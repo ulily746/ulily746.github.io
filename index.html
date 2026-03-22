@@ -1,380 +1,109 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
 <title>Yuri Choi</title>
 
 <style>
-
-body{
-margin:0;
-font-family: Arial, Helvetica, sans-serif;
-background:#F2F2DF;
-color:#1A1A1A;
-line-height:1.7;
+body {
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#F2F2DF;
+  color:#1A1A1A;
+  line-height:1.7;
 }
 
 /* navigation */
-
-.nav{
-display:flex;
-gap:50px;
-padding:22px 0px;
-padding-left:400px;
-font-size:16px;
-border-bottom:1px solid #e5dcc8;
-background:black;
-position:sticky;
-top:0;
-z-index:1000;
+.nav {
+  display:flex;
+  gap:50px;
+  padding:22px 0px;
+  padding-left:400px;
+  font-size:16px;
+  border-bottom:1px solid #e5dcc8;
+  background:black;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
-
-.nav a{
-text-decoration:none;
-color:#F2F2DF;
-font-weight:500;
+.nav a {
+  text-decoration:none;
+  color:#F2F2DF;
+  font-weight:500;
 }
-
-.nav a:hover{
-color:#8B6B4F;
-}
+.nav a:hover { color:#8B6B4F; }
 
 /* layout */
-
-.container{
-display:flex;
-flex-wrap:wrap;
-width:100%;
-gap:0;
-}
+.container { display:flex; flex-wrap:wrap; width:100%; gap:0; }
 
 /* left profile */
-
-.left{
-width:20%;
-min-width:200px;
-height:auto;
-position:sticky;
-top:0;
-margin:0;
-background:#000; /* 배경색 추가 */
-overflow:hidden;
+.left {
+  width:20%; min-width:200px; height:auto;
+  position:sticky; top:0; margin:0;
+  background:#000; overflow:hidden;
 }
-
-.profile-card{
-position:relative;
-height:100%;
-overflow:hidden;
+.profile-card { position:relative; height:100%; overflow:hidden; }
+.profile-card img { width:100%; height:100%; object-fit:cover; display:block; }
+.overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.35); }
+.profile-info {
+  position:absolute; top:25%; left:50%; transform:translate(-50%,-30%);
+  text-align:center; color:white;
 }
-
-.profile-card img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
-
-/* dark overlay */
-
-.overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
-}
-
-/* text on image */
-
-.profile-info{
-position:absolute;
-top:25%;
-left:50%;
-transform:translate(-50%,-30%);
-text-align:center;
-color:white;
-}
-
-.profile-info h2{
-margin:0;
-font-size:28px;
-}
-
-.profile-info p{
-margin:8px 0;
-font-size:14px;
-}
-
-.profile-info a{
-color:white;
-text-decoration:none;
-opacity:0.9;
-}
-
-.profile-info a:hover{
-opacity:1;
-text-decoration:underline;
-} 
+.profile-info h2 { margin:0; font-size:28px; }
+.profile-info p { margin:8px 0; font-size:14px; }
+.profile-info a { color:white; text-decoration:none; opacity:0.9; }
+.profile-info a:hover { opacity:1; text-decoration:underline; }
 
 /* right content */
-
-.right{
-  width:100%;
-  padding:50px 20px;
-  max-width:900px;
-  margin-left:auto;
-  margin-right:auto; /* 화면이 커도 가운데 정렬 */
-  box-sizing:border-box;
+.right {
+  width:100%; padding:50px 20px;
+  max-width:900px; margin:0 auto; box-sizing:border-box;
 }
+.right p { line-height:1.7; font-size:15px; }
 
-.right p{
-  line-height:1.7;
-  font-size:15px;
-}
-   
-h1{
-margin-top:0;
-font-size:32px;
-}
+h1 {margin-top:0; font-size:32px;}
+h3 {margin-top:35px;}
+ul {padding-left:22px;}
 
-h3{
-margin-top:35px;
-}
-
-ul{
-padding-left:22px;
-}
-
-   #about-me-top h1{
-      font-size:32px;
-      margin-bottom:5px;
-    }
-
-    #about-me-top hr{
-      border:none;
-      height:2px;
-      background-color:#8B6B4F; 
-      width:100%;
-      margin-bottom:10px 0 20px 0;
-      display:block;
-      margin-left:0
-    }
-
-    #about-me-top p{
-      font-size:16px;
-      line-height:1.6;
-      color:#1A1A1A;
-    }
-
-   /* About Me 아래 키워드 섹션 */
-#keywords-section p{
-  font-size:15px;
-  line-height:1.6;
-  color:#1A1A1A;
-}
-
-#keywords-section b{
-  font-weight:700; /* 진하게 */
-  color:#8B6B4F;   /* 포인트 컬러 */
-}
-
-/* About Me 아래 키워드 섹션 */
-#keywords-section p{
-  font-size:15px;
-  line-height:1.6;
-  color:#1A1A1A;
-}
-#keywords-section b{
-  font-weight:700;
-  color:#8B6B4F; /* 포인트 컬러 */
-}
-
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* 스킬 간 간격 */
-  margin-top: 10px;
-}
-
-.skill-badge {
-  background: #F2E8DC; /* 연한 배경 */
-  color: #8B6B4F; /* 글자 포인트 */
-  padding: 6px 12px;
-  border-radius: 20px; /* 둥근 배지 */
-  font-size: 14px;
-  font-weight: 500;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* Research Highlights 카드 */
-#research-highlights{
-  background:white;
-  border-radius:12px;
-  padding:25px;
-  margin-top:30px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.1);
-}
-
-/* 블록 구분 */
-.research-block{
-  margin-top:15px;
-  padding:12px 0;
-  border-top:1px solid #e5dcc8;
-}
-
-.research-block:first-child{
-  border-top:none;
-}
-
-.research-block h4{
-  margin:0 0 8px 0;
-  font-size:16px;
-  color:#8B6B4F;
-}
-
-/* Topic + Objective 블록 flex */
-.topic-objective-flex{
-  display:flex;
-  flex-wrap:wrap; /* 화면 작으면 세로로 배치 */
-  gap:20px;
-  align-items:center;
-}
-
-.text-block{
-  flex:1 1 300px; /* 최소 300px, 최대 가변 */
-}
-
-.image-block{
-  flex:0 0 250px; 
-  text-align:center;
-}
-
-.image-block img{
-  max-width:100%; 
-  height:auto;
-  border-radius:8px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
+#about-me-top h1 { font-size:32px; margin-bottom:5px; }
+#about-me-top hr { border:none; height:2px; background-color:#8B6B4F; width:100%; margin-bottom:20px; }
+#about-me-top p { font-size:16px; line-height:1.6; color:#1A1A1A; }
 
 /* Keywords */
-.research-block p{
-  margin:0;
-  line-height:1.6;
-}
+#keywords-section p { font-size:15px; line-height:1.6; color:#1A1A1A; }
+#keywords-section b { font-weight:700; color:#8B6B4F; }
 
-.research-block p b:first-child{
-  font-weight:700;
-}
+/* Skills */
+.skills-container { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+.skill-badge { background:#F2E8DC; color:#8B6B4F; padding:6px 12px; border-radius:20px; font-size:14px; font-weight:500; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
 
-/* Publications 가운데 제목 */
-.center-title{
-  text-align:center;
-  margin-bottom:10px;
-}
+/* Research Highlights */
+#research-highlights { background:white; border-radius:12px; padding:25px; margin-top:30px; box-shadow:0 6px 18px rgba(0,0,0,0.1); }
+.research-block { margin-top:15px; padding:12px 0; border-top:1px solid #e5dcc8; }
+.research-block:first-child { border-top:none; }
+.research-block h4 { margin:0 0 8px 0; font-size:16px; color:#8B6B4F; }
+.topic-objective-flex { display:flex; flex-wrap:wrap; gap:20px; align-items:center; }
+.text-block { flex:1 1 300px; }
+.image-block { flex:0 0 250px; text-align:center; }
+.image-block img { max-width:100%; height:auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+.research-block p { margin:0; line-height:1.6; }
+.center-title { text-align:center; margin-bottom:10px; }
 
-.research-block ul{
-  padding-left:20px;
-  line-height:1.6;
-}
+/* Carousel */
+.visual-carousel { overflow:hidden; width:100%; max-width:900px; margin:50px auto; position:relative; }
+.carousel-track { display:flex; transition:transform 0.5s ease; }
+.carousel-item { flex:0 0 220px; margin:0 10px; transition:transform 0.3s ease, opacity 0.3s ease; opacity:0.5; }
+.carousel-item.active { transform:scale(1.8); opacity:1; z-index:2; }
+.carousel-item img { width:100%; height:auto; max-height:250px; object-fit:cover; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
 
-.research-block li b{
-  color:#8B6B4F;
-}
+/* Timeline */
+.timeline-container { width:100%; max-width:900px; margin:50px auto 80px auto; }
+.timeline-svg { width:100%; height:150px; }
 
-/* 슬라이더가 .right 안에서만 움직이도록 */
-.visual-carousel {
-  overflow: hidden;
-  width: 100%;
-  max-width: 900px;
-  margin: 100px auto;
-  position: relative;  
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease;
-  .timeline-item 
-  text-align: center;  /* 중앙 정렬 */
-}
-
-.carousel-item.active {
-  transform: scale(2); /* 중심 사진 2배 확대 */
-  opacity: 1;
-  z-index: 2; /* 중앙 강조 */
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.timeline-dot {
-  margin: 0 auto;      /* 중앙에 dot */
-}
-.timeline-item p {
-  display: inline-block;
-  padding: 0 10px;
-  font-size: 14px;
-  background: #F2F2DF;
-  border-radius: 6px;
-}
-}
-
-.carousel-item {
-  flex: 0 0 220px;  /* Each item will take up 220px of space */
-  margin: 0 10px;   /* Margin for spacing between items */
-  transition: transform 0.3s ease, opacity 0.3s ease; /* Transition effects */
-}
-
-.carousel-item.active {
-  transform: scale(1.2);   /* Scale up the active image */
-  opacity: 1;              /* Fully visible for the active item */
-}
-
-.carousel-item img {
-  width: 100%;            /* Ensure the image fills the block */
-  height: auto;          /* Auto height to maintain aspect ratio */
-  max-height: 150px;     /* Set a max height to prevent excessive scaling */
-  object-fit: cover;      /* Cover the area without distortion */
-  border-radius: 8px;    /* Rounded corners */
- }
-
-.timeline-container {
-  width: 100%;
-  max-width: 900px;
-  margin: 50px auto 80px auto; /* 캐러셀 밑으로 충분히 공간 확보 */
-}
-
-.timeline-svg {
-  width: 100%;
-  height: 150px;
-}
-
-/* 모바일 대응 */
-@media (max-width: 900px) {
-  .timeline-item {
-    width: 100% !important;
-    text-align: left !important;
-    left: 0 !important;
-    padding-left: 40px;
-    padding-right: 20px;
-  }
-  .timeline-item .timeline-dot {
-    left: -10px !important;
-  }
-}
+/* 모바일 */
 @media (max-width:900px){
-  .container{
-    flex-direction: column; /* 사진 위, 내용 아래 */
-  }
-  .left, .right{
-    width:100%;
-    height:auto;
-  }
+  .container{flex-direction:column;}
+  .left,.right{width:100%; height:auto;}
 }
 </style>
 
@@ -391,189 +120,136 @@ padding-left:22px;
 
 <div class="container">
 
-<div class="left">
-
-<div class="profile-card">
-
-<img src="profile.jpg">
-
-<div class="overlay"></div>
-
-<div class="profile-info">
-
-<h2>Yuri Choi</h2>
-
-<p>
-✉ <a href="mailto:choic2k3@gmail.com">
-choic2k3@gmail.com
-</a>
-</p>
-
-<p>
-🔗 <a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">
-LinkedIn
-</a>
-</p>
-
-</div>
-</div>
-
-</div>   <!-- left 끝 -->
-
-<div class="right">
-
-  <!-- About Me 상단 -->
-  <section id="about-me-top">
-    <h1>About Me</h1>
-    <hr>
-    <p>
-      I am a Master’s graduate in Chemical and Biomolecular Engineering with research experience in <b>PLGA-PEG nanoparticle-based drug delivery systems</b> for dual metabolic inhibition in cancer therapy.  
-      Proficient in nanoparticle characterization (DLS, TEM, HPLC) and therapeutic evaluation in cellular and in vivo models.  
-      Building on this experimental foundation, I aim to advance toward <b>smart, data-driven, and AI-integrated drug delivery platforms</b> for improved diagnosis, targeted therapy, and preventive strategies, combining biological insights with engineering approaches.
-    </p>
-  </section>
-
-  <!-- About Me 바로 아래에 Keyword 섹션 삽입 -->
-  <div id="keywords-section" style="margin-top:30px;">
-    <p><b>Keyword of Interest </b> organ-on-chip, sensor, microrobotics, bio-integrated systems, soft robotics</p>
-  </div>
-
-<div class="skills">
-  <h4>Skills / Expertise</h4>
-  <div class="skills-container">
-    <span class="skill-badge">DLS</span>
-    <span class="skill-badge">TEM</span>
-    <span class="skill-badge">HPLC</span>
-    <span class="skill-badge">Nanoparticle synthesis</span>
-    <span class="skill-badge">Compusyn</span>
-    <span class="skill-badge">CLSM</span>
-  </div>
-</div>
-
-<div id="research-highlights" class="card">
-  <h3> Research Highlights</h3>
-
-  <!-- Topic + Objective + 이미지 -->
-  <div class="research-block topic-objective">
-    <h4>Master’s Thesis</h4>
-    <div class="topic-objective-flex">
-      <div class="text-block">
-        <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.  
-        <b>Object:</b> Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.
-        </p>
-      </div>
-      <div class="image-block">
-        <img src="TOC.png" alt="Research Diagram">
+  <div class="left">
+    <div class="profile-card">
+      <img src="profile.jpg">
+      <div class="overlay"></div>
+      <div class="profile-info">
+        <h2>Yuri Choi</h2>
+        <p>✉ <a href="mailto:choic2k3@gmail.com">choic2k3@gmail.com</a></p>
+        <p>🔗 <a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">LinkedIn</a></p>
       </div>
     </div>
   </div>
 
-  <!-- Keywords -->
+  <div class="right">
+    <!-- About Me -->
+    <section id="about-me-top">
+      <h1>About Me</h1>
+      <hr>
+      <p>
+        I am a Master’s graduate in Chemical and Biomolecular Engineering with research experience in <b>PLGA-PEG nanoparticle-based drug delivery systems</b> for dual metabolic inhibition in cancer therapy.  
+        Proficient in nanoparticle characterization (DLS, TEM, HPLC) and therapeutic evaluation in cellular and in vivo models.  
+        Building on this experimental foundation, I aim to advance toward <b>smart, data-driven, and AI-integrated drug delivery platforms</b> for improved diagnosis, targeted therapy, and preventive strategies, combining biological insights with engineering approaches.
+      </p>
+    </section>
 
-    
-    <p><b>Keyword </b> nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles, selective toxicity, EPR effect</p>
-  </div>
+    <div id="keywords-section" style="margin-top:30px;">
+      <p><b>Keyword of Interest </b> organ-on-chip, sensor, microrobotics, bio-integrated systems, soft robotics</p>
+    </div>
 
-  <!-- Publications -->
-  <div class="research-block">
-    <h4 class="center-title">Publications</h4>
-    <ul>
-      <li>Y. Choi*, H. Nam*, J.M. An, S. Lee, S. Kim, H. Park, S. Kim, Y.K. Lee, Y.C. Kim (*Equal contribution). Overcoming metabolic plasticity in hepatocellular carcinoma via tumor targeted dual regulation of glycolysis and oxidative phosphorylation.</li>
-      <li>H. Nam, H. Park, M. Son, I. Kang, Y. Choi, S. Lee, S. Kim, S. Kim, H. Kim, J.B. Chang, H.G. Lee, Y.K. Lee, Y.C. Kim. Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via dual metabolism regulation and immunogenic cell death. Journal of Controlled Release, 383, 11375 (2025)</li>
-    </ul>
-  </div>
-</div>
+    <div class="skills">
+      <h4>Skills / Expertise</h4>
+      <div class="skills-container">
+        <span class="skill-badge">DLS</span>
+        <span class="skill-badge">TEM</span>
+        <span class="skill-badge">HPLC</span>
+        <span class="skill-badge">Nanoparticle synthesis</span>
+        <span class="skill-badge">Compusyn</span>
+        <span class="skill-badge">CLSM</span>
+      </div>
+    </div>
 
- <!-- About Me / Research Header -->
-  <h1>Research Highlights</h1>
+    <!-- Research Highlights -->
+    <div id="research-highlights" class="card">
+      <h3>Research Highlights</h3>
+      <div class="research-block topic-objective">
+        <h4>Master’s Thesis</h4>
+        <div class="topic-objective-flex">
+          <div class="text-block">
+            <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.  
+            <b>Object:</b> Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.
+            </p>
+          </div>
+          <div class="image-block">
+            <img src="TOC.png" alt="Research Diagram">
+          </div>
+        </div>
+      </div>
 
-  <!-- Visual Carousel -->
-  <div class="visual-carousel">
-    <div class="carousel-track">
-    <div class="carousel-item"><img src="scheme.png" alt="Diagram 1"></div>
-    <div class="carousel-item"><img src="Aerobic.png" alt="Experiment 2"></div>
-    <div class="carousel-item"><img src="oxphos.png" alt="Experiment 3"></div>
-    <div class="carousel-item"><img src="Drug.png" alt="Experiment 4"></div>
-    <div class="carousel-item"><img src="Psize.png" alt="Experiment 5"></div>
-    <div class="carousel-item"><img src="glycolysis.png" alt="Experiment 7"></div>
-    <div class="carousel-item"><img src="clsm.png" alt="Experiment 8"></div>
-    <div class="carousel-item"><img src="invivo.png" alt="Experiment 9"></div>
-    <div class="carousel-item"><img src="invivo2.png" alt="Experiment 10"></div>
-    <div class="carousel-item"><img src="Emusion.png" alt="Experiment 11"></div>
-  </div>
-</div>  
+      <p><b>Keyword </b> nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles, selective toxicity, EPR effect</p>
 
-<div class="right">
-  <!-- 기존 Research Visual Carousel -->
-  <h1>Research Highlights</h1>
-  <div class="visual-carousel">
-    <div class="carousel-track">
-      <div class="carousel-item"><img src="scheme.png" alt="Diagram 1"></div>
-      <div class="carousel-item"><img src="Aerobic.png" alt="Experiment 2"></div>
-      <div class="carousel-item"><img src="oxphos.png" alt="Experiment 3"></div>
-      <div class="carousel-item"><img src="Drug.png" alt="Experiment 4"></div>
-      <div class="carousel-item"><img src="Psize.png" alt="Experiment 5"></div>
+      <div class="research-block">
+        <h4 class="center-title">Publications</h4>
+        <ul>
+          <li>Y. Choi*, H. Nam*, J.M. An, S. Lee, S. Kim, H. Park, S. Kim, Y.K. Lee, Y.C. Kim (*Equal contribution). Overcoming metabolic plasticity in hepatocellular carcinoma via tumor targeted dual regulation of glycolysis and oxidative phosphorylation.</li>
+          <li>H. Nam, H. Park, M. Son, I. Kang, Y. Choi, S. Lee, S. Kim, S. Kim, H. Kim, J.B. Chang, H.G. Lee, Y.K. Lee, Y.C. Kim. Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via dual metabolism regulation and immunogenic cell death. Journal of Controlled Release, 383, 11375 (2025)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Visual Carousel -->
+    <div class="visual-carousel">
+      <div class="carousel-track">
+        <div class="carousel-item"><img src="scheme.png" alt="Diagram 1"></div>
+        <div class="carousel-item"><img src="Aerobic.png" alt="Experiment 2"></div>
+        <div class="carousel-item"><img src="oxphos.png" alt="Experiment 3"></div>
+        <div class="carousel-item"><img src="Drug.png" alt="Experiment 4"></div>
+        <div class="carousel-item"><img src="Psize.png" alt="Experiment 5"></div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-container">
+      <svg class="timeline-svg" viewBox="0 0 900 150" preserveAspectRatio="xMidYMid meet">
+        <path d="M50,100 C300,50 600,50 850,100" stroke="#e0e0e0" stroke-width="4" fill="transparent"/>
+        <path id="progress-line" d="M50,100 C300,50 600,50 700,80" stroke="#8B6B4F" stroke-width="4" fill="transparent"
+              stroke-dasharray="500" stroke-dashoffset="500">
+          <animate attributeName="stroke-dashoffset" from="500" to="0" dur="2s" fill="freeze"/>
+        </path>
+
+        <circle cx="50" cy="100" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
+        <text x="50" y="70" text-anchor="middle" font-size="12" fill="#1A1A1A">2017 Start</text>
+
+        <circle cx="250" cy="75" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
+        <text x="250" y="45" text-anchor="middle" font-size="12" fill="#1A1A1A">2020 Intern</text>
+
+        <circle cx="700" cy="80" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
+        <text x="700" y="50" text-anchor="middle" font-size="12" fill="#1A1A1A">2022 B.S. End</text>
+
+        <circle cx="850" cy="100" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
+        <text x="850" y="70" text-anchor="middle" font-size="12" fill="#1A1A1A">2023 M.S. Start</text>
+
+        <circle cx="880" cy="90" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
+        <text x="880" y="60" text-anchor="middle" font-size="12" fill="#1A1A1A">2025 M.S. End</text>
+      </svg>
     </div>
   </div>
 
-  <!-- Timeline: 비주얼 밑으로 -->
-  <div class="timeline-container">
-    <svg class="timeline-svg" viewBox="0 0 900 150" preserveAspectRatio="xMidYMid meet">
-      <!-- 전체 곡선선 -->
-      <path d="M50,100 C300,50 600,50 850,100" stroke="#e0e0e0" stroke-width="4" fill="transparent"/>
-
-      <!-- 진행선 (애니메이션) -->
-      <path id="progress-line" d="M50,100 C300,50 600,50 700,80" stroke="#8B6B4F" stroke-width="4" fill="transparent"
-            stroke-dasharray="500" stroke-dashoffset="500">
-        <animate attributeName="stroke-dashoffset" from="500" to="0" dur="2s" fill="freeze"/>
-      </path>
-
-      <!-- 노드 & 텍스트 -->
-      <circle cx="50" cy="100" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
-      <text x="50" y="70" text-anchor="middle" font-size="12" fill="#1A1A1A">2017 Start</text>
-
-      <circle cx="250" cy="75" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
-      <text x="250" y="45" text-anchor="middle" font-size="12" fill="#1A1A1A">2020 Intern</text>
-
-      <circle cx="700" cy="80" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
-      <text x="700" y="50" text-anchor="middle" font-size="12" fill="#1A1A1A">2022 B.S. End</text>
-
-      <circle cx="850" cy="100" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
-      <text x="850" y="70" text-anchor="middle" font-size="12" fill="#1A1A1A">2023 M.S. Start</text>
-
-      <circle cx="880" cy="90" r="12" fill="#F2F2DF" stroke="#8B6B4F" stroke-width="3"/>
-      <text x="880" y="60" text-anchor="middle" font-size="12" fill="#1A1A1A">2025 M.S. End</text>
-    </svg>
-  </div>
 </div>
 
-</div> <!-- right 끝 -->
-
-<!-- JS 코드 -->
 <script>
 const track = document.querySelector('.carousel-track');
 const items = Array.from(track.children);
 let index = 0;
 
 function updateCarousel() {
- function updateCarousel() {
-  const centerOffset = (items[0].getBoundingClientRect().width + 20) / 2;
-  const trackWidth = track.offsetWidth;
   const itemWidth = items[0].getBoundingClientRect().width + 20;
+  const trackWidth = track.offsetWidth;
 
   items.forEach((item, i) => {
     item.classList.toggle('active', i === index);
   });
 
-  // 가운데 사진이 .right 중앙에 위치하도록 transform
   const translateX = index * itemWidth - trackWidth / 2 + itemWidth / 2;
   track.style.transform = `translateX(-${translateX}px)`;
 
   index++;
-  if (index >= items.length) index = 0;
+  if(index >= items.length) index = 0;
 }
 
 setInterval(updateCarousel, 2500);
 </script>
+
 </body>
 </html>
