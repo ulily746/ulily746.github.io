@@ -180,34 +180,39 @@ padding-left:22px;
   color:#8B6B4F; /* 포인트 컬러 */
 }
 
-/* Research Highlights 카드 */
-#research-highlights{
-  background:white;
-  border-radius:12px;
-  padding:25px;
-  margin-top:30px; /* Keyword 섹션과 구분 */
-  box-shadow:0 6px 18px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.research-block{
+  margin-top:15px;
+  padding:12px 0;
+  border-top:1px solid #e5dcc8;
 }
-#research-highlights:hover{
-  transform: translateY(-5px);
-  box-shadow:0 10px 24px rgba(0,0,0,0.15);
+
+.research-block:first-child{
+  border-top:none; /* 첫 블록 위 선 제거 */
 }
-#research-highlights h3{
-  margin-top:0;
-  margin-bottom:15px;
-  font-size:20px;
-}
-#research-highlights h4{
-  margin-top:20px;
+
+.research-block h4{
+  margin:0 0 8px 0;
   font-size:16px;
+  color:#8B6B4F;
 }
-#research-highlights ul{
+
+.research-block p{
+  margin:0;
+  line-height:1.6;
+}
+
+.research-block ul{
   padding-left:20px;
   line-height:1.6;
 }
-#research-highlights li b{
-  color:#8B6B4F; /* 키워드 강조 */
+
+.research-block li b{
+  color:#8B6B4F; /* 강조 */
+}
+
+/* Keyword 항상 Bold */
+.research-block p b:first-child{
+  font-weight:700;
 }
    
 </style>
@@ -274,23 +279,33 @@ LinkedIn
 
 <!-- Keyword 섹션 바로 아래에 Research Highlights 카드 삽입 -->
 <div id="research-highlights" class="card">
-  <h3>⚙️ Research Highlights</h3>
+  <h3> Research Highlights</h3>
   
-  <!-- 연구 간략 소개 -->
-  <ul>
-    <li>
-      <b>Master’s Thesis:</b> Development of <b>dual metabolic pathway inhibitors</b> delivered via <b>PLGA-PEG nanoparticles</b> to selectively target hepatocellular carcinoma while sparing normal cells.  
-      Aim: Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation, using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.  
-      Keywords: <b>nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles, selective toxicity, EPR effect</b>.
-    </li>
-  </ul>
+  <!-- 연구 주제 -->
+  <div class="research-block">
+    <h4>Master’s Thesis</h4>
+    <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.</p>
+  </div>
 
-  <!-- 출판/논문 리스트 -->
-  <h4 style="margin-top:20px;">📚 Selected Publications</h4>
-  <ul>
-    <li>Y. Choi*, H. Nam*, J.M. An, S. Lee, S. Kim, H. Park, S. Kim, Y.K. Lee, Y.C. Kim (*Equal contribution). Overcoming metabolic plasticity in hepatocellular carcinoma via tumor targeted dual regulation of glycolysis and oxidative phosphorylation.</li>
-    <li>H. Nam, H. Park, M. Son, I. Kang, Y. Choi, S. Lee, S. Kim, S. Kim, H. Kim, J.B. Chang, H.G. Lee, Y.K. Lee, Y.C. Kim. Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via dual metabolism regulation and immunogenic cell death. Journal of Controlled Release, 383, 11375 (2025)</li>
-  </ul>
+  <!-- 연구 목적 -->
+  <div class="research-block">
+    <h4>Objective</h4>
+    <p>Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.</p>
+  </div>
+
+  <!-- 키워드 -->
+  <div class="research-block">
+    <h4>Keywords</h4>
+    <p><b>Keyword –</b> nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles, selective toxicity, EPR effect</p>
+  </div>
+
+   <!-- 출판/논문 리스트 -->
+  <div class="research-block">
+    <h4> Selected Publications</h4>
+    <ul>
+      <li>Y. Choi*, H. Nam*, J.M. An, S. Lee, S. Kim, H. Park, S. Kim, Y.K. Lee, Y.C. Kim (*Equal contribution). Overcoming metabolic plasticity in hepatocellular carcinoma via tumor targeted dual regulation of glycolysis and oxidative phosphorylation.</li>
+      <li>H. Nam, H. Park, M. Son, I. Kang, Y. Choi, S. Lee, S. Kim, S. Kim, H. Kim, J.B. Chang, H.G. Lee, Y.K. Lee, Y.C. Kim. Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via dual metabolism regulation and immunogenic cell death. Journal of Controlled Release, 383, 11375 (2025)</li>
+    </ul>
 </div>
    
 </div> <!-- right 끝 -->
