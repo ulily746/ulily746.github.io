@@ -280,6 +280,66 @@ padding-left:22px;
 .research-block li b{
   color:#8B6B4F;
 }
+
+.visual-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.visual-card {
+  width: 220px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.visual-card img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 8px;
+}
+.visual-card p {
+  font-size: 13px;
+  text-align: center;
+  color: #333;
+}
+
+.short-timeline {
+  margin-top: 40px;
+}
+.short-timeline h4 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #8B6B4F;
+  margin-bottom: 20px;
+}
+.timeline-container {
+  position: relative;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 3px dashed #8B6B4F;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+.timeline-dot {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: #8B6B4F;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+.timeline-item p {
+  margin: 0 0 0 10px;
+  font-size: 14px;
+  color: #333;
+}
 </style>
 
 </head>
@@ -387,6 +447,48 @@ LinkedIn
     </ul>
   </div>
 </div>
-   
+
+<div class="visual-media">
+  <h4>Visual / Media</h4>
+  <div class="visual-container">
+    <div class="visual-card"><img src="scheme.png" alt="Diagram 1"><p>PLGA-PEG nanoparticle delivery schematic</p></div>
+    <div class="visual-card"><img src="Aerobic.png" alt="Experiment 2"><p>Aerobic glycolysis schematic</p></div>
+    <div class="visual-card"><img src="oxphos.png" alt="Experiment 3"><p>Oxidative phospholation schematic</p></div>
+    <div class="visual-card"><img src="Drug.png" alt="Experiment 4"><p>Summary schematic of therapeutic mechanism</p></div>
+    <div class="visual-card"><img src="Psize.png" alt="Experiment 5"><p>Nanoparticles size via DLS EPR</p></div>
+    <div class="visual-card"><img src="compusyn.png" alt="Experiment 6"><p>Optimizaion of two drugs </p></div>
+    <div class="visual-card"><img src="glycolysis.png" alt="Experiment 7"><p>Glycolysis inhibition</p></div>
+    <div class="visual-card"><img src="clsm.png" alt="Experiment 8"><p>OXPHOS inhibition</p></div>
+    <div class="visual-card"><img src="invivo.png" alt="Experiment 9"><p>in vivo data</p></div>
+    <div class="visual-card"><img src="invivo2.png" alt="Experiment 10"><p>In vivo tumor response</p></div>
+    <div class="visual-card"><img src="Emusion.png" alt="Experiment 11"><p>synthesis of nanoparticles</p></div>
+  </div>
+</div>  
+
+<div class="short-timeline">
+  <h4>Short Timeline</h4>
+  <div class="timeline-container">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p>2017 – Bachelor’s degree in Chemical Engineering</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p>2019 – Master’s Thesis: Dual metabolic pathway inhibitors via PLGA-PEG nanoparticles</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p>2020 – Publication: Overcoming metabolic plasticity in hepatocellular carcinoma</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p>2025 – Publication: Metal-phenolic networks reverse immunosuppressive tumor microenvironment</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <p>Future – PhD research: AI-integrated smart drug delivery systems</p>
+    </div>
+  </div>
+</div>
 </div> <!-- right 끝 -->
   
