@@ -286,29 +286,29 @@ padding-left:22px;
 /* 슬라이더가 .right 안에서만 움직이도록 */
 .visual-carousel {
   overflow: hidden;
-  width: 100%; /* .right 기준 */
+  width: 100%;
   position: relative;
+  display: flex;
+  justify-content: center; /* Center the carousel */
 }
 
-.right .visual-carousel {
-  width: 100%;
-  overflow: hidden;
-}
-  .carousel-track {
+.carousel-track {
   display: flex;
   transition: transform 0.5s ease;
-  will-change: transform;
 }
-  
+
 .carousel-item {
   flex: 0 0 220px;
   margin: 0 10px;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.5; /* Less prominent when not active */
 }
 
 .carousel-item.active {
   transform: scale(1.2);
+  opacity: 1; /* Fully visible when active */
 }
+
 
 /* 타임라인 중앙 정렬, 점 기준으로 좌우 나눔 */
 .timeline-container {
@@ -536,16 +536,17 @@ const items = Array.from(track.children);
 let index = 0;
 
 function updateCarousel() {
-  const itemWidth = items[0].getBoundingClientRect().width + 20; // margin 포함
-  track.style.transform = `translateX(-${index * itemWidth}px)`;
+  const itemWidth = items[0].getBoundingClientRect().width + 20; // margin included
+  track.style.transform = `translateX(-${(index - 1) * itemWidth}px)`; // Center the active item
 
   items.forEach((item, i) => {
     item.classList.toggle('active', i === index);
   });
 
   index++;
-  if(index >= items.length) index = 0;
+  if (index >= items.length) index = 0; // Loop back to the first image
 }
+
 
 setInterval(updateCarousel, 2500);
 </script>
