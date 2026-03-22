@@ -288,14 +288,18 @@ padding-left:22px;
   overflow: hidden;
   width: 100%; /* .right 기준 */
   position: relative;
-  margin-top: 20px;
 }
 
-.carousel-track {
+.right .visual-carousel {
+  width: 100%;
+  overflow: hidden;
+}
+  .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
+  will-change: transform;
 }
-
+  
 .carousel-item {
   flex: 0 0 220px;
   margin: 0 10px;
@@ -310,18 +314,28 @@ padding-left:22px;
 .timeline-container {
   position: relative;
   margin: 40px 0;
+  width: 100%;
 }
 
 .timeline-item {
   position: relative;
-  width: 100%;
-  margin: 20px 0;
+  width: 50%;
+  margin: 30px 0;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
 }
 
 .timeline-dot {
   position: absolute;
   top: 0;
-  left: -8px;
   width: 16px;
   height: 16px;
   background: #8B6B4F;
@@ -329,15 +343,21 @@ padding-left:22px;
   border: 3px solid white;
 }
 
+.timeline-item:nth-child(odd) .timeline-dot {
+  right: -8px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -8px;
+}
+
 .timeline-item p {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 0 10px;
   font-size: 14px;
   background: #F2F2DF;
   border-radius: 6px;
-  margin-left: 20px;
 }
-
 
 /* 모바일 대응 */
 @media (max-width: 900px) {
@@ -527,7 +547,6 @@ function updateCarousel() {
   if(index >= items.length) index = 0;
 }
 
-// 2.5초마다 슬라이더 이동
 setInterval(updateCarousel, 2500);
 </script>
 </body>
