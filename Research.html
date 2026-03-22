@@ -1,1 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yuri Choi - Research</title>
+  <style>
+    body {
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:#F2F2DF;
+      color:#1A1A1A;
+      line-height:1.7;
+    }
 
+    /* navigation */
+    .nav {
+      display:flex;
+      gap:50px;
+      padding:22px 0px;
+      padding-left:400px;
+      font-size:16px;
+      border-bottom:1px solid #e5dcc8;
+      background:black;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .nav a {
+      text-decoration:none;
+      color:#F2F2DF;
+      font-weight:500;
+    }
+    .nav a:hover {
+      color:#8B6B4F;
+    }
+
+    /* layout */
+    .container {
+      display:flex;
+      flex-wrap:wrap;
+      width:100%;
+      gap:0;
+    }
+
+    /* left profile */
+    .left {
+      width:20%;
+      min-width:200px;
+      height:100vh;
+      position:sticky;
+      top:0;
+      margin:0;
+      background:#000;
+      overflow:hidden;
+    }
+    .profile-card {
+      position:relative;
+      height:100%;
+      overflow:hidden;
+    }
+    .profile-card img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .overlay {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.35);
+    }
+    .profile-info {
+      position:absolute;
+      top:25%;
+      left:50%;
+      transform:translate(-50%,-30%);
+      text-align:center;
+      color:white;
+    }
+    .profile-info h2 {
+      margin:0;
+      font-size:28px;
+    }
+    .profile-info p {
+      margin:8px 0;
+      font-size:14px;
+    }
+    .profile-info a {
+      color:white;
+      text-decoration:none;
+      opacity:0.9;
+    }
+    .profile-info a:hover {
+      opacity:1;
+      text-decoration:underline;
+    }
+
+    /* right content */
+    .right {
+      width:100%;
+      padding:50px 20px;
+      max-width:900px;
+      margin-left:auto;
+      margin-right:auto;
+      box-sizing:border-box;
+    }
+    .right h1 {
+      margin-top:0;
+      font-size:32px;
+    }
+    .right p {
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    /* responsive */
+    @media (max-width:900px) {
+      .container {
+        flex-direction: column;
+      }
+      .left, .right {
+        width:100%;
+        height:auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <div class="nav">
+    <a href="index.html">Main</a>
+    <a href="research.html">Research</a>
+    <a href="cv.html">CV</a>
+    <a href="news.html">News</a>
+  </div>
+
+  <!-- Container -->
+  <div class="container">
+
+    <!-- Left profile -->
+    <div class="left">
+      <div class="profile-card">
+        <img src="profile.jpg" alt="Yuri Choi">
+        <div class="overlay"></div>
+        <div class="profile-info">
+          <h2>Yuri Choi</h2>
+          <p>✉ <a href="mailto:choic2k3@gmail.com">choic2k3@gmail.com</a></p>
+          <p>🔗 <a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">LinkedIn</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right content -->
+    <div class="right">
+      <h1>Research</h1>
+      <p>연구 내용은 이곳에 나중에 자세히 작성할 예정입니다.</p>
+
+      <!-- Placeholder 예시: 나중에 Research Highlights, 이미지, 타임라인 등 추가 -->
+      <div id="research-placeholder" style="margin-top:30px; padding:20px; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        <p>Research Highlights / Publications / Experiments 등 이곳에 추가 예정</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
