@@ -283,17 +283,17 @@ padding-left:22px;
   color:#8B6B4F;
 }
 
+/* 슬라이더가 .right 안에서만 움직이도록 */
 .visual-carousel {
   overflow: hidden;
-  width: 100%; /* 이미 right 안에서 최대폭 900px 설정되어 있어 왼쪽 영역 침범 없음 */
+  width: 100%; /* .right 기준 */
   position: relative;
-  margin: 20px 0;
+  margin-top: 20px;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
-  will-change: transform;
 }
 
 .carousel-item {
@@ -302,16 +302,11 @@ padding-left:22px;
   transition: transform 0.3s;
 }
 
-.carousel-item img {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
 .carousel-item.active {
-  transform: scale(1.2); /* 가운데 사진 확대 */
+  transform: scale(1.2);
 }
 
+/* 타임라인 중앙 정렬, 점 기준으로 좌우 나눔 */
 .timeline-container {
   position: relative;
   margin: 40px 0;
@@ -319,23 +314,14 @@ padding-left:22px;
 
 .timeline-item {
   position: relative;
-  margin: 30px 0;
-  width: 50%;
-}
-
-.timeline-item:nth-child(odd) {
-  left: 0;
-  text-align: right;
-}
-
-.timeline-item:nth-child(even) {
-  left: 50%;
-  text-align: left;
+  width: 100%;
+  margin: 20px 0;
 }
 
 .timeline-dot {
   position: absolute;
   top: 0;
+  left: -8px;
   width: 16px;
   height: 16px;
   background: #8B6B4F;
@@ -343,20 +329,13 @@ padding-left:22px;
   border: 3px solid white;
 }
 
-.timeline-item:nth-child(odd) p {
-  margin-right: 30px;
-}
-
-.timeline-item:nth-child(even) p {
-  margin-left: 30px;
-}
-
 .timeline-item p {
   display: inline-block;
-  padding: 0 10px;
+  padding: 6px 10px;
   font-size: 14px;
   background: #F2F2DF;
   border-radius: 6px;
+  margin-left: 20px;
 }
 
 
@@ -490,8 +469,12 @@ LinkedIn
   </div>
 </div>
 
-<div class="visual-carousel">
-  <div class="carousel-track">
+ <!-- About Me / Research Header -->
+  <h1>Research Highlights</h1>
+
+  <!-- Visual Carousel -->
+  <div class="visual-carousel">
+    <div class="carousel-track">
     <div class="carousel-item"><img src="scheme.png" alt="Diagram 1"></div>
     <div class="carousel-item"><img src="Aerobic.png" alt="Experiment 2"></div>
     <div class="carousel-item"><img src="oxphos.png" alt="Experiment 3"></div>
@@ -505,67 +488,29 @@ LinkedIn
   </div>
 </div>  
 
-<div class="short-timeline">
-  <h4>Timeline</h4>
-  <div class="timeline-container">
-    
-    <!-- 2017-2022 B.S. PNU -->
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <p>
-        <b>2017-2022</b> – B.S. in Biomaterial Science, Pusan National University (PNU), Pusan, Korea<br>
-        Thesis: Development of Liver Carcinoma Targeting Dual Metabolic Therapy via PLGA-PEG Nanoparticle<br>
-        Total GPA: 4.0/4.5 (3.56/4.0), Major GPA: 4.09/4.5 (3.64/4.0), 5/26<br>
-        Advisor: Prof. Seung-Yun Yang
-      </p>
+ <!-- Timeline -->
+  <div class="short-timeline">
+    <h4>Timeline</h4>
+    <div class="timeline-container">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p><b>2017-2022</b> – B.S. in Biomaterial Science, PNU, Korea</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p><b>2020-2021</b> – Field Training Intern, PNU</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p><b>2023-2025</b> – M.S., KAIST</p>
+      </div>
     </div>
-
-    <!-- 2020-2021 Field Training Intern -->
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <p>
-        <b>2020-2021</b> – Field Training Intern, Polymeric Biomaterials & Drug Delivery Lab (PBS), PNU, Pusan, Korea<br>
-        - Developed membrane-based exosome isolation system; fabricated and characterized membranes using SEM and DLS.<br>
-        - Operated tangential flow filtration system; collaborated on device prototyping with acid/base-assisted fabrication and 3D modeling.<br>
-        - Conducted exosome characterization (TEM, DLS)
-      </p>
-    </div>
-
-    <!-- 2023-2025 M.S. KAIST -->
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <p>
-        <b>2023-2025</b> – M.S. in Chemical and Biomolecular Engineering, KAIST, Daejeon, Korea<br>
-        Thesis: Development of Liver Carcinoma Targeting Dual Metabolic Therapy via PLGA-PEG Nanoparticle<br>
-        Advisor: Prof. Yeu-Chun Kim
-      </p>
-    </div>
-
-    <!-- 2023-2025 Graduate Student Researcher -->
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <p>
-        <b>2023-2025</b> – Graduate student researcher, Biomedical Micro-Nano Delivery Lab, KAIST, Daejeon, Korea<br>
-        - Designed and optimized PLGA-PEG nanoparticles for dual metabolic inhibition in hepatocellular carcinoma (HepG2).<br>
-        - Conducted in vitro assays (cell viability, apoptosis, lactate/glucose metabolism, ROS/ATP/JC-1/MitoSOX, GSH).<br>
-        - Nanoparticle characterization (DLS, HPLC, TEM, CLSM); investigated biodistribution and therapeutic efficacy in liver tumor models.<br>
-        - Analyzed data using Prism, FlowJo, CompuSyn, ZEN.
-      </p>
-    </div>
-
-    <!-- Future PhD -->
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <p>
-        <b>Future</b> – PhD research: AI-integrated smart drug delivery systems
-      </p>
-    </div>
-
   </div>
-</div>
+
 </div> <!-- right 끝 -->
-  
-// JS 무한 루프
+
+<!-- JS 코드 -->
+<script>
 const track = document.querySelector('.carousel-track');
 const items = Array.from(track.children);
 let index = 0;
@@ -579,11 +524,11 @@ function updateCarousel() {
   });
 
   index++;
-  if (index >= items.length) index = 0;
+  if(index >= items.length) index = 0;
 }
 
+// 2.5초마다 슬라이더 이동
 setInterval(updateCarousel, 2500);
 </script>
-
 </body>
 </html>
