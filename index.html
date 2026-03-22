@@ -286,13 +286,13 @@ padding-left:22px;
 .visual-carousel {
   overflow: hidden;
   width: 100%;
-  margin: 20px 0;
   position: relative;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
+  will-change: transform;
 }
 
 .carousel-item {
@@ -318,43 +318,44 @@ padding-left:22px;
 
 .timeline-item {
   position: relative;
+  margin: 30px 0;
   width: 50%;
-  padding: 20px 40px;
-  box-sizing: border-box;
 }
 
 .timeline-item:nth-child(odd) {
   left: 0;
-  text-align: left;
+  text-align: right;
 }
 
 .timeline-item:nth-child(even) {
   left: 50%;
-  text-align: right;
+  text-align: left;
 }
 
 .timeline-dot {
   position: absolute;
-  top: 20px;
-  width: 20px;
-  height: 20px;
+  top: 0;
+  width: 16px;
+  height: 16px;
   background: #8B6B4F;
   border-radius: 50%;
   border: 3px solid white;
 }
 
 .timeline-item:nth-child(odd) .timeline-dot {
-  right: -10px;
+  right: -8px;
 }
 
 .timeline-item:nth-child(even) .timeline-dot {
-  left: -10px;
+  left: -8px;
 }
 
 .timeline-item p {
-  margin: 0;
+  display: inline-block;
+  padding: 0 10px;
   font-size: 14px;
-  line-height: 1.6;
+  background: #F2F2DF;
+  border-radius: 6px;
 }
 
 /* 모바일 대응 */
@@ -576,21 +577,21 @@ LinkedIn
 </div>
 </div> <!-- right 끝 -->
   
-<!-- 여기 바로 아래에 JS 붙여넣기 -->
-<script>
+// JS 무한 루프
 const track = document.querySelector('.carousel-track');
 const items = Array.from(track.children);
 let index = 0;
 
 function updateCarousel() {
-  const itemWidth = items[0].getBoundingClientRect().width + 20; // margin 포함
+  const itemWidth = items[0].getBoundingClientRect().width + 20;
   track.style.transform = `translateX(-${index * itemWidth}px)`;
 
   items.forEach((item, i) => {
     item.classList.toggle('active', i === index);
   });
 
-  index = (index + 1) % items.length;
+  index++;
+  if(index >= items.length) index = 0;
 }
 
 setInterval(updateCarousel, 2500);
