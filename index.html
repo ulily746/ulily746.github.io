@@ -55,9 +55,10 @@ width:20%;
 min-width:200px;
 height:calc(100vh - 70px);
 position:sticky;
-top:0;
+top:70px;
 margin:0;
-z-index:1;
+background:#000; /* 배경색 추가 */
+overflow:hidden;
 }
 
 .profile-card{
@@ -186,6 +187,16 @@ padding-left:22px;
 #keywords-section b{
   font-weight:700;
   color:#8B6B4F; /* 포인트 컬러 */
+}
+
+.skills p{
+  margin:5px 0;
+  line-height:1.6;
+}
+
+.skills p b{
+  font-weight:700;
+  color:#8B6B4F;
 }
 
 /* Research Highlights 카드 */
@@ -323,6 +334,13 @@ LinkedIn
   <div id="keywords-section" style="margin-top:30px;">
     <p><b>Keyword of Interest </b> organ-on-chip, sensor, microrobotics, bio-integrated systems, soft robotics</p>
   </div>
+
+ <div class="research-block skills">
+  <h4>Skills / Expertise</h4>
+  <p>
+    <b>Skills –</b> DLS, TEM, HPLC, Nanoparticle synthesis, Microfluidics, AI/ML integration
+  </p>
+</div>
 
 <div id="research-highlights" class="card">
   <h3> Research Highlights</h3>
