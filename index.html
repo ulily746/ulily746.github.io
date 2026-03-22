@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -8,9 +9,10 @@
 
 body{
 margin:0;
-font-family: Arial;
-background:#F4EFEA;
+font-family: Arial, Helvetica, sans-serif;
+background:#F5EEDC;
 color:#1A1A1A;
+line-height:1.7;
 }
 
 /* navigation */
@@ -18,41 +20,111 @@ color:#1A1A1A;
 .nav{
 display:flex;
 gap:40px;
-padding:20px 60px;
+padding:22px 60px;
 font-size:18px;
-border-bottom:1px solid #ddd;
+border-bottom:1px solid #e5dcc8;
+background:white;
 }
 
 .nav a{
 text-decoration:none;
 color:#1A1A1A;
+font-weight:500;
+}
+
+.nav a:hover{
+color:#8B6B4F;
 }
 
 /* layout */
 
 .container{
 display:flex;
-padding:60px;
-gap:60px;
+padding:70px;
+gap:80px;
+max-width:1100px;
+margin:auto;
 }
+
+/* left profile */
 
 .left{
-width:35%;
+width:32%;
 }
+
+.profile-card{
+position:relative;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.profile-card img{
+width:100%;
+height:500px;
+object-fit:cover;
+display:block;
+}
+
+/* dark overlay */
+
+.overlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.35);
+}
+
+/* text on image */
+
+.profile-info{
+position:absolute;
+top:30%;
+left:50%;
+transform:translate(-50%,-30%);
+text-align:center;
+color:white;
+}
+
+.profile-info h2{
+margin:0;
+font-size:28px;
+}
+
+.profile-info p{
+margin:8px 0;
+font-size:14px;
+}
+
+.profile-info a{
+color:white;
+text-decoration:none;
+}
+
+/* right content */
 
 .right{
-width:65%;
+width:68%;
 }
 
-img{
-width:100%;
-border-radius:8px;
+h1{
+margin-top:0;
+font-size:32px;
+}
+
+h3{
+margin-top:35px;
+}
+
+ul{
+padding-left:22px;
 }
 
 </style>
 
 </head>
-
 
 <body>
 
@@ -67,34 +139,26 @@ border-radius:8px;
 
 <div class="left">
 
+<div class="profile-card">
+
 <img src="profile.jpg">
 
-</div>
+<div class="overlay"></div>
 
-<div class="right">
+<div class="profile-info">
 
-<h1>Yuri Choi</h1>
+<h2>Yuri Choi</h2>
 
-<p>
-Biohybrid Robotics Researcher
-</p>
+<p>choic2k3@gamil.com</p>
 
 <p>
-I am interested in developing biohybrid robotic systems integrating living biological components with engineered materials.
+<a href="https://www.linkedin.com/in/cy-yuri746">
+LinkedIn
+</a>
 </p>
 
-<h3>Research Interests</h3>
-
-<ul>
-<li>Biohybrid robotics</li>
-<li>Soft robotics</li>
-<li>Microfluidic sensors</li>
-</ul>
-
 </div>
 
 </div>
 
-</body>
-
-</html>
+</div>
