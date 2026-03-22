@@ -189,14 +189,21 @@ padding-left:22px;
   color:#8B6B4F; /* 포인트 컬러 */
 }
 
-.skills p{
-  margin:5px 0;
-  line-height:1.6;
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* 스킬 간 간격 */
+  margin-top: 10px;
 }
 
-.skills p b{
-  font-weight:700;
-  color:#8B6B4F;
+.skill-badge {
+  background: #F2E8DC; /* 연한 배경 */
+  color: #8B6B4F; /* 글자 포인트 */
+  padding: 6px 12px;
+  border-radius: 20px; /* 둥근 배지 */
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 /* Research Highlights 카드 */
@@ -335,11 +342,16 @@ LinkedIn
     <p><b>Keyword of Interest </b> organ-on-chip, sensor, microrobotics, bio-integrated systems, soft robotics</p>
   </div>
 
- <div class="research-block skills">
+<div class="skills">
   <h4>Skills / Expertise</h4>
-  <p>
-    <b>Skills –</b> DLS, TEM, HPLC, Nanoparticle synthesis, Microfluidics, AI/ML integration
-  </p>
+  <div class="skills-container">
+    <span class="skill-badge">DLS</span>
+    <span class="skill-badge">TEM</span>
+    <span class="skill-badge">HPLC</span>
+    <span class="skill-badge">Nanoparticle synthesis</span>
+    <span class="skill-badge">Compusyn</span>
+    <span class="skill-badge">CLSM</span>
+  </div>
 </div>
 
 <div id="research-highlights" class="card">
