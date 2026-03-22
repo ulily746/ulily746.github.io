@@ -288,13 +288,40 @@ padding-left:22px;
   overflow: hidden;
   width: 100%;
   max-width: 900px;
-  margin: 40px auto;
+  margin: 50px auto;
   position: relative;  
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.5s ease;
+  .timeline-item 
+  text-align: center;  /* 중앙 정렬 */
+}
+
+.carousel-item.active {
+  transform: scale(2); /* 중심 사진 2배 확대 */
+  opacity: 1;
+  z-index: 2; /* 중앙 강조 */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.timeline-dot {
+  margin: 0 auto;      /* 중앙에 dot */
+}
+.timeline-item p {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 14px;
+  background: #F2F2DF;
+  border-radius: 6px;
+}
 }
 
 .carousel-item {
@@ -518,14 +545,21 @@ const items = Array.from(track.children);
 let index = 0;
 
 function updateCarousel() {
-  const itemWidth = items[0].getBoundingClientRect().width + 20; // margin included
-  track.style.transform = `translateX(-${(index - 1) * itemWidth}px)`; // Center the active item
+ function updateCarousel() {
+  const centerOffset = (items[0].getBoundingClientRect().width + 20) / 2;
+  const trackWidth = track.offsetWidth;
+  const itemWidth = items[0].getBoundingClientRect().width + 20;
+
   items.forEach((item, i) => {
     item.classList.toggle('active', i === index);
   });
 
+  // 가운데 사진이 .right 중앙에 위치하도록 transform
+  const translateX = index * itemWidth - trackWidth / 2 + itemWidth / 2;
+  track.style.transform = `translateX(-${translateX}px)`;
+
   index++;
-  if (index >= items.length) index = 0; // Loop back to the first image
+  if (index >= items.length) index = 0;
 }
 
 setInterval(updateCarousel, 2500);
