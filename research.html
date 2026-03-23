@@ -11,7 +11,6 @@ body{
   color:#1A1A1A;
   line-height:1.6;
 }
-
 /* navigation */
 .nav{
   display:flex;
@@ -32,116 +31,147 @@ body{
 .nav a:hover{
   color:#8B6B4F;
 }
-
-/* layout */
+/* container */
 .container{
   display:flex;
-  flex-wrap:wrap;
-  max-width:1200px;
-  margin:50px auto;
-  gap:20px;
+  width:100%;
+  min-height:100vh;
 }
 
-/* Sidebar */
-.sidebar{
-  flex:0 0 250px;
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+/* left sidebar */
+.left{
+  width:250px;
+  min-width:250px;
+  background:#000;
+  color:white;
   position:sticky;
-  top:80px;
-  height:fit-content;
+  top:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:20px 10px;
+  box-sizing:border-box;
 }
-
-/* Sidebar sections */
-.sidebar h3{
-  color:#8B6B4F;
-  margin-top:0;
+.left img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+  object-fit:cover;
 }
-.sidebar ul{
-  padding-left:15px;
+.left h2{
+  margin:10px 0 5px 0;
+  text-align:center;
 }
-.sidebar li{
-  margin-bottom:8px;
-  cursor:pointer;
-  color:#1A1A1A;
+.left p{
+  font-size:13px;
+  text-align:center;
 }
-.sidebar li:hover{
+.left a{
+  color:#F2F2DF;
+  text-decoration:none;
+}
+.left a:hover{
   text-decoration:underline;
 }
-
-/* Main content */
-.main-content{
-  flex:1;
-}
-
-/* Page title */
-h1{
-  font-size:32px;
-  text-align:center;
-  margin-bottom:30px;
-  color:#8B6B4F;
-}
-
-/* Search bar */
-#search-bar{
+.left .search-bar{
+  margin:15px 0;
   width:100%;
-  padding:8px 12px;
-  margin-bottom:20px;
-  border-radius:5px;
-  border:1px solid #ccc;
-  font-size:14px;
+  display:flex;
 }
-
-/* Project thumbnails */
-.project-list{
+.left .search-bar input{
+  flex:1;
+  padding:5px 10px;
+  border-radius:5px;
+  border:none;
+  font-size:13px;
+}
+.left .category-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:10px;
+}
+.left .category-filter button{
+  flex:1 1 48%;
+  padding:5px;
+  font-size:12px;
+  border:none;
+  border-radius:5px;
+  background:#8B6B4F;
+  color:white;
+  cursor:pointer;
+}
+.left .category-filter button:hover{
+  background:#6a4e38;
+}
+/* right content */
+.right{
+  flex:1;
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  box-sizing:border-box;
+}
+/* project cards */
+.cards{
   display:flex;
   flex-wrap:wrap;
   gap:20px;
-  justify-content:flex-start;
 }
-
-.project-item{
+.card{
   background:white;
   border-radius:10px;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
   width:250px;
-  text-align:center;
+  cursor:pointer;
   overflow:hidden;
-  cursor:pointer;
-  transition: transform 0.3s ease;
+  transition:transform 0.3s ease;
 }
-.project-item:hover{
-  transform: translateY(-5px);
+.card:hover{
+  transform:translateY(-5px);
 }
-.project-item img{
+.card .placeholder{
   width:100%;
-  height:180px;
-  object-fit:cover;
-}
-.project-item h4{
-  margin:10px 0;
-  color:#8B6B4F;
-}
-.view-more{
-  margin-bottom:10px;
-  padding:6px 12px;
-  border:none;
-  background:#8B6B4F;
-  color:white;
-  border-radius:5px;
-  cursor:pointer;
+  height:150px;
+  background:#ccc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#555;
   font-size:14px;
 }
-
-/* Modal */
+.card-content{
+  padding:10px;
+}
+.card-content h4{
+  margin:5px 0;
+  color:#8B6B4F;
+  font-size:16px;
+}
+.card-content p{
+  font-size:13px;
+  color:#666;
+  margin:3px 0;
+}
+.read-more{
+  margin-top:5px;
+  padding:4px 8px;
+  background:#8B6B4F;
+  color:white;
+  border:none;
+  border-radius:5px;
+  font-size:12px;
+  cursor:pointer;
+}
+/* modal */
 .modal{
   display:none;
   position:fixed;
   top:0; left:0;
   width:100%; height:100%;
-  background: rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.7);
   z-index:10000;
   justify-content:center;
   align-items:center;
@@ -156,9 +186,15 @@ h1{
   overflow-y:auto;
   position:relative;
 }
-.modal-content img{
+.modal-content .modal-placeholder{
   width:100%;
-  height:auto;
+  height:300px;
+  background:#ccc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#555;
+  font-size:16px;
   margin-top:15px;
   border-radius:8px;
 }
@@ -171,81 +207,76 @@ h1{
   cursor:pointer;
   color:#8B6B4F;
 }
-
-/* Keywords */
-.keywords{
-  margin-top:10px;
-  font-size:14px;
-  color:#666;
-}
-
 @media(max-width:900px){
   .container{
     flex-direction:column;
   }
-  .sidebar{
+  .left{
     width:100%;
-    position:relative;
-    top:auto;
-    margin-bottom:30px;
+    height:auto;
   }
-  .project-list{
+  .cards{
     justify-content:center;
+  }
+  .card{
+    width:90%;
   }
 }
 </style>
 </head>
 <body>
-
 <div class="nav">
   <a href="index.html">Main</a>
   <a href="research.html">Research</a>
   <a href="cv.html">CV</a>
   <a href="news.html">News</a>
 </div>
-
 <div class="container">
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h3>Timeline</h3>
-    <ul>
-      <li onclick="openProject('Master’s Thesis')">2023-2025: Master’s Thesis (KAIST)</li>
-      <li onclick="openProject('Supported Research')">2021: Supported Research (PNU)</li>
-      <li onclick="openProject('Undergraduate Project')">2019: Undergraduate Project</li>
-    </ul>
+  <!-- Left Sidebar -->
+  <div class="left">
+    <img src="profile.jpg" alt="Profile">
+    <h2>Yuri Choi</h2>
+    <p>✉ <a href="mailto:choic2k3@gmail.com">choic2k3@gmail.com</a></p>
+    <p>🔗 <a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">LinkedIn</a></p>
+    
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search Projects...">
+    </div>
 
-    <h3>Publications</h3>
-    <ul>
-      <li><a href="#" target="_blank">Overcoming metabolic plasticity in HCC</a></li>
-      <li><a href="#" target="_blank">Metal-phenolic networks reverse TME immunosuppression</a></li>
-    </ul>
+    <div class="category-filter">
+      <button data-category="all">All</button>
+      <button data-category="ms">M.S.</button>
+      <button data-category="bs">B.S.</button>
+      <button data-category="support">Support</button>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <h1>Research Projects</h1>
-    <input type="text" id="search-bar" placeholder="Search projects...">
-
-    <div class="project-list">
-      <!-- Master’s Thesis -->
-      <div class="project-item" data-title="Master’s Thesis" data-topic="Dual metabolic pathway inhibitors via PLGA-PEG nanoparticles" data-objective="Target hepatocellular carcinoma selectively using nanoparticles for long circulation and EPR effect." data-keywords="nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles" data-image="scheme.png">
-        <img src="scheme.png" alt="Master’s Thesis">
-        <h4>Master’s Thesis</h4>
-        <button class="view-more">View More</button>
+  <!-- Right Content -->
+  <div class="right">
+    <div class="cards">
+      <div class="card" data-category="ms" data-title="Master Thesis" data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
+        <div class="placeholder">Scheme.png</div>
+        <div class="card-content">
+          <h4>Master Thesis</h4>
+          <p>PLGA-PEG nanoparticles</p>
+          <button class="read-more">View More</button>
+        </div>
       </div>
-
-      <!-- Supported Research -->
-      <div class="project-item" data-title="Supported Research" data-topic="Support on organ-on-chip sensor development" data-objective="Assist in microfluidic sensor integration and validation" data-keywords="organ-on-chip, sensor, microfluidics" data-image="NHY.jpg">
-        <img src="NHY.jpg" alt="Supported Research">
-        <h4>Supported Research</h4>
-        <button class="view-more">View More</button>
+      <div class="card" data-category="support" data-title="Supported Research" data-detail="Assisted in NHY research project focusing on organ-on-chip systems.">
+        <div class="placeholder">NHY.jpg</div>
+        <div class="card-content">
+          <h4>Supported Research</h4>
+          <p>Organ-on-chip</p>
+          <button class="read-more">View More</button>
+        </div>
       </div>
-
-      <!-- Undergraduate Project -->
-      <div class="project-item" data-title="Undergraduate Project" data-topic="Thermally forced filtration study" data-objective="Investigate particle separation efficiency in TFF system" data-keywords="TFF, filtration, particle separation" data-image="TFF.png">
-        <img src="TFF.png" alt="Undergraduate Project">
-        <h4>Undergraduate Project</h4>
-        <button class="view-more">View More</button>
+      <div class="card" data-category="bs" data-title="Undergrad Research" data-detail="Worked on TFF project in undergraduate research.">
+        <div class="placeholder">TFF.png</div>
+        <div class="card-content">
+          <h4>Undergrad Research</h4>
+          <p>TFF project</p>
+          <button class="read-more">View More</button>
+        </div>
       </div>
     </div>
   </div>
@@ -256,10 +287,8 @@ h1{
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2 id="modal-title"></h2>
-    <p><b>Topic:</b> <span id="modal-topic"></span></p>
-    <p><b>Objective:</b> <span id="modal-objective"></span></p>
-    <img id="modal-image" src="" alt="Project Image">
-    <p class="keywords"><b>Keywords:</b> <span id="modal-keywords"></span></p>
+    <p id="modal-detail"></p>
+    <div class="modal-placeholder">Project Image</div>
   </div>
 </div>
 
@@ -267,53 +296,35 @@ h1{
 // Modal functionality
 const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal-title');
-const modalTopic = document.getElementById('modal-topic');
-const modalObjective = document.getElementById('modal-objective');
-const modalKeywords = document.getElementById('modal-keywords');
-const modalImage = document.getElementById('modal-image');
+const modalDetail = document.getElementById('modal-detail');
 
-document.querySelectorAll('.project-item').forEach(item => {
-  item.addEventListener('click', () => {
-    openProject(item.dataset.title);
+document.querySelectorAll('.card, .read-more').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    let card = e.target.closest('.card');
+    modal.style.display='flex';
+    modalTitle.textContent = card.dataset.title;
+    modalDetail.textContent = card.dataset.detail;
   });
 });
 
-function openProject(title){
-  const item = Array.from(document.querySelectorAll('.project-item'))
-    .find(p => p.dataset.title === title);
-  if(!item) return;
+document.querySelector('.close').addEventListener('click', ()=>{modal.style.display='none';});
+window.addEventListener('click', e=>{if(e.target===modal) modal.style.display='none';});
 
-  modal.style.display = 'flex';
-  modalTitle.textContent = item.dataset.title;
-  modalTopic.textContent = item.dataset.topic;
-  modalObjective.textContent = item.dataset.objective;
-  modalKeywords.textContent = item.dataset.keywords;
-  modalImage.src = item.dataset.image;
-  modalImage.alt = item.dataset.title;
-}
-
-document.querySelector('.close').addEventListener('click', () => {
-  modal.style.display = 'none';
+// Category filter
+document.querySelectorAll('.category-filter button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const cat = btn.dataset.category;
+    document.querySelectorAll('.card').forEach(card=>{
+      card.style.display=(cat==='all'||card.dataset.category===cat)?'block':'none';
+    });
+  });
 });
 
-window.addEventListener('click', e => {
-  if(e.target === modal){
-    modal.style.display = 'none';
-  }
-});
-
-// Search functionality
-const searchInput = document.getElementById('search-bar');
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase();
-  document.querySelectorAll('.project-item').forEach(item => {
-    const title = item.dataset.title.toLowerCase();
-    const keywords = item.dataset.keywords.toLowerCase();
-    if(title.includes(query) || keywords.includes(query)){
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
+// Search filter
+document.getElementById('search-input').addEventListener('input', e=>{
+  const val = e.target.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(card=>{
+    card.style.display = (card.dataset.title.toLowerCase().includes(val)) ? 'block' : 'none';
   });
 });
 </script>
