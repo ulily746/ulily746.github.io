@@ -11,6 +11,7 @@ body{
   color:#1A1A1A;
   line-height:1.6;
 }
+
 /* navigation */
 .nav{
   display:flex;
@@ -48,7 +49,7 @@ body{
   top:0;
   background:#000;
   color:white;
-  padding:20px 10px;
+  padding:30px 10px 20px 10px; /* 위쪽 여백 확보 */
   box-sizing:border-box;
   display:flex;
   flex-direction:column;
@@ -70,34 +71,17 @@ body{
 .left a:hover{
   text-decoration:underline;
 }
+
 /* search */
 .search-bar input{
   width:100%;
-  padding:6px 10px;
+  padding:8px 10px;
   border-radius:5px;
   border:none;
   font-size:13px;
-  margin-bottom:10px;
+  margin-bottom:20px; /* 여백 확보 */
 }
-/* category filter */
-.category-filter{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-}
-.category-filter button{
-  flex:1 1 48%;
-  padding:5px;
-  font-size:12px;
-  border:none;
-  border-radius:5px;
-  background:#8B6B4F;
-  color:white;
-  cursor:pointer;
-}
-.category-filter button:hover{
-  background:#6a4e38;
-}
+
 /* timeline & publications */
 .timeline, .publications{
   background:#111;
@@ -124,9 +108,31 @@ body{
   padding:30px;
   display:flex;
   flex-direction:column;
-  gap:20px;
+  gap:15px;
   box-sizing:border-box;
 }
+
+/* category filter moved above cards */
+.category-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-bottom:15px; /* 카드와 간격 */
+}
+.category-filter button{
+  flex:1 1 48%;
+  padding:5px;
+  font-size:12px;
+  border:none;
+  border-radius:5px;
+  background:#8B6B4F;
+  color:white;
+  cursor:pointer;
+}
+.category-filter button:hover{
+  background:#6a4e38;
+}
+
 /* project cards */
 .cards{
   display:flex;
@@ -243,13 +249,6 @@ body{
       <input type="text" id="search-input" placeholder="Search Projects...">
     </div>
 
-    <div class="category-filter">
-      <button data-category="all">All</button>
-      <button data-category="ms">M.S.</button>
-      <button data-category="bs">B.S.</button>
-      <button data-category="support">Support</button>
-    </div>
-
     <div class="timeline">
       <h3>Timeline</h3>
       <div class="timeline-item">2023-2025: M.S. Student @ KAIST</div>
@@ -267,6 +266,13 @@ body{
 
   <!-- Right content -->
   <div class="right">
+    <div class="category-filter">
+      <button data-category="all">All</button>
+      <button data-category="ms">M.S.</button>
+      <button data-category="bs">B.S.</button>
+      <button data-category="support">Support</button>
+    </div>
+
     <div class="cards">
       <div class="card" data-category="ms" data-title="Master Thesis" data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
         <img src="scheme.png" alt="Master Thesis">
