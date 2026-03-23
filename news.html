@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>News - Yuri Choi</title>
+<style>
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#F2F2DF;
+  color:#1A1A1A;
+  line-height:1.6;
+}
+
+/* navigation */
+.nav{
+  display:flex;
+  gap:50px;
+  padding:22px 0 22px 50px;
+  font-size:16px;
+  border-bottom:1px solid #e5dcc8;
+  background:black;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.nav a{
+  text-decoration:none;
+  color:#F2F2DF;
+  font-weight:500;
+}
+.nav a:hover{
+  color:#8B6B4F;
+}
+
+/* container */
+.container{
+  max-width:1200px;
+  margin:50px auto;
+  padding:0 20px;
+}
+
+/* category filter */
+.category-filter{
+  display:flex;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+.category-filter button{
+  padding:6px 14px;
+  border:none;
+  border-radius:5px;
+  background:#8B6B4F;
+  color:white;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.3s;
+}
+.category-filter button:hover{
+  background:#6a4e38;
+}
+
+/* cards */
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.card{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  width:250px;
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform 0.3s ease;
+}
+.card:hover{
+  transform: translateY(-5px);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.card-content{
+  padding:12px;
+}
+.card-content h4{
+  margin:5px 0;
+  color:#8B6B4F;
+  font-size:16px;
+}
+.card-content p{
+  font-size:14px;
+  color:#666;
+  margin:5px 0;
+}
+.read-more{
+  margin-top:8px;
+  padding:5px 10px;
+  background:#8B6B4F;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+/* modal */
+.modal{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  z-index:10000;
+  justify-content:center;
+  align-items:center;
+}
+.modal-content{
+  background:white;
+  border-radius:10px;
+  padding:20px;
+  max-width:700px;
+  width:90%;
+  max-height:90%;
+  overflow-y:auto;
+  position:relative;
+}
+.modal-content img{
+  width:100%;
+  height:auto;
+  margin-top:15px;
+  border-radius:8px;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  font-weight:bold;
+  cursor:pointer;
+  color:#8B6B4F;
+}
+
+@media(max-width:900px){
+  .cards{
+    justify-content:center;
+  }
+  .card{
+    width:90%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">Main</a>
+  <a href="research.html">Research</a>
+  <a href="cv.html">CV</a>
+  <a href="news.html">News</a>
+</div>
+
+<div class="container">
+  <h1>News & Updates</h1>
+
+  <!-- Category Filter -->
+  <div class="category-filter">
+    <button data-category="all">All</button>
+    <button data-category="skills">Skills</button>
+    <button data-category="language">Language</button>
+    <button data-category="hobby">Hobby</button>
+    <button data-category="travel">Travel</button>
+  </div>
+
+  <!-- Cards -->
+  <div class="cards">
+    <!-- Skills example -->
+    <div class="card" data-category="skills" data-title="Python Certification" data-date="2026-01-15" data-summary="Completed Python & Web Development Courses" data-image="cert.png" data-detail="Completed full Python programming course including data analysis, web scraping, and Flask web apps.">
+      <img src="cert.png" alt="Python Certification">
+      <div class="card-content">
+        <h4>Python Certification</h4>
+        <p>2026-01-15</p>
+        <p>Completed Python & Web Development Courses</p>
+        <button class="read-more">Read More</button>
+      </div>
+    </div>
+
+    <!-- Language example -->
+    <div class="card" data-category="language" data-title="German Learning" data-date="2026-03-01" data-summary="Reached B1 Level" data-image="german.jpg" data-detail="Studied German intensively reaching B1 level, focusing on academic reading and conversational skills.">
+      <img src="german.jpg" alt="German Learning">
+      <div class="card-content">
+        <h4>German Learning</h4>
+        <p>2026-03-01</p>
+        <p>Reached B1 Level</p>
+        <button class="read-more">Read More</button>
+      </div>
+    </div>
+
+    <!-- Hobby example -->
+    <div class="card" data-category="hobby" data-title="Weekend Hiking" data-date="2026-02-20" data-summary="Hiked in Seoraksan" data-image="hike.png" data-detail="Went hiking in Seoraksan National Park with friends, explored scenic trails and practiced landscape photography.">
+      <img src="hike.png" alt="Weekend Hiking">
+      <div class="card-content">
+        <h4>Weekend Hiking</h4>
+        <p>2026-02-20</p>
+        <p>Hiked in Seoraksan</p>
+        <button class="read-more">Read More</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modal-title"></h2>
+    <p><b>Date:</b> <span id="modal-date"></span></p>
+    <p id="modal-detail"></p>
+    <img id="modal-image" src="" alt="Modal Image">
+  </div>
+</div>
+
+<script>
+// Modal functionality
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDate = document.getElementById('modal-date');
+const modalDetail = document.getElementById('modal-detail');
+const modalImage = document.getElementById('modal-image');
+
+document.querySelectorAll('.card, .read-more').forEach(btn => {
+  btn.addEventListener('click', e=>{
+    let card = e.target.closest('.card');
+    modal.style.display='flex';
+    modalTitle.textContent = card.dataset.title;
+    modalDate.textContent = card.dataset.date;
+    modalDetail.textContent = card.dataset.detail;
+    modalImage.src = card.dataset.image;
+    modalImage.alt = card.dataset.title;
+  });
+});
+
+document.querySelector('.close').addEventListener('click', ()=>{
+  modal.style.display='none';
+});
+window.addEventListener('click', e=>{
+  if(e.target === modal) modal.style.display='none';
+});
+
+// Category filter
+document.querySelectorAll('.category-filter button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const cat = btn.dataset.category;
+    document.querySelectorAll('.card').forEach(card=>{
+      if(cat==='all' || card.dataset.category===cat){
+        card.style.display='block';
+      }else{
+        card.style.display='none';
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
