@@ -121,7 +121,7 @@ text-decoration:underline;
 /* right content */
 
 .right{
-  width:100%;
+  width:calc(100% - 20%)
   padding:50px 20px;
   max-width:900px;
   margin-left:auto;
@@ -279,8 +279,7 @@ ul {padding-left:22px;}
 .visual-carousel {
   overflow: hidden;       /* 좌우 영역 넘침 숨김 */
   width: 100%;            /* .right 영역 전체 너비 사용 */
-  max-width: 900px;       /* 필요하면 제한 */
-  margin: 0 auto;         /* 가운데 정렬 */
+  margin-left: 20%;        
   position: relative;
   display: flex;
   justify-content: center; /* 오른쪽 영역 안에서 가운데 정렬 */
@@ -291,8 +290,8 @@ ul {padding-left:22px;}
   padding:0 50px;          /* 양쪽 여백 확보 */
 }
 .carousel-item{
-  flex:0 0 250px;
-  margin:0 20px;
+  flex:0 0 230px;
+  margin:0 18px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity:0.5;
   display:flex;
