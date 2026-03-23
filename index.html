@@ -477,18 +477,36 @@ ul {padding-left:22px;}
 </div> <!-- container 끝 -->
 
 <script>
-    <div class="carousel-item"><img src="scheme.png" alt="Diagram 1"></div>
-    <div class="carousel-item"><img src="Aerobic.png" alt="Experiment 2"></div>
-    <div class="carousel-item"><img src="oxphos.png" alt="Experiment 3"></div>
-    <div class="carousel-item"><img src="Drug.png" alt="Experiment 4"></div>
-    <div class="carousel-item"><img src="Psize.png" alt="Experiment 5"></div>
-    <div class="carousel-item"><img src="glycolysis.png" alt="Experiment 6"></div>
-    <div class="carousel-item"><img src="clsm.png" alt="Experiment 7"></div>
-    <div class="carousel-item"><img src="invivo.png" alt="Experiment 8"></div>
-    <div class="carousel-item"><img src="invivo2.png" alt="Experiment 9"></div>
-    <div class="carousel-item"><img src="Emusion.png" alt="Experiment 10"></div>
-    <div class="carousel-item"><img src="Extra.png" alt="Experiment 11"></div>
-  </div>
+const track = document.querySelector('.carousel-track');
+const items = Array.from(track.children);
+const visibleSlots = 5; // 슬롯 수
+let index = Math.floor(visibleSlots / 2); // 중앙에서 시작
+
+function updateCarousel() {
+  const itemWidth = items[0].getBoundingClientRect().width + 30; // margin 포함
+  const centerIndex = Math.floor(visibleSlots / 2);
+
+  items.forEach((item, i) => {
+    item.classList.remove('active');
+  });
+
+  // 중앙 이미지 활성화
+  const activeItem = items[index];
+  activeItem.classList.add('active');
+
+  // 왼쪽으로 이동하면서 중앙 정렬
+  const translateX = index * itemWidth - centerIndex * itemWidth;
+  track.style.transform = `translateX(-${translateX}px)`;
+
+  // 인덱스 증가 (무한 루프)
+  index++;
+  if (index >= items.length) index = 0;
+}
+
+// 초기 배치
+updateCarousel();
+setInterval(updateCarousel, 2500);
+</script>
 </div>
 
 </body>
