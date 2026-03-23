@@ -284,10 +284,8 @@ background:#e5dcc8;
 }
 
 .timeline-item{
-position:relative;
-margin-bottom:50px;
-opacity:1;
-transform:none;
+opacity:0;
+transform:translateY(40px);
 transition:all 0.6s ease;
 }
 
@@ -521,36 +519,15 @@ function updateCarousel(){
 
 setInterval(updateCarousel,2500);
 
-</script>
-
- <section class="timeline">
-
-<div class="timeline-item">
-<div class="timeline-content">
-<h3>M.S. Student Researcher</h3>
-<p>Biomedical Micro-Nano Delivery Lab, KAIST</p>
-<span>2023 – 2025 · Nanoparticle drug delivery</span>
-</div>
-</div>
-
-<div class="timeline-item">
-<div class="timeline-content">
-<h3>Field Training Intern</h3>
-<p>Polymeric Biomaterials & Drug Delivery Lab, PNU</p>
-<span>2020 – 2021 · Exosome isolation</span>
-</div>
-</div>
-
-</section>
 <script>
 
-const items = document.querySelectorAll(".timeline-item");
+const timelineItems = document.querySelectorAll(".timeline-item");
 
 function showTimeline(){
 
 const trigger = window.innerHeight * 0.9;
 
-items.forEach(item => {
+timelineItems.forEach(item => {
 
 const top = item.getBoundingClientRect().top;
 
