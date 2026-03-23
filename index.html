@@ -321,6 +321,21 @@ ul {padding-left:22px;}
   position: relative;   /* 절대 위치 제거 */
   z-index: 1;           /* 캐러셀 위로 겹치지 않게 */
 }
+.timeline-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid white;
+}
+
+.timeline-item p {
+  font-size: 12px;   /* 기존 14px -> 12px */
+  padding: 0 6px;    /* 양 옆 padding 줄이기 */
+}
 /* 모바일 */
 @media (max-width: 900px){
   .container {flex-direction: column;}
