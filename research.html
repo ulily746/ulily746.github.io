@@ -15,7 +15,7 @@ body{
 .nav{
   display:flex;
   gap:50px;
-  padding:22px 0 22px 50px;
+  padding:22px 0 22px 400px;
   font-size:16px;
   border-bottom:1px solid #e5dcc8;
   background:black;
@@ -31,36 +31,32 @@ body{
 .nav a:hover{
   color:#8B6B4F;
 }
-/* container */
+
+/* layout */
 .container{
   display:flex;
+  flex-wrap:wrap;
   width:100%;
-  min-height:100vh;
 }
 
 /* left sidebar */
 .left{
-  width:250px;
+  width:20%;
   min-width:250px;
-  background:#000;
-  color:white;
+  height:100vh;
   position:sticky;
   top:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  background:#000;
+  color:white;
   padding:20px 10px;
   box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  overflow-y:auto;
 }
-.left img{
-  width:100%;
-  border-radius:12px;
-  margin-bottom:15px;
-  object-fit:cover;
-}
-.left h2{
-  margin:10px 0 5px 0;
+.left h2, .left h3{
+  margin:5px 0;
   text-align:center;
 }
 .left p{
@@ -74,25 +70,22 @@ body{
 .left a:hover{
   text-decoration:underline;
 }
-.left .search-bar{
-  margin:15px 0;
+/* search */
+.search-bar input{
   width:100%;
-  display:flex;
-}
-.left .search-bar input{
-  flex:1;
-  padding:5px 10px;
+  padding:6px 10px;
   border-radius:5px;
   border:none;
   font-size:13px;
+  margin-bottom:10px;
 }
-.left .category-filter{
+/* category filter */
+.category-filter{
   display:flex;
   flex-wrap:wrap;
   gap:5px;
-  margin-top:10px;
 }
-.left .category-filter button{
+.category-filter button{
   flex:1 1 48%;
   padding:5px;
   font-size:12px;
@@ -102,9 +95,29 @@ body{
   color:white;
   cursor:pointer;
 }
-.left .category-filter button:hover{
+.category-filter button:hover{
   background:#6a4e38;
 }
+/* timeline & publications */
+.timeline, .publications{
+  background:#111;
+  padding:10px;
+  border-radius:10px;
+  font-size:12px;
+}
+.timeline-item{
+  margin-bottom:8px;
+  padding-left:10px;
+  border-left:2px solid #8B6B4F;
+}
+.publications ul{
+  list-style:none;
+  padding-left:5px;
+}
+.publications li{
+  margin-bottom:5px;
+}
+
 /* right content */
 .right{
   flex:1;
@@ -132,15 +145,10 @@ body{
 .card:hover{
   transform:translateY(-5px);
 }
-.card .placeholder{
+.card img{
   width:100%;
   height:150px;
-  background:#ccc;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#555;
-  font-size:14px;
+  object-fit:cover;
 }
 .card-content{
   padding:10px;
@@ -165,6 +173,7 @@ body{
   font-size:12px;
   cursor:pointer;
 }
+
 /* modal */
 .modal{
   display:none;
@@ -186,17 +195,10 @@ body{
   overflow-y:auto;
   position:relative;
 }
-.modal-content .modal-placeholder{
+.modal-content img{
   width:100%;
-  height:300px;
-  background:#ccc;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#555;
-  font-size:16px;
-  margin-top:15px;
   border-radius:8px;
+  margin-top:15px;
 }
 .close{
   position:absolute;
@@ -207,6 +209,7 @@ body{
   cursor:pointer;
   color:#8B6B4F;
 }
+
 @media(max-width:900px){
   .container{
     flex-direction:column;
@@ -225,20 +228,17 @@ body{
 </style>
 </head>
 <body>
+
 <div class="nav">
   <a href="index.html">Main</a>
   <a href="research.html">Research</a>
   <a href="cv.html">CV</a>
   <a href="news.html">News</a>
 </div>
+
 <div class="container">
-  <!-- Left Sidebar -->
+  <!-- Left sidebar -->
   <div class="left">
-    <img src="profile.jpg" alt="Profile">
-    <h2>Yuri Choi</h2>
-    <p>✉ <a href="mailto:choic2k3@gmail.com">choic2k3@gmail.com</a></p>
-    <p>🔗 <a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">LinkedIn</a></p>
-    
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Search Projects...">
     </div>
@@ -249,29 +249,45 @@ body{
       <button data-category="bs">B.S.</button>
       <button data-category="support">Support</button>
     </div>
+
+    <div class="timeline">
+      <h3>Timeline</h3>
+      <div class="timeline-item">2023-2025: M.S. Student @ KAIST</div>
+      <div class="timeline-item">2020-2021: Field Training Intern @ PNU</div>
+    </div>
+
+    <div class="publications">
+      <h3>Publications</h3>
+      <ul>
+        <li>Y. Choi*, H. Nam*, ... Overcoming metabolic plasticity...</li>
+        <li>H. Nam, H. Park, ... Metal-phenolic networks reverse...</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Right Content -->
+  <!-- Right content -->
   <div class="right">
     <div class="cards">
       <div class="card" data-category="ms" data-title="Master Thesis" data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
-        <div class="placeholder">Scheme.png</div>
+        <img src="scheme.png" alt="Master Thesis">
         <div class="card-content">
           <h4>Master Thesis</h4>
           <p>PLGA-PEG nanoparticles</p>
           <button class="read-more">View More</button>
         </div>
       </div>
+
       <div class="card" data-category="support" data-title="Supported Research" data-detail="Assisted in NHY research project focusing on organ-on-chip systems.">
-        <div class="placeholder">NHY.jpg</div>
+        <img src="NHY.jpg" alt="Supported Research">
         <div class="card-content">
           <h4>Supported Research</h4>
           <p>Organ-on-chip</p>
           <button class="read-more">View More</button>
         </div>
       </div>
+
       <div class="card" data-category="bs" data-title="Undergrad Research" data-detail="Worked on TFF project in undergraduate research.">
-        <div class="placeholder">TFF.png</div>
+        <img src="TFF.png" alt="Undergrad Research">
         <div class="card-content">
           <h4>Undergrad Research</h4>
           <p>TFF project</p>
@@ -288,7 +304,7 @@ body{
     <span class="close">&times;</span>
     <h2 id="modal-title"></h2>
     <p id="modal-detail"></p>
-    <div class="modal-placeholder">Project Image</div>
+    <img id="modal-image" src="" alt="">
   </div>
 </div>
 
@@ -297,6 +313,7 @@ body{
 const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal-title');
 const modalDetail = document.getElementById('modal-detail');
+const modalImage = document.getElementById('modal-image');
 
 document.querySelectorAll('.card, .read-more').forEach(btn=>{
   btn.addEventListener('click', e=>{
@@ -304,6 +321,7 @@ document.querySelectorAll('.card, .read-more').forEach(btn=>{
     modal.style.display='flex';
     modalTitle.textContent = card.dataset.title;
     modalDetail.textContent = card.dataset.detail;
+    modalImage.src = card.querySelector('img').src;
   });
 });
 
