@@ -49,7 +49,7 @@ body{
   top:0;
   background:#000;
   color:white;
-  padding:30px 10px 20px 10px; /* 위쪽 여백 확보 */
+  padding:30px 15px 20px 15px; /* 좌우 여백 확보 */
   box-sizing:border-box;
   display:flex;
   flex-direction:column;
@@ -80,6 +80,7 @@ body{
   border:none;
   font-size:13px;
   margin-bottom:20px; /* 여백 확보 */
+  box-sizing:border-box;
 }
 
 /* timeline & publications */
@@ -115,19 +116,19 @@ body{
 /* category filter moved above cards */
 .category-filter{
   display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin-bottom:15px; /* 카드와 간격 */
+  gap:8px;
+  margin-bottom:15px;
+  flex-wrap: nowrap; /* 한 줄 유지 */
 }
 .category-filter button{
-  flex:1 1 48%;
-  padding:5px;
+  padding:5px 8px; /* 손가락 한 마디 정도 크기 */
   font-size:12px;
   border:none;
   border-radius:5px;
   background:#8B6B4F;
   color:white;
   cursor:pointer;
+  white-space:nowrap;
 }
 .category-filter button:hover{
   background:#6a4e38;
@@ -230,6 +231,9 @@ body{
   .card{
     width:90%;
   }
+  .category-filter{
+    flex-wrap:wrap; /* 모바일에서는 줄바꿈 허용 */
+  }
 }
 </style>
 </head>
@@ -283,11 +287,11 @@ body{
         </div>
       </div>
 
-      <div class="card" data-category="support" data-title="Supported Research" data-detail="Assisted in NHY research project focusing on organ-on-chip systems.">
+      <div class="card" data-category="support" data-title="Supported Research" data-detail="Assisted in NHY research project focusing on metal-phenolic networks.">
         <img src="NHY.jpg" alt="Supported Research">
         <div class="card-content">
           <h4>Supported Research</h4>
-          <p>Organ-on-chip</p>
+          <p>metal-phenolic networks</p>
           <button class="read-more">View More</button>
         </div>
       </div>
