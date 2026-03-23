@@ -1,154 +1,131 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Yuri Choi</title>
-
 <style>
-
 body{
-margin:0;
-font-family: Arial, Helvetica, sans-serif;
-background:#F2F2DF;
-color:#1A1A1A;
-line-height:1.7;
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#F2F2DF;
+  color:#1A1A1A;
+  line-height:1.7;
 }
 
 /* navigation */
-
 .nav{
-display:flex;
-gap:50px;
-padding:22px 0px;
-padding-left:400px;
-font-size:16px;
-border-bottom:1px solid #e5dcc8;
-background:black;
-position:sticky;
-top:0;
-z-index:1000;
+  display:flex;
+  gap:50px;
+  padding:22px 0 22px 400px;
+  font-size:16px;
+  border-bottom:1px solid #e5dcc8;
+  background:black;
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
-
 .nav a{
-text-decoration:none;
-color:#F2F2DF;
-font-weight:500;
+  text-decoration:none;
+  color:#F2F2DF;
+  font-weight:500;
 }
-
 .nav a:hover{
-color:#8B6B4F;
+  color:#8B6B4F;
 }
 
 /* layout */
-
 .container{
-display:flex;
-flex-wrap:wrap;
-width:100%;
-gap:0;
+  display:flex;
+  flex-wrap:wrap;
+  width:100%;
+  gap:0;
 }
 
 /* left profile */
-
 .left{
-width:20%;
-min-width:200px;
-height:auto;
-position:sticky;
-top:0;
-margin:0;
-background:#000; /* 배경색 추가 */
-overflow:hidden;
+  width:20%;
+  min-width:200px;
+  height:auto;
+  position:sticky;
+  top:0;
+  margin:0;
+  background:#000;
+  overflow:hidden;
 }
-
 .profile-card{
-position:relative;
-height:100%;
-overflow:hidden;
+  position:relative;
+  height:100%;
+  overflow:hidden;
 }
-
 .profile-card img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
-
 /* dark overlay */
-
 .overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.35);
 }
-
 /* text on image */
-
 .profile-info{
-position:absolute;
-top:25%;
-left:50%;
-transform:translate(-50%,-30%);
-text-align:center;
-color:white;
+  position:absolute;
+  top:25%;
+  left:50%;
+  transform:translate(-50%,-30%);
+  text-align:center;
+  color:white;
 }
-
 .profile-info h2{
-margin:0;
-font-size:28px;
+  margin:0;
+  font-size:28px;
 }
-
 .profile-info p{
-margin:8px 0;
-font-size:14px;
+  margin:8px 0;
+  font-size:14px;
 }
-
 .profile-info a{
-color:white;
-text-decoration:none;
-opacity:0.9;
+  color:white;
+  text-decoration:none;
+  opacity:0.9;
 }
-
 .profile-info a:hover{
-opacity:1;
-text-decoration:underline;
-} 
+  opacity:1;
+  text-decoration:underline;
+}
 
 /* right content */
-
 .right{
-  width:calc(100% - 20%)
+  width:calc(100% - 20%);
   padding:50px 20px;
   max-width:900px;
   margin-left:auto;
-  margin-right:auto; /* 화면이 커도 가운데 정렬 */
+  margin-right:auto;
   box-sizing:border-box;
 }
-
 .right p{
   line-height:1.7;
   font-size:15px;
 }
-   
+
 h1 {margin-top:0; font-size:32px;}
 h3 {margin-top:35px;}
 ul {padding-left:22px;}
 
-  /* About Me 섹션 위 여백 추가 */
+/* About Me */
 #about-me-top {
-    margin-top: 30px;  /* 원하는 만큼 여백 조절 */
+    margin-top: 30px;
 }
-
-   #about-me-top h1{
-      font-size:32px;
-      margin-bottom:5px;
-    }
-
-  #about-me-top hr {
+#about-me-top h1{
+    font-size:32px;
+    margin-bottom:5px;
+}
+#about-me-top hr {
   border:none;
   height:2px;
   background-color:#8B6B4F; 
@@ -161,19 +138,7 @@ ul {padding-left:22px;}
   color:#1A1A1A;
 }
 
-   /* About Me 아래 키워드 섹션 */
-#keywords-section p{
-  font-size:15px;
-  line-height:1.6;
-  color:#1A1A1A;
-}
-
-#keywords-section b{
-  font-weight:700; /* 진하게 */
-  color:#8B6B4F;   /* 포인트 컬러 */
-}
-
-/* About Me 아래 키워드 섹션 */
+/* Keyword section */
 #keywords-section p{
   font-size:15px;
   line-height:1.6;
@@ -181,27 +146,27 @@ ul {padding-left:22px;}
 }
 #keywords-section b{
   font-weight:700;
-  color:#8B6B4F; /* 포인트 컬러 */
+  color:#8B6B4F;
 }
 
+/* Skills */
 .skills-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* 스킬 간 간격 */
+  gap: 10px;
   margin-top: 10px;
 }
-
 .skill-badge {
-  background: #F2E8DC; /* 연한 배경 */
-  color: #8B6B4F; /* 글자 포인트 */
+  background: #F2E8DC;
+  color: #8B6B4F;
   padding: 6px 12px;
-  border-radius: 20px; /* 둥근 배지 */
+  border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Research Highlights 카드 */
+/* Research Highlights */
 #research-highlights{
   background:white;
   border-radius:12px;
@@ -209,45 +174,33 @@ ul {padding-left:22px;}
   margin-top:30px;
   box-shadow:0 6px 18px rgba(0,0,0,0.1);
 }
-
-/* 블록 구분 */
 .research-block{
   margin-top:15px;
   padding:12px 0;
   border-top:1px solid #e5dcc8;
 }
-
 .research-block:first-child{
   border-top:none;
 }
-
 .research-block h4{
   margin:0 0 8px 0;
   font-size:16px;
   color:#8B6B4F;
 }
-
-/* Topic + Objective 블록 flex */
+/* Topic + Objective */
 .topic-objective-flex{
   display:flex;
-  flex-wrap:wrap; /* 화면 작으면 세로로 배치 */
+  flex-wrap:wrap;
   gap:20px;
   align-items:center;
 }
-.topic-objective-text {
-  line-height: 1.6;       /* 문단 간격 조금 더 읽기 좋게 */
-  margin: 10px 0 0 0;     /* 위쪽 여백은 없애고, 아래쪽 여백은 살짝 */
-}
-
 .text-block{
-  flex:1 1 300px; /* 최소 300px, 최대 가변 */
+  flex:1 1 300px;
 }
-
 .image-block{
   flex:0 0 300px; 
   text-align:center;
 }
-
 .image-block img{
   max-width:105%; 
   height:auto;
@@ -255,91 +208,53 @@ ul {padding-left:22px;}
   box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Keywords */
-.research-block p{
-  margin:0;
-  line-height:1.6;
-}
-
-.research-block p b:first-child{
-  font-weight:700;
-}
-
-/* Publications 가운데 제목 */
+/* Publications */
 .center-title{
   text-align:center;
   margin-bottom:10px;
 }
-
 .research-block ul{
   padding-left:20px;
   line-height:1.6;
 }
-  /* Publications 상단 여백 늘리기 */
-.research-block.center-title {
-  margin-top: 50px; /* 캐러셀과의 간격 */
-}
-
-/* Publications 전체 블록 */
-.research-block {
-  margin-top: 20px; /* 기존 여백 유지 */
-  padding-top: 15px; /* 내부 패딩 */
-}
-
 .research-block li b{
   color:#8B6B4F;
 }
-
-/* Publications 상단 여백 늘리기 */
-.research-block.center-title {
-  margin-top: 60px; /* 캐러셀과의 간격 */
-}
-
-/* Publications 전체 블록 */
-.research-block {
-  margin-top: 20px; /* 기존 여백 유지 */
-  padding-top: 15px; /* 내부 패딩 */
-}
-  /* Publications 끝 구분선 */
 .publications-end-line {
   width: 100%;
-  height: 2px;                   /* 기존 위쪽 선과 동일 */
-  background-color: #8B6B4F;     /* 기존 선 색상과 동일 */
-  margin: 20px 0;                 /* 위아래 간격 */
+  height: 2px;                   
+  background-color: #8B6B4F;     
+  margin: 20px 0;
+}
 
-/* 슬라이더가 .right 안에서만 움직이도록 */
+/* Visual Carousel */
 .visual-carousel {
-  overflow: hidden;       /* 좌우 영역 넘침 숨김 */
-  width: 100%;            /* .right 영역 전체 너비 사용 */
-  margin-left: 15%;        
+  overflow: hidden;
+  width: 100%;
   position: relative;
-  display: flex;
-  justify-content: center; /* 오른쪽 영역 안에서 가운데 정렬 */
 }
 .carousel-track{
   display:flex;
   transition: transform 0.5s ease;
-  padding:0 150px;          /* 양쪽 여백 확보 */
 }
 .carousel-item{
   flex:0 0 200px;
   margin:0 15px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
   opacity:0.5;
   display:flex;
   justify-content:center;
   align-items:center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .carousel-item.active{
-  transform: scale(1.3);   /* 확대 시 겹치지 않도록 scale 조정 */
+  transform: scale(1.3);
   opacity:1;
   z-index:10;
-  transform-origin: center center;
 }
 .carousel-item img{
   width:100%;
   height:180px;
-  object-fit:contain;       
+  object-fit:contain;
   border-radius:8px;
 }
 
@@ -347,37 +262,34 @@ ul {padding-left:22px;}
 .timeline-container {
   width: 100%;
   margin-left: 20%;
-  margin-top: 80px; /* 캐러셀과 타임라인 간 간격 */
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
-  align-items: center;  /* 가운데 정렬 */
-  position: relative;   /* 절대 위치 제거 */
-  z-index: 1;           /* 캐러셀 위로 겹치지 않게 */
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 .timeline-svg {
   width: 100%;
   height: 100%;
 }
-
 .timeline-dot {
   width: 12px;
   height: 12px;
   border: 2px solid white;
 }
-
 .timeline-item p {
-  font-size: 12px;   /* 기존 14px -> 12px */
-  padding: 0 6px;    /* 양 옆 padding 줄이기 */
+  font-size: 12px;
+  padding: 0 6px;
 }
+
 /* 모바일 */
 @media (max-width: 900px){
   .container {flex-direction: column;}
   .left, .right {width:100%; height:auto;}
 }
 </style>
-
 </head>
-
 <body>
 
 <div class="nav">
@@ -388,8 +300,7 @@ ul {padding-left:22px;}
 </div>
 
 <div class="container">
-
-<div class="left">
+  <div class="left">
     <div class="profile-card">
       <img src="profile.jpg">
       <div class="overlay"></div>
@@ -399,91 +310,84 @@ ul {padding-left:22px;}
         <p>🔗 <a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">LinkedIn</a></p>
       </div>
     </div>
-  </div> <!-- left 끝 -->
-
-<div class="right">
-
-  <!-- About Me 상단 -->
-  <section id="about-me-top">
-    <h1>About Me</h1>
-    <hr>
-    <p>
-      I am a Master’s graduate in Chemical and Biomolecular Engineering with research experience in <b>PLGA-PEG nanoparticle-based drug delivery systems</b> for dual metabolic inhibition in cancer therapy.  
-      Proficient in nanoparticle characterization (DLS, TEM, HPLC) and therapeutic evaluation in cellular and in vivo models.  
-      Building on this experimental foundation, I aim to advance toward <b>smart, data-driven, and AI-integrated drug delivery platforms</b> for improved diagnosis, targeted therapy, and preventive strategies, combining biological insights with engineering approaches.
-    </p>
-  </section>
-
-  <!-- About Me 바로 아래에 Keyword 섹션 삽입 -->
-  <div id="keywords-section" style="margin-top:30px;">
-    <p><b>Keyword of Interest </b> organ-on-chip, sensor, microrobotics, bio-integrated systems, soft robotics</p>
   </div>
-  
-<hr style="border:none; height:2px; background-color:#8B6B4F; margin:30px 0;">
-  
-<div class="skills">
-  <h4>Skills / Expertise</h4>
-  <div class="skills-container">
-    <span class="skill-badge">DLS</span>
-    <span class="skill-badge">TEM</span>
-    <span class="skill-badge">HPLC</span>
-    <span class="skill-badge">Nanoparticle synthesis</span>
-    <span class="skill-badge">Compusyn</span>
-    <span class="skill-badge">CLSM</span>
-  </div>
-</div>
 
-<div id="research-highlights" class="card">
-  <h3> Research Highlights</h3>
+  <div class="right">
+    <!-- About Me -->
+    <section id="about-me-top">
+      <h1>About Me</h1>
+      <hr>
+      <p>
+        I am a Master’s graduate in Chemical and Biomolecular Engineering with research experience in <b>PLGA-PEG nanoparticle-based drug delivery systems</b> for dual metabolic inhibition in cancer therapy.  
+        Proficient in nanoparticle characterization (DLS, TEM, HPLC) and therapeutic evaluation in cellular and in vivo models.  
+        Building on this experimental foundation, I aim to advance toward <b>smart, data-driven, and AI-integrated drug delivery platforms</b> for improved diagnosis, targeted therapy, and preventive strategies, combining biological insights with engineering approaches.
+      </p>
+    </section>
 
-  <!-- Topic + Objective + 이미지 -->
-  <div class="research-block topic-objective">
-    <h4>Master’s Thesis</h4>
-    <div class="topic-objective-flex">
-      <div class="text-block">
-        <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.<br><br>  
-        <b>Object:</b> Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.
-        </p>
-      </div>
-      <div class="image-block">
-        <img src="TOC.png" alt="Research Diagram">
+    <div id="keywords-section" style="margin-top:30px;">
+      <p><b>Keyword of Interest </b> organ-on-chip, sensor, microrobotics, bio-integrated systems, soft robotics</p>
+    </div>
+
+    <hr style="border:none; height:2px; background-color:#8B6B4F; margin:30px 0;">
+
+    <div class="skills">
+      <h4>Skills / Expertise</h4>
+      <div class="skills-container">
+        <span class="skill-badge">DLS</span>
+        <span class="skill-badge">TEM</span>
+        <span class="skill-badge">HPLC</span>
+        <span class="skill-badge">Nanoparticle synthesis</span>
+        <span class="skill-badge">Compusyn</span>
+        <span class="skill-badge">CLSM</span>
       </div>
     </div>
-  </div>
 
-    <p><b>Keyword </b> nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles, selective toxicity, EPR effect</p>
-  </div>
+    <div id="research-highlights" class="card">
+      <h3> Research Highlights</h3>
+      <div class="research-block topic-objective">
+        <h4>Master’s Thesis</h4>
+        <div class="topic-objective-flex">
+          <div class="text-block">
+            <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.<br><br>  
+            <b>Object:</b> Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.</p>
+          </div>
+          <div class="image-block">
+            <img src="TOC.png" alt="Research Diagram">
+          </div>
+        </div>
+      </div>
+      <p><b>Keyword </b> nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles, selective toxicity, EPR effect</p>
+    </div>
 
+    <!-- Visual Carousel -->
+    <div class="visual-carousel">
+      <div class="carousel-track">
+        <div class="carousel-item"><img src="scheme.png"></div>
+        <div class="carousel-item"><img src="Aerobic.png"></div>
+        <div class="carousel-item"><img src="oxphos.png"></div>
+        <div class="carousel-item"><img src="Drug.png"></div>
+        <div class="carousel-item"><img src="Psize.png"></div>
+        <div class="carousel-item"><img src="glycolysis.png"></div>
+        <div class="carousel-item"><img src="clsm.png"></div>
+        <div class="carousel-item"><img src="invivo.png"></div>
+        <div class="carousel-item"><img src="invivo2.png"></div>
+        <div class="carousel-item"><img src="Emusion.png"></div>
+      </div>
+    </div>
 
-      <!-- Visual Carousel 수정 -->
-<div class="visual-carousel">
-  <div class="carousel-track">
-    <div class="carousel-item"><img src="scheme.png"></div>
-    <div class="carousel-item"><img src="Aerobic.png"></div>
-    <div class="carousel-item"><img src="oxphos.png"></div>
-    <div class="carousel-item"><img src="Drug.png"></div>
-    <div class="carousel-item"><img src="Psize.png"></div>
-    <div class="carousel-item"><img src="glycolysis.png"></div>
-    <div class="carousel-item"><img src="clsm.png"></div>
-    <div class="carousel-item"><img src="invivo.png"></div>
-    <div class="carousel-item"><img src="invivo2.png"></div>
-    <div class="carousel-item"><img src="Emusion.png"></div>
-  </div>
-</div>
+    <!-- Publications -->
+    <div class="research-block">
+      <h4 class="center-title">Publications</h4>
+      <ul>
+        <li>Y. Choi*, H. Nam*, J.M. An, S. Lee, S. Kim, H. Park, S. Kim, Y.K. Lee, Y.C. Kim (*Equal contribution). Overcoming metabolic plasticity in hepatocellular carcinoma via tumor targeted dual regulation of glycolysis and oxidative phosphorylation.</li>
+        <li>H. Nam, H. Park, M. Son, I. Kang, Y. Choi, S. Lee, S. Kim, S. Kim, H. Kim, J.B. Chang, H.G. Lee, Y.K. Lee, Y.C. Kim. Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via dual metabolism regulation and immunogenic cell death. Journal of Controlled Release, 383, 11375 (2025)</li>
+      </ul>
+    </div>
 
-  <!-- Publications -->
-  <div class="research-block">
-    <h4 class="center-title">Publications</h4>
-    <ul>
-      <li>Y. Choi*, H. Nam*, J.M. An, S. Lee, S. Kim, H. Park, S. Kim, Y.K. Lee, Y.C. Kim (*Equal contribution). Overcoming metabolic plasticity in hepatocellular carcinoma via tumor targeted dual regulation of glycolysis and oxidative phosphorylation.</li>
-      <li>H. Nam, H. Park, M. Son, I. Kang, Y. Choi, S. Lee, S. Kim, S. Kim, H. Kim, J.B. Chang, H.G. Lee, Y.K. Lee, Y.C. Kim. Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via dual metabolism regulation and immunogenic cell death. Journal of Controlled Release, 383, 11375 (2025)</li>
-    </ul>
-  </div>
-</div>
-  <!-- Publications 리스트 끝난 후 구분선 추가 -->
-<div class="publications-end-line"></div>
+    <div class="publications-end-line"></div>
 
- <div class="timeline-container">
+    <!-- Timeline -->
+    <div class="timeline-container">
       <svg class="timeline-svg" viewBox="0 0 900 150" preserveAspectRatio="xMidYMid meet">
         <path d="M50,100 C300,50 600,50 850,100" stroke="#e0e0e0" stroke-width="4" fill="transparent"/>
         <path id="progress-line" d="M50,100 C300,50 600,50 700,80" stroke="#8B6B4F" stroke-width="4" fill="transparent"
@@ -507,13 +411,12 @@ ul {padding-left:22px;}
         <text x="880" y="60" text-anchor="middle" font-size="12" fill="#1A1A1A">2025 M.S. End</text>
       </svg>
     </div>
-  </div> <!-- right 끝 -->
-
-</div> <!-- container 끝 -->
+  </div>
+</div>
 
 <script>
 const track = document.querySelector('.carousel-track');
-const items = Array.from(track.children);
+let items = Array.from(track.children);
 
 // 앞뒤에 복제
 const firstClone = items[0].cloneNode(true);
@@ -521,29 +424,30 @@ const lastClone = items[items.length-1].cloneNode(true);
 track.appendChild(firstClone);
 track.insertBefore(lastClone, items[0]);
 
-let index = 1; // 실제 첫번째 이미지 위치
+// clone 후 items 업데이트
+items = Array.from(track.children);
+let index = 1; // 실제 첫번째 이미지
+items[index].classList.add('active');
 
 function updateCarousel() {
-  const itemWidth = items[0].getBoundingClientRect().width + 20;
+  const itemWidth = items[0].getBoundingClientRect().width + 30;
   track.style.transition = 'transform 0.5s ease';
   track.style.transform = `translateX(-${index * itemWidth}px)`;
 
-  items.forEach((item, i) => item.classList.toggle('active', i === index-1));
+  items.forEach((item,i) => item.classList.remove('active'));
+  if(items[index]) items[index].classList.add('active');
 
   index++;
-  if(index > items.length) {
-    // transition 끝난 후 첫번째로 자연스럽게 이동
-    setTimeout(() => {
+  if(index >= items.length -1){
+    setTimeout(()=>{
       track.style.transition = 'none';
       index = 1;
       track.style.transform = `translateX(-${index * itemWidth}px)`;
-    }, 500);
+    },500);
   }
 }
 setInterval(updateCarousel, 2500);
 </script>
-</div>
 
 </body>
 </html>
-
