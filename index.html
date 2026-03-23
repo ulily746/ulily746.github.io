@@ -365,58 +365,95 @@ ul {padding-left:22px;}
 
 
 <script>
+
 const track = document.querySelector('.carousel-track');
 let items = Array.from(track.children);
 
-// 루프용 복제
 const cloneCount = 3;
+const centerOffset = 2;
+let index = cloneCount;
 
+
+// 이미지 복제 (무한루프용)
 for(let i=0;i<cloneCount;i++){
+
   const firstClone = items[i].cloneNode(true);
   const lastClone = items[items.length-1-i].cloneNode(true);
 
   track.appendChild(firstClone);
   track.insertBefore(lastClone, track.firstChild);
+
 }
 
 items = Array.from(track.children);
 
 
+// 중앙 이미지 활성화
 function updateActive(){
+
   items.forEach(item => item.classList.remove('active'));
-  // 중앙에 있는 이미지만 active
-  const trackRect = track.getBoundingClientRect();
-  let centerPos = trackRect.left + trackRect.width/2;
-  let closest = items.reduce((prev,curr)=>{
-    let rect = curr.getBoundingClientRect();
-    let currCenter = rect.left + rect.width/2;
-    return (Math.abs(currCenter-centerPos) < Math.abs(prev.center-centerPos)) ? {el:curr,center:currCenter} : prev;
-  }, {el:items[0],center:0});
-  closest.el.classList.add('active');
+
+  let activeIndex = index + centerOffset;
+
+  if(activeIndex >= items.length){
+    activeIndex -= items.length;
+  }
+
+  items[activeIndex].classList.add('active');
+
 }
 
-// 초기 transform
+
+// 시작 위치
 function setPosition(){
+
   const itemWidth = items[0].getBoundingClientRect().width + 30;
-   track.style.transform =
+
+  track.style.transition = 'none';
+
+  track.style.transform =
   `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
 
   updateActive();
+
 }
+
 setPosition();
 
+
+// 자동 슬라이드
 function updateCarousel(){
+
   const itemWidth = items[0].getBoundingClientRect().width + 30;
+
   index++;
+
   track.style.transition = 'transform 0.5s ease';
- track.style.transform =
+
+  track.style.transform =
   `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
 
   setTimeout(()=>{
-      updateActive();
+
+    updateActive();
+
+    if(index >= items.length - cloneCount){
+
+      track.style.transition = 'none';
+
+      index = cloneCount;
+
+      track.style.transform =
+      `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
+
+    }
+
   },500);
+
 }
+
 setInterval(updateCarousel,2500);
+
 </script>
 
 </body>
