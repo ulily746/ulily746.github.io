@@ -260,7 +260,91 @@ ul {padding-left:22px;}
   z-index:10;
 }
 
+.timeline{
+position:relative;
+max-width:900px;
+margin:100px auto;
+}
 
+.timeline::before{
+content:"";
+position:absolute;
+left:50%;
+top:0;
+width:2px;
+height:100%;
+background:#cfcfcf;
+transform:translateX(-50%);
+}
+
+.timeline-item{
+position:relative;
+width:50%;
+padding:40px 30px;
+opacity:0;
+transform:translateY(40px);
+transition:all 0.6s ease;
+}
+
+.timeline-item.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.timeline-item.left{
+left:0;
+text-align:right;
+}
+
+.timeline-item.right{
+left:50%;
+}
+
+.timeline-item::before{
+content:"";
+position:absolute;
+top:50px;
+width:14px;
+height:14px;
+background:#333;
+border-radius:50%;
+z-index:2;
+}
+
+.timeline-item.left::before{
+right:-7px;
+}
+
+.timeline-item.right::before{
+left:-7px;
+}
+
+.timeline-content{
+background:#f8f8f8;
+padding:20px 24px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.timeline-content h3{
+margin:5px 0;
+font-size:18px;
+}
+
+.timeline-content p{
+margin:5px 0;
+color:#666;
+}
+
+.timeline-content .year{
+font-weight:600;
+color:#8B6B4F;
+}
+
+.timeline-content .desc{
+font-size:14px;
+color:#888;
+}
 
 /* 모바일 */
 @media (max-width:900px){
@@ -370,7 +454,7 @@ const track = document.querySelector('.carousel-track');
 let items = Array.from(track.children);
 
 const cloneCount = 4;
-const centerOffset = 1;
+const centerOffset = 0;
 let index = cloneCount -1;
 
 
@@ -428,7 +512,7 @@ function updateCarousel(){
 
   index++;
 
-  track.style.transition = 'transform 0.3s ease';
+  track.style.transition = 'transform 0.5s ease';
 
   track.style.transform =
   `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
@@ -455,5 +539,50 @@ setInterval(updateCarousel,2500);
 
 </script>
 
+ <section class="timeline">
+
+<div class="timeline-item left">
+<div class="timeline-content">
+<span class="year">2023 – 2025</span>
+<h3>M.S. Student Researcher</h3>
+<p>Biomedical Micro-Nano Delivery Lab, KAIST</p>
+<span class="desc">Nanoparticle drug delivery · metabolic cancer therapy</span>
+</div>
+</div>
+
+<div class="timeline-item right">
+<div class="timeline-content">
+<span class="year">2020 – 2021</span>
+<h3>Field Training Intern</h3>
+<p>Polymeric Biomaterials & Drug Delivery Lab, PNU</p>
+<span class="desc">Exosome isolation · membrane fabrication</span>
+</div>
+</div>
+
+</section>   
+
+<script>
+
+const timelineItems = document.querySelectorAll(".timeline-item");
+
+function showTimeline(){
+
+const trigger = window.innerHeight * 0.85;
+
+timelineItems.forEach(item =>{
+
+const top = item.getBoundingClientRect().top;
+
+if(top < trigger){
+item.classList.add("show");
+}
+
+});
+
+}
+
+window.addEventListener("scroll",showTimeline);
+
+</script>
 </body>
 </html>
