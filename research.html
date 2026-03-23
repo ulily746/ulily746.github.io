@@ -33,11 +33,47 @@ body{
   color:#8B6B4F;
 }
 
-/* Right content */
-.right{
-  max-width:1000px;
+/* layout */
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  max-width:1200px;
   margin:50px auto;
-  padding:0 20px;
+  gap:20px;
+}
+
+/* Sidebar */
+.sidebar{
+  flex:0 0 250px;
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  position:sticky;
+  top:80px;
+  height:fit-content;
+}
+
+/* Sidebar sections */
+.sidebar h3{
+  color:#8B6B4F;
+  margin-top:0;
+}
+.sidebar ul{
+  padding-left:15px;
+}
+.sidebar li{
+  margin-bottom:8px;
+  cursor:pointer;
+  color:#1A1A1A;
+}
+.sidebar li:hover{
+  text-decoration:underline;
+}
+
+/* Main content */
+.main-content{
+  flex:1;
 }
 
 /* Page title */
@@ -48,12 +84,22 @@ h1{
   color:#8B6B4F;
 }
 
+/* Search bar */
+#search-bar{
+  width:100%;
+  padding:8px 12px;
+  margin-bottom:20px;
+  border-radius:5px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
 /* Project thumbnails */
 .project-list{
   display:flex;
   flex-wrap:wrap;
   gap:20px;
-  justify-content:center;
+  justify-content:flex-start;
 }
 
 .project-item{
@@ -133,10 +179,18 @@ h1{
   color:#666;
 }
 
-@media(max-width:600px){
-  .project-list{
+@media(max-width:900px){
+  .container{
     flex-direction:column;
-    align-items:center;
+  }
+  .sidebar{
+    width:100%;
+    position:relative;
+    top:auto;
+    margin-bottom:30px;
+  }
+  .project-list{
+    justify-content:center;
   }
 }
 </style>
@@ -150,29 +204,49 @@ h1{
   <a href="news.html">News</a>
 </div>
 
-<div class="right">
-  <h1>Research Projects</h1>
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Timeline</h3>
+    <ul>
+      <li onclick="openProject('Master’s Thesis')">2023-2025: Master’s Thesis (KAIST)</li>
+      <li onclick="openProject('Supported Research')">2021: Supported Research (PNU)</li>
+      <li onclick="openProject('Undergraduate Project')">2019: Undergraduate Project</li>
+    </ul>
 
-  <div class="project-list">
-    <!-- Master’s Thesis -->
-    <div class="project-item" data-title="Master’s Thesis" data-topic="Dual metabolic pathway inhibitors via PLGA-PEG nanoparticles" data-objective="Target hepatocellular carcinoma selectively using nanoparticles for long circulation and EPR effect." data-keywords="nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles" data-image="scheme.png">
-      <img src="scheme.png" alt="Master’s Thesis">
-      <h4>Master’s Thesis</h4>
-      <button class="view-more">View More</button>
-    </div>
+    <h3>Publications</h3>
+    <ul>
+      <li><a href="#" target="_blank">Overcoming metabolic plasticity in HCC</a></li>
+      <li><a href="#" target="_blank">Metal-phenolic networks reverse TME immunosuppression</a></li>
+    </ul>
+  </div>
 
-    <!-- Supported Research -->
-    <div class="project-item" data-title="Supported Research" data-topic="Support on organ-on-chip sensor development" data-objective="Assist in microfluidic sensor integration and validation" data-keywords="organ-on-chip, sensor, microfluidics" data-image="NHY.jpg">
-      <img src="NHY.jpg" alt="Supported Research">
-      <h4>Supported Research</h4>
-      <button class="view-more">View More</button>
-    </div>
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Research Projects</h1>
+    <input type="text" id="search-bar" placeholder="Search projects...">
 
-    <!-- Undergraduate Project -->
-    <div class="project-item" data-title="Undergraduate Project" data-topic="Thermally forced filtration study" data-objective="Investigate particle separation efficiency in TFF system" data-keywords="TFF, filtration, particle separation" data-image="TFF.png">
-      <img src="TFF.png" alt="Undergraduate Project">
-      <h4>Undergraduate Project</h4>
-      <button class="view-more">View More</button>
+    <div class="project-list">
+      <!-- Master’s Thesis -->
+      <div class="project-item" data-title="Master’s Thesis" data-topic="Dual metabolic pathway inhibitors via PLGA-PEG nanoparticles" data-objective="Target hepatocellular carcinoma selectively using nanoparticles for long circulation and EPR effect." data-keywords="nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles" data-image="scheme.png">
+        <img src="scheme.png" alt="Master’s Thesis">
+        <h4>Master’s Thesis</h4>
+        <button class="view-more">View More</button>
+      </div>
+
+      <!-- Supported Research -->
+      <div class="project-item" data-title="Supported Research" data-topic="Support on organ-on-chip sensor development" data-objective="Assist in microfluidic sensor integration and validation" data-keywords="organ-on-chip, sensor, microfluidics" data-image="NHY.jpg">
+        <img src="NHY.jpg" alt="Supported Research">
+        <h4>Supported Research</h4>
+        <button class="view-more">View More</button>
+      </div>
+
+      <!-- Undergraduate Project -->
+      <div class="project-item" data-title="Undergraduate Project" data-topic="Thermally forced filtration study" data-objective="Investigate particle separation efficiency in TFF system" data-keywords="TFF, filtration, particle separation" data-image="TFF.png">
+        <img src="TFF.png" alt="Undergraduate Project">
+        <h4>Undergraduate Project</h4>
+        <button class="view-more">View More</button>
+      </div>
     </div>
   </div>
 </div>
@@ -200,15 +274,23 @@ const modalImage = document.getElementById('modal-image');
 
 document.querySelectorAll('.project-item').forEach(item => {
   item.addEventListener('click', () => {
-    modal.style.display = 'flex';
-    modalTitle.textContent = item.dataset.title;
-    modalTopic.textContent = item.dataset.topic;
-    modalObjective.textContent = item.dataset.objective;
-    modalKeywords.textContent = item.dataset.keywords;
-    modalImage.src = item.dataset.image;
-    modalImage.alt = item.dataset.title;
+    openProject(item.dataset.title);
   });
 });
+
+function openProject(title){
+  const item = Array.from(document.querySelectorAll('.project-item'))
+    .find(p => p.dataset.title === title);
+  if(!item) return;
+
+  modal.style.display = 'flex';
+  modalTitle.textContent = item.dataset.title;
+  modalTopic.textContent = item.dataset.topic;
+  modalObjective.textContent = item.dataset.objective;
+  modalKeywords.textContent = item.dataset.keywords;
+  modalImage.src = item.dataset.image;
+  modalImage.alt = item.dataset.title;
+}
 
 document.querySelector('.close').addEventListener('click', () => {
   modal.style.display = 'none';
@@ -218,6 +300,21 @@ window.addEventListener('click', e => {
   if(e.target === modal){
     modal.style.display = 'none';
   }
+});
+
+// Search functionality
+const searchInput = document.getElementById('search-bar');
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  document.querySelectorAll('.project-item').forEach(item => {
+    const title = item.dataset.title.toLowerCase();
+    const keywords = item.dataset.keywords.toLowerCase();
+    if(title.includes(query) || keywords.includes(query)){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
 });
 </script>
 
