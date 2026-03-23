@@ -306,11 +306,14 @@ ul {padding-left:22px;}
 
 /* Timeline */
 .timeline-container {
-  width:100%;
-  max-width:900px;
-  margin:50px auto 80px auto;
+  width: 100%;
+  margin-top: 40px; /* 캐러셀과 타임라인 간 간격 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* 가운데 정렬 */
+  position: relative;   /* 절대 위치 제거 */
+  z-index: 1;           /* 캐러셀 위로 겹치지 않게 */
 }
-.timeline-svg {width:100%; height:150px;}
 /* 모바일 */
 @media (max-width: 900px){
   .container {flex-direction: column;}
