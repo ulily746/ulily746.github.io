@@ -1,1 +1,225 @@
-ㅇ
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Research - Yuri Choi</title>
+<style>
+body{
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  background:#F2F2DF;
+  color:#1A1A1A;
+  line-height:1.6;
+}
+
+/* navigation */
+.nav{
+  display:flex;
+  gap:50px;
+  padding:22px 0 22px 50px;
+  font-size:16px;
+  border-bottom:1px solid #e5dcc8;
+  background:black;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.nav a{
+  text-decoration:none;
+  color:#F2F2DF;
+  font-weight:500;
+}
+.nav a:hover{
+  color:#8B6B4F;
+}
+
+/* Right content */
+.right{
+  max-width:1000px;
+  margin:50px auto;
+  padding:0 20px;
+}
+
+/* Page title */
+h1{
+  font-size:32px;
+  text-align:center;
+  margin-bottom:30px;
+  color:#8B6B4F;
+}
+
+/* Project thumbnails */
+.project-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+}
+
+.project-item{
+  background:white;
+  border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  width:250px;
+  text-align:center;
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform 0.3s ease;
+}
+.project-item:hover{
+  transform: translateY(-5px);
+}
+.project-item img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.project-item h4{
+  margin:10px 0;
+  color:#8B6B4F;
+}
+.view-more{
+  margin-bottom:10px;
+  padding:6px 12px;
+  border:none;
+  background:#8B6B4F;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+/* Modal */
+.modal{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  z-index:10000;
+  justify-content:center;
+  align-items:center;
+}
+.modal-content{
+  background:white;
+  border-radius:10px;
+  padding:20px;
+  max-width:700px;
+  width:90%;
+  max-height:90%;
+  overflow-y:auto;
+  position:relative;
+}
+.modal-content img{
+  width:100%;
+  height:auto;
+  margin-top:15px;
+  border-radius:8px;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:24px;
+  font-weight:bold;
+  cursor:pointer;
+  color:#8B6B4F;
+}
+
+/* Keywords */
+.keywords{
+  margin-top:10px;
+  font-size:14px;
+  color:#666;
+}
+
+@media(max-width:600px){
+  .project-list{
+    flex-direction:column;
+    align-items:center;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">Main</a>
+  <a href="research.html">Research</a>
+  <a href="cv.html">CV</a>
+  <a href="news.html">News</a>
+</div>
+
+<div class="right">
+  <h1>Research Projects</h1>
+
+  <div class="project-list">
+    <!-- Master’s Thesis -->
+    <div class="project-item" data-title="Master’s Thesis" data-topic="Dual metabolic pathway inhibitors via PLGA-PEG nanoparticles" data-objective="Target hepatocellular carcinoma selectively using nanoparticles for long circulation and EPR effect." data-keywords="nanomedicine, dual metabolic inhibition, hepatocellular carcinoma, PLGA-PEG nanoparticles" data-image="scheme.png">
+      <img src="scheme.png" alt="Master’s Thesis">
+      <h4>Master’s Thesis</h4>
+      <button class="view-more">View More</button>
+    </div>
+
+    <!-- Supported Research -->
+    <div class="project-item" data-title="Supported Research" data-topic="Support on organ-on-chip sensor development" data-objective="Assist in microfluidic sensor integration and validation" data-keywords="organ-on-chip, sensor, microfluidics" data-image="NHY.jpg">
+      <img src="NHY.jpg" alt="Supported Research">
+      <h4>Supported Research</h4>
+      <button class="view-more">View More</button>
+    </div>
+
+    <!-- Undergraduate Project -->
+    <div class="project-item" data-title="Undergraduate Project" data-topic="Thermally forced filtration study" data-objective="Investigate particle separation efficiency in TFF system" data-keywords="TFF, filtration, particle separation" data-image="TFF.png">
+      <img src="TFF.png" alt="Undergraduate Project">
+      <h4>Undergraduate Project</h4>
+      <button class="view-more">View More</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modal-title"></h2>
+    <p><b>Topic:</b> <span id="modal-topic"></span></p>
+    <p><b>Objective:</b> <span id="modal-objective"></span></p>
+    <img id="modal-image" src="" alt="Project Image">
+    <p class="keywords"><b>Keywords:</b> <span id="modal-keywords"></span></p>
+  </div>
+</div>
+
+<script>
+// Modal functionality
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalTopic = document.getElementById('modal-topic');
+const modalObjective = document.getElementById('modal-objective');
+const modalKeywords = document.getElementById('modal-keywords');
+const modalImage = document.getElementById('modal-image');
+
+document.querySelectorAll('.project-item').forEach(item => {
+  item.addEventListener('click', () => {
+    modal.style.display = 'flex';
+    modalTitle.textContent = item.dataset.title;
+    modalTopic.textContent = item.dataset.topic;
+    modalObjective.textContent = item.dataset.objective;
+    modalKeywords.textContent = item.dataset.keywords;
+    modalImage.src = item.dataset.image;
+    modalImage.alt = item.dataset.title;
+  });
+});
+
+document.querySelector('.close').addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', e => {
+  if(e.target === modal){
+    modal.style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html>
