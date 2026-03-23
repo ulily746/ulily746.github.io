@@ -435,8 +435,7 @@ function updateCarousel(){
 
   setTimeout(()=>{
 
-    updateActive();
-
+  
     if(index >= items.length - cloneCount){
 
       track.style.transition = 'none';
@@ -445,6 +444,8 @@ function updateCarousel(){
 
       track.style.transform =
       `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
+
+       updateActive();
 
     }
 
