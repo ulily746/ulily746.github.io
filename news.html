@@ -11,8 +11,6 @@ body{
   color:#1A1A1A;
   line-height:1.6;
 }
-
-/* navigation */
 .nav{
   display:flex;
   gap:50px;
@@ -32,15 +30,11 @@ body{
 .nav a:hover{
   color:#8B6B4F;
 }
-
-/* container */
 .container{
   max-width:1200px;
   margin:50px auto;
   padding:0 20px;
 }
-
-/* category filter */
 .category-filter{
   display:flex;
   gap:15px;
@@ -60,8 +54,6 @@ body{
 .category-filter button:hover{
   background:#6a4e38;
 }
-
-/* cards */
 .cards{
   display:flex;
   flex-wrap:wrap;
@@ -79,10 +71,15 @@ body{
 .card:hover{
   transform: translateY(-5px);
 }
-.card img{
+.card .placeholder{
   width:100%;
   height:180px;
-  object-fit:cover;
+  background:#ccc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#555;
+  font-size:14px;
 }
 .card-content{
   padding:12px;
@@ -107,8 +104,6 @@ body{
   cursor:pointer;
   font-size:13px;
 }
-
-/* modal */
 .modal{
   display:none;
   position:fixed;
@@ -129,9 +124,15 @@ body{
   overflow-y:auto;
   position:relative;
 }
-.modal-content img{
+.modal-content .modal-placeholder{
   width:100%;
-  height:auto;
+  height:300px;
+  background:#ccc;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#555;
+  font-size:16px;
   margin-top:15px;
   border-radius:8px;
 }
@@ -144,7 +145,6 @@ body{
   cursor:pointer;
   color:#8B6B4F;
 }
-
 @media(max-width:900px){
   .cards{
     justify-content:center;
@@ -156,18 +156,14 @@ body{
 </style>
 </head>
 <body>
-
 <div class="nav">
   <a href="index.html">Main</a>
   <a href="research.html">Research</a>
   <a href="cv.html">CV</a>
   <a href="news.html">News</a>
 </div>
-
 <div class="container">
   <h1>News & Updates</h1>
-
-  <!-- Category Filter -->
   <div class="category-filter">
     <button data-category="all">All</button>
     <button data-category="skills">Skills</button>
@@ -175,12 +171,9 @@ body{
     <button data-category="hobby">Hobby</button>
     <button data-category="travel">Travel</button>
   </div>
-
-  <!-- Cards -->
   <div class="cards">
-    <!-- Skills example -->
-    <div class="card" data-category="skills" data-title="Python Certification" data-date="2026-01-15" data-summary="Completed Python & Web Development Courses" data-image="cert.png" data-detail="Completed full Python programming course including data analysis, web scraping, and Flask web apps.">
-      <img src="cert.png" alt="Python Certification">
+    <div class="card" data-category="skills" data-title="Python Certification" data-date="2026-01-15" data-detail="Completed full Python programming course including data analysis, web scraping, and Flask web apps.">
+      <div class="placeholder">Image Placeholder</div>
       <div class="card-content">
         <h4>Python Certification</h4>
         <p>2026-01-15</p>
@@ -188,10 +181,8 @@ body{
         <button class="read-more">Read More</button>
       </div>
     </div>
-
-    <!-- Language example -->
-    <div class="card" data-category="language" data-title="German Learning" data-date="2026-03-01" data-summary="Reached B1 Level" data-image="german.jpg" data-detail="Studied German intensively reaching B1 level, focusing on academic reading and conversational skills.">
-      <img src="german.jpg" alt="German Learning">
+    <div class="card" data-category="language" data-title="German Learning" data-date="2026-03-01" data-detail="Studied German intensively reaching B1 level, focusing on academic reading and conversational skills.">
+      <div class="placeholder">Image Placeholder</div>
       <div class="card-content">
         <h4>German Learning</h4>
         <p>2026-03-01</p>
@@ -199,10 +190,8 @@ body{
         <button class="read-more">Read More</button>
       </div>
     </div>
-
-    <!-- Hobby example -->
-    <div class="card" data-category="hobby" data-title="Weekend Hiking" data-date="2026-02-20" data-summary="Hiked in Seoraksan" data-image="hike.png" data-detail="Went hiking in Seoraksan National Park with friends, explored scenic trails and practiced landscape photography.">
-      <img src="hike.png" alt="Weekend Hiking">
+    <div class="card" data-category="hobby" data-title="Weekend Hiking" data-date="2026-02-20" data-detail="Went hiking in Seoraksan National Park with friends, explored scenic trails and practiced landscape photography.">
+      <div class="placeholder">Image Placeholder</div>
       <div class="card-content">
         <h4>Weekend Hiking</h4>
         <p>2026-02-20</p>
@@ -213,58 +202,42 @@ body{
   </div>
 </div>
 
-<!-- Modal -->
 <div class="modal" id="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2 id="modal-title"></h2>
     <p><b>Date:</b> <span id="modal-date"></span></p>
     <p id="modal-detail"></p>
-    <img id="modal-image" src="" alt="Modal Image">
+    <div class="modal-placeholder">Image Placeholder</div>
   </div>
 </div>
 
 <script>
-// Modal functionality
 const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal-title');
 const modalDate = document.getElementById('modal-date');
 const modalDetail = document.getElementById('modal-detail');
-const modalImage = document.getElementById('modal-image');
 
-document.querySelectorAll('.card, .read-more').forEach(btn => {
+document.querySelectorAll('.card, .read-more').forEach(btn=>{
   btn.addEventListener('click', e=>{
     let card = e.target.closest('.card');
     modal.style.display='flex';
     modalTitle.textContent = card.dataset.title;
     modalDate.textContent = card.dataset.date;
     modalDetail.textContent = card.dataset.detail;
-    modalImage.src = card.dataset.image;
-    modalImage.alt = card.dataset.title;
   });
 });
+document.querySelector('.close').addEventListener('click', ()=>{modal.style.display='none';});
+window.addEventListener('click', e=>{if(e.target===modal) modal.style.display='none';});
 
-document.querySelector('.close').addEventListener('click', ()=>{
-  modal.style.display='none';
-});
-window.addEventListener('click', e=>{
-  if(e.target === modal) modal.style.display='none';
-});
-
-// Category filter
 document.querySelectorAll('.category-filter button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const cat = btn.dataset.category;
     document.querySelectorAll('.card').forEach(card=>{
-      if(cat==='all' || card.dataset.category===cat){
-        card.style.display='block';
-      }else{
-        card.style.display='none';
-      }
+      card.style.display=(cat==='all'||card.dataset.category===cat)?'block':'none';
     });
   });
 });
 </script>
-
 </body>
 </html>
