@@ -229,6 +229,10 @@ ul {padding-left:22px;}
   gap:20px;
   align-items:center;
 }
+.topic-objective-text {
+  line-height: 1.6;       /* 문단 간격 조금 더 읽기 좋게 */
+  margin: 10px 0 0 0;     /* 위쪽 여백은 없애고, 아래쪽 여백은 살짝 */
+}
 
 .text-block{
   flex:1 1 300px; /* 최소 300px, 최대 가변 */
@@ -303,14 +307,14 @@ ul {padding-left:22px;}
 .carousel-item img{
   width:100%;
   height:160px;
-  object-fit:cover;        /* 확대 시 cover로 일부 잘림 허용 */
+  object-fit:contain;       
   border-radius:8px;
 }
 
 /* Timeline */
 .timeline-container {
   width: 100%;
-  margin-top: 40px; /* 캐러셀과 타임라인 간 간격 */
+  margin-top: 50px; /* 캐러셀과 타임라인 간 간격 */
   display: flex;
   flex-direction: column;
   align-items: center;  /* 가운데 정렬 */
@@ -387,7 +391,7 @@ ul {padding-left:22px;}
     <h4>Master’s Thesis</h4>
     <div class="topic-objective-flex">
       <div class="text-block">
-        <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.  
+        <p><b>Topic:</b> Development of dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles to selectively target hepatocellular carcinoma while sparing normal cells.<br><br>  
         <b>Object:</b> Overcome tumor metabolic plasticity by inhibiting glycolysis and oxidative phosphorylation using nanoparticles designed for long circulation, liver accumulation, and tumor-selective delivery via the EPR effect.
         </p>
       </div>
