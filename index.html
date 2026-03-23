@@ -272,35 +272,36 @@ ul {padding-left:22px;}
 }
 
 /* 슬라이더가 .right 안에서만 움직이도록 */
-.visual-carousel {
-  overflow: hidden;
-  width: 100%;
-  max-width: 900px;
-  margin:50px auto;
-  position: relative;  
+.visual-carousel{
+  overflow:hidden;          /* track 밖 이미지 숨김 */
+  width:100%;
+  position:relative;
+  margin-top:50px;
 }
-.carousel-track {
-  display: flex;
+.carousel-track{
+  display:flex;
   transition: transform 0.5s ease;
+  padding:0 50px;          /* 양쪽 여백 확보 */
 }
-.carousel-item {
-  flex: 0 0 220px;
-  margin: 0 10px;
+.carousel-item{
+  flex:0 0 200px;
+  margin:0 10px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity:0.5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
-.carousel-item.active {
-  transform: scale(1.8); /* 가운데 사진 크게 */
+.carousel-item.active{
+  transform: scale(1.3);   /* 확대 시 겹치지 않도록 scale 조정 */
   opacity:1;
-  z-index:2;
+  z-index:10;
 }
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  max-height:250px;
-  object-fit: cover;
+.carousel-item img{
+  width:100%;
+  height:150px;
+  object-fit:cover;        /* 확대 시 cover로 일부 잘림 허용 */
   border-radius:8px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Timeline */
@@ -403,21 +404,21 @@ ul {padding-left:22px;}
   </div>
 </div>
 
-  <!-- Visual Carousel -->
-    <div class="visual-carousel">
-         <div class="carousel-track">
-           <div class="carousel-item"><img src="scheme.png" alt="Diagram 1"></div>
-           <div class="carousel-item"><img src="Aerobic.png" alt="Experiment 2"></div>
-           <div class="carousel-item"><img src="oxphos.png" alt="Experiment 3"></div>
-           <div class="carousel-item"><img src="Drug.png" alt="Experiment 4"></div>
-           <div class="carousel-item"><img src="Psize.png" alt="Experiment 5"></div>
-           <div class="carousel-item"><img src="glycolysis.png" alt="Experiment 7"></div>
-           <div class="carousel-item"><img src="clsm.png" alt="Experiment 8"></div>
-           <div class="carousel-item"><img src="invivo.png" alt="Experiment 9"></div>
-           <div class="carousel-item"><img src="invivo2.png" alt="Experiment 10"></div>
-           <div class="carousel-item"><img src="Emusion.png" alt="Experiment 11"></div>
-         </div>
-    </div>  
+  <!-- Visual Carousel 수정 -->
+<div class="visual-carousel">
+  <div class="carousel-track">
+    <div class="carousel-item"><img src="scheme.png"></div>
+    <div class="carousel-item"><img src="Aerobic.png"></div>
+    <div class="carousel-item"><img src="oxphos.png"></div>
+    <div class="carousel-item"><img src="Drug.png"></div>
+    <div class="carousel-item"><img src="Psize.png"></div>
+    <div class="carousel-item"><img src="glycolysis.png"></div>
+    <div class="carousel-item"><img src="clsm.png"></div>
+    <div class="carousel-item"><img src="invivo.png"></div>
+    <div class="carousel-item"><img src="invivo2.png"></div>
+    <div class="carousel-item"><img src="Emusion.png"></div>
+  </div>
+</div>
 
  <div class="timeline-container">
       <svg class="timeline-svg" viewBox="0 0 900 150" preserveAspectRatio="xMidYMid meet">
@@ -453,23 +454,22 @@ const items = Array.from(track.children);
 let index = 0;
 
 function updateCarousel() {
-  const itemWidth = items[0].getBoundingClientRect().width + 20;
-  const trackWidth = track.offsetWidth;
-
-  items.forEach((item, i) => {
+  const itemWidth = items[0].getBoundingClientRect().width + 20; // margin 포함
+  items.forEach((item,i)=>{
     item.classList.toggle('active', i === index);
   });
 
-  const translateX = index * itemWidth - trackWidth / 2 + itemWidth / 2;
-  track.style.transform = `translateX(-${translateX}px)`;
+  // 중앙 정렬
+  const trackWidth = track.offsetWidth;
+  const offset = (index * itemWidth + itemWidth/2) - trackWidth/2;
+  track.style.transform = `translateX(-${offset}px)`;
 
   index++;
-  if(index >= items.length) index = 0;
+  if(index>=items.length) index=0;
 }
 
-setInterval(updateCarousel, 2500);
+setInterval(updateCarousel,2500);
 </script>
-
 </body>
 </html>
 
