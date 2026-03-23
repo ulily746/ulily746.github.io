@@ -260,30 +260,7 @@ ul {padding-left:22px;}
   z-index:10;
 }
 
-/* Timeline */
-.timeline-container {
-  width:100%;
-  margin-left:20%;
-  margin-top:80px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  position:relative;
-  z-index:1;
-}
-.timeline-svg {
-  width:100%;
-  height:100%;
-}
-.timeline-dot {
-  width:12px;
-  height:12px;
-  border:2px solid white;
-}
-.timeline-item p {
-  font-size:12px;
-  padding:0 6px;
-}
+
 
 /* 모바일 */
 @media (max-width:900px){
@@ -392,14 +369,18 @@ const track = document.querySelector('.carousel-track');
 let items = Array.from(track.children);
 
 // 루프용 복제
-const firstClone = items[0].cloneNode(true);
-const lastClone = items[items.length-1].cloneNode(true);
-track.appendChild(firstClone);
-track.insertBefore(lastClone, items[0]);
+const cloneCount = 3;
+
+for(let i=0;i<cloneCount;i++){
+  const firstClone = items[i].cloneNode(true);
+  const lastClone = items[items.length-1-i].cloneNode(true);
+
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, track.firstChild);
+}
+
 items = Array.from(track.children);
 
-let index = 1;
-const visibleCenter = Math.floor(items.length/2);
 
 function updateActive(){
   items.forEach(item => item.classList.remove('active'));
@@ -417,7 +398,9 @@ function updateActive(){
 // 초기 transform
 function setPosition(){
   const itemWidth = items[0].getBoundingClientRect().width + 30;
-  track.style.transform = `translateX(-${index*itemWidth}px)`;
+   track.style.transform =
+  `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
+
   updateActive();
 }
 setPosition();
@@ -426,17 +409,13 @@ function updateCarousel(){
   const itemWidth = items[0].getBoundingClientRect().width + 30;
   index++;
   track.style.transition = 'transform 0.5s ease';
-  track.style.transform = `translateX(-${index*itemWidth}px)`;
+ track.style.transform =
+  `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
+
   setTimeout(()=>{
-    if(index >= items.length-1){
-      track.style.transition = 'none';
-      index = 1;
-      track.style.transform = `translateX(-${index*itemWidth}px)`;
-    }
-    updateActive();
+      updateActive();
   },500);
 }
-
 setInterval(updateCarousel,2500);
 </script>
 
