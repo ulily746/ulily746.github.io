@@ -433,7 +433,7 @@ function updateCarousel(){
   track.style.transform =
   `translateX(calc(50% - ${itemWidth/2}px - ${index*itemWidth}px))`;
 
-  setTimeout(()=>{
+  setTimeout(updateActive,500);
 
   
     if(index >= items.length - cloneCount){
@@ -448,8 +448,6 @@ function updateCarousel(){
        updateActive();
 
     }
-
-  },500);
 
 }
 
