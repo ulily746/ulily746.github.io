@@ -266,66 +266,6 @@ ul {padding-left:22px;}
   z-index:10;
 }
 
-.timeline{
-position:relative;
-max-width:800px;
-margin:80px auto;
-padding-left:50px;
-}
-
-.timeline::before{
-content:"";
-position:absolute;
-left:20px;
-top:0;
-bottom:0;
-width:2px;
-background:#e5dcc8;
-}
-
-.timeline-item{
-opacity:0;
-transform:translateY(40px);
-transition:all 0.6s ease;
-}
-
-.timeline-item.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.timeline-item::before{
-content:"";
-position:absolute;
-left:-34px;
-top:10px;
-width:12px;
-height:12px;
-background:#8B6B4F;
-border-radius:50%;
-}
-
-.timeline-content{
-background:#f8f8f8;
-padding:18px 22px;
-border-radius:10px;
-box-shadow:0 4px 12px rgba(0,0,0,0.08);
-}
-
-.timeline-content h3{
-margin:0;
-font-size:18px;
-}
-
-.timeline-content p{
-margin:5px 0;
-color:#666;
-}
-
-.timeline-content span{
-font-size:14px;
-color:#888;
-}
 
 /* 모바일 */
 @media (max-width:900px){
@@ -519,29 +459,5 @@ function updateCarousel(){
 
 setInterval(updateCarousel,2500);
 
-<script>
-
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-function showTimeline(){
-
-const trigger = window.innerHeight * 0.9;
-
-timelineItems.forEach(item => {
-
-const top = item.getBoundingClientRect().top;
-
-if(top < trigger){
-item.classList.add("show");
-}
-
-});
-
-}
-
-window.addEventListener("scroll", showTimeline);
-window.addEventListener("load", showTimeline);
-
-</script>
 </body>
 </html>
