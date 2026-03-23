@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <title>Yuri Choi | CV</title>
 
+<!-- 아이콘 라이브러리 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 body{
@@ -55,6 +58,7 @@ gap:70px;
 
 .cv-sidebar{
 width:260px;
+font-size:14px; /* 글자 약간 축소 */
 }
 
 .profile-pic{
@@ -71,22 +75,24 @@ box-shadow:0 6px 15px rgba(0,0,0,0.2);
 .cv-sidebar h2{
 text-align:center;
 margin-bottom:5px;
+font-size:20px;
 }
 
 .tagline{
 text-align:center;
-font-size:14px;
+font-size:13px;
 color:#666;
 margin-bottom:30px;
 }
 
 .sidebar-section{
-margin-bottom:30px;
+margin-bottom:28px;
 }
 
 .sidebar-section h4{
 margin-bottom:8px;
 color:#8B6B4F;
+font-size:15px;
 }
 
 .sidebar-section ul{
@@ -102,15 +108,26 @@ margin:6px 0;
 /* CONTACT */
 
 .contact a{
-display:block;
+display:flex;
+align-items:center;
+gap:8px;
 text-decoration:none;
 color:#1A1A1A;
-margin-bottom:6px;
+margin-bottom:8px;
 font-size:14px;
 }
 
 .contact a:hover{
 color:#8B6B4F;
+}
+
+
+/* LANGUAGE LEVEL */
+
+.lang-level{
+color:#9c9c9c;
+font-size:13px;
+margin-left:5px;
 }
 
 
@@ -132,7 +149,7 @@ margin-bottom:25px;
 }
 
 
-/* GRID CV ROW (핵심 구조) */
+/* GRID CV ROW */
 
 .cv-row{
 display:grid;
@@ -172,8 +189,6 @@ width:100%;
 
 <body>
 
-
-<!-- NAV -->
 
 <div class="nav">
 <a href="index.html">Main</a>
@@ -238,8 +253,8 @@ B.S. Biomaterials Science<br>
 <h4>Languages</h4>
 
 <ul>
-<li>Korean</li>
-<li>English</li>
+<li>Korean <span class="lang-level">(Native)</span></li>
+<li>English <span class="lang-level">(Professional)</span></li>
 </ul>
 
 </div>
@@ -249,9 +264,20 @@ B.S. Biomaterials Science<br>
 
 <h4>Contact</h4>
 
-<a href="mailto:choic2k3@gmail.com">Email</a>
-<a href="https://orcid.org/" target="_blank">ORCID</a>
-<a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+<a href="mailto:choic2k3@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+Email
+</a>
+
+<a href="https://orcid.org/" target="_blank">
+<i class="fa-brands fa-orcid"></i>
+ORCID
+</a>
+
+<a href="https://www.linkedin.com/" target="_blank">
+<i class="fa-brands fa-linkedin"></i>
+LinkedIn
+</a>
 
 </div>
 
@@ -263,14 +289,13 @@ B.S. Biomaterials Science<br>
 
 <div class="cv-content">
 
-
 <section>
 
 <h2>Summary</h2>
 
 <p>
 
-Master’s graduate in Chemical and Biomolecular Engineering with research experience in PLGA-PEG nanoparticle-based drug delivery systems for metabolic cancer therapy. Experienced in nanoparticle characterization and biological evaluation across cellular and in vivo models. Interested in integrating microphysiological systems such as organ-on-chip platforms with smart drug delivery and biosensing technologies.
+Master’s graduate in Chemical and Biomolecular Engineering with research experience in PLGA-PEG nanoparticle-based drug delivery systems for metabolic cancer therapy. Experienced in nanoparticle characterization and biological evaluation across cellular and in vivo models. Interested in integrating organ-on-chip platforms with smart drug delivery and biosensing technologies.
 
 </p>
 
@@ -282,8 +307,8 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 
 <h2>Research Experience</h2>
 
-
 <div class="cv-row">
+
 <div class="cv-label">2023–2025</div>
 
 <div>
@@ -292,15 +317,13 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 
 <ul>
 
-<li>Designed PLGA-PEG nanoparticles encapsulating shikonin and atovaquone for dual metabolic inhibition in hepatocellular carcinoma.</li>
+<li>Designed PLGA-PEG nanoparticles encapsulating shikonin and atovaquone for dual metabolic inhibition.</li>
 
-<li>Performed in vitro assays including cell viability, apoptosis, ROS, ATP, JC-1, MitoSOX, glucose and lactate metabolism.</li>
+<li>Performed in vitro assays including apoptosis, ROS, ATP, JC-1 and metabolic assays.</li>
 
 <li>Characterized nanoparticles using DLS, HPLC, TEM and CLSM.</li>
 
 <li>Evaluated biodistribution and therapeutic efficacy in orthotopic liver tumor models.</li>
-
-<li>Analyzed experimental data using Prism, FlowJo, CompuSyn and ZEN.</li>
 
 </ul>
 
@@ -309,6 +332,7 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 
 
 <div class="cv-row">
+
 <div class="cv-label">2020–2021</div>
 
 <div>
@@ -319,17 +343,14 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 
 <li>Developed membrane-based exosome isolation systems.</li>
 
-<li>Designed and operated tangential flow filtration modules.</li>
+<li>Operated tangential flow filtration modules.</li>
 
-<li>Performed exosome characterization using TEM and DLS.</li>
-
-<li>Assisted device fabrication and 3D modeling for separation systems.</li>
+<li>Characterized exosomes using TEM and DLS.</li>
 
 </ul>
 
 </div>
 </div>
-
 
 </section>
 
@@ -340,17 +361,23 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 <h2>Technical Skills</h2>
 
 <div class="cv-row">
-<div class="cv-label">Experimental</div>
-<div>Nanoparticle synthesis, cell culture, in vivo tumor models</div>
+<div class="cv-label">Experimental Techniques</div>
+<div>Nanoparticle synthesis (double emulsion, nanoprecipitation)<br>
+Cell culture (cancer & normal cell lines)<br>
+Assays: MTT, apoptosis, ROS, JC-1, MitoSOX, ATP, GSH, lactate & glucose assay, Western blotting, flow cytometry, confocal microscopy
+</div>
 </div>
 
 <div class="cv-row">
 <div class="cv-label">Characterization</div>
-<div>DLS, TEM, HPLC, CLSM</div>
+<div>DLS, TEM, HPLC, CLSM, and SEM<br>
+  Microplate & luciferase assays<br>
+Tangential flow filtration system operation
+</div>
 </div>
 
 <div class="cv-row">
-<div class="cv-label">Analysis</div>
+<div class="cv-label">Data Analysis</div>
 <div>GraphPad Prism, FlowJo, CompuSyn, ZEN</div>
 </div>
 
@@ -363,32 +390,28 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 <h2>Publications</h2>
 
 <div class="cv-row">
-
 <div class="cv-label">2025</div>
 
 <div>
 
 Nam H., Park H., Son M., Kang I., <strong>Choi Y.</strong>, et al.  
 <i>Metal-phenolic networks reverse the immunosuppressive tumor microenvironment.</i>  
-Journal of Controlled Release.
+Journal of Controlled Release, , 383, 11375 (2025)
 
 </div>
-
 </div>
 
 
 <div class="cv-row">
-
 <div class="cv-label">2026</div>
 
 <div>
 
 <strong>Choi Y.</strong>, Nam H., et al.  
 <i>Overcoming metabolic plasticity in hepatocellular carcinoma via tumor-targeted regulation of glycolysis and oxidative phosphorylation.</i>  
-Applied Nanomaterials.
+ACS Appl. Nano Mater. 2026, 9, 4, 1760–1771 (2026)
 
 </div>
-
 </div>
 
 </section>
@@ -405,46 +428,7 @@ Applied Nanomaterials.
 
 <div>
 
-Poster Presentation — Korean Society for Biomaterials Spring Meeting  
-
-Dual metabolic therapy targeting glycolysis and mitochondrial metabolism via PLGA-PEG nanoparticles.
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<section>
-
-<h2>References</h2>
-
-<div class="cv-row">
-
-<div class="cv-label">Advisor</div>
-
-<div>
-
-<strong>Prof. Yeu-Chun Kim</strong>  
-Department of Chemical and Biomolecular Engineering  
-KAIST
-
-</div>
-
-</div>
-
-
-<div class="cv-row">
-
-<div class="cv-label">Professor</div>
-
-<div>
-
-<strong>Prof. Seung-Yun Yang</strong>  
-Department of Biomaterials Science  
-Pusan National University
+Poster Presentation — Dual metabolic therapy targeting glycolysis and mitochondrial metabolism via PLGA-PEG nanoparticles for carcinoma. The Korean Society for Biomaterials Annual Spring Meeting, Republic of Korea, 2025
 
 </div>
 
@@ -455,9 +439,7 @@ Pusan National University
 
 </div>
 
-
 </div>
-
 
 </body>
 </html>
