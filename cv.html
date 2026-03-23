@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>Yuri Choi - CV</title>
+<title>Yuri Choi | CV</title>
 
 <style>
 
@@ -14,7 +15,8 @@ color:#1A1A1A;
 line-height:1.7;
 }
 
-/* navigation */
+/* NAVIGATION */
+
 .nav{
 display:flex;
 gap:50px;
@@ -37,123 +39,130 @@ font-weight:500;
 color:#8B6B4F;
 }
 
-/* layout */
-.container{
+/* MAIN LAYOUT */
+
+.cv-container{
 display:flex;
-width:100%;
+max-width:1200px;
+margin:auto;
+padding:60px 40px;
+gap:70px;
 }
 
-/* left profile */
-.left{
-width:20%;
-min-width:200px;
-height:100vh;
-position:sticky;
-top:0;
-background:#000;
-overflow:hidden;
+/* SIDEBAR */
+
+.cv-sidebar{
+width:260px;
 }
 
-.profile-card{
-position:relative;
-width:100%;
-height:100%;
-}
-
-.profile-card img{
-width:100%;
-height:100%;
+.profile-pic{
+width:170px;
+height:170px;
+border-radius:50%;
 object-fit:cover;
+display:block;
+margin:auto;
+margin-bottom:20px;
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
 
-.overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.35);
-}
-
-.profile-info{
-position:absolute;
-top:25%;
-left:50%;
-transform:translate(-50%,-30%);
+.cv-sidebar h2{
 text-align:center;
-color:white;
+margin-bottom:5px;
 }
 
-.profile-info h2{
-margin:0;
-font-size:28px;
+.tagline{
+text-align:center;
+font-size:14px;
+color:#666;
+margin-bottom:30px;
 }
 
-.profile-info p{
-margin:8px 0;
+.sidebar-section{
+margin-bottom:30px;
+}
+
+.sidebar-section h4{
+margin-bottom:8px;
+color:#8B6B4F;
+}
+
+.sidebar-section ul{
+padding-left:18px;
+margin:5px 0;
+}
+
+.sidebar-section p{
+margin:6px 0;
+}
+
+/* CONTACT LINKS */
+
+.contact a{
+display:block;
+text-decoration:none;
+color:#1A1A1A;
+margin-bottom:6px;
 font-size:14px;
 }
 
-.profile-info a{
-color:white;
-text-decoration:none;
+.contact a:hover{
+color:#8B6B4F;
 }
 
-/* right content */
-.right{
+/* RIGHT CONTENT */
+
+.cv-content{
 flex:1;
-padding:60px 40px;
-max-width:900px;
-margin:auto;
+max-width:800px;
 }
 
-.section{
+.cv-content section{
 margin-bottom:50px;
 }
 
-.section h2{
-font-size:24px;
-margin-bottom:10px;
-}
-
-.section hr{
-border:none;
-height:2px;
-background:#8B6B4F;
+.cv-content h2{
+border-bottom:2px solid #8B6B4F;
+padding-bottom:6px;
 margin-bottom:20px;
 }
 
-/* CV items */
+/* CV ITEMS */
 
 .cv-item{
 margin-bottom:20px;
 }
 
-.cv-title{
-font-weight:bold;
-color:#8B6B4F;
+.cv-item h3{
+margin:0;
+font-size:17px;
 }
 
 .cv-date{
-float:right;
-color:#777;
 font-size:14px;
+color:#777;
 }
 
-.skill-badge{
+/* SKILLS */
+
+.skills span{
 display:inline-block;
 background:#F2E8DC;
-color:#8B6B4F;
 padding:6px 12px;
 border-radius:20px;
-margin:4px;
+margin:5px;
 font-size:14px;
+color:#8B6B4F;
 }
 
 </style>
 </head>
 
+
 <body>
+
+
+<!-- NAV -->
 
 <div class="nav">
 <a href="index.html">Main</a>
@@ -162,186 +171,231 @@ font-size:14px;
 <a href="news.html">News</a>
 </div>
 
-<div class="container">
 
-<!-- LEFT PROFILE -->
+<div class="cv-container">
 
-<div class="left">
 
-<div class="profile-card">
-<img src="profile.jpg">
+<!-- SIDEBAR -->
 
-<div class="overlay"></div>
+<div class="cv-sidebar">
 
-<div class="profile-info">
+<img src="profile.jpg" class="profile-pic">
+
 <h2>Yuri Choi</h2>
 
-<p>✉ choic2k3@gmail.com</p>
+<p class="tagline">
+Biomedical Engineer <br>
+Organ-on-Chip | Drug Delivery
+</p>
+
+
+<div class="sidebar-section">
+
+<h4>Research Interests</h4>
+
+<ul>
+<li>Organ-on-chip systems</li>
+<li>Nanoparticle drug delivery</li>
+<li>Metabolic cancer therapy</li>
+<li>Biohybrid robotics</li>
+</ul>
+
+</div>
+
+
+<div class="sidebar-section">
+
+<h4>Education</h4>
 
 <p>
-<a href="https://www.linkedin.com/in/cy-yuri746" target="_blank">
-LinkedIn
-</a>
+<strong>KAIST</strong><br>
+M.S. Chemical & Biomolecular Engineering<br>
+2023 – 2025
+</p>
+
+<p>
+<strong>Pusan National University</strong><br>
+B.S. Biomaterials Science<br>
+2017 – 2022
 </p>
 
 </div>
+
+
+<div class="sidebar-section">
+
+<h4>Languages</h4>
+
+<ul>
+<li>Korean (Native)</li>
+<li>English (Fluent)</li>
+</ul>
+
 </div>
+
+
+<div class="sidebar-section contact">
+
+<h4>Contact</h4>
+
+<a href="mailto:choic2k3@gmail.com">Email</a>
+
+<a href="https://orcid.org/" target="_blank">ORCID</a>
+
+<a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+
+</div>
+
 </div>
 
 
-<!-- RIGHT CONTENT -->
 
-<div class="right">
+<!-- MAIN CONTENT -->
+
+<div class="cv-content">
 
 
-<!-- SUMMARY -->
-
-<div class="section">
+<section>
 
 <h2>Summary</h2>
-<hr>
 
 <p>
-Master’s graduate in Chemical and Biomolecular Engineering with research experience in nanoparticle-based drug delivery systems. Skilled in nanoparticle synthesis, characterization, and biological evaluation. Interested in bio-integrated systems including organ-on-chip, sensors, and microrobotics for next-generation biomedical technologies.
+
+Master’s graduate in Chemical and Biomolecular Engineering with research experience in nanoparticle-based drug delivery systems for metabolic cancer therapy. Skilled in nanoparticle synthesis, characterization, and biological evaluation. Interested in integrating microphysiological systems such as organ-on-chip platforms with advanced therapeutic technologies.
+
 </p>
 
-</div>
+</section>
 
 
-<!-- EDUCATION -->
 
-<div class="section">
-
-<h2>Education</h2>
-<hr>
-
-<div class="cv-item">
-
-<span class="cv-title">
-Korea Advanced Institute of Science and Technology (KAIST)
-</span>
-
-<span class="cv-date">2023 – 2025</span>
-
-<p>
-M.S. in Chemical and Biomolecular Engineering
-</p>
-
-</div>
-
-
-<div class="cv-item">
-
-<span class="cv-title">
-Pusan National University
-</span>
-
-<span class="cv-date">2017 – 2022</span>
-
-<p>
-B.S. in Biomaterials Science
-</p>
-
-</div>
-
-</div>
-
-
-<!-- RESEARCH EXPERIENCE -->
-
-<div class="section">
+<section>
 
 <h2>Research Experience</h2>
-<hr>
+
 
 <div class="cv-item">
 
-<span class="cv-title">
-Graduate Student Researcher – KAIST
-</span>
+<h3>Graduate Student Researcher – KAIST</h3>
 
-<span class="cv-date">2023 – 2025</span>
+<p class="cv-date">2023 – 2025</p>
 
 <p>
-Developed PLGA-PEG nanoparticles for dual metabolic inhibition in hepatocellular carcinoma.
-Conducted nanoparticle synthesis, characterization (DLS, TEM, HPLC), and in vitro / in vivo therapeutic evaluation.
+
+Developed PLGA-PEG nanoparticles for dual metabolic inhibition therapy targeting hepatocellular carcinoma. Conducted nanoparticle synthesis and characterization using DLS, TEM, and HPLC, and evaluated therapeutic efficacy through in vitro and in vivo studies.
+
 </p>
 
 </div>
 
+
+<div class="cv-item">
+
+<h3>Field Training Intern – Pusan National University</h3>
+
+<p class="cv-date">2020 – 2021</p>
+
+<p>
+
+Worked on membrane fabrication and electrostatic isolation systems for biological samples. Assisted with device design and experimental operation.
+
+</p>
+
 </div>
 
+</section>
 
-<!-- TECHNICAL SKILLS -->
 
-<div class="section">
+
+<section>
 
 <h2>Technical Skills</h2>
-<hr>
 
-<span class="skill-badge">Nanoparticle synthesis</span>
-<span class="skill-badge">DLS</span>
-<span class="skill-badge">TEM</span>
-<span class="skill-badge">HPLC</span>
-<span class="skill-badge">CLSM</span>
-<span class="skill-badge">CompuSyn</span>
+<div class="skills">
+
+<span>Nanoparticle synthesis</span>
+<span>DLS</span>
+<span>TEM</span>
+<span>HPLC</span>
+<span>CLSM</span>
+<span>Flow Cytometry</span>
+<span>GraphPad Prism</span>
+<span>CompuSyn</span>
 
 </div>
 
+</section>
 
-<!-- PUBLICATIONS -->
 
-<div class="section">
+
+<section>
 
 <h2>Publications</h2>
-<hr>
 
 <p>
-Y. Choi*, H. Nam*, et al. Overcoming metabolic plasticity in hepatocellular carcinoma via tumor-targeted dual regulation of glycolysis and oxidative phosphorylation.
+
+Nam H., Park H., Son M., Kang I., <strong>Choi Y.</strong>, et al.  
+Metal-phenolic networks reverse the immunosuppressive tumor microenvironment.  
+<i>Journal of Controlled Release</i>, 2025.
+
 </p>
 
 <p>
-H. Nam, H. Park, M. Son, I. Kang, Y. Choi, et al.
-Metal-phenolic networks reverse the immunosuppressive tumor microenvironment.
-Journal of Controlled Release (2025)
+
+Choi Y., Nam H., et al.  
+Overcoming metabolic plasticity in hepatocellular carcinoma via tumor-targeted regulation of glycolysis and oxidative phosphorylation.  
+(under revision)
+
 </p>
 
-</div>
+</section>
 
 
-<!-- PRESENTATIONS -->
 
-<div class="section">
+<section>
 
 <h2>Presentations</h2>
-<hr>
 
 <p>
-Poster Presentation – The Korean Society for Biomaterials Spring Meeting (2025)
+
+Choi Y. et al.  
+Dual metabolic therapy targeting glycolysis and mitochondrial metabolism via PLGA-PEG nanoparticles for carcinoma.  
+Poster Presentation – Korean Society for Biomaterials Spring Meeting (2025)
+
 </p>
 
-</div>
+</section>
 
 
-<!-- REFERENCES -->
 
-<div class="section">
+<section>
 
 <h2>References</h2>
-<hr>
 
 <p>
-Prof. Yeu-Chun Kim – KAIST
+
+<strong>Prof. Yeu-Chun Kim</strong><br>
+Department of Chemical and Biomolecular Engineering<br>
+KAIST
+
 </p>
 
 <p>
-Prof. Seung-Yun Yang – Pusan National University
+
+<strong>Prof. Seung-Yun Yang</strong><br>
+Department of Biomaterials Science<br>
+Pusan National University
+
 </p>
 
-</div>
+</section>
+
 
 </div>
+
+
 </div>
+
 
 </body>
 </html>
