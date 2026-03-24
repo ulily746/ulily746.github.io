@@ -49,7 +49,7 @@ body{
   top:0;
   background:#000;
   color:white;
-  padding:30px 15px 20px 15px;
+  padding:30px 15px 20px 15px; /* 좌우 여백 확보 */
   box-sizing:border-box;
   display:flex;
   flex-direction:column;
@@ -79,7 +79,7 @@ body{
   border-radius:5px;
   border:none;
   font-size:13px;
-  margin-bottom:20px;
+  margin-bottom:20px; /* 여백 확보 */
   box-sizing:border-box;
 }
 
@@ -113,15 +113,15 @@ body{
   box-sizing:border-box;
 }
 
-/* category filter */
+/* category filter moved above cards */
 .category-filter{
   display:flex;
   gap:8px;
   margin-bottom:15px;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; /* 한 줄 유지 */
 }
 .category-filter button{
-  padding:5px 8px;
+  padding:5px 8px; /* 손가락 한 마디 정도 크기 */
   font-size:12px;
   border:none;
   border-radius:5px;
@@ -205,7 +205,7 @@ body{
 .modal-content img{
   width:100%;
   border-radius:8px;
-  margin-top:10px;
+  margin-top:15px;
 }
 .close{
   position:absolute;
@@ -215,21 +215,6 @@ body{
   font-weight:bold;
   cursor:pointer;
   color:#8B6B4F;
-}
-
-/* modal extra images block */
-.modal-image-block{
-  margin-bottom:20px;
-  text-align:center;
-}
-.modal-image-block .image-title{
-  font-weight:600;
-  color:#8B6B4F;
-  margin:6px 0 3px 0;
-}
-.modal-image-block .image-desc{
-  font-size:13px;
-  color:#333;
 }
 
 @media(max-width:900px){
@@ -247,7 +232,7 @@ body{
     width:90%;
   }
   .category-filter{
-    flex-wrap:wrap;
+    flex-wrap:wrap; /* 모바일에서는 줄바꿈 허용 */
   }
 }
 </style>
@@ -283,82 +268,146 @@ body{
     </div>
   </div>
 
-  <!-- Right content -->
-  <div class="right">
-    <div class="category-filter">
-      <button data-category="all">All</button>
-      <button data-category="bs">B.S.</button>
-      <button data-category="support">Support</button>
-    </div>
+<!-- Right content -->
+<div class="right">
 
-    <div class="cards">
-
-      <!-- Supporting Research -->
-      <div class="card"
-        data-category="support"
-        data-title="Metal-Phenolic Networks for Cancer Metabolism Modulation"
-        data-image="NHY.jpg"
-        data-detail="Assisted in NHY research project focusing on metal-phenolic networks.">
-
-        <img src="NHY.jpg" alt="Supported Research">
-        <div class="card-content">
-          <h4>Metal-phenolic networks</h4>
-          <p>Supporting Research Project</p>
-          <button class="read-more">View More</button>
-        </div>
-      </div>
-
-      <!-- Undergraduate Research -->
-      <div class="card"
-        data-category="bs"
-        data-title="Exosome Isolation via TFF"
-        data-image="TFF.png"
-        data-detail="Undergraduate thesis on size-based exosome isolation.">
-
-        <img src="TFF.png" alt="Undergrad Research">
-        <div class="card-content">
-          <h4>Exosome Isolation via TFF</h4>
-          <p>Undergraduate Research</p>
-          <button class="read-more">View More</button>
-        </div>
-
-        <!-- extra images for modal -->
-        <div class="extra-images" style="display:none;">
-          <div class="modal-image-block">
-            <img src="mem.png" alt="Membrane Schematic">
-            <p class="image-title">Membrane chemical etching schematic</p>
-            <p class="image-desc">Chemically etched asymmetric membrane</p>
-          </div>
-          <div class="modal-image-block">
-            <img src="mem2.png" alt="SEM Membrane">
-            <p class="image-title">SEM image of etched membrane</p>
-            <p class="image-desc">Surface confirmed by SEM</p>
-          </div>
-          <div class="modal-image-block">
-            <img src="exo.jpg" alt="Exosome TEM">
-            <p class="image-title">TEM image of isolated exosomes</p>
-            <p class="image-desc">Exosome morphology confirmed</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
+  <div class="category-filter">
+    <button data-category="all">All</button>
+    <button data-category="ms">M.S.</button>
+    <button data-category="bs">B.S.</button>
+    <button data-category="support">Support</button>
   </div>
+
+  <div class="cards">
+
+    <!-- Master Research -->
+    <div class="card"
+      data-category="ms"
+      data-title="Master Thesis"
+      data-image="scheme.png"
+      data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
+
+      <img src="scheme.png" alt="Master Thesis">
+
+      <div class="card-content">
+        <h4>Master Thesis</h4>
+        <p>PLGA-PEG nanoparticles</p>
+        <button class="read-more">View More</button>
+      </div>
+    </div>
+
+
+    <!-- Supporting Research -->
+    <div class="card"
+      data-category="support"
+      data-title="Metal-Phenolic Networks for Cancer Metabolism Modulation"
+      data-image="NHY.jpg"
+      data-detail="
+Background:
+Cancer cells rely heavily on aerobic glycolysis, which contributes to an immunosuppressive tumor microenvironment (TME) by depleting glucose and producing metabolites such as lactate.
+
+Strategy:
+Metal-phenolic networks (MPNs) were developed by coating zinc oxide (ZnO) nanoparticles with epigallocatechin gallate (EGCG) to regulate cancer cell metabolism.
+
+Mechanism:
+Under acidic tumor conditions, MPNs release Zn²⁺ ions and EGCG, inhibiting both glycolysis and mitochondrial metabolism.
+
+Key Outcome:
+Dual metabolic inhibition induced immunogenic cell death (ICD), promoted dendritic cell maturation, activated cytotoxic T cells, and suppressed regulatory T cells.
+
+Contribution:
+Assisted with experimental procedures including nanoparticle preparation and biological experiments supporting the project.
+
+Publication:
+Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via metabolic regulation and immunogenic cell death.
+">
+
+      <img src="NHY.jpg" alt="Supported Research">
+
+      <div class="card-content">
+        <h4>Metal-phenolic networks for cancer immunotherapy</h4>
+        <p>Supporting Research Project</p>
+        <button class="read-more">View More</button>
+      </div>
+    </div>
+
+
+ <!-- Undergraduate Research -->
+<div class="card"
+  data-category="bs"
+  data-title="Size-Based Isolation of Exosomes through Tangential Flow Filtration for Biomedical Applications"
+  data-image="TFF.png"
+  data-detail="
+Background:
+Efficient isolation of exosomes is essential for biomedical research. However, conventional methods often suffer from low yield or limited purity.
+
+Objective:
+To develop a size-based strategy for selective and efficient exosome isolation.
+
+Approach:
+Tangential Flow Filtration (TFF) was used as a size-based separation method. Chemically etched asymmetric membranes were fabricated to improve filtration flux and separation efficiency.
+
+Key Results:
+Stable filtration conditions were established and membrane etching was confirmed through SEM imaging. Isolated exosomes were validated using TEM analysis.
+
+Techniques:
+TFF filtration, membrane chemical etching, SEM imaging, TEM characterization
+
+Contribution:
+Performed most experimental procedures including membrane fabrication, TFF operation, and exosome validation under the guidance of senior researchers.
+
+Output:
+Submitted as an undergraduate graduation thesis.
+">
+
+<img src="TFF.png" alt="Undergrad Research">
+
+<div class="card-content">
+<h4>Exosome Isolation via TFF</h4>
+<p>Undergraduate Research</p>
+<button class="read-more">View More</button>
 </div>
+
+<!-- 추가 이미지 (학부 연구만) -->
+<div class="extra-images" style="display:none;">
+
+<p><b>Membrane chemical etching schematic</b></p>
+<img src="mem.png">
+
+<p><b>SEM image of etched membrane</b></p>
+<img src="mem2.png">
+
+<p><b>TEM image of isolated exosomes</b></p>
+<img src="exo.jpg">
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 id="modal-title"></h2>
-    <p id="modal-detail"></p>
-    <img id="modal-image" src="" alt="">
-    <div id="modal-extra-images"></div>
-  </div>
+<div class="modal-content">
+
+<span class="close">&times;</span>
+
+<h2 id="modal-title"></h2>
+
+<p id="modal-detail"></p>
+
+<img id="modal-image" src="" alt="">
+
+<div id="modal-extra-images"></div>
+
+</div>
 </div>
 
+
 <script>
+
 // Modal elements
 const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal-title');
@@ -366,50 +415,85 @@ const modalDetail = document.getElementById('modal-detail');
 const modalImage = document.getElementById('modal-image');
 const modalExtra = document.getElementById('modal-extra-images');
 
-// Open modal
+
+// Modal open
 document.querySelectorAll('.card, .read-more').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    let card = e.target.closest('.card');
-    modal.style.display='flex';
-    modalTitle.textContent = card.dataset.title;
-    modalDetail.textContent = card.dataset.detail;
-    modalImage.src = card.dataset.image;
 
-    // extra images
-    modalExtra.innerHTML = "";
-    const extra = card.querySelector(".extra-images");
-    if(extra){
-      modalExtra.innerHTML = extra.innerHTML;
-    }
-  });
+btn.addEventListener('click', e=>{
+
+let card = e.target.closest('.card');
+
+modal.style.display='flex';
+
+modalTitle.textContent = card.dataset.title;
+
+modalDetail.textContent = card.dataset.detail;
+
+modalImage.src = card.dataset.image;
+
+
+// 추가 이미지 초기화
+modalExtra.innerHTML = "";
+
+// 카드 안 extra-images 불러오기
+const extra = card.querySelector(".extra-images");
+
+if(extra){
+modalExtra.innerHTML = extra.innerHTML;
+}
+
 });
 
-// Close modal
+});
+
+
+// Modal close
 document.querySelector('.close').addEventListener('click', ()=>{
-  modal.style.display='none';
+
+modal.style.display='none';
+
 });
+
+
 window.addEventListener('click', e=>{
-  if(e.target===modal) modal.style.display='none';
+
+if(e.target===modal) modal.style.display='none';
+
 });
+
 
 // Category filter
 document.querySelectorAll('.category-filter button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const cat = btn.dataset.category;
-    document.querySelectorAll('.card').forEach(card=>{
-      card.style.display = (cat==='all'||card.dataset.category===cat)?'block':'none';
-    });
-  });
+
+btn.addEventListener('click', ()=>{
+
+const cat = btn.dataset.category;
+
+document.querySelectorAll('.card').forEach(card=>{
+
+card.style.display = (cat==='all'||card.dataset.category===cat) ? 'block' : 'none';
+
 });
+
+});
+
+});
+
 
 // Search filter
 document.getElementById('search-input').addEventListener('input', e=>{
-  const val = e.target.value.toLowerCase();
-  document.querySelectorAll('.card').forEach(card=>{
-    card.style.display = card.dataset.title.toLowerCase().includes(val) ? 'block' : 'none';
-  });
+
+const val = e.target.value.toLowerCase();
+
+document.querySelectorAll('.card').forEach(card=>{
+
+card.style.display = card.dataset.title.toLowerCase().includes(val) ? 'block' : 'none';
+
 });
+
+});
+
 </script>
 
 </body>
-</html>
+</html> 
