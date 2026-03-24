@@ -268,30 +268,41 @@ body{
     </div>
   </div>
 
-  <!-- Right content -->
-  <div class="right">
-    <div class="category-filter">
-      <button data-category="all">All</button>
-      <button data-category="ms">M.S.</button>
-      <button data-category="bs">B.S.</button>
-      <button data-category="support">Support</button>
+<!-- Right content -->
+<div class="right">
+
+  <div class="category-filter">
+    <button data-category="all">All</button>
+    <button data-category="ms">M.S.</button>
+    <button data-category="bs">B.S.</button>
+    <button data-category="support">Support</button>
+  </div>
+
+  <div class="cards">
+
+    <!-- Master Research -->
+    <div class="card"
+      data-category="ms"
+      data-title="Master Thesis"
+      data-image="scheme.png"
+      data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
+
+      <img src="scheme.png" alt="Master Thesis">
+
+      <div class="card-content">
+        <h4>Master Thesis</h4>
+        <p>PLGA-PEG nanoparticles</p>
+        <button class="read-more">View More</button>
+      </div>
     </div>
 
-    <div class="cards">
-      <div class="card" data-category="ms" data-title="Master Thesis" data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
-        <img src="scheme.png" alt="Master Thesis">
-        <div class="card-content">
-          <h4>Master Thesis</h4>
-          <p>PLGA-PEG nanoparticles</p>
-          <button class="read-more">View More</button>
-        </div>
-      </div>
 
-      <div class="card" data-category="support" data-title="Supported Research" data-detail="Assisted in NHY research project focusing on metal-phenolic networks."
-        data-detail="
-Title:
-Metal-Phenolic Networks for Cancer Metabolism Modulation and Tumor Microenvironment Reprogramming
-
+    <!-- Supporting Research -->
+    <div class="card"
+      data-category="support"
+      data-title="Metal-Phenolic Networks for Cancer Metabolism Modulation"
+      data-image="NHY.jpg"
+      data-detail="
 Background:
 Cancer cells rely heavily on aerobic glycolysis, which contributes to an immunosuppressive tumor microenvironment (TME) by depleting glucose and producing metabolites such as lactate.
 
@@ -299,29 +310,34 @@ Strategy:
 Metal-phenolic networks (MPNs) were developed by coating zinc oxide (ZnO) nanoparticles with epigallocatechin gallate (EGCG) to regulate cancer cell metabolism.
 
 Mechanism:
-Under acidic tumor conditions, MPNs release Zn²⁺ ions and EGCG, inhibiting both glycolysis and mitochondrial metabolism, resulting in severe metabolic stress in cancer cells.
+Under acidic tumor conditions, MPNs release Zn²⁺ ions and EGCG, inhibiting both glycolysis and mitochondrial metabolism.
 
 Key Outcome:
-Dual metabolic inhibition induced immunogenic cell death (ICD), promoted dendritic cell maturation, activated cytotoxic T cells, and suppressed regulatory T cells, ultimately reversing the immunosuppressive tumor microenvironment.
+Dual metabolic inhibition induced immunogenic cell death (ICD), promoted dendritic cell maturation, activated cytotoxic T cells, and suppressed regulatory T cells.
 
-My Contribution:
+Contribution:
 Assisted with experimental procedures including nanoparticle preparation and biological experiments supporting the project.
 
 Publication:
 Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via metabolic regulation and immunogenic cell death.
 ">
-        <img src="NHY.jpg" alt="Supported Research">
-        <div class="card-content">
-          <h4>Metal-phenolic networks for cancer immunotherapy</h4>
-          <p>Supporting Research Project</p>
-          <button class="read-more">View More</button>
-        </div>
+
+      <img src="NHY.jpg" alt="Supported Research">
+
+      <div class="card-content">
+        <h4>Metal-phenolic networks for cancer immunotherapy</h4>
+        <p>Supporting Research Project</p>
+        <button class="read-more">View More</button>
       </div>
+    </div>
 
-      <div class="card" data-category="bs"
-data-title="Size-Based Isolation of Exosomes through Tangential Flow Filtration for Biomedical Applications"
 
-data-detail="
+    <!-- Undergraduate Research -->
+    <div class="card"
+      data-category="bs"
+      data-title="Size-Based Isolation of Exosomes through Tangential Flow Filtration for Biomedical Applications"
+      data-image="TFF.png"
+      data-detail="
 Background:
 Efficient isolation of exosomes is essential for biomedical research. However, conventional methods often suffer from low yield or limited purity.
 
@@ -343,14 +359,17 @@ Performed most experimental procedures including membrane fabrication, TFF opera
 Output:
 Submitted as an undergraduate graduation thesis.
 ">
-        <img src="TFF.png" alt="Undergrad Research">
-        <div class="card-content">
-         <h4>Exosome Isolation via TFF</h4>
-<p>Undergraduate Research</p>
-          <button class="read-more">View More</button>
-        </div>
+
+      <img src="TFF.png" alt="Undergrad Research">
+
+      <div class="card-content">
+        <h4>Exosome Isolation via TFF</h4>
+        <p>Undergraduate Research</p>
+        <button class="read-more">View More</button>
       </div>
+
     </div>
+
   </div>
 </div>
 
@@ -383,10 +402,13 @@ const modalImage = document.getElementById('modal-image');
 document.querySelectorAll('.card, .read-more').forEach(btn=>{
   btn.addEventListener('click', e=>{
     let card = e.target.closest('.card');
+
     modal.style.display='flex';
     modalTitle.textContent = card.dataset.title;
     modalDetail.textContent = card.dataset.detail;
-    modalImage.src = card.querySelector('img').src;
+
+    // 이미지 수정
+    modalImage.src = card.dataset.image;
   });
 });
 
