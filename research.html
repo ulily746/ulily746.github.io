@@ -332,12 +332,12 @@ Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via
     </div>
 
 
-    <!-- Undergraduate Research -->
-    <div class="card"
-      data-category="bs"
-      data-title="Size-Based Isolation of Exosomes through Tangential Flow Filtration for Biomedical Applications"
-      data-image="TFF.png"
-      data-detail="
+ <!-- Undergraduate Research -->
+<div class="card"
+  data-category="bs"
+  data-title="Size-Based Isolation of Exosomes through Tangential Flow Filtration for Biomedical Applications"
+  data-image="TFF.png"
+  data-detail="
 Background:
 Efficient isolation of exosomes is essential for biomedical research. However, conventional methods often suffer from low yield or limited purity.
 
@@ -360,78 +360,139 @@ Output:
 Submitted as an undergraduate graduation thesis.
 ">
 
-      <img src="TFF.png" alt="Undergrad Research">
+<img src="TFF.png" alt="Undergrad Research">
 
-      <div class="card-content">
-        <h4>Exosome Isolation via TFF</h4>
-        <p>Undergraduate Research</p>
-        <button class="read-more">View More</button>
-      </div>
-
-    </div>
-
-  </div>
+<div class="card-content">
+<h4>Exosome Isolation via TFF</h4>
+<p>Undergraduate Research</p>
+<button class="read-more">View More</button>
 </div>
+
+<!-- 추가 이미지 (학부 연구만) -->
+<div class="extra-images" style="display:none;">
+
+<p><b>Membrane chemical etching schematic</b></p>
+<img src="mem.png">
+
+<p><b>SEM image of etched membrane</b></p>
+<img src="mem2.png">
+
+<p><b>TEM image of isolated exosomes</b></p>
+<img src="exo.jpg">
+
+</div>
+
+</div>
+
+</div>
+</div>
+
 
 <!-- Modal -->
 <div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 id="modal-title"></h2>
-    <p id="modal-detail"></p>
-    <img id="modal-image" src="" alt="">
-    
-  <p><b>Membrane chemical etching schematic</b></p>
-  <img src="mem.png">
+<div class="modal-content">
 
-  <p><b>SEM image of etched membrane</b></p>
-  <img src="mem2.png">
+<span class="close">&times;</span>
 
-  <p><b>TEM image of isolated exosomes</b></p>
-  <img src="exo.jpg">
-  </div>
+<h2 id="modal-title"></h2>
+
+<p id="modal-detail"></p>
+
+<img id="modal-image" src="" alt="">
+
+<div id="modal-extra-images"></div>
+
+</div>
 </div>
 
+
 <script>
-// Modal functionality
+
+// Modal elements
 const modal = document.getElementById('modal');
 const modalTitle = document.getElementById('modal-title');
 const modalDetail = document.getElementById('modal-detail');
 const modalImage = document.getElementById('modal-image');
+const modalExtra = document.getElementById('modal-extra-images');
 
+
+// Modal open
 document.querySelectorAll('.card, .read-more').forEach(btn=>{
-  btn.addEventListener('click', e=>{
-    let card = e.target.closest('.card');
 
-    modal.style.display='flex';
-    modalTitle.textContent = card.dataset.title;
-    modalDetail.textContent = card.dataset.detail;
+btn.addEventListener('click', e=>{
 
-    // 이미지 수정
-    modalImage.src = card.dataset.image;
-  });
+let card = e.target.closest('.card');
+
+modal.style.display='flex';
+
+modalTitle.textContent = card.dataset.title;
+
+modalDetail.textContent = card.dataset.detail;
+
+modalImage.src = card.dataset.image;
+
+
+// 추가 이미지 초기화
+modalExtra.innerHTML = "";
+
+// 카드 안 extra-images 불러오기
+const extra = card.querySelector(".extra-images");
+
+if(extra){
+modalExtra.innerHTML = extra.innerHTML;
+}
+
 });
 
-document.querySelector('.close').addEventListener('click', ()=>{modal.style.display='none';});
-window.addEventListener('click', e=>{if(e.target===modal) modal.style.display='none';});
+});
+
+
+// Modal close
+document.querySelector('.close').addEventListener('click', ()=>{
+
+modal.style.display='none';
+
+});
+
+
+window.addEventListener('click', e=>{
+
+if(e.target===modal) modal.style.display='none';
+
+});
+
 
 // Category filter
 document.querySelectorAll('.category-filter button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const cat = btn.dataset.category;
-    document.querySelectorAll('.card').forEach(card=>{
-      card.style.display=(cat==='all'||card.dataset.category===cat)?'block':'none';
-    });
-  });
+
+btn.addEventListener('click', ()=>{
+
+const cat = btn.dataset.category;
+
+document.querySelectorAll('.card').forEach(card=>{
+
+card.style.display = (cat==='all'||card.dataset.category===cat) ? 'block' : 'none';
+
 });
+
+});
+
+});
+
 
 // Search filter
 document.getElementById('search-input').addEventListener('input', e=>{
-  const val = e.target.value.toLowerCase();
-  document.querySelectorAll('.card').forEach(card=>{
-    card.style.display = (card.dataset.title.toLowerCase().includes(val)) ? 'block' : 'none';
-  });
+
+const val = e.target.value.toLowerCase();
+
+document.querySelectorAll('.card').forEach(card=>{
+
+card.style.display = card.dataset.title.toLowerCase().includes(val) ? 'block' : 'none';
+
 });
+
+});
+
 </script>
 
 </body>
