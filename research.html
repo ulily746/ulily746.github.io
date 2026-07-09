@@ -536,30 +536,95 @@ color:#ddd;
 <!-- Right content -->
 <div class="right">
 
-  <div class="category-filter">
-    <button data-category="all">All</button>
-    <button data-category="ms">M.S.</button>
-    <button data-category="bs">B.S.</button>
-    <button data-category="support">Support</button>
-  </div>
+<div class="category-filter">
 
-  <div class="cards">
+<button data-tag="all">All</button>
 
-    <!-- Master Research -->
-    <div class="card"
-      data-category="ms"
-      data-title="Master Thesis"
-      data-image="scheme.png"
-      data-detail="Dual metabolic pathway inhibitors delivered via PLGA-PEG nanoparticles targeting hepatocellular carcinoma.">
+<button data-tag="Cancer Metabolism">Cancer Metabolism</button>
 
-      <img src="scheme.png" alt="Master Thesis">
+<button data-tag="Nanomedicine">Nanomedicine</button>
 
-      <div class="card-content">
-        <h4>Master Thesis</h4>
-        <p>PLGA-PEG nanoparticles</p>
-        <button class="read-more">View More</button>
-      </div>
-    </div>
+<button data-tag="Drug Delivery">Drug Delivery</button>
+
+<button data-tag="Cancer Immunotherapy">Cancer Immunotherapy</button>
+
+<button data-tag="Biomedical Engineering">Biomedical Engineering</button>
+
+</div>
+
+
+<div class="cards">
+
+   <!-- Master Research -->
+<div class="card"
+
+data-tags="Cancer Metabolism,Nanomedicine,Drug Delivery"
+
+data-title="Dual Metabolic Therapy Using PLGA-PEG Nanoparticles for Hepatocellular Carcinoma"
+
+data-image="scheme.png"
+
+data-detail="
+Overview:
+
+Cancer cells exhibit metabolic plasticity by switching between glycolysis and mitochondrial respiration, contributing to therapeutic resistance.
+
+Strategy:
+
+PLGA-PEG nanoparticles were developed to deliver dual metabolic inhibitors targeting glycolysis and mitochondrial metabolism for hepatocellular carcinoma treatment.
+
+Key Results:
+
+Dual metabolic inhibition enhanced anticancer efficacy by suppressing glucose metabolism, increasing oxidative stress, and inducing apoptosis.
+
+Research Type:
+
+M.S. Thesis | Independent Research
+
+Publication:
+
+Manuscript in preparation.
+">
+
+
+<img src="scheme.png" 
+alt="Dual metabolic therapy using PLGA-PEG nanoparticles">
+
+
+<div class="card-content">
+
+
+<h4>
+Dual Metabolic Therapy Using 
+PLGA–PEG Nanoparticles
+</h4>
+
+
+<p class="research-type">
+M.S. Thesis · Independent Research
+</p>
+
+
+<div class="card-tags">
+
+<span>Cancer Metabolism</span>
+
+<span>Nanomedicine</span>
+
+<span>Drug Delivery</span>
+
+</div>
+
+
+<div class="view-project">
+View Project →
+</div>
+
+
+</div>
+
+
+</div>
 
 
     <!-- Supporting Research -->
@@ -682,30 +747,21 @@ const modalExtra = document.getElementById('modal-extra-images');
 
 
 // Modal open
-document.querySelectorAll('.card, .read-more').forEach(btn=>{
+document.querySelectorAll(".category-filter button").forEach(btn=>{
 
-btn.addEventListener('click', e=>{
+btn.addEventListener("click",()=>{
 
-let card = e.target.closest('.card');
+const tag = btn.dataset.tag;
 
-modal.style.display='flex';
+document.querySelectorAll(".card").forEach(card=>{
 
-modalTitle.textContent = card.dataset.title;
+const tags = card.dataset.tags.split(",");
 
-modalDetail.textContent = card.dataset.detail;
+card.style.display =
+(tag==="all" || tags.includes(tag))
+? "block":"none";
 
-modalImage.src = card.dataset.image;
-
-
-// 추가 이미지 초기화
-modalExtra.innerHTML = "";
-
-// 카드 안 extra-images 불러오기
-const extra = card.querySelector(".extra-images");
-
-if(extra){
-modalExtra.innerHTML = extra.innerHTML;
-}
+});
 
 });
 
