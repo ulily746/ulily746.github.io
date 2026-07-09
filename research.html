@@ -576,6 +576,39 @@ color:#ddd;
   .category-filter{
     flex-wrap:wrap; /* 모바일에서는 줄바꿈 허용 */
   }
+ .result-item{
+
+margin-top:25px;
+
+}
+
+
+
+.modal-result-image{
+
+width:100%;
+
+border-radius:10px;
+
+margin-top:10px;
+
+}
+
+
+
+.image-caption{
+
+font-size:12px;
+
+line-height:1.6;
+
+color:#777;
+
+margin-top:8px;
+
+font-style:italic;
+
+} 
 }
 </style>
 </head>
@@ -723,25 +756,65 @@ data-title="Dual Metabolic Therapy Using PLGA-PEG Nanoparticles for Hepatocellul
 
 data-image="scheme.png"
 
-data-detail="
-Overview:
+data-type="M.S. Thesis · Independent Research"
 
+
+data-overview="
 Cancer cells exhibit metabolic plasticity by switching between glycolysis and mitochondrial respiration, contributing to therapeutic resistance.
 
-Strategy:
+This study developed a dual metabolic inhibition strategy for hepatocellular carcinoma using PLGA-PEG nanoparticles.
+"
 
-PLGA-PEG nanoparticles were developed to deliver dual metabolic inhibitors targeting glycolysis and mitochondrial metabolism for hepatocellular carcinoma treatment.
 
-Key Results:
 
-Dual metabolic inhibition enhanced anticancer efficacy by suppressing glucose metabolism, increasing oxidative stress, and inducing apoptosis.
+data-strategy="
+PLGA-PEG nanoparticles were designed to deliver metabolic inhibitors targeting glycolysis and mitochondrial metabolism.
 
-Research Type:
+Shikonin inhibited glycolytic activity, while Atovaquone disrupted mitochondrial respiration, resulting in metabolic stress.
+"
 
-M.S. Thesis | Independent Research
 
-Publication:
 
+data-results="
+1. Nanoparticle Characterization
+
+PLGA-PEG nanoparticles were successfully fabricated with controlled physicochemical properties.
+
+Dynamic light scattering analysis confirmed that atovaquone-loaded nanoparticles exhibited an average particle size of approximately 200 nm, while shikonin-loaded nanoparticles showed an average size of approximately 190 nm.
+
+Low PDI values indicated uniform nanoparticle formation and high colloidal stability. Zeta potential measurements showed negative surface charges for both nanoparticles, confirming successful PLGA-PEG nanoparticle formation and enhanced dispersion stability.
+
+
+2. Metabolic Regulation
+
+The dual metabolic inhibition strategy was designed to suppress glycolytic activity by reducing lactate production.
+
+Lactate analysis demonstrated decreased lactate generation following treatment, confirming inhibition of glycolytic metabolism.
+
+
+3. Mitochondrial Dysfunction and Oxidative Stress
+
+JC-1 assay revealed mitochondrial membrane potential disruption following dual metabolic inhibition.
+
+MitoSOX and ROS analysis demonstrated increased mitochondrial and intracellular oxidative stress, supporting metabolic stress induction and apoptotic cell death.
+"
+
+
+data-results-images="
+CY size result.png|
+CY latate.png|
+CY cell assay.png
+"
+
+
+data-results-captions="
+Nanoparticle characterization: Particle size, PDI, and zeta potential analysis confirmed successful formation of stable PLGA-PEG nanoparticles.|
+Metabolic regulation: Lactate production was reduced following dual metabolic inhibition, demonstrating suppression of glycolytic metabolism.|
+Mitochondrial dysfunction and oxidative stress: JC-1, MitoSOX, and ROS analysis demonstrated mitochondrial disruption and increased oxidative stress.
+"
+
+
+data-publication="
 Manuscript in preparation.
 ">
 
@@ -764,19 +837,7 @@ M.S. Thesis · Independent Research
 </p>
 
 
-<div class="card-tags">
-
-<span>Cancer Metabolism</span>
-
-<span>Nanomedicine</span>
-
-<span>Drug Delivery</span>
-
 </div>
-
-
-</div>
-
 
 <!-- Hover Overlay -->
 
@@ -884,22 +945,104 @@ Submitted as an undergraduate graduation thesis.
 
 
 <!-- Modal -->
+
 <div class="modal" id="modal">
+
 <div class="modal-content">
+
 
 <span class="close">&times;</span>
 
+
 <h2 id="modal-title"></h2>
 
-<p id="modal-detail"></p>
 
-<img id="modal-image" src="" alt="">
+<p class="modal-type" id="modal-type"></p>
 
-<div id="modal-extra-images"></div>
+
+
+<!-- Representative Image -->
+
+<img 
+id="modal-image" 
+class="modal-main-image"
+src="" 
+alt="">
+
+
+
+
+
+<!-- Overview -->
+
+<div class="modal-section">
+
+<h3>
+Overview
+</h3>
+
+<p id="modal-overview"></p>
 
 </div>
+
+
+
+
+
+<!-- Research Strategy -->
+
+<div class="modal-section">
+
+<h3>
+Research Strategy
+</h3>
+
+<p id="modal-strategy"></p>
+
 </div>
 
+
+
+
+
+<!-- Key Results -->
+
+<div class="modal-section">
+
+<h3>
+Key Results
+</h3>
+
+<p id="modal-results"></p>
+
+
+<div id="modal-results-images"></div>
+
+
+</div>
+
+
+
+
+
+<!-- Publication -->
+
+<div class="modal-section">
+
+<h3>
+Publication
+</h3>
+
+<p id="modal-publication"></p>
+
+
+</div>
+
+
+
+</div>
+
+</div>
 
 <script>
 
@@ -916,7 +1059,9 @@ const modalDetail = document.getElementById('modal-detail');
 const modalImage = document.getElementById('modal-image');
 
 const modalExtra = document.getElementById('modal-extra-images');
-
+  
+const modalResultsImages =
+document.getElementById('modal-results-images');
 
 
 // ======================
@@ -965,7 +1110,49 @@ modalExtra.innerHTML = extra.innerHTML;
 
 }
 
+modalResultsImages.innerHTML = "";
 
+
+// 결과 이미지 불러오기
+
+if(card.dataset.resultsImages){
+
+const images =
+card.dataset.resultsImages.split("|");
+
+const captions =
+card.dataset.resultsCaptions.split("|");
+
+
+images.forEach((img,index)=>{
+
+
+const wrapper = document.createElement("div");
+
+wrapper.className="result-item";
+
+
+wrapper.innerHTML = `
+
+<img 
+src="${img.trim()}"
+class="modal-result-image">
+
+
+<p class="image-caption">
+${captions[index]}
+</p>
+
+`;
+
+
+modalResultsImages.appendChild(wrapper);
+
+
+});
+
+
+}
 });
 
 
