@@ -523,240 +523,156 @@ color:#ddd;
 
 }
 
-/* modal */
+/* ==========================
+   Modal
+========================== */
+
 .modal{
+
   display:none;
+
   position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.7);
-  z-index:10000;
-  justify-content:center;
-  align-items:center;
-}
-.modal-content{
-  background:white;
-  border-radius:10px;
-  padding:20px;
-  max-width:700px;
-  width:90%;
-  max-height:90%;
-  overflow-y:auto;
-  position:relative;
-}
-.modal-content img{
+
+  top:0;
+  left:0;
+
   width:100%;
-  border-radius:8px;
-  margin-top:15px;
+  height:100%;
+
+  background:rgba(0,0,0,0.7);
+
+  z-index:10000;
+
+  justify-content:center;
+
+  align-items:center;
+
 }
+
+
+.modal-content{
+
+  background:white;
+
+  border-radius:14px;
+
+  padding:35px;
+
+  max-width:750px;
+
+  width:90%;
+
+  max-height:90%;
+
+  overflow-y:auto;
+
+  position:relative;
+
+}
+
+
+/* close button */
+
 .close{
+
   position:absolute;
-  top:10px;
-  right:15px;
-  font-size:24px;
+
+  top:15px;
+
+  right:20px;
+
+  font-size:28px;
+
   font-weight:bold;
+
   cursor:pointer;
+
   color:#8B6B4F;
-}
-  
-.result-item{
-
-margin-top:35px;
-
-padding:20px 0 30px;
-
-border-bottom:1px solid #eee;
-
-}
-
-
-.result-title{
-
-font-size:15px;
-
-font-weight:600;
-
-color:#8B6B4F;
-
-margin-bottom:15px;
-
-letter-spacing:0.3px;
-
-}
-
-
-.modal-result-image{
-
-width:85%;
-
-display:block;
-
-margin:15px auto;
-
-border-radius:12px;
-
-}
-
-
-.image-caption{
-
-font-size:13px;
-
-line-height:1.7;
-
-color:#777;
-
-margin-top:10px;
-
-font-style:italic;
-
-}
-
-@media(max-width:900px){
-  .container{
-    flex-direction:column;
-  }
-  .left{
-    width:100%;
-    height:auto;
-  }
-  .cards{
-    justify-content:center;
-  }
-  .card{
-    width:90%;
-  }
-  .category-filter{
-    flex-wrap:wrap; /* 모바일에서는 줄바꿈 허용 */
-  }
-
-
-.modal-result-image{
-
-width:75%;
-
-display:block;
-
-margin:20px auto;
-
-border-radius:12px;
 
 }
 
 
 
-.image-caption{
 
-font-size:12px;
+/* Main Image */
 
-line-height:1.6;
+.modal-main-image{
 
-color:#777;
+  width:100%;
 
-margin-top:8px;
+  border-radius:12px;
 
-font-style:italic;
-
-} 
-
-.modal-highlight{
-
-position:relative;
-
-padding:35px 20px 30px;
-
-margin:45px 0;
-
-border-top:1px solid #8B6B4F;
-
-border-bottom:1px solid #8B6B4F;
-
-background:#F9F6EE;
+  margin:20px 0 30px;
 
 }
 
 
-.modal-highlight h3{
 
-position:absolute;
-
-top:-13px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-background:#F9F6EE;
-
-padding:0 20px;
-
-font-size:16px;
-
-font-weight:600;
-
-color:#8B6B4F;
-
-margin:0;
-
-}
-.modal-highlight.empty{
-display:none;
-}  
 
 
 /* ==========================
-   Modal Section Divider Design
+   Section Box
 ========================== */
+
 
 .modal-section{
 
-    position:relative !important;
+    position:relative;
 
-    margin:45px 0 !important;
+    margin:55px 0;
 
-    padding:35px 20px 30px !important;
+    padding:35px 25px 30px;
 
-    border-top:1px solid #d8cdb8 !important;
+    border-top:1px solid #d8cdb8;
 
-    border-bottom:1px solid #d8cdb8 !important;
+    border-bottom:1px solid #d8cdb8;
 
-    background:white;
+    background:#ffffff;
 
 }
 
+
+
+/* Section title */
 
 .modal-section h3{
 
-    position:absolute !important;
+    position:absolute;
 
-    top:-13px !important;
+    top:-14px;
 
-    left:50% !important;
+    left:50%;
 
-    transform:translateX(-50%) !important;
+    transform:translateX(-50%);
 
-    background:white !important;
 
-    padding:0 18px !important;
+    background:white;
 
-    color:#8B6B4F !important;
+    padding:0 25px;
 
-    font-size:16px !important;
 
-    font-weight:600 !important;
+    color:#8B6B4F;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    letter-spacing:0.5px;
+
+
+    margin:0;
 
     white-space:nowrap;
 
-    margin:0 !important;
-
 }
+
 
 
 .modal-section p{
 
     font-size:14px;
 
-    line-height:1.85;
+    line-height:1.9;
 
     color:#444;
 
@@ -768,102 +684,253 @@ display:none;
 
 
 
-/* Highlight */
+
+/* ==========================
+   Research Highlight
+========================== */
+
 
 .modal-highlight{
 
-    position:relative !important;
 
-    margin:45px 0 !important;
+    position:relative;
 
-    padding:35px 20px 30px !important;
 
-    border-top:1px solid #8B6B4F !important;
+    margin:55px 0;
 
-    border-bottom:1px solid #8B6B4F !important;
 
-    background:#F9F6EE !important;
+    padding:35px 25px 30px;
+
+
+    border-top:1px solid #8B6B4F;
+
+    border-bottom:1px solid #8B6B4F;
+
+
+    background:#F9F6EE;
+
 
 }
+
+
 
 
 .modal-highlight h3{
 
-    position:absolute !important;
 
-    top:-13px !important;
+    position:absolute;
 
-    left:50% !important;
 
-    transform:translateX(-50%) !important;
+    top:-14px;
 
-    background:#F9F6EE !important;
 
-    padding:0 18px !important;
+    left:50%;
 
-    color:#8B6B4F !important;
 
-    font-size:16px !important;
+    transform:translateX(-50%);
 
-    font-weight:600 !important;
 
-    margin:0 !important;
+    background:#F9F6EE;
+
+
+    padding:0 25px;
+
+
+    color:#8B6B4F;
+
+
+    font-size:16px;
+
+
+    font-weight:600;
+
+
+    margin:0;
+
+
+    white-space:nowrap;
+
 
 }
-/* Result figure style */
+
+
+
+.modal-highlight p{
+
+
+    font-size:14px;
+
+    line-height:1.9;
+
+    color:#444;
+
+
+}
+
+
+
+.modal-highlight.empty{
+
+    display:none;
+
+}
+
+
+
+
+
+/* ==========================
+   Result Images
+========================== */
+
 
 .result-item{
 
-margin-top:35px;
+    margin-top:35px;
 
-padding-bottom:25px;
+    padding-bottom:30px;
 
-border-bottom:1px solid #eee;
+    border-bottom:1px solid #eee;
 
 }
+
 
 
 .result-title{
 
-font-size:16px;
+    font-size:15px;
 
-font-weight:600;
+    font-weight:600;
 
-color:#8B6B4F;
+    color:#8B6B4F;
 
-margin-bottom:12px;
+    margin-bottom:15px;
 
 }
+
 
 
 .modal-result-image{
 
-width:90%;
+    width:85%;
 
-display:block;
+    display:block;
 
-margin:10px auto;
+    margin:15px auto;
 
-border-radius:10px;
+    border-radius:12px;
 
 }
 
 
+
 .image-caption{
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    color:#555;
+
+    margin-top:12px;
+
+    text-align:left;
+
+}
+
+
+
+
+/* ==========================
+   Mobile
+========================== */
+
+
+@media(max-width:900px){
+
+
+.container{
+
+flex-direction:column;
+
+}
+
+
+.left{
+
+width:100%;
+
+height:auto;
+
+}
+
+
+.cards{
+
+justify-content:center;
+
+}
+
+
+.card{
+
+width:90%;
+
+}
+
+
+.category-filter{
+
+flex-wrap:wrap;
+
+}
+
+
+
+.modal-content{
+
+width:90%;
+
+padding:20px;
+
+}
+
+
+
+.modal-section{
+
+margin:45px 0;
+
+padding:30px 15px 25px;
+
+}
+
+
+
+.modal-section p{
 
 font-size:13px;
 
-line-height:1.8;
+}
 
-color:#555;
 
-margin-top:12px;
 
-font-style:normal;
+.modal-result-image{
 
-text-align:left;
+width:95%;
 
-}  
+}
+
+
+
+.image-caption{
+
+font-size:12px;
+
+}
+
+
+
 }
 </style>
 </head>
@@ -1405,13 +1472,13 @@ Research Highlight
 Key Results
 </h3>
 
-<p id="modal-results"></p>
-
 
 <div id="modal-results-images"></div>
 
 
 </div>
+
+
 
 
 
@@ -1502,9 +1569,6 @@ modalOverview.textContent = card.dataset.overview;
 modalStrategy.textContent = card.dataset.strategy;
 
 
-// key results
-
-modalResults.textContent = card.dataset.results;
 
 //modal highlight  
   
@@ -1542,10 +1606,10 @@ const images =
 card.dataset.resultsImages.split("|");
 
 const captions =
-card.dataset.resultsCaptions.split("|");
+(card.dataset.resultsCaptions || "").split("|");
 
- const titles =
-card.dataset.resultsTitles.split("|"); 
+const titles =
+(card.dataset.resultsTitles || "").split("|");
 
 images.forEach((img,index)=>{
 
@@ -1558,7 +1622,7 @@ wrapper.className="result-item";
 wrapper.innerHTML = `
 
 <h4 class="result-title">
-${titles[index]}
+${titles[index] || ""}
 </h4>
 
 
@@ -1568,7 +1632,7 @@ class="modal-result-image">
 
 
 <p class="image-caption">
-${captions[index]}
+${captions[index] || ""}
 </p>
 
 `;
