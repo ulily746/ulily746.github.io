@@ -1537,7 +1537,12 @@ document.getElementById('modal-highlight-text');
 
 document.addEventListener("click", function(e){
 
+
+if(e.target.closest(".modal")) return;
+
+
 const card = e.target.closest(".card");
+
 
 if(!card) return;
 
@@ -1827,14 +1832,14 @@ card.className="card";
 
 card.dataset.title = data.title;
 card.dataset.type = data.type;
-card.dataset.image = data.image;
+card.dataset.image = data.image || "";
 
-card.dataset.overview = data.overview;
-card.dataset.strategy = data.strategy;
-card.dataset.highlight = data.highlight;
-card.dataset.publication = data.publication;
+card.dataset.overview = data.overview || "";
+card.dataset.strategy = data.strategy || "";
+card.dataset.highlight = data.highlight || "";
+card.dataset.publication = data.publication || "";
 
-card.dataset.tags = (data.tag || []).join(",");
+card.dataset.tags = (data.tag || data.tags || []).join(",");
 
 
 card.dataset.resultsImages =
@@ -1857,8 +1862,7 @@ data.resultsTitles
 
 card.innerHTML = `
 
-<img src="${data.image}">
-
+<img src="${data.image || ""}">
 
 <div class="card-content">
 
@@ -1872,7 +1876,8 @@ ${data.type}
 
 <div class="card-tags">
 
-${(data.tag || []).map(tag=>`
+${(data.tag || data.tags || []).map(tag=>`
+console.log("TAGS:", data.tag);
 
 <span>${tag}</span>
 
