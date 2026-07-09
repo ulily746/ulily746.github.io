@@ -87,27 +87,28 @@ margin-bottom:30px;
 }
 
 .sidebar-section{
-margin-bottom:30px;
+margin-bottom:45px;
 }
 
 .sidebar-section h4{
-margin-bottom:8px;
+margin-bottom:14px;
 color:#8B6B4F;
 font-size:15px;
+letter-spacing:0.3px;
 }
 
 .sidebar-section ul{
 padding-left:18px;
-margin:5px 0;
+margin:0;
+line-height:1.9;
 }
-
 .sidebar-section p{
 margin:6px 0;
 }
 
     .education-item{
-margin-bottom:18px;
-padding-bottom:18px;
+margin-bottom:25px;
+padding-bottom:25px;
 border-bottom:1px solid #ddd8cb;
 }
 
@@ -215,15 +216,15 @@ padding-left:18px;
 line-height:1.6;
 }
 
-.skill-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    column-gap:40px;
-    row-gap:10px;
+.skill-list{
+    font-size:14px;
+    color:#444;
+    line-height:2;
 }
 
-.skill-grid div{
-    line-height:1.6;
+.skill-list span:not(:last-child)::after{
+    content:" · ";
+    color:#b7a68e;
 }
     
 /* EMAIL MODAL */
@@ -363,7 +364,9 @@ opacity:1;
 /* SUMMARY KEYWORDS */
 
 .research-tags{
-    margin-top:18px;
+    margin-top:22px;
+    padding-top:14px;
+    border-top:1px solid #ddd8cb;
     font-size:13px;
     color:#8B6B4F;
     font-weight:500;
@@ -390,6 +393,7 @@ opacity:1;
     font-style:italic;
     font-weight:600;
     color:#8B6B4F;
+    font-size:14px;
 }
     
 /* MOBILE */
@@ -638,7 +642,7 @@ Building upon this foundation, I aim to integrate advanced biomedical technologi
 
 <div class="cv-label">Laboratory Techniques</div>
 
-<div class="skill-grid">
+<div class="skill-list">
 
 <div>Nanoparticle synthesis</div>
 <div>Cell culture</div>
@@ -657,7 +661,7 @@ Building upon this foundation, I aim to integrate advanced biomedical technologi
 
 <div class="cv-label">Instrumentation</div>
 
-<div class="skill-grid">
+<div class="skill-list">
 
 <div>DLS</div>
 <div>TEM</div>
@@ -680,7 +684,7 @@ Building upon this foundation, I aim to integrate advanced biomedical technologi
 
     <div class="cv-label">Computational & Data Analysis</div>
 
-    <div class="skill-grid">
+    <div class="skill-list">
         <div>GraphPad Prism</div>
         <div>CompuSyn</div>
 
@@ -758,7 +762,7 @@ ACS Applied Nano Materials
 
 <div>
 
-Choi Y., et al. Dual metabolic therapy targeting glycolysis and mitochondrial metabolism via PLGA-PEG nanoparticles for carcinoma. Poster presentation, Korean Society for Biomaterials Annual Spring Meeting, Republic of Korea, 2025.
+<strong>Choi Y.</strong>, et al. Dual metabolic therapy targeting glycolysis and mitochondrial metabolism via PLGA-PEG nanoparticles for carcinoma. Poster presentation, Korean Society for Biomaterials Annual Spring Meeting, Republic of Korea, 2025.
 
 </div>
 
