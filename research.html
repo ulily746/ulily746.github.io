@@ -2056,6 +2056,19 @@ highlightBox.classList.add("empty");
 
 modalResultsImages.innerHTML="";
 
+const resultsSection = modalResultsImages.closest(".modal-section");
+
+
+if(data.title === "Metal–Phenolic Networks for Cancer Immunotherapy"){
+
+resultsSection.style.display="none";
+
+}
+else{
+
+resultsSection.style.display="block";
+
+}  
 
 // 1. 이미지 결과 있는 경우
 if(card.dataset.resultsImages){
@@ -2070,8 +2083,6 @@ const titles =
 
 
 images.forEach((img,index)=>{
-
-...
 
 
 });
