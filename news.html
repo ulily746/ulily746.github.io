@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<title>News & Updates - Yuri Choi</title>
+<title>News & Updates | Yuri Choi</title>
 
 <style>
 
@@ -10,213 +12,357 @@
     box-sizing:border-box;
 }
 
+
 body{
+
     margin:0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+    Arial, Helvetica, sans-serif;
+
     background:#F2F2DF;
     color:#1A1A1A;
+
     line-height:1.7;
+
 }
+
 
 
 /* Navigation */
 
 .nav{
+
     display:flex;
     gap:50px;
+
     padding:22px 0 22px 50px;
+
     background:#000;
+
     position:sticky;
     top:0;
-    z-index:1000;
+
+    z-index:100;
+
 }
+
 
 .nav a{
+
     color:#F2F2DF;
+
     text-decoration:none;
+
     font-size:16px;
-    font-weight:500;
+
 }
+
 
 .nav a:hover{
+
     color:#8B6B4F;
+
 }
 
-
-/* Main */
-
-.container{
-    max-width:1200px;
-    margin:70px auto;
-    padding:0 30px;
-}
 
 
 /* Header */
 
 .header{
-    text-align:center;
-    margin-bottom:60px;
+
+    max-width:1200px;
+
+    margin:70px auto 40px;
+
+    padding:0 40px;
+
 }
+
 
 .header h1{
-    font-size:42px;
-    letter-spacing:1px;
+
+    font-size:45px;
+
     margin-bottom:15px;
+
+    letter-spacing:1px;
+
 }
 
+
 .header p{
+
     color:#666;
-    font-size:17px;
+
+    font-size:18px;
+
 }
+
+
+
+/* Layout */
+
+
+.news-container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:220px 1fr;
+
+    gap:60px;
+
+    padding:40px;
+
+}
+
+
+
+/* Timeline */
+
+
+.timeline{
+
+    border-right:1px solid #d8cfbb;
+
+    padding-right:35px;
+
+}
+
+
+.timeline h2{
+
+    font-size:20px;
+
+    margin-bottom:40px;
+
+}
+
+
+.year{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:#8B6B4F;
+
+    margin-bottom:30px;
+
+}
+
+
+.time-item{
+
+    margin-bottom:40px;
+
+    position:relative;
+
+}
+
+
+.time-item:after{
+
+    content:"";
+
+    width:10px;
+
+    height:10px;
+
+    background:#8B6B4F;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    right:-41px;
+
+    top:8px;
+
+}
+
+
+
+.time-item span{
+
+    font-size:13px;
+
+    color:#777;
+
+}
+
+
+.time-item p{
+
+    margin:5px 0;
+
+    font-weight:bold;
+
+}
+
+
+
+
+
+/* News List */
+
+
+.news-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:45px;
+
+}
+
+
+
+.news-card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    display:grid;
+
+    grid-template-columns:260px 1fr;
+
+    gap:35px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,0.06);
+
+}
+
+
+.news-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+.news-image{
+
+    height:170px;
+
+    background:#ddd;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#777;
+
+    border-radius:8px;
+
+}
+
+
+
+.category{
+
+    color:#8B6B4F;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    font-weight:bold;
+
+}
+
+
+
+.news-card h2{
+
+    font-size:27px;
+
+    margin:10px 0;
+
+    line-height:1.3;
+
+}
+
+
+
+.date{
+
+    color:#888;
+
+    font-size:14px;
+
+}
+
+
+.description{
+
+    color:#555;
+
+    margin-top:15px;
+
+}
+
+
+
 
 
 /* Filter */
 
+
 .filters{
+
+    max-width:1200px;
+
+    margin:0 auto 20px;
+
+    padding:0 40px;
+
     display:flex;
-    justify-content:center;
+
     gap:25px;
-    margin-bottom:50px;
-    flex-wrap:wrap;
+
 }
 
-.filter-btn{
+
+
+.filters button{
+
     border:none;
+
     background:none;
-    padding:8px 18px;
+
     cursor:pointer;
+
     font-size:14px;
+
+    padding:8px;
+
     color:#555;
-    border-bottom:1px solid transparent;
+
 }
 
-.filter-btn:hover,
-.filter-btn.active{
+
+.filters button:hover,
+.filters button.active{
+
     color:#8B6B4F;
+
     border-bottom:1px solid #8B6B4F;
-}
-
-
-
-/* Featured */
-
-.featured{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-    margin-bottom:70px;
-    cursor:pointer;
-}
-
-
-.featured-image{
-    height:400px;
-    background:#ccc;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#666;
-    font-size:18px;
-}
-
-
-.featured-content{
-    padding:35px;
-}
-
-
-.category{
-    color:#8B6B4F;
-    font-size:12px;
-    letter-spacing:2px;
-    font-weight:bold;
-}
-
-
-.featured h2{
-    font-size:30px;
-    margin:12px 0;
-}
-
-
-.date{
-    color:#777;
-    font-size:14px;
-}
-
-
-
-/* Cards */
-
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
-    gap:35px;
-}
-
-
-.card{
-
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    cursor:pointer;
-    box-shadow:0 5px 20px rgba(0,0,0,0.07);
-    transition:0.3s;
-}
-
-
-.card:hover{
-    transform:translateY(-8px);
-}
-
-
-.card-image{
-
-    height:230px;
-    background:#ccc;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#666;
-
-}
-
-
-
-.card-content{
-
-    padding:25px;
-
-}
-
-
-.card h3{
-
-    font-size:22px;
-    margin:10px 0;
-
-}
-
-
-.card p{
-
-    color:#666;
-    font-size:14px;
-
-}
-
-
-
-.read{
-
-    margin-top:15px;
-    color:#8B6B4F;
-    font-size:14px;
-    font-weight:bold;
 
 }
 
@@ -227,49 +373,43 @@ body{
 
 .modal{
 
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-justify-content:center;
-align-items:center;
-z-index:2000;
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.6);
+
+    justify-content:center;
+
+    align-items:center;
 
 }
-
 
 
 .modal-box{
 
-background:white;
-width:90%;
-max-width:750px;
-max-height:90%;
-overflow:auto;
-padding:40px;
-border-radius:15px;
+    background:white;
+
+    width:90%;
+
+    max-width:700px;
+
+    padding:40px;
+
+    border-radius:15px;
 
 }
-
 
 
 .close{
 
-float:right;
-font-size:28px;
-cursor:pointer;
-color:#8B6B4F;
+    float:right;
 
-}
+    font-size:25px;
 
-
-
-.modal-box h2{
-
-font-size:32px;
+    cursor:pointer;
 
 }
 
@@ -277,28 +417,47 @@ font-size:32px;
 
 .modal-image{
 
-height:300px;
-background:#ccc;
-margin:25px 0;
-display:flex;
-align-items:center;
-justify-content:center;
+    height:280px;
+
+    background:#ddd;
+
+    margin:20px 0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
 }
 
 
 
-/* mobile */
 
-@media(max-width:700px){
+@media(max-width:850px){
 
-.header h1{
-font-size:32px;
+
+.news-container{
+
+grid-template-columns:1fr;
+
 }
 
-.container{
-padding:20px;
+
+.timeline{
+
+border:none;
+
 }
+
+
+.news-card{
+
+grid-template-columns:1fr;
+
+}
+
+
 
 }
 
@@ -307,7 +466,9 @@ padding:20px;
 </head>
 
 
+
 <body>
+
 
 
 <div class="nav">
@@ -321,176 +482,224 @@ padding:20px;
 
 
 
-<div class="container">
 
+<div class="header">
 
-<section class="header">
-
-<h1>News & Updates</h1>
+<h1>
+News & Updates
+</h1>
 
 <p>
-A collection of research milestones, achievements,
-learning experiences, and moments beyond the laboratory.
+Research milestones, academic experiences,
+learning journeys, and moments beyond the laboratory.
 </p>
 
-</section>
+</div>
 
 
 
 <div class="filters">
 
-<button class="filter-btn active" data-filter="all">
+<button class="active">
 ALL
 </button>
 
-<button class="filter-btn" data-filter="research">
+<button>
 RESEARCH
 </button>
 
-<button class="filter-btn" data-filter="conference">
-CONFERENCE
+<button>
+ACADEMIC
 </button>
 
-<button class="filter-btn" data-filter="skill">
-SKILL
+<button>
+LEARNING
 </button>
 
-<button class="filter-btn" data-filter="travel">
+<button>
 TRAVEL
 </button>
 
-<button class="filter-btn" data-filter="life">
+<button>
 LIFE
 </button>
 
+
 </div>
 
 
 
-<!-- Featured -->
 
 
-<div class="featured"
-data-category="research"
+<div class="news-container">
+
+
+
+<!-- Timeline -->
+
+<div class="timeline">
+
+
+<h2>
+Timeline
+</h2>
+
+
+
+<div class="year">
+2026
+</div>
+
+
+<div class="time-item">
+
+<span>
+JAN
+</span>
+
+<p>
+Research
+</p>
+
+</div>
+
+
+<div class="time-item">
+
+<span>
+MAR
+</span>
+
+<p>
+Conference
+</p>
+
+</div>
+
+
+
+<div class="year">
+2025
+</div>
+
+
+<div class="time-item">
+
+<span>
+AUG
+</span>
+
+<p>
+Travel
+</p>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- News -->
+
+
+<div class="news-list">
+
+
+
+<div class="news-card"
 data-title="Metabolic Cancer Therapy Research"
 data-date="January 2026"
-data-detail="Research milestone on dual metabolic inhibition using PLGA-PEG nanoparticles.">
+data-detail="Research milestone focusing on nanoparticle-based metabolic cancer therapy.">
 
 
-<div class="featured-image">
-Featured Image
+<div class="news-image">
+Research Image
 </div>
 
 
-<div class="featured-content">
+
+<div>
+
 
 <div class="category">
 RESEARCH
 </div>
+
 
 <h2>
 Metabolic Cancer Therapy Research
 </h2>
 
+
 <div class="date">
 January 2026
 </div>
 
-<p>
-Exploring therapeutic strategies by targeting
-cancer metabolism through nanoparticle-based delivery.
+
+<p class="description">
+
+Exploring therapeutic strategies
+through metabolic regulation and
+nanoparticle delivery systems.
+
 </p>
 
 
 </div>
 
+
 </div>
 
 
 
 
 
-<div class="cards">
 
 
-<div class="card"
-data-category="conference"
+<div class="news-card"
 data-title="International Conference Presentation"
 data-date="March 2026"
-data-detail="Presented research findings and exchanged ideas with researchers worldwide.">
+data-detail="Presented research and exchanged ideas with researchers worldwide.">
 
 
-<div class="card-image">
+<div class="news-image">
 Conference Photo
 </div>
 
 
-<div class="card-content">
+<div>
 
 <div class="category">
-CONFERENCE
+ACADEMIC
 </div>
 
-<h3>
-International Conference
-</h3>
+
+<h2>
+International Conference Presentation
+</h2>
+
 
 <div class="date">
 March 2026
 </div>
 
-<p>
-Sharing research and scientific discussions.
+
+<p class="description">
+
+Sharing scientific discoveries
+and connecting with researchers
+beyond my laboratory.
+
 </p>
 
-<div class="read">
-View story →
-</div>
 
 </div>
 
-</div>
-
-
-
-
-
-<div class="card"
-data-category="skill"
-data-title="Python Certification"
-data-date="January 2026"
-data-detail="Completed Python programming training for scientific data analysis.">
-
-
-<div class="card-image">
-Certificate Image
-</div>
-
-
-<div class="card-content">
-
-<div class="category">
-SKILL
-</div>
-
-<h3>
-Python Certification
-</h3>
-
-<div class="date">
-January 2026
-</div>
-
-<p>
-Learning computational tools for research.
-</p>
-
-<div class="read">
-View story →
-</div>
-
-
-</div>
 
 </div>
 
@@ -499,49 +708,44 @@ View story →
 
 
 
-<div class="card"
-data-category="travel"
+
+<div class="news-card"
 data-title="Switzerland Journey"
 data-date="August 2025"
-data-detail="Exploring landscapes, culture, and scientific inspirations.">
+data-detail="A personal journey exploring nature, culture, and inspiration.">
 
 
-<div class="card-image">
+<div class="news-image">
 Travel Photo
 </div>
 
 
-<div class="card-content">
+<div>
+
 
 <div class="category">
 TRAVEL
 </div>
 
-<h3>
+
+<h2>
 Switzerland Journey
-</h3>
+</h2>
+
 
 <div class="date">
 August 2025
 </div>
 
 
-<p>
-Memories beyond the laboratory.
+<p class="description">
+
+Memories and perspectives
+collected outside research life.
+
 </p>
 
 
-<div class="read">
-View story →
-</div>
-
-
-</div>
-
-</div>
-
-
-
 </div>
 
 
@@ -550,23 +754,35 @@ View story →
 
 
 
-<!-- Modal -->
+
+</div>
+
+</div>
+
+
+
+
 
 <div class="modal">
 
+
 <div class="modal-box">
+
 
 <span class="close">
 ×
 </span>
 
+
 <h2 id="modal-title"></h2>
 
 <p id="modal-date"></p>
 
+
 <div class="modal-image">
 Image
 </div>
+
 
 <p id="modal-detail"></p>
 
@@ -574,6 +790,8 @@ Image
 </div>
 
 </div>
+
+
 
 
 
@@ -590,83 +808,37 @@ const detail=document.querySelector("#modal-detail");
 
 
 
-document.querySelectorAll(".card,.featured")
-.forEach(item=>{
+document.querySelectorAll(".news-card")
+.forEach(card=>{
 
-item.onclick=()=>{
+
+card.onclick=function(){
+
 
 modal.style.display="flex";
 
-title.innerHTML=item.dataset.title;
 
-date.innerHTML=item.dataset.date;
+title.innerHTML=this.dataset.title;
 
-detail.innerHTML=item.dataset.detail;
+date.innerHTML=this.dataset.date;
+
+detail.innerHTML=this.dataset.detail;
+
+
 
 }
+
 
 });
 
 
 
 document.querySelector(".close")
-.onclick=()=>{
+.onclick=function(){
 
 modal.style.display="none";
 
-};
-
-
-
-window.onclick=(e)=>{
-
-if(e.target===modal)
-modal.style.display="none";
-
-};
-
-
-
-document.querySelectorAll(".filter-btn")
-.forEach(btn=>{
-
-
-btn.onclick=()=>{
-
-
-document.querySelectorAll(".filter-btn")
-.forEach(b=>b.classList.remove("active"));
-
-btn.classList.add("active");
-
-
-let filter=btn.dataset.filter;
-
-
-document.querySelectorAll(".card")
-.forEach(card=>{
-
-
-if(filter==="all" || card.dataset.category===filter){
-
-card.style.display="block";
-
 }
-
-else{
-
-card.style.display="none";
-
-}
-
-
-});
-
-
-};
-
-
-});
 
 
 
@@ -674,4 +846,5 @@ card.style.display="none";
 
 
 </body>
+
 </html>
