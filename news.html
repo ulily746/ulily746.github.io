@@ -9,55 +9,53 @@
 <style>
 
 *{
-    box-sizing:border-box;
+box-sizing:border-box;
 }
 
 
 body{
-    margin:0;
-    background:#F2F2DF;
-    color:#1A1A1A;
-    font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#F2F2DF;
+color:#1A1A1A;
+font-family:Arial, Helvetica, sans-serif;
 }
 
 
 /* NAV */
 
 .nav{
-    display:flex;
-    gap:50px;
-    padding:22px 0 22px 50px;
-    background:#000;
-    position:sticky;
-    top:0;
-    z-index:100;
+display:flex;
+gap:50px;
+padding:22px 50px;
+background:#000;
+position:sticky;
+top:0;
+z-index:100;
 }
 
 
 .nav a{
-    color:#F2F2DF;
-    text-decoration:none;
-    font-size:16px;
+color:#F2F2DF;
+text-decoration:none;
 }
+
 
 
 .nav a:hover{
-    color:#8B6B4F;
+color:#8B6B4F;
 }
+
 
 
 
 
 /* HEADER */
 
-
 .header{
 
-    max-width:1300px;
+text-align:center;
 
-    margin:70px auto 40px;
-
-    padding:0 50px;
+margin:80px auto 40px;
 
 }
 
@@ -65,11 +63,11 @@ body{
 
 .header h1{
 
-    font-size:55px;
+font-size:56px;
 
-    margin:0;
+letter-spacing:-1px;
 
-    letter-spacing:-1px;
+margin:0;
 
 }
 
@@ -77,60 +75,11 @@ body{
 
 .header p{
 
-    margin-top:15px;
+font-size:18px;
 
-    font-size:18px;
+color:#666;
 
-    color:#666;
-
-}
-
-
-
-
-
-/* FILTER */
-
-
-.filters{
-
-    max-width:1300px;
-
-    margin:auto;
-
-    padding:0 50px 40px;
-
-    display:flex;
-
-    gap:30px;
-
-}
-
-
-
-.filters button{
-
-    border:none;
-
-    background:none;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    letter-spacing:1px;
-
-    color:#555;
-
-}
-
-
-
-.filters button.active{
-
-    color:#8B6B4F;
-
-    border-bottom:1px solid #8B6B4F;
+margin-top:15px;
 
 }
 
@@ -138,94 +87,54 @@ body{
 
 
 
-/* MASONRY */
 
-.archive{
 
-    max-width:1300px;
+/* INDEX */
 
-    margin:auto;
 
-    padding:0 50px 100px;
+.index{
 
-    columns:3 300px;
+text-align:center;
 
-    column-gap:35px;
+margin:40px auto 70px;
 
 }
 
 
 
-.card{
+.index h3{
 
-    background:white;
+font-size:14px;
 
-    border-radius:15px;
+letter-spacing:4px;
 
-    overflow:hidden;
-
-    margin-bottom:35px;
-
-    break-inside:avoid;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-
-    0 8px 25px rgba(0,0,0,.06);
+margin-bottom:25px;
 
 }
 
 
 
-.card:hover{
+.index button{
 
-    transform:translateY(-8px);
+background:none;
 
-}
+border:none;
 
+margin:0 15px;
 
+font-size:14px;
 
+cursor:pointer;
 
-.card-image{
-
-    width:100%;
-
-    background:#ddd;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#777;
+color:#555;
 
 }
 
 
 
-.small{
+.index button:hover{
 
-    height:170px;
-
-}
-
-
-
-.medium{
-
-    height:230px;
-
-}
-
-
-
-.large{
-
-    height:320px;
+color:#8B6B4F;
 
 }
 
@@ -233,9 +142,91 @@ body{
 
 
 
-.card-content{
 
-    padding:20px;
+
+
+
+/* COLLECTION */
+
+
+.collection{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:0 40px 100px;
+
+}
+
+
+
+.section-title{
+
+text-align:center;
+
+font-size:26px;
+
+letter-spacing:2px;
+
+margin:60px 0 35px;
+
+}
+
+
+
+
+
+/* FEATURE */
+
+
+.feature{
+
+display:grid;
+
+grid-template-columns:1.4fr 1fr;
+
+gap:35px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+margin-bottom:40px;
+
+}
+
+
+
+.feature-image{
+
+height:330px;
+
+background:#ddd;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:#777;
+
+border-radius:12px;
+
+}
+
+
+
+.feature-text{
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
 
 }
 
@@ -243,25 +234,112 @@ body{
 
 .category{
 
-    font-size:11px;
+font-size:12px;
 
-    letter-spacing:3px;
+letter-spacing:3px;
 
-    color:#8B6B4F;
+color:#8B6B4F;
 
-    font-weight:bold;
+font-weight:bold;
 
 }
 
 
 
-.card h2{
+.feature h2{
 
-    font-size:22px;
+font-size:34px;
 
-    line-height:1.3;
+margin:15px 0;
 
-    margin:10px 0;
+}
+
+
+
+.feature p{
+
+color:#666;
+
+line-height:1.7;
+
+}
+
+
+
+
+
+
+
+/* SMALL CARDS */
+
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:25px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+border-radius:15px;
+
+overflow:hidden;
+
+transition:.3s;
+
+cursor:pointer;
+
+}
+
+
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+
+.card-image{
+
+height:180px;
+
+background:#ddd;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:#777;
+
+}
+
+
+
+.card-content{
+
+padding:18px;
+
+}
+
+
+
+.card h3{
+
+margin:8px 0;
+
+font-size:20px;
 
 }
 
@@ -269,24 +347,21 @@ body{
 
 .date{
 
-    font-size:13px;
+font-size:13px;
 
-    color:#888;
-
-}
-
-
-
-.description{
-
-    color:#666;
-
-    font-size:14px;
-
-    margin-top:12px;
+color:#888;
 
 }
 
+
+
+.card p{
+
+font-size:14px;
+
+color:#666;
+
+}
 
 
 
@@ -294,21 +369,20 @@ body{
 
 /* MODAL */
 
+
 .modal{
 
-    display:none;
+display:none;
 
-    position:fixed;
+position:fixed;
 
-    inset:0;
+inset:0;
 
-    background:rgba(0,0,0,.65);
+background:rgba(0,0,0,.6);
 
-    justify-content:center;
+align-items:center;
 
-    align-items:center;
-
-    z-index:200;
+justify-content:center;
 
 }
 
@@ -316,15 +390,15 @@ body{
 
 .modal-box{
 
-    width:90%;
+background:white;
 
-    max-width:700px;
+width:90%;
 
-    background:white;
+max-width:650px;
 
-    border-radius:20px;
+padding:40px;
 
-    padding:40px;
+border-radius:20px;
 
 }
 
@@ -332,32 +406,42 @@ body{
 
 .close{
 
-    float:right;
+float:right;
 
-    cursor:pointer;
+cursor:pointer;
 
-    font-size:25px;
+font-size:25px;
+
+}
+
+
+
+
+
+@media(max-width:900px){
+
+.feature{
+
+grid-template-columns:1fr;
 
 }
 
 
+.cards{
 
-
-@media(max-width:700px){
-
-    .archive{
-
-        columns:1;
-
-    }
+grid-template-columns:1fr;
 
 }
+
+
+}
+
+
 
 </style>
 
 
 </head>
-
 
 
 <body>
@@ -381,6 +465,7 @@ body{
 
 
 
+
 <div class="header">
 
 <h1>
@@ -389,8 +474,8 @@ News & Updates
 
 
 <p>
-A visual archive of research,
-achievements, learning, and life moments.
+Research, achievements, learning,
+and moments beyond the laboratory.
 </p>
 
 
@@ -400,31 +485,20 @@ achievements, learning, and life moments.
 
 
 
-<div class="filters">
 
-<button class="active">
-ALL
-</button>
+<div class="index">
 
-<button>
-RESEARCH
-</button>
+<h3>
+INDEX
+</h3>
 
-<button>
-ACADEMIC
-</button>
 
-<button>
-LEARNING
-</button>
-
-<button>
-TRAVEL
-</button>
-
-<button>
-LIFE
-</button>
+<button>ALL</button>
+<button>RESEARCH</button>
+<button>ACADEMIC</button>
+<button>LEARNING</button>
+<button>TRAVEL</button>
+<button>LIFE</button>
 
 
 </div>
@@ -435,18 +509,29 @@ LIFE
 
 
 
-<div class="archive">
+<div class="collection">
 
 
 
-<div class="card">
 
-<div class="card-image large">
+
+<div class="section-title">
+Research Collection
+</div>
+
+
+
+
+<div class="feature">
+
+
+<div class="feature-image">
 Research Image
 </div>
 
 
-<div class="card-content">
+<div class="feature-text">
+
 
 <div class="category">
 RESEARCH
@@ -454,17 +539,19 @@ RESEARCH
 
 
 <h2>
-Metabolic Cancer Therapy Research
+Metabolic Cancer Therapy
 </h2>
 
 
-<div class="date">
+<p>
+A research journey exploring metabolic
+regulation and nanoparticle-based
+therapeutic strategies.
+</p>
+
+
+<p>
 January 2026
-</div>
-
-
-<p class="description">
-Exploring metabolic regulation and nanoparticle-based therapeutic strategies.
 </p>
 
 
@@ -479,25 +566,27 @@ Exploring metabolic regulation and nanoparticle-based therapeutic strategies.
 
 
 
+
+<div class="cards">
+
+
 <div class="card">
 
-
-<div class="card-image small">
-Conference Photo
+<div class="card-image">
+Conference
 </div>
 
 
 <div class="card-content">
-
 
 <div class="category">
 ACADEMIC
 </div>
 
 
-<h2>
+<h3>
 International Conference
-</h2>
+</h3>
 
 
 <div class="date">
@@ -507,10 +596,7 @@ March 2026
 
 </div>
 
-
 </div>
-
-
 
 
 
@@ -518,65 +604,21 @@ March 2026
 
 <div class="card">
 
-
-<div class="card-image medium">
-Travel Photo
-</div>
-
-
-<div class="card-content">
-
-
-<div class="category">
-TRAVEL
-</div>
-
-
-<h2>
-Switzerland Journey
-</h2>
-
-
-<div class="date">
-August 2025
-</div>
-
-
-<p class="description">
-Moments beyond the laboratory.
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<div class="card-image small">
+<div class="card-image">
 Certificate
 </div>
 
 
 <div class="card-content">
 
-
 <div class="category">
 LEARNING
 </div>
 
 
-<h2>
+<h3>
 Python Certification
-</h2>
+</h3>
 
 
 <div class="date">
@@ -586,10 +628,7 @@ Python Certification
 
 </div>
 
-
 </div>
-
-
 
 
 
@@ -597,23 +636,21 @@ Python Certification
 
 <div class="card">
 
-
-<div class="card-image medium">
-Lab Photo
+<div class="card-image">
+Travel
 </div>
 
 
 <div class="card-content">
 
-
 <div class="category">
-LIFE
+TRAVEL
 </div>
 
 
-<h2>
-Laboratory Moments
-</h2>
+<h3>
+Switzerland Journey
+</h3>
 
 
 <div class="date">
@@ -623,6 +660,90 @@ Laboratory Moments
 
 </div>
 
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="section-title">
+Life Collection
+</div>
+
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<div class="card-image">
+Lab Life
+</div>
+
+
+<div class="card-content">
+
+<div class="category">
+LIFE
+</div>
+
+
+<h3>
+Laboratory Moments
+</h3>
+
+
+<div class="date">
+2025
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<div class="card-image">
+Hobby
+</div>
+
+
+<div class="card-content">
+
+<div class="category">
+LIFE
+</div>
+
+
+<h3>
+Weekend Memories
+</h3>
+
+
+<div class="date">
+2025
+</div>
+
+
+</div>
+
+</div>
+
+
 
 </div>
 
@@ -634,73 +755,6 @@ Laboratory Moments
 
 </div>
 
-
-
-
-
-
-
-
-<div class="modal" id="modal">
-
-
-<div class="modal-box">
-
-
-<span class="close"
-onclick="closeModal()">
-×
-</span>
-
-
-<h2 id="modal-title"></h2>
-
-
-<p>
-Detailed story page will appear here.
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<script>
-
-
-document.querySelectorAll(".card")
-.forEach(card=>{
-
-card.onclick=function(){
-
-document.getElementById("modal")
-.style.display="flex";
-
-document.getElementById("modal-title")
-.innerHTML=
-this.querySelector("h2").innerHTML;
-
-}
-
-});
-
-
-
-function closeModal(){
-
-document.getElementById("modal")
-.style.display="none";
-
-}
-
-
-</script>
 
 
 
