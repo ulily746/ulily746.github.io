@@ -570,7 +570,32 @@ color:#ddd;
 
 }
 
+/* header */
 
+.modal-header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+
+.modal-header h2{
+
+    font-size:26px;
+    line-height:1.4;
+    color:#1A1A1A;
+    margin-bottom:10px;
+
+}
+
+
+.modal-header p{
+
+    color:#8B6B4F;
+    font-size:14px;
+    letter-spacing:0.5px;
+
+}
+  
 /* close button */
 
 .close{
@@ -598,11 +623,11 @@ color:#ddd;
 
 .modal-main-image{
 
-  width:100%;
+  width:85%;
 
   border-radius:12px;
 
-  margin:20px 0 30px;
+ margin:25px auto 40px;
 
 }
 
@@ -691,27 +716,19 @@ color:#ddd;
 
 
 .modal-highlight{
-
+.modal-highlight{
 
     position:relative;
 
-
     margin:55px 0;
 
+    padding:35px;
 
-    padding:35px 25px 30px;
+    background:#F6F1E8;
 
-
-    border-top:1px solid #8B6B4F;
-
-    border-bottom:1px solid #8B6B4F;
-
-
-    background:#F9F6EE;
-
+    border-left:4px solid #8B6B4F;
 
 }
-
 
 
 
@@ -730,7 +747,7 @@ color:#ddd;
     transform:translateX(-50%);
 
 
-    background:#F9F6EE;
+   background:#F6F1E8;
 
 
     padding:0 25px;
@@ -838,7 +855,15 @@ color:#ddd;
 
 }
 
+#modal-publication{
 
+font-size:14px;
+
+line-height:1.8;
+
+font-style:italic;
+
+}
 
 
 /* ==========================
@@ -1405,10 +1430,13 @@ View Project →
 <span class="close">&times;</span>
 
 
+<div class="modal-header">
+
 <h2 id="modal-title"></h2>
 
+<p id="modal-type"></p>
 
-<p class="modal-type" id="modal-type"></p>
+</div>
 
 
 
@@ -1429,7 +1457,7 @@ alt="">
 <div class="modal-section">
 
 <h3>
-Overview
+01. Research Overview
 </h3>
 
 <p id="modal-overview"></p>
@@ -1445,7 +1473,7 @@ Overview
 <div class="modal-section">
 
 <h3>
-Research Strategy
+02. Experimental Strategy
 </h3>
 
 <p id="modal-strategy"></p>
@@ -1469,9 +1497,8 @@ Research Highlight
 <div class="modal-section">
 
 <h3>
-Key Results
+04. Key Findings
 </h3>
-
 
 <div id="modal-results-images"></div>
 
