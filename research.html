@@ -561,18 +561,39 @@ color:#ddd;
   
 .result-item{
 
-margin-top:25px;
+margin-top:35px;
+
+padding:20px 0 30px;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+.result-title{
+
+font-size:15px;
+
+font-weight:600;
+
+color:#8B6B4F;
+
+margin-bottom:15px;
+
+letter-spacing:0.3px;
 
 }
 
 
 .modal-result-image{
 
-width:100%;
+width:85%;
 
-border-radius:10px;
+display:block;
 
-margin-top:10px;
+margin:15px auto;
+
+border-radius:12px;
 
 }
 
@@ -612,11 +633,13 @@ font-style:italic;
 
 .modal-result-image{
 
-width:100%;
+width:75%;
 
-border-radius:10px;
+display:block;
 
-margin-top:10px;
+margin:20px auto;
+
+border-radius:12px;
 
 }
 
@@ -635,6 +658,88 @@ margin-top:8px;
 font-style:italic;
 
 } 
+
+.modal-highlight{
+
+background:#F2F2DF;
+
+border-left:4px solid #8B6B4F;
+
+padding:15px 20px;
+
+margin:25px 0;
+
+border-radius:8px;
+
+}
+
+
+.modal-highlight h3{
+
+margin-top:0;
+
+color:#8B6B4F;
+
+}  
+
+.modal-highlight.empty{
+display:none;
+}  
+
+/* Result figure style */
+
+.result-item{
+
+margin-top:35px;
+
+padding-bottom:25px;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+.result-title{
+
+font-size:16px;
+
+font-weight:600;
+
+color:#8B6B4F;
+
+margin-bottom:12px;
+
+}
+
+
+.modal-result-image{
+
+width:90%;
+
+display:block;
+
+margin:10px auto;
+
+border-radius:10px;
+
+}
+
+
+.image-caption{
+
+font-size:13px;
+
+line-height:1.8;
+
+color:#555;
+
+margin-top:12px;
+
+font-style:normal;
+
+text-align:left;
+
+}  
 }
 </style>
 </head>
@@ -827,16 +932,28 @@ MitoSOX and ROS analysis demonstrated increased mitochondrial and intracellular 
 
 
 data-results-images="
-CY size result.png|
+Cy size result.png|
 CY latate.png|
 CY cell assay.png
 "
 
 
+data-results-titles="
+Nanoparticle Characterization|
+Metabolic Regulation|
+Mitochondrial Dysfunction and Oxidative Stress
+"
+
+data-highlight="
+Dual regulation of glycolysis and oxidative phosphorylation
+using PLGA-PEG nanoparticles selectively overcame metabolic
+plasticity in hepatocellular carcinoma.
+"
+  
 data-results-captions="
-Nanoparticle characterization: Particle size, PDI, and zeta potential analysis confirmed successful formation of stable PLGA-PEG nanoparticles.|
-Metabolic regulation: Lactate production was reduced following dual metabolic inhibition, demonstrating suppression of glycolytic metabolism.|
-Mitochondrial dysfunction and oxidative stress: JC-1, MitoSOX, and ROS analysis demonstrated mitochondrial disruption and increased oxidative stress.
+PLGA-PEG nanoparticles showed controlled particle size (~200 nm), narrow PDI values, and stable physicochemical properties, confirming successful nanoparticle fabrication and colloidal stability.|
+Dual metabolic inhibition reduced lactate production, demonstrating suppression of glycolytic activity and metabolic pathway regulation.|
+Combination treatment induced mitochondrial membrane depolarization and increased oxidative stress, supporting metabolic stress-mediated apoptosis.
 "
 
 
@@ -916,7 +1033,10 @@ Metal–phenolic networks were constructed by coating zinc oxide nanoparticles w
 The platform was designed to modulate glycolysis and mitochondrial metabolism under tumor-associated acidic conditions.
 "
 
-
+data-highlight="
+Metabolic regulation was leveraged to remodel the tumor
+microenvironment and enhance antitumor immune responses.
+"
 
 data-results="
 Metabolic regulation by metal–phenolic networks induced immunogenic cell death and remodeled the tumor microenvironment.
@@ -1146,7 +1266,15 @@ Research Strategy
 
 </div>
 
+<div class="modal-highlight" id="modal-highlight">
 
+<h3>
+Research Highlight
+</h3>
+
+<p id="modal-highlight-text"></p>
+
+</div>
 
 
 
@@ -1213,6 +1341,9 @@ const modalStrategy = document.getElementById('modal-strategy');
 const modalResults = document.getElementById('modal-results');
 
 const modalPublication = document.getElementById('modal-publication');
+
+const modalHighlight =
+document.getElementById('modal-highlight-text');
   
 // ======================
 // Open Modal when Card Click
@@ -1256,6 +1387,25 @@ modalStrategy.textContent = card.dataset.strategy;
 
 modalResults.textContent = card.dataset.results;
 
+//modal highlight  
+  
+if(card.dataset.highlight){
+
+modalHighlight.textContent = card.dataset.highlight;
+
+document.getElementById('modal-highlight')
+.classList.remove('empty');
+
+}
+else{
+
+modalHighlight.textContent="";
+
+document.getElementById('modal-highlight')
+.classList.add('empty');
+
+}
+
 // reset result images
 
 modalResultsImages.innerHTML = "";
@@ -1275,6 +1425,8 @@ card.dataset.resultsImages.split("|");
 const captions =
 card.dataset.resultsCaptions.split("|");
 
+ const titles =
+card.dataset.resultsTitles.split("|"); 
 
 images.forEach((img,index)=>{
 
@@ -1286,6 +1438,11 @@ wrapper.className="result-item";
 
 wrapper.innerHTML = `
 
+<h4 class="result-title">
+${titles[index]}
+</h4>
+
+
 <img 
 src="${img.trim()}"
 class="modal-result-image">
@@ -1296,7 +1453,6 @@ ${captions[index]}
 </p>
 
 `;
-
 
 modalResultsImages.appendChild(wrapper);
 
