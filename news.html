@@ -9,70 +9,55 @@
 <style>
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
+
 body{
-
-margin:0;
-
-font-family:
-Arial, Helvetica, sans-serif;
-
-background:#F2F2DF;
-
-color:#1A1A1A;
-
+    margin:0;
+    background:#F2F2DF;
+    color:#1A1A1A;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 
 /* NAV */
 
 .nav{
-
-display:flex;
-
-gap:50px;
-
-padding:22px 0 22px 50px;
-
-background:#000;
-
-position:sticky;
-
-top:0;
-
-z-index:10;
-
+    display:flex;
+    gap:50px;
+    padding:22px 0 22px 50px;
+    background:#000;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 
 .nav a{
-
-color:#F2F2DF;
-
-text-decoration:none;
-
+    color:#F2F2DF;
+    text-decoration:none;
+    font-size:16px;
 }
 
 
 .nav a:hover{
-
-color:#8B6B4F;
-
+    color:#8B6B4F;
 }
+
 
 
 
 /* HEADER */
 
+
 .header{
 
-max-width:1200px;
+    max-width:1300px;
 
-margin:70px auto 40px;
+    margin:70px auto 40px;
 
-padding:0 40px;
+    padding:0 50px;
 
 }
 
@@ -80,9 +65,11 @@ padding:0 40px;
 
 .header h1{
 
-font-size:52px;
+    font-size:55px;
 
-margin-bottom:10px;
+    margin:0;
+
+    letter-spacing:-1px;
 
 }
 
@@ -90,155 +77,60 @@ margin-bottom:10px;
 
 .header p{
 
-font-size:18px;
+    margin-top:15px;
 
-color:#666;
+    font-size:18px;
 
-}
-
-
-
-/* MAIN */
-
-.layout{
-
-max-width:1200px;
-
-margin:auto;
-
-padding:30px 40px 100px;
-
-display:grid;
-
-grid-template-columns:180px 1fr;
-
-gap:60px;
+    color:#666;
 
 }
 
 
 
-/* INDEX */
 
 
-.index{
-
-position:sticky;
-
-top:120px;
-
-height:max-content;
-
-}
+/* FILTER */
 
 
+.filters{
 
-.index h3{
+    max-width:1300px;
 
-font-size:14px;
+    margin:auto;
 
-letter-spacing:3px;
+    padding:0 50px 40px;
 
-margin-bottom:30px;
+    display:flex;
+
+    gap:30px;
 
 }
 
 
 
-.index a{
+.filters button{
 
-display:block;
+    border:none;
 
-margin-bottom:18px;
+    background:none;
 
-text-decoration:none;
+    cursor:pointer;
 
-color:#555;
+    font-size:14px;
 
-font-size:14px;
+    letter-spacing:1px;
 
-}
-
-
-
-.index a:hover{
-
-color:#8B6B4F;
+    color:#555;
 
 }
 
 
 
-/* CONTENT */
+.filters button.active{
 
-.featured{
+    color:#8B6B4F;
 
-background:white;
-
-border-radius:18px;
-
-padding:30px;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,.06);
-
-margin-bottom:80px;
-
-}
-
-
-
-.feature-image{
-
-height:320px;
-
-background:#ddd;
-
-border-radius:12px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-color:#777;
-
-}
-
-
-
-.category{
-
-margin-top:25px;
-
-font-size:12px;
-
-letter-spacing:3px;
-
-color:#8B6B4F;
-
-font-weight:bold;
-
-}
-
-
-
-.featured h2{
-
-font-size:36px;
-
-margin:10px 0;
-
-}
-
-
-
-.featured p{
-
-color:#666;
-
-font-size:16px;
+    border-bottom:1px solid #8B6B4F;
 
 }
 
@@ -246,39 +138,19 @@ font-size:16px;
 
 
 
-/* COLLECTION */
+/* MASONRY */
 
+.archive{
 
-.collection{
+    max-width:1300px;
 
-margin-bottom:70px;
+    margin:auto;
 
-}
+    padding:0 50px 100px;
 
+    columns:3 300px;
 
-
-.collection-title{
-
-font-size:22px;
-
-margin-bottom:25px;
-
-border-bottom:1px solid #ddd;
-
-padding-bottom:10px;
-
-}
-
-
-
-.cards{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:25px;
+    column-gap:35px;
 
 }
 
@@ -286,15 +158,23 @@ gap:25px;
 
 .card{
 
-background:white;
+    background:white;
 
-border-radius:15px;
+    border-radius:15px;
 
-overflow:hidden;
+    overflow:hidden;
 
-cursor:pointer;
+    margin-bottom:35px;
 
-transition:.3s;
+    break-inside:avoid;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+
+    0 8px 25px rgba(0,0,0,.06);
 
 }
 
@@ -302,112 +182,149 @@ transition:.3s;
 
 .card:hover{
 
-transform:translateY(-8px);
-
-box-shadow:
-0 10px 25px rgba(0,0,0,.1);
+    transform:translateY(-8px);
 
 }
+
 
 
 
 .card-image{
 
-height:160px;
+    width:100%;
 
-background:#ddd;
+    background:#ddd;
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    justify-content:center;
 
-justify-content:center;
+    align-items:center;
 
-color:#777;
+    color:#777;
 
 }
+
+
+
+.small{
+
+    height:170px;
+
+}
+
+
+
+.medium{
+
+    height:230px;
+
+}
+
+
+
+.large{
+
+    height:320px;
+
+}
+
+
 
 
 
 .card-content{
 
-padding:18px;
+    padding:20px;
 
 }
 
 
 
-.card-tag{
+.category{
 
-font-size:11px;
+    font-size:11px;
 
-color:#8B6B4F;
+    letter-spacing:3px;
 
-letter-spacing:2px;
+    color:#8B6B4F;
 
-}
-
-
-
-.card h4{
-
-font-size:20px;
-
-margin:8px 0;
+    font-weight:bold;
 
 }
 
 
 
-.card small{
+.card h2{
 
-color:#888;
+    font-size:22px;
+
+    line-height:1.3;
+
+    margin:10px 0;
+
+}
+
+
+
+.date{
+
+    font-size:13px;
+
+    color:#888;
 
 }
 
 
 
-.card p{
+.description{
 
-font-size:14px;
+    color:#666;
 
-color:#666;
+    font-size:14px;
+
+    margin-top:12px;
 
 }
+
+
+
 
 
 
 /* MODAL */
 
-
 .modal{
 
-display:none;
+    display:none;
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-background:rgba(0,0,0,.65);
+    background:rgba(0,0,0,.65);
 
-justify-content:center;
+    justify-content:center;
 
-align-items:center;
+    align-items:center;
+
+    z-index:200;
 
 }
 
 
+
 .modal-box{
 
-background:white;
+    width:90%;
 
-width:90%;
+    max-width:700px;
 
-max-width:700px;
+    background:white;
 
-padding:40px;
+    border-radius:20px;
 
-border-radius:20px;
+    padding:40px;
 
 }
 
@@ -415,51 +332,36 @@ border-radius:20px;
 
 .close{
 
-float:right;
+    float:right;
 
-font-size:25px;
+    cursor:pointer;
 
-cursor:pointer;
-
-}
-
-
-
-@media(max-width:900px){
-
-
-.layout{
-
-grid-template-columns:1fr;
+    font-size:25px;
 
 }
 
 
-.index{
-
-position:relative;
-
-}
 
 
-.cards{
+@media(max-width:700px){
 
-grid-template-columns:1fr;
+    .archive{
 
-}
+        columns:1;
 
+    }
 
 }
-
-
 
 </style>
+
 
 </head>
 
 
 
 <body>
+
 
 
 <div class="nav">
@@ -476,54 +378,21 @@ grid-template-columns:1fr;
 
 
 
+
+
+
 <div class="header">
 
 <h1>
 News & Updates
 </h1>
 
+
 <p>
-Research, achievements, learning experiences,
-and moments beyond the laboratory.
+A visual archive of research,
+achievements, learning, and life moments.
 </p>
 
-</div>
-
-
-
-
-
-<div class="layout">
-
-
-<!-- SIDE INDEX -->
-
-<div class="index">
-
-<h3>
-INDEX
-</h3>
-
-<a href="#research">
-01 Research
-</a>
-
-<a href="#academic">
-02 Academic
-</a>
-
-<a href="#learning">
-03 Learning
-</a>
-
-<a href="#travel">
-04 Travel
-</a>
-
-<a href="#life">
-05 Life
-</a>
-
 
 </div>
 
@@ -531,22 +400,56 @@ INDEX
 
 
 
-<div>
+<div class="filters">
+
+<button class="active">
+ALL
+</button>
+
+<button>
+RESEARCH
+</button>
+
+<button>
+ACADEMIC
+</button>
+
+<button>
+LEARNING
+</button>
+
+<button>
+TRAVEL
+</button>
+
+<button>
+LIFE
+</button>
 
 
-
-<!-- FEATURE -->
-
-<div class="featured">
-
-
-<div class="feature-image">
-Featured Image
 </div>
 
+
+
+
+
+
+
+<div class="archive">
+
+
+
+<div class="card">
+
+<div class="card-image large">
+Research Image
+</div>
+
+
+<div class="card-content">
 
 <div class="category">
-FEATURED STORY
+RESEARCH
 </div>
 
 
@@ -555,66 +458,23 @@ Metabolic Cancer Therapy Research
 </h2>
 
 
-<p>
-Exploring innovative therapeutic strategies
-through metabolic regulation and nanoparticle
-delivery systems.
+<div class="date">
+January 2026
+</div>
+
+
+<p class="description">
+Exploring metabolic regulation and nanoparticle-based therapeutic strategies.
 </p>
 
 
 </div>
 
 
-
-
-
-
-<!-- RESEARCH -->
-
-<section class="collection" id="research">
-
-
-<div class="collection-title">
-Research
 </div>
 
 
-<div class="cards">
 
-
-<div class="card">
-
-
-<div class="card-image">
-Research Photo
-</div>
-
-
-<div class="card-content">
-
-<div class="card-tag">
-RESEARCH
-</div>
-
-
-<h4>
-Cancer Therapy Project
-</h4>
-
-
-<small>
-2026
-</small>
-
-
-<p>
-Research progress and scientific journey.
-</p>
-
-</div>
-
-
-</div>
 
 
 
@@ -622,84 +482,26 @@ Research progress and scientific journey.
 <div class="card">
 
 
-<div class="card-image">
-Research Photo
-</div>
-
-
-<div class="card-content">
-
-<div class="card-tag">
-RESEARCH
-</div>
-
-
-<h4>
-Nanoparticle Study
-</h4>
-
-
-<small>
-2025
-</small>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<!-- ACADEMIC -->
-
-
-<section class="collection" id="academic">
-
-
-<div class="collection-title">
-Academic
-</div>
-
-
-<div class="cards">
-
-
-<div class="card">
-
-
-<div class="card-image">
+<div class="card-image small">
 Conference Photo
 </div>
 
 
 <div class="card-content">
 
-<div class="card-tag">
+
+<div class="category">
 ACADEMIC
 </div>
 
 
-<h4>
-Conference Presentation
-</h4>
+<h2>
+International Conference
+</h2>
 
 
-<small>
-2026
-</small>
-
-
+<div class="date">
+March 2026
 </div>
 
 
@@ -709,89 +511,15 @@ Conference Presentation
 </div>
 
 
-</section>
 
 
 
-
-
-
-
-<!-- LEARNING -->
-
-
-<section class="collection" id="learning">
-
-
-<div class="collection-title">
-Learning
-</div>
-
-
-<div class="cards">
 
 
 <div class="card">
 
 
-<div class="card-image">
-Certificate
-</div>
-
-
-<div class="card-content">
-
-
-<div class="card-tag">
-LEARNING
-</div>
-
-
-<h4>
-Python Certification
-</h4>
-
-
-<small>
-2026
-</small>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- TRAVEL -->
-
-
-<section class="collection" id="travel">
-
-
-<div class="collection-title">
-Travel
-</div>
-
-
-<div class="cards">
-
-
-<div class="card">
-
-
-<div class="card-image">
+<div class="card-image medium">
 Travel Photo
 </div>
 
@@ -799,21 +527,97 @@ Travel Photo
 <div class="card-content">
 
 
-<div class="card-tag">
+<div class="category">
 TRAVEL
 </div>
 
 
-<h4>
+<h2>
 Switzerland Journey
-</h4>
+</h2>
 
 
-<small>
+<div class="date">
+August 2025
+</div>
+
+
+<p class="description">
+Moments beyond the laboratory.
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="card-image small">
+Certificate
+</div>
+
+
+<div class="card-content">
+
+
+<div class="category">
+LEARNING
+</div>
+
+
+<h2>
+Python Certification
+</h2>
+
+
+<div class="date">
+2026
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<div class="card-image medium">
+Lab Photo
+</div>
+
+
+<div class="card-content">
+
+
+<div class="category">
+LIFE
+</div>
+
+
+<h2>
+Laboratory Moments
+</h2>
+
+
+<div class="date">
 2025
-</small>
-
-
 </div>
 
 
@@ -823,15 +627,80 @@ Switzerland Journey
 </div>
 
 
-</section>
+
+
 
 
 
 </div>
 
+
+
+
+
+
+
+
+<div class="modal" id="modal">
+
+
+<div class="modal-box">
+
+
+<span class="close"
+onclick="closeModal()">
+×
+</span>
+
+
+<h2 id="modal-title"></h2>
+
+
+<p>
+Detailed story page will appear here.
+</p>
+
+
 </div>
 
 
+</div>
+
+
+
+
+
+
+<script>
+
+
+document.querySelectorAll(".card")
+.forEach(card=>{
+
+card.onclick=function(){
+
+document.getElementById("modal")
+.style.display="flex";
+
+document.getElementById("modal-title")
+.innerHTML=
+this.querySelector("h2").innerHTML;
+
+}
+
+});
+
+
+
+function closeModal(){
+
+document.getElementById("modal")
+.style.display="none";
+
+}
+
+
+</script>
 
 
 
