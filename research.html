@@ -285,81 +285,242 @@ color:#ddd;
 
 }
 /* right content */
+
 .right{
+
   flex:1;
+
   padding:30px;
+
   display:flex;
+
   flex-direction:column;
+
   gap:15px;
+
   box-sizing:border-box;
+
 }
 
-/* category filter moved above cards */
+
+/* research tag filter */
+
 .category-filter{
+
   display:flex;
+
   gap:8px;
+
   margin-bottom:15px;
-  flex-wrap: nowrap; /* 한 줄 유지 */
+
+  flex-wrap:wrap;
+
 }
+
+
 .category-filter button{
-  padding:5px 8px; /* 손가락 한 마디 정도 크기 */
+
+  padding:6px 12px;
+
   font-size:12px;
+
   border:none;
-  border-radius:5px;
+
+  border-radius:15px;
+
   background:#8B6B4F;
+
   color:white;
+
   cursor:pointer;
+
   white-space:nowrap;
+
 }
+
+
 .category-filter button:hover{
+
   background:#6a4e38;
+
 }
+
 
 /* project cards */
+
 .cards{
+
   display:flex;
+
   flex-wrap:wrap;
-  gap:20px;
+
+  gap:25px;
+
 }
+
+
+
 .card{
+
   background:white;
-  border-radius:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  width:250px;
+
+  border-radius:12px;
+
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+
+  width:290px;
+
   cursor:pointer;
+
   overflow:hidden;
-  transition:transform 0.3s ease;
+
+  position:relative;
+
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+
 }
+
+
+
 .card:hover{
-  transform:translateY(-5px);
+
+  transform:translateY(-8px);
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
 }
+
+
+
+/* card image */
+
 .card img{
+
   width:100%;
-  height:150px;
+
+  height:170px;
+
   object-fit:cover;
+
 }
+
+
+/* card text */
+
 .card-content{
-  padding:10px;
+
+  padding:15px;
+
 }
+
+
+
 .card-content h4{
-  margin:5px 0;
+
+  margin:5px 0 8px;
+
   color:#8B6B4F;
+
   font-size:16px;
+
+  line-height:1.4;
+
+  font-weight:600;
+
 }
-.card-content p{
-  font-size:13px;
-  color:#666;
-  margin:3px 0;
-}
-.read-more{
-  margin-top:5px;
-  padding:4px 8px;
-  background:#8B6B4F;
-  color:white;
-  border:none;
-  border-radius:5px;
+
+
+
+.research-type{
+
   font-size:12px;
-  cursor:pointer;
+
+  color:#777;
+
+  margin:0 0 12px;
+
+}
+
+
+/* research tags */
+
+.card-tags{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+}
+
+
+
+.card-tags span{
+
+  font-size:10px;
+
+  padding:4px 8px;
+
+  border-radius:15px;
+
+  background:#F2F2DF;
+
+  color:#8B6B4F;
+
+  border:1px solid #e5dcc8;
+
+}
+
+
+/* hover overlay */
+
+.card-overlay{
+
+  position:absolute;
+
+  top:0;
+
+  left:0;
+
+  width:100%;
+
+  height:100%;
+
+  background:rgba(0,0,0,0.65);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  opacity:0;
+
+  transition:opacity 0.3s ease;
+
+}
+
+
+
+.card:hover .card-overlay{
+
+  opacity:1;
+
+}
+
+
+
+.card-overlay span{
+
+  color:white;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  letter-spacing:0.5px;
+
 }
 
 /* modal */
@@ -553,9 +714,7 @@ color:#ddd;
 </div>
 
 
-<div class="cards">
-
-   <!-- Master Research -->
+<!-- Master Research -->
 <div class="card"
 
 data-tags="Cancer Metabolism,Nanomedicine,Drug Delivery"
@@ -616,10 +775,16 @@ M.S. Thesis · Independent Research
 </div>
 
 
-<div class="view-project">
-View Project →
 </div>
 
+
+<!-- Hover Overlay -->
+
+<div class="card-overlay">
+
+<span>
+View Project →
+</span>
 
 </div>
 
@@ -738,83 +903,206 @@ Submitted as an undergraduate graduation thesis.
 
 <script>
 
-// Modal elements
+// ======================
+// Modal Elements
+// ======================
+
 const modal = document.getElementById('modal');
+
 const modalTitle = document.getElementById('modal-title');
+
 const modalDetail = document.getElementById('modal-detail');
+
 const modalImage = document.getElementById('modal-image');
+
 const modalExtra = document.getElementById('modal-extra-images');
 
 
-// Modal open
-document.querySelectorAll(".category-filter button").forEach(btn=>{
 
-btn.addEventListener("click",()=>{
+// ======================
+// Open Modal when Card Click
+// ======================
 
-const tag = btn.dataset.tag;
+document.querySelectorAll('.card').forEach(card=>{
 
-document.querySelectorAll(".card").forEach(card=>{
 
-const tags = card.dataset.tags.split(",");
+card.addEventListener('click', ()=>{
 
-card.style.display =
-(tag==="all" || tags.includes(tag))
-? "block":"none";
+
+modal.style.display='flex';
+
+
+// title
+
+modalTitle.textContent = card.dataset.title;
+
+
+// detail
+
+modalDetail.textContent = card.dataset.detail;
+
+
+// main image
+
+modalImage.src = card.dataset.image;
+
+
+
+// reset extra images
+
+modalExtra.innerHTML = "";
+
+
+
+// load extra images if exist
+
+const extra = card.querySelector(".extra-images");
+
+
+if(extra){
+
+modalExtra.innerHTML = extra.innerHTML;
+
+}
+
 
 });
 
-});
 
 });
 
 
-// Modal close
+
+
+// ======================
+// Close Modal
+// ======================
+
+
 document.querySelector('.close').addEventListener('click', ()=>{
+
 
 modal.style.display='none';
 
+
 });
+
 
 
 window.addEventListener('click', e=>{
 
-if(e.target===modal) modal.style.display='none';
+
+if(e.target === modal){
+
+
+modal.style.display='none';
+
+
+}
+
 
 });
 
 
-// Category filter
+
+
+
+// ======================
+// Tag Filter
+// ======================
+
+
 document.querySelectorAll('.category-filter button').forEach(btn=>{
+
 
 btn.addEventListener('click', ()=>{
 
-const cat = btn.dataset.category;
+
+const tag = btn.dataset.tag;
+
+
 
 document.querySelectorAll('.card').forEach(card=>{
 
-card.style.display = (cat==='all'||card.dataset.category===cat) ? 'block' : 'none';
+
+const tags = card.dataset.tags.split(",");
+
+
+
+if(tag === "all" || tags.includes(tag)){
+
+
+card.style.display="block";
+
+
+}
+
+else{
+
+
+card.style.display="none";
+
+
+}
+
+
 
 });
 
-});
 
 });
 
 
-// Search filter
+});
+
+
+
+
+
+// ======================
+// Search Filter
+// ======================
+
+
 document.getElementById('search-input').addEventListener('input', e=>{
 
-const val = e.target.value.toLowerCase();
+
+const keyword = e.target.value.toLowerCase();
+
+
 
 document.querySelectorAll('.card').forEach(card=>{
 
-card.style.display = card.dataset.title.toLowerCase().includes(val) ? 'block' : 'none';
+
+const title = card.dataset.title.toLowerCase();
+
+
+const detail = card.dataset.detail.toLowerCase();
+
+
+
+if(title.includes(keyword) || detail.includes(keyword)){
+
+
+card.style.display="block";
+
+
+}
+
+else{
+
+
+card.style.display="none";
+
+
+}
+
+
 
 });
 
+
 });
+
 
 </script>
-
-</body>
-</html> 
