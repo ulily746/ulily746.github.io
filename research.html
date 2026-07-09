@@ -1069,7 +1069,7 @@ Metal–Phenolic Networks Reverse the Immunosuppressive Tumor Microenvironment
 </div>
 
 
-<div class="cards">
+<div class="cards" id="research-cards">
 
 
 <!-- Master Research -->
@@ -1535,43 +1535,27 @@ document.getElementById('modal-highlight-text');
 // Open Modal when Card Click
 // ======================
 
-document.querySelectorAll('.card').forEach(card=>{
+document.addEventListener("click", function(e){
 
+const card = e.target.closest(".card");
 
-card.addEventListener('click', ()=>{
+if(!card) return;
 
 
 modal.style.display='flex';
 
 
-// title
-
 modalTitle.textContent = card.dataset.title;
-
-
-// research type
 
 modalType.textContent = card.dataset.type;
 
-
-// representative image
-
 modalImage.src = card.dataset.image;
 
-
-// overview
-
 modalOverview.textContent = card.dataset.overview;
-
-
-// strategy
 
 modalStrategy.textContent = card.dataset.strategy;
 
 
-
-//modal highlight  
-  
 if(card.dataset.highlight){
 
 modalHighlight.textContent = card.dataset.highlight;
@@ -1589,16 +1573,14 @@ document.getElementById('modal-highlight')
 
 }
 
-// reset result images
 
-modalResultsImages.innerHTML = "";
-  
-// publication
-
-modalPublication.textContent = card.dataset.publication;
+modalResultsImages.innerHTML="";
 
 
-// 결과 이미지 불러오기
+modalPublication.textContent =
+card.dataset.publication;
+
+
 
 if(card.dataset.resultsImages){
 
@@ -1611,23 +1593,23 @@ const captions =
 const titles =
 (card.dataset.resultsTitles || "").split("|");
 
+
 images.forEach((img,index)=>{
 
 
-const wrapper = document.createElement("div");
+const wrapper=document.createElement("div");
 
 wrapper.className="result-item";
 
 
-wrapper.innerHTML = `
+wrapper.innerHTML=`
 
 <h4 class="result-title">
 ${titles[index] || ""}
 </h4>
 
 
-<img 
-src="${img.trim()}"
+<img src="${img.trim()}"
 class="modal-result-image">
 
 
@@ -1637,13 +1619,15 @@ ${captions[index] || ""}
 
 `;
 
+
 modalResultsImages.appendChild(wrapper);
 
 
 });
 
-
 }
+
+
 });
 
 
@@ -1817,17 +1801,92 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-// Firestore에서 연구 데이터 가져오기
+const cardsContainer = document.getElementById("research-cards");
+
+cardsContainer.innerHTML="";
+
 
 const querySnapshot = await getDocs(collection(db, "projects"));
 
 
 querySnapshot.forEach((doc)=>{
 
-  const data = doc.data();
+const data = doc.data();
 
-  console.log(data);
+
+const card = document.createElement("div");
+
+card.className="card";
+
+
+card.dataset.title = data.title;
+card.dataset.type = data.type;
+card.dataset.image = data.image;
+
+card.dataset.overview = data.overview;
+card.dataset.strategy = data.strategy;
+card.dataset.highlight = data.highlight;
+card.dataset.publication = data.publication;
+
+card.dataset.tags = data.tag.join(",");
+
+
+card.dataset.resultsImages =
+(data.resultsImages || []).join("|");
+
+card.dataset.resultsTitles =
+(data.resultsTitles || []).join("|");
+
+card.dataset.resultsCaptions =
+(data.resultsCaptions || []).join("|");
+
+
+
+card.innerHTML = `
+
+<img src="${data.image}">
+
+
+<div class="card-content">
+
+<h4>${data.title}</h4>
+
+
+<p class="research-type">
+${data.type}
+</p>
+
+
+<div class="card-tags">
+
+${data.tag.map(tag=>`
+
+<span>${tag}</span>
+
+`).join("")}
+
+</div>
+
+</div>
+
+
+<div class="card-overlay">
+
+<span>
+View Project →
+</span>
+
+</div>
+
+
+`;
+
+
+cardsContainer.appendChild(card);
+
 
 });
+  
+
 
 </script>  
