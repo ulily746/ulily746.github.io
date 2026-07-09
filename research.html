@@ -558,6 +558,38 @@ color:#ddd;
   cursor:pointer;
   color:#8B6B4F;
 }
+  
+.result-item{
+
+margin-top:25px;
+
+}
+
+
+.modal-result-image{
+
+width:100%;
+
+border-radius:10px;
+
+margin-top:10px;
+
+}
+
+
+.image-caption{
+
+font-size:12px;
+
+line-height:1.6;
+
+color:#777;
+
+margin-top:8px;
+
+font-style:italic;
+
+}
 
 @media(max-width:900px){
   .container{
@@ -576,12 +608,6 @@ color:#ddd;
   .category-filter{
     flex-wrap:wrap; /* 모바일에서는 줄바꿈 허용 */
   }
- .result-item{
-
-margin-top:25px;
-
-}
-
 
 
 .modal-result-image{
@@ -1054,16 +1080,21 @@ const modal = document.getElementById('modal');
 
 const modalTitle = document.getElementById('modal-title');
 
-const modalDetail = document.getElementById('modal-detail');
-
 const modalImage = document.getElementById('modal-image');
 
-const modalExtra = document.getElementById('modal-extra-images');
-  
 const modalResultsImages =
 document.getElementById('modal-results-images');
 
+const modalType = document.getElementById('modal-type');
 
+const modalOverview = document.getElementById('modal-overview');
+
+const modalStrategy = document.getElementById('modal-strategy');
+
+const modalResults = document.getElementById('modal-results');
+
+const modalPublication = document.getElementById('modal-publication');
+  
 // ======================
 // Open Modal when Card Click
 // ======================
@@ -1082,35 +1113,34 @@ modal.style.display='flex';
 modalTitle.textContent = card.dataset.title;
 
 
-// detail
+// research type
 
-modalDetail.textContent = card.dataset.detail;
+modalType.textContent = card.dataset.type;
 
 
-// main image
+// representative image
 
 modalImage.src = card.dataset.image;
 
 
+// overview
 
-// reset extra images
-
-modalExtra.innerHTML = "";
-
+modalOverview.textContent = card.dataset.overview;
 
 
-// load extra images if exist
+// strategy
 
-const extra = card.querySelector(".extra-images");
+modalStrategy.textContent = card.dataset.strategy;
 
 
-if(extra){
+// key results
 
-modalExtra.innerHTML = extra.innerHTML;
+modalResults.textContent = card.dataset.results;
 
-}
 
-modalResultsImages.innerHTML = "";
+// publication
+
+modalPublication.textContent = card.dataset.publication;
 
 
 // 결과 이미지 불러오기
