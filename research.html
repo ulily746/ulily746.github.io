@@ -1812,6 +1812,9 @@ const querySnapshot = await getDocs(collection(db, "projects"));
 querySnapshot.forEach((doc)=>{
 
 const data = doc.data();
+  
+console.log("PROJECT:", data.title);
+console.log(data);
 
 
 const card = document.createElement("div");
