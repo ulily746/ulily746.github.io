@@ -41,68 +41,249 @@ body{
 }
 
 /* left sidebar */
+/* sidebar */
+
 .left{
-  width:20%;
-  min-width:250px;
-  height:100vh;
-  position:sticky;
-  top:0;
-  background:#000;
-  color:white;
-  padding:30px 15px 20px 15px; /* 좌우 여백 확보 */
-  box-sizing:border-box;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  overflow-y:auto;
+
+width:22%;
+min-width:280px;
+
+height:100vh;
+
+position:sticky;
+top:0;
+
+background:#000;
+
+color:#F2F2DF;
+
+padding:35px 25px;
+
+box-sizing:border-box;
+
+overflow-y:auto;
+
 }
-.left h2, .left h3{
-  margin:5px 0;
-  text-align:center;
+
+
+
+.sidebar-section{
+
+padding-bottom:25px;
+
+margin-bottom:25px;
+
+border-bottom:1px solid #2b2b2b;
+
 }
-.left p{
-  font-size:13px;
-  text-align:center;
+
+
+
+.sidebar-section:last-child{
+
+border-bottom:none;
+
 }
-.left a{
-  color:#F2F2DF;
-  text-decoration:none;
+
+
+
+.sidebar-section h3{
+
+font-size:13px;
+
+letter-spacing:1.5px;
+
+color:#8B6B4F;
+
+margin:0 0 15px;
+
+font-weight:600;
+
 }
-.left a:hover{
-  text-decoration:underline;
-}
+
+
 
 /* search */
+
 .search-bar input{
-  width:100%;
-  padding:8px 10px;
-  border-radius:5px;
-  border:none;
-  font-size:13px;
-  margin-bottom:20px; /* 여백 확보 */
-  box-sizing:border-box;
+
+width:100%;
+
+background:#151515;
+
+border:1px solid #333;
+
+color:white;
+
+padding:10px 12px;
+
+border-radius:6px;
+
+font-size:13px;
+
+box-sizing:border-box;
+
 }
 
-/* timeline & publications */
-.timeline, .publications{
-  background:#111;
-  padding:10px;
-  border-radius:10px;
-  font-size:12px;
+
+.search-bar input::placeholder{
+
+color:#888;
+
 }
+
+
+
+/* timeline */
+
+
 .timeline-item{
-  margin-bottom:8px;
-  padding-left:10px;
-  border-left:2px solid #8B6B4F;
-}
-.publications ul{
-  list-style:none;
-  padding-left:5px;
-}
-.publications li{
-  margin-bottom:5px;
+
+position:relative;
+
+padding-left:18px;
+
+margin-bottom:20px;
+
 }
 
+
+
+.timeline-item::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+top:5px;
+
+width:8px;
+
+height:8px;
+
+background:#8B6B4F;
+
+border-radius:50%;
+
+}
+
+
+
+.timeline-item::after{
+
+content:"";
+
+position:absolute;
+
+left:3px;
+
+top:15px;
+
+height:65px;
+
+width:2px;
+
+background:#333;
+
+}
+
+
+
+.timeline-item:last-child::after{
+
+display:none;
+
+}
+
+
+
+.year{
+
+font-size:14px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+
+
+.timeline-item p{
+
+font-size:12px;
+
+color:#aaa;
+
+line-height:1.6;
+
+margin-top:5px;
+
+}
+
+
+
+/* publication */
+
+
+.publications ul{
+
+padding:0;
+
+margin:0;
+
+list-style:none;
+
+}
+
+
+
+.publications li{
+
+font-size:12px;
+
+line-height:1.5;
+
+margin-bottom:12px;
+
+color:#ddd;
+
+}
+
+
+
+/* techniques */
+
+
+.skill-tags{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+}
+
+
+
+.skill-tags span{
+
+background:#171717;
+
+border:1px solid #333;
+
+padding:5px 10px;
+
+border-radius:20px;
+
+font-size:11px;
+
+color:#ddd;
+
+}
 /* right content */
 .right{
   flex:1;
@@ -247,27 +428,111 @@ body{
 </div>
 
 <div class="container">
-  <!-- Left sidebar -->
-  <div class="left">
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search Projects...">
-    </div>
+<div class="left">
 
-    <div class="timeline">
-      <h3>Timeline</h3>
-      <div class="timeline-item">2023-2025: M.S. Student @ KAIST</div>
-      <div class="timeline-item">2020-2021: Field Training Intern @ PNU</div>
-    </div>
+  <!-- Search -->
+  <div class="sidebar-section search-bar">
 
-    <div class="publications">
-      <h3>Publications</h3>
-      <ul>
-        <li>Y. Choi*, H. Nam*, ... Overcoming metabolic plasticity...</li>
-        <li>H. Nam, H. Park, ... Metal-phenolic networks reverse...</li>
-      </ul>
-    </div>
+    <h3>SEARCH PROJECTS</h3>
+
+    <input 
+    type="text" 
+    id="search-input" 
+    placeholder="Search Projects...">
+
   </div>
 
+
+  <!-- Timeline -->
+  <div class="sidebar-section timeline">
+
+    <h3>RESEARCH TIMELINE</h3>
+
+
+    <div class="timeline-item">
+
+      <span class="year">
+      2023–2025
+      </span>
+
+      <p>
+      M.S. Research<br>
+      Chemical & Biomolecular Engineering<br>
+      KAIST
+      </p>
+
+    </div>
+
+
+    <div class="timeline-item">
+
+      <span class="year">
+      2020–2021
+      </span>
+
+      <p>
+      Undergraduate Research<br>
+      Biomedical Engineering<br>
+      PNU
+      </p>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Publications -->
+  <div class="sidebar-section publications">
+
+    <h3>PUBLICATIONS</h3>
+
+
+    <ul>
+
+      <li>
+      Metal–Phenolic Networks for Cancer Immunotherapy
+      </li>
+
+
+      <li>
+      Dual metabolic therapy using nanoparticles
+      </li>
+
+    </ul>
+
+
+  </div>
+
+
+
+  <!-- Techniques -->
+  <div class="sidebar-section techniques">
+
+    <h3>TECHNIQUES</h3>
+
+
+    <div class="skill-tags">
+
+      <span>Nanoparticle Synthesis</span>
+
+      <span>Cell Culture</span>
+
+      <span>Cellular Metabolic Assay</span>
+
+      <span>Western Blot</span>
+
+      <span>Flow Cytometry</span>
+
+      <span>MTT Assay</span>
+
+    </div>
+
+
+  </div>
+
+
+</div>
 <!-- Right content -->
 <div class="right">
 
