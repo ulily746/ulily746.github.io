@@ -1834,7 +1834,7 @@ card.dataset.strategy = data.strategy;
 card.dataset.highlight = data.highlight;
 card.dataset.publication = data.publication;
 
-card.dataset.tags = data.tag.join(",");
+card.dataset.tags = (data.tag || []).join(",");
 
 
 card.dataset.resultsImages =
@@ -1865,7 +1865,7 @@ ${data.type}
 
 <div class="card-tags">
 
-${data.tag.map(tag=>`
+${(data.tag || []).map(tag=>`
 
 <span>${tag}</span>
 
