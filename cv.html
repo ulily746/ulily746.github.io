@@ -105,22 +105,63 @@ margin:5px 0;
 margin:6px 0;
 }
 
+    .education-item{
+margin-bottom:18px;
+padding-bottom:18px;
+border-bottom:1px solid #ddd8cb;
+}
+
+.education-item:last-child{
+border-bottom:none;
+padding-bottom:0;
+margin-bottom:0;
+}
+
+.school-name{
+font-weight:700;
+font-size:15px;
+color:#1A1A1A;
+}
+
+.degree{
+font-size:13px;
+color:#666;
+margin:3px 0 10px;
+}
+
+.research-title{
+font-size:12px;
+font-weight:600;
+color:#8B6B4F;
+text-transform:uppercase;
+letter-spacing:.5px;
+margin-bottom:4px;
+}
+
+.research-topic{
+font-size:13px;
+line-height:1.5;
+color:#444;
+}
 
 /* CONTACT */
 
 .contact a{
 display:flex;
 align-items:center;
-gap:10px;
 text-decoration:none;
 color:#1A1A1A;
-margin-bottom:8px;
+margin-bottom:10px;
 font-size:14px;
-transition:0.2s;
+transition:.2s;
 }
 
-.contact a:hover{
+.contact a i{
+width:22px;
+text-align:center;
 color:#8B6B4F;
+margin-right:10px;
+flex-shrink:0;
 }
 
 
@@ -174,6 +215,17 @@ padding-left:18px;
 line-height:1.6;
 }
 
+.skill-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:40px;
+    row-gap:10px;
+}
+
+.skill-grid div{
+    line-height:1.6;
+}
+    
 /* EMAIL MODAL */
 
 .modal{
@@ -201,21 +253,13 @@ z-index:3000;
 }
 
 .modal-content{
-
 position:relative;
-
 background:white;
-
-padding:35px;
-
+padding:24px 30px;
 border-radius:14px;
-
-width:360px;
-
+width:340px;
 text-align:center;
-
 box-shadow:0 10px 35px rgba(0,0,0,.25);
-
 }
 
 .modal-close{
@@ -316,6 +360,25 @@ opacity:1;
 
 }
   
+/* SUMMARY KEYWORDS */
+
+.research-tags{
+    margin-top:18px;
+    font-size:13px;
+    color:#8B6B4F;
+    font-weight:500;
+    line-height:1.8;
+}
+
+.research-tags span{
+    display:inline;
+}
+
+.research-tags span:not(:last-child)::after{
+    content:" • ";
+    color:#b7a68e;
+}
+    
 
 /* MOBILE */
 
@@ -383,33 +446,47 @@ Nanoparticles | Drug Delivery
 
 <h4>Education</h4>
 
-<p>
+<div class="education-item">
 
-<strong>KAIST</strong><br>
+<div class="school-name">
+KAIST
+</div>
 
+<div class="degree">
 M.S. Chemical & Biomolecular Engineering
+</div>
 
-<br><br>
+<div class="research-title">
+Research Topic
+</div>
 
-<strong>Research Topic</strong><br>
-
+<div class="research-topic">
 Development of Liver Carcinoma Targeting Dual Metabolic Therapy via PLGA-PEG Nanoparticles
+</div>
 
-</p>
+</div>
 
-<p>
 
-<strong>Pusan National University</strong><br>
+<div class="education-item">
 
+<div class="school-name">
+Pusan National University
+</div>
+
+<div class="degree">
 B.S. Biomaterials Science
+</div>
 
-<br><br>
+<div class="research-title">
+Research Topic
+</div>
 
-<strong>Research Topic</strong><br>
-
+<div class="research-topic">
 Optimizing Tangential Flow Filtration for Efficient Isolation of Exosomes in Biomedical Applications
+</div>
 
-</p>
+</div>
+
 </div>
 
 
@@ -477,7 +554,13 @@ Master’s graduate in Chemical and Biomolecular Engineering with research exper
 Building upon this foundation, I aim to integrate advanced biomedical technologies—including organ-on-chip platforms, smart biosensors, and biomedical microrobotics—with nanomedicine to develop next-generation therapeutic systems for precision medicine.
 
 </p>
-
+<div class="research-tags">
+    <span>Drug Delivery</span>
+    <span>Nanomedicine</span>
+    <span>Organ-on-Chip</span>
+    <span>Biosensors</span>
+    <span>Biomedical Microrobotics</span>
+</div>
 </section>
 
 
@@ -540,34 +623,58 @@ Building upon this foundation, I aim to integrate advanced biomedical technologi
 <h2>Technical Skills</h2>
 
 <div class="cv-row">
-<div class="cv-label">Experimental Techniques</div>
-<div>
+<div class="cv-label">Laboratory Techniques</div>
+<div class="skill-grid">
 
-Nanoparticle synthesis (double emulsion, nanoprecipitation)<br>
-Cell culture (cancer & normal cell lines)<br>
-Assays: MTT, apoptosis, ROS, JC-1, MitoSOX, ATP, GSH, lactate & glucose assay, Western blotting, flow cytometry, confocal microscopy
+    <div>Nanoparticle synthesis</div>
+    <div>Cell culture</div>
 
-</div>
+    <div>Western blotting</div>
+    <div>Flow cytometry</div>
+
+    <div>Confocal microscopy</div>
+    <div>MTT / ROS / JC-1 assays</div>
+
+    <div>ATP / GSH assays</div>
+    <div>MitoSOX / Lactate & Glucose assays</div>
+
+    </div>
+
 </div>
 
 <div class="cv-row">
-<div class="cv-label">Characterization</div>
-<div>
+<div class="cv-label">Instrumentation</div>
+<div class="skill-grid">
 
-DLS, TEM, HPLC, CLSM, SEM<br>
-Microplate & luciferase assays<br>
-Tangential flow filtration system operation
+    <div>DLS</div>
+    <div>TEM</div>
+
+    <div>SEM</div>
+    <div>HPLC</div>
+
+    <div>Confocal Microscopy</div>
+    <div>Flow Cytometry</div>
+
+    <div>Microplate Reader</div>
+    <div>Tangential Flow Filtration</div>
 
 </div>
+    </div>
+
 </div>
 
 <div class="cv-row">
-<div class="cv-label">Data Analysis</div>
-<div>
 
-GraphPad Prism, FlowJo, CompuSyn, ZEN
+    <div class="cv-label">Data Analysis</div>
 
-</div>
+    <div class="skill-grid">
+        <div>GraphPad Prism</div>
+        <div>CompuSyn</div>
+
+        <div>FlowJo</div>
+        <div>ZEN</div>
+    </div>
+
 </div>
 
 </section>
