@@ -1782,8 +1782,6 @@ card.style.display="none";
 
 console.log("🔥 Firebase script started");
 
-  
-// Firebase SDK
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
@@ -1803,45 +1801,61 @@ const firebaseConfig = {
 };
 
 
-// Firebase 시작
-
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
+
 const cardsContainer = document.getElementById("research-cards");
 
-cardsContainer.innerHTML="";
+cardsContainer.innerHTML = "";
 
 
 const querySnapshot = await getDocs(collection(db, "projects"));
 
 
+
 querySnapshot.forEach((doc)=>{
 
+
 const data = doc.data();
+
 
 console.log("PROJECT:", data.title);
 console.log(data);
 
 
+
 const card = document.createElement("div");
 
-card.className="card";
+card.className = "card";
 
+
+
+// =====================
+// Dataset 저장
+// =====================
 
 card.dataset.title = data.title || "";
+
 card.dataset.type = data.type || "";
+
 card.dataset.image = data.image || "";
 
 card.dataset.overview = data.overview || "";
+
 card.dataset.strategy = data.strategy || "";
+
 card.dataset.highlight = data.highlight || "";
+
 card.dataset.publication = data.publication || "";
 
 
-card.dataset.tags =
-(data.tag || data.tags || []).join(",");
+
+const tags = data.tag || data.tags || [];
+
+card.dataset.tags = tags.join(",");
+
 
 
 card.dataset.resultsImages =
@@ -1857,6 +1871,11 @@ card.dataset.resultsCaptions =
 
 
 
+
+// =====================
+// Card HTML
+// =====================
+
 card.innerHTML = `
 
 <img src="${data.image || ""}">
@@ -1864,28 +1883,32 @@ card.innerHTML = `
 
 <div class="card-content">
 
+
 <h4>
-${data.title}
+${data.title || ""}
 </h4>
 
 
 <p class="research-type">
-${data.type}
+${data.type || ""}
 </p>
+
 
 
 <div class="card-tags">
 
-${(data.tag || data.tags || []).map(tag=>`
+${tags.map(tag=>`
 
 <span>${tag}</span>
 
 `).join("")}
 
+
 </div>
 
 
 </div>
+
 
 
 <div class="card-overlay">
@@ -1901,17 +1924,151 @@ View Project →
 
 
 
+
+// =====================
+// 카드 추가
+// =====================
+
 cardsContainer.appendChild(card);
 
 
-});
+
+
+// =====================
+// Firebase Card → Modal 연결
+// =====================
+
+card.addEventListener("click", ()=>{
+
+
+console.log("CLICKED:", card.dataset.title);
+
+
+
+modal.style.display="flex";
+
+
+
+modalTitle.textContent = card.dataset.title;
+
+
+modalType.textContent = card.dataset.type;
+
+
+modalImage.src = card.dataset.image;
+
+
+modalOverview.textContent = card.dataset.overview;
+
+
+modalStrategy.textContent = card.dataset.strategy;
+
+
+modalPublication.textContent = card.dataset.publication;
+
+
+
+// Highlight
+
+if(card.dataset.highlight){
+
+
+modalHighlight.textContent = card.dataset.highlight;
+
+
+document.getElementById("modal-highlight")
+.classList.remove("empty");
+
+
+}
+else{
+
+
+modalHighlight.textContent="";
+
+
+document.getElementById("modal-highlight")
+.classList.add("empty");
+
 
 }
 
 
-});
-});
-  
 
 
-</script>  
+// Results 이미지 초기화
+
+modalResultsImages.innerHTML="";
+
+
+
+const images =
+(card.dataset.resultsImages || "").split("|");
+
+
+const titles =
+(card.dataset.resultsTitles || "").split("|");
+
+
+const captions =
+(card.dataset.resultsCaptions || "").split("|");
+
+
+
+images.forEach((img,index)=>{
+
+
+if(!img.trim()) return;
+
+
+
+const wrapper=document.createElement("div");
+
+
+wrapper.className="result-item";
+
+
+
+wrapper.innerHTML = `
+
+<h4 class="result-title">
+
+${titles[index] || ""}
+
+</h4>
+
+
+
+<img src="${img.trim()}"
+class="modal-result-image">
+
+
+
+<p class="image-caption">
+
+${captions[index] || ""}
+
+</p>
+
+
+`;
+
+
+
+modalResultsImages.appendChild(wrapper);
+
+
+
+});
+
+
+
+});
+
+
+
+});
+
+
+
+</script>
