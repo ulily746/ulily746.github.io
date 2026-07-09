@@ -1788,3 +1788,46 @@ card.style.display="none";
 
 
 </script>
+
+<script type="module">
+
+// Firebase SDK
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getFirestore, collection, getDocs } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// Firebase 설정
+const firebaseConfig = {
+  apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+  authDomain: "yuri-research-portfolio.firebaseapp.com",
+  projectId: "yuri-research-portfolio",
+  storageBucket: "yuri-research-portfolio.firebasestorage.app",
+  messagingSenderId: "231317507996",
+  appId: "1:231317507996:web:9773282c138706d886c259",
+  measurementId: "G-57VHW2454E"
+};
+
+
+// Firebase 시작
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+// Firestore에서 연구 데이터 가져오기
+
+const querySnapshot = await getDocs(collection(db, "projects"));
+
+
+querySnapshot.forEach((doc)=>{
+
+  const data = doc.data();
+
+  console.log(data);
+
+});
+
+</script>  
