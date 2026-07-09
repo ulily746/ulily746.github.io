@@ -12,7 +12,6 @@
 box-sizing:border-box;
 }
 
-
 body{
 
 margin:0;
@@ -43,7 +42,7 @@ position:sticky;
 
 top:0;
 
-z-index:1000;
+z-index:10;
 
 }
 
@@ -54,10 +53,7 @@ color:#F2F2DF;
 
 text-decoration:none;
 
-font-size:16px;
-
 }
-
 
 
 .nav a:hover{
@@ -68,16 +64,13 @@ color:#8B6B4F;
 
 
 
-
-
 /* HEADER */
-
 
 .header{
 
-max-width:1300px;
+max-width:1200px;
 
-margin:70px auto 50px;
+margin:70px auto 40px;
 
 padding:0 40px;
 
@@ -87,9 +80,9 @@ padding:0 40px;
 
 .header h1{
 
-font-size:48px;
+font-size:52px;
 
-margin:0 0 15px;
+margin-bottom:10px;
 
 }
 
@@ -97,45 +90,42 @@ margin:0 0 15px;
 
 .header p{
 
-color:#666;
-
 font-size:18px;
+
+color:#666;
 
 }
 
 
 
+/* MAIN */
 
+.layout{
 
-/* MAIN LAYOUT */
-
-
-.main{
-
-max-width:1300px;
+max-width:1200px;
 
 margin:auto;
 
-padding:0 40px 80px;
+padding:30px 40px 100px;
 
 display:grid;
 
-grid-template-columns:280px 1fr;
+grid-template-columns:180px 1fr;
 
-gap:70px;
+gap:60px;
 
 }
 
 
 
-/* TIMELINE */
+/* INDEX */
 
 
-.timeline{
+.index{
 
 position:sticky;
 
-top:100px;
+top:120px;
 
 height:max-content;
 
@@ -143,35 +133,11 @@ height:max-content;
 
 
 
-.timeline-title{
+.index h3{
 
-font-size:20px;
+font-size:14px;
 
-letter-spacing:2px;
-
-margin-bottom:35px;
-
-}
-
-
-
-.line{
-
-border-left:1px solid #cfc5af;
-
-padding-left:35px;
-
-}
-
-
-
-.year{
-
-font-size:30px;
-
-font-weight:bold;
-
-color:#8B6B4F;
+letter-spacing:3px;
 
 margin-bottom:30px;
 
@@ -179,45 +145,56 @@ margin-bottom:30px;
 
 
 
+.index a{
 
-.time-card{
+display:block;
+
+margin-bottom:18px;
+
+text-decoration:none;
+
+color:#555;
+
+font-size:14px;
+
+}
+
+
+
+.index a:hover{
+
+color:#8B6B4F;
+
+}
+
+
+
+/* CONTENT */
+
+.featured{
 
 background:white;
 
-border-radius:12px;
+border-radius:18px;
 
-overflow:hidden;
-
-width:180px;
-
-margin-bottom:35px;
-
-cursor:pointer;
+padding:30px;
 
 box-shadow:
-0 5px 15px rgba(0,0,0,0.08);
+0 10px 30px rgba(0,0,0,.06);
 
-transition:.3s;
-
-}
-
-
-
-.time-card:hover{
-
-transform:translateY(-5px);
+margin-bottom:80px;
 
 }
 
 
 
-.time-card img{
+.feature-image{
 
-width:100%;
-
-height:90px;
+height:320px;
 
 background:#ddd;
+
+border-radius:12px;
 
 display:flex;
 
@@ -225,33 +202,43 @@ align-items:center;
 
 justify-content:center;
 
-}
-
-
-
-.time-card div{
-
-padding:12px;
+color:#777;
 
 }
 
 
 
-.time-card h4{
+.category{
 
-margin:0;
-
-font-size:15px;
-
-}
-
-
-
-.time-card span{
+margin-top:25px;
 
 font-size:12px;
 
-color:#888;
+letter-spacing:3px;
+
+color:#8B6B4F;
+
+font-weight:bold;
+
+}
+
+
+
+.featured h2{
+
+font-size:36px;
+
+margin:10px 0;
+
+}
+
+
+
+.featured p{
+
+color:#666;
+
+font-size:16px;
 
 }
 
@@ -259,10 +246,10 @@ color:#888;
 
 
 
-/* RIGHT AREA */
+/* COLLECTION */
 
 
-.category-section{
+.collection{
 
 margin-bottom:70px;
 
@@ -270,22 +257,17 @@ margin-bottom:70px;
 
 
 
-.category-title{
+.collection-title{
 
-font-size:15px;
-
-letter-spacing:3px;
-
-color:#8B6B4F;
+font-size:22px;
 
 margin-bottom:25px;
 
-border-bottom:1px solid #ddd2bd;
+border-bottom:1px solid #ddd;
 
 padding-bottom:10px;
 
 }
-
 
 
 
@@ -294,13 +276,11 @@ padding-bottom:10px;
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
+repeat(3,1fr);
 
-gap:30px;
+gap:25px;
 
 }
-
-
 
 
 
@@ -316,10 +296,6 @@ cursor:pointer;
 
 transition:.3s;
 
-box-shadow:
-
-0 8px 25px rgba(0,0,0,0.06);
-
 }
 
 
@@ -328,14 +304,16 @@ box-shadow:
 
 transform:translateY(-8px);
 
+box-shadow:
+0 10px 25px rgba(0,0,0,.1);
+
 }
 
 
 
+.card-image{
 
-.image{
-
-height:150px;
+height:160px;
 
 background:#ddd;
 
@@ -351,8 +329,6 @@ color:#777;
 
 
 
-
-
 .card-content{
 
 padding:18px;
@@ -361,35 +337,29 @@ padding:18px;
 
 
 
-.tag{
+.card-tag{
 
 font-size:11px;
 
-letter-spacing:2px;
-
 color:#8B6B4F;
 
-font-weight:bold;
+letter-spacing:2px;
 
 }
 
 
 
-.card h3{
+.card h4{
 
-font-size:19px;
+font-size:20px;
 
 margin:8px 0;
 
-line-height:1.3;
-
 }
 
 
 
-.date{
-
-font-size:13px;
+.card small{
 
 color:#888;
 
@@ -407,8 +377,6 @@ color:#666;
 
 
 
-
-
 /* MODAL */
 
 
@@ -420,16 +388,13 @@ position:fixed;
 
 inset:0;
 
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.65);
 
 justify-content:center;
 
 align-items:center;
 
-z-index:2000;
-
 }
-
 
 
 .modal-box{
@@ -442,7 +407,7 @@ max-width:700px;
 
 padding:40px;
 
-border-radius:15px;
+border-radius:20px;
 
 }
 
@@ -456,52 +421,36 @@ font-size:25px;
 
 cursor:pointer;
 
-color:#8B6B4F;
-
 }
-
-
-
-.modal-image{
-
-height:300px;
-
-background:#ddd;
-
-margin:25px 0;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-}
-
-
 
 
 
 @media(max-width:900px){
 
 
-.main{
+.layout{
 
 grid-template-columns:1fr;
 
 }
 
 
-
-.timeline{
+.index{
 
 position:relative;
 
 }
 
 
+.cards{
+
+grid-template-columns:1fr;
 
 }
+
+
+}
+
 
 
 </style>
@@ -511,7 +460,6 @@ position:relative;
 
 
 <body>
-
 
 
 <div class="nav">
@@ -525,7 +473,6 @@ position:relative;
 <a href="news.html">News</a>
 
 </div>
-
 
 
 
@@ -546,137 +493,41 @@ and moments beyond the laboratory.
 
 
 
-<div class="main">
+<div class="layout">
 
 
+<!-- SIDE INDEX -->
 
+<div class="index">
 
+<h3>
+INDEX
+</h3>
 
-<!-- LEFT TIMELINE -->
+<a href="#research">
+01 Research
+</a>
 
+<a href="#academic">
+02 Academic
+</a>
 
-<div class="timeline">
+<a href="#learning">
+03 Learning
+</a>
 
+<a href="#travel">
+04 Travel
+</a>
 
-<div class="timeline-title">
-TIMELINE
-</div>
-
-
-<div class="line">
-
-
-<div class="year">
-2026
-</div>
-
-
-
-<div class="time-card"
-onclick="openNews(
-'Metabolic Cancer Therapy Research'
-)">
-
-
-<div class="image">
-Image
-</div>
-
-
-<div>
-
-<h4>
-Research Milestone
-</h4>
-
-<span>
-JAN 2026
-</span>
-
-</div>
-
-</div>
-
-
-
-
-
-<div class="time-card"
-onclick="openNews(
-'International Conference'
-)">
-
-
-<div class="image">
-Image
-</div>
-
-
-<div>
-
-<h4>
-Conference
-</h4>
-
-<span>
-MAR 2026
-</span>
-
-</div>
+<a href="#life">
+05 Life
+</a>
 
 
 </div>
 
 
-
-
-
-
-<div class="year">
-2025
-</div>
-
-
-
-<div class="time-card"
-onclick="openNews(
-'Switzerland Journey'
-)">
-
-
-<div class="image">
-Image
-</div>
-
-
-<div>
-
-<h4>
-Travel
-</h4>
-
-<span>
-AUG 2025
-</span>
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-
-
-
-
-<!-- RIGHT CONTENT -->
 
 
 
@@ -684,52 +535,121 @@ AUG 2025
 
 
 
-<section class="category-section">
+<!-- FEATURE -->
+
+<div class="featured">
 
 
-<div class="category-title">
-RESEARCH
+<div class="feature-image">
+Featured Image
+</div>
+
+
+<div class="category">
+FEATURED STORY
+</div>
+
+
+<h2>
+Metabolic Cancer Therapy Research
+</h2>
+
+
+<p>
+Exploring innovative therapeutic strategies
+through metabolic regulation and nanoparticle
+delivery systems.
+</p>
+
+
+</div>
+
+
+
+
+
+
+<!-- RESEARCH -->
+
+<section class="collection" id="research">
+
+
+<div class="collection-title">
+Research
 </div>
 
 
 <div class="cards">
 
 
-<div class="card"
-onclick="openNews('Metabolic Cancer Therapy Research')">
+<div class="card">
 
 
-<div class="image">
+<div class="card-image">
 Research Photo
 </div>
 
 
 <div class="card-content">
 
-<div class="tag">
+<div class="card-tag">
 RESEARCH
 </div>
 
 
-<h3>
-Metabolic Cancer Therapy
-</h3>
+<h4>
+Cancer Therapy Project
+</h4>
 
 
-<div class="date">
-January 2026
-</div>
+<small>
+2026
+</small>
 
 
 <p>
-Nanoparticle-based cancer therapy research journey.
+Research progress and scientific journey.
 </p>
 
+</div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+
+<div class="card-image">
+Research Photo
+</div>
+
+
+<div class="card-content">
+
+<div class="card-tag">
+RESEARCH
+</div>
+
+
+<h4>
+Nanoparticle Study
+</h4>
+
+
+<small>
+2025
+</small>
+
 
 </div>
 
 
 </div>
+
+
 
 </div>
 
@@ -741,54 +661,49 @@ Nanoparticle-based cancer therapy research journey.
 
 
 
+<!-- ACADEMIC -->
 
 
+<section class="collection" id="academic">
 
-<section class="category-section">
 
-
-<div class="category-title">
-ACADEMIC
+<div class="collection-title">
+Academic
 </div>
 
 
 <div class="cards">
 
 
-<div class="card"
-onclick="openNews('International Conference')">
+<div class="card">
 
 
-<div class="image">
+<div class="card-image">
 Conference Photo
 </div>
 
 
 <div class="card-content">
 
-<div class="tag">
+<div class="card-tag">
 ACADEMIC
 </div>
 
-<h3>
-International Conference
-</h3>
+
+<h4>
+Conference Presentation
+</h4>
 
 
-<div class="date">
-March 2026
-</div>
+<small>
+2026
+</small>
 
-
-<p>
-Sharing research and scientific discussions.
-</p>
 
 </div>
 
 
 </div>
-
 
 
 </div>
@@ -802,55 +717,50 @@ Sharing research and scientific discussions.
 
 
 
+<!-- LEARNING -->
 
 
-<section class="category-section">
+<section class="collection" id="learning">
 
 
-<div class="category-title">
-TRAVEL & LIFE
+<div class="collection-title">
+Learning
 </div>
 
 
 <div class="cards">
 
 
-<div class="card"
-onclick="openNews('Switzerland Journey')">
+<div class="card">
 
 
-<div class="image">
-Travel Photo
+<div class="card-image">
+Certificate
 </div>
 
 
 <div class="card-content">
 
-<div class="tag">
-TRAVEL
+
+<div class="card-tag">
+LEARNING
 </div>
 
 
-<h3>
-Switzerland Journey
-</h3>
+<h4>
+Python Certification
+</h4>
 
 
-<div class="date">
-August 2025
-</div>
-
-
-<p>
-Memories beyond the laboratory.
-</p>
+<small>
+2026
+</small>
 
 
 </div>
 
 
 </div>
-
 
 
 </div>
@@ -862,83 +772,67 @@ Memories beyond the laboratory.
 
 
 
+
+
+<!-- TRAVEL -->
+
+
+<section class="collection" id="travel">
+
+
+<div class="collection-title">
+Travel
+</div>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+
+<div class="card-image">
+Travel Photo
+</div>
+
+
+<div class="card-content">
+
+
+<div class="card-tag">
+TRAVEL
+</div>
+
+
+<h4>
+Switzerland Journey
+</h4>
+
+
+<small>
+2025
+</small>
+
+
 </div>
 
 
 </div>
 
 
-
-
-
-
-
-<!-- MODAL -->
-
-
-<div class="modal" id="modal">
-
-
-<div class="modal-box">
-
-
-<span class="close"
-onclick="closeNews()">
-×
-</span>
-
-
-<h2 id="title"></h2>
-
-
-<div class="modal-image">
-Image
 </div>
 
 
-<p>
-Detailed story will appear here.
-</p>
+</section>
+
 
 
 </div>
-
 
 </div>
 
 
 
-
-
-
-
-<script>
-
-
-function openNews(title){
-
-document.getElementById("modal")
-.style.display="flex";
-
-
-document.getElementById("title")
-.innerHTML=title;
-
-
-}
-
-
-
-function closeNews(){
-
-document.getElementById("modal")
-.style.display="none";
-
-}
-
-
-
-</script>
 
 
 
