@@ -1834,6 +1834,7 @@ card.style.display="none";
 
 console.log("🔥 Firebase script started");
 
+
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
@@ -1841,7 +1842,6 @@ import { getFirestore, collection, getDocs }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-// Firebase 설정
 const firebaseConfig = {
   apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
   authDomain: "yuri-research-portfolio.firebaseapp.com",
@@ -1858,12 +1858,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 
-const cardsContainer = document.getElementById("research-cards");
+const cardsContainer =
+document.getElementById("research-cards");
 
-cardsContainer.innerHTML = "";
+
+cardsContainer.innerHTML="";
 
 
-const querySnapshot = await getDocs(collection(db, "projects"));
+const querySnapshot =
+await getDocs(collection(db,"projects"));
 
 
 
@@ -1874,71 +1877,64 @@ const data = doc.data();
 
 
 console.log("PROJECT:", data.title);
-console.log(data);
 
 
 
-const card = document.createElement("div");
+const card=document.createElement("div");
 
-card.className = "card";
-
-
-
-// =====================
-// Dataset 저장
-// =====================
-
-card.dataset.title = data.title || "";
-
-card.dataset.type = data.type || "";
-
-card.dataset.image = data.image || "";
-
-card.dataset.overview = data.overview || "";
-
-card.dataset.strategy = data.strategy || "";
-
-card.dataset.highlight = data.highlight || "";
-
-card.dataset.publication = data.publication || "";
-
-card.dataset.results = data.results || "";
-
-const tags = data.tag || data.tags || [];
-
-card.dataset.tags = tags.join(",");
+card.className="card";
 
 
 
-card.dataset.resultsImages =
+// dataset
+
+card.dataset.title=data.title || "";
+
+card.dataset.type=data.type || "";
+
+card.dataset.image=data.image || "";
+
+card.dataset.overview=data.overview || "";
+
+card.dataset.strategy=data.strategy || "";
+
+card.dataset.highlight=data.highlight || "";
+
+card.dataset.publication=data.publication || "";
+
+card.dataset.results=data.results || "";
+
+
+
+const tags=data.tags || [];
+
+card.dataset.tags=tags.join(",");
+
+
+
+card.dataset.resultsImages=
 (data.resultsImages || []).join("|");
 
 
-card.dataset.resultsTitles =
+card.dataset.resultsTitles=
 (data.resultsTitles || []).join("|");
 
 
-card.dataset.resultsCaptions =
+card.dataset.resultsCaptions=
 (data.resultsCaptions || []).join("|");
 
 
 
 
-// =====================
-// Card HTML
-// =====================
 
-card.innerHTML = `
+card.innerHTML=`
 
 <img src="${data.image || ""}">
 
 
 <div class="card-content">
 
-
-<h4>
-${data.title || ""}
-</h4>
+<h4>${data.title || ""}</h4>
 
 
 <p class="research-type">
@@ -1946,13 +1942,10 @@ ${data.type || ""}
 </p>
 
 
-
 <div class="card-tags">
 
 ${tags.map(tag=>`
-
 <span>${tag}</span>
-
 `).join("")}
 
 
@@ -1971,67 +1964,55 @@ View Project →
 
 </div>
 
-
 `;
 
 
-
-
-// =====================
-// 카드 추가
-// =====================
 
 cardsContainer.appendChild(card);
 
 
 
 
-// =====================
-// Firebase Card → Modal 연결
-// =====================
 
-card.addEventListener("click", ()=>{
+// =================
+// Modal Click
+// =================
+
+card.addEventListener("click",()=>{
 
 
-console.log("CLICKED:", data.title);
+console.log("CLICKED:",data.title);
 
 
 
 modal.style.display="flex";
 
 
+modalTitle.textContent=data.title || "";
 
-modalTitle.textContent = data.title || "";
+modalType.textContent=data.type || "";
 
+modalImage.src=data.image || "";
 
-modalType.textContent = data.type || "";
+modalOverview.textContent=data.overview || "";
 
+modalStrategy.textContent=data.strategy || "";
 
-modalImage.src = data.image || "";
-
-
-modalOverview.textContent = data.overview || "";
-
-
-modalStrategy.textContent = data.strategy || "";
-
-
-modalPublication.textContent = data.publication || "";
+modalPublication.textContent=data.publication || "";
 
 
 
 
-// Highlight
+// highlight
 
-const highlightBox =
+const highlightBox=
 document.getElementById("modal-highlight");
 
 
 if(data.highlight){
 
 
-modalHighlight.textContent = data.highlight;
-
+modalHighlight.textContent=data.highlight;
 
 highlightBox.classList.remove("empty");
 
@@ -2042,7 +2023,6 @@ else{
 
 modalHighlight.textContent="";
 
-
 highlightBox.classList.add("empty");
 
 
@@ -2052,68 +2032,75 @@ highlightBox.classList.add("empty");
 
 
 
-// Results 초기화
+// results reset
 
 modalResultsImages.innerHTML="";
 
-const resultsSection = modalResultsImages.closest(".modal-section");
+
+// 서포트 연구는 Key Results 숨김
+
+const resultsSection =
+modalResultsImages.closest(".modal-section");
 
 
-if(data.title === "Metal–Phenolic Networks for Cancer Immunotherapy"){
+
+if(data.title === 
+"Metal–Phenolic Networks for Cancer Immunotherapy"){
+
 
 resultsSection.style.display="none";
+
 
 }
 else{
 
+
 resultsSection.style.display="block";
 
-}  
 
-// 1. 이미지 결과 있는 경우
-if(card.dataset.resultsImages){
 
-const images = card.dataset.resultsImages.split("|");
+const images=data.resultsImages || [];
 
-const captions =
-(card.dataset.resultsCaptions || "").split("|");
+const titles=data.resultsTitles || [];
 
-const titles =
-(card.dataset.resultsTitles || "").split("|");
+const captions=data.resultsCaptions || [];
+
 
 
 images.forEach((img,index)=>{
 
 
-});
-
-}
-
-
-// 2. 텍스트 결과만 있는 경우
-if(
-(!card.dataset.resultsImages || card.dataset.resultsImages === "") 
-&& card.dataset.results
-){
-
 const wrapper=document.createElement("div");
+
 
 wrapper.className="result-item";
 
+
 wrapper.innerHTML=`
 
+<h4 class="result-title">
+${titles[index] || ""}
+</h4>
+
+
+<img 
+src="${img}"
+class="modal-result-image">
+
+
 <p class="image-caption">
-${card.dataset.results}
+${captions[index] || ""}
 </p>
 
 `;
 
-modalResultsImages.appendChild(wrapper);
 
-}
+modalResultsImages.appendChild(wrapper);
 
 
 });
+
+}
 
 
 
