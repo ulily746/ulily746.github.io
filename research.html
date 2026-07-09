@@ -1902,7 +1902,7 @@ card.dataset.highlight = data.highlight || "";
 
 card.dataset.publication = data.publication || "";
 
-
+card.dataset.results = data.results || "";
 
 const tags = data.tag || data.tags || [];
 
@@ -2057,49 +2057,49 @@ highlightBox.classList.add("empty");
 modalResultsImages.innerHTML="";
 
 
+// 1. 이미지 결과 있는 경우
+if(card.dataset.resultsImages){
+
+const images = card.dataset.resultsImages.split("|");
+
+const captions =
+(card.dataset.resultsCaptions || "").split("|");
+
+const titles =
+(card.dataset.resultsTitles || "").split("|");
 
 
-// Results 이미지
+images.forEach((img,index)=>{
 
-(data.resultsImages || []).forEach((img,index)=>{
+...
 
+
+});
+
+}
+
+
+// 2. 텍스트 결과만 있는 경우
+if(
+(!card.dataset.resultsImages || card.dataset.resultsImages === "") 
+&& card.dataset.results
+){
 
 const wrapper=document.createElement("div");
 
-
 wrapper.className="result-item";
 
-
-
-wrapper.innerHTML = `
-
-
-<h4 class="result-title">
-
-${data.resultsTitles?.[index] || ""}
-
-</h4>
-
-
-
-<img src="${img}"
-class="modal-result-image">
-
-
+wrapper.innerHTML=`
 
 <p class="image-caption">
-
-${data.resultsCaptions?.[index] || ""}
-
+${card.dataset.results}
 </p>
-
 
 `;
 
-
-
 modalResultsImages.appendChild(wrapper);
 
+}
 
 
 });
