@@ -1884,7 +1884,92 @@ View Project →
 
 cardsContainer.appendChild(card);
 
+card.addEventListener("click", function(){
 
+modal.style.display='flex';
+
+
+modalTitle.textContent = card.dataset.title;
+
+modalType.textContent = card.dataset.type;
+
+modalImage.src = card.dataset.image;
+
+modalOverview.textContent = card.dataset.overview;
+
+modalStrategy.textContent = card.dataset.strategy;
+
+modalPublication.textContent = card.dataset.publication;
+
+
+
+if(card.dataset.highlight){
+
+modalHighlight.textContent = card.dataset.highlight;
+
+document.getElementById('modal-highlight')
+.classList.remove('empty');
+
+}
+else{
+
+document.getElementById('modal-highlight')
+.classList.add('empty');
+
+}
+
+
+
+modalResultsImages.innerHTML="";
+
+
+if(card.dataset.resultsImages){
+
+const images =
+card.dataset.resultsImages.split("|");
+
+const captions =
+(card.dataset.resultsCaptions || "").split("|");
+
+const titles =
+(card.dataset.resultsTitles || "").split("|");
+
+
+images.forEach((img,index)=>{
+
+
+const wrapper=document.createElement("div");
+
+wrapper.className="result-item";
+
+
+wrapper.innerHTML=`
+
+<h4 class="result-title">
+${titles[index] || ""}
+</h4>
+
+<img src="${img.trim()}"
+class="modal-result-image">
+
+
+<p class="image-caption">
+${captions[index] || ""}
+</p>
+
+`;
+
+
+modalResultsImages.appendChild(wrapper);
+
+
+});
+
+
+}
+
+
+});
 });
   
 
