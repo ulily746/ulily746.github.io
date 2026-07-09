@@ -1524,119 +1524,11 @@ const modalOverview = document.getElementById('modal-overview');
 
 const modalStrategy = document.getElementById('modal-strategy');
 
-const modalResults = document.getElementById('modal-results');
-
-const modalPublication = document.getElementById('modal-publication');
+const modalPublication =
+document.getElementById('modal-publication');
 
 const modalHighlight =
 document.getElementById('modal-highlight-text');
-  
-// ======================
-// Open Modal when Card Click
-// ======================
-
-document.addEventListener("click", function(e){
-
-
-const card = e.target.closest(".card");
-
-
-if(!card) return;
-
-document.querySelector('.close').onclick = function(){
- modal.style.display='none';
-}
-  
-modal.style.display='flex';
-
-
-modalTitle.textContent = card.dataset.title;
-
-modalType.textContent = card.dataset.type;
-
-modalImage.src = card.dataset.image;
-
-modalOverview.textContent = card.dataset.overview;
-
-modalStrategy.textContent = card.dataset.strategy;
-
-
-if(card.dataset.highlight){
-
-modalHighlight.textContent = card.dataset.highlight;
-
-document.getElementById('modal-highlight')
-.classList.remove('empty');
-
-}
-else{
-
-modalHighlight.textContent="";
-
-document.getElementById('modal-highlight')
-.classList.add('empty');
-
-}
-
-
-modalResultsImages.innerHTML="";
-
-
-modalPublication.textContent =
-card.dataset.publication;
-
-
-
-if(card.dataset.resultsImages){
-
-const images =
-card.dataset.resultsImages.split("|");
-
-const captions =
-(card.dataset.resultsCaptions || "").split("|");
-
-const titles =
-(card.dataset.resultsTitles || "").split("|");
-
-
-images.forEach((img,index)=>{
-
-
-const wrapper=document.createElement("div");
-
-wrapper.className="result-item";
-
-
-wrapper.innerHTML=`
-
-<h4 class="result-title">
-${titles[index] || ""}
-</h4>
-
-
-<img src="${img.trim()}"
-class="modal-result-image">
-
-
-<p class="image-caption">
-${captions[index] || ""}
-</p>
-
-`;
-
-
-modalResultsImages.appendChild(wrapper);
-
-
-});
-
-}
-
-
-});
-
-
-});
 
 
 
@@ -1645,31 +1537,191 @@ modalResultsImages.appendChild(wrapper);
 // Close Modal
 // ======================
 
+const closeButton = document.querySelector('.close');
 
-document.querySelector('.close').addEventListener('click', ()=>{
 
+closeButton.addEventListener('click', ()=>{
 
-modal.style.display='none';
-
+modal.style.display = "none";
 
 });
 
 
 
-window.addEventListener('click', e=>{
+window.addEventListener('click', (e)=>{
 
 
 if(e.target === modal){
 
-
-modal.style.display='none';
-
+modal.style.display = "none";
 
 }
 
 
 });
 
+
+
+
+// ======================
+// Firebase Card Modal Function
+// ======================
+
+function openModal(data){
+
+
+modal.style.display = "flex";
+
+
+
+// Title
+
+modalTitle.textContent = data.title || "";
+
+
+
+// Type
+
+modalType.textContent = data.type || "";
+
+
+
+// Main Image
+
+modalImage.src = data.image || "";
+
+
+
+// Overview
+
+modalOverview.textContent =
+data.overview || "";
+
+
+
+// Strategy
+
+modalStrategy.textContent =
+data.strategy || "";
+
+
+
+// Publication
+
+modalPublication.textContent =
+data.publication || "";
+
+
+
+
+
+// Highlight
+
+const highlightBox =
+document.getElementById('modal-highlight');
+
+
+if(data.highlight){
+
+
+modalHighlight.textContent =
+data.highlight;
+
+
+highlightBox.classList.remove("empty");
+
+
+}
+else{
+
+
+modalHighlight.textContent = "";
+
+
+highlightBox.classList.add("empty");
+
+
+}
+
+
+
+
+
+// Results 초기화
+
+modalResultsImages.innerHTML = "";
+
+
+
+
+
+// Results Images
+
+const images =
+data.resultsImages || [];
+
+
+
+const titles =
+data.resultsTitles || [];
+
+
+
+const captions =
+data.resultsCaptions || [];
+
+
+
+
+
+images.forEach((img,index)=>{
+
+
+const wrapper =
+document.createElement("div");
+
+
+wrapper.className =
+"result-item";
+
+
+
+wrapper.innerHTML = `
+
+
+<h4 class="result-title">
+
+${titles[index] || ""}
+
+</h4>
+
+
+
+<img 
+src="${img}"
+class="modal-result-image">
+
+
+
+<p class="image-caption">
+
+${captions[index] || ""}
+
+</p>
+
+
+`;
+
+
+
+modalResultsImages.appendChild(wrapper);
+
+
+
+});
+
+
+}
 
 
 
@@ -1941,7 +1993,7 @@ cardsContainer.appendChild(card);
 card.addEventListener("click", ()=>{
 
 
-console.log("CLICKED:", card.dataset.title);
+console.log("CLICKED:", data.title);
 
 
 
@@ -1949,35 +2001,39 @@ modal.style.display="flex";
 
 
 
-modalTitle.textContent = card.dataset.title;
+modalTitle.textContent = data.title || "";
 
 
-modalType.textContent = card.dataset.type;
+modalType.textContent = data.type || "";
 
 
-modalImage.src = card.dataset.image;
+modalImage.src = data.image || "";
 
 
-modalOverview.textContent = card.dataset.overview;
+modalOverview.textContent = data.overview || "";
 
 
-modalStrategy.textContent = card.dataset.strategy;
+modalStrategy.textContent = data.strategy || "";
 
 
-modalPublication.textContent = card.dataset.publication;
+modalPublication.textContent = data.publication || "";
+
 
 
 
 // Highlight
 
-if(card.dataset.highlight){
+const highlightBox =
+document.getElementById("modal-highlight");
 
 
-modalHighlight.textContent = card.dataset.highlight;
+if(data.highlight){
 
 
-document.getElementById("modal-highlight")
-.classList.remove("empty");
+modalHighlight.textContent = data.highlight;
+
+
+highlightBox.classList.remove("empty");
 
 
 }
@@ -1987,8 +2043,7 @@ else{
 modalHighlight.textContent="";
 
 
-document.getElementById("modal-highlight")
-.classList.add("empty");
+highlightBox.classList.add("empty");
 
 
 }
@@ -1996,30 +2051,17 @@ document.getElementById("modal-highlight")
 
 
 
-// Results 이미지 초기화
+
+// Results 초기화
 
 modalResultsImages.innerHTML="";
 
 
 
-const images =
-(card.dataset.resultsImages || "").split("|");
 
+// Results 이미지
 
-const titles =
-(card.dataset.resultsTitles || "").split("|");
-
-
-const captions =
-(card.dataset.resultsCaptions || "").split("|");
-
-
-
-images.forEach((img,index)=>{
-
-
-if(!img.trim()) return;
-
+(data.resultsImages || []).forEach((img,index)=>{
 
 
 const wrapper=document.createElement("div");
@@ -2031,22 +2073,23 @@ wrapper.className="result-item";
 
 wrapper.innerHTML = `
 
+
 <h4 class="result-title">
 
-${titles[index] || ""}
+${data.resultsTitles?.[index] || ""}
 
 </h4>
 
 
 
-<img src="${img.trim()}"
+<img src="${img}"
 class="modal-result-image">
 
 
 
 <p class="image-caption">
 
-${captions[index] || ""}
+${data.resultsCaptions?.[index] || ""}
 
 </p>
 
