@@ -91,7 +91,7 @@ margin-bottom:45px;
 }
 
 .sidebar-section h4{
-margin-bottom:14px;
+margin-bottom:18px;
 color:#8B6B4F;
 font-size:15px;
 letter-spacing:0.3px;
@@ -216,15 +216,33 @@ padding-left:18px;
 line-height:1.6;
 }
 
-.skill-list{
-    font-size:14px;
-    color:#444;
-    line-height:2;
+.skill-tags{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:8px;
+
 }
 
-.skill-list span:not(:last-child)::after{
-    content:" · ";
-    color:#b7a68e;
+
+.skill-tags span{
+
+padding:5px 12px;
+
+border:1px solid #ddd8cb;
+
+border-radius:5px;
+
+font-size:13px;
+
+color:#444;
+
+background:#faf8f3;
+
+line-height:1.5;
+
 }
     
 /* EMAIL MODAL */
@@ -395,7 +413,13 @@ opacity:1;
     color:#8B6B4F;
     font-size:14px;
 }
-    
+/* Updated-date */
+.updated-date{
+    text-align:right;
+    font-size:12px;
+    color:#999;
+    margin-bottom:25px;
+}    
 /* MOBILE */
 
 @media (max-width:900px){
@@ -557,6 +581,10 @@ LinkedIn
 
 <div class="cv-content">
 
+<div class="updated-date">
+Last updated: July 2026
+</div>    
+
 <section>
 
 <h2>Summary</h2>
@@ -630,50 +658,27 @@ Building upon this foundation, I aim to integrate advanced biomedical technologi
 </div>
 </div>
 
-</section>
-
-
-
 <section>
 
 <h2>Technical Skills</h2>
 
 <div class="cv-row">
 
-<div class="cv-label">Laboratory Techniques</div>
-
-<div class="skill-list">
-
-<div>Nanoparticle synthesis</div>
-<div>Cell culture</div>
-
-<div>Western blotting</div>
-<div>MTT / ROS / JC-1 assays</div>
-
-<div>ATP / GSH assays</div>
-<div>MitoSOX / Lactate & Glucose assays</div>
-
+<div class="cv-label">
+Laboratory Techniques
 </div>
 
-</div>
+<div class="skill-tags">
 
-<div class="cv-row">
-
-<div class="cv-label">Instrumentation</div>
-
-<div class="skill-list">
-
-<div>DLS</div>
-<div>TEM</div>
-
-<div>SEM</div>
-<div>HPLC</div>
-
-<div>CLSM</div>
-<div>Flow Cytometery</div>
-
-<div>Microplate Reader</div>
-<div>Tangential Flow Filtration</div>
+<span>Nanoparticle Synthesis</span>
+<span>Cell Culture</span>
+<span>Western Blotting</span>
+<span>MTT Assay</span>
+<span>ROS Analysis</span>
+<span>JC-1 Assay</span>
+<span>ATP / GSH Assays</span>
+<span>MitoSOX Analysis</span>
+<span>Lactate & Glucose Assays</span>
 
 </div>
 
@@ -682,15 +687,41 @@ Building upon this foundation, I aim to integrate advanced biomedical technologi
 
 <div class="cv-row">
 
-    <div class="cv-label">Computational & Data Analysis</div>
+<div class="cv-label">
+Instrumentation
+</div>
 
-    <div class="skill-list">
-        <div>GraphPad Prism</div>
-        <div>CompuSyn</div>
+<div class="skill-tags">
 
-        <div>FlowJo</div>
-        <div>ZEN</div>
-    </div>
+<span>DLS</span>
+<span>TEM</span>
+<span>SEM</span>
+<span>HPLC</span>
+<span>CLSM</span>
+<span>Flow Cytometry</span>
+<span>Microplate Reader</span>
+<span>Tangential Flow Filtration</span>
+
+</div>
+
+</div>
+
+
+
+<div class="cv-row">
+
+<div class="cv-label">
+Computational & Data Analysis
+</div>
+
+<div class="skill-tags">
+
+<span>GraphPad Prism</span>
+<span>CompuSyn</span>
+<span>FlowJo</span>
+<span>ZEN</span>
+
+</div>
 
 </div>
 
