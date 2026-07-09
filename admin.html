@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Research Admin</title>
+
+<style>
+
+body{
+
+font-family:Arial, Helvetica, sans-serif;
+
+background:#F2F2DF;
+
+padding:40px;
+
+color:#1A1A1A;
+
+}
+
+
+.container{
+
+max-width:800px;
+
+margin:auto;
+
+background:white;
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+}
+
+
+
+h1{
+
+color:#8B6B4F;
+
+}
+
+
+
+label{
+
+display:block;
+
+margin-top:20px;
+
+font-weight:bold;
+
+font-size:14px;
+
+}
+
+
+
+input, textarea{
+
+width:100%;
+
+padding:12px;
+
+margin-top:8px;
+
+border:1px solid #ddd;
+
+border-radius:8px;
+
+box-sizing:border-box;
+
+font-size:14px;
+
+}
+
+
+
+textarea{
+
+height:120px;
+
+}
+
+
+
+button{
+
+margin-top:30px;
+
+padding:15px 30px;
+
+border:none;
+
+background:#8B6B4F;
+
+color:white;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:15px;
+
+}
+
+
+button:hover{
+
+background:#6a4e38;
+
+}
+
+
+#message{
+
+margin-top:20px;
+
+font-weight:bold;
+
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+Research Upload
+</h1>
+
+<label>
+Title
+</label>
+
+<input id="title">
+
+<label>
+Type
+</label>
+
+<input id="type">
+
+<label>
+Image Path
+</label>
+
+<input id="image"
+placeholder="example: scheme.png">
+
+<label>
+Overview
+</label>
+
+<textarea id="overview"></textarea>
+
+<label>
+Research Strategy
+</label>
+
+<textarea id="strategy"></textarea>
+
+<label>
+Research Highlight
+</label>
+
+<textarea id="highlight"></textarea>
+
+<label>
+Publication
+</label>
+
+<textarea id="publication"></textarea>
+
+<label>
+Tags (comma separated)
+</label>
+
+<input id="tags"
+placeholder="Cancer Metabolism, Nanomedicine">
+
+<hr>
+
+<h3>
+Key Results
+</h3>
+
+<label>
+Result Images (use | between images)
+</label>
+
+<input id="resultsImages"
+placeholder="img1.png|img2.png|img3.png">
+
+<label>
+Result Titles (use | between titles)
+</label>
+
+<input id="resultsTitles"
+placeholder="Title1|Title2|Title3">
+
+<label>
+Result Captions (use | between captions)
+</label>
+
+<textarea id="resultsCaptions"></textarea>
+
+<button id="save">
+
+Save Project
+
+</button>
+
+<p id="message"></p>
+
+</div>
+
+<script type="module">
+
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import { 
+
+getFirestore,
+
+collection,
+
+addDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+
+const firebaseConfig = {
+
+
+apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+authDomain: "yuri-research-portfolio.firebaseapp.com",
+
+projectId: "yuri-research-portfolio",
+
+storageBucket: "yuri-research-portfolio.firebasestorage.app",
+
+messagingSenderId: "231317507996",
+
+appId: "1:231317507996:web:9773282c138706d886c259",
+
+measurementId: "G-57VHW2454E"
+
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+
+
+
+
+document
+.getElementById("save")
+.addEventListener("click", async ()=>{
+
+
+try{
+
+
+const tags = 
+
+document
+.getElementById("tags")
+.value
+
+.split(",")
+
+.map(t=>t.trim())
+
+.filter(t=>t);
+
+
+
+const resultsImages =
+
+document
+.getElementById("resultsImages")
+.value
+
+.split("|")
+
+.map(t=>t.trim())
+
+.filter(t=>t);
+
+
+
+const resultsTitles =
+
+document
+.getElementById("resultsTitles")
+.value
+
+.split("|")
+
+.map(t=>t.trim())
+
+.filter(t=>t);
+
+
+
+const resultsCaptions =
+
+document
+.getElementById("resultsCaptions")
+.value
+
+.split("|")
+
+.map(t=>t.trim())
+
+.filter(t=>t);
+
+
+
+
+
+
+await addDoc(
+
+collection(db,"projects"),
+
+{
+
+
+title:
+document.getElementById("title").value,
+
+
+type:
+document.getElementById("type").value,
+
+
+image:
+document.getElementById("image").value,
+
+
+overview:
+document.getElementById("overview").value,
+
+
+strategy:
+document.getElementById("strategy").value,
+
+
+highlight:
+document.getElementById("highlight").value,
+
+
+publication:
+document.getElementById("publication").value,
+
+
+tags:tags,
+
+
+resultsImages:resultsImages,
+
+
+resultsTitles:resultsTitles,
+
+
+resultsCaptions:resultsCaptions
+
+
+}
+
+
+
+);
+
+
+
+
+
+document.getElementById("message")
+.innerHTML=
+
+"✅ Project uploaded successfully";
+
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+document.getElementById("message")
+.innerHTML=
+
+"❌ Upload failed";
+
+
+}
+
+
+
+});
+
+
+
+</script>
+
+</body>
+
+</html>
