@@ -579,13 +579,13 @@ margin-top:10px;
 
 .image-caption{
 
-font-size:12px;
+font-size:13px;
 
-line-height:1.6;
+line-height:1.7;
 
 color:#777;
 
-margin-top:8px;
+margin-top:10px;
 
 font-style:italic;
 
@@ -862,6 +862,15 @@ PLGA–PEG Nanoparticles
 M.S. Thesis · Independent Research
 </p>
 
+<div class="card-tags">
+
+<span>Cancer Metabolism</span>
+
+<span>Nanomedicine</span>
+
+<span>Drug Delivery</span>
+
+</div>
 
 </div>
 
@@ -1137,7 +1146,10 @@ modalStrategy.textContent = card.dataset.strategy;
 
 modalResults.textContent = card.dataset.results;
 
+// reset result images
 
+modalResultsImages.innerHTML = "";
+  
 // publication
 
 modalPublication.textContent = card.dataset.publication;
