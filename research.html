@@ -710,14 +710,14 @@ font-style:italic;
 
     <ul>
 
-      <li>
-      Metal–Phenolic Networks for Cancer Immunotherapy
-      </li>
+     <li>
+Nanoparticle-Mediated Dual Regulation of Glycolysis and Oxidative Phosphorylation in Hepatocellular Carcinoma
+</li>
 
 
-      <li>
-      Dual metabolic therapy using nanoparticles
-      </li>
+<li>
+Metal–Phenolic Networks Reverse the Immunosuppressive Tumor Microenvironment
+</li>
 
     </ul>
 
@@ -841,7 +841,9 @@ Mitochondrial dysfunction and oxidative stress: JC-1, MitoSOX, and ROS analysis 
 
 
 data-publication="
-Manuscript in preparation.
+Nanoparticle-Mediated Dual Regulation of Glycolysis and Oxidative Phosphorylation Selectively Overcomes Metabolic Plasticity in Hepatocellular Carcinoma.
+
+ACS Applied Nano Materials, 9(4), 1760–1771 (2026)
 ">
 
 
@@ -888,39 +890,98 @@ View Project →
 </div>
 
 
-    <!-- Supporting Research -->
-    <div class="card"
-      data-category="support"
-      data-title="Metal-Phenolic Networks for Cancer Metabolism Modulation"
-      data-image="NHY.jpg"
-      data-detail="
-Background:
-Cancer cells rely heavily on aerobic glycolysis, which contributes to an immunosuppressive tumor microenvironment (TME) by depleting glucose and producing metabolites such as lactate.
+   <!-- Supporting Research -->
+<div class="card"
 
-Strategy:
-Metal-phenolic networks (MPNs) were developed by coating zinc oxide (ZnO) nanoparticles with epigallocatechin gallate (EGCG) to regulate cancer cell metabolism.
+data-tags="Cancer Metabolism,Nanomedicine,Cancer Immunotherapy"
 
-Mechanism:
-Under acidic tumor conditions, MPNs release Zn²⁺ ions and EGCG, inhibiting both glycolysis and mitochondrial metabolism.
+data-title="Metal–Phenolic Networks for Cancer Immunotherapy"
 
-Key Outcome:
-Dual metabolic inhibition induced immunogenic cell death (ICD), promoted dendritic cell maturation, activated cytotoxic T cells, and suppressed regulatory T cells.
+data-image="NHY.jpg"
+
+data-type="Supporting Research · Experimental Contribution"
+
+
+data-overview="
+Cancer cells exhibit metabolic reprogramming that contributes to an immunosuppressive tumor microenvironment.
+
+This project developed metal–phenolic networks (MPNs) to regulate cancer metabolism and enhance antitumor immune responses.
+"
+
+
+
+data-strategy="
+Metal–phenolic networks were constructed by coating zinc oxide nanoparticles with epigallocatechin gallate (EGCG).
+
+The platform was designed to modulate glycolysis and mitochondrial metabolism under tumor-associated acidic conditions.
+"
+
+
+
+data-results="
+Metabolic regulation by metal–phenolic networks induced immunogenic cell death and remodeled the tumor microenvironment.
+
+The treatment promoted dendritic cell maturation, enhanced cytotoxic T cell activation, and reduced immunosuppressive regulatory T cell populations.
+
 
 Contribution:
-Assisted with experimental procedures including nanoparticle preparation and biological experiments supporting the project.
 
-Publication:
-Metal-phenolic networks reverse the immunosuppressive tumor microenvironment via metabolic regulation and immunogenic cell death.
+Supported nanoparticle preparation and biological evaluation experiments.
+
+Contributed to methodology development and experimental validation.
+"
+
+
+
+data-publication="
+Nam H., Park H., Son M., Kang I., Choi Y., et al.
+
+Metal–phenolic networks reverse the immunosuppressive tumor microenvironment.
+
+Journal of Controlled Release, 383, 11375 (2025)
 ">
 
-      <img src="NHY.jpg" alt="Supported Research">
 
-      <div class="card-content">
-        <h4>Metal-phenolic networks for cancer immunotherapy</h4>
-        <p>Supporting Research Project</p>
-        <button class="read-more">View More</button>
-      </div>
-    </div>
+<img src="NHY.jpg" 
+alt="Metal–Phenolic Networks for Cancer Immunotherapy">
+
+
+<div class="card-content">
+
+<h4>
+Metal–Phenolic Networks for Cancer Immunotherapy
+</h4>
+
+
+<p class="research-type">
+Supporting Research · Experimental Contribution
+</p>
+
+
+<div class="card-tags">
+
+<span>Cancer Metabolism</span>
+
+<span>Nanomedicine</span>
+
+<span>Cancer Immunotherapy</span>
+
+</div>
+
+
+</div>
+
+
+<div class="card-overlay">
+
+<span>
+View Project →
+</span>
+
+</div>
+
+
+</div>
 
 
  <!-- Undergraduate Research -->
@@ -992,7 +1053,7 @@ alt="Exosome isolation using Tangential Flow Filtration">
 <div class="card-content">
 
 <h4>
-Exosome Isolation via 
+Size-Based Exosome Isolation via 
 Tangential Flow Filtration
 </h4>
 
@@ -1355,8 +1416,12 @@ document.querySelectorAll('.card').forEach(card=>{
 const title = card.dataset.title.toLowerCase();
 
 
-const detail = card.dataset.detail.toLowerCase();
-
+const detail = (
+card.dataset.overview || 
+card.dataset.strategy || 
+card.dataset.results || 
+""
+).toLowerCase();
 
 
 if(title.includes(keyword) || detail.includes(keyword)){
