@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -7,6 +6,7 @@
 <meta charset="UTF-8">
 
 <title>Research Admin</title>
+
 
 <style>
 
@@ -23,9 +23,10 @@ color:#1A1A1A;
 }
 
 
+
 .container{
 
-max-width:800px;
+max-width:900px;
 
 margin:auto;
 
@@ -49,6 +50,16 @@ color:#8B6B4F;
 
 
 
+h2{
+
+margin-top:50px;
+
+color:#8B6B4F;
+
+}
+
+
+
 label{
 
 display:block;
@@ -63,7 +74,8 @@ font-size:14px;
 
 
 
-input, textarea{
+input,
+textarea{
 
 width:100%;
 
@@ -93,9 +105,9 @@ height:120px;
 
 button{
 
-margin-top:30px;
+margin-top:20px;
 
-padding:15px 30px;
+padding:12px 25px;
 
 border:none;
 
@@ -107,9 +119,10 @@ border-radius:8px;
 
 cursor:pointer;
 
-font-size:15px;
+font-size:14px;
 
 }
+
 
 
 button:hover{
@@ -117,6 +130,64 @@ button:hover{
 background:#6a4e38;
 
 }
+
+
+
+/* project list */
+
+
+.project-box{
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+padding:20px;
+
+margin-top:20px;
+
+background:#fafafa;
+
+}
+
+
+
+.project-box h3{
+
+margin:0;
+
+color:#8B6B4F;
+
+}
+
+
+
+.project-buttons{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+
+
+.edit-btn{
+
+background:#4c7aaf;
+
+}
+
+
+
+.delete-btn{
+
+background:#b84c4c;
+
+}
+
 
 
 #message{
@@ -128,17 +199,49 @@ font-weight:bold;
 }
 
 
+
+.preview{
+
+width:200px;
+
+margin-top:15px;
+
+border-radius:10px;
+
+display:none;
+
+}
+
+
+
+hr{
+
+margin:50px 0;
+
+border:none;
+
+border-top:1px solid #ddd;
+
+}
+
+
 </style>
+
 
 </head>
 
+
 <body>
 
+
 <div class="container">
+
 
 <h1>
 Research Upload
 </h1>
+
+
 
 <label>
 Title
@@ -146,18 +249,33 @@ Title
 
 <input id="title">
 
+
+
 <label>
 Type
 </label>
 
 <input id="type">
 
+
+
 <label>
 Image Path
 </label>
 
-<input id="image"
-placeholder="example: scheme.png">
+<input 
+id="image"
+placeholder="example: scheme.png"
+>
+
+
+
+<img
+id="image-preview"
+class="preview"
+>
+
+
 
 <label>
 Overview
@@ -165,11 +283,15 @@ Overview
 
 <textarea id="overview"></textarea>
 
+
+
 <label>
 Research Strategy
 </label>
 
 <textarea id="strategy"></textarea>
+
+
 
 <label>
 Research Highlight
@@ -177,44 +299,68 @@ Research Highlight
 
 <textarea id="highlight"></textarea>
 
+
+
 <label>
 Publication
 </label>
 
 <textarea id="publication"></textarea>
 
+
+
+
 <label>
-Tags (comma separated)
+Tags
 </label>
 
-<input id="tags"
-placeholder="Cancer Metabolism, Nanomedicine">
+<input 
+id="tags"
+placeholder="Cancer Metabolism, Nanomedicine"
+>
+
+
+
 
 <hr>
 
-<h3>
+
+
+<h2>
 Key Results
-</h3>
+</h2>
+
 
 <label>
-Result Images (use | between images)
+Result Images (use |)
 </label>
 
-<input id="resultsImages"
-placeholder="img1.png|img2.png|img3.png">
+<input 
+id="resultsImages"
+placeholder="img1.png|img2.png"
+>
+
+
 
 <label>
-Result Titles (use | between titles)
+Result Titles (use |)
 </label>
 
-<input id="resultsTitles"
-placeholder="Title1|Title2|Title3">
+<input 
+id="resultsTitles"
+placeholder="Title1|Title2"
+>
+
+
 
 <label>
-Result Captions (use | between captions)
+Result Captions (use |)
 </label>
 
 <textarea id="resultsCaptions"></textarea>
+
+
+
 
 <button id="save">
 
@@ -222,25 +368,50 @@ Save Project
 
 </button>
 
+
+
 <p id="message"></p>
+
+
+
+<hr>
+
+
+
+<h2>
+Existing Projects
+</h2>
+
+
+
+<div id="project-list">
 
 </div>
 
+
+
+</div>
 <script type="module">
 
-
-import { initializeApp }
-
+import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
-import { 
+import {
 
 getFirestore,
 
 collection,
 
-addDoc
+addDoc,
+
+getDocs,
+
+doc,
+
+updateDoc,
+
+deleteDoc
 
 }
 
@@ -249,6 +420,7 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 
+// Firebase 설정
 
 const firebaseConfig = {
 
@@ -267,8 +439,9 @@ appId: "1:231317507996:web:9773282c138706d886c259",
 
 measurementId: "G-57VHW2454E"
 
-
 };
+
+
 
 
 
@@ -280,79 +453,63 @@ const db = getFirestore(app);
 
 
 
+// 현재 수정 중인 document ID
+
+let currentEditId = null;
+
+
+
+
+
+// ========================
+// Image Preview
+// ========================
+
+
+const imageInput = document.getElementById("image");
+
+const imagePreview = document.getElementById("image-preview");
+
+
+
+imageInput.addEventListener("input", ()=>{
+
+
+const value = imageInput.value.trim();
+
+
+if(value){
+
+imagePreview.src=value;
+
+imagePreview.style.display="block";
+
+}
+
+else{
+
+imagePreview.style.display="none";
+
+}
+
+
+});
+
+
+
+
+
+// ========================
+// Save / Update Project
+// ========================
+
 
 document
 .getElementById("save")
 .addEventListener("click", async ()=>{
 
 
-try{
-
-
-const tags = 
-
-document
-.getElementById("tags")
-.value
-
-.split(",")
-
-.map(t=>t.trim())
-
-.filter(t=>t);
-
-
-
-const resultsImages =
-
-document
-.getElementById("resultsImages")
-.value
-
-.split("|")
-
-.map(t=>t.trim())
-
-.filter(t=>t);
-
-
-
-const resultsTitles =
-
-document
-.getElementById("resultsTitles")
-.value
-
-.split("|")
-
-.map(t=>t.trim())
-
-.filter(t=>t);
-
-
-
-const resultsCaptions =
-
-document
-.getElementById("resultsCaptions")
-.value
-
-.split("|")
-
-.map(t=>t.trim())
-
-.filter(t=>t);
-
-
-
-
-
-
-await addDoc(
-
-collection(db,"projects"),
-
-{
+const data = {
 
 
 title:
@@ -383,36 +540,115 @@ publication:
 document.getElementById("publication").value,
 
 
-tags:tags,
+
+tags:
+
+document
+.getElementById("tags")
+.value
+.split(",")
+.map(t=>t.trim())
+.filter(t=>t),
 
 
-resultsImages:resultsImages,
+
+resultsImages:
+
+document
+.getElementById("resultsImages")
+.value
+.split("|")
+.map(t=>t.trim())
+.filter(t=>t),
 
 
-resultsTitles:resultsTitles,
+
+resultsTitles:
+
+document
+.getElementById("resultsTitles")
+.value
+.split("|")
+.map(t=>t.trim())
+.filter(t=>t),
 
 
-resultsCaptions:resultsCaptions
+
+resultsCaptions:
+
+document
+.getElementById("resultsCaptions")
+.value
+.split("|")
+.map(t=>t.trim())
+.filter(t=>t)
+
+};
 
 
-}
 
 
+try{
+
+
+// 수정
+
+if(currentEditId){
+
+
+await updateDoc(
+
+doc(db,"projects",currentEditId),
+
+data
 
 );
 
 
 
+document.getElementById("message").innerHTML=
+
+"✅ Project updated";
 
 
-document.getElementById("message")
-.innerHTML=
-
-"✅ Project uploaded successfully";
-
+currentEditId=null;
 
 
 }
+
+
+
+// 새 프로젝트
+
+else{
+
+
+await addDoc(
+
+collection(db,"projects"),
+
+data
+
+);
+
+
+document.getElementById("message").innerHTML=
+
+"✅ Project uploaded";
+
+
+}
+
+
+
+clearForm();
+
+
+loadProjects();
+
+
+}
+
 
 catch(error){
 
@@ -420,10 +656,9 @@ catch(error){
 console.log(error);
 
 
-document.getElementById("message")
-.innerHTML=
+document.getElementById("message").innerHTML=
 
-"❌ Upload failed";
+"❌ Error";
 
 
 }
@@ -431,11 +666,292 @@ document.getElementById("message")
 
 
 });
+ 
+// ========================
+// Load Existing Projects
+// ========================
+
+
+async function loadProjects(){
+
+
+const list = document.getElementById("project-list");
+
+
+list.innerHTML="";
+
+
+
+const snapshot = await getDocs(
+collection(db,"projects")
+);
+
+
+
+snapshot.forEach((item)=>{
+
+
+const data = item.data();
+
+
+const box = document.createElement("div");
+
+
+box.className="project-box";
+
+
+
+box.innerHTML = `
+
+
+<h3>
+${data.title || ""}
+</h3>
+
+
+<p>
+${data.type || ""}
+</p>
+
+
+<p>
+${(data.tags || []).join(", ")}
+</p>
+
+
+
+<div class="project-buttons">
+
+
+<button class="edit-btn">
+Edit
+</button>
+
+
+
+<button class="delete-btn">
+Delete
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+
+
+// ========================
+// Edit
+// ========================
+
+
+box
+.querySelector(".edit-btn")
+.addEventListener("click", ()=>{
+
+
+currentEditId=item.id;
+
+
+
+document.getElementById("title").value =
+data.title || "";
+
+
+
+document.getElementById("type").value =
+data.type || "";
+
+
+
+document.getElementById("image").value =
+data.image || "";
+
+
+
+document.getElementById("overview").value =
+data.overview || "";
+
+
+
+document.getElementById("strategy").value =
+data.strategy || "";
+
+
+
+document.getElementById("highlight").value =
+data.highlight || "";
+
+
+
+document.getElementById("publication").value =
+data.publication || "";
+
+
+
+document.getElementById("tags").value =
+(data.tags || []).join(", ");
+
+
+
+document.getElementById("resultsImages").value =
+(data.resultsImages || []).join("|");
+
+
+
+document.getElementById("resultsTitles").value =
+(data.resultsTitles || []).join("|");
+
+
+
+document.getElementById("resultsCaptions").value =
+(data.resultsCaptions || []).join("|");
+
+
+
+
+imagePreview.src=data.image || "";
+
+imagePreview.style.display =
+data.image ? "block" : "none";
+
+
+
+
+document.getElementById("save").innerHTML =
+"Update Project";
+
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+
+});
+
+
+
+
+
+
+// ========================
+// Delete
+// ========================
+
+
+box
+.querySelector(".delete-btn")
+.addEventListener("click", async ()=>{
+
+
+const check =
+confirm(
+"Delete this project?"
+);
+
+
+
+if(!check) return;
+
+
+
+await deleteDoc(
+
+doc(
+db,
+"projects",
+item.id
+)
+
+);
+
+
+
+document.getElementById("message").innerHTML=
+
+"🗑 Project deleted";
+
+
+
+loadProjects();
+
+
+});
+
+
+
+
+
+list.appendChild(box);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+// ========================
+// Clear Form
+// ========================
+
+
+function clearForm(){
+
+
+
+document
+.querySelectorAll("input, textarea")
+.forEach(el=>{
+
+
+if(el.id !== "image-preview"){
+
+el.value="";
+
+}
+
+
+});
+
+
+
+imagePreview.style.display="none";
+
+
+document.getElementById("save").innerHTML=
+"Save Project";
+
+
+}
+
+
+
+
+
+// ========================
+// Initial Load
+// ========================
+
+
+loadProjects();
 
 
 
 </script>
 
-</body>
 
-</html>
