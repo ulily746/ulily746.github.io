@@ -291,7 +291,7 @@ RESEARCH
 }
 
 .research-card{
-    background:#E5DFD3; /* 부드럽고 차분한 오트밀 베이지 */
+    background:#DDE3DA; 
     height:620px;
     overflow:hidden;
     display:flex;
@@ -302,7 +302,7 @@ RESEARCH
 }
 
 .research-card:nth-child(even){
-    background:#EADFCF; /* 은은한 생기를 주는 클레이 베이지 */
+    background:#E2DCD5; 
 }
 
 .research-card:hover{
@@ -403,11 +403,11 @@ ACADEMIC
 }
 
 /* 고급 세라믹/인테리어 무드의 5가지 톤 다운 배색 */
-.academic-card:nth-child(5n+1){ background:#DED7C8; }
-.academic-card:nth-child(5n+2){ background:#D5D8D1; }
-.academic-card:nth-child(5n+3){ background:#E6DDCF; }
-.academic-card:nth-child(5n+4){ background:#D9D2C4; }
-.academic-card:nth-child(5n+5){ background:#D8D8CE; }
+.academic-card:nth-child(5n+1){ background:#DDE3DA; }
+.academic-card:nth-child(5n+2){ background:#E2DCD5; }
+.academic-card:nth-child(5n+3){ background:#D4DCDE; }
+.academic-card:nth-child(5n+4){ background:#E6DFD9; }
+.academic-card:nth-child(5n+5){ background:#DDE3DA; }
 
 .academic-card:hover{
     transform:translateY(-8px);
