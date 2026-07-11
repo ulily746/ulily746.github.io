@@ -350,116 +350,102 @@ RESEARCH 파트 (Warm Oatmeal 단색 통일)
 
 
 /* =====================================
-ACADEMIC CARD (상단정렬 + 사진확대 + 새로운 색상)
+ACADEMIC CARD (이전 버전 복구)
 ===================================== */
+.academic-section {
+    padding: 120px 8%;
+}
+
 .academic-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0;
+    gap: 25px; /* 카드 사이 간격 다시 추가 */
 }
 
 .academic-card {
-    height: 650px; /* 안정적인 레이아웃을 위해 높이 살짝 늘림 */
-    position: relative;
+    background: #EAE5D9; /* 이전의 아늑한 베이지/오트밀 톤 */
+    height: 620px;
     overflow: hidden;
-    transition: .4s;
     display: flex;
     flex-direction: column;
+    position: relative;
+    transition: .4s;
 }
 
-/* 새로운 프리미엄 컬러 반복 체계 */
-.academic-card:nth-child(odd) { background: #D5CFC1; }
-.academic-card:nth-child(even) { background: #CCD1C7; }
-
-/* [중요] 5번째 마지막 카드만 완전히 다른 전면 반전 색상으로 포인트 */
-.academic-card:nth-child(5) {
-    background: #4A4E46; /* 묵직한 딥 세이지 그린 카키 */
+/* 이전 버전의 2도 교차 배색 구조 복구 */
+.academic-card:nth-child(even) {
+    background: #E3E8E0; /* 연한 민트 그레이 */
 }
-.academic-card:nth-child(5) h3 { color: #F2F2DF !important; }
-.academic-card:nth-child(5) p { color: #D5DCD0 !important; }
-.academic-card:nth-child(5) .card-content span { color: #B2B9AD !important; }
-.academic-card:nth-child(5) .card-footer button { background: #F2F2DF; color: #4A4E46; }
 
 .academic-card:hover {
     transform: translateY(-8px);
-    z-index: 5;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
 }
 
-/* 사진 크기 대폭 확대 (우상단 밀착 유지, 너비 85% / 높이 62%로 확장) */
+/* 사진이 위쪽에 가득 차는 이전 레이아웃 구조 */
 .academic-card .card-image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 85%;
-    height: 62%;
+    height: 360px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .academic-card .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: .5s;
 }
 
-/* 텍스트 영역: 'ㄴ'자 하단에서 '상단 정렬(justify-content: flex-start)'로 전면 수정 */
+.academic-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* 텍스트 내용 레이아웃 복구 */
 .academic-card .card-content {
-    position: absolute;
-    inset: 0;
-    padding: 35px;
+    padding: 30px;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* 글자들을 카드 위쪽 기준으로 정렬 */
-    padding-top: 66%; /* 사진이 끝나는 지점 아래부터 글이 자연스럽게 시작되도록 여백 확보 */
-    pointer-events: none;
-}
-
-/* 글자 영역 너비 제한 및 정렬 */
-.academic-card .card-content span,
-.academic-card .card-content h3,
-.academic-card .card-content p {
-    width: 80%; 
-    pointer-events: auto;
 }
 
 .academic-card .card-content span {
     font-size: 11px;
     letter-spacing: 2px;
-    color: #605B51;
     text-transform: uppercase;
+    color: #777;
+    font-weight: 500;
 }
 
 .academic-card h3 {
-    margin-top: 10px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 25px;
-    font-weight: 500;
+    font-size: 24px;
     line-height: 1.2;
+    margin-top: 12px;
+    font-family: 'Cormorant Garamond', serif;
     color: #1A1A1A;
 }
 
 .academic-card p {
     margin-top: 10px;
+    color: #666;
     font-size: 14px;
-    color: #444;
     line-height: 1.5;
 }
 
-/* View Story 버튼 우하단 고정 */
+/* View Story 버튼 우하단 및 정렬 원상복구 */
 .academic-card .card-footer {
-    position: absolute;
-    right: 30px;
-    bottom: 30px;
-    pointer-events: auto;
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end; /* 우측 정렬 */
+    padding: 0 30px 30px 30px;
 }
 
 .academic-card .card-footer button {
-    background: #111;
-    color: white;
-    padding: 10px 18px;
-    font-size: 12px;
-    letter-spacing: 1px;
+    background: #222;
+    color: #F2F2DF;
     border: none;
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: .3s;
 }
