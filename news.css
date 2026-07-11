@@ -56,22 +56,15 @@ img{
 .navbar{
 
     width:100%;
-
     padding:35px 8%;
 
-    position:relative;
-
-    z-index:10;
-
 }
-
 
 
 .nav-left{
 
     display:flex;
-
-    gap:45px;
+    gap:50px;
 
 }
 
@@ -80,10 +73,9 @@ img{
 .nav-left a{
 
     font-size:14px;
+    letter-spacing:1.5px;
 
-    letter-spacing:1px;
-
-    color:#555;
+    color:#222;
 
     position:relative;
 
@@ -93,10 +85,17 @@ img{
 
 
 
-.nav-left a:hover,
-.nav-left .active{
+.nav-left a:hover{
 
-    color:#111;
+    color:#8B7355;
+
+}
+
+
+
+.nav-left a.active{
+
+    color:#8B7355;
 
 }
 
@@ -109,18 +108,14 @@ img{
     position:absolute;
 
     left:0;
-
     bottom:-8px;
 
     width:100%;
-
     height:1px;
 
-    background:#111;
+    background:#8B7355;
 
 }
-
-
 
 
 
