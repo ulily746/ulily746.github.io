@@ -37,22 +37,51 @@
             </div>
         </div>
 
-        <div class="hero-image">
-            <div class="arch-decoration">
-    <svg viewBox="0 0 460 610" class="arch-svg">
-        <!-- 1. 아치 모양의 기준선 정의 (이 선을 따라 글자가 흐릅니다) -->
-        <path id="archPath" d="M 5,610 L 5,230 A 225,225 0 0,1 455,230 L 455,610" fill="none" stroke="#B9AA95" stroke-width="1"/>
-        
-        <!-- 2. 선을 따라가는 글자 배치 -->
-        <text class="arch-svg-text">
-            <!-- href="#archPath"로 위에서 만든 아치선과 연결하고, startOffset으로 글자 시작 위치 조정 -->
-            <textPath href="#archPath" startOffset="25%">Dilly Dally Moments</textPath>
-        </text>
-        
-        <text class="arch-svg-text">
-            <textPath href="#archPath" startOffset="62%">Little by Little</textPath>
-        </text>
-    </svg>
+      <div class="hero-image">
+
+    <div class="arch-decoration">
+        <svg viewBox="0 0 460 610" class="arch-svg">
+
+            <path 
+            id="topArch"
+            d="M20 250 A210 210 0 0 1 440 250"
+            fill="none"
+            stroke="#B9AA95"
+            stroke-width="1"/>
+
+
+            <path
+            id="bottomArch"
+            d="M440 350 L440 560"
+            fill="none"
+            stroke="#B9AA95"
+            stroke-width="1"/>
+
+
+            <text class="arch-svg-text">
+                <textPath href="#topArch" startOffset="15%">
+                    Dilly Dally
+                </textPath>
+            </text>
+
+
+            <text class="arch-svg-text">
+                <textPath href="#bottomArch" startOffset="15%">
+                    Little by Little
+                </textPath>
+            </text>
+
+
+        </svg>
+    </div>
+
+
+    <!-- 추가 -->
+    <div class="arch-image">
+        <img src="profile.jpg">
+    </div>
+
+
 </div>
         </div>
     </header>
