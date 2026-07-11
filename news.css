@@ -148,11 +148,10 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 
     position:absolute;
 
-    width:420px;
-    height:570px;
+    width:470px;
+    height:620px;
 
-    top:0;
-
+    top:-20px;
     left:50%;
 
     transform:translateX(-50%);
@@ -194,11 +193,13 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 /* =====================================
 ARCH SVG TEXT FLOW
 ===================================== */
-.arch-svg {
-    width: 100%;
-    height: 100%;
-    display: block;
+
+.arch-svg{
+    width:100%;
+    height:100%;
+    display:block;
 }
+
 
 .arch-svg-text{
 
@@ -218,17 +219,23 @@ ARCH SVG TEXT FLOW
 
 }
 
-.arch-svg-text textPath {
-    dominant-baseline: central;
+
+.arch-svg-text textPath{
+
+    dominant-baseline:central;
+
 }
+
+
+/* bottom text */
 
 .arch-bottom-text{
 
     position:absolute;
 
-    right:-35px;
+    right:-45px;
 
-    bottom:-35px;
+    bottom:-20px;
 
     font-family:'Great Vibes',cursive;
 
@@ -240,9 +247,11 @@ ARCH SVG TEXT FLOW
 
     background:#F2F2DF;
 
-    padding:0 8px;
+    padding:0 10px;
 
-}    
+    z-index:10;
+
+}
 /* =====================================
 CATEGORY
 ===================================== */
