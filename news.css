@@ -253,7 +253,7 @@ RESEARCH
 }
 
 .research-card{
-    background:#DDE3DA; 
+    background-color:#DDE3DA; 
     height:620px;
     overflow:hidden;
     display:flex;
@@ -264,7 +264,7 @@ RESEARCH
 }
 
 .research-card:nth-child(even){
-    background:#E2DCD5; 
+    background-color:#E2DCD5; 
 }
 
 .research-card:hover{
@@ -365,11 +365,11 @@ ACADEMIC
 }
 
 /* 고급 세라믹/인테리어 무드의 5가지 톤 다운 배색 */
-.academic-card:nth-child(5n+1){ background:#DDE3DA; }
-.academic-card:nth-child(5n+2){ background:#E2DCD5; }
-.academic-card:nth-child(5n+3){ background:#D4DCDE; }
-.academic-card:nth-child(5n+4){ background:#E6DFD9; }
-.academic-card:nth-child(5n+5){ background:#DDE3DA; }
+.academic-card:nth-child(5n+1){ background-color:#DDE3DA; }
+.academic-card:nth-child(5n+2){ background-color:#E2DCD5; }
+.academic-card:nth-child(5n+3){ background-color:#D4DCDE; }
+.academic-card:nth-child(5n+4){ background-color:#E6DFD9; }
+.academic-card:nth-child(5n+5){ background-color:#DDE3DA; }
 
 .academic-card:hover{
     transform:translateY(-8px);
