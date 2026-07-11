@@ -1233,7 +1233,79 @@ CAPTION
 
 
 
+/* =====================================
+LIFE ARCH BACKGROUND
+===================================== */
 
+
+.life-section{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.life-arch-bg{
+
+    position:absolute;
+
+    width:700px;
+
+    height:850px;
+
+    left:50%;
+
+    top:120px;
+
+    transform:translateX(-50%);
+
+    border:1px solid #D8CDBB;
+
+    border-radius:350px 350px 0 0;
+
+    opacity:.5;
+
+    z-index:0;
+
+}
+
+
+
+.life-arch-bg::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:620px;
+
+    height:770px;
+
+    left:40px;
+
+    top:40px;
+
+    border:1px solid #E6DED0;
+
+    border-radius:310px 310px 0 0;
+
+}
+
+
+
+/* 내용 위로 올리기 */
+
+.life-header,
+.life-grid{
+
+    position:relative;
+
+    z-index:2;
+
+}
 
 /* =====================================
 LIFE
