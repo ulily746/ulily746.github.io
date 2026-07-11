@@ -180,10 +180,22 @@ ARCH SVG TEXT FLOW
     display: block;
 }
 
-.arch-svg-text {
-    font-family: 'Great Vibes', cursive;
-    font-size: 34px;
-    fill: #8B6B4F;
+.arch-svg-text{
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:28px;
+
+    fill:#8B6B4F;
+
+    paint-order:stroke;
+
+    stroke:#F2F2DF;
+
+    stroke-width:8px;
+
+    stroke-linejoin:round;
+
 }
 
 .arch-svg-text textPath {
