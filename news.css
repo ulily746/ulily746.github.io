@@ -1,3 +1,7 @@
+/* =====================================
+RESET
+===================================== */
+
 *{
     margin:0;
     padding:0;
@@ -11,7 +15,9 @@ html{
 
 
 body{
-background:#F2F2DF;.
+
+    background:#F2F2DF;
+
     color:#222;
 
     font-family:'Inter', sans-serif;
@@ -21,7 +27,6 @@ background:#F2F2DF;.
 }
 
 
-
 a{
 
     text-decoration:none;
@@ -29,7 +34,6 @@ a{
     color:inherit;
 
 }
-
 
 
 img{
@@ -44,11 +48,10 @@ img{
 
 
 
+/* =====================================
+NAVIGATION
+===================================== */
 
-
-/* ============================= */
-/* NAVIGATION */
-/* ============================= */
 
 .nav{
 
@@ -58,7 +61,7 @@ img{
 
     align-items:center;
 
-    gap:50px;
+    gap:55px;
 
     height:70px;
 
@@ -75,11 +78,10 @@ img{
 }
 
 
+
 .nav a{
 
     color:#F2F2DF;
-
-    text-decoration:none;
 
     font-size:16px;
 
@@ -88,6 +90,7 @@ img{
     transition:.3s;
 
 }
+
 
 
 .nav a:hover{
@@ -100,32 +103,34 @@ img{
 
 
 
-
-/* ===================================== */
-/* HERO */
-/* ===================================== */
-
+/* =====================================
+HERO
+===================================== */
 
 
 .hero{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr 1fr;
 
-align-items:center;
+    align-items:center;
 
-gap:80px;
+    gap:80px;
 
-padding:120px 12%;
+    padding:120px 12%;
 
 }
+
+
 
 .hero-text{
 
-padding-left:40px;
+    padding-left:40px;
 
 }
+
+
 
 .hero-small{
 
@@ -145,7 +150,7 @@ padding-left:40px;
 
     margin-top:25px;
 
-    font-family:'Cormorant Garamond', serif;
+    font-family:'Cormorant Garamond',serif;
 
     font-size:90px;
 
@@ -156,8 +161,6 @@ padding-left:40px;
     color:#171717;
 
 }
-
-
 
 
 
@@ -177,13 +180,11 @@ padding-left:40px;
 
 
 
-
-
 .hero-sign{
 
     margin-top:45px;
 
-    font-family:'Great Vibes', cursive;
+    font-family:'Great Vibes',cursive;
 
     font-size:55px;
 
@@ -193,60 +194,44 @@ padding-left:40px;
 
 
 
-
-
-/* HERO IMAGE */
-
-
-.hero-image{
-
-position:relative;
-
-display:flex;
-
-justify-content:center;
-
-}
-
-.hero-image{
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-
-
-
 /* =====================================
-   ARCH DECORATION
+HERO IMAGE
 ===================================== */
 
 
 .hero-image{
+
     position:relative;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
 }
 
 
+
+/* 아치 장식 */
 
 .arch-decoration{
 
     position:absolute;
 
-    width:430px;
+    width:470px;
 
-    height:570px;
+    height:620px;
 
-    top:-25px;
+    top:-20px;
 
     left:50%;
 
     transform:translateX(-50%);
 
     z-index:1;
+
+    pointer-events:none;
 
 }
 
@@ -265,6 +250,7 @@ justify-content:center;
     top:0;
 
     border-radius:
+
     220px 220px 0 0;
 
     border:1px solid #B9AA95;
@@ -272,6 +258,8 @@ justify-content:center;
 }
 
 
+
+/* 장식 글자 */
 
 .arch-text{
 
@@ -283,7 +271,7 @@ justify-content:center;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:13px;
+    font-size:12px;
 
     letter-spacing:3px;
 
@@ -291,12 +279,7 @@ justify-content:center;
 
 }
 
-.arch-image{
-    position:relative;
-    z-index:2;
-}
 
-/* 위쪽 아치 */
 
 .arch-text.top{
 
@@ -304,28 +287,62 @@ justify-content:center;
 
     left:20px;
 
-    transform:
-    rotate(-8deg);
-
 }
 
 
-
-/* 아래쪽 */
 
 .arch-text.bottom{
 
-    bottom:40px;
+    bottom:35px;
 
     left:20px;
 
-    transform:
-    rotate(8deg);
+}
+
+
+
+
+
+/* 실제 사진 */
+
+
+.arch-image{
+
+    position:relative;
+
+    z-index:2;
+
+    width:430px;
+
+    height:580px;
+
+    overflow:hidden;
+
+    border-radius:
+
+    220px 220px 0 0;
+
+    box-shadow:
+
+    0 25px 50px rgba(0,0,0,.08);
 
 }
-/* ===================================== */
-/* CATEGORY */
-/* ===================================== */
+
+
+
+.arch-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+/* =====================================
+CATEGORY
+===================================== */
 
 
 .category-nav{
@@ -333,6 +350,8 @@ justify-content:center;
     display:flex;
 
     justify-content:center;
+
+    align-items:center;
 
     gap:60px;
 
@@ -370,9 +389,13 @@ justify-content:center;
 
 }
 
-/* ===================================== */
-/* COMMON SECTION TITLE */
-/* ===================================== */
+
+
+
+
+/* =====================================
+COMMON TITLE
+===================================== */
 
 
 .section-title{
@@ -407,7 +430,7 @@ justify-content:center;
 
     margin-top:20px;
 
-    font-family:'Cormorant Garamond', serif;
+    font-family:'Cormorant Garamond',serif;
 
     font-size:70px;
 
@@ -437,9 +460,9 @@ justify-content:center;
 
 
 
-/* ===================================== */
-/* RESEARCH */
-/* ===================================== */
+/* =====================================
+RESEARCH
+===================================== */
 
 
 .research-section{
@@ -462,8 +485,6 @@ justify-content:center;
 
 
 
-
-
 .research-card{
 
     background:#fff;
@@ -481,8 +502,6 @@ justify-content:center;
     transform:translateY(-8px);
 
 }
-
-
 
 
 
@@ -514,8 +533,6 @@ justify-content:center;
 
 
 
-
-
 .card-content{
 
     padding:35px;
@@ -535,8 +552,6 @@ justify-content:center;
     color:#888;
 
 }
-
-
 
 
 
@@ -566,8 +581,6 @@ justify-content:center;
 
 
 
-
-
 .card-footer{
 
     display:flex;
@@ -592,8 +605,6 @@ justify-content:center;
 
 
 
-
-
 .card-footer button{
 
     border:none;
@@ -614,9 +625,9 @@ justify-content:center;
 
 
 
-/* ===================================== */
-/* ACADEMIC */
-/* ===================================== */
+/* =====================================
+ACADEMIC
+===================================== */
 
 
 .academic-section{
@@ -624,8 +635,6 @@ justify-content:center;
     padding:120px 8%;
 
 }
-
-
 
 
 
@@ -638,8 +647,6 @@ justify-content:center;
     gap:30px;
 
 }
-
-
 
 
 
@@ -661,15 +668,11 @@ justify-content:center;
 
 
 
-
-
 .academic-card .card-image{
 
     height:280px;
 
 }
-
-
 
 
 
@@ -705,9 +708,9 @@ justify-content:center;
 
 }
 
-/* ===================================== */
-/* TRAVEL */
-/* ===================================== */
+/* =====================================
+TRAVEL
+===================================== */
 
 
 .travel-section{
@@ -743,8 +746,6 @@ justify-content:center;
 
 
 
-
-
 .travel-gallery{
 
     display:grid;
@@ -756,8 +757,6 @@ justify-content:center;
     gap:25px;
 
 }
-
-
 
 
 
@@ -791,8 +790,6 @@ justify-content:center;
 
 
 
-
-
 .travel-card::after{
 
     content:"";
@@ -810,8 +807,6 @@ justify-content:center;
     );
 
 }
-
-
 
 
 
@@ -851,11 +846,6 @@ justify-content:center;
 
 }
 
-
-
-
-
-/* Travel layout */
 
 
 .travel-card.large{
@@ -898,9 +888,9 @@ justify-content:center;
 
 
 
-/* ===================================== */
-/* LIFE */
-/* ===================================== */
+/* =====================================
+LIFE
+===================================== */
 
 
 .life-section{
@@ -908,8 +898,6 @@ justify-content:center;
     padding:120px 8%;
 
 }
-
-
 
 
 
@@ -923,8 +911,6 @@ justify-content:center;
 
 
 
-
-
 .life-grid{
 
     display:grid;
@@ -934,8 +920,6 @@ justify-content:center;
     gap:25px;
 
 }
-
-
 
 
 
@@ -971,8 +955,6 @@ justify-content:center;
 
 
 
-
-
 .life-overlay{
 
     position:absolute;
@@ -1001,8 +983,6 @@ justify-content:center;
 
 
 
-
-
 .life-overlay h3{
 
     font-family:'Cormorant Garamond',serif;
@@ -1022,8 +1002,6 @@ justify-content:center;
     font-size:14px;
 
 }
-
-
 
 
 
@@ -1057,9 +1035,9 @@ justify-content:center;
 
 
 
-/* ===================================== */
-/* FOOTER */
-/* ===================================== */
+/* =====================================
+FOOTER
+===================================== */
 
 
 .news-footer{
@@ -1110,9 +1088,11 @@ justify-content:center;
 
 
 
-/* ===================================== */
-/* RESPONSIVE */
-/* ===================================== */
+
+
+/* =====================================
+RESPONSIVE
+===================================== */
 
 
 @media(max-width:1000px){
@@ -1120,38 +1100,27 @@ justify-content:center;
 
 .hero{
 
-display:grid;
+    grid-template-columns:1fr;
 
-grid-template-columns:1fr 1fr;
+    gap:50px;
 
-align-items:center;
-
-gap:60px;
-
-padding:90px 12% 120px;
+    padding:80px 8%;
 
 }
 
-
-
-.hero p{
-
-    margin-left:auto;
-
-    margin-right:auto;
-
-}
 
 
 .hero-text{
 
-padding-left:40px;
+    padding-left:0;
 
-}    
+}
 
-.hero-image{
 
-    margin-top:50px;
+
+.hero h1{
+
+    font-size:70px;
 
 }
 
@@ -1194,20 +1163,26 @@ padding-left:40px;
 
 
 
+
+
 @media(max-width:600px){
 
 
 .nav{
 
-    padding:25px;
+    gap:20px;
+
+    height:auto;
+
+    padding:20px;
 
 }
 
 
 
-.nav-left{
+.nav a{
 
-    gap:20px;
+    font-size:14px;
 
 }
 
@@ -1223,7 +1198,7 @@ padding-left:40px;
 
 .hero h1{
 
-    font-size:60px;
+    font-size:55px;
 
 }
 
@@ -1231,25 +1206,43 @@ padding-left:40px;
 
 .arch-image{
 
-    width:380px;
+    width:320px;
 
-    height:520px;
+    height:430px;
 
-    overflow:hidden;
+    border-radius:
 
-    border-radius:190px 190px 0 0;
-
-    box-shadow:
-    0 20px 40px rgba(0,0,0,0.08);
+    160px 160px 0 0;
 
 }
 
 
-.category-nav{
 
-    gap:20px;
+.arch-decoration{
 
-    flex-wrap:wrap;
+    width:350px;
+
+    height:480px;
+
+}
+
+
+
+.arch-line{
+
+    width:320px;
+
+    height:430px;
+
+}
+
+
+
+.arch-text{
+
+    width:320px;
+
+    font-size:10px;
 
 }
 
@@ -1270,7 +1263,6 @@ padding-left:40px;
     grid-template-columns:1fr;
 
 }
-
 
 
 }
