@@ -328,39 +328,49 @@ ARCH HERO FRAME
 
     background:#F2F2DF;
 
-    padding:0 12px;
+    padding:0 10px;
 
     font-family:'Cormorant Garamond',serif;
 
-    font-size:13px;
+    font-size:20px;
 
-    letter-spacing:2px;
+    font-style:italic;
 
-    color:#8B7355;
+    color:#8B6B4F;
 
     white-space:nowrap;
 
 }
 
 
-/* 왼쪽 위 */
+
+/* 아치 둥근 부분 따라가기 */
 
 .arch-text.top{
 
-    top:70px;
+    top:55px;
 
-    left:-35px;
+    left:-15px;
+
+    transform:
+
+    rotate(-18deg);
 
 }
 
 
-/* 오른쪽 아래 */
+
+/* 오른쪽 아래 선과 연결 */
 
 .arch-text.bottom{
 
-    bottom:70px;
+    bottom:25px;
 
-    right:-35px;
+    right:-45px;
+
+    transform:
+
+    rotate(12deg);
 
 }
 
@@ -596,7 +606,11 @@ line-height:1.2;
 
 }
 
+.research-card:nth-child(even){
 
+    background:#F9F3E8;
+
+}
 
 .card-footer{
 
@@ -657,7 +671,7 @@ ACADEMIC
 
     display:grid;
 
-    grid-template-columns:repeat(4,220px);
+    grid-template-columns:repeat(4,260px);
 
     justify-content:center;
 
@@ -665,12 +679,11 @@ ACADEMIC
 
 }
 
-
 .academic-card{
 
     background:#fff;
 
-    height:500px;
+    height:620px;
 
     position:relative;
 
@@ -690,7 +703,7 @@ ACADEMIC
 
 
 
-.academic-card .card-image{
+..academic-card .card-image{
 
     position:absolute;
 
@@ -698,9 +711,9 @@ ACADEMIC
 
     right:0;
 
-    width:75%;
+    width:80%;
 
-    height:300px;
+    height:380px;
 
 }
 .academic-card .card-image img{
@@ -757,18 +770,24 @@ ACADEMIC
 
 }
 
+.academic-card:nth-child(even){
+
+    background:#F9F3E8;
+
+}
+
+
+.academic-card:nth-child(odd){
+
+    background:#FFFFFF;
+
+}
+
 .card-footer{
 
     margin-top:auto;
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-end;
-
 }
-
 
 .card-footer button{
 
@@ -776,22 +795,13 @@ ACADEMIC
 
     color:#F2F2DF;
 
-    border:none;
+    padding:12px 20px;
 
-    padding:12px 18px;
+    border:none;
 
     font-size:12px;
 
     letter-spacing:1px;
-
-    cursor:pointer;
-
-}
-
-
-.card-footer button:hover{
-
-    background:#8B6B4F;
 
 }
 
