@@ -1,231 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News | Yuri Choi</title>
-    <link rel="stylesheet" href="news.css">
+    <title>News & Updates</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Great+Vibes&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="news.css">
 </head>
 <body>
 
-    <!-- Navigation -->
-    <div class="nav">
-        <a href="index.html">Main</a>
-        <a href="research.html">Research</a>
-        <a href="cv.html">CV</a>
-        <a href="news.html">News</a>
-    </div>
+    <nav class="navbar">
+        <div class="nav-logo">YURI CHOI</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="news.html" class="active">News</a></li>
+        </ul>
+    </nav>
 
-    <!-- HERO -->
-    <div class="hero-image">
+    <header class="hero">
+        <div class="hero-text">
+            <span class="hero-small">Personal Archive</span>
+            <h1>News<br>& Updates</h1>
+            <p>Research, learning, travel and life. A collection of moments that shaped who I am.</p>
+            <div class="hero-sign">Yuri Choi</div>
+            <div class="hero-meta">
+                <div class="meta-line"></div>
+                <span>CURRENT FOCUS</span>
+                <p>Nanomedicine · Cancer Metabolism<br>Drug Delivery · Biomedical Engineering</p>
+            </div>
+        </div>
+
+        <div class="hero-image">
             <div class="arch-decoration">
                 <svg viewBox="0 0 460 610" class="arch-svg">
                     <defs>
                         <path id="archPath" d="M 35,610 V 230 A 195,195 0 0,1 425,230 V 610" fill="none" />
                     </defs>
-                    
                     <use href="#archPath" stroke="#B9AA95" stroke-width="1.2" fill="none" />
-                    
                     <text class="arch-svg-text top" dy="8">
                         <textPath href="#archPath" startOffset="14%">
                             Dilly Dally Moments
                         </textPath>
                     </text>
                 </svg>
-
                 <div class="arch-text bottom">Little by Little</div>
             </div>
-            
-            <div class="arch-image">
-                <img src="hero.jpg" alt="Hero Image">
-            </div>
-        </div>
-
-        <div class="hero-image">
-            <div class="arch-decoration">
-                <!-- 아치 선과 곡선 글자를 위한 SVG -->
-                <svg viewBox="0 0 460 610" class="arch-svg">
-                    <defs>
-                        <!-- 글자가 따라갈 아치 곡선 경로 정의 (반지름 230px) -->
-                        <path id="archPath" d="M 5,610 V 230 A 225,225 0 0,1 455,230 V 610" fill="none" />
-                    </defs>
-                    
-                    <!-- 실제 눈에 보이는 아치 선 -->
-                    <use href="#archPath" stroke="#B9AA95" stroke-width="1" fill="none" />
-                    
-                    <!-- 곡선을 따라가는 상단 글자 (배경 효과를 위해 약간의 자리를 띄움) -->
-                    <text class="arch-svg-text top" dy="-6">
-                        <textPath href="#archPath" startOffset="30%">
-                            Dilly Dally Moments
-                        </textPath>
-                    </text>
-                </svg>
-
-                <!-- 맨 아래 선상에 배치될 하단 글자 -->
-                <div class="arch-text bottom">Little by Little</div>
-            </div>
-            
             <div class="arch-image">
                 <img src="hero.jpg" alt="Hero Image">
             </div>
         </div>
     </header>
 
-    <!-- CATEGORY -->
-    <section class="category-nav">
-        <a href="#research">Research</a>
-        <a href="#academic">Academic</a>
-        <a href="#travel">Travel</a>
-        <a href="#life">Life</a>
-    </section>
-
-    <!-- RESEARCH -->
     <section id="research" class="research-section">
         <div class="section-title">
-            <h2>Research</h2>
-            <p>Research projects, publications, conferences and laboratory stories.</p>
+            <h2>Research Updates</h2>
+            <p>Latest academic activities, publications, and lab works.</p>
         </div>
-
         <div class="research-grid">
-            <!-- CARD 1 -->
             <div class="research-card">
-                <div class="card-image"><img src="research1.jpg" alt=""></div>
-                <div class="card-content">
-                    <span>Research</span>
-                    <h3>Dual Metabolic Therapy</h3>
-                    <p>PLGA-PEG nanoparticle platform.</p>
-                    <div class="card-footer">
-                        <p>2026</p>
-                        <button>View Story →</button>
-                    </div>
+                <div class="card-image">
+                    <img src="research1.jpg" alt="Research 1">
                 </div>
-            </div>
-            <!-- CARD 2 -->
-            <div class="research-card">
-                <div class="card-image"><img src="research2.jpg" alt=""></div>
                 <div class="card-content">
                     <span>Publication</span>
-                    <h3>Paper Writing</h3>
-                    <p>Preparing manuscript.</p>
+                    <h3>Nanomedicine Breakthrough</h3>
+                    <p>New drug delivery system targeting cancer metabolism cells published in Nature Biomedical Engineering.</p>
                     <div class="card-footer">
-                        <p>2026</p>
-                        <button>View Story →</button>
+                        <p>2026. 05</p>
+                        <button>Read Paper</button>
                     </div>
                 </div>
             </div>
-            <!-- CARD 3 -->
             <div class="research-card">
-                <div class="card-image"><img src="research3.jpg" alt=""></div>
+                <div class="card-image">
+                    <img src="research2.jpg" alt="Research 2">
+                </div>
                 <div class="card-content">
                     <span>Conference</span>
-                    <h3>ACS Spring</h3>
-                    <p>Poster Presentation.</p>
+                    <h3>AACR Annual Meeting</h3>
+                    <p>Presented oral session on innovative cancer metabolic therapeutics and nanomedicine vectors.</p>
                     <div class="card-footer">
-                        <p>2026</p>
-                        <button>View Story →</button>
+                        <p>2026. 04</p>
+                        <button>View Abstract</button>
                     </div>
                 </div>
             </div>
-            <!-- CARD 4 -->
             <div class="research-card">
-                <div class="card-image"><img src="research4.jpg" alt=""></div>
+                <div class="card-image">
+                    <img src="research3.jpg" alt="Research 3">
+                </div>
                 <div class="card-content">
-                    <span>Laboratory</span>
-                    <h3>Experimental Record</h3>
-                    <p>Weekly archive.</p>
+                    <span>Lab Note</span>
+                    <h3>In Vivo Tracking Success</h3>
+                    <p>Successfully monitored real-time drug accumulation in tumor models using advanced fluorescence imaging.</p>
                     <div class="card-footer">
-                        <p>2026</p>
-                        <button>View Story →</button>
+                        <p>2026. 03</p>
+                        <button>Read Note</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="view-all">
-            <a href="research-all.html">View All Research →</a>
-        </div>
-    </section>
-
-    <!-- ACADEMIC -->
-    <section id="academic" class="academic-section">
-        <div class="section-title">
-            <h2>Academic & Learning</h2>
-            <p>Conferences, certifications, awards and continuous learning.</p>
-        </div>
-
-        <div class="academic-grid">
-            <!-- CARD 1 -->
-            <div class="academic-card">
-                <div class="card-image"><img src="academic1.jpg" alt=""></div>
-                <div class="card-content">
-                    <span>Conference</span>
-                    <h3>ACS Spring 2026</h3>
-                    <p>Poster Presentation</p>
-                    <div class="card-footer">
-                        <button>View Story →</button>
-                    </div>
+            <div class="research-card">
+                <div class="card-image">
+                    <img src="research4.jpg" alt="Research 4">
                 </div>
-            </div>
-            <!-- CARD 2 -->
-            <div class="academic-card">
-                <div class="card-image"><img src="academic2.jpg" alt=""></div>
-                <div class="card-content">
-                    <span>Certificate</span>
-                    <h3>Python Programming</h3>
-                    <p>Data Analysis</p>
-                    <div class="card-footer">
-                        <button>View Story →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- CARD 3 -->
-            <div class="academic-card">
-                <div class="card-image"><img src="academic3.jpg" alt=""></div>
-                <div class="card-content">
-                    <span>Language</span>
-                    <h3>German</h3>
-                    <p>B1 Level</p>
-                    <div class="card-footer">
-                        <button>View Story →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- CARD 4 -->
-            <div class="academic-card">
-                <div class="card-image"><img src="academic4.jpg" alt=""></div>
                 <div class="card-content">
                     <span>Award</span>
-                    <h3>Academic Achievement</h3>
-                    <p>Scholarship</p>
+                    <h3>Young Investigator Award</h3>
+                    <p>Honored to receive the best research award at the Korean Biomedical Engineering Society meeting.</p>
                     <div class="card-footer">
-                        <button>View Story →</button>
-                    </div>
-                </div>
-            </div>
-            <!-- CARD 5 -->
-            <div class="academic-card">
-                <div class="card-image"><img src="academic5.jpg" alt=""></div>
-                <div class="card-content">
-                    <span>Language</span>
-                    <h3>TOEFL Preparation</h3>
-                    <p>Academic Communication</p>
-                    <div class="card-footer">
-                        <p style="font-size: 11px; color:#7a705f; margin-bottom: 5px;">2025</p>
-                        <button>View Story →</button>
+                        <p>2026. 02</p>
+                        <button>Details</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="view-all">
-            <a href="academic-all.html">View All Academic →</a>
-        </div>    
     </section>
 
-   <!-- ===================================== -->
-    <!-- TRAVEL -->
-    <!-- ===================================== -->
+    <section id="academic" class="academic-section">
+        <div class="section-title">
+            <h2>Academic Achievements</h2>
+            <p>Milestones, degrees, and scholarly journey.</p>
+        </div>
+        <div class="academic-grid">
+            <div class="academic-card">
+                <div class="card-image">
+                    <img src="academic1.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <span>01 / Ph.D Candidate</span>
+                    <h3>Biomedical Engineering</h3>
+                    <p>Deepening knowledge in therapeutic solutions.</p>
+                </div>
+                <div class="card-footer"><button>View Story</button></div>
+            </div>
+            <div class="academic-card">
+                <div class="card-image">
+                    <img src="academic2.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <span>02 / Master's Degree</span>
+                    <h3>Nanomedicine Track</h3>
+                    <p>Thesis on targeted delivery polymers.</p>
+                </div>
+                <div class="card-footer"><button>View Story</button></div>
+            </div>
+            <div class="academic-card">
+                <div class="card-image">
+                    <img src="academic3.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <span>03 / Bachelor's Degree</span>
+                    <h3>Life Sciences</h3>
+                    <p>Graduated with high honors, laying foundations.</p>
+                </div>
+                <div class="card-footer"><button>View Story</button></div>
+            </div>
+            <div class="academic-card">
+                <div class="card-image">
+                    <img src="academic4.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <span>04 / Global Fellowship</span>
+                    <h3>Research Scholarship</h3>
+                    <p>Supported by National Research Foundation.</p>
+                </div>
+                <div class="card-footer"><button>View Story</button></div>
+            </div>
+            <div class="academic-card">
+                <div class="card-image">
+                    <img src="academic5.jpg" alt="">
+                </div>
+                <div class="card-content">
+                    <span>05 / Future Path</span>
+                    <h3>Postdoctoral Vision</h3>
+                    <p>Expanding scope toward translational oncology networks.</p>
+                </div>
+                <div class="card-footer"><button>View Story</button></div>
+            </div>
+        </div>
+    </section>
+
     <section id="travel" class="travel-section">
         <div class="travel-header">
             <h2>Travel</h2>
@@ -236,17 +193,14 @@
         <div class="travel-gallery">
             <div class="travel-word">wander</div>
             
-            <!-- 왼쪽: 세로형 메인 이미지 -->
             <div class="travel-card travel-one">
                 <img src="travel1.jpg" alt="">
             </div>
 
-            <!-- 가운데: 낮게 배치된 이미지 -->
             <div class="travel-card travel-two">
                 <img src="travel2.jpg" alt="">
             </div>
 
-            <!-- 오른쪽: 이미지와 하단 캡션 글 그룹 -->
             <div class="travel-three-wrapper">
                 <div class="travel-card travel-three">
                     <img src="travel3.jpg" alt="">
@@ -259,41 +213,32 @@
         </div>
     </section>
 
-    <!-- ===================================== -->
-    <!-- LIFE -->
-    <!-- ===================================== -->
     <section id="life" class="life-section">
-        <!-- 첫 번째 레퍼런스의 거대한 배경 아치 박스 -->
         <div class="large-arch-bg">
             <div class="life-header">
                 <h2>Life & Style</h2>
                 <p>Moments of beauty, wellness, and daily inspiration.</p>
             </div>
 
-            <!-- 두 번째 레퍼런스의 4개 아치형 카드 그리드 -->
             <div class="life-grid">
-                <!-- 카드 1 -->
                 <div class="life-card">
                     <div class="life-arch-img">
                         <img src="life1.jpg" alt="">
                     </div>
                     <span>Beauty & Lifestyle</span>
                 </div>
-                <!-- 카드 2 -->
                 <div class="life-card">
                     <div class="life-arch-img">
                         <img src="life2.jpg" alt="">
                     </div>
                     <span>Sports & Wellness</span>
                 </div>
-                <!-- 카드 3 -->
                 <div class="life-card">
                     <div class="life-arch-img">
                         <img src="life3.jpg" alt="">
                     </div>
                     <span>Home & Decor</span>
                 </div>
-                <!-- 카드 4 -->
                 <div class="life-card">
                     <div class="life-arch-img">
                         <img src="life4.jpg" alt="">
@@ -304,11 +249,8 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="news-footer">
-        <div class="footer-name">Yuri Choi</div>
-        <p>Research · Learning · Travel · Life</p>
-        <span>© 2026 Yuri Choi. All rights reserved.</span>
+    <footer class="footer">
+        <p>&copy; 2026 Yuri Choi. All rights reserved.</p>
     </footer>
 
 </body>
