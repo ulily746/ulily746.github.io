@@ -320,13 +320,15 @@ ARCH HERO FRAME
 
 /* 아치 글자 */
 
+/* 아치 글자 */
+
 .arch-text{
 
     position:absolute;
 
     width:460px;
 
-    left:0;
+    left:5px;
 
     text-align:center;
 
@@ -338,23 +340,31 @@ ARCH HERO FRAME
 
     color:#8B7355;
 
+    background:#F2F2DF;
+
+    padding:0 15px;
+
+    z-index:5;
+
 }
 
 
 .arch-text.top{
 
-    top:35px;
+    top:45px;
+
+    transform:rotate(-8deg);
 
 }
 
 
 .arch-text.bottom{
 
-    bottom:35px;
+    bottom:45px;
+
+    transform:rotate(8deg);
 
 }
-
-
 
 /* =====================================
 CATEGORY
@@ -491,11 +501,11 @@ RESEARCH
 
 .research-grid{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(4,1fr);
 
-    gap:45px;
+gap:30px;
 
 }
 
@@ -503,14 +513,15 @@ RESEARCH
 
 .research-card{
 
-    background:#fff;
+background:#fff;
 
-    overflow:hidden;
+overflow:hidden;
 
-    transition:.4s;
+height:520px;
+
+transition:.4s;
 
 }
-
 
 
 .research-card:hover{
@@ -523,12 +534,9 @@ RESEARCH
 
 .card-image{
 
-    height:330px;
-
-    overflow:hidden;
+height:280px;
 
 }
-
 
 
 .card-image img{
@@ -551,7 +559,7 @@ RESEARCH
 
 .card-content{
 
-    padding:35px;
+    padding:25px;
 
 }
 
@@ -573,16 +581,11 @@ RESEARCH
 
 .card-content h3{
 
-    margin-top:15px;
+font-size:28px;
 
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:35px;
-
-    font-weight:500;
+line-height:1.2;
 
 }
-
 
 
 .card-content p{
@@ -1185,20 +1188,18 @@ RESPONSIVE
 
 .nav{
 
-    gap:25px;
+    gap:20px;
 
-    height:70px;
+    height:auto;
 
-    padding:0;
+    padding:20px;
 
 }
 
 
 .nav a{
 
-    font-size:16px;
-
-}
+    font-size:14px;
 
 }
 
@@ -1210,13 +1211,11 @@ RESPONSIVE
 }
 
 
-
 .hero h1{
 
     font-size:55px;
 
 }
-
 
 
 .arch-image{
@@ -1225,38 +1224,25 @@ RESPONSIVE
 
     height:430px;
 
-    border-radius:
-
-    160px 160px 0 0;
-
 }
-
 
 
 .arch-decoration{
 
-    width:460px;
-    height:610px;
+    width:350px;
 
-    top:-30px;
-
-    left:50%;
-
-    transform:translateX(-50%);
+    height:480px;
 
 }
 
 
 .arch-line{
 
-    width:460px;
-    height:610px;
+    width:320px;
 
-    left:0;
-    top:0;
+    height:430px;
 
 }
-
 
 
 .arch-text{
@@ -1268,7 +1254,6 @@ RESPONSIVE
 }
 
 
-
 .section-title h2,
 .travel-header h2,
 .life-header h2{
@@ -1278,12 +1263,18 @@ RESPONSIVE
 }
 
 
-
 .academic-grid{
 
     grid-template-columns:1fr;
 
 }
 
+}
 
+.nav{
+    gap:55px;
+}
+
+.nav a{
+    font-size:16px;
 }
