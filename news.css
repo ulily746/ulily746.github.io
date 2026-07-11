@@ -573,40 +573,88 @@ TRAVEL
 }
 
 /* =====================================
-LIFE PART ARCH BACKGROUND & CARDS (복구 완료)
-==================================== */
-/* LIFE 섹션 전체를 아치 배경으로 감싸는 틀 */
+LIFE (거대 배경 아치 + 4연속 아치 카드)
+===================================== */
 .life-section {
-    position: relative;
+    padding: 100px 6% 160px 6%;
+    background: #1A1A1A; /* 첫 번째 레퍼런스처럼 바깥쪽은 어두운 톤 */
+}
+
+/* 거대한 중앙 아치형 배경 (첫 번째 레퍼런스 구현) */
+.large-arch-bg {
+    background: #F2F2DF; /* 웹사이트 기본 아이보리색으로 내부 채우기 */
     width: 100%;
-    background-color: #F2F2DF; /* 원래 아이보리 배경 */
-    padding: 100px 0;
+    border-radius: 50vw 50vw 0 0; /* 완벽한 거대 아치 곡선 생성 */
+    padding: 120px 8% 120px 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* LIFE 파트 내부의 아치형 장명 프레임 */
-.life-arch-frame {
-    position: relative;
-    width: 600px;  /* LIFE 파트 아치 크기에 맞게 조절 가능 */
-    height: 800px;
-    margin: 0 auto;
-    border: 1px solid #B9AA95; /* 은은한 아치 선 */
-    border-radius: 300px 300px 0 0; /* 상단만 둥글게 아치형태 */
-    overflow: hidden;
-    background-color: #F2F2DF;
+.life-header {
+    text-align: center;
+    margin-bottom: 80px;
 }
 
-/* LIFE 파트 내부에 있던 카드 아치 스타일 */
+.life-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 55px;
+    font-weight: 400;
+    color: #111;
+}
+
+.life-header p {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+/* 두 번째 레퍼런스의 아치 카드 그리드 */
+.life-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+}
+
 .life-card {
-    border-radius: 200px 200px 0 0; /* 카드 자체를 아치형으로 만들었던 코드 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 세로로 긴 세련된 아치 프레임 이미지 */
+.life-arch-img {
+    width: 100%;
+    height: 380px; /* 두 번째 이미지 특유의 세로 비율 */
+    border-radius: 140px 140px 0 0; /* 상단만 둥근 아치 처리 */
     overflow: hidden;
-    background-color: #DDE3DA; /* 1번 테마 세이지 그린 적용 */
-    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.04);
 }
 
-.life-card:hover {
-    transform: translateY(-5px);
+.life-arch-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
 }
 
+.life-card:hover .life-arch-img img {
+    transform: scale(1.05);
+}
+
+/* 하단 연한 폰트 설명 */
+.life-card span {
+    font-size: 13px;
+    color: #888;
+    letter-spacing: 0.5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    text-align: center;
+}
 /* =====================================
 FOOTER
 ===================================== */
