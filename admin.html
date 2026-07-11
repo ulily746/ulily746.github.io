@@ -4,31 +4,33 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Research Admin</title>
 
-
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
 
 font-family:Arial, Helvetica, sans-serif;
-
 background:#F2F2DF;
-
-padding:40px;
-
 color:#1A1A1A;
 
 }
 
+/* ---------------- Login ---------------- */
 
+#login-box{
 
-.container{
+width:420px;
 
-max-width:900px;
-
-margin:auto;
+margin:120px auto;
 
 background:white;
 
@@ -36,29 +38,101 @@ padding:40px;
 
 border-radius:15px;
 
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
 
 }
 
+#login-box h2{
 
+margin-bottom:25px;
+
+color:#8B6B4F;
+
+}
+
+#login-box input{
+
+width:100%;
+
+padding:12px;
+
+border:1px solid #ddd;
+
+border-radius:8px;
+
+font-size:15px;
+
+margin-bottom:20px;
+
+}
+
+#login-box button{
+
+width:100%;
+
+padding:14px;
+
+background:#8B6B4F;
+
+border:none;
+
+color:white;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:15px;
+
+}
+
+#login-msg{
+
+margin-top:15px;
+
+color:#b84c4c;
+
+font-size:14px;
+
+}
+
+/* ---------------- Admin ---------------- */
+
+.container{
+
+display:none;
+
+max-width:950px;
+
+margin:40px auto;
+
+background:white;
+
+padding:40px;
+
+border-radius:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+}
 
 h1{
 
 color:#8B6B4F;
 
+margin-bottom:30px;
+
 }
-
-
 
 h2{
 
 margin-top:50px;
 
+margin-bottom:15px;
+
 color:#8B6B4F;
 
 }
-
-
 
 label{
 
@@ -71,8 +145,6 @@ font-weight:bold;
 font-size:14px;
 
 }
-
-
 
 input,
 textarea{
@@ -87,43 +159,37 @@ border:1px solid #ddd;
 
 border-radius:8px;
 
-box-sizing:border-box;
-
 font-size:14px;
 
 }
-
-
 
 textarea{
 
 height:120px;
 
+resize:vertical;
+
 }
 
-
-
 button{
-
-margin-top:20px;
 
 padding:12px 25px;
 
 border:none;
 
+border-radius:8px;
+
 background:#8B6B4F;
 
 color:white;
-
-border-radius:8px;
 
 cursor:pointer;
 
 font-size:14px;
 
+margin-top:20px;
+
 }
-
-
 
 button:hover{
 
@@ -131,64 +197,17 @@ background:#6a4e38;
 
 }
 
+.preview{
 
-
-/* project list */
-
-
-.project-box{
-
-border:1px solid #ddd;
-
-border-radius:12px;
-
-padding:20px;
-
-margin-top:20px;
-
-background:#fafafa;
-
-}
-
-
-
-.project-box h3{
-
-margin:0;
-
-color:#8B6B4F;
-
-}
-
-
-
-.project-buttons{
-
-display:flex;
-
-gap:10px;
+display:none;
 
 margin-top:15px;
 
-}
+width:220px;
 
-
-
-.edit-btn{
-
-background:#4c7aaf;
+border-radius:10px;
 
 }
-
-
-
-.delete-btn{
-
-background:#b84c4c;
-
-}
-
-
 
 #message{
 
@@ -197,22 +216,6 @@ margin-top:20px;
 font-weight:bold;
 
 }
-
-
-
-.preview{
-
-width:200px;
-
-margin-top:15px;
-
-border-radius:10px;
-
-display:none;
-
-}
-
-
 
 hr{
 
@@ -224,143 +227,148 @@ border-top:1px solid #ddd;
 
 }
 
+/* ---------- Existing Projects ---------- */
+
+.project-box{
+
+background:#fafafa;
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+padding:20px;
+
+margin-bottom:20px;
+
+}
+
+.project-box h3{
+
+color:#8B6B4F;
+
+margin-bottom:10px;
+
+}
+
+.project-buttons{
+
+display:flex;
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+.edit-btn{
+
+background:#4c7aaf;
+
+}
+
+.delete-btn{
+
+background:#b84c4c;
+
+}
 
 </style>
 
-
 </head>
-
 
 <body>
 
+<!-- ================= LOGIN ================= -->
 
-<div class="container">
+<div id="login-box">
 
+<h2>Administrator Login</h2>
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<button id="login">
+
+Login
+
+</button>
+
+<p id="login-msg"></p>
+
+</div>
+
+<!-- ================= ADMIN ================= -->
+
+<div class="container" id="admin-panel">
 
 <h1>
+
 Research Upload
+
 </h1>
 
-
-
-<label>
-Title
-</label>
+<label>Title</label>
 
 <input id="title">
 
-
-
-<label>
-Type
-</label>
+<label>Type</label>
 
 <input id="type">
 
+<label>Image Path</label>
 
-
-<label>
-Image Path
-</label>
-
-<input 
+<input
 id="image"
-placeholder="example: scheme.png"
->
-
-
+placeholder="scheme.png">
 
 <img
 id="image-preview"
-class="preview"
->
+class="preview">
 
-
-
-<label>
-Overview
-</label>
+<label>Overview</label>
 
 <textarea id="overview"></textarea>
 
-
-
-<label>
-Research Strategy
-</label>
+<label>Research Strategy</label>
 
 <textarea id="strategy"></textarea>
 
-
-
-<label>
-Research Highlight
-</label>
+<label>Research Highlight</label>
 
 <textarea id="highlight"></textarea>
 
-
-
-<label>
-Publication
-</label>
+<label>Publication</label>
 
 <textarea id="publication"></textarea>
 
+<label>Tags (comma separated)</label>
 
-
-
-<label>
-Tags
-</label>
-
-<input 
+<input
 id="tags"
-placeholder="Cancer Metabolism, Nanomedicine"
->
-
-
-
+placeholder="Cancer Metabolism, Nanomedicine">
 
 <hr>
 
+<h2>Key Results</h2>
 
+<label>Result Images ( | )</label>
 
-<h2>
-Key Results
-</h2>
-
-
-<label>
-Result Images (use |)
-</label>
-
-<input 
+<input
 id="resultsImages"
-placeholder="img1.png|img2.png"
->
+placeholder="img1.png|img2.png|img3.png">
 
+<label>Result Titles ( | )</label>
 
-
-<label>
-Result Titles (use |)
-</label>
-
-<input 
+<input
 id="resultsTitles"
-placeholder="Title1|Title2"
->
+placeholder="Title1|Title2|Title3">
 
-
-
-<label>
-Result Captions (use |)
-</label>
+<label>Result Captions ( | )</label>
 
 <textarea id="resultsCaptions"></textarea>
-
-
-
 
 <button id="save">
 
@@ -368,62 +376,38 @@ Save Project
 
 </button>
 
-
-
 <p id="message"></p>
-
-
 
 <hr>
 
+<h2>Existing Projects</h2>
 
-
-<h2>
-Existing Projects
-</h2>
-
-
-
-<div id="project-list">
+<div id="project-list"></div>
 
 </div>
 
-
-
-</div>
 <script type="module">
 
-import { initializeApp } 
+import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
 
 import {
 
 getFirestore,
-
 collection,
-
 addDoc,
-
 getDocs,
-
 doc,
-
 updateDoc,
-
 deleteDoc
 
 }
-
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-
-
-// Firebase 설정
+// ================= Firebase =================
 
 const firebaseConfig = {
-
 
 apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
 
@@ -441,42 +425,69 @@ measurementId: "G-57VHW2454E"
 
 };
 
-
-
-
-
 const app = initializeApp(firebaseConfig);
-
 
 const db = getFirestore(app);
 
 
-
-
-// 현재 수정 중인 document ID
+// ================= Variables =================
 
 let currentEditId = null;
-
-
-
-
-
-// ========================
-// Image Preview
-// ========================
-
 
 const imageInput = document.getElementById("image");
 
 const imagePreview = document.getElementById("image-preview");
 
 
+// ================= Login =================
+
+const ADMIN_PASSWORD = "yuri1234";
+
+document
+.getElementById("login")
+.addEventListener("click", ()=>{
+
+const pw =
+document.getElementById("password").value;
+
+if(pw===ADMIN_PASSWORD){
+
+document.getElementById("login-box").style.display="none";
+
+document.getElementById("admin-panel").style.display="block";
+
+loadProjects();
+
+}else{
+
+document.getElementById("login-msg").innerHTML=
+"Wrong password.";
+
+}
+
+});
+
+
+// Enter Login
+
+document
+.getElementById("password")
+.addEventListener("keydown",(e)=>{
+
+if(e.key==="Enter"){
+
+document.getElementById("login").click();
+
+}
+
+});
+
+
+// ================= Image Preview =================
 
 imageInput.addEventListener("input", ()=>{
 
-
-const value = imageInput.value.trim();
-
+const value=imageInput.value.trim();
 
 if(value){
 
@@ -484,62 +495,43 @@ imagePreview.src=value;
 
 imagePreview.style.display="block";
 
-}
-
-else{
+}else{
 
 imagePreview.style.display="none";
 
 }
 
-
 });
 
 
-
-
-
-// ========================
-// Save / Update Project
-// ========================
-
+// ================= Save =================
 
 document
 .getElementById("save")
 .addEventListener("click", async ()=>{
 
-
-const data = {
-
+const data={
 
 title:
 document.getElementById("title").value,
 
-
 type:
 document.getElementById("type").value,
-
 
 image:
 document.getElementById("image").value,
 
-
 overview:
 document.getElementById("overview").value,
-
 
 strategy:
 document.getElementById("strategy").value,
 
-
 highlight:
 document.getElementById("highlight").value,
 
-
 publication:
 document.getElementById("publication").value,
-
-
 
 tags:
 
@@ -548,9 +540,7 @@ document
 .value
 .split(",")
 .map(t=>t.trim())
-.filter(t=>t),
-
-
+.filter(Boolean),
 
 resultsImages:
 
@@ -559,9 +549,7 @@ document
 .value
 .split("|")
 .map(t=>t.trim())
-.filter(t=>t),
-
-
+.filter(Boolean),
 
 resultsTitles:
 
@@ -570,9 +558,7 @@ document
 .value
 .split("|")
 .map(t=>t.trim())
-.filter(t=>t),
-
-
+.filter(Boolean),
 
 resultsCaptions:
 
@@ -581,20 +567,15 @@ document
 .value
 .split("|")
 .map(t=>t.trim())
-.filter(t=>t)
+.filter(Boolean)
 
 };
 
-
-
-
 try{
 
-
-// 수정
+// ---------- UPDATE ----------
 
 if(currentEditId){
-
 
 await updateDoc(
 
@@ -604,24 +585,15 @@ data
 
 );
 
-
-
 document.getElementById("message").innerHTML=
 
 "✅ Project updated";
 
-
-currentEditId=null;
-
-
 }
 
-
-
-// 새 프로젝트
+// ---------- ADD ----------
 
 else{
-
 
 await addDoc(
 
@@ -631,201 +603,140 @@ data
 
 );
 
-
 document.getElementById("message").innerHTML=
 
 "✅ Project uploaded";
 
-
 }
-
-
 
 clearForm();
 
-
-loadProjects();
-
+await loadProjects();
 
 }
-
 
 catch(error){
 
-
 console.log(error);
-
 
 document.getElementById("message").innerHTML=
 
-"❌ Error";
-
+"❌ Upload failed";
 
 }
 
-
-
 });
- 
-// ========================
-// Load Existing Projects
-// ========================
 
+// ========================
+// Load Projects
+// ========================
 
 async function loadProjects(){
 
-
-const list = document.getElementById("project-list");
-
+const list =
+document.getElementById("project-list");
 
 list.innerHTML="";
 
-
-
-const snapshot = await getDocs(
-collection(db,"projects")
-);
-
-
+const snapshot =
+await getDocs(collection(db,"projects"));
 
 snapshot.forEach((item)=>{
 
+const data=item.data();
 
-const data = item.data();
-
-
-const box = document.createElement("div");
-
+const box=document.createElement("div");
 
 box.className="project-box";
 
+box.innerHTML=`
 
+<h3>${data.title || ""}</h3>
 
-box.innerHTML = `
+<p>${data.type || ""}</p>
 
-
-<h3>
-${data.title || ""}
-</h3>
-
-
-<p>
-${data.type || ""}
-</p>
-
-
-<p>
-${(data.tags || []).join(", ")}
-</p>
-
-
+<p>${(data.tags || []).join(", ")}</p>
 
 <div class="project-buttons">
 
-
 <button class="edit-btn">
+
 Edit
+
 </button>
-
-
 
 <button class="delete-btn">
+
 Delete
+
 </button>
-
-
 
 </div>
 
-
 `;
-
-
-
 
 
 // ========================
 // Edit
 // ========================
 
-
 box
 .querySelector(".edit-btn")
-.addEventListener("click", ()=>{
-
+.addEventListener("click",()=>{
 
 currentEditId=item.id;
-
-
 
 document.getElementById("title").value =
 data.title || "";
 
-
-
 document.getElementById("type").value =
 data.type || "";
-
-
 
 document.getElementById("image").value =
 data.image || "";
 
-
-
 document.getElementById("overview").value =
 data.overview || "";
-
-
 
 document.getElementById("strategy").value =
 data.strategy || "";
 
-
-
 document.getElementById("highlight").value =
 data.highlight || "";
-
-
 
 document.getElementById("publication").value =
 data.publication || "";
 
-
-
 document.getElementById("tags").value =
 (data.tags || []).join(", ");
-
-
 
 document.getElementById("resultsImages").value =
 (data.resultsImages || []).join("|");
 
-
-
 document.getElementById("resultsTitles").value =
 (data.resultsTitles || []).join("|");
-
-
 
 document.getElementById("resultsCaptions").value =
 (data.resultsCaptions || []).join("|");
 
 
+if(data.image){
 
+imagePreview.src=data.image;
 
-imagePreview.src=data.image || "";
+imagePreview.style.display="block";
 
-imagePreview.style.display =
-data.image ? "block" : "none";
+}else{
 
+imagePreview.style.display="none";
 
+}
 
-
-document.getElementById("save").innerHTML =
+document.getElementById("save").innerHTML=
 "Update Project";
 
-
+document.getElementById("message").innerHTML=
+"✏ Editing Project";
 
 window.scrollTo({
 
@@ -835,73 +746,42 @@ behavior:"smooth"
 
 });
 
-
 });
-
-
-
-
 
 
 // ========================
 // Delete
 // ========================
 
-
 box
 .querySelector(".delete-btn")
-.addEventListener("click", async ()=>{
+.addEventListener("click",async()=>{
 
+const ok=
+confirm("Delete this project?");
 
-const check =
-confirm(
-"Delete this project?"
-);
-
-
-
-if(!check) return;
-
-
+if(!ok) return;
 
 await deleteDoc(
 
-doc(
-db,
-"projects",
-item.id
-)
+doc(db,"projects",item.id)
 
 );
 
-
+clearForm();
 
 document.getElementById("message").innerHTML=
-
 "🗑 Project deleted";
 
-
-
-loadProjects();
-
+await loadProjects();
 
 });
-
-
-
-
 
 list.appendChild(box);
 
-
-
 });
 
-
-
 }
-
-
 
 
 
@@ -909,49 +789,38 @@ list.appendChild(box);
 // Clear Form
 // ========================
 
-
 function clearForm(){
-
-
 
 document
 .querySelectorAll("input, textarea")
 .forEach(el=>{
 
-
-if(el.id !== "image-preview"){
+if(el.id!=="image-preview"){
 
 el.value="";
 
 }
 
-
 });
-
-
 
 imagePreview.style.display="none";
 
+currentEditId=null;
 
 document.getElementById("save").innerHTML=
 "Save Project";
-
 
 }
 
 
 
-
-
 // ========================
-// Initial Load
+// END
 // ========================
-
-
-loadProjects();
-
-
 
 </script>
 
+</body>
 
+</html> 
+ 
