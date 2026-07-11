@@ -434,21 +434,6 @@ COMMON TITLE
 
 
 
-.section-title span,
-.travel-header span,
-.life-header span{
-
-    font-size:12px;
-
-    letter-spacing:4px;
-
-    text-transform:uppercase;
-
-    color:#888;
-
-}
-
-
 
 .section-title h2,
 .travel-header h2,
@@ -663,15 +648,22 @@ ACADEMIC
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:30px;
+    gap:0;
 
 }
 
 
-
 .academic-card{
 
+    position:relative;
+
+    height:520px;
+
     background:#fff;
+
+    border-right:1px solid #eee;
+
+    overflow:hidden;
 
     transition:.4s;
 
@@ -689,15 +681,37 @@ ACADEMIC
 
 .academic-card .card-image{
 
-    height:280px;
+    position:absolute;
+
+    top:35px;
+
+    right:35px;
+
+    width:70%;
+
+    height:55%;
 
 }
 
+.academic-card .card-image img{
 
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
 
 .academic-card .card-content{
 
-    padding:25px;
+    position:absolute;
+
+    left:35px;
+
+    bottom:40px;
+
+    padding:0;
 
 }
 
@@ -1271,10 +1285,40 @@ RESPONSIVE
 
 }
 
-.nav{
-    gap:55px;
+/* ==============================
+VIEW ALL BUTTON
+============================== */
+
+.view-all{
+
+    text-align:center;
+
+    margin-top:70px;
+
 }
 
-.nav a{
-    font-size:16px;
+
+.view-all a{
+
+    display:inline-block;
+
+    padding:14px 40px;
+
+    border:1px solid #222;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+
+.view-all a:hover{
+
+    background:#000;
+
+    color:#F2F2DF;
+
 }
