@@ -171,6 +171,27 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
     object-fit: cover;
 }
 
+.arch-bottom-text{
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:45px;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:28px;
+
+    color:#8B6B4F;
+
+    background:#F2F2DF;
+
+    padding:0 8px;
+
+    white-space:nowrap;
+
+}
 /* =====================================
 ARCH SVG TEXT FLOW
 ===================================== */
