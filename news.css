@@ -127,22 +127,22 @@ HERO & ARCH FRAME (수정본)
 }
 
 /* 아치 이미지 및 SVG 데코레이션 */
+/* 아치 프레임 요소 간 격차 정밀 조정 */
 .hero-image {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
+    align-items: flex-end; /* 바닥 선 일치를 위해 하단 정렬 */
+    width: 460px;
+    height: 610px;
+    margin: 0 auto;
 }
 
 .arch-decoration {
     position: absolute;
-    width: 460px;
-    height: 610px;
+    inset: 0;
     z-index: 3;
     pointer-events: none;
-    display: flex;
-    justify-content: center;
 }
 
 .arch-svg {
@@ -150,32 +150,28 @@ HERO & ARCH FRAME (수정본)
     height: 100%;
 }
 
-/* 곡선을 따라가는 텍스트 스타일 */
-.arch-svg-text {
-    font-family: 'Great Vibes', cursive;
-    font-size: 26px; /* 크기를 줄여 사진을 가리지 않게 조절 */
-    fill: #8B6B4F;
-}
-
-/* 글자 뒤 아치선을 끊는 듯한 착시 효과 (텍스트에 배경 그림자 배치) */
+/* 상단 글자 스타일: 텍스트에 두꺼운 외곽선을 주어 아치 선을 자연스럽게 지워버리는 가림막 효과 */
 .arch-svg-text.top {
-    font-size: 24px;
-    text-shadow: 
-        -8px 0 #F2F2DF, 8px 0 #F2F2DF, 
-        -4px 0 #F2F2DF, 4px 0 #F2F2DF,
-        0 0 5px #F2F2DF;
+    font-family: 'Great Vibes', cursive;
+    font-size: 26px;
+    fill: #8B6B4F;
+    letter-spacing: 0.5px;
+    /* 텍스트 배경색과 동일한 스트로크로 뒤의 아치 선을 끊어줌 */
+    stroke: #F2F2DF;
+    stroke-width: 6px;
+    paint-order: stroke fill;
 }
 
-/* 아치 사진 스타일 */
+/* 내부 아치 사진: 선 두께(35px 여백)와 곡률(195px)을 SVG 패스와 1:1로 정확히 일치 */
 .arch-image {
-    position: relative;
-    z-index: 2;
-    width: 390px;
-    height: 540px;
+    position: absolute;
+    bottom: 0;
+    left: 35px;
+    right: 35px;
+    top: 230px;
     overflow: hidden;
     border-radius: 195px 195px 0 0;
-    box-shadow: 0 20px 40px rgba(0,0,0,.06);
-    margin-top: 40px; /* 아치 선과 간격을 맞추기 위해 조정 */
+    z-index: 2;
 }
 
 .arch-image img {
@@ -184,17 +180,18 @@ HERO & ARCH FRAME (수정본)
     object-fit: cover;
 }
 
-/* 바닥 선상에 배치될 bottom 글자 */
+/* 하단 글자: 튀는 네모 박스를 제거하고, 글자 자체 가림막 효과로 바닥 아치 선을 덮음 */
 .arch-text.bottom {
     position: absolute;
-    bottom: -10px; /* 맨 아래 선 위치 */
-    right: 50px;
+    bottom: 15px; /* 바닥 실선 위치에 정확히 안착 */
+    right: 55px;
     font-family: 'Great Vibes', cursive;
-    font-size: 22px; /* 사이즈 축소 */
+    font-size: 24px;
     color: #8B6B4F;
-    background: #F2F2DF; /* 선을 끊기 위한 배경색 */
-    padding: 0 10px;
     z-index: 10;
+    background: #F2F2DF; /* 배경색과 동일하게 매칭 */
+    padding: 0 8px; /* 글자 좌우로 선이 살짝 끊어지도록 여백 확보 */
+    line-height: 1;
 }
 /* =====================================
 CATEGORY
