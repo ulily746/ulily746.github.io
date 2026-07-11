@@ -1167,25 +1167,24 @@ RESPONSIVE
 
 @media(max-width:600px){
 
-
 .nav{
 
-    gap:20px;
+    gap:55px;
 
-    height:auto;
+    height:70px;
 
-    padding:20px;
+    padding:0;
 
 }
-
 
 
 .nav a{
 
-    font-size:14px;
+    font-size:16px;
 
 }
 
+}
 
 
 .hero{
