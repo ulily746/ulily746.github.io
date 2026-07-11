@@ -923,30 +923,66 @@ TRAVEL
 
 }
 
+/* =====================================
+TRAVEL EDITORIAL STYLE
+===================================== */
 
 
 .travel-gallery{
 
-    display:grid;
-
-    grid-template-columns:repeat(12,1fr);
-
-    grid-auto-rows:220px;
-
-    gap:25px;
-
-}
-
-
-
-.travel-card{
-
     position:relative;
+
+    height:900px;
 
     overflow:hidden;
 
 }
 
+
+/* 뒤쪽 필기체 */
+
+
+.travel-word{
+
+    position:absolute;
+
+    top:80px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:220px;
+
+    color:#D8CDBB;
+
+    opacity:.45;
+
+    white-space:nowrap;
+
+    z-index:0;
+
+}
+
+
+
+/* 사진 공통 */
+
+.travel-card{
+
+    position:absolute;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 25px 50px rgba(0,0,0,.08);
+
+    z-index:2;
+
+}
 
 
 .travel-card img{
@@ -955,18 +991,105 @@ TRAVEL
 
     height:100%;
 
-    transition:.6s;
+    object-fit:cover;
 
 }
 
 
 
-.travel-card:hover img{
 
-    transform:scale(1.08);
+/* 큰 왼쪽 사진 */
+
+.travel-one{
+
+    width:430px;
+
+    height:560px;
+
+    left:5%;
+
+    top:120px;
 
 }
 
+
+
+/* 오른쪽 작은 사진 */
+
+.travel-two{
+
+    width:300px;
+
+    height:400px;
+
+    right:12%;
+
+    top:80px;
+
+}
+
+
+
+/* 아래 긴 사진 */
+
+.travel-three{
+
+    width:500px;
+
+    height:280px;
+
+    left:35%;
+
+    bottom:60px;
+
+}
+
+
+
+/* 글자 */
+
+.travel-caption{
+
+    position:absolute;
+
+    right:8%;
+
+    bottom:90px;
+
+    z-index:3;
+
+}
+
+
+
+.travel-caption h3{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:55px;
+
+    font-weight:400;
+
+}
+
+
+
+.travel-caption p{
+
+    margin-top:10px;
+
+    letter-spacing:3px;
+
+    font-size:13px;
+
+    color:#777;
+
+}
+
+
+/* =====================================
+TRAVEL HOVER
+===================================== */
 
 
 .travel-card::after{
@@ -977,90 +1100,80 @@ TRAVEL
 
     inset:0;
 
-    background:linear-gradient(
+    background:rgba(0,0,0,0);
 
-        transparent,
-
-        rgba(0,0,0,.45)
-
-    );
+    transition:.4s;
 
 }
 
 
-
-.travel-info{
+.travel-hover{
 
     position:absolute;
 
-    left:30px;
+    inset:0;
 
-    bottom:25px;
+    display:flex;
 
-    z-index:2;
+    justify-content:flex-end;
+
+    align-items:flex-end;
+
+    padding:30px;
+
+    z-index:3;
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+
+
+.travel-hover a{
 
     color:white;
 
-}
+    border:1px solid rgba(255,255,255,.7);
 
+    padding:12px 22px;
 
-
-.travel-info h3{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:35px;
-
-    font-weight:400;
-
-}
-
-
-
-.travel-info p{
-
-    font-size:13px;
+    font-size:12px;
 
     letter-spacing:2px;
 
-}
+    background:rgba(0,0,0,.2);
 
-
-
-.travel-card.large{
-
-    grid-column:span 6;
-
-    grid-row:span 2;
+    transition:.3s;
 
 }
 
 
 
-.travel-card.small{
+.travel-card:hover::after{
 
-    grid-column:span 3;
-
-}
-
-
-
-.travel-card.tall{
-
-    grid-column:span 3;
-
-    grid-row:span 2;
+    background:rgba(0,0,0,.45);
 
 }
 
 
 
-.travel-card.wide{
+.travel-card:hover .travel-hover{
 
-    grid-column:span 6;
+    opacity:1;
 
 }
 
+
+
+.travel-hover a:hover{
+
+    background:white;
+
+    color:#222;
+
+}
 
 
 
