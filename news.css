@@ -126,18 +126,17 @@ img{
 
 .hero{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:1fr 1fr;
+grid-template-columns:0.9fr 1fr;
 
-    align-items:center;
+align-items:center;
 
-    gap:80px;
+gap:40px;
 
-    padding:80px 8% 120px;
+padding:80px 8% 120px;
 
 }
-
 
 
 
@@ -215,25 +214,36 @@ img{
 
 .hero-image{
 
-    display:flex;
+position:relative;
 
-    justify-content:center;
+display:flex;
+
+justify-content:center;
 
 }
 
 
 
 
-
 .arch-image{
 
-    width:420px;
+width:420px;
 
-    height:560px;
+height:560px;
 
-    overflow:hidden;
+overflow:hidden;
 
-    border-radius:220px 220px 0 0;
+border-radius:
+
+220px 220px 40px 40px;
+
+position:relative;
+
+z-index:2;
+
+box-shadow:
+
+0 30px 60px rgba(0,0,0,.08);
 
 }
 
@@ -248,7 +258,46 @@ img{
 }
 
 
+.hero-decoration{
 
+position:absolute;
+
+top:80px;
+
+left:-20px;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:100px;
+
+letter-spacing:8px;
+
+color:#E5DED2;
+
+transform:rotate(-90deg);
+
+z-index:1;
+
+}
+
+
+.hero-year{
+
+position:absolute;
+
+bottom:30px;
+
+right:40px;
+
+font-family:'Great Vibes',cursive;
+
+font-size:50px;
+
+color:#8B7355;
+
+z-index:3;
+
+}
 
 
 /* ===================================== */
