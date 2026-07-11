@@ -184,6 +184,8 @@ HERO
 
     margin-top:45px;
 
+    margin-left:80px;
+
     font-family:'Great Vibes',cursive;
 
     font-size:55px;
@@ -192,7 +194,54 @@ HERO
 
 }
 
+/* =====================================
+HERO META
+===================================== */
 
+.hero-meta{
+
+    margin-top:45px;
+
+    margin-left:10px;
+
+}
+
+
+.hero-meta .meta-line{
+
+    width:80px;
+
+    height:1px;
+
+    background:#B9AA95;
+
+    margin-bottom:15px;
+
+}
+
+
+.hero-meta span{
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    color:#8B7355;
+
+}
+
+
+.hero-meta p{
+
+    margin-top:12px;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    color:#777;
+
+}
 
 /* =====================================
 HERO IMAGE
