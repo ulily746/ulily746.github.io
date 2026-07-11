@@ -11,8 +11,7 @@ html{
 
 
 body{
-background:#F2F2DF;
-
+background:#F2F2DF;.
     color:#222;
 
     font-family:'Inter', sans-serif;
@@ -234,19 +233,17 @@ justify-content:center;
 
     position:absolute;
 
-    width:470px;
+    width:430px;
 
-    height:620px;
+    height:570px;
 
-    top:-20px;
+    top:-25px;
 
     left:50%;
 
     transform:translateX(-50%);
 
-    z-index:3;
-
-    pointer-events:none;
+    z-index:1;
 
 }
 
@@ -291,7 +288,10 @@ justify-content:center;
 
 }
 
-
+.arch-image{
+    position:relative;
+    z-index:2;
+}
 
 /* 위쪽 아치 */
 
@@ -1228,11 +1228,16 @@ padding-left:40px;
 
 .arch-image{
 
-width:330px;
+    width:380px;
 
-height:450px;
+    height:520px;
 
-border-radius:170px 170px 0 0;
+    overflow:hidden;
+
+    border-radius:190px 190px 0 0;
+
+    box-shadow:
+    0 20px 40px rgba(0,0,0,0.08);
 
 }
 
