@@ -132,80 +132,43 @@ HERO META
 }
 
 /* =====================================
-HERO IMAGE & ARCH FRAME
+HERO IMAGE & ARCH FRAME (완전 정돈됨)
 ===================================== */
-.hero-image{
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    width:100%;
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 620px; /* 아래 레이아웃이 침범하지 못하게 기둥 역할 */
 }
 
-.arch-decoration{
-    position:absolute;
-    width:470px;
-    height:620px;
-    top:-35px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:3;
-    pointer-events:none;
+.arch-decoration {
+    position: absolute;
+    width: 470px;
+    height: 620px;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    pointer-events: none;
 }
 
-.arch-line{
-    position:absolute;
-    width:460px;
-    height:610px;
-    left:5px;
-    top:0;
-    border:1px solid #B9AA95;
-    border-radius: 230px 230px 0 0;
-}
-
-.arch-image{
-    position:relative;
-    z-index:2;
-    width:400px;
-    height:550px;
-    overflow:hidden;
+.arch-image {
+    position: relative;
+    z-index: 2;
+    width: 400px;
+    height: 550px;
+    overflow: hidden;
     border-radius: 200px 200px 0 0;
     box-shadow: 0 25px 50px rgba(0,0,0,.04);
+    margin-top: 35px; /* 아치선 안으로 사진이 이쁘게 들어가도록 조정 */
 }
 
-.arch-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.arch-text{
-    position:absolute;
-    z-index:10;
-    font-family:'Great Vibes',cursive;
-    font-size:34px;
-    color:#8B6B4F;
-    white-space:nowrap;
-}
-
-.arch-text::before{
-    content:"";
-    position:absolute;
-    inset:-5px -15px;
-    background:#F2F2DF;
-    z-index:-1;
-}
-
-.arch-text.top{
-    top:65px;
-    left:-35px;
-    transform:rotate(-32deg);
-}
-
-.arch-text.bottom{
-    right:-65px;
-    bottom:15px;
-    transform:rotate(0deg);
+.arch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* =====================================
@@ -214,19 +177,18 @@ ARCH SVG TEXT FLOW
 .arch-svg {
     width: 100%;
     height: 100%;
+    display: block;
 }
 
 .arch-svg-text {
     font-family: 'Great Vibes', cursive;
-    font-size: 32px; /* 이쁜 글씨 크기로 조절 */
-    fill: #8B6B4F;   /* 글자 색상 */
+    font-size: 34px;
+    fill: #8B6B4F;
 }
 
-/* 글자 뒤에 하얀 배경 느낌을 살짝 주고 싶다면 아래 속성을 텍스트에 활용할 수 있습니다 */
 .arch-svg-text textPath {
     dominant-baseline: central;
 }
-
 /* =====================================
 CATEGORY
 ===================================== */
