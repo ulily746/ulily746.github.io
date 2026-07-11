@@ -255,21 +255,32 @@ justify-content:center;
 ===================================== */
 
 
+.hero-image{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
 .arch-decoration{
 
-position:absolute;
+    position:absolute;
 
-width:500px;
+    width:470px;
 
-height:650px;
+    height:620px;
 
-top:-35px;
+    top:-20px;
 
-left:50%;
+    left:50%;
 
-transform:translateX(-50%);
+    transform:translateX(-50%);
 
-pointer-events:none;
+    z-index:3;
+
+    pointer-events:none;
 
 }
 
@@ -277,126 +288,72 @@ pointer-events:none;
 
 .arch-line{
 
-position:absolute;
+    position:absolute;
 
-width:430px;
+    width:430px;
 
-height:580px;
+    height:580px;
 
-left:35px;
+    left:20px;
 
-top:0;
+    top:0;
 
-border-radius:
+    border-radius:
+    220px 220px 0 0;
 
-220px 220px 0 0;
-
-border:1px solid #B9AA95;
+    border:1px solid #B9AA95;
 
 }
+
 
 
 .arch-text{
 
-position:absolute;
+    position:absolute;
 
-font-size:10px;
+    width:430px;
 
-letter-spacing:3px;
+    text-align:center;
 
-color:#8B7355;
+    font-family:'Cormorant Garamond',serif;
 
-white-space:nowrap;
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    color:#8B7355;
 
 }
 
+
+
+/* 위쪽 아치 */
 
 .arch-text.top{
 
-top:10px;
+    top:35px;
 
-left:80px;
+    left:20px;
 
-transform:rotate(-4deg);
+    transform:
+    rotate(-8deg);
 
 }
 
 
+
+/* 아래쪽 */
 
 .arch-text.bottom{
 
-bottom:30px;
+    bottom:40px;
 
-left:90px;
+    left:20px;
 
-transform:rotate(4deg);
-
-}dl
-
-.arch-image{
-
-    position:relative;
-
-    z-index:2;
-
-    width:430px;
-
-    height:580px;
-
-    overflow:hidden;
-
-    border-radius:220px 220px 0 0;
+    transform:
+    rotate(8deg);
 
 }
-
-
-.arch-image{
-
-    width:430px;
-
-    height:580px;
-
-    overflow:hidden;
-
-    border-radius:
-
-    220px 220px 0 0;
-
-    box-shadow:
-
-    0 25px 50px rgba(0,0,0,0.08);
-
-}
-
-
-.arch-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-}
-
-.hero-line{
-
-position:absolute;
-
-left:-80px;
-
-top:50%;
-
-width:100px;
-
-height:1px;
-
-background:#B9AA95;
-
-}
-
-
-
 /* ===================================== */
 /* CATEGORY */
 /* ===================================== */
@@ -1221,7 +1178,6 @@ padding:90px 12% 120px;
 
 padding-left:40px;
 
-}dlwl    
     
 
 .hero-image{
