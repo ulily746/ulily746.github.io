@@ -93,12 +93,41 @@ News
 
 
 
-  <div class="hero-image">
+ <div class="hero-image">
+
+    <svg class="arch-decoration" viewBox="0 0 600 750">
+
+        <!-- outer arch line -->
+        <path 
+        id="topArc"
+        d="M100,330 A200,200 0 0,1 500,330"
+        fill="none"/>
+
+        <path 
+        id="bottomArc"
+        d="M100,330 A200,200 0 0,0 500,330"
+        fill="none"/>
+
+
+        <text>
+            <textPath href="#topArc" startOffset="50%">
+                BIOMEDICAL ENGINEERING · NANOMEDICINE · DRUG DELIVERY
+            </textPath>
+        </text>
+
+
+        <text>
+            <textPath href="#bottomArc" startOffset="50%">
+                METABOLIC THERAPY · RESEARCH ARCHIVE · YURI CHOI · 2026
+            </textPath>
+        </text>
+
+
+    </svg>
+
 
     <div class="arch-image">
-
-        <img src="hero.jpg" alt="Personal archive">
-
+        <img src="hero.jpg">
     </div>
 
 
