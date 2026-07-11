@@ -454,10 +454,10 @@ ACADEMIC CARD (이전 버전 복구)
     background: #8B6B4F;
 }
 /* =====================================
-TRAVEL (매거진 3분할 레이아웃)
+TRAVEL (매거진 3분할 레이아웃 - 위치 조정본)
 ===================================== */
 .travel-section {
-    padding: 120px 8%;
+    padding: 140px 8% 120px 8%; /* 필기체가 위로 올라간 만큼 상단 패딩 확보 */
     position: relative;
 }
 
@@ -466,27 +466,27 @@ TRAVEL (매거진 3분할 레이아웃)
     position: relative;
     width: 100%;
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr; /* 예시처럼 3개 열 배치 */
+    grid-template-columns: 1.2fr 1fr 1.2fr;
     gap: 40px;
     align-items: flex-start;
     margin-top: 60px;
 }
 
-/* 뒤쪽 은은한 필기체 */
+/* 뒤쪽 은은한 필기체 (위로 올리고 오른쪽으로 대폭 이동, w만 걸치게 조정) */
 .travel-word {
     position: absolute;
-    left: 10%;
-    top: -80px;
+    right: 55%; /* 오른쪽으로 많이 밀어서 위치 조정 */
+    top: -120px; /* 위쪽으로 살짝 보이게 더 끌어올림 */
     font-family: 'Great Vibes', cursive;
-    font-size: 180px;
+    font-size: 190px;
     color: #B9AA95;
-    opacity: .25;
+    opacity: .28;
     white-space: nowrap;
     z-index: 1;
     pointer-events: none;
 }
 
-/* 공통 사진 카드 스타일 (흰색 매거진 분위기) */
+/* 공통 사진 카드 스타일 */
 .travel-card {
     position: relative;
     overflow: hidden;
@@ -503,23 +503,22 @@ TRAVEL (매거진 3분할 레이아웃)
     transition: transform .6s ease;
 }
 
-/* 호버 시 부드러운 확대 효과 (기존 어두워지는 효과 제거) */
 .travel-card:hover img {
     transform: scale(1.04);
 }
 
-/* 1번 카드 (왼쪽: 세로로 긴 큰 이미지) */
+/* 1번 카드 (왼쪽: 세로 메인) */
 .travel-one {
-    height: 580px;
+    height: 560px;
 }
 
-/* 2번 카드 (가운데: 아래쪽으로 살짝 내려앉은 정사각형 이미지) */
+/* 2번 카드 (가운데: 첫 번째 사진보다 아래로 살짝 삐져나오게 조정) */
 .travel-two {
-    height: 380px;
-    margin-top: 120px; /* 예시처럼 아래로 배치 */
+    height: 420px;
+    margin-top: 170px; /* 위쪽 여백을 늘려 첫 번째 사진 바닥보다 아래로 내려오게 설정 */
 }
 
-/* 3번 열 (오른쪽: 사진 + 아래 캡션 글자 구조) */
+/* 3번 열 (오른쪽: 사진 + 아래 캡션) */
 .travel-three-wrapper {
     display: flex;
     flex-direction: column;
@@ -530,7 +529,7 @@ TRAVEL (매거진 3분할 레이아웃)
     height: 380px;
 }
 
-/* 설명 글귀 (예시 이미지의 우하단 서사 텍스트 스타일) */
+/* 설명 글귀 */
 .travel-caption {
     padding-top: 10px;
     text-align: left;
@@ -552,7 +551,7 @@ TRAVEL (매거진 3분할 레이아웃)
     max-width: 90%;
 }
 
-/* 기존 불필요한 Hover 레이어 스타일 초기화 */
+/* 호버 레이어 초기화 유지 */
 .travel-card::after, .travel-hover {
     display: none;
 }
