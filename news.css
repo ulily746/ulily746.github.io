@@ -57,7 +57,7 @@ NAVIGATION
 }
 
 /* =====================================
-HERO
+HERO & ARCH FRAME (수정본)
 ===================================== */
 .hero {
     display: grid;
@@ -102,7 +102,6 @@ HERO
     color: #333;
 }
 
-/* HERO META */
 .hero-meta {
     margin-top: 45px;
 }
@@ -127,7 +126,7 @@ HERO
     color: #777;
 }
 
-/* ARCH HERO FRAME */
+/* 아치 이미지 및 SVG 데코레이션 */
 .hero-image {
     position: relative;
     display: flex;
@@ -138,33 +137,45 @@ HERO
 
 .arch-decoration {
     position: absolute;
-    width: 470px;
-    height: 620px;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    pointer-events: none;
-}
-
-.arch-line {
-    position: absolute;
     width: 460px;
     height: 610px;
-    left: 5px;
-    top: 0;
-    border: 1px solid #B9AA95;
-    border-radius: 230px 230px 0 0;
+    z-index: 3;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
 }
 
+.arch-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* 곡선을 따라가는 텍스트 스타일 */
+.arch-svg-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 26px; /* 크기를 줄여 사진을 가리지 않게 조절 */
+    fill: #8B6B4F;
+}
+
+/* 글자 뒤 아치선을 끊는 듯한 착시 효과 (텍스트에 배경 그림자 배치) */
+.arch-svg-text.top {
+    font-size: 24px;
+    text-shadow: 
+        -8px 0 #F2F2DF, 8px 0 #F2F2DF, 
+        -4px 0 #F2F2DF, 4px 0 #F2F2DF,
+        0 0 5px #F2F2DF;
+}
+
+/* 아치 사진 스타일 */
 .arch-image {
     position: relative;
     z-index: 2;
-    width: 400px;
-    height: 550px;
+    width: 390px;
+    height: 540px;
     overflow: hidden;
-    border-radius: 200px 200px 0 0;
-    box-shadow: 0 25px 50px rgba(0,0,0,.08);
+    border-radius: 195px 195px 0 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,.06);
+    margin-top: 40px; /* 아치 선과 간격을 맞추기 위해 조정 */
 }
 
 .arch-image img {
@@ -173,35 +184,18 @@ HERO
     object-fit: cover;
 }
 
-.arch-text {
-    position: absolute;
-    z-index: 10;
-    font-family: 'Great Vibes', cursive;
-    font-size: 34px;
-    color: #8B6B4F;
-    white-space: nowrap;
-}
-
-.arch-text::before {
-    content: "";
-    position: absolute;
-    inset: -5px -15px;
-    background: #F2F2DF;
-    z-index: -1;
-}
-
-.arch-text.top {
-    top: 65px;
-    left: -35px;
-    transform: rotate(-32deg);
-}
-
+/* 바닥 선상에 배치될 bottom 글자 */
 .arch-text.bottom {
-    right: -65px;
-    bottom: 115px;
-    transform: rotate(0deg);
+    position: absolute;
+    bottom: -10px; /* 맨 아래 선 위치 */
+    right: 50px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 22px; /* 사이즈 축소 */
+    color: #8B6B4F;
+    background: #F2F2DF; /* 선을 끊기 위한 배경색 */
+    padding: 0 10px;
+    z-index: 10;
 }
-
 /* =====================================
 CATEGORY
 ===================================== */
@@ -260,7 +254,7 @@ COMMON TITLE
 }
 
 /* =====================================
-RESEARCH
+RESEARCH 파트 (새로운 세련된 색상 조합)
 ===================================== */
 .research-section {
     padding: 120px 8%;
@@ -273,17 +267,23 @@ RESEARCH
 }
 
 .research-card {
-    background: #DDE3DA;
+    background: #E3E8E0; /* 1, 3번 카드: 차분한 세이지 세라믹 그린 */
     height: 620px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
     transition: .4s;
+    border-radius: 4px; /* 살짝 부드러운 느낌 추가 */
+}
+
+.research-card:nth-child(even) {
+    background: #EAE5D9; /* 2, 4번 카드: 포근하고 고급스러운 샌드 오트밀 */
 }
 
 .research-card:hover {
     transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
 }
 
 .card-image {
@@ -309,27 +309,25 @@ RESEARCH
 }
 
 .card-content span {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #888;
+    color: #8A8E87; /* 텍스트 톤 다운 */
+    font-weight: 500;
 }
 
 .card-content h3 {
     font-size: 24px;
     line-height: 1.2;
-    margin-top: 10px;
+    margin-top: 12px;
     font-family: 'Cormorant Garamond', serif;
+    color: #1A1A1A;
 }
 
 .card-content p {
-    margin-top: 12px;
+    margin-top: 10px;
     color: #666;
     font-size: 14px;
-}
-
-.research-card:nth-child(even) {
-    background: #F1EEE5;
 }
 
 .card-footer {
@@ -339,18 +337,23 @@ RESEARCH
     align-items: center;
 }
 
-.card-footer button, .academic-card .card-footer button {
-    background: #000;
+.card-footer p {
+    font-size: 12px;
+    color: #888;
+}
+
+.card-footer button {
+    background: #222;
     color: #F2F2DF;
     border: none;
-    padding: 12px 18px;
-    font-size: 12px;
+    padding: 10px 16px;
+    font-size: 11px;
     letter-spacing: 1px;
     cursor: pointer;
     transition: .3s;
 }
 
-.card-footer button:hover, .academic-card .card-footer button:hover {
+.card-footer button:hover {
     background: #8B6B4F;
 }
 
