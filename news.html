@@ -11,6 +11,7 @@
 </head>
 <body>
 
+    <!-- NAVIGATION BAR (초기 버전) -->
     <nav class="navbar">
         <div class="nav-logo">YURI CHOI</div>
         <ul class="nav-links">
@@ -20,6 +21,7 @@
         </ul>
     </nav>
 
+    <!-- HERO SECTION (초기 버전) -->
     <header class="hero">
         <div class="hero-text">
             <span class="hero-small">Personal Archive</span>
@@ -32,28 +34,18 @@
                 <p>Nanomedicine · Cancer Metabolism<br>Drug Delivery · Biomedical Engineering</p>
             </div>
         </div>
-
         <div class="hero-image">
-            <div class="arch-decoration">
-                <svg viewBox="0 0 460 610" class="arch-svg">
-                    <defs>
-                        <path id="archPath" d="M 35,610 V 230 A 195,195 0 0,1 425,230 V 610" fill="none" />
-                    </defs>
-                    <use href="#archPath" stroke="#B9AA95" stroke-width="1.2" fill="none" />
-                    <text class="arch-svg-text top" dy="8">
-                        <textPath href="#archPath" startOffset="14%">
-                            Dilly Dally Moments
-                        </textPath>
-                    </text>
-                </svg>
+            <div class="arch-frame">
+                <div class="arch-text top">Dilly Dally Moments</div>
+                <div class="arch-image-inner">
+                    <img src="hero.jpg" alt="Hero Image">
+                </div>
                 <div class="arch-text bottom">Little by Little</div>
-            </div>
-            <div class="arch-image">
-                <img src="hero.jpg" alt="Hero Image">
             </div>
         </div>
     </header>
 
+    <!-- RESEARCH SECTION (초기 버전) -->
     <section id="research" class="research-section">
         <div class="section-title">
             <h2>Research Updates</h2>
@@ -119,6 +111,7 @@
         </div>
     </section>
 
+    <!-- ACADEMIC SECTION (초기 버전) -->
     <section id="academic" class="academic-section">
         <div class="section-title">
             <h2>Academic Achievements</h2>
@@ -183,43 +176,37 @@
         </div>
     </section>
 
+    <!-- TRAVEL SECTION (초기 버전) -->
     <section id="travel" class="travel-section">
         <div class="travel-header">
             <h2>Travel</h2>
             <div class="travel-script">Journey</div>
             <p>Every place leaves a story.</p>
         </div>
-
         <div class="travel-gallery">
             <div class="travel-word">wander</div>
-            
-            <div class="travel-card travel-one">
+            <div class="travel-card t1">
                 <img src="travel1.jpg" alt="">
+                <div class="travel-hover"><h3>Switzerland</h3><p>2025. 07</p></div>
             </div>
-
-            <div class="travel-card travel-two">
+            <div class="travel-card t2">
                 <img src="travel2.jpg" alt="">
+                <div class="travel-hover"><h3>Paris</h3><p>2024. 09</p></div>
             </div>
-
-            <div class="travel-three-wrapper">
-                <div class="travel-card travel-three">
-                    <img src="travel3.jpg" alt="">
-                </div>
-                <div class="travel-caption">
-                    <h3>Switzerland</h3>
-                    <p>테이블 위 유리 화병 안에 꽂아둔 몇 송이 꽃처럼, 스위스의 알프스는 여행의 순간마다 싱그러운 무드를 더해줍니다. 눈길이 머무는 모든 곳이 조화롭고 아늑한 기억으로 남는 여정을 기록합니다.</p>
-                </div>
+            <div class="travel-card t3">
+                <img src="travel3.jpg" alt="">
+                <div class="travel-hover"><h3>Kyoto</h3><p>2023. 11</p></div>
             </div>
         </div>
     </section>
 
+    <!-- LIFE SECTION (🔥 수정된 아치형 레이아웃 유지) -->
     <section id="life" class="life-section">
         <div class="large-arch-bg">
             <div class="life-header">
                 <h2>Life & Style</h2>
                 <p>Moments of beauty, wellness, and daily inspiration.</p>
             </div>
-
             <div class="life-grid">
                 <div class="life-card">
                     <div class="life-arch-img">
