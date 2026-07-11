@@ -35,10 +35,28 @@
 
         <div class="hero-image">
             <div class="arch-decoration">
-                <div class="arch-line"></div>
-                <div class="arch-text top">Dilly Dally Moments</div>
+                <!-- 아치 선과 곡선 글자를 위한 SVG -->
+                <svg viewBox="0 0 460 610" class="arch-svg">
+                    <defs>
+                        <!-- 글자가 따라갈 아치 곡선 경로 정의 (반지름 230px) -->
+                        <path id="archPath" d="M 5,610 V 230 A 225,225 0 0,1 455,230 V 610" fill="none" />
+                    </defs>
+                    
+                    <!-- 실제 눈에 보이는 아치 선 -->
+                    <use href="#archPath" stroke="#B9AA95" stroke-width="1" fill="none" />
+                    
+                    <!-- 곡선을 따라가는 상단 글자 (배경 효과를 위해 약간의 자리를 띄움) -->
+                    <text class="arch-svg-text top" dy="-6">
+                        <textPath href="#archPath" startOffset="30%">
+                            Dilly Dally Moments
+                        </textPath>
+                    </text>
+                </svg>
+
+                <!-- 맨 아래 선상에 배치될 하단 글자 -->
                 <div class="arch-text bottom">Little by Little</div>
             </div>
+            
             <div class="arch-image">
                 <img src="hero.jpg" alt="Hero Image">
             </div>
