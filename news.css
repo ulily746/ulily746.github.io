@@ -540,61 +540,39 @@ TRAVEL
 }
 
 /* =====================================
-LIFE
-===================================== */
-.life-section{
-    padding:120px 8%;
+LIFE PART ARCH BACKGROUND & CARDS (복구 완료)
+==================================== */
+/* LIFE 섹션 전체를 아치 배경으로 감싸는 틀 */
+.life-section {
+    position: relative;
+    width: 100%;
+    background-color: #F2F2DF; /* 원래 아이보리 배경 */
+    padding: 100px 0;
 }
 
-.life-grid{
-    display:grid;
-    grid-template-columns:repeat(12,1fr);
-    gap:25px;
+/* LIFE 파트 내부의 아치형 장명 프레임 */
+.life-arch-frame {
+    position: relative;
+    width: 600px;  /* LIFE 파트 아치 크기에 맞게 조절 가능 */
+    height: 800px;
+    margin: 0 auto;
+    border: 1px solid #B9AA95; /* 은은한 아치 선 */
+    border-radius: 300px 300px 0 0; /* 상단만 둥글게 아치형태 */
+    overflow: hidden;
+    background-color: #F2F2DF;
 }
 
-.life-card{
-    position:relative;
-    overflow:hidden;
-    height:350px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.03);
+/* LIFE 파트 내부에 있던 카드 아치 스타일 */
+.life-card {
+    border-radius: 200px 200px 0 0; /* 카드 자체를 아치형으로 만들었던 코드 */
+    overflow: hidden;
+    background-color: #DDE3DA; /* 1번 테마 세이지 그린 적용 */
+    transition: transform 0.3s ease;
 }
 
-.life-card img{
-    width:100%;
-    height:100%;
-    transition:.6s;
+.life-card:hover {
+    transform: translateY(-5px);
 }
-
-.life-card:hover img{
-    transform:scale(1.06);
-}
-
-.life-overlay{
-    position:absolute;
-    inset:0;
-    padding:35px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    color:white;
-    background:linear-gradient(transparent, rgba(0,0,0,.6));
-}
-
-.life-overlay h3{
-    font-family:'Cormorant Garamond',serif;
-    font-size:35px;
-    font-weight:400;
-}
-
-.life-overlay p{
-    margin-top:10px;
-    font-size:14px;
-    opacity: 0.9;
-}
-
-.life-card.large{ grid-column:span 7; height:500px; }
-.life-card.wide{ grid-column:span 8; }
-.life-card:not(.large):not(.wide){ grid-column:span 5; }
 
 /* =====================================
 FOOTER
