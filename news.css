@@ -47,29 +47,23 @@ img{
 
 
 
-/* ===================================== */
-/* NAVIGATION */
-/* ===================================== */
-
-
-/* ===================================== */
-/* NAVIGATION */
-/* ===================================== */
-
+/* navigation */
 
 .nav{
 
 display:flex;
 
+align-items:center;
+
 gap:50px;
 
-padding:22px 0 22px 400px;
+padding:22px 8%;
 
 font-size:16px;
 
-background:black;
-
 border-bottom:1px solid #e5dcc8;
+
+background:black;
 
 position:sticky;
 
@@ -79,6 +73,7 @@ z-index:1000;
 
 }
 
+
 .nav a{
 
 text-decoration:none;
@@ -86,6 +81,8 @@ text-decoration:none;
 color:#F2F2DF;
 
 font-weight:500;
+
+transition:0.3s;
 
 }
 
@@ -98,37 +95,8 @@ color:#8B6B4F;
 
 
 
-.nav-left a:hover{
-
-    color:#8B7355;
-
-}
 
 
-
-.nav-left a.active{
-
-    color:#222;
-
-}
-
-
-
-.nav-left a.active::after{
-
-    content:"";
-
-    display:block;
-
-    margin-top:7px;
-
-    height:1px;
-
-    width:100%;
-
-    background:#222;
-
-}
 
 
 /* ===================================== */
