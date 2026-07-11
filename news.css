@@ -515,12 +515,13 @@ TRAVEL
     width:100%;
     height:850px;
     overflow:hidden;
+     margin:0;
 }
 
 .travel-word{
     position:absolute;
-    left:5%;
-    top:20px;
+    left:18%;
+    top:-50px;
     font-family:'Great Vibes',cursive;
     font-size:240px;
     color:#D8CDBB;
@@ -538,8 +539,8 @@ TRAVEL
 }
 
 .travel-one{ width:430px; height:560px; left:8%; top:120px; }
-.travel-two{ width:230px; height:300px; left:calc(8% + 430px); top:380px; }
-.travel-three{ width:430px; height:300px; left:calc(8% + 660px); top:120px; }
+.travel-two{ width:320px; height:300px; left:calc(8% + 430px); top:380px; }
+.travel-three{ width:430px; height:300px; left:calc(8% + 750px); top:120px; }
 
 .travel-card::after{
     content:"";
