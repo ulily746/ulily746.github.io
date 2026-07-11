@@ -209,6 +209,25 @@ HERO IMAGE & ARCH FRAME
 }
 
 /* =====================================
+ARCH SVG TEXT FLOW
+===================================== */
+.arch-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.arch-svg-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px; /* 이쁜 글씨 크기로 조절 */
+    fill: #8B6B4F;   /* 글자 색상 */
+}
+
+/* 글자 뒤에 하얀 배경 느낌을 살짝 주고 싶다면 아래 속성을 텍스트에 활용할 수 있습니다 */
+.arch-svg-text textPath {
+    dominant-baseline: central;
+}
+
+/* =====================================
 CATEGORY
 ===================================== */
 .category-nav{
