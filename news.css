@@ -1,5 +1,5 @@
 /* =====================================
-RESET
+GENERAL STYLES & NAV
 ===================================== */
 * {
     margin: 0;
@@ -7,64 +7,59 @@ RESET
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    background: #F2F2DF;
-    color: #222;
-    font-family: 'Inter', sans-serif;
-    line-height: 1.7;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #F2F2DF;
+    color: #171717;
+    overflow-x: hidden;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-}
-
-/* =====================================
-NAVIGATION
-===================================== */
-.nav {
+.navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 55px;
-    height: 70px;
-    background: #000;
-    border-bottom: 1px solid #e5dcc8;
-    position: sticky;
+    padding: 30px 8%;
+    background: transparent;
+    position: absolute;
+    width: 100%;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
 }
 
-.nav a {
-    color: #F2F2DF;
-    font-size: 16px;
+.nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 3px;
     font-weight: 500;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    letter-spacing: 1px;
     transition: .3s;
 }
 
-.nav a:hover {
-    color: #8B6B4F;
+.nav-links a:hover, .nav-links a.active {
+    color: #111;
 }
 
 /* =====================================
-HERO & ARCH FRAME (수정본)
+HERO SECTION (초기 버전)
 ===================================== */
 .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 80px;
-    padding: 120px 12%;
+    padding: 140px 12% 100px 12%;
 }
 
 .hero-text {
@@ -126,163 +121,107 @@ HERO & ARCH FRAME (수정본)
     color: #777;
 }
 
-/* 아치 이미지 및 SVG 데코레이션 */
-/* 아치 프레임 요소 간 격차 정밀 조정 */
 .hero-image {
-    position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* 바닥 선 일치를 위해 하단 정렬 */
-    width: 460px;
-    height: 610px;
-    margin: 0 auto;
 }
 
-.arch-decoration {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
+.arch-frame {
+    position: relative;
+    width: 380px;
+    height: 530px;
+    border: 1px solid #B9AA95;
+    border-radius: 190px 190px 0 0;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.arch-svg {
+.arch-image-inner {
     width: 100%;
     height: 100%;
-}
-
-/* 상단 글자 스타일: 텍스트에 두꺼운 외곽선을 주어 아치 선을 자연스럽게 지워버리는 가림막 효과 */
-.arch-svg-text.top {
-    font-family: 'Great Vibes', cursive;
-    font-size: 26px;
-    fill: #8B6B4F;
-    letter-spacing: 0.5px;
-    /* 텍스트 배경색과 동일한 스트로크로 뒤의 아치 선을 끊어줌 */
-    stroke: #F2F2DF;
-    stroke-width: 6px;
-    paint-order: stroke fill;
-}
-
-/* 내부 아치 사진: 선 두께(35px 여백)와 곡률(195px)을 SVG 패스와 1:1로 정확히 일치 */
-.arch-image {
-    position: absolute;
-    bottom: 0;
-    left: 35px;
-    right: 35px;
-    top: 230px;
+    border-radius: 165px 165px 0 0;
     overflow: hidden;
-    border-radius: 195px 195px 0 0;
-    z-index: 2;
 }
 
-.arch-image img {
+.arch-image-inner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* 하단 글자: 튀는 네모 박스를 제거하고, 글자 자체 가림막 효과로 바닥 아치 선을 덮음 */
-.arch-text.bottom {
+.arch-text {
     position: absolute;
-    bottom: 15px; /* 바닥 실선 위치에 정확히 안착 */
-    right: 55px;
     font-family: 'Great Vibes', cursive;
-    font-size: 24px;
-    color: #8B6B4F;
-    z-index: 10;
-    background: #F2F2DF; /* 배경색과 동일하게 매칭 */
-    padding: 0 8px; /* 글자 좌우로 선이 살짝 끊어지도록 여백 확보 */
-    line-height: 1;
-}
-/* =====================================
-CATEGORY
-===================================== */
-.category-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
-    padding: 30px 0;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 120px;
+    font-size: 38px;
+    color: #171717;
+    white-space: nowrap;
 }
 
-.category-nav a {
-    font-size: 13px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #555;
-    transition: .3s;
+.arch-text.top {
+    top: -20px;
+    transform: rotate(-10px);
 }
 
-.category-nav a:hover {
-    color: #000;
+.arch-text.bottom {
+    bottom: 20px;
+    right: -40px;
+    transform: rotate(-5deg);
 }
 
 /* =====================================
 COMMON TITLE
 ===================================== */
-.section-title, .travel-header, .life-header {
-    text-align: center;
-    margin-bottom: 80px;
+.section-title {
+    margin-bottom: 60px;
 }
 
-.section-title h2, .travel-header h2, .life-header h2 {
-    margin-top: 20px;
+.section-title h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 70px;
+    font-size: 45px;
     font-weight: 400;
-    line-height: 1;
+    color: #111;
 }
 
-.section-title p, .travel-header p, .life-header p {
-    margin: 25px auto 0;
-    max-width: 500px;
-    font-size: 15px;
-    color: #666;
-}
-
-/* Script Subtitles */
-.travel-script, .life-script {
-    font-family: 'Great Vibes', cursive;
-    font-size: 40px;
-    color: #8B6B4F;
-    margin-top: -10px;
+.section-title p {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+    letter-spacing: 1px;
 }
 
 /* =====================================
-RESEARCH 파트 (Warm Oatmeal 단색 통일)
+RESEARCH SECTION (초기 버전)
 ===================================== */
 .research-section {
-    padding: 120px 8%;
+    padding: 100px 8%;
 }
 
 .research-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 35px;
+    gap: 30px;
 }
 
 .research-card {
-    background: #E2DDD2; /* 고급스러운 단색 오트밀 베이지로 통일 */
-    height: 620px;
+    background: #fff;
+    height: 580px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
     transition: .4s;
-    border-radius: 4px;
 }
 
 .research-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
 }
 
 .card-image {
-    height: 380px; /* 사진 크기 소폭 확대 */
+    height: 320px;
     overflow: hidden;
-    flex-shrink: 0;
 }
 
 .card-image img {
@@ -297,7 +236,7 @@ RESEARCH 파트 (Warm Oatmeal 단색 통일)
 }
 
 .card-content {
-    padding: 30px;
+    padding: 25px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -307,22 +246,23 @@ RESEARCH 파트 (Warm Oatmeal 단색 통일)
     font-size: 11px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #7A756B;
+    color: #8B7355;
     font-weight: 500;
 }
 
 .card-content h3 {
-    font-size: 24px;
-    line-height: 1.2;
-    margin-top: 12px;
+    font-size: 22px;
+    line-height: 1.3;
+    margin-top: 10px;
     font-family: 'Cormorant Garamond', serif;
-    color: #1A1A1A;
+    font-weight: 500;
 }
 
 .card-content p {
-    margin-top: 10px;
-    color: #555;
+    margin-top: 12px;
+    color: #666;
     font-size: 14px;
+    line-height: 1.6;
 }
 
 .card-footer {
@@ -330,120 +270,102 @@ RESEARCH 파트 (Warm Oatmeal 단색 통일)
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 15px;
 }
 
 .card-footer p {
     font-size: 12px;
-    color: #777;
+    color: #999;
 }
 
 .card-footer button {
-    background: #222;
-    color: #F2F2DF;
+    background: none;
     border: none;
-    padding: 10px 16px;
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 1px;
+    font-weight: 500;
     cursor: pointer;
+    border-bottom: 1px solid #111;
+    padding-bottom: 2px;
     transition: .3s;
 }
 
+.card-footer button:hover {
+    color: #8B7355;
+    border-color: #8B7355;
+}
 
 /* =====================================
-ACADEMIC CARD (이전 버전 복구)
+ACADEMIC SECTION (초기 버전)
 ===================================== */
 .academic-section {
-    padding: 120px 8%;
+    padding: 100px 8%;
 }
 
 .academic-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 25px; /* 카드 사이 간격 다시 추가 */
+    gap: 20px;
 }
 
 .academic-card {
-    background: #EAE5D9; /* 이전의 아늑한 베이지/오트밀 톤 */
-    height: 620px;
-    overflow: hidden;
+    background: #fff;
+    height: 460px;
     display: flex;
     flex-direction: column;
-    position: relative;
     transition: .4s;
-}
-
-/* 이전 버전의 2도 교차 배색 구조 복구 */
-.academic-card:nth-child(even) {
-    background: #E3E8E0; /* 연한 민트 그레이 */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
 }
 
 .academic-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
 }
 
-/* 사진이 위쪽에 가득 차는 이전 레이아웃 구조 */
 .academic-card .card-image {
-    height: 360px;
-    overflow: hidden;
-    flex-shrink: 0;
+    height: 240px;
 }
 
 .academic-card .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: .5s;
 }
 
-.academic-card:hover .card-image img {
-    transform: scale(1.05);
-}
-
-/* 텍스트 내용 레이아웃 복구 */
 .academic-card .card-content {
-    padding: 30px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    padding: 20px;
 }
 
 .academic-card .card-content span {
     font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #777;
-    font-weight: 500;
+    color: #999;
 }
 
 .academic-card h3 {
-    font-size: 24px;
-    line-height: 1.2;
-    margin-top: 12px;
+    font-size: 18px;
+    margin-top: 8px;
     font-family: 'Cormorant Garamond', serif;
-    color: #1A1A1A;
+    font-weight: 500;
 }
 
 .academic-card p {
-    margin-top: 10px;
-    color: #666;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 13px;
+    color: #777;
+    margin-top: 8px;
+    line-height: 1.4;
 }
 
-/* View Story 버튼 우하단 및 정렬 원상복구 */
 .academic-card .card-footer {
     margin-top: auto;
-    display: flex;
-    justify-content: flex-end; /* 우측 정렬 */
-    padding: 0 30px 30px 30px;
+    padding: 20px;
 }
 
 .academic-card .card-footer button {
-    background: #222;
-    color: #F2F2DF;
+    width: 100%;
+    padding: 10px 0;
+    background: #171717;
+    color: #fff;
     border: none;
-    padding: 10px 16px;
     font-size: 11px;
     letter-spacing: 1px;
     cursor: pointer;
@@ -451,124 +373,124 @@ ACADEMIC CARD (이전 버전 복구)
 }
 
 .academic-card .card-footer button:hover {
-    background: #8B6B4F;
+    background: #8B7355;
 }
+
 /* =====================================
-TRAVEL (매거진 3분할 레이아웃 - 위치 조정본)
+TRAVEL SECTION (초기 버전)
 ===================================== */
 .travel-section {
-    padding: 140px 8% 120px 8%; /* 필기체가 위로 올라간 만큼 상단 패딩 확보 */
+    padding: 100px 8%;
     position: relative;
 }
 
-/* 전체 갤러리 컨테이너 */
+.travel-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.travel-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 45px;
+    font-weight: 400;
+}
+
+.travel-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+    color: #8B7355;
+    margin-top: -10px;
+}
+
+.travel-header p {
+    font-size: 13px;
+    color: #777;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+
 .travel-gallery {
     position: relative;
+    height: 600px;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1.2fr;
-    gap: 40px;
-    align-items: flex-start;
-    margin-top: 60px;
 }
 
-/* 뒤쪽 은은한 필기체 (위로 올리고 오른쪽으로 대폭 이동, w만 걸치게 조정) */
 .travel-word {
     position: absolute;
-    right: 55%; /* 오른쪽으로 많이 밀어서 위치 조정 */
-    top: -120px; /* 위쪽으로 살짝 보이게 더 끌어올림 */
     font-family: 'Great Vibes', cursive;
-    font-size: 190px;
-    color: #B9AA95;
-    opacity: .28;
-    white-space: nowrap;
+    font-size: 150px;
+    color: #E2E2CE;
     z-index: 1;
-    pointer-events: none;
+    top: 30%;
+    left: 5%;
 }
 
-/* 공통 사진 카드 스타일 */
 .travel-card {
-    position: relative;
+    position: absolute;
     overflow: hidden;
-    background: transparent;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
     z-index: 2;
-    display: flex;
-    flex-direction: column;
 }
 
 .travel-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform .6s ease;
+    transition: .6s;
+}
+
+.t1 { width: 340px; height: 460px; top: 0; left: 15%; }
+.t2 { width: 280px; height: 360px; top: 180px; left: 48%; z-index: 3; }
+.t3 { width: 320px; height: 420px; top: 50px; right: 10%; }
+
+.travel-hover {
+    position: absolute;
+    inset: 0;
+    background: rgba(23,23,23,0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: .4s;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.travel-hover h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.travel-hover p {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+.travel-card:hover .travel-hover {
+    opacity: 1;
 }
 
 .travel-card:hover img {
-    transform: scale(1.04);
-}
-
-/* 1번 카드 (왼쪽: 세로 메인) */
-.travel-one {
-    height: 560px;
-}
-
-/* 2번 카드 (가운데: 첫 번째 사진보다 아래로 살짝 삐져나오게 조정) */
-.travel-two {
-    height: 420px;
-    margin-top: 170px; /* 위쪽 여백을 늘려 첫 번째 사진 바닥보다 아래로 내려오게 설정 */
-}
-
-/* 3번 열 (오른쪽: 사진 + 아래 캡션) */
-.travel-three-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.travel-three {
-    height: 380px;
-}
-
-/* 설명 글귀 */
-.travel-caption {
-    padding-top: 10px;
-    text-align: left;
-}
-
-.travel-caption h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 1.2;
-    color: #111;
-}
-
-.travel-caption p {
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 1.8;
-    color: #666;
-    max-width: 90%;
-}
-
-/* 호버 레이어 초기화 유지 */
-.travel-card::after, .travel-hover {
-    display: none;
+    transform: scale(1.05);
 }
 
 /* =====================================
-LIFE (거대 배경 아치 + 4연속 아치 카드)
+LIFE SECTION (🔥 수정된 세로가 길쭉한 아치형 스타일 유지)
 ===================================== */
 .life-section {
     padding: 100px 6% 160px 6%;
-    background: #1A1A1A; /* 첫 번째 레퍼런스처럼 바깥쪽은 어두운 톤 */
+    background: #1A1A1A; 
 }
 
-/* 거대한 중앙 아치형 배경 (첫 번째 레퍼런스 구현) */
 .large-arch-bg {
-    background: #F2F2DF; /* 웹사이트 기본 아이보리색으로 내부 채우기 */
+    background: #F2F2DF; 
     width: 100%;
-    border-radius: 40vw 40vw 0 0; /* 완벽한 거대 아치 곡선 생성 */
+    border-radius: 50% 50% 0 0 / 40% 40% 0 0; /* 세로로 길쭉한 아치 비율 유지 */
     padding: 160px 8% 120px 8%;
     display: flex;
     flex-direction: column;
@@ -594,7 +516,6 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
     letter-spacing: 1px;
 }
 
-/* 두 번째 레퍼런스의 아치 카드 그리드 */
 .life-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -609,11 +530,10 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
     align-items: center;
 }
 
-/* 세로로 긴 세련된 아치 프레임 이미지 */
 .life-arch-img {
     width: 100%;
-    height: 380px; /* 두 번째 이미지 특유의 세로 비율 */
-    border-radius: 140px 140px 0 0; /* 상단만 둥근 아치 처리 */
+    height: 380px; 
+    border-radius: 140px 140px 0 0; 
     overflow: hidden;
     margin-bottom: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.04);
@@ -630,7 +550,6 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
     transform: scale(1.05);
 }
 
-/* 하단 연한 폰트 설명 */
 .life-card span {
     font-size: 13px;
     color: #888;
@@ -643,85 +562,11 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
 /* =====================================
 FOOTER
 ===================================== */
-.news-footer {
+.footer {
     text-align: center;
-    padding: 100px 20px;
-    border-top: 1px solid #ddd;
-    background: #111;
-    color: #fff;
-}
-
-.footer-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 55px;
-}
-
-.news-footer p {
-    margin-top: 20px;
-    color: #bbb;
-}
-
-.news-footer span {
-    display: block;
-    margin-top: 35px;
-    font-size: 12px;
-    color: #777;
-}
-
-/* =====================================
-VIEW ALL BUTTON
-===================================== */
-.view-all {
-    text-align: center;
-    margin-top: 70px;
-}
-
-.view-all a {
-    display: inline-block;
-    padding: 14px 40px;
-    border: 1px solid #222;
+    padding: 60px 0;
     font-size: 13px;
-    letter-spacing: 2px;
-    transition: .3s;
-    background: transparent;
-}
-
-.view-all a:hover {
-    background: #000;
-    color: #F2F2DF;
-}
-
-/* =====================================
-RESPONSIVE (MEDIA QUERIES)
-===================================== */
-@media(max-width: 1024px) {
-    .hero { grid-template-columns: 1fr; gap: 50px; padding: 80px 8%; }
-    .hero-text { padding-left: 0; text-align: center; }
-    .hero p { margin: 35px auto 0; }
-    .hero-meta .meta-line { margin: 0 auto 15px; }
-    .hero h1 { font-size: 75px; }
-    
-    .research-grid { grid-template-columns: repeat(2, 1fr); }
-    .academic-grid { grid-template-columns: repeat(2, 1fr); }
-    
-    .travel-gallery { height: auto; display: flex; flex-direction: column; gap: 30px; }
-    .travel-card { position: relative; width: 100% !important; height: 400px !important; left: 0 !important; top: 0 !important; right: 0 !important; }
-    .travel-caption { position: relative; left: 0; bottom: 0; text-align: center; margin-top: 20px; }
-    .travel-word { display: none; }
-
-    .life-grid { display: flex; flex-direction: column; }
-    .life-card { width: 100% !important; height: 350px !important; }
-}
-
-@media(max-width: 600px) {
-    .nav { gap: 15px; padding: 15px; flex-wrap: wrap; }
-    .nav a { font-size: 14px; }
-    .hero h1 { font-size: 50px; }
-    .arch-image { width: 280px; height: 380px; }
-    .arch-decoration { width: 310px; height: 430px; }
-    .arch-line { width: 290px; height: 400px; }
-    
-    .research-grid, .academic-grid { grid-template-columns: 1fr; }
-    .section-title h2, .travel-header h2, .life-header h2 { font-size: 45px; }
-    .category-nav { gap: 20px; flex-wrap: wrap; padding: 20px; }
+    color: #bbb;
+    background: #1A1A1A;
+    border-top: 1px solid #222;
 }
