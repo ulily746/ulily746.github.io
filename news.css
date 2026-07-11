@@ -364,42 +364,70 @@ ACADEMIC
     padding: 120px 8%;
 }
 
+/* =====================================
+ACADEMIC CARD (수정본)
+===================================== */
 .academic-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    gap: 0; /* 카드 사이 간격 완전히 제거 */
 }
 
 .academic-card {
     height: 620px;
-    display: flex;
-    flex-direction: column;
     position: relative;
     overflow: hidden;
     transition: .4s;
+    display: flex;
+    flex-direction: column;
 }
 
-.academic-card:nth-child(5n+1) { background: #DED7C8; }
-.academic-card:nth-child(5n+2) { background: #D5D8D1; }
-.academic-card:nth-child(5n+3) { background: #E6DDCF; }
-.academic-card:nth-child(5n+4) { background: #D9D2C4; }
-.academic-card:nth-child(5n+5) { background: #D8D8CE; }
+/* 2개 색상 반복 구조 (홀수/짝수) */
+.academic-card:nth-child(odd) {
+    background: #DED7C8; 
+}
+.academic-card:nth-child(even) {
+    background: #D5D8D1; 
+}
 
 .academic-card:hover {
     transform: translateY(-8px);
+    z-index: 5; /* 인접 카드보다 위로 올라오도록 설정 */
 }
 
+/* 사진 위쪽 & 오른쪽에 딱 붙이기 (너비 80%, 높이 55%로 'ㄴ'자 여백 확보) */
 .academic-card .card-image {
-    width: 100%;
-    height: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 55%;
     overflow: hidden;
 }
 
+.academic-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 텍스트 영역을 'ㄴ'자 공간에 배치 */
 .academic-card .card-content {
-    padding: 25px;
-    flex: 1;
+    position: absolute;
+    inset: 0; /* 카드를 통째로 감싸되 padding과 내부 정렬로 배치 관리 */
+    padding: 35px;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end; /* 기본 콘텐츠들을 아래로 밀기 */
+    pointer-events: none; /* absolute 겹침으로 인한 클릭 방해 방지 */
+}
+
+/* 텍스트 요소들만 왼쪽 'ㄴ'자 빈 공간(너비 70% 제한)으로 밀어 넣기 */
+.academic-card .card-content span,
+.academic-card .card-content h3,
+.academic-card .card-content p {
+    width: 70%; 
+    pointer-events: auto;
 }
 
 .academic-card .card-content span {
@@ -410,7 +438,7 @@ ACADEMIC
 }
 
 .academic-card h3 {
-    margin-top: 15px;
+    margin-top: 10px;
     font-family: 'Cormorant Garamond', serif;
     font-size: 26px;
     font-weight: 500;
@@ -421,11 +449,30 @@ ACADEMIC
     margin-top: 10px;
     font-size: 14px;
     color: #555;
+    margin-bottom: 60px; /* 버튼이 들어갈 자리 확보 */
 }
 
+/* View Story 버튼 오른쪽 아래 구석 고정 */
 .academic-card .card-footer {
-    margin-top: auto;
-    width: 100%;
+    position: absolute;
+    right: 35px;
+    bottom: 35px;
+    pointer-events: auto;
+}
+
+.academic-card .card-footer button {
+    background: #111;
+    color: white;
+    padding: 10px 18px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.academic-card .card-footer button:hover {
+    background: #8B6B4F;
 }
 
 /* =====================================
