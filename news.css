@@ -568,8 +568,8 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
 .large-arch-bg {
     background: #F2F2DF; /* 웹사이트 기본 아이보리색으로 내부 채우기 */
     width: 100%;
-    border-radius: 50vw 50vw 0 0; /* 완벽한 거대 아치 곡선 생성 */
-    padding: 120px 8% 120px 8%;
+    border-radius: 40vw 40vw 0 0; /* 완벽한 거대 아치 곡선 생성 */
+    padding: 160px 8% 120px 8%;
     display: flex;
     flex-direction: column;
     align-items: center;
