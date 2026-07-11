@@ -375,13 +375,9 @@ ARCH HERO FRAME
 
     z-index:5;
 
-    background:#F2F2DF;
-
-    padding:0 10px;
-
     font-family:'Cormorant Garamond',serif;
 
-    font-size:20px;
+    font-size:18px;
 
     font-style:italic;
 
@@ -396,33 +392,24 @@ ARCH HERO FRAME
 /* 아치 둥근 부분 따라가기 */
 
 .arch-text.top{
-.arch-text.top{
 
-    top:45px;
+    top:65px;
 
-    left:-40px;
+    left:-35px;
 
-    width:auto;
-
-    transform:rotate(-35deg);
+    transform:rotate(-32deg);
 
 }
-
-
 
 .arch-text.bottom{
 
-    right:-35px;
+    right:-45px;
 
-    bottom:70px;
+    bottom:75px;
 
-    left:auto;
-
-    width:auto;
-
+    transform:rotate(0deg);
 
 }
-
 /* =====================================
 CATEGORY
 ===================================== */
