@@ -320,49 +320,47 @@ ARCH HERO FRAME
 
 /* 아치 글자 */
 
-/* 아치 글자 */
-
 .arch-text{
 
     position:absolute;
 
-    width:460px;
-
-    left:5px;
-
-    text-align:center;
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    color:#8B7355;
+    z-index:5;
 
     background:#F2F2DF;
 
-    padding:0 15px;
+    padding:0 12px;
 
-    z-index:5;
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    color:#8B7355;
+
+    white-space:nowrap;
 
 }
 
+
+/* 왼쪽 위 */
 
 .arch-text.top{
 
-    top:45px;
+    top:70px;
 
-    transform:rotate(-8deg);
+    left:-35px;
 
 }
 
 
+/* 오른쪽 아래 */
+
 .arch-text.bottom{
 
-    bottom:45px;
+    bottom:70px;
 
-    transform:rotate(8deg);
+    right:-35px;
 
 }
 
