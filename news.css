@@ -1,2516 +1,691 @@
 /* =====================================
 RESET
 ===================================== */
-
 *{
     margin:0;
-
     padding:0;
-
     box-sizing:border-box;
-
 }
 
 html{
-
     scroll-behavior:smooth;
-
 }
 
 body{
-
-    background:#F2F2DF;
-
+    background:#F2F2DF; /* 포근한 아이보리 베이스 */
     color:#222;
-
     font-family:'Inter', sans-serif;
-
     line-height:1.7;
-
-
 }
-
 
 a{
     text-decoration:none;
     color:inherit;
 }
 
-
 img{
     width:100%;
-
-
-
     display:block;
-
-
-
     object-fit:cover;
-
-
-
 }
-
-
-
-
-
-
 
 /* =====================================
-
 NAVIGATION
-
 ===================================== */
-
-
-
-
-
 .nav{
-
-
-
     display:flex;
-
-
-
     justify-content:center;
-
-
-
     align-items:center;
-
-
-
     gap:55px;
-
-
-
     height:70px;
-
-
-
     background:#000;
-
-
-
     border-bottom:1px solid #e5dcc8;
-
-
-
     position:sticky;
-
-
-
     top:0;
-
-
-
     z-index:1000;
-
-
-
 }
-
-
-
-
-
-
 
 .nav a{
-
-
-
     color:#F2F2DF;
-
-
-
     font-size:16px;
-
-
-
     font-weight:500;
-
-
-
     transition:.3s;
-
-
-
 }
-
-
-
-
-
-
 
 .nav a:hover{
-
-
-
-    color:#8B6B4F;
-
-
-
+    color:#B9AA95;
 }
-
-
-
-
-
-
-
-
-
-
 
 /* =====================================
-
 HERO
-
 ===================================== */
-
-
-
-
-
 .hero{
-
-
-
     display:grid;
-
-
-
     grid-template-columns:1fr 1fr;
-
-
-
     align-items:center;
-
-
-
     gap:80px;
-
-
-
     padding:120px 12%;
-
-
-
 }
-
-
-
-
-
-
 
 .hero-text{
-
-
-
     padding-left:40px;
-
-
-
 }
-
-
-
-
-
-
 
 .hero-small{
-
-
-
     font-size:13px;
-
-
-
     letter-spacing:3px;
-
-
-
     color:#777;
-
-
-
     text-transform:uppercase;
-
-
-
 }
-
-
-
-
-
-
 
 .hero h1{
-
-
-
     margin-top:25px;
-
-
-
     font-family:'Cormorant Garamond',serif;
-
-
-
     font-size:90px;
-
-
-
     font-weight:400;
-
-
-
     line-height:.9;
-
-
-
     color:#171717;
-
-
-
 }
-
-
-
-
-
-
 
 .hero p{
-
-
-
     margin-top:35px;
-
-
-
     max-width:380px;
-
-
-
     font-size:15px;
-
-
-
     color:#555;
-
-
-
     line-height:2;
-
-
-
 }
-
-
-
-
-
-
 
 .hero-sign{
-
-
-
     margin-top:45px;
-
-
-
     margin-left:80px;
-
-
-
     font-family:'Great Vibes',cursive;
-
-
-
     font-size:55px;
-
-
-
     color:#333;
-
-
-
 }
-
-
 
 /* =====================================
-
 HERO META
-
 ===================================== */
-
-
-
 .hero-meta{
-
-
-
     margin-top:45px;
-
-
-
     margin-left:10px;
-
-
-
 }
-
-
-
-
 
 .hero-meta .meta-line{
-
-
-
     width:80px;
-
-
-
     height:1px;
-
-
-
     background:#B9AA95;
-
-
-
     margin-bottom:15px;
-
-
-
 }
-
-
-
-
 
 .hero-meta span{
-
-
-
     font-size:11px;
-
-
-
     letter-spacing:3px;
-
-
-
     color:#8B7355;
-
-
-
 }
-
-
-
-
 
 .hero-meta p{
-
-
-
     margin-top:12px;
-
-
-
     font-size:13px;
-
-
-
     line-height:1.8;
-
-
-
     color:#777;
-
-
-
 }
 
-
-
 /* =====================================
-
-HERO IMAGE
-
+HERO IMAGE & ARCH FRAME
 ===================================== */
-
-
-
-
-
 .hero-image{
-
-
-
     position:relative;
-
-
-
     display:flex;
-
-
-
     justify-content:center;
-
-
-
     align-items:center;
-
-
-
-}
-
-
-
-/* =====================================
-
-ARCH HERO FRAME
-
-===================================== */
-
-
-
-
-
-.hero-image{
-
-
-
-    position:relative;
-
-
-
-    display:flex;
-
-
-
-    justify-content:center;
-
-
-
-    align-items:center;
-
-
-
     width:100%;
-
-
-
 }
-
-
-
-
-
-
-
-/* 바깥 아치 */
-
-
 
 .arch-decoration{
-
-
-
     position:absolute;
-
-
-
     width:470px;
-
-
-
     height:620px;
-
-
-
     top:-35px;
-
-
-
     left:50%;
-
-
-
     transform:translateX(-50%);
-
-
-
     z-index:3;
-
-
-
     pointer-events:none;
-
-
-
 }
-
-
-
-
-
-
 
 .arch-line{
-
-
-
     position:absolute;
-
-
-
     width:460px;
-
-
-
     height:610px;
-
-
-
     left:5px;
-
-
-
     top:0;
-
-
-
     border:1px solid #B9AA95;
-
-
-
-    border-radius:
-
-
-
-    230px 230px 0 0;
-
-
-
+    border-radius: 230px 230px 0 0;
 }
-
-
-
-
-
-
-
-/* 사진 */
-
-
 
 .arch-image{
-
-
-
     position:relative;
-
-
-
     z-index:2;
-
-
-
     width:400px;
-
-
-
     height:550px;
-
-
-
     overflow:hidden;
-
-
-
-    border-radius:
-
-
-
-    200px 200px 0 0;
-
-
-
-    
-
-
-
-    box-shadow:
-
-
-
-    0 25px 50px rgba(0,0,0,.08);
-
-
-
+    border-radius: 200px 200px 0 0;
+    box-shadow: 0 25px 50px rgba(0,0,0,.04);
 }
-
-
-
-
-
-
 
 .arch-image img{
-
-
-
     width:100%;
-
-
-
     height:100%;
-
-
-
     object-fit:cover;
-
-
-
 }
-
-
-
-
-
-
-
-/* 아치 글자 */
-
-
 
 .arch-text{
-
-
-
     position:absolute;
-
-
-
     z-index:10;
-
-
-
     font-family:'Great Vibes',cursive;
-
-
-
     font-size:34px;
-
-
-
     color:#8B6B4F;
-
-
-
     white-space:nowrap;
-
-
-
 }
-
-
 
 .arch-text::before{
-
-
-
     content:"";
-
-
-
     position:absolute;
-
-
-
     inset:-5px -15px;
-
-
-
     background:#F2F2DF;
-
-
-
     z-index:-1;
-
-
-
 }
-
-
-
-/* 아치 둥근 부분 따라가기 */
-
-
 
 .arch-text.top{
-
-
-
     top:65px;
-
-
-
     left:-35px;
-
-
-
     transform:rotate(-32deg);
-
-
-
 }
-
-
 
 .arch-text.bottom{
-
-
-
     right:-65px;
-
-
-
     bottom:15px;
-
-
-
     transform:rotate(0deg);
-
-
-
 }
 
 /* =====================================
-
 CATEGORY
-
 ===================================== */
-
-
-
-
-
 .category-nav{
-
-
-
     display:flex;
-
-
-
     justify-content:center;
-
-
-
     align-items:center;
-
-
-
     gap:60px;
-
-
-
     padding:30px 0;
-
-
-
-    border-top:1px solid #ddd;
-
-
-
-    border-bottom:1px solid #ddd;
-
-
-
+    border-top:1px solid #E5DFD3;
+    border-bottom:1px solid #E5DFD3;
     margin-bottom:120px;
-
-
-
 }
-
-
-
-
-
-
 
 .category-nav a{
-
-
-
     font-size:13px;
-
-
-
     letter-spacing:2px;
-
-
-
     text-transform:uppercase;
-
-
-
-    color:#555;
-
-
-
+    color:#666;
     transition:.3s;
-
-
-
 }
-
-
-
-
-
-
 
 .category-nav a:hover{
-
-
-
     color:#000;
-
-
-
 }
 
-
-
-
-
-
-
-
-
-
-
 /* =====================================
-
 COMMON TITLE
-
 ===================================== */
-
-
-
-
-
-.section-title{
-
-
-
+.section-title, .travel-header, .life-header{
     text-align:center;
-
-
-
     margin-bottom:80px;
-
-
-
 }
 
-
-
-
-
-
-
-
-
-.section-title h2,
-
-.travel-header h2,
-
-.life-header h2{
-
-
-
+.section-title h2, .travel-header h2, .life-header h2{
     margin-top:20px;
-
-
-
     font-family:'Cormorant Garamond',serif;
-
-
-
     font-size:70px;
-
-
-
     font-weight:400;
-
-
-
     line-height:1;
-
-
-
+    color:#1A1A1A;
 }
 
-
-
-
-
-
-
-.section-title p,
-
-.travel-header p,
-
-.life-header p{
-
-
-
+.section-title p, .travel-header p, .life-header p{
     margin:25px auto 0;
-
-
-
     max-width:500px;
-
-
-
     font-size:15px;
-
-
-
     color:#666;
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
 
 /* =====================================
-
 RESEARCH
-
 ===================================== */
-
-
-
-
-
 .research-section{
-
-
-
     padding:120px 8%;
-
-
-
 }
-
-
-
-
-
-
 
 .research-grid{
-
-
-
     display:grid;
-
-
-
     grid-template-columns:repeat(4,1fr);
-
-
-
     gap:35px;
-
-
-
 }
-
-
-
-
-
-
 
 .research-card{
-
-
-
-    background:#DDE3DA;
-
-
-
+    background:#E5DFD3; /* 부드럽고 차분한 오트밀 베이지 */
     height:620px;
-
-
-
     overflow:hidden;
-
-
-
     display:flex;
-
-
-
     flex-direction:column;
-
-
-
     position:relative;
-
-
-
     transition:.4s;
-
-
-
+    box-shadow: 0 15px 35px rgba(0,0,0,0.02);
 }
-
-
-
-
-
-.research-card:hover{
-
-
-
-    transform:translateY(-8px);
-
-
-
-}
-
-
-
-
-
-
-
-.card-image{
-
-
-
-    height:360px;
-
-
-
-    overflow:hidden;
-
-
-
-    flex-shrink:0;
-
-
-
-}
-
-
-
-
-
-.card-image img{
-
-
-
-    height:100%;
-
-
-
-    transition:.5s;
-
-
-
-}
-
-
-
-
-
-
-
-.research-card:hover .card-image img{
-
-
-
-    transform:scale(1.05);
-
-
-
-}
-
-
-
-
-
-
-
-.card-content{
-
-
-
-    padding:30px;
-
-
-
-    flex:1;
-
-
-
-    display:flex;
-
-
-
-    flex-direction:column;
-
-
-
-}
-
-
-
-
-
-.card-content span{
-
-
-
-    font-size:12px;
-
-
-
-    letter-spacing:2px;
-
-
-
-    text-transform:uppercase;
-
-
-
-    color:#888;
-
-
-
-}
-
-
-
-
-
-
-
-.card-content h3{
-
-
-
-font-size:28px;
-
-
-
-line-height:1.2;
-
-
-
-}
-
-
-
-
-
-.card-content p{
-
-
-
-    margin-top:12px;
-
-
-
-    color:#666;
-
-
-
-    font-size:14px;
-
-
-
-}
-
-
 
 .research-card:nth-child(even){
-
-
-
-    background:#F1EEE5;
-
+    background:#EADFCF; /* 은은한 생기를 주는 클레이 베이지 */
 }
 
+.research-card:hover{
+    transform:translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
 
+.card-image{
+    height:360px;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+.card-image img{
+    height:100%;
+    transition:.5s;
+}
+
+.research-card:hover .card-image img{
+    transform:scale(1.04);
+}
+
+.card-content{
+    padding:30px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+.card-content span{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#8B7355;
+    font-weight:500;
+}
+
+.card-content h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    font-weight:500;
+    line-height:1.2;
+    margin-top:10px;
+    color:#222;
+}
+
+.card-content p{
+    margin-top:12px;
+    color:#666;
+    font-size:14px;
+}
 
 .card-footer{
-
-
-
     margin-top:auto;
-
-
-
     display:flex;
-
-
-
     justify-content:space-between;
-
-
-
     align-items:flex-end;
-
-
-
 }
 
-
-
-
+.card-footer p {
+    font-size: 13px;
+    color: #777;
+}
 
 .card-footer button{
-
-
-
-    background:#000;
-
-
-
+    background:#111;
     color:#F2F2DF;
-
-
-
     border:none;
-
-
-
-    padding:12px 18px;
-
-
-
+    padding:10px 16px;
     font-size:12px;
-
-
-
     letter-spacing:1px;
-
-
-
     cursor:pointer;
-
-
-
+    transition: .3s;
 }
-
-
-
-
 
 .card-footer button:hover{
-
-
-
     background:#8B6B4F;
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
 
 /* =====================================
-
 ACADEMIC
-
 ===================================== */
-
-
-
-
-
 .academic-section{
-
-
-
     padding:120px 8%;
-
-
-
 }
-
-
-
-
-
-
 
 .academic-grid{
-
-
-
     display:grid;
-
-
-
     grid-template-columns:repeat(5,1fr);
-
-
-
     gap:0;
-
-
-
 }
-
-
-
-/* =====================================
-
-ACADEMIC CARD NEW STYLE
-
-===================================== */
-
-
-
-
 
 .academic-card{
-
-
-
     height:620px;
-
-
-
     position:relative;
-
-
-
     overflow:hidden;
-
-
-
     transition:.4s;
-
-
-
 }
 
-
-
-.academic-card:nth-child(5n+1){
-
-
-
-    background:#DED7C8;
-
-
-
-}
-
-
-
-
-
-.academic-card:nth-child(5n+2){
-
-
-
-    background:#D5D8D1;
-
-
-
-}
-
-
-
-
-
-.academic-card:nth-child(5n+3){
-
-
-
-    background:#E6DDCF;
-
-
-
-}
-
-
-
-
-
-.academic-card:nth-child(5n+4){
-
-
-
-    background:#D9D2C4;
-
-
-
-}
-
-
-
-
-
-.academic-card:nth-child(5n+5){
-
-
-
-    background:#D8D8CE;
-
-
-
-}
-
-
+/* 고급 세라믹/인테리어 무드의 5가지 톤 다운 배색 */
+.academic-card:nth-child(5n+1){ background:#DED7C8; }
+.academic-card:nth-child(5n+2){ background:#D5D8D1; }
+.academic-card:nth-child(5n+3){ background:#E6DDCF; }
+.academic-card:nth-child(5n+4){ background:#D9D2C4; }
+.academic-card:nth-child(5n+5){ background:#D8D8CE; }
 
 .academic-card:hover{
-
-
-
     transform:translateY(-8px);
-
-
-
+    z-index: 5;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
 }
-
-
-
-
-
-
-
-/* image top right */
-
-
 
 .academic-card .card-image{
-
-
-
     position:absolute;
-
-
-
     top:0;
-
-
-
     right:0;
-
-
-
     width:80%;
-
-
-
     height:58%;
-
-
-
     overflow:hidden;
-
-
-
 }
-
-
-
-
-
-
 
 .academic-card .card-image img{
-
-
-
     width:100%;
-
-
-
     height:100%;
-
-
-
     object-fit:cover;
-
-
-
 }
-
-
-
-
-
-
-
-/* text bottom left */
-
-
 
 .academic-card .card-content{
-
-
-
     position:absolute;
-
-
-
     left:0;
-
-
-
     bottom:0;
-
-
-
-    width:58%;
-
-
-
+    width:100%;
     padding:35px;
-
-
-
+    padding-bottom: 90px; /* 버튼 공간 확보 */
 }
-
-
-
-
-
-
 
 .academic-card .card-content span{
-
-
-
     font-size:11px;
-
-
-
     letter-spacing:2px;
-
-
-
     color:#7A705F;
-
-
-
+    text-transform: uppercase;
+    font-weight: 500;
 }
-
-
-
-
-
-
 
 .academic-card h3{
-
-
-
-    margin-top:15px;
-
-
-
+    margin-top:12px;
     font-family:'Cormorant Garamond',serif;
-
-
-
-    font-size:34px;
-
-
-
+    font-size:32px;
     font-weight:500;
-
-
-
     line-height:1.2;
-
-
-
-}
-
-
-
-
-
-
-
-.academic-card p{
-
-
-
-    margin-top:15px;
-
-
-
-    font-size:14px;
-
-
-
-    color:#555;
-
-
-
-}
-
-
-
-
-
-
-
-/* view story */
-
-
-
-.academic-card .card-footer{
-
-
-
-position:absolute;
-
-
-
-left:35px;
-
-
-
-bottom:35px;
-
-
-
-}
-
-
-
-
-
-
-
-.academic-card .card-footer button{
-
-
-
-    background:#111;
-
-
-
-    color:white;
-
-
-
-    padding:10px 18px;
-
-
-
-    font-size:12px;
-
-
-
-    letter-spacing:1px;
-
-
-
-}
-
-
-
-
-
-/* =====================================
-
-TRAVEL
-
-===================================== */
-
-
-
-
-
-.travel-section{
-
-
-
-    padding:120px 8%;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-header{
-
-
-
-    text-align:center;
-
-
-
-    margin-bottom:80px;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-header h2{
-
-
-
-    margin-top:20px;
-
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-
-    font-size:70px;
-
-
-
-    font-weight:400;
-
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-
-TRAVEL EDITORIAL COLLAGE
-
-===================================== */
-
-
-
-
-
-.travel-gallery{
-
-
-
-    position:relative;
-
-
-
-    width:100%;
-
-
-
-    height:850px;
-
-
-
-    overflow:hidden;
-
-
-
-}
-
-
-
-
-
-
-
-/* 뒤쪽 필기체 */
-
-
-
-
-
-.travel-word{
-
-
-
-    position:absolute;
-
-
-
-    left:5%;
-
-
-
-    top:20px;
-
-
-
-    font-family:'Great Vibes',cursive;
-
-
-
-    font-size:240px;
-
-
-
-    color:#D8CDBB;
-
-
-
-    opacity:.45;
-
-
-
-    white-space:nowrap;
-
-
-
-    z-index:1;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-word span{
-
-
-
-    position:relative;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/* 공통 사진 */
-
-
-
-
-
-.travel-card{
-
-
-
-    position:absolute;
-
-
-
-    overflow:hidden;
-
-
-
-    background:white;
-
-
-
-    box-shadow:
-
-
-
-    0 25px 50px rgba(0,0,0,.10);
-
-
-
-    z-index:2;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-card img{
-
-
-
-    width:100%;
-
-
-
-    height:100%;
-
-
-
-    object-fit:cover;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/* =====================================
-
-PHOTO POSITION
-
-===================================== */
-
-
-
-
-
-/*
-
-PHOTO 1
-
-큰 메인 이미지
-
-*/
-
-
-
-
-
-.travel-one{
-
-
-
-    width:430px;
-
-
-
-    height:560px;
-
-
-
-    left:8%;
-
-
-
-    top:120px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-PHOTO 2
-
-
-
-사진1 오른쪽과 맞닿음
-
-
-
-세로길이 약 절반
-
-
-
-*/
-
-
-
-
-
-.travel-two{
-
-
-
-    width:230px;
-
-
-
-    height:300px;
-
-
-
-    left:calc(8% + 430px);
-
-
-
-    top:380px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-PHOTO 3
-
-
-
-사진2 오른쪽 위 꼭짓점과 연결
-
-
-
-*/
-
-
-
-
-
-.travel-three{
-
-
-
-    width:430px;
-
-
-
-    height:300px;
-
-
-
-    left:calc(8% + 660px);
-
-
-
-    top:120px;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* =====================================
-
-HOVER
-
-===================================== */
-
-
-
-
-
-.travel-card::after{
-
-
-
-    content:"";
-
-
-
-    position:absolute;
-
-
-
-    inset:0;
-
-
-
-    background:rgba(0,0,0,0);
-
-
-
-    transition:.4s;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-hover{
-
-
-
-    position:absolute;
-
-
-
-    inset:0;
-
-
-
-    display:flex;
-
-
-
-    justify-content:flex-end;
-
-
-
-    align-items:flex-end;
-
-
-
-    padding:30px;
-
-
-
-    opacity:0;
-
-
-
-    z-index:3;
-
-
-
-    transition:.4s;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-hover a{
-
-
-
-    background:#000;
-
-
-
-    color:white;
-
-
-
-    padding:12px 25px;
-
-
-
-    font-size:12px;
-
-
-
-    letter-spacing:2px;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-card:hover::after{
-
-
-
-    background:rgba(0,0,0,.45);
-
-
-
-}
-
-
-
-
-
-
-
-.travel-card:hover .travel-hover{
-
-
-
-    opacity:1;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-/* =====================================
-
-CAPTION
-
-===================================== */
-
-
-
-
-
-.travel-caption{
-
-
-
-    position:absolute;
-
-
-
-    left:calc(8% + 660px);
-
-
-
-    top:520px;
-
-
-
-    z-index:4;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-caption h3{
-
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-
-    font-size:55px;
-
-
-
-    font-weight:400;
-
-
-
-    line-height:1;
-
-
-
-}
-
-
-
-
-
-
-
-.travel-caption p{
-
-
-
-    margin-top:15px;
-
-
-
-    font-size:13px;
-
-
-
-    letter-spacing:3px;
-
-
-
-    color:#777;
-
-
-
-}
-
-
-/* =====================================
-LIFE SECTION (🔥 수정된 세로가 길쭉한 아치형 스타일 유지)
-===================================== */
-.life-section {
-    padding: 100px 6% 160px 6%;
-    background: #1A1A1A; 
-}
-
-.large-arch-bg {
-    background: #F2F2DF; 
-    width: 100%;
-    border-radius: 50% 50% 0 0 / 40% 40% 0 0; /* 세로로 길쭉한 아치 비율 유지 */
-    padding: 160px 8% 120px 8%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.life-header {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.life-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 55px;
-    font-weight: 400;
     color: #111;
 }
 
-.life-header p {
-    margin-top: 15px;
-    font-size: 15px;
-    color: #666;
-    letter-spacing: 1px;
+.academic-card p{
+    margin-top:12px;
+    font-size:14px;
+    color:#666;
 }
 
-.life-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    width: 100%;
-    max-width: 1200px;
-}
-
-.life-card {
+.academic-card .card-footer{
+    position:absolute;
+    left:35px;
+    bottom:35px;
+    right: 35px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 }
 
-.life-arch-img {
-    width: 100%;
-    height: 380px; 
-    border-radius: 140px 140px 0 0; 
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+.academic-card .card-footer button{
+    background:#111;
+    color:white;
+    border: none;
+    padding:10px 18px;
+    font-size:12px;
+    letter-spacing:1px;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.life-arch-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .5s ease;
+.academic-card .card-footer button:hover{
+    background: #8B6B4F;
 }
 
-.life-card:hover .life-arch-img img {
-    transform: scale(1.05);
+/* =====================================
+TRAVEL
+===================================== */
+.travel-section{
+    padding:120px 8%;
 }
 
-.life-card span {
-    font-size: 13px;
-    color: #888;
-    letter-spacing: 0.5px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    text-align: center;
+.travel-gallery{
+    position:relative;
+    width:100%;
+    height:850px;
+    overflow:hidden;
 }
+
+.travel-word{
+    position:absolute;
+    left:5%;
+    top:20px;
+    font-family:'Great Vibes',cursive;
+    font-size:240px;
+    color:#D8CDBB;
+    opacity:.45;
+    white-space:nowrap;
+    z-index:1;
+}
+
+.travel-card{
+    position:absolute;
+    overflow:hidden;
+    background:white;
+    box-shadow: 0 25px 50px rgba(0,0,0,.06);
+    z-index:2;
+}
+
+.travel-one{ width:430px; height:560px; left:8%; top:120px; }
+.travel-two{ width:230px; height:300px; left:calc(8% + 430px); top:380px; }
+.travel-three{ width:430px; height:300px; left:calc(8% + 660px); top:120px; }
+
+.travel-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0);
+    transition:.4s;
+}
+
+.travel-hover{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-end;
+    padding:30px;
+    opacity:0;
+    z-index:3;
+    transition:.4s;
+}
+
+.travel-hover a{
+    background:#000;
+    color:white;
+    padding:12px 25px;
+    font-size:12px;
+    letter-spacing:2px;
+}
+
+.travel-card:hover::after{ background:rgba(0,0,0,.4); }
+.travel-card:hover .travel-hover{ opacity:1; }
+
+.travel-caption{
+    position:absolute;
+    left:calc(8% + 660px);
+    top:520px;
+    z-index:4;
+}
+
+.travel-caption h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:55px;
+    font-weight:400;
+    line-height:1;
+}
+
+.travel-caption p{
+    margin-top:15px;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#777;
+}
+
+/* =====================================
+LIFE
+===================================== */
+.life-section{
+    padding:120px 8%;
+}
+
+.life-grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:25px;
+}
+
+.life-card{
+    position:relative;
+    overflow:hidden;
+    height:350px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.03);
+}
+
+.life-card img{
+    width:100%;
+    height:100%;
+    transition:.6s;
+}
+
+.life-card:hover img{
+    transform:scale(1.06);
+}
+
+.life-overlay{
+    position:absolute;
+    inset:0;
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    color:white;
+    background:linear-gradient(transparent, rgba(0,0,0,.6));
+}
+
+.life-overlay h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:35px;
+    font-weight:400;
+}
+
+.life-overlay p{
+    margin-top:10px;
+    font-size:14px;
+    opacity: 0.9;
+}
+
+.life-card.large{ grid-column:span 7; height:500px; }
+.life-card.wide{ grid-column:span 8; }
+.life-card:not(.large):not(.wide){ grid-column:span 5; }
 
 /* =====================================
 FOOTER
 ===================================== */
-.footer {
-    text-align: center;
-    padding: 60px 0;
-    font-size: 13px;
-    color: #bbb;
-    background: #1A1A1A;
-    border-top: 1px solid #222;
+.news-footer{
+    text-align:center;
+    padding:100px 20px;
+    border-top:1px solid #E5DFD3;
+}
+
+.footer-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:55px;
+    color: #1a1a1a;
+}
+
+.news-footer p{
+    margin-top:20px;
+    color:#666;
+}
+
+.news-footer span{
+    display:block;
+    margin-top:35px;
+    font-size:12px;
+    color:#999;
+}
+
+/* =====================================
+VIEW ALL BUTTON
+===================================== */
+.view-all{
+    text-align:center;
+    margin-top:70px;
+}
+
+.view-all a{
+    display:inline-block;
+    padding:14px 40px;
+    border:1px solid #222;
+    font-size:13px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.view-all a:hover{
+    background:#000;
+    color:#F2F2DF;
+} 
+
+/* =====================================
+RESPONSIVE
+===================================== */
+@media(max-width:1000px){
+    .hero{ grid-template-columns:1fr; gap:50px; padding:80px 8%; }
+    .hero-text{ padding-left:0; }
+    .hero h1{ font-size:70px; }
+    .research-grid{ grid-template-columns:1fr; }
+    .academic-grid{ grid-template-columns:repeat(2,1fr); }
+    .travel-gallery, .life-grid{ display:block; }
+    .travel-card, .life-card{ margin-bottom:25px; }
+}
+
+@media(max-width:600px){
+    .nav{ gap:20px; height:auto; padding:20px; }
+    .nav a{ font-size:14px; }
+    .hero{ padding:50px 25px; }
+    .hero h1{ font-size:55px; }
+    .arch-image{ width:320px; height:430px; }
+    .arch-decoration{ width:350px; height:480px; }
+    .arch-line{ width:320px; height:430px; }
+    .arch-text{ width:320px; font-size:10px; }
+    .section-title h2, .travel-header h2, .life-header h2{ font-size:50px; }
+    .academic-grid{ grid-template-columns:1fr; }
 }
