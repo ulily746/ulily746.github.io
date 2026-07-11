@@ -373,13 +373,11 @@ ARCH HERO FRAME
 
     position:absolute;
 
-    z-index:5;
+    z-index:10;
 
-    font-family:'Cormorant Garamond',serif;
+    font-family:'Great Vibes',cursive;
 
-    font-size:18px;
-
-    font-style:italic;
+    font-size:34px;
 
     color:#8B6B4F;
 
@@ -387,7 +385,19 @@ ARCH HERO FRAME
 
 }
 
+.arch-text::before{
 
+    content:"";
+
+    position:absolute;
+
+    inset:-5px -15px;
+
+    background:#F2F2DF;
+
+    z-index:-1;
+
+}
 
 /* 아치 둥근 부분 따라가기 */
 
@@ -403,9 +413,9 @@ ARCH HERO FRAME
 
 .arch-text.bottom{
 
-    right:-45px;
+    right:-65px;
 
-    bottom:75px;
+    bottom:15px;
 
     transform:rotate(0deg);
 
@@ -542,7 +552,7 @@ RESEARCH
 
 .research-card{
 
-    background:#E6DED0;
+    background:#DDE3DA;
 
     height:620px;
 
@@ -644,8 +654,7 @@ line-height:1.2;
 
 .research-card:nth-child(even){
 
-    background:#F9F3E8;
-
+    background:#F1EEE5;
 }
 
 .card-footer{
@@ -782,9 +791,9 @@ ACADEMIC CARD NEW STYLE
 
     right:0;
 
-    width:72%;
+    width:80%;
 
-    height:52%;
+    height:58%;
 
     overflow:hidden;
 
@@ -866,7 +875,11 @@ ACADEMIC CARD NEW STYLE
 
 .academic-card .card-footer{
 
-    margin-top:35px;
+position:absolute;
+
+left:35px;
+
+bottom:35px;
 
 }
 
@@ -910,21 +923,22 @@ TRAVEL
 
 
 
-.travel-script,
-.life-script{
+.travel-header h2{
 
-    margin-top:15px;
+    margin-top:20px;
 
-    font-family:'Great Vibes',cursive;
+    font-family:'Cormorant Garamond',serif;
 
-    font-size:65px;
+    font-size:70px;
 
-    color:#444;
+    font-weight:400;
 
 }
 
+
+
 /* =====================================
-TRAVEL EDITORIAL STYLE
+TRAVEL EDITORIAL COLLAGE
 ===================================== */
 
 
@@ -932,11 +946,14 @@ TRAVEL EDITORIAL STYLE
 
     position:relative;
 
-    height:900px;
+    width:100%;
+
+    height:850px;
 
     overflow:hidden;
 
 }
+
 
 
 /* 뒤쪽 필기체 */
@@ -946,15 +963,13 @@ TRAVEL EDITORIAL STYLE
 
     position:absolute;
 
-    top:80px;
+    left:5%;
 
-    left:50%;
-
-    transform:translateX(-50%);
+    top:20px;
 
     font-family:'Great Vibes',cursive;
 
-    font-size:220px;
+    font-size:240px;
 
     color:#D8CDBB;
 
@@ -962,13 +977,24 @@ TRAVEL EDITORIAL STYLE
 
     white-space:nowrap;
 
-    z-index:0;
+    z-index:1;
 
 }
 
 
 
-/* 사진 공통 */
+.travel-word span{
+
+    position:relative;
+
+}
+
+
+
+
+
+/* 공통 사진 */
+
 
 .travel-card{
 
@@ -976,13 +1002,16 @@ TRAVEL EDITORIAL STYLE
 
     overflow:hidden;
 
+    background:white;
+
     box-shadow:
 
-    0 25px 50px rgba(0,0,0,.08);
+    0 25px 50px rgba(0,0,0,.10);
 
     z-index:2;
 
 }
+
 
 
 .travel-card img{
@@ -998,7 +1027,17 @@ TRAVEL EDITORIAL STYLE
 
 
 
-/* 큰 왼쪽 사진 */
+
+/* =====================================
+PHOTO POSITION
+===================================== */
+
+
+/*
+PHOTO 1
+큰 메인 이미지
+*/
+
 
 .travel-one{
 
@@ -1006,7 +1045,7 @@ TRAVEL EDITORIAL STYLE
 
     height:560px;
 
-    left:5%;
+    left:8%;
 
     top:120px;
 
@@ -1014,81 +1053,62 @@ TRAVEL EDITORIAL STYLE
 
 
 
-/* 오른쪽 작은 사진 */
+
+
+/*
+PHOTO 2
+
+사진1 오른쪽과 맞닿음
+
+세로길이 약 절반
+
+*/
+
 
 .travel-two{
 
-    width:300px;
+    width:230px;
 
-    height:400px;
+    height:300px;
 
-    right:12%;
+    left:calc(8% + 430px);
 
-    top:80px;
+    top:380px;
 
 }
 
 
 
-/* 아래 긴 사진 */
+
+
+/*
+PHOTO 3
+
+사진2 오른쪽 위 꼭짓점과 연결
+
+*/
+
 
 .travel-three{
 
-    width:500px;
+    width:430px;
 
-    height:280px;
+    height:300px;
 
-    left:35%;
+    left:calc(8% + 660px);
 
-    bottom:60px;
-
-}
-
-
-
-/* 글자 */
-
-.travel-caption{
-
-    position:absolute;
-
-    right:8%;
-
-    bottom:90px;
-
-    z-index:3;
+    top:120px;
 
 }
 
 
 
-.travel-caption h3{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:55px;
-
-    font-weight:400;
-
-}
 
 
-
-.travel-caption p{
-
-    margin-top:10px;
-
-    letter-spacing:3px;
-
-    font-size:13px;
-
-    color:#777;
-
-}
 
 
 /* =====================================
-TRAVEL HOVER
+HOVER
 ===================================== */
 
 
@@ -1107,6 +1127,7 @@ TRAVEL HOVER
 }
 
 
+
 .travel-hover{
 
     position:absolute;
@@ -1121,9 +1142,9 @@ TRAVEL HOVER
 
     padding:30px;
 
-    z-index:3;
-
     opacity:0;
+
+    z-index:3;
 
     transition:.4s;
 
@@ -1133,19 +1154,15 @@ TRAVEL HOVER
 
 .travel-hover a{
 
+    background:#000;
+
     color:white;
 
-    border:1px solid rgba(255,255,255,.7);
-
-    padding:12px 22px;
+    padding:12px 25px;
 
     font-size:12px;
 
     letter-spacing:2px;
-
-    background:rgba(0,0,0,.2);
-
-    transition:.3s;
 
 }
 
@@ -1167,14 +1184,52 @@ TRAVEL HOVER
 
 
 
-.travel-hover a:hover{
 
-    background:white;
 
-    color:#222;
+/* =====================================
+CAPTION
+===================================== */
+
+
+.travel-caption{
+
+    position:absolute;
+
+    left:calc(8% + 660px);
+
+    top:520px;
+
+    z-index:4;
 
 }
 
+
+
+.travel-caption h3{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:55px;
+
+    font-weight:400;
+
+    line-height:1;
+
+}
+
+
+
+.travel-caption p{
+
+    margin-top:15px;
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    color:#777;
+
+}
 
 
 
