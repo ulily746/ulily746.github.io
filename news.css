@@ -396,30 +396,30 @@ ARCH HERO FRAME
 /* 아치 둥근 부분 따라가기 */
 
 .arch-text.top{
+.arch-text.top{
 
-    top:55px;
+    top:45px;
 
-    left:-15px;
+    left:-40px;
 
-    transform:
+    width:auto;
 
-    rotate(-18deg);
+    transform:rotate(-35deg);
 
 }
 
 
 
-/* 오른쪽 아래 선과 연결 */
-
 .arch-text.bottom{
 
-    bottom:25px;
+    right:-35px;
 
-    right:-45px;
+    bottom:70px;
 
-    transform:
+    left:auto;
 
-    rotate(12deg);
+    width:auto;
+
 
 }
 
@@ -555,7 +555,7 @@ RESEARCH
 
 .research-card{
 
-    background:#fff;
+    background:#E6DED0;
 
     height:620px;
 
@@ -720,17 +720,18 @@ ACADEMIC
 
     display:grid;
 
-    grid-template-columns:repeat(4,260px);
-
-    justify-content:center;
+    grid-template-columns:repeat(5,1fr);
 
     gap:0;
 
 }
 
-.academic-card{
+/* =====================================
+ACADEMIC CARD NEW STYLE
+===================================== */
 
-    background:#fff;
+
+.academic-card{
 
     height:620px;
 
@@ -742,7 +743,39 @@ ACADEMIC
 
 }
 
+.academic-card:nth-child(5n+1){
 
+    background:#DED7C8;
+
+}
+
+
+.academic-card:nth-child(5n+2){
+
+    background:#D5D8D1;
+
+}
+
+
+.academic-card:nth-child(5n+3){
+
+    background:#E6DDCF;
+
+}
+
+
+.academic-card:nth-child(5n+4){
+
+    background:#D9D2C4;
+
+}
+
+
+.academic-card:nth-child(5n+5){
+
+    background:#D8D8CE;
+
+}
 
 .academic-card:hover{
 
@@ -752,7 +785,9 @@ ACADEMIC
 
 
 
-..academic-card .card-image{
+/* image top right */
+
+.academic-card .card-image{
 
     position:absolute;
 
@@ -760,11 +795,16 @@ ACADEMIC
 
     right:0;
 
-    width:80%;
+    width:78%;
 
-    height:380px;
+    height:55%;
+
+    overflow:hidden;
 
 }
+
+
+
 .academic-card .card-image img{
 
     width:100%;
@@ -775,6 +815,10 @@ ACADEMIC
 
 }
 
+
+
+/* text bottom left */
+
 .academic-card .card-content{
 
     position:absolute;
@@ -783,13 +827,21 @@ ACADEMIC
 
     bottom:0;
 
-    width:100%;
+    width:58%;
 
-    padding:25px;
+    padding:35px;
 
-    height:220px;
+}
 
-    background:#fff;
+
+
+.academic-card .card-content span{
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    color:#7A705F;
 
 }
 
@@ -797,13 +849,15 @@ ACADEMIC
 
 .academic-card h3{
 
+    margin-top:15px;
+
     font-family:'Cormorant Garamond',serif;
 
-    font-size:28px;
+    font-size:34px;
 
     font-weight:500;
 
-    margin-top:12px;
+    line-height:1.2;
 
 }
 
@@ -811,42 +865,33 @@ ACADEMIC
 
 .academic-card p{
 
-    margin-top:10px;
+    margin-top:15px;
 
     font-size:14px;
 
-    color:#666;
-
-}
-
-.academic-card:nth-child(even){
-
-    background:#F9F3E8;
+    color:#555;
 
 }
 
 
-.academic-card:nth-child(odd){
 
-    background:#FFFFFF;
+/* view story */
 
-}
+.academic-card .card-footer{
 
-.card-footer{
-
-    margin-top:auto;
+    margin-top:35px;
 
 }
 
-.card-footer button{
 
-    background:#000;
 
-    color:#F2F2DF;
+.academic-card .card-footer button{
 
-    padding:12px 20px;
+    background:#111;
 
-    border:none;
+    color:white;
+
+    padding:10px 18px;
 
     font-size:12px;
 
