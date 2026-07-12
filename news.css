@@ -558,14 +558,6 @@ TRAVEL
 
 }
 
-.travel-one{
-    width:390px;
-    height:520px;
-    left:50%;
-    transform:translateX(-600px);
-    top:120px;
-}
-
 
 .travel-one{
     width:460px;
@@ -577,7 +569,7 @@ TRAVEL
 
 .travel-two{
     width:340px;
-    height:330px;
+    height:350px;
     left:50%;
     transform:translateX(-160px);
     top:370px;
