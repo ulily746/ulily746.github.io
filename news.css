@@ -229,33 +229,6 @@ ARCH SVG TEXT FLOW
 }
 
 
-/* bottom text */
-
-.arch-bottom-text{
-
-    position:absolute;
-
-    left:75%;
-
-    transform:translateX(-50%);
-
-    bottom:-70px;
-
-    font-family:'Great Vibes',cursive;
-
-    font-size:22px;
-
-    color:#8B6B4F;
-
-    white-space:nowrap;
-
-    background:#F2F2DF;
-
-    padding:0 15px;
-
-    z-index:10;
-
-}
 /* =====================================
 CATEGORY
 ===================================== */
