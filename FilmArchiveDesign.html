@@ -5,846 +5,1051 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Travel Diary - Le Petit Bonheur</title>
+<title>Travel Diary</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
 
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 
-/* =====================================
-   COLOR SYSTEM
-===================================== */
-
-:root{
-
---paper:#F5EFE4;
---ink:#302B27;
-
---olive:#7C8061;
---stamp:#B36B5E;
-
---line:#D9CDBB;
-
---photo:#FFFDF8;
-
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-
-
-/* =====================================
-   GLOBAL
-===================================== */
+html{
+scroll-behavior:smooth;
+}
 
 body{
 
-background:var(--paper);
-color:var(--ink);
-
+background:#F7F2EA;
+font-family:'Noto Sans KR',sans-serif;
+color:#5A4C43;
 overflow-x:hidden;
-
-}
-
-
-
-
-/* =====================================
-   FONT SYSTEM
-===================================== */
-
-.diary-title{
-
-font-family:
-"Caveat",
-cursive;
-
-font-weight:600;
-
-}
-
-
-
-.diary-text{
-
-font-family:
-"Cormorant Garamond",
-serif;
-
-}
-
-
-
-.archive-code{
-
-font-family:
-"IBM Plex Mono",
-monospace;
-
-letter-spacing:.18em;
-
-font-size:.7rem;
-
-color:var(--olive);
-
-}
-
-
-
-/* =====================================
-   PAPER LINE
-===================================== */
-
-.paper-line{
-
-border-color:var(--line);
-
-}
-
-
-
-/* =====================================
-   PHOTO PRINT
-===================================== */
-
-
-.photo-print{
-
-background:white;
-
-padding:14px;
-
-box-shadow:
-0 15px 35px rgba(60,40,20,.15);
-
 position:relative;
 
 }
 
-
-
-/* masking tape */
-
-.photo-print::before{
+body::before{
 
 content:"";
-
-position:absolute;
-
-top:-13px;
-
-left:40%;
-
-
-width:90px;
-
-height:22px;
-
-
-background:
-rgba(218,200,160,.65);
-
-
-transform:
-rotate(-5deg);
-
-z-index:2;
-
-}
-
-
-
-
-.photo-print img{
-
-filter:
-sepia(10%)
-contrast(.95)
-brightness(.98);
-
-}
-
-
-
-/* =====================================
-   FILM FRAME
-===================================== */
-
-
-.film-frame{
-
-background:#191714;
-
-padding:28px 0;
-
-position:relative;
-
-width:100%;
-
-}
-
-
-
-.film-frame::before,
-.film-frame::after{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-right:0;
-
-height:8px;
-
+position:fixed;
+inset:0;
+pointer-events:none;
 
 background-image:
 
-radial-gradient(
-circle,
-var(--paper) 3px,
-transparent 4px
-);
+radial-gradient(rgba(0,0,0,.04) 1px,transparent 1px),
+radial-gradient(rgba(255,255,255,.3) 1px,transparent 1px);
 
+background-size:140px 140px;
 
-background-size:
-18px 8px;
+opacity:.5;
 
+z-index:-2;
 
 }
 
+.hero{
 
-.film-frame::before{
+max-width:1600px;
 
-top:8px;
+margin:auto;
 
-}
+padding:80px 70px 120px;
 
+display:grid;
 
-.film-frame::after{
+grid-template-columns:1fr 1.15fr;
 
-bottom:8px;
+gap:80px;
 
-}
+align-items:center;
 
-
-
-/* =====================================
-   WAVE NOTE BOX
-===================================== */
-
-
-.wavy-border{
-
-border:
-
-2px solid var(--olive);
-
-
-border-radius:
-
-45px 25px 45px 25px
-/
-25px 45px 25px 45px;
-
+position:relative;
 
 }
 
+.hero-text{
 
-
-
-/* =====================================
-   HAND DRAW LINE
-===================================== */
-
-
-.travel-line{
-
-stroke:
-
-var(--olive);
-
-stroke-width:2;
-
-stroke-dasharray:6 8;
-
-fill:none;
+position:relative;
 
 }
 
+.diary{
 
+font-family:'Caveat',cursive;
+
+font-size:42px;
+
+color:#AF8C70;
+
+transform:rotate(-5deg);
+
+margin-bottom:15px;
+
+}
+
+.hero-title{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:8rem;
+
+line-height:.9;
+
+font-weight:600;
+
+color:#3C312C;
+
+}
+
+.hero-desc{
+
+margin-top:35px;
+
+font-size:18px;
+
+line-height:2;
+
+max-width:420px;
+
+color:#6C5F55;
+
+}
+
+.hero-photo{
+
+position:relative;
+
+}
+
+.hero-photo img{
+
+width:100%;
+
+height:760px;
+
+object-fit:cover;
+
+border-radius:36px;
+
+box-shadow:0 35px 80px rgba(0,0,0,.15);
+
+}
+
+.tape{
+
+position:absolute;
+
+width:140px;
+
+height:34px;
+
+background:rgba(240,224,170,.65);
+
+top:-12px;
+
+left:40px;
+
+transform:rotate(-8deg);
+
+backdrop-filter:blur(2px);
+
+}
+
+.tape2{
+
+position:absolute;
+
+width:140px;
+
+height:34px;
+
+background:rgba(240,224,170,.65);
+
+bottom:-14px;
+
+right:45px;
+
+transform:rotate(8deg);
+
+}
+
+.stamp{
+
+position:absolute;
+
+right:-35px;
+
+top:80px;
+
+background:white;
+
+padding:22px;
+
+border:2px dashed #C7A98A;
+
+border-radius:20px;
+
+transform:rotate(8deg);
+
+font-family:'IBM Plex Mono',monospace;
+
+font-size:12px;
+
+letter-spacing:2px;
+
+}
+
+.flight{
+
+position:absolute;
+
+left:45%;
+
+top:50px;
+
+font-family:'Caveat',cursive;
+
+font-size:44px;
+
+color:#B39273;
+
+transform:rotate(6deg);
+
+}
+
+.flight svg{
+
+margin-top:10px;
+
+width:220px;
+
+}
+
+.note{
+
+position:absolute;
+
+left:48%;
+
+bottom:70px;
+
+background:#FFFDF8;
+
+padding:28px;
+
+width:260px;
+
+box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+transform:rotate(-5deg);
+
+}
+
+.note h4{
+
+font-family:'Caveat',cursive;
+
+font-size:36px;
+
+margin-bottom:10px;
+
+}
+
+.note p{
+
+font-size:14px;
+
+line-height:1.8;
+
+color:#75685D;
+
+}
+
+.scroll{
+
+position:absolute;
+
+left:70px;
+
+bottom:20px;
+
+font-family:'IBM Plex Mono',monospace;
+
+letter-spacing:4px;
+
+font-size:11px;
+
+color:#A58C77;
+
+}
+
+@media(max-width:900px){
+
+.hero{
+
+grid-template-columns:1fr;
+
+padding:40px 25px 80px;
+
+}
+
+.hero-title{
+
+font-size:4.5rem;
+
+}
+
+.hero-photo img{
+
+height:480px;
+
+}
+
+.note{
+
+display:none;
+
+}
+
+.flight{
+
+display:none;
+
+}
+
+.stamp{
+
+display:none;
+
+}
+
+}
 
 </style>
 
-
 </head>
 
+<body>
 
-<body class="antialiased">
+<section class="hero">
 
+<div class="hero-text">
 
-<div class="w-full space-y-28 pb-24">
+<div class="diary">
+little happiness
+</div>
 
+<h1 class="hero-title">
 
+Travel<br>
 
-<!-- =====================================
- HERO
-===================================== -->
-
-
-<header class="w-full space-y-3">
-
-
-<h1 class="diary-title text-7xl md:text-9xl pl-6">
-
-Le Petit
+Diary
 
 </h1>
 
+<p class="hero-desc">
 
+작은 골목을 걷고,
 
-<div class="w-full h-[60vh] overflow-hidden border-y paper-line">
+창가에 오래 앉아 있고,
 
+필름 카메라로 오늘을 기록하는 여행.
 
-<img
+그렇게 모인 작은 순간들이
 
-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80"
-
-class="w-full h-full object-cover"
-
-alt="travel cover"
-
->
-
-
-</div>
-
-
-
-<h1 class="diary-title text-7xl md:text-9xl text-right pr-6">
-
-Bonheur
-
-</h1>
-
-
-
-</header>
-
-
-
-
-
-<!-- =====================================
- INTRO NOTE
-===================================== -->
-
-
-<section class="px-6 text-center">
-
-
-<p class="archive-code mb-4">
-
-TRAVEL NOTE / FILM COLLECTION 01
+나만의 다이어리가 되었습니다.
 
 </p>
 
+</div>
 
+<div class="hero-photo">
 
-<p class="diary-text text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+<div class="tape"></div>
 
+<div class="tape2"></div>
 
-[ 작은 순간들을 모아 기록하는 여행 노트.
-낯선 거리의 빛, 오래된 건물의 온기,
-그리고 필름 속에 남겨진 작은 행복의 조각들. ]
-
-
-</p>
-
-
-
-</section>
-
-
-<!-- =====================================
- PHOTO NOTE 01
-===================================== -->
-
-
-<section class="grid grid-cols-1 md:grid-cols-2 items-center border-y paper-line">
-
-
-<div class="w-full aspect-square overflow-hidden">
-
-
-<img
-
-src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80"
-
-class="w-full h-full object-cover"
-
-alt="travel photo"
-
->
-
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80">
 
 </div>
 
+<div class="stamp">
 
+PARIS
 
+<br><br>
 
-<div class="p-10 md:p-16 text-center">
-
-
-<span class="archive-code">
-
-DAY 01 / LITTLE MOMENT
-
-</span>
-
-
-
-<h2 class="diary-title text-5xl mt-5 mb-5">
-
-A quiet morning
-
-</h2>
-
-
-
-<p class="diary-text text-lg leading-relaxed">
-
-
-조용한 아침,
-작은 골목 사이로 들어오는 햇살.
-여행의 시작은 언제나
-천천히 찾아오는 작은 행복이었다.
-
-</p>
-
-
+08 / 2026
 
 </div>
 
+<div class="flight">
 
-</section>
+Bon Voyage
 
+<svg viewBox="0 0 240 90">
 
+<path d="M5 50
+C50 10
+120 90
+220 40"
 
+fill="none"
 
+stroke="#C5A78A"
 
+stroke-width="3"
 
-<!-- =====================================
- PHOTO NOTE 02
- ROTATED PRINT
-===================================== -->
+stroke-linecap="round"
 
-
-<section class="grid grid-cols-1 md:grid-cols-2 items-center border-b paper-line">
-
-
-<div class="order-2 md:order-1 p-12 flex justify-center">
-
-
-<div class="photo-print w-full max-w-md transform rotate-3">
-
-
-<img
-
-src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80"
-
-class="w-full aspect-[4/3] object-cover"
-
->
-
-
-
-<div class="pt-4">
-
-
-<p class="archive-code">
-
-FILM 002
-
-</p>
-
-
-<p class="diary-text text-xl">
-
-PARIS, FRANCE
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="order-1 md:order-2 p-10 md:p-16">
-
-
-<span class="archive-code">
-
-08.24.2026 / MEMORY
-
-</span>
-
-
-
-<h2 class="diary-title text-5xl mt-5 mb-5">
-
-Lost in the streets
-
-</h2>
-
-
-
-<p class="diary-text text-lg leading-relaxed">
-
-
-계획 없이 걷던 작은 거리.
-우연히 발견한 카페와
-창가에 머물던 오후의 빛을 기록하다.
-
-</p>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- =====================================
- HAND DRAW CONNECTION
-===================================== -->
-
-
-<section class="relative h-32 hidden md:block">
-
-
-<svg
-
-class="absolute w-full h-full"
-
-viewBox="0 0 800 120"
-
->
-
-
-<path
-
-d="M200 20
-C300 100,
-500 20,
-650 90"
-
-class="travel-line"
-
-/>
-
-
+stroke-dasharray="8 8"/>
 
 </svg>
 
+</div>
 
+<div class="note">
 
-<div class="absolute right-[18%] top-10 diary-title text-3xl">
+<h4>today's note</h4>
 
-✈ little journey
+<p>
+
+Sometimes
+
+the smallest streets
+
+become
+
+the biggest memories.
+
+</p>
 
 </div>
 
+<div class="scroll">
 
+SCROLL ↓
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- SCRAPBOOK SECTION 01 -->
+<!-- ========================================= -->
+
+<section class="relative max-w-[1600px] mx-auto px-8 lg:px-20 py-36">
+
+    <!-- hand doodle -->
+    <svg class="absolute left-[18%] top-10 w-64 opacity-60 hidden lg:block"
+        viewBox="0 0 240 140"
+        fill="none">
+
+        <path
+            d="M15 75
+            C60 5
+            150 130
+            220 45"
+            stroke="#BEA084"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-dasharray="7 9"/>
+
+    </svg>
+
+    <div class="grid lg:grid-cols-2 gap-24 items-center">
+
+        <!-- ================================= -->
+        <!-- LEFT -->
+        <!-- ================================= -->
+
+        <div class="relative">
+
+            <!-- Sticker -->
+
+            <div class="absolute -left-8 -top-10 text-5xl rotate-[-15deg]">
+
+                🌼
+
+            </div>
+
+            <!-- Main Photo -->
+
+            <div class="bg-white p-5 shadow-2xl rotate-[-4deg] w-[88%]">
+
+                <img
+
+                src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80"
+
+                class="w-full h-[520px] object-cover"
+
+                alt="">
+
+                <p class="mono mt-5 text-[11px] tracking-[4px] text-[#A68867]">
+
+                    FILM 001
+
+                </p>
+
+            </div>
+
+            <!-- Tape -->
+
+            <div
+
+            class="absolute
+
+            left-16
+
+            top-[-14px]
+
+            w-36
+
+            h-8
+
+            bg-[#EED9A9]/70
+
+            rotate-[-9deg]">
+
+            </div>
+
+            <!-- Small Photo -->
+
+            <div
+
+            class="absolute
+
+            right-0
+
+            bottom-[-40px]
+
+            bg-white
+
+            p-3
+
+            rotate-[8deg]
+
+            shadow-xl
+
+            w-56">
+
+                <img
+
+                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=700&q=80"
+
+                class="aspect-square object-cover"
+
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ================================= -->
+        <!-- RIGHT -->
+        <!-- ================================= -->
+
+        <div class="relative">
+
+            <p
+
+            class="mono
+
+            tracking-[5px]
+
+            text-xs
+
+            text-[#B59372]
+
+            mb-4">
+
+                AUGUST · 2026
+
+            </p>
+
+            <h2
+
+            class="hand
+
+            text-[78px]
+
+            leading-none
+
+            text-[#45362D]
+
+            mb-8">
+
+                A little street
+
+            </h2>
+
+            <p
+
+            class="leading-9
+
+            text-[17px]
+
+            max-w-md
+
+            text-[#6D6259]">
+
+                이름도 몰랐던 작은 골목.
+
+                지도에는 없던 오래된 서점.
+
+                우연히 발견한 카페.
+
+                여행은 계획보다 우연이
+
+                더 아름답다는 것을
+
+                천천히 배워가는 하루였다.
+
+            </p>
+
+            <!-- memo -->
+
+            <div
+
+            class="mt-12
+
+            bg-[#FFFCF8]
+
+            border
+
+            border-[#E6D5C6]
+
+            p-8
+
+            rotate-[-2deg]
+
+            max-w-sm
+
+            shadow-lg">
+
+                <p class="hand text-4xl mb-3">
+
+                    Today's Note
+
+                </p>
+
+                <p class="text-sm leading-7 text-[#7B7066]">
+
+                    Sometimes
+
+                    getting lost
+
+                    is the best part
+
+                    of travelling.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
 
+<!-- ========================================= -->
+<!-- FILM STRIP -->
+<!-- ========================================= -->
 
+<section class="py-20">
 
+<div class="relative bg-[#2D2723] py-8 overflow-hidden">
 
+<!-- holes -->
 
-<!-- =====================================
- PHOTO NOTE 03
-===================================== -->
+<div class="absolute top-2 left-0 right-0 h-3"
 
+style="background-image:radial-gradient(circle,#F7F2EA 4px,transparent 5px);
+background-size:18px 8px;"></div>
 
-<section class="grid grid-cols-1 md:grid-cols-2 items-center border-b paper-line">
+<div class="absolute bottom-2 left-0 right-0 h-3"
 
+style="background-image:radial-gradient(circle,#F7F2EA 4px,transparent 5px);
+background-size:18px 8px;"></div>
 
-
-
-
-<div class="p-12 flex justify-center">
-
-
-<div class="photo-print w-full max-w-md transform -rotate-3">
-
+<div class="flex gap-8 px-10 overflow-x-auto">
 
 <img
-
-src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80"
-
-class="w-full aspect-[4/3] object-cover"
-
->
-
-
-
-<div class="pt-4">
-
-
-<p class="archive-code">
-
-FILM 003
-
-</p>
-
-
-<p class="diary-text text-xl">
-
-A SMALL DISCOVERY
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="p-10 md:p-16 text-center">
-
-
-<span class="archive-code">
-
-DAY 03 / NOTES
-
-</span>
-
-
-
-<h2 class="diary-title text-5xl mt-5 mb-5">
-
-Tiny discoveries
-
-</h2>
-
-
-
-<p class="diary-text text-lg leading-relaxed">
-
-
-여행에서 가장 오래 기억되는 것은
-유명한 장소보다,
-그날 우연히 만난 작은 순간들이었다.
-
-</p>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<!-- =====================================
- NOTE CARD
-===================================== -->
-
-
-<section class="px-6">
-
-
-<div class="wavy-border max-w-4xl mx-auto p-10 md:p-14 text-center">
-
-
-<div class="text-3xl mb-3">
-
-✦
-
-</div>
-
-
-
-<h3 class="diary-title text-5xl mb-5">
-
-A little note
-
-</h3>
-
-
-
-
-<p class="diary-text text-lg leading-relaxed">
-
-
-사진 한 장,
-짧은 메모 하나.
-그 순간의 온도를 오래 간직하기 위한
-작은 여행 기록.
-
-</p>
-
-
-
-</div>
-
-
-</section>
-
-<!-- =====================================
- FILM FRAME 01
-===================================== -->
-
-
-<section class="grid grid-cols-1 md:grid-cols-2 items-center border-y paper-line">
-
-
-<div class="film-frame">
-
-
-<div class="w-full aspect-video overflow-hidden">
-
+src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=80"
+class="h-72 w-[420px] object-cover flex-none rounded-sm">
 
 <img
-
-src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=1000&q=80"
-
-class="w-full h-full object-cover"
-
-alt="film photo"
-
->
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-<div class="p-10 md:p-14">
-
-
-<span class="archive-code">
-
-NEGATIVE FILM 400
-
-</span>
-
-
-
-<h2 class="diary-title text-5xl mt-5 mb-5">
-
-Captured in motion
-
-</h2>
-
-
-
-<p class="diary-text text-lg leading-relaxed">
-
-
-필름 속에 남겨진 순간들은
-조금 느리고 조금 흐릿하지만,
-그래서 더 오래 기억된다.
-
-</p>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-<!-- =====================================
- HORIZONTAL FILM STRIP
-===================================== -->
-
-
-<section>
-
-
-<div class="film-frame">
-
-
-<div class="h-44 md:h-64 overflow-hidden">
-
+src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=700&q=80"
+class="h-72 w-[420px] object-cover flex-none rounded-sm">
 
 <img
-
-src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80"
-
-class="w-full h-full object-cover brightness-95"
-
-alt="film strip"
-
->
-
+src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=700&q=80"
+class="h-72 w-[420px] object-cover flex-none rounded-sm">
 
 </div>
 
-
-
-<div class="text-center py-6">
-
-
-<p class="archive-code text-[#F5EFE4]">
-
-ROLL NO.03 / SUMMER JOURNEY
-
-</p>
-
-
 </div>
 
+</section>
+
+<!-- ========================================= -->
+<!-- SCRAPBOOK SECTION 02 -->
+<!-- ========================================= -->
+
+<section class="relative max-w-[1600px] mx-auto px-8 lg:px-20 py-36 overflow-hidden">
+
+    <!-- doodle -->
+
+    <svg class="absolute right-[12%] top-12 w-72 hidden lg:block opacity-60"
+         viewBox="0 0 320 180"
+         fill="none">
+
+        <path
+        d="M20 90
+        C80 20
+        170 170
+        290 70"
+
+        stroke="#C8A788"
+
+        stroke-width="3"
+
+        stroke-linecap="round"
+
+        stroke-dasharray="8 10"/>
+
+    </svg>
 
 
-</div>
 
+
+
+    <div class="grid lg:grid-cols-2 gap-28 items-center">
+
+
+
+
+        <!-- ================================= -->
+        <!-- LEFT TEXT -->
+        <!-- ================================= -->
+
+
+
+        <div>
+
+            <p class="mono tracking-[5px] text-xs text-[#B8936D] mb-5">
+
+                SEPTEMBER · 2026
+
+            </p>
+
+
+
+            <h2 class="hand text-[82px] leading-none text-[#43352D] mb-8">
+
+                Coffee Break
+
+            </h2>
+
+
+
+            <p class="leading-9 text-[17px] max-w-md text-[#6E6258]">
+
+                창가에 앉아
+
+                사람들을 바라보며
+
+                천천히 커피를 마시는 시간.
+
+                아무것도 하지 않아도
+
+                여행은 충분히 행복했다.
+
+            </p>
+
+
+
+
+
+            <!-- little memo -->
+
+            <div
+
+            class="mt-14
+
+            inline-block
+
+            bg-[#FFFDF8]
+
+            p-7
+
+            border
+
+            border-[#E5D8C8]
+
+            rotate-[2deg]
+
+            shadow-lg">
+
+                <p class="hand text-4xl mb-3">
+
+                    little happiness
+
+                </p>
+
+                <p class="text-sm leading-7 text-[#76695D]">
+
+                    A cup of coffee.
+
+                    Warm sunshine.
+
+                    Slow afternoon.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- ================================= -->
+        <!-- RIGHT COLLAGE -->
+        <!-- ================================= -->
+
+
+
+        <div class="relative h-[760px]">
+
+
+
+            <!-- main -->
+
+            <div
+
+            class="absolute
+
+            right-8
+
+            top-0
+
+            bg-white
+
+            p-4
+
+            shadow-2xl
+
+            rotate-[3deg]
+
+            w-[72%]">
+
+                <img
+
+                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80"
+
+                class="w-full h-[430px] object-cover">
+
+
+
+                <p class="mono mt-4 text-[11px] tracking-[4px] text-[#A68667]">
+
+                    PARIS CAFE
+
+                </p>
+
+            </div>
+
+
+
+
+
+            <!-- second -->
+
+            <div
+
+            class="absolute
+
+            left-0
+
+            top-44
+
+            bg-white
+
+            p-3
+
+            shadow-xl
+
+            rotate-[-8deg]
+
+            w-64">
+
+                <img
+
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80"
+
+                class="aspect-square object-cover">
+
+            </div>
+
+
+
+
+
+            <!-- third -->
+
+            <div
+
+            class="absolute
+
+            right-0
+
+            bottom-10
+
+            bg-white
+
+            p-3
+
+            shadow-xl
+
+            rotate-[8deg]
+
+            w-56">
+
+                <img
+
+                src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=80"
+
+                class="aspect-[4/5] object-cover">
+
+            </div>
+
+
+
+
+
+            <!-- tape -->
+
+            <div
+
+            class="absolute
+
+            right-36
+
+            -top-3
+
+            w-32
+
+            h-8
+
+            bg-[#ECD8A5]/70
+
+            rotate-[-10deg]">
+
+            </div>
+
+
+
+
+
+            <div
+
+            class="absolute
+
+            left-24
+
+            top-[350px]
+
+            w-28
+
+            h-7
+
+            bg-[#ECD8A5]/70
+
+            rotate-[12deg]">
+
+            </div>
+
+
+
+
+
+            <!-- flower -->
+
+            <div
+
+            class="absolute
+
+            right-10
+
+            top-[260px]
+
+            text-5xl
+
+            rotate-[18deg]">
+
+                🌼
+
+            </div>
+
+
+
+
+
+            <!-- stamp -->
+
+            <div
+
+            class="absolute
+
+            left-12
+
+            bottom-4
+
+            border-2
+
+            border-dashed
+
+            border-[#D0AF8B]
+
+            rounded-full
+
+            px-7
+
+            py-5
+
+            rotate-[-12deg]
+
+            bg-[#FFFDF8]">
+
+                <p class="mono text-[10px] tracking-[4px]">
+
+                    TRAVEL
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
 
 </section>
 
@@ -853,73 +1058,309 @@ ROLL NO.03 / SUMMER JOURNEY
 
 
 
-<!-- =====================================
- FILM FRAME 02
-===================================== -->
+<!-- ========================================= -->
+<!-- HANDWRITING -->
+<!-- ========================================= -->
 
+<section class="relative py-24">
 
-<section class="grid grid-cols-1 md:grid-cols-2 items-center border-y paper-line">
+    <div class="max-w-6xl mx-auto text-center">
 
+        <p class="hand text-7xl text-[#9E846B] rotate-[-3deg]">
 
+            "collect moments, not things."
 
-<div class="p-10 md:p-14 order-2 md:order-1">
+        </p>
 
+    </div>
 
-<span class="archive-code">
+</section>   
 
-DEVELOPING REEL
+<!-- ========================================= -->
+<!-- SCRAPBOOK SECTION 03 -->
+<!-- ========================================= -->
 
-</span>
+<section class="relative max-w-[1650px] mx-auto py-40 px-8 lg:px-24 overflow-hidden">
 
+    <!-- doodle -->
+    <svg class="absolute left-1/2 -translate-x-1/2 top-12 w-[600px] opacity-50 hidden lg:block"
+        viewBox="0 0 600 180"
+        fill="none">
 
+        <path
+        d="M20 90
+        C90 20
+        180 160
+        280 80
+        S450 20
+        570 120"
 
-<h2 class="diary-title text-5xl mt-5 mb-5">
+        stroke="#C4A182"
 
-Until next journey
+        stroke-width="3"
 
-</h2>
+        stroke-linecap="round"
 
+        stroke-dasharray="8 10"/>
 
-
-<p class="diary-text text-lg leading-relaxed">
-
-
-한 장의 사진으로 남겨진 여행.
-하지만 그 안에는
-수많은 이야기와 감정이 담겨 있다.
-
-</p>
-
-
-
-</div>
-
-
-
-
-<div class="film-frame order-1 md:order-2">
-
-
-<div class="aspect-video overflow-hidden">
-
-
-<img
-
-src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1000&q=80"
-
-class="w-full h-full object-cover"
-
-alt="final film"
-
->
-
-
-</div>
+    </svg>
 
 
 
-</div>
+    <div class="text-center mb-28">
 
+        <p class="mono tracking-[6px] text-xs text-[#B78F6C] mb-5">
+            MEMORY PAGE
+        </p>
+
+        <h2 class="hand text-[88px] text-[#43352D] rotate-[-2deg]">
+            Happy Little Moments
+        </h2>
+
+    </div>
+
+
+
+    <div class="relative h-[980px]">
+
+        <!-- ============================ -->
+        <!-- Photo 1 -->
+        <!-- ============================ -->
+
+        <div class="absolute left-0 top-0 bg-white p-4 shadow-2xl rotate-[-5deg] w-[360px]">
+
+            <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+            class="h-[470px] w-full object-cover">
+
+            <p class="mono mt-4 text-[11px] tracking-[4px] text-[#A9896C]">
+
+                MORNING WALK
+
+            </p>
+
+        </div>
+
+        <div class="absolute left-20 -top-4 w-32 h-8 bg-[#EFD9A8]/70 rotate-[-8deg]"></div>
+
+
+
+        <!-- ============================ -->
+        <!-- Photo 2 -->
+        <!-- ============================ -->
+
+        <div class="absolute left-[310px] top-[140px] bg-white p-3 shadow-xl rotate-[8deg] w-[250px]">
+
+            <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=700&q=80"
+            class="aspect-square object-cover">
+
+        </div>
+
+        <div class="absolute left-[420px] top-[115px] w-24 h-6 bg-[#ECD6A0]/70 rotate-[12deg]"></div>
+
+
+
+        <!-- ============================ -->
+        <!-- Memo -->
+        <!-- ============================ -->
+
+        <div class="absolute left-[610px] top-16 bg-[#FFFDF8] shadow-xl p-8 rotate-[-3deg] max-w-xs">
+
+            <h3 class="hand text-5xl mb-4">
+
+                my diary
+
+            </h3>
+
+            <p class="text-[15px] leading-8 text-[#72675C]">
+
+                Every city has
+
+                its own rhythm.
+
+                I just wanted
+
+                to remember
+
+                how it felt.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ============================ -->
+        <!-- Photo 3 -->
+        <!-- ============================ -->
+
+        <div class="absolute right-8 top-0 bg-white p-5 shadow-2xl rotate-[4deg] w-[420px]">
+
+            <img
+            src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80"
+            class="h-[560px] object-cover w-full">
+
+            <p class="mono mt-4 text-[11px] tracking-[4px] text-[#A9896C]">
+
+                OLD TOWN
+
+            </p>
+
+        </div>
+
+        <div class="absolute right-24 top-[-10px] w-36 h-8 bg-[#EFD9A8]/70 rotate-[10deg]"></div>
+
+
+
+        <!-- ============================ -->
+        <!-- Flower -->
+        <!-- ============================ -->
+
+        <div class="absolute right-[380px] top-[360px] text-6xl rotate-[18deg]">
+
+            🌼
+
+        </div>
+
+
+
+        <!-- ============================ -->
+        <!-- Photo 4 -->
+        <!-- ============================ -->
+
+        <div class="absolute left-[150px] bottom-0 bg-white p-4 shadow-xl rotate-[6deg] w-[310px]">
+
+            <img
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80"
+            class="aspect-[4/5] object-cover">
+
+        </div>
+
+
+
+        <!-- ============================ -->
+        <!-- Photo 5 -->
+        <!-- ============================ -->
+
+        <div class="absolute left-[520px] bottom-[30px] bg-white p-3 shadow-xl rotate-[-7deg] w-[220px]">
+
+            <img
+            src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=700&q=80"
+            class="aspect-square object-cover">
+
+        </div>
+
+
+
+        <!-- ============================ -->
+        <!-- Handwriting -->
+        <!-- ============================ -->
+
+        <div class="absolute right-[250px] bottom-[90px]">
+
+            <p class="hand text-6xl text-[#A78567] rotate-[-6deg]">
+
+                enjoy today ♡
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ============================ -->
+        <!-- Plane -->
+        <!-- ============================ -->
+
+        <div class="absolute right-[40px] bottom-[120px]">
+
+            <svg width="220" height="90" viewBox="0 0 220 90">
+
+                <path
+
+                d="M10 60
+                C70 0
+                140 110
+                210 25"
+
+                stroke="#C6A586"
+
+                stroke-width="3"
+
+                fill="none"
+
+                stroke-linecap="round"
+
+                stroke-dasharray="8 8"/>
+
+            </svg>
+
+        </div>
+
+
+
+        <!-- ============================ -->
+        <!-- Stamp -->
+        <!-- ============================ -->
+
+        <div class="absolute right-[50px] bottom-0 bg-[#FFFDF8] border-2 border-dashed border-[#D0AE8A] rounded-full px-8 py-6 rotate-[10deg]">
+
+            <p class="mono tracking-[4px] text-[11px]">
+
+                BON VOYAGE
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section> 
+
+<!-- ========================================= -->
+<!-- FILM MEMORY STRIP -->
+<!-- ========================================= -->
+
+<section class="py-24 overflow-hidden">
+
+    <div class="relative bg-[#2C2522] py-8">
+
+        <!-- top holes -->
+        <div class="absolute top-2 left-0 right-0 h-3"
+        style="
+        background-image:
+        radial-gradient(circle,#F7F2EA 4px,transparent 5px);
+        background-size:18px 8px;"></div>
+
+        <!-- bottom holes -->
+        <div class="absolute bottom-2 left-0 right-0 h-3"
+        style="
+        background-image:
+        radial-gradient(circle,#F7F2EA 4px,transparent 5px);
+        background-size:18px 8px;"></div>
+
+        <div class="flex gap-8 px-10">
+
+            <img
+            src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=80"
+            class="w-[420px] h-[290px] object-cover rounded-sm flex-none">
+
+            <img
+            src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=900&q=80"
+            class="w-[420px] h-[290px] object-cover rounded-sm flex-none">
+
+            <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+            class="w-[420px] h-[290px] object-cover rounded-sm flex-none">
+
+            <img
+            src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=900&q=80"
+            class="w-[420px] h-[290px] object-cover rounded-sm flex-none">
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -927,46 +1368,230 @@ alt="final film"
 
 
 
+<!-- ========================================= -->
+<!-- LAST PAGE -->
+<!-- ========================================= -->
 
+<section class="relative max-w-[1600px] mx-auto px-8 lg:px-24 py-36">
 
-<!-- =====================================
- FINAL MESSAGE
-===================================== -->
+    <div class="text-center mb-20">
 
+        <p class="mono tracking-[5px] text-xs text-[#B28C6C]">
 
-<section class="px-6">
+            LAST PAGE
 
+        </p>
 
-<div class="max-w-3xl mx-auto text-center py-16">
+        <h2 class="hand text-[95px] text-[#45362E] rotate-[-2deg] mt-3">
 
+            Until Next Trip
 
-<p class="archive-code mb-5">
+        </h2>
 
-END OF FILM
-
-</p>
-
-
-<h2 class="diary-title text-6xl mb-6">
-
-See you again
-
-</h2>
+    </div>
 
 
 
-<p class="diary-text text-xl">
+    <div class="relative h-[720px]">
+
+        <!-- Main Photo -->
+
+        <div
+        class="absolute
+        left-1/2
+        -translate-x-1/2
+        top-0
+        bg-white
+        p-5
+        rotate-[-3deg]
+        shadow-2xl
+        w-[470px]">
+
+            <img
+
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+
+            class="h-[560px] object-cover w-full">
+
+            <p class="mono mt-4 text-[11px] tracking-[4px] text-[#AA8A6D]">
+
+                LAST SUNSET
+
+            </p>
+
+        </div>
 
 
-다음 페이지에는
-또 다른 작은 행복이 기록될 예정입니다.
 
-</p>
+        <!-- Tape -->
+
+        <div
+        class="absolute
+        left-[49%]
+        -translate-x-1/2
+        -top-4
+        w-36
+        h-8
+        bg-[#EED9AA]/70
+        rotate-[-8deg]">
+
+        </div>
 
 
 
-</div>
+        <!-- Left Note -->
 
+        <div
+        class="absolute
+        left-10
+        top-36
+        bg-[#FFFDF8]
+        p-8
+        rotate-[-5deg]
+        shadow-xl
+        max-w-xs">
+
+            <p class="hand text-5xl mb-4">
+
+                Remember
+
+            </p>
+
+            <p class="leading-8 text-[#75695E] text-sm">
+
+                여행은 끝났지만
+
+                기억은 계속된다.
+
+                사진 한 장,
+
+                커피 한 잔,
+
+                골목 하나.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- Right Ticket -->
+
+        <div
+        class="absolute
+        right-0
+        top-40
+        bg-[#F4E8D7]
+        border-2
+        border-dashed
+        border-[#C9A98A]
+        p-8
+        rotate-[8deg]
+        w-72">
+
+            <p class="mono text-xs tracking-[4px] mb-4">
+
+                BOARDING PASS
+
+            </p>
+
+            <h3 class="serif text-3xl mb-4">
+
+                BON VOYAGE
+
+            </h3>
+
+            <div class="space-y-2 text-sm text-[#76695E]">
+
+                <p>FROM : SEOUL</p>
+
+                <p>TO : PARIS</p>
+
+                <p>GATE : 08</p>
+
+                <p>SEAT : A17</p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Small Photo -->
+
+        <div
+        class="absolute
+        left-[170px]
+        bottom-0
+        bg-white
+        p-3
+        rotate-[8deg]
+        shadow-xl
+        w-60">
+
+            <img
+
+            src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=700&q=80"
+
+            class="aspect-square object-cover">
+
+        </div>
+
+
+
+        <!-- Small Photo -->
+
+        <div
+        class="absolute
+        right-[170px]
+        bottom-6
+        bg-white
+        p-3
+        rotate-[-7deg]
+        shadow-xl
+        w-64">
+
+            <img
+
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80"
+
+            class="aspect-[4/5] object-cover">
+
+        </div>
+
+
+
+        <!-- flower -->
+
+        <div
+        class="absolute
+        left-[430px]
+        bottom-[180px]
+        text-6xl
+        rotate-[20deg]">
+
+            🌼
+
+        </div>
+
+
+
+        <!-- handwriting -->
+
+        <div
+        class="absolute
+        right-[310px]
+        bottom-[160px]">
+
+            <p class="hand text-6xl text-[#A68465] rotate-[-7deg]">
+
+                see you soon ♡
+
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -974,82 +1599,65 @@ See you again
 
 
 
+<!-- ========================================= -->
+<!-- FOOTER -->
+<!-- ========================================= -->
 
-</div>
+<footer class="bg-[#43342D] text-[#F8F4EE] py-24 mt-32">
 
+    <div class="max-w-[1500px] mx-auto px-8 flex flex-col lg:flex-row justify-between items-center gap-10">
 
+        <div>
 
+            <h3 class="serif text-4xl mb-3">
 
+                Le Petit Bonheur
 
+            </h3>
 
-<!-- =====================================
- FOOTER
-===================================== -->
+            <p class="mono tracking-[4px] text-xs text-[#D2B79A]">
 
+                TRAVEL ARCHIVE · 2026
 
-<footer class="bg-[#302B27] text-[#F5EFE4] py-16 px-8">
+            </p>
 
-
-<div class="flex flex-col md:flex-row justify-between items-center gap-8">
-
-
-
-<div class="text-center md:text-left">
-
-
-<p class="archive-code text-[#F5EFE4]">
-
-LE PETIT BONHEUR
-
-</p>
+        </div>
 
 
 
-<p class="diary-text text-lg mt-3">
+        <div class="flex gap-5">
 
-Travel Diary Archive
+            <a
+            href="#"
 
-</p>
+            class="border border-[#8E7560]
+            px-6 py-3
+            hover:bg-[#F8F4EE]
+            hover:text-[#43342D]
+            duration-300">
 
+                Instagram
 
+            </a>
 
-<p class="text-xs opacity-60 mt-3">
+            <a
+            href="#"
 
-© 2026 RECORDED MOMENTS
+            class="border border-[#8E7560]
+            px-6 py-3
+            hover:bg-[#F8F4EE]
+            hover:text-[#43342D]
+            duration-300">
 
-</p>
+                Contact
 
+            </a>
 
+        </div>
 
-</div>
-
-
-
-
-<div class="diary-title text-4xl">
-
-✈ Bon voyage
-
-</div>
-
-
-
-</div>
-
+    </div>
 
 </footer>
 
-
-
-
-
-<script>
-
-lucide.createIcons();
-
-</script>
-
-
 </body>
-
-</html>  
+</html>   
