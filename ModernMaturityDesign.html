@@ -3,66 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모던 머추어리티</title>
+  <title>Modern Maturity - Le Petit Bonheur</title>
+  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- 구글 폰트에서 Elegant 필기체(Script) 서체 로드 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-script { font-family: 'Playfair Display', serif; font-style: italic; }
+  </style>
 </head>
-<body class="min-h-screen bg-[#111111] py-6 px-4 flex justify-center antialiased">
+<body class="bg-[#F6F5F2] text-[#222222] antialiased overflow-x-hidden">
 
-  <div class="w-full max-w-md bg-[#1A1A1A] rounded-[24px] shadow-2xl overflow-hidden flex flex-col relative text-[#D4D4D4] font-sans border border-[#2A2A2A]">
-    
-    <div class="absolute top-6 left-6 z-10">
-      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-[#262626] flex items-center justify-center text-white hover:bg-[#333] transition">
-        <i data-lucide="arrow-left" class="w-5 h-5"></i>
-      </button>
-    </div>
+  <!-- 전체 컨테이너: 양옆 공백 최소화 (w-full, px-2 md:px-4) -->
+  <div class="w-full space-y-36 pb-32">
 
-    <!-- 1. 히어로 배너 (다크 무드 와이드 이미지) -->
-    <div class="relative w-full aspect-[16/10] bg-zinc-800">
-      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Architecture" class="w-full h-full object-cover opacity-75 mix-blend-luminosity">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent"></div>
-    </div>
+    <!-- 1. 맨위 제목 + 아래 사각형 사진 + 그 아래 필기체 문구와 설명 -->
+    <header class="w-full pt-16 flex flex-col items-center">
+      <!-- 맨 위 제목 -->
+      <div class="text-center mb-10 tracking-widest uppercase">
+        <span class="text-xs text-gray-400 block mb-2">Editorial Vol. 04</span>
+        <h1 class="text-3xl md:text-5xl font-light tracking-tight text-[#111111]">MODERN MATURITY</h1>
+      </div>
+      
+      <!-- 아래 사각형 사진 -->
+      <div class="w-[96%] max-w-7xl aspect-[16/9] overflow-hidden border border-gray-200 shadow-xs">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Modern Main" class="w-full h-full object-cover">
+      </div>
 
-    <!-- 2. 헤드라인 타이틀 -->
-    <div class="px-6 pt-2 pb-6 text-center">
-      <p class="text-[9px] tracking-[0.3em] text-[#A3A3A3] uppercase font-semibold">Premium Arch & Space</p>
-      <h1 class="text-xl font-light tracking-widest text-white mt-1 uppercase">ARCHIVE STRUCT</h1>
-    </div>
-
-    <!-- 3. 본문 텍스트 정보 -->
-    <div class="px-6 pb-6 space-y-4">
-      <div class="border-l-2 border-[#E5E5E5] pl-4 py-1">
-        <p class="text-xs leading-relaxed text-[#A3A3A3]">
-          우리는 보이지 않는 구조의 본질에 집중합니다. 선과 면, 빛과 그림자가 만들어내는 최소한의 개입을 통해 공간 속에 묵직한 서사를 구현합니다.
+      <!-- 그 아래 필기체 문구와 설명 -->
+      <div class="mt-8 max-w-2xl text-center px-6 space-y-3">
+        <p class="font-script text-2xl md:text-3xl text-gray-500 tracking-wide">"The beauty of structured flavor."</p>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
+          시간의 흐름 속에서 더욱 깊어지고 견고해지는 가치. 르 쁘띠 보뇌르가 지향하는 모던 마투리티 아카이브는 직선적인 절제미와 그 내면에 정제된 달콤함의 성숙을 미학적인 레이아웃으로 표현합니다.
         </p>
       </div>
+    </header>
 
-      <!-- 프로필 디테일 리스트 -->
-      <div class="bg-[#222222] rounded-xl p-4 space-y-3 border border-[#2A2A2A]">
-        <div class="flex justify-between items-center text-xs">
-          <span class="text-[#737373] flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Location</span>
-          <span class="text-white font-medium">Seoul, Korea</span>
-        </div>
-        <div class="flex justify-between items-center text-xs border-t border-zinc-800 pt-2.5">
-          <span class="text-[#737373] flex items-center gap-1.5"><i data-lucide="layers" class="w-3.5 h-3.5"></i> Expertise</span>
-          <span class="text-white font-medium">Spatial & Branding</span>
+
+    <!-- 2. 사각형 사진 + 오른쪽 아래 작은 세로형 사각형 사진 겹침 + 밑에 설명 -->
+    <section class="w-full max-w-5xl mx-auto px-4">
+      <div class="relative w-[85%] md:w-[75%] aspect-[4/3] overflow-hidden border border-gray-200">
+        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1000&q=80" alt="Layered Main 1" class="w-full h-full object-cover">
+        
+        <!-- 오른쪽 아래 겹쳐진 작은 세로형 사각형 사진 -->
+        <div class="absolute -bottom-12 -right-12 md:-right-16 w-[40%] aspect-[2/3] overflow-hidden border-4 border-[#F6F5F2] shadow-xl bg-gray-100">
+          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Layered Sub 1" class="w-full h-full object-cover">
         </div>
       </div>
-    </div>
 
-    <!-- 4. 하단 미니멀 링크 -->
-    <div class="mt-auto p-6 bg-[#161616] border-t border-[#2A2A2A] text-center">
-      <div class="space-y-2 max-w-xs mx-auto">
-        <a href="#" class="flex items-center justify-between bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium py-3.5 px-5 rounded-xl transition border border-zinc-700">
-          <span>공식 포트폴리오 웹사이트</span><i data-lucide="external-link" class="w-3.5 h-3.5 text-zinc-400"></i>
-        </a>
-        <a href="#" class="flex items-center justify-between bg-transparent hover:bg-zinc-800 text-[#A3A3A3] text-xs font-medium py-3.5 px-5 rounded-xl transition border border-zinc-800">
-          <span>비즈니스 프로젝트 문의</span><i data-lucide="mail" class="w-3.5 h-3.5"></i>
-        </a>
+      <!-- 밑에 설명 -->
+      <div class="mt-20 max-w-xl text-left pl-2">
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">01 / Geometric Layer</h3>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
+          시선이 머무는 그리드의 교차점. 메인 플레이트 스냅 위로 겹쳐진 좁고 깊은 구도의 세로 컷은 베이킹의 텍스처를 입체적으로 분해하여 보여주는 모던한 시도입니다.
+        </p>
       </div>
-    </div>
+    </section>
+
+
+    <!-- 3. 정사각형 사진 두 개 대각선으로 살짝 겹치게 배치 + 그 아래 설명 -->
+    <section class="w-full max-w-5xl mx-auto px-4 flex flex-col items-center">
+      <!-- 대각선 겹침 프레임 스페이스 -->
+      <div class="relative w-full max-w-lg aspect-square my-8">
+        <!-- 왼쪽 위 정사각형 사진 -->
+        <div class="absolute top-0 left-0 w-[65%] aspect-square overflow-hidden border border-gray-200 shadow-xs">
+          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Diagonal 1" class="w-full h-full object-cover">
+        </div>
+        <!-- 오른쪽 아래 정사각형 사진 (대각선 겹침) -->
+        <div class="absolute bottom-0 right-0 w-[65%] aspect-square overflow-hidden border-4 border-[#F6F5F2] shadow-xl">
+          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Diagonal 2" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- 그 아래 설명 -->
+      <div class="mt-12 max-w-xl text-center px-4">
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">02 / Symmetry & Contrast</h3>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
+          두 개의 완벽한 정방형이 대각선 궤적 위에서 만나 독특한 균형을 이룹니다. 디저트의 단면과 도구의 정렬이 주는 대칭성과 시각적 대비를 온전히 담았습니다.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- 4. 다시 큰 사진 하나 + 아래 설명 -->
+    <section class="w-full">
+      <!-- 화면을 꽉 채우는 와이드 큰 사진 -->
+      <div class="w-[96%] max-w-7xl mx-auto aspect-[21/9] overflow-hidden border border-gray-200">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Wide View" class="w-full h-full object-cover">
+      </div>
+
+      <!-- 아래 설명 -->
+      <div class="mt-8 max-w-2xl mx-auto text-center px-6">
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">03 / The Panorama</h3>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
+          탁 트인 와이드 파노라마 뷰로 마주하는 아틀리에의 전경. 긴 수평선이 주는 안정감과 모던한 여백은 바쁜 일상 속에서 깊은 성숙의 휴식을 제안합니다.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- 5. 큰 사진 배치 + 오른쪽 위쪽 작은 사진 겹쳐지게 배치 + 아래 설명 -->
+    <section class="w-full max-w-5xl mx-auto px-4">
+      <div class="relative w-[85%] md:w-[75%] aspect-[4/3] overflow-hidden border border-gray-200 ml-auto">
+        <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1000&q=80" alt="Layered Main 2" class="w-full h-full object-cover">
+        
+        <!-- 오른쪽 위쪽으로 겹쳐진 작은 사각형 사진 -->
+        <div class="absolute -top-12 -left-12 md:-left-16 w-[42%] aspect-square overflow-hidden border-4 border-[#F6F5F2] shadow-xl bg-gray-100">
+          <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" alt="Layered Sub 2" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- 아래 설명 -->
+      <div class="mt-16 max-w-xl text-right ml-auto pr-2">
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">04 / Top-Left Overlap</h3>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
+          오른쪽으로 치우친 거대한 오브제 슬라이스 위에, 좌측 상단으로 빗겨 겹쳐 올린 감성적 스냅. 정교하게 계산된 오프셋 배치는 아방가르드하면서도 차분한 마무리를 선사합니다.
+        </p>
+      </div>
+    </section>
 
   </div>
+
+  <!-- 미니멀 모던 푸터 -->
+  <footer class="bg-[#111111] text-gray-400 py-16 px-6 text-xs tracking-wider border-t border-gray-800">
+    <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <p class="text-white font-medium text-sm tracking-widest">LE PETIT BONHEUR</p>
+        <p class="text-gray-500 mt-1">© 2026 MODERN MATURITY EDITION. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="flex gap-8 text-gray-500">
+        <a href="#" class="hover:text-white transition">ARCHIVE</a>
+        <a href="#" class="hover:text-white transition">LEGAL</a>
+      </div>
+    </div>
+  </footer>
 
   <script>lucide.createIcons();</script>
 </body>
