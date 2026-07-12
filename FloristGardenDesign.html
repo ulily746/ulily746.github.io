@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>플로리스트 가든</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-[#A9988B] py-6 px-4 flex justify-center antialiased">
+
+  <div class="w-full max-w-md bg-[#F4F6F0] rounded-[40px] shadow-2xl overflow-hidden flex flex-col relative text-[#4A5343] font-sans border border-[#DEE5D2]">
+    
+    <div class="absolute top-6 left-6 z-10">
+      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-[#E5EAD9]/80 backdrop-blur-xs flex items-center justify-center text-[#4A5343] hover:bg-[#E5EAD9] transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- 1. 상단 히어로 (부드러운 아치 프레임 이미지) -->
+    <div class="pt-20 px-6 pb-6 text-center">
+      <div class="w-[85%] mx-auto aspect-[3/4] bg-[#E5EAD9] rounded-t-full overflow-hidden border-4 border-white shadow-sm relative">
+        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="Florist" class="w-full h-full object-cover">
+        <div class="absolute bottom-4 right-4 bg-white/70 backdrop-blur-xs text-[10px] px-2.5 py-1 rounded-full text-[#E58F8F] font-bold">✿ spring mood</div>
+      </div>
+      <h1 class="text-2xl font-serif text-[#3B4235] tracking-wide mt-5 font-bold">Lily Gloges <span class="text-xs block italic text-[#A66E6E] font-sans tracking-widest mt-1">/ florist</span></h1>
+    </div>
+
+    <!-- 2. 말풍선 형태의 감성 곡선 정보 블록 -->
+    <div class="px-6 py-2 space-y-4">
+      <div class="bg-white p-5 rounded-[24px] rounded-tl-none border border-[#DEE5D2]">
+        <p class="text-[10px] uppercase tracking-widest text-[#A66E6E] font-bold mb-1">About me</p>
+        <p class="text-xs leading-relaxed text-[#5C6654]">
+          자연 고유의 선과 색감의 조화를 사랑하며, 오직 당신만을 위한 세상에 하나뿐인 커스텀 부케를 만듭니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. 마스터 클래스 가이드 선 리스트 -->
+    <div class="p-6 bg-white border-y border-[#DEE5D2] mt-4 text-center">
+      <div class="flex items-center gap-1.5 text-xs font-bold text-[#3B4235] justify-center mb-3">
+        <i data-lucide="sparkles" class="w-4 h-4 text-[#E58F8F]"></i><span>Master Class 대상</span>
+      </div>
+      <div class="space-y-1.5 max-w-xs mx-auto text-left">
+        <div class="bg-[#F4F6F0] py-2 px-4 rounded-full text-xs text-[#5C6654] border border-[#DEE5D2]">❀ 기초부터 첫 부케를 만들고 싶으신 분</div>
+        <div class="bg-[#F4F6F0] py-2 px-4 rounded-full text-xs text-[#5C6654] border border-[#DEE5D2]">❀ 새로운 꽃 힐링 취미를 찾으시는 분</div>
+      </div>
+    </div>
+
+    <!-- 4. 메신저 연결 푸터 -->
+    <div class="mt-auto p-6 bg-white border-t border-[#DEE5D2] text-center">
+      <div class="grid grid-cols-2 gap-2 max-w-xs mx-auto">
+        <a href="#" class="bg-[#F4F6F0] text-[#4A5343] text-xs font-medium py-3 rounded-xl border border-[#DEE5D2]">인스타 DM</a>
+        <a href="#" class="bg-[#A66E6E] text-white text-xs font-medium py-3 rounded-xl shadow-xs">카카오톡 문의</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
