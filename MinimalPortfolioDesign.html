@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Minimal Portfolio - Travel Archive</title>
+<title>Travel Archive - Minimal Portfolio</title>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,72 +21,69 @@
 
 <style>
 
-body { 
-  font-family: 'Plus Jakarta Sans', sans-serif;
 
-  background-color:#EDE4D4;
+body {
 
-  /* Paper Texture */
-  background-image:
-  radial-gradient(
-    rgba(80,60,40,0.05) 1px,
-    transparent 1px
-  );
+font-family:'Plus Jakarta Sans', sans-serif;
 
-  background-size:4px 4px;
+background-color:#F5EFE6;
+
+
+/* subtle paper texture */
+
+background-image:
+
+radial-gradient(
+rgba(74,59,50,0.035) 1px,
+transparent 1px
+);
+
+background-size:5px 5px;
+
 }
 
 
-.font-serif-title { 
-  font-family:'Cinzel', serif; 
+
+.font-serif-title {
+
+font-family:'Cinzel', serif;
+
 }
 
 
-/* subtle paper overlay */
 
-.paper-layer{
-  position:relative;
+.archive-image {
+
+filter:
+saturate(90%)
+contrast(96%);
+
 }
 
-.paper-layer::before{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:
-  linear-gradient(
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.08)
-  );
-
-  pointer-events:none;
-}
-
-
-/* image softness */
-
-.archive-image{
-  filter:
-  saturate(85%)
-  contrast(95%);
-}
 
 
 </style>
 
+
 </head>
 
 
-<body 
-class="
-bg-[#EDE4D4]
-text-[#4B4036]
+
+
+<body class="
+bg-[#F5EFE6]
+text-[#4A3B32]
 antialiased
 overflow-x-hidden
 ">
 
 
+
 <div class="w-full space-y-36 pb-32">
+
+
+
+
 
 
 
@@ -91,63 +92,69 @@ overflow-x-hidden
 <!-- ================================= -->
 
 
+
 <header class="
-w-full 
-pt-16 
-px-4 
-md:px-8 
-max-w-7xl 
+w-full
+pt-16
+px-4
+md:px-8
+max-w-7xl
 mx-auto
 ">
 
 
+
 <div class="
-grid 
-grid-cols-1 
-md:grid-cols-12 
-gap-8 
+grid
+grid-cols-1
+md:grid-cols-12
+gap-8
 items-center
 ">
 
 
-<!-- LEFT TEXT -->
+
+
+
+<!-- LEFT CONTENT -->
+
 
 <div class="
-col-span-1 
-md:col-span-5 
-space-y-4 
-text-left 
-order-2 
-md:order-1 
+col-span-1
+md:col-span-5
+space-y-4
+text-left
+order-2
+md:order-1
 z-10
 ">
 
 
-<span 
-class="
-text-xs 
-tracking-[0.3em] 
-text-[#B29A78]
-uppercase 
-font-medium 
+
+<span class="
+text-xs
+tracking-[0.25em]
+text-[#A39081]
+uppercase
+font-medium
 block
 ">
 
-Travel Archive
+Life & Travel Archive
 
 </span>
 
 
 
-<h1 
-class="
-text-4xl 
-md:text-6xl 
-font-serif-title 
-font-light 
-tracking-wide 
+
+<h1 class="
+text-4xl
+md:text-6xl
+font-serif-title
+font-light
+tracking-wide
 leading-[1.1]
-text-[#4B4036]
+text-[#4A3B32]
 ">
 
 Quiet<br>
@@ -157,34 +164,41 @@ Journeys
 
 
 
-<div 
-class="
-w-16 
-h-[1px] 
-bg-[#B29A78]
+
+<div class="
+w-16
+h-[1px]
+bg-[#A39081]
 my-6
 ">
 </div>
 
 
 
-<p 
-class="
-text-xs 
-md:text-sm 
-text-[#766B5C]
-max-w-sm 
-leading-relaxed 
+
+
+<p class="
+text-xs
+md:text-sm
+text-[#7A6B5E]
+max-w-sm
+leading-relaxed
 font-light
 ">
 
-작은 순간들을 기록하는 여행 아카이브.
-자연과 공간, 그리고 그 안에서 발견한 조용한 아름다움을 하나의 이야기로 담아냅니다.
+여백 속에 담긴 여행의 순간.
+공간과 자연, 그리고 일상의 작은 아름다움을 하나의 아카이브로 기록합니다.
 
 </p>
 
 
+
+
 </div>
+
+
+
+
 
 
 
@@ -194,36 +208,38 @@ font-light
 <!-- RIGHT ARCH IMAGE -->
 
 
-<div 
-class="
-col-span-1 
-md:col-span-7 
-flex 
-justify-end 
-order-1 
+<div class="
+col-span-1
+md:col-span-7
+flex
+justify-end
+order-1
 md:order-2
 ">
 
 
-<div 
-class="
-w-full 
-max-w-xl 
+
+
+
+<div class="
+w-full
+max-w-xl
 aspect-[3/5]
 rounded-t-full
 overflow-hidden
 border
-border-[#D8CBB8]
+border-[#DDD2C2]
 shadow-sm
-bg-[#E6D9C5]
+bg-[#EFE6DA]
 ">
+
 
 
 <img
 
 src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80"
 
-alt="Travel Archive Main"
+alt="Minimal Travel Arch"
 
 class="
 w-full
@@ -235,27 +251,34 @@ archive-image
 />
 
 
-</div>
-
 
 </div>
 
 
+
+
+
 </div>
+
+
+
+</div>
+
 
 
 </header>
 
+
 <!-- ================================= -->
-<!-- SECTION 2 -->
+<!-- CONTENT SECTION -->
 <!-- ================================= -->
 
 
 <section class="
-w-full 
-max-w-6xl 
-mx-auto 
-px-4 
+w-full
+max-w-6xl
+mx-auto
+px-4
 md:px-8
 ">
 
@@ -266,41 +289,39 @@ md:px-8
 
 
 
-<!-- =============================== -->
+<!-- ================================= -->
 <!-- OBJECT 01 -->
-<!-- =============================== -->
+<!-- ================================= -->
 
 
-<div 
-class="
-grid 
-grid-cols-1 
-md:grid-cols-12 
-gap-8 
+<div class="
+grid
+grid-cols-1
+md:grid-cols-12
+gap-8
 items-center
 ">
 
 
-<div 
-class="
-col-span-1 
-md:col-span-5 
-flex 
+
+<div class="
+col-span-1
+md:col-span-5
+flex
 justify-center
 ">
 
 
-<div 
-class="
-w-72 
-h-72 
-md:w-96 
+<div class="
+w-72
+h-72
+md:w-96
 md:h-96
 rounded-full
 overflow-hidden
 border
-border-[#D8CBB8]
-bg-[#E6D9C5]
+border-[#DDD2C2]
+bg-[#EFE6DA]
 shadow-sm
 ">
 
@@ -309,7 +330,7 @@ shadow-sm
 
 src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
 
-alt="Archive Object 01"
+alt="Travel Object 01"
 
 class="
 w-full
@@ -330,20 +351,21 @@ archive-image
 
 
 
-<div 
-class="
-col-span-1 
-md:col-span-7 
-space-y-3 
+
+
+<div class="
+col-span-1
+md:col-span-7
+space-y-3
 md:pl-8
 ">
 
 
-<span 
-class="
+
+<span class="
 text-xs
-tracking-[0.3em]
-text-[#B29A78]
+tracking-widest
+text-[#A39081]
 font-medium
 block
 ">
@@ -355,68 +377,68 @@ PLACE 01
 
 
 
-<h3 
-class="
-text-xl 
-md:text-2xl 
-font-serif-title 
-text-[#4B4036]
+<h3 class="
+text-xl
+md:text-2xl
+font-serif-title
+text-[#4A3B32]
 ">
 
-Hidden Villages
+Hidden Corners
 
 </h3>
 
 
 
 
-<p 
-class="
-text-xs 
-md:text-sm 
-text-[#766B5C]
+<p class="
+text-xs
+md:text-sm
+text-[#7A6B5E]
 leading-relaxed
 font-light
 max-w-xl
 ">
 
-오래된 건축과 자연이 공존하는 장소.
-빠르게 지나가는 여행보다 천천히 머무르며 발견하는 순간을 기록합니다.
+오래된 거리와 자연이 만들어내는 조용한 풍경.
+천천히 머무르며 발견하는 장소의 이야기를 기록합니다.
 
 </p>
 
 
-</div>
-
 
 </div>
 
 
 
+</div>
 
 
 
 
-<!-- =============================== -->
+
+
+
+
+
+<!-- ================================= -->
 <!-- STATEMENT -->
-<!-- =============================== -->
+<!-- ================================= -->
 
 
-<div 
-class="
-w-full 
-py-12 
-border-y 
-border-[#D8CBB8]
+<div class="
+w-full
+py-12
+border-y
+border-[#DDD2C2]
 text-center
 ">
 
 
-<span 
-class="
+<span class="
 text-[10px]
-tracking-[0.4em]
-text-[#B29A78]
+tracking-[0.35em]
+text-[#A39081]
 ">
 
 COLLECTED MOMENTS
@@ -425,14 +447,14 @@ COLLECTED MOMENTS
 
 
 
-<h2 
-class="
-text-2xl 
-md:text-4xl 
+
+<h2 class="
+text-2xl
+md:text-4xl
 font-serif-title
 font-light
 tracking-[0.15em]
-text-[#4B4036]
+text-[#4A3B32]
 uppercase
 mt-4
 ">
@@ -443,18 +465,18 @@ The Beauty Of Slow Living
 
 
 
-<p 
-class="
+<p class="
 text-[10px]
 md:text-xs
-text-[#766B5C]
+text-[#7A6B5E]
 tracking-widest
-mt-3
+mt-2
 ">
 
-천천히 머무는 순간의 아름다움
+천천히 바라보는 순간의 아름다움
 
 </p>
+
 
 
 </div>
@@ -466,27 +488,26 @@ mt-3
 
 
 
-<!-- =============================== -->
+
+<!-- ================================= -->
 <!-- OBJECT 02 -->
-<!-- =============================== -->
+<!-- ================================= -->
 
 
-<div 
-class="
-grid 
-grid-cols-1 
-md:grid-cols-12 
-gap-8 
+<div class="
+grid
+grid-cols-1
+md:grid-cols-12
+gap-8
 items-center
 ">
 
 
 
-<div 
-class="
-col-span-1 
-md:col-span-7 
-space-y-3 
+<div class="
+col-span-1
+md:col-span-7
+space-y-3
 md:pr-8
 text-left
 md:text-right
@@ -495,11 +516,11 @@ md:order-1
 ">
 
 
-<span 
-class="
+
+<span class="
 text-xs
-tracking-[0.3em]
-text-[#B29A78]
+tracking-widest
+text-[#A39081]
 font-medium
 block
 ">
@@ -510,36 +531,36 @@ PLACE 02
 
 
 
-<h3 
-class="
-text-xl 
-md:text-2xl 
+
+<h3 class="
+text-xl
+md:text-2xl
 font-serif-title
-text-[#4B4036]
+text-[#4A3B32]
 ">
 
-Mountain Light
+Light & Memory
 
 </h3>
 
 
 
 
-<p 
-class="
+<p class="
 text-xs
 md:text-sm
-text-[#766B5C]
+text-[#7A6B5E]
 leading-relaxed
 font-light
 max-w-xl
 md:ml-auto
 ">
 
-자연이 만들어내는 빛과 그림자.
-아침의 공기, 작은 골목, 창문 너머의 풍경을 통해 여행의 감각을 기록합니다.
+빛과 그림자가 만들어내는 여행의 기록.
+작은 순간들이 모여 하나의 오래된 기억이 됩니다.
 
 </p>
+
 
 
 </div>
@@ -550,19 +571,18 @@ md:ml-auto
 
 
 
-<div 
-class="
-col-span-1 
-md:col-span-5 
-flex 
+<div class="
+col-span-1
+md:col-span-5
+flex
 justify-center
 order-1
 md:order-2
 ">
 
 
-<div 
-class="
+
+<div class="
 w-72
 h-72
 md:w-96
@@ -570,17 +590,18 @@ md:h-96
 rounded-full
 overflow-hidden
 border
-border-[#D8CBB8]
-bg-[#E6D9C5]
+border-[#DDD2C2]
+bg-[#EFE6DA]
 shadow-sm
 ">
+
 
 
 <img
 
 src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80"
 
-alt="Archive Object 02"
+alt="Travel Object 02"
 
 class="
 w-full
@@ -592,8 +613,6 @@ archive-image
 />
 
 
-</div>
-
 
 </div>
 
@@ -602,30 +621,39 @@ archive-image
 
 
 
+</div>
 
 
 
 
-<!-- =============================== -->
+
+
+
+
+
+<!-- ================================= -->
 <!-- MINI GALLERY -->
-<!-- =============================== -->
+<!-- ================================= -->
 
 
-<section 
-class="
+<section class="
 w-full
-pt-10
+pt-12
 ">
 
 
-<div class="text-center mb-12">
+
+<div class="
+text-center
+mb-12
+">
 
 
-<span 
-class="
+
+<span class="
 text-xs
 tracking-[0.35em]
-text-[#B29A78]
+text-[#A39081]
 ">
 
 COLLECTION
@@ -634,12 +662,12 @@ COLLECTION
 
 
 
-<h2 
-class="
+
+<h2 class="
 text-2xl
 md:text-4xl
 font-serif-title
-text-[#4B4036]
+text-[#4A3B32]
 mt-4
 ">
 
@@ -649,18 +677,6 @@ Moments Along The Way
 
 
 
-<p 
-class="
-text-xs
-text-[#766B5C]
-mt-3
-font-light
-">
-
-Fragments of places, light and memories.
-
-</p>
-
 
 </div>
 
@@ -670,8 +686,8 @@ Fragments of places, light and memories.
 
 
 
-<div 
-class="
+
+<div class="
 grid
 grid-cols-3
 gap-4
@@ -681,11 +697,17 @@ items-start
 
 
 
-<div class="aspect-square overflow-hidden">
+
+
+<div class="
+aspect-square
+overflow-hidden
+">
+
 
 <img
 
-src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=80"
+src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80"
 
 class="
 w-full
@@ -696,6 +718,7 @@ archive-image
 
 >
 
+
 </div>
 
 
@@ -703,8 +726,9 @@ archive-image
 
 
 
-<div 
-class="
+
+
+<div class="
 aspect-square
 overflow-hidden
 mt-8
@@ -713,7 +737,7 @@ mt-8
 
 <img
 
-src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80"
+src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
 
 class="
 w-full
@@ -733,12 +757,15 @@ archive-image
 
 
 
-<div class="aspect-square overflow-hidden">
+<div class="
+aspect-square
+overflow-hidden
+">
 
 
 <img
 
-src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=500&q=80"
+src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"
 
 class="
 w-full
@@ -754,7 +781,9 @@ archive-image
 
 
 
+
 </div>
+
 
 
 </section>
@@ -764,29 +793,28 @@ archive-image
 </div>
 
 
-</section>
+</section>  
 
 <!-- ================================= -->
-<!-- SECTION 3 : ENDING VIEW -->
+<!-- ENDING IMAGE SECTION -->
 <!-- ================================= -->
 
 
-<section 
-class="
-w-full 
-space-y-8
+<section class="
+w-full
+space-y-6
 ">
 
 
-<div 
-class="
+
+<div class="
 w-[96%]
 max-w-7xl
 mx-auto
 aspect-[21/9]
 overflow-hidden
 border
-border-[#D8CBB8]
+border-[#DDD2C2]
 shadow-sm
 ">
 
@@ -795,7 +823,7 @@ shadow-sm
 
 src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80"
 
-alt="Travel Ending Archive"
+alt="Travel Archive Ending"
 
 class="
 w-full
@@ -815,49 +843,47 @@ archive-image
 
 
 
-<!-- POSTCARD MESSAGE -->
-
-
-<div 
-class="
+<div class="
 w-full
 max-w-xl
 mx-auto
 text-center
 px-6
-space-y-4
 ">
 
 
-<span
-class="
+
+<span class="
 text-[10px]
-tracking-[0.4em]
-text-[#B29A78]
+tracking-[0.35em]
+text-[#A39081]
+block
+mb-4
 ">
 
-POSTCARD FROM MEMORY
+A NOTE FROM THE JOURNEY
 
 </span>
 
 
 
 
-<p 
-class="
+<p class="
 text-xs
 md:text-sm
-text-[#766B5C]
+text-[#7A6B5E]
 font-light
 leading-relaxed
 ">
 
-어떤 장소는 지나가는 것이 아니라,
-오래 기억되는 순간으로 남습니다.
+어떤 순간은 사진으로 남고,
+어떤 장소는 기억으로 남습니다.
 <br>
-조용한 풍경과 작은 순간들을 하나의 여행 기록으로 담았습니다.
+
+작은 풍경과 조용한 시간을 하나의 이야기로 기록합니다.
 
 </p>
+
 
 
 </div>
@@ -865,7 +891,6 @@ leading-relaxed
 
 
 </section>
-
 
 
 
@@ -883,23 +908,20 @@ leading-relaxed
 <!-- ================================= -->
 
 
-<footer 
-
-class="
-bg-[#3A332C]
-text-[#EDE4D4]
+<footer class="
+bg-[#362A21]
+text-[#F5EFE6]
 py-16
 px-6
 text-xs
 font-light
 tracking-widest
 border-t
-border-[#B29A78]
+border-[#A39081]
 ">
 
 
-<div 
-class="
+<div class="
 w-full
 max-w-7xl
 mx-auto
@@ -913,15 +935,14 @@ gap-6
 
 
 
-<div 
-class="
+<div class="
 text-center
 md:text-left
 ">
 
 
-<p 
-class="
+
+<p class="
 text-white
 font-serif-title
 tracking-wider
@@ -934,16 +955,17 @@ TRAVEL ARCHIVE
 
 
 
-<p 
-class="
-text-[#B29A78]
+
+<p class="
+text-[#A39081]
 mt-2
 ">
 
-© 2026 MINIMAL JOURNAL EDITION.
+© 2026 MINIMAL PORTFOLIO EDITION.
 CURATED WITH SILENCE.
 
 </p>
+
 
 
 </div>
@@ -954,12 +976,12 @@ CURATED WITH SILENCE.
 
 
 
-<div 
-class="
+<div class="
 flex
 gap-8
-text-[#B29A78]
+text-[#A39081]
 ">
+
 
 
 <a 
@@ -974,7 +996,8 @@ COLLECTION
 </a>
 
 
-<a 
+
+<a
 href="#"
 class="
 hover:text-white
@@ -986,14 +1009,17 @@ INQUIRY
 </a>
 
 
-</div>
-
-
 
 </div>
+
+
+
+</div>
+
 
 
 </footer>
+
 
 
 
@@ -1006,4 +1032,5 @@ lucide.createIcons();
 
 
 </body>
+
 </html>  
