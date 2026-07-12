@@ -21,29 +21,29 @@
   <!-- 전체 컨테이너 -->
   <div class="w-full space-y-40 pb-24">
 
-    <!-- 1. [요구사항 1, 2] 대문 사진 비율 조정(세로 축소/가로 확장) 및 하단 설명 추가 -->
-    <header class="w-full max-w-6xl mx-auto pt-12 px-4 flex flex-col items-center">
+    <!-- 1. [요구사항 1] 대문 사진 세로 길이를 기존의 두 배 수준인 세로형 도록 비례(aspect-[3/4])로 확장 -->
+    <header class="w-full max-w-4xl mx-auto pt-12 px-4 flex flex-col items-center">
       <div class="w-full border-b border-[#D1C7BD] pb-4 mb-6 flex justify-between items-end text-[10px] tracking-[0.3em] uppercase text-[#7A6953]">
         <span>Research Quarterly</span>
         <span class="font-medium text-xs">Vol. 12 / 2026</span>
         <span>Atelier Study</span>
       </div>
       
-      <!-- [요구사항 2] 가로를 늘리고 세로를 줄인 16:10 스타일의 와이드 책자 표지 비율 -->
-      <div class="relative w-full aspect-[16/10] max-h-[500px] overflow-hidden bg-gray-200 shadow-xl border border-[#D1C7BD]">
-        <img src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=1600&q=80" alt="Magazine Cover Main" class="w-full h-full object-cover brightness-95">
+      <!-- [요구사항 1] 세로로 훨씬 깊어진 고전 아카이브 서적 커버 비율 -->
+      <div class="relative w-full aspect-[3/4] max-h-[750px] overflow-hidden bg-gray-200 shadow-2xl border border-[#D1C7BD]">
+        <img src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=1600&q=80" alt="Magazine Cover Main" class="w-full h-full object-cover brightness-90">
         
         <!-- 표지 폰트 오버레이 -->
-        <div class="absolute inset-0 p-6 md:p-12 flex flex-col justify-between bg-gradient-to-t from-black/30 via-transparent to-black/10">
-          <h1 class="text-3xl md:text-6xl font-serif-title font-light tracking-wide text-white drop-shadow-xs leading-none text-left">
-            DESSERT ATELIER<br><span class="text-xs md:text-sm tracking-[0.4em] font-sans block mt-2 text-[#F4F3EF]">ANALYTICAL ARCHIVE</span>
+        <div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-between bg-gradient-to-t from-black/40 via-transparent to-black/20">
+          <h1 class="text-4xl md:text-6xl font-serif-title font-light tracking-wide text-white drop-shadow-xs leading-none text-left">
+            DESSERT ATELIER<br><span class="text-xs md:text-sm tracking-[0.4em] font-sans block mt-3 text-[#F4F3EF]">ANALYTICAL ARCHIVE</span>
           </h1>
-          <span class="text-[10px] tracking-[0.25em] text-white/80 font-serif-title">THEORETICAL FRAMEWORK</span>
+          <span class="text-[10px] tracking-[0.25em] text-white/90 font-serif-title">THEORETICAL FRAMEWORK</span>
         </div>
       </div>
 
-      <!-- [요구사항 1] 대문 사진 바로 아래 들어가는 설명문 -->
-      <div class="mt-8 max-w-3xl text-center px-4 space-y-2">
+      <!-- 대문 사진 바로 아래 설명문 -->
+      <div class="mt-10 max-w-3xl text-center px-4 space-y-2">
         <h2 class="text-xl font-serif-title text-[#1A2636] tracking-wide">식문화 구조주의와 형태학적 아카이브</h2>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light max-w-2xl mx-auto">
           미시적 관점에서 바라본 재료의 결합과 물리적 성숙에 관한 고찰. 본 아틀리에 저널은 복잡하게 얽힌 조리 과학의 인과관계를 시각적 프레임워크를 통해 분해하고 기록하는 연구 목적의 데이터베이스입니다.
@@ -52,43 +52,43 @@
     </header>
 
 
-    <!-- 3. [요구사항 4] 2x3 배열의 설명·사진 상자 교차 배치 (세로로 긴 둥근 사각형) -->
-    <!-- *기존 1사진 1설명 파트는 삭제되었습니다.* -->
+    <!-- 2. [요구사항 2] 2x3 배열 6개 사각형 배치 수정 -->
+    <!-- 첫 줄: [설명] -> [사진] -> [설명]  /  둘째 줄: [사진] -> [설명] -> [사진] -->
     <section class="w-full max-w-5xl mx-auto px-4">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
         
-        <!-- 행 1, 열 1: 설명 -->
+        <!-- [첫 번째 줄, 1열] 설명 상자 -->
         <div class="flex flex-col justify-center items-center text-center p-6 bg-[#EBE9E2] border border-[#D1C7BD] aspect-[3/4] rounded-2xl shadow-xs">
           <span class="text-[10px] font-mono text-[#7A6953] tracking-widest mb-2">PHASE 01</span>
           <h4 class="text-sm font-semibold mb-2">물성 변화 측정</h4>
           <p class="text-[11px] text-gray-600 font-light leading-relaxed">온도 변화에 따른 단백질 분자 사슬의 결합 밀도 변화 관찰.</p>
         </div>
 
-        <!-- 행 1, 열 2: 사진 -->
+        <!-- [첫 번째 줄, 2열] 사진 상자 -->
         <div class="w-full aspect-[3/4] overflow-hidden border border-[#D1C7BD] rounded-2xl shadow-xs">
           <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80" alt="Grid 1" class="w-full h-full object-cover">
         </div>
 
-        <!-- 행 1, 열 3: 설명 -->
+        <!-- [첫 번째 줄, 3열] 설명 상자 -->
         <div class="flex flex-col justify-center items-center text-center p-6 bg-[#EBE9E2] border border-[#D1C7BD] aspect-[3/4] rounded-2xl shadow-xs">
           <span class="text-[10px] font-mono text-[#7A6953] tracking-widest mb-2">PHASE 02</span>
           <h4 class="text-sm font-semibold mb-2">점탄성 분석</h4>
           <p class="text-[11px] text-gray-600 font-light leading-relaxed">글루텐 매트릭스 형성에 따른 내부 기포 유지력 통계 데이터.</p>
         </div>
 
-        <!-- 행 2, 열 1: 사진 -->
+        <!-- [두 번째 줄, 1열] 사진 상자 -->
         <div class="w-full aspect-[3/4] overflow-hidden border border-[#D1C7BD] rounded-2xl shadow-xs">
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Grid 2" class="w-full h-full object-cover">
         </div>
 
-        <!-- 행 2, 열 2: 설명 -->
+        <!-- [두 번째 줄, 2열] 설명 상자 -->
         <div class="flex flex-col justify-center items-center text-center p-6 bg-[#EBE9E2] border border-[#D1C7BD] aspect-[3/4] rounded-2xl shadow-xs">
           <span class="text-[10px] font-mono text-[#7A6953] tracking-widest mb-2">PHASE 03</span>
           <h4 class="text-sm font-semibold mb-2">기하학적 매칭</h4>
           <p class="text-[11px] text-gray-600 font-light leading-relaxed">플레이팅 구성 시 시각적 안정감을 부여하는 수학적 여백 연구.</p>
         </div>
 
-        <!-- 행 2, 열 3: 사진 -->
+        <!-- [두 번째 줄, 3열] 사진 상자 -->
         <div class="w-full aspect-[3/4] overflow-hidden border border-[#D1C7BD] rounded-2xl shadow-xs">
           <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80" alt="Grid 3" class="w-full h-full object-cover">
         </div>
@@ -97,25 +97,18 @@
     </section>
 
 
-    <!-- 4. [요구사항 5] 3개 사진 배치 (양옆 사진은 작고, 가운데 큰 사진 / 셋 다 세로로 긴 비율) -->
+    <!-- 3. 기존 레이아웃 유지: 3개 사진 배치 (양옆은 작고 가운데는 큰 세로 비율) -->
     <section class="w-full max-w-5xl mx-auto px-4">
       <div class="flex items-center justify-center gap-4 md:gap-8">
-        
-        <!-- 좌측: 작은 세로형 사진 -->
         <div class="w-[28%] aspect-[2/3] overflow-hidden border border-[#D1C7BD] shadow-xs">
           <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=500&q=80" alt="Side Left" class="w-full h-full object-cover">
         </div>
-        
-        <!-- 중앙: 큰 세로형 사진 (강조된 스케일) -->
         <div class="w-[44%] aspect-[2/3] overflow-hidden border border-[#D1C7BD] shadow-md">
           <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80" alt="Center Main" class="w-full h-full object-cover">
         </div>
-        
-        <!-- 우측: 작은 세로형 사진 -->
         <div class="w-[28%] aspect-[2/3] overflow-hidden border border-[#D1C7BD] shadow-xs">
           <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=500&q=80" alt="Side Right" class="w-full h-full object-cover">
         </div>
-        
       </div>
       <div class="mt-6 text-center max-w-xl mx-auto">
         <p class="text-[11px] text-gray-500 font-light">그리드 밸런스 팩터: 수직 축을 중심으로 전개되는 구조적 대비 실험 뷰</p>
@@ -123,11 +116,10 @@
     </section>
 
 
-    <!-- 5. [요구사항 6] 4개 사진 카드 세로 길이 확장 및 지그재그 반복 배치 -->
+    <!-- 4. 기존 레이아웃 유지: 4개 사진 카드 세로 확장 및 지그재그 배치 -->
     <section class="w-full max-w-7xl mx-auto px-4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <!-- 카드 1: [위 사진 / 아래 설명] - 세로 길이 확장 (aspect-[3/5]) -->
         <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
           <div class="w-full aspect-[4/5] overflow-hidden border border-[#D1C7BD]">
             <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Card 1" class="w-full h-full object-cover">
@@ -139,7 +131,6 @@
           </div>
         </div>
 
-        <!-- 카드 2: [위 설명 / 아래 사진] - 세로 길이 확장 -->
         <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
           <div class="pb-4 space-y-1 order-1">
             <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.02</span>
@@ -151,7 +142,6 @@
           </div>
         </div>
 
-        <!-- 카드 3: [위 사진 / 아래 설명] - 세로 길이 확장 -->
         <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
           <div class="w-full aspect-[4/5] overflow-hidden border border-[#D1C7BD]">
             <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80" alt="Card 3" class="w-full h-full object-cover">
@@ -163,7 +153,6 @@
           </div>
         </div>
 
-        <!-- 카드 4: [위 설명 / 아래 사진] - 세로 길이 확장 -->
         <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
           <div class="pb-4 space-y-1 order-1">
             <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.04</span>
@@ -180,7 +169,7 @@
 
   </div>
 
-  <!-- [요구사항 6] 작성일 및 메타데이터 정보만 간결하게 포함된 하단 탭 푸터 -->
+  <!-- 기존 푸터 유지: 작성일 위주의 미니멀 디자인 -->
   <footer class="bg-[#1A2636] text-gray-400 py-10 px-6 text-[11px] tracking-wider border-t border-[#D1C7BD]/20">
     <div class="w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
       <p class="font-serif-title text-white tracking-widest text-xs">DESSERT ATELIER LAB ARCHIVE</p>
