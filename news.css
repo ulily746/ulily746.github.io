@@ -232,6 +232,10 @@ ARCH SVG TEXT FLOW
     font-family:'Great Vibes',cursive;
     font-size:22px;
     fill:#8B6B4F;
+
+    stroke:#F2F2DF;
+    stroke-width:6px;
+    paint-order:stroke;
 }
 /* =====================================
 CATEGORY
