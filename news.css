@@ -145,7 +145,7 @@ HERO IMAGE & ARCH FRAME
 
 .arch-image {
     position: absolute;
-    top: 0;
+    top: 10;
     left: 0;
 
     width: 100%;
@@ -170,18 +170,16 @@ HERO IMAGE & ARCH FRAME
 
 
 .arch-decoration {
+    position:absolute;
 
-    position: absolute;
+    top:-35px;
+    left:-35px;
 
-    top: -20px;
-    left: -25px;
+    width:470px;
+    height:680px;
 
-    width: 450px;
-    height: 650px;
-
-    pointer-events: none;
-
-    z-index: 3;
+    pointer-events:none;
+    z-index:3;
 }
 
 
