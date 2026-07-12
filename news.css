@@ -669,12 +669,65 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
 
 /* 세로로 긴 세련된 아치 프레임 이미지 */
 .life-arch-img {
+
     width: 100%;
-    height: 380px; /* 두 번째 이미지 특유의 세로 비율 */
-    border-radius: 140px 140px 0 0; /* 상단만 둥근 아치 처리 */
+
+    height: 380px;
+
+    border-radius: 140px 140px 0 0;
+
     overflow: hidden;
+
     margin-bottom: 20px;
+
     box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+
+    position: relative;
+
+}
+
+/* LIFE HOVER */
+
+.life-hover{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.35);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+
+.life-hover span{
+
+    background:#111;
+
+    color:#F2F2DF;
+
+    padding:12px 25px;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+}
+
+
+.life-card:hover .life-hover{
+
+    opacity:1;
+
 }
 
 .life-arch-img img {
