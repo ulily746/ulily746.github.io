@@ -3,162 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Florist Garden - Premium Taplink Edition</title>
+  <title>Florist Garden - Organic Life Log</title>
   <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Elegant Serif and Sans fonts matching the reference image styling -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- 레퍼런스의 우아한 세리프(Cinzel)와 아기자기하고 포근한 서체(Gaegu) 로드 -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Gaegu:wght@400;700&family=Marcellus&display=swap" rel="stylesheet">
   
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Gaegu', sans-serif;
     }
-    .font-serif-luxury {
-      font-family: 'Playfair Display', serif;
+    .font-serif-elegant {
+      font-family: 'Marcellus', serif;
     }
-    
-    /* Custom organic path / shape mask matching the first card top portrait */
-    .organic-mask-top {
-      clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 85% 95%, 50% 100%, 15% 95%, 0% 85%);
-      border-radius: 40px 40px 100px 100px;
+    .font-brand {
+      font-family: 'Cinzel', serif;
     }
-    
-    /* Wavy organic container background for About me area */
-    .organic-bg-light {
-      background-color: #E2EAD8;
-      border-radius: 60px 30px 90px 40px / 40px 80px 50px 70px;
+
+    /* 1. 대문: 레퍼런스 특유의 뭉툭한 하트/조약돌 모양 비정형 대형 프레임 */
+    .organic-heart-shape {
+      clip-path: url(#heart-blob);
     }
-    
-    /* Smooth liquid-like frame for the location image */
-    .liquid-frame {
-      border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+
+    /* 2. 본문: 안으로 부드럽게 감겨 들어오는 둥근 면(Blob) 형태 프레임들 */
+    .organic-bg-blob-1 {
+      clip-path: url(#bg-blob-1);
+    }
+    .organic-bg-blob-2 {
+      clip-path: url(#bg-blob-2);
+    }
+    .organic-photo-blob {
+      clip-path: url(#photo-blob);
     }
   </style>
 </head>
-<!-- 레퍼런스 사진 특유의 무드: 감성적인 더스키 로즈 톤(bg-[#B29990]) + 무게감 있는 초콜릿 브라운 텍스트(text-[#4A3E3A]) -->
-<body class="bg-[#B29990] text-[#4A3E3A] antialiased min-h-screen py-12 px-4 flex flex-col items-center justify-center">
+<!-- 레퍼런스 바탕의 톤다운된 우아한 더스티 로즈 시폰(bg-[#AF9790]) 모빌리티 감성 배경 -->
+<body class="bg-[#AF9790] text-[#3D3330] antialiased min-h-screen py-8 px-4 flex flex-col items-center justify-center">
 
-  <!-- Main Container displaying two elegant vertical smartphone-styled panels side-by-side -->
-  <div class="w-full max-w-5xl flex flex-col md:flex-row justify-center items-stretch gap-8 md:gap-12">
+  <!-- SVG 비정형 클립패스 마스터 템플릿 (레퍼런스의 미세한 곡선 디테일을 100% 코드로 구현하기 위한 소스) -->
+  <svg class="absolute w-0 h-0">
+    <defs>
+      <!-- 대문 뭉툭한 하트/달걀 프레임 -->
+      <clipPath id="heart-blob" clipPathUnits="objectBoundingBox">
+        <path d="M 0.5,0.05 C 0.25,-0.1 0,0.1 0,0.45 C 0,0.75 0.3,0.95 0.5,1 C 0.7,0.95 1,0.75 1,0.45 C 1,0.1 0.75,-0.1 0.5,0.05 Z"/>
+      </clipPath>
+      <!-- 안으로 굽어 들어오는 연두색 면 1 -->
+      <clipPath id="bg-blob-1" clipPathUnits="objectBoundingBox">
+        <path d="M 0.1,0 C 0.4,0.05 0.9,0 1,0.1 C 1,0.4 0.9,0.8 0.7,0.95 C 0.4,1 0,0.9 0,0.7 C 0,0.4 0,0.05 0.1,0 Z"/>
+      </clipPath>
+      <!-- 중간 큰 비정형 사진 틀 -->
+      <clipPath id="photo-blob" clipPathUnits="objectBoundingBox">
+        <path d="M 0.15,0.1 C 0.35,0 0.75,0.05 0.9,0.2 C 1,0.4 0.95,0.75 0.8,0.9 C 0.6,1 0.2,0.95 0.1,0.8 C -0.05,0.6 0,0.2 0.15,0.1 Z"/>
+      </clipPath>
+      <!-- 하단 반복되는 둥근 면 2 -->
+      <clipPath id="bg-blob-2" clipPathUnits="objectBoundingBox">
+        <path d="M 0,0.1 C 0.1,0 0.8,0.05 0.9,0.2 C 1,0.4 0.95,0.8 0.8,0.95 C 0.5,1 0.1,0.9 0,0.75 C 0,0.5 0,0.2 0,0.1 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <!-- 단 하나의 촘촘한 세로 스크롤 마스터 컨테이너 -->
+  <div class="w-full max-w-[360px] bg-[#F7F3EE] rounded-[45px] shadow-2xl overflow-hidden p-4 flex flex-col space-y-7 relative">
     
-    <!-- LEFT CARD: Lily Gloges Florist Profile & About Me -->
-    <div class="w-full max-w-[360px] bg-[#FAF8F5] rounded-[45px] shadow-2xl overflow-hidden flex flex-col justify-between border-4 border-white/40 p-5 relative space-y-6 mx-auto">
+    <!-- 꽃 장식 미니 투명 일러스트 요소 효과 -->
+    <div class="absolute top-40 right-2 w-12 opacity-80 pointer-events-none">
+      <span class="text-rose-300 text-2xl">🌸</span>
+    </div>
+
+    <!-- 1. 대문 섹션: [요구사항 2] 뭉툭한 하트모양 전신 사진 + 정교한 타이틀 및 분위기 재현 -->
+    <header class="w-full flex flex-col items-center pt-2 relative">
+      <!-- 뭉툭한 하트 셰이프 프레임 내부 사진 -->
+      <div class="w-[85%] aspect-[4/5] organic-heart-shape overflow-hidden bg-stone-200 relative">
+        <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="Florist Main Portrait" class="w-full h-full object-cover">
+      </div>
       
-      <!-- Top Decorative Wavy Frame for Main Portrait -->
-      <div class="relative w-full aspect-[4/5] rounded-[35px] overflow-hidden bg-[#EAE5DF] border border-[#DDD3CB]">
-        <img src="https://images.unsplash.com/photo-1574482620826-40685ca5ebd2?auto=format&fit=crop&w=700&q=80" alt="Lily Gloges Florist" class="w-full h-full object-cover">
+      <!-- 하트 아래로 자연스럽게 겹치며 흐르는 레퍼런스 스타일 타이틀 룩 -->
+      <div class="w-full text-left mt-3 px-3 relative z-10">
+        <h1 class="text-3xl font-brand tracking-tight text-[#4A3E3B] leading-none">
+          Lily<br>Gloges
+        </h1>
+        <span class="text-xs font-serif-elegant italic text-[#8A756E] block text-right -mt-2 pr-4">/ florist garden</span>
+      </div>
+
+      <!-- 타이틀 하단 자연스러운 손글씨조 서문 (공백 최소화) -->
+      <p class="mt-3 px-3 text-[11px] text-gray-500 text-left leading-relaxed">
+        안녕하세요, 자연의 선을 그리는 플로리스트 릴리입니다. 오직 당신만의 라이프와 어우러지는 단 하나의 계절감을 선물합니다.
+      </p>
+    </header>
+
+
+    <!-- 2. 중앙 레이어: [요구사항 2] 안으로 굽어 들어오는 둥근 면 배경 + 사진 + 설명 (동일 디테일화) -->
+    <section class="w-full px-1">
+      <!-- 연두색 톤온톤 오가닉 블롭 배경 박스 -->
+      <div class="w-full organic-bg-blob-1 bg-[#E3EAE2] p-6 pt-7 pb-8 relative">
         
-        <!-- Abstract thin wavy outline overlaid on the picture as seen in the ref image -->
-        <div class="absolute inset-3 border border-white/30 rounded-[30px] pointer-events-none"></div>
-      </div>
-      
-      <!-- Florist Branding Text Elements -->
-      <div class="px-2 space-y-1">
-        <h2 class="text-3xl font-serif-luxury tracking-wide text-[#3D3330] leading-none">
-          Lily<br>Gloges<span class="text-xs font-light italic text-[#7C8B6E] ml-2 block sm:inline">/ florist</span>
-        </h2>
-        <p class="text-[11px] text-[#6E5E59] leading-relaxed pt-2 font-light">
-          안녕하세요. 플로리스트 릴리입니다. 오직 당신만을 위해 세상에 단 하나뿐인 시그니처 감성의 아름다운 비스포크 부케를 디자인합니다.
-        </p>
-      </div>
-      
-      <!-- About Me Custom Shape Box (Organic light green-beige background) -->
-      <div class="organic-bg-light p-5 space-y-3 relative overflow-hidden">
-        <h3 class="text-xl font-serif-luxury text-[#48543B] tracking-wide">About me</h3>
-        <p class="text-[10px] text-[#546047] leading-relaxed font-light">
-          안녕하세요! 저희 시그니처 플라워 아틀리에는 한적하고 아름다운 정원 중심부에 위치해 있습니다. 매주 신선한 꽃들로 가득합니다.
-        </p>
-        
-        <div class="text-right">
-          <p class="text-[9px] text-[#546047] font-medium leading-normal">
-            매주 토요일마다<br>프라이빗 플라워 클래스를<br>선별적으로 운영하고 있습니다.
-          </p>
-        </div>
-      </div>
-      
-      <!-- Bottom Section with Small Rounded Grid Snapshots -->
-      <div class="grid grid-cols-2 gap-3 pt-2 items-center">
-        <div class="space-y-1">
-          <p class="text-[9px] text-[#7C6E69] leading-tight font-light">
-            3시간 동안 진행되는 마스터 코스에서 첫 작품을 완성하세요.
-          </p>
-          <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden border border-[#E8DFD8]">
-            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=400&q=80" alt="Flower details" class="w-full h-full object-cover">
+        <div class="space-y-3">
+          <!-- 내부 미니 타이틀 -->
+          <h3 class="text-lg font-serif-elegant text-[#4A5D4E] tracking-wide">About my garden</h3>
+          
+          <!-- 그리드 레이아웃: 좌측 텍스트 설명, 우측 하단 둥글게 스며든 꽃 스냅샷 -->
+          <div class="flex gap-3 items-start">
+            <div class="flex-1 space-y-2">
+              <p class="text-[10.5px] text-[#556658] leading-relaxed">
+                정형화된 대칭에서 벗어나 자연 그대로의 흐름을 쫓아갑니다. 매주 신선한 꽃들과 떠나는 일상 여행.
+              </p>
+              <p class="text-[10px] text-gray-400 font-serif-elegant italic">Moscow center atelier.</p>
+            </div>
+            
+            <!-- 우측에 배치된 미니 오가닉 플라워 이미지 -->
+            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white/60 shadow-2xs transform rotate-6 shrink-0">
+              <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+            </div>
           </div>
         </div>
-        
-        <div class="space-y-2 flex flex-col items-end">
-          <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-xs">
-            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80" alt="Bouquet sample" class="w-full h-full object-cover">
-          </div>
-          <p class="text-[9px] text-[#637255] italic font-medium tracking-wide">Creative Atelier Room</p>
-        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 3. 대형 비정형 컷 섹션: [요구사항 2] 비정형 프레임의 큼직한 사진 하나 + 하단 설명 구조 -->
+    <section class="w-full px-2 space-y-2">
+      <!-- 큼직한 메인 비정형 사진 배치 -->
+      <div class="w-full aspect-[16/11] organic-photo-blob overflow-hidden bg-stone-100 shadow-xs">
+        <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=600&q=80" alt="Large Organic View" class="w-full h-full object-cover">
       </div>
       
-    </div>
-    
-    <!-- RIGHT CARD: Master class curriculum & Location details -->
-    <!-- (FAQ and Contacts completely eliminated per prompt request) -->
-    <div class="w-full max-w-[360px] bg-[#FAF8F5] rounded-[45px] shadow-2xl overflow-hidden flex flex-col justify-start border-4 border-white/40 p-6 relative space-y-8 mx-auto">
-      
-      <!-- Master Class Headline Title -->
-      <div class="text-center pt-2">
-        <h2 class="text-3xl font-serif-luxury tracking-wide text-[#3D3330]">Master class</h2>
-      </div>
-      
-      <!-- Beautiful Speech Bubble-style Curved Info Blocks matching the source picture -->
-      <div class="space-y-3.5 px-1">
-        
-        <!-- Bubble 1 -->
-        <div class="bg-white border border-[#E2DCD5] rounded-full px-4 py-2.5 shadow-2xs text-center">
-          <p class="text-[10px] text-[#6A5A54] font-light">기초부터 차근차근 나만의 완벽한 첫 부케를 직접 완성하고 싶으신 분</p>
-        </div>
-        
-        <!-- Bubble 2 -->
-        <div class="bg-white border border-[#E2DCD5] rounded-full px-4 py-2.5 shadow-2xs text-center">
-          <p class="text-[10px] text-[#6A5A54] font-light">바쁜 일상에서 벗어나 식물이 주는 온전한 휴식과 새로운 취미를 찾으시는 분</p>
-        </div>
-        
-        <!-- Bubble 3 -->
-        <div class="bg-[#ECE9E4] border border-[#DDD6CE] rounded-[24px] px-4 py-3 text-center">
-          <p class="text-[10px] text-[#554742] font-medium">오직 꽃에 매료되어 감각적인 힐링과 깊이감 있는 텍스처를 탐구하려는 모든 분들 위해 개설되었습니다.</p>
-        </div>
-        
-      </div>
-      
-      <!-- Location Headline & Dynamic Organic Image Frame -->
-      <div class="space-y-4 pt-2">
-        <div class="text-center">
-          <h3 class="text-2xl font-serif-luxury text-[#3D3330] tracking-wide">Location</h3>
-        </div>
-        
-        <!-- Distinct liquid glass custom-shaped mask image matching the image reference center style -->
-        <div class="w-56 h-56 liquid-frame overflow-hidden bg-[#EAE6E1] mx-auto border-2 border-white shadow-md">
-          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Atelier Interior Location" class="w-full h-full object-cover">
-        </div>
-        
-        <p class="text-[10px] text-center text-gray-500 font-light max-w-xs mx-auto px-4">
-          서울 성수동의 고즈넉한 숲길 골목 아틀리에실에서 감도 높은 수업이 진행됩니다.
+      <!-- 그 아래 정갈하고 아기자기한 텍스트 캡션 -->
+      <div class="text-center px-4">
+        <p class="text-[11px] text-gray-500 italic leading-snug">
+          "3시간 동안 펼쳐지는 온전한 몰입, 당신의 손끝에서 피어나는 첫 번째 유니크 번치 가든"
         </p>
       </div>
-      
-      <!-- Bottom Decorative Miniature Element filling the space gracefully -->
-      <div class="pt-6 border-t border-[#EDE7E2]/60 mt-auto flex justify-between items-center text-[9px] text-[#A39691] tracking-widest uppercase px-2">
-        <span>Florist Botanical Log</span>
-        <span>2026 Archive</span>
+    </section>
+
+
+    <!-- 4. 하단 레이어: [요구사항 2] 상단의 둥근 면 디자인 구조를 한 번 더 변주하여 완벽 반복 구현 -->
+    <section class="w-full px-1">
+      <!-- 하단 반복을 위해 커스텀된 또 다른 오가닉 블롭 배경 박스 -->
+      <div class="w-full organic-bg-blob-2 bg-[#EFE9DF] p-6 pt-8 pb-7 relative">
+        
+        <div class="space-y-3">
+          <!-- 좌측 상단으로 삐져나온 작은 스냅 컷 디테일 (레퍼런스 왼쪽 하단 무드 재현) -->
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-[20px] overflow-hidden border border-white shadow-2xs shrink-0 transform -rotate-6">
+              <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+            </div>
+            
+            <div class="flex-1">
+              <h4 class="text-xs font-bold text-[#6B5E59]">Creative Atmosphere</h4>
+              <p class="text-[10.5px] text-[#80726C] leading-tight mt-0.5">
+                지루한 일상에서 잠시 벗어나, 초록빛 가득한 아틀리에의 예술적 공기에 온전히 녹아들어 보세요.
+              </p>
+            </div>
+          </div>
+          
+        </div>
+
       </div>
-      
-    </div>
-    
-  </div>
-  
-  <!-- Subtle Minimalist Footer showing creation date only -->
-  <div class="mt-12 text-center text-white/70 text-[10px] tracking-widest font-light">
-    <p>PAGE DESIGN ARCHIVE — 작성일: 2026년 7월 12일</p>
+    </section>
+
+
+    <!-- 5. 최종 미니멀 푸터: 요청하신 작성일 기반 깔끔 마감 -->
+    <footer class="pt-2 border-t border-dashed border-[#D1C7BD] text-center">
+      <div class="text-[13px] font-brand tracking-widest text-[#6B5E59]">LILY GLOGES ATELIER</div>
+      <div class="text-[9.5px] text-gray-400 mt-1 font-light">
+        <p>작성일자: 2026년 7월 12일 — Flowers & Life Archive</p>
+        <p class="opacity-75">© 2026 FLOCRAFT STUDIO. ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
+
   </div>
 
   <script>lucide.createIcons();</script>
