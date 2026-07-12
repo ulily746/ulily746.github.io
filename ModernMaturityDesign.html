@@ -3,104 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modern Maturity - Le Petit Bonheur</title>
+  <title>Academic Archive - Modern Maturity</title>
   <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- 구글 폰트에서 Elegant 필기체(Script) 서체 로드 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-script { font-family: 'Playfair Display', serif; font-style: italic; }
   </style>
 </head>
-<body class="bg-[#F6F5F2] text-[#222222] antialiased overflow-x-hidden">
+<!-- 연구/학문 최적화 색감: 고서적 느낌의 크림 아이보리(bg-[#F4F3EF])와 신뢰감의 딥 네이비(text-[#1C2D42]) -->
+<body class="bg-[#F4F3EF] text-[#1C2D42] antialiased overflow-x-hidden">
 
-  <!-- 전체 컨테이너: 양옆 공백 최소화 (w-full, px-2 md:px-4) -->
-  <div class="w-full space-y-36 pb-32">
+  <!-- 전체 컨테이너 -->
+  <div class="w-full space-y-40 pb-32">
 
     <!-- 1. 맨위 제목 + 아래 사각형 사진 + 그 아래 필기체 문구와 설명 -->
     <header class="w-full pt-16 flex flex-col items-center">
-      <!-- 맨 위 제목 -->
       <div class="text-center mb-10 tracking-widest uppercase">
-        <span class="text-xs text-gray-400 block mb-2">Editorial Vol. 04</span>
-        <h1 class="text-3xl md:text-5xl font-light tracking-tight text-[#111111]">MODERN MATURITY</h1>
+        <span class="text-xs text-[#7A6953] block mb-2">Research Monograph Vol. 04</span>
+        <h1 class="text-3xl md:text-5xl font-light tracking-tight text-[#1A2636]">MODERN MATURITY</h1>
       </div>
       
-      <!-- 아래 사각형 사진 -->
-      <div class="w-[96%] max-w-7xl aspect-[16/9] overflow-hidden border border-gray-200 shadow-xs">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Modern Main" class="w-full h-full object-cover">
+      <div class="w-[96%] max-w-7xl aspect-[16/9] overflow-hidden border border-[#D1C7BD] shadow-xs">
+        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1600&q=80" alt="Academic Archive Main" class="w-full h-full object-cover">
       </div>
 
-      <!-- 그 아래 필기체 문구와 설명 -->
       <div class="mt-8 max-w-2xl text-center px-6 space-y-3">
-        <p class="font-script text-2xl md:text-3xl text-gray-500 tracking-wide">"The beauty of structured flavor."</p>
+        <p class="font-script text-2xl md:text-3xl text-[#7A6953] tracking-wide">"Veritas et Scientia"</p>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          시간의 흐름 속에서 더욱 깊어지고 견고해지는 가치. 르 쁘띠 보뇌르가 지향하는 모던 마투리티 아카이브는 직선적인 절제미와 그 내면에 정제된 달콤함의 성숙을 미학적인 레이아웃으로 표현합니다.
+          지식의 파편들을 정교하게 조립하여 하나의 체계를 세우는 과정. 본 아카이브는 현상 너머에 존재하는 구조적 본질을 규명하고, 세대를 거쳐 축적된 학문적 성숙을 현대적인 레이아웃으로 시각화합니다.
         </p>
       </div>
     </header>
 
 
-    <!-- 2. 사각형 사진 + 오른쪽 아래 작은 세로형 사각형 사진 겹침 + 밑에 설명 -->
+    <!-- 2. 큰 사진 위에 아주 작은 세로형 사진이 내추럴하게 일부분 겹쳐진 레이아웃 -->
     <section class="w-full max-w-5xl mx-auto px-4">
-      <div class="relative w-[85%] md:w-[75%] aspect-[4/3] overflow-hidden border border-gray-200">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1000&q=80" alt="Layered Main 1" class="w-full h-full object-cover">
-        
-        <!-- 오른쪽 아래 겹쳐진 작은 세로형 사각형 사진 -->
-        <div class="absolute -bottom-12 -right-12 md:-right-16 w-[40%] aspect-[2/3] overflow-hidden border-4 border-[#F6F5F2] shadow-xl bg-gray-100">
-          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Layered Sub 1" class="w-full h-full object-cover">
+      <div class="relative w-[85%] md:w-[75%] aspect-[4/3]">
+        <div class="w-full h-full overflow-hidden border border-[#D1C7BD] shadow-xs">
+          <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80" alt="Research 1" class="w-full h-full object-cover">
+        </div>
+        <!-- 확실히 작아진 서브 사진이 위로 투박하게 겹쳐진 연출 -->
+        <div class="absolute -bottom-10 -right-10 md:-right-12 w-[28%] aspect-[2/3] overflow-hidden border-4 border-[#F4F3EF] shadow-2xl z-10">
+          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="Research Sub 1" class="w-full h-full object-cover">
         </div>
       </div>
 
-      <!-- 밑에 설명 -->
       <div class="mt-20 max-w-xl text-left pl-2">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">01 / Geometric Layer</h3>
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">01 / Methodological Layer</h3>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          시선이 머무는 그리드의 교차점. 메인 플레이트 스냅 위로 겹쳐진 좁고 깊은 구도의 세로 컷은 베이킹의 텍스처를 입체적으로 분해하여 보여주는 모던한 시도입니다.
+          관찰과 기록의 거리를 좁히는 다층적 접근. 가설을 검증하기 위한 정량적 데이터 필드 위로 정성적인 해석의 단면을 레이어드하여 배치함으로써, 탐구 과정의 입체성을 추구합니다.
         </p>
       </div>
     </section>
 
 
-    <!-- 3. 정사각형 사진 두 개 대각선으로 살짝 겹치게 배치 + 그 아래 설명 -->
-    <section class="w-full max-w-5xl mx-auto px-4 flex flex-col items-center">
-      <!-- 대각선 겹침 프레임 스페이스 -->
-      <div class="relative w-full max-w-lg aspect-square my-8">
+    <!-- 3. 같은 크기의 두 정사각형 사진 사이즈를 대폭 키우고, 겹치는 부분을 최소화한 레이아웃 -->
+    <section class="w-full max-w-6xl mx-auto px-4 flex flex-col items-center">
+      <div class="relative w-full max-w-3xl aspect-[16/11] my-4">
         <!-- 왼쪽 위 정사각형 사진 -->
-        <div class="absolute top-0 left-0 w-[65%] aspect-square overflow-hidden border border-gray-200 shadow-xs">
-          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Diagonal 1" class="w-full h-full object-cover">
+        <div class="absolute top-0 left-0 w-[55%] aspect-square overflow-hidden border border-[#D1C7BD] shadow-sm">
+          <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=80" alt="Research Diagonal 1" class="w-full h-full object-cover">
         </div>
-        <!-- 오른쪽 아래 정사각형 사진 (대각선 겹침) -->
-        <div class="absolute bottom-0 right-0 w-[65%] aspect-square overflow-hidden border-4 border-[#F6F5F2] shadow-xl">
-          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Diagonal 2" class="w-full h-full object-cover">
+        <!-- 오른쪽 아래 정사각형 사진 (오프셋을 크게 주어 슬쩍만 겹치도록 세팅) -->
+        <div class="absolute bottom-0 right-0 w-[55%] aspect-square overflow-hidden border-4 border-[#F4F3EF] shadow-2xl z-10">
+          <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=700&q=80" alt="Research Diagonal 2" class="w-full h-full object-cover">
         </div>
       </div>
 
-      <!-- 그 아래 설명 -->
-      <div class="mt-12 max-w-xl text-center px-4">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">02 / Symmetry & Contrast</h3>
+      <div class="mt-16 max-w-xl text-center px-4">
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">02 / Hypothesis & Synthesis</h3>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          두 개의 완벽한 정방형이 대각선 궤적 위에서 만나 독특한 균형을 이룹니다. 디저트의 단면과 도구의 정렬이 주는 대칭성과 시각적 대비를 온전히 담았습니다.
+          이론과 실제 연구가 마주하는 대칭적 궤적. 정교하게 설계된 두 개의 스냅 컷은 가설 수립(Hypothesis)과 종합(Synthesis)의 상호작용을 구조적으로 상징합니다.
         </p>
       </div>
     </section>
 
 
-    <!-- 4. 다시 큰 사진 하나 + 아래 설명 -->
+    <!-- 4. 다시 큰사진 하나 아래 설명 -->
     <section class="w-full">
-      <!-- 화면을 꽉 채우는 와이드 큰 사진 -->
-      <div class="w-[96%] max-w-7xl mx-auto aspect-[21/9] overflow-hidden border border-gray-200">
-        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Wide View" class="w-full h-full object-cover">
+      <div class="w-[96%] max-w-7xl mx-auto aspect-[21/9] overflow-hidden border border-[#D1C7BD]">
+        <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1600&q=80" alt="Wide Academic View" class="w-full h-full object-cover">
       </div>
 
-      <!-- 아래 설명 -->
       <div class="mt-8 max-w-2xl mx-auto text-center px-6">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">03 / The Panorama</h3>
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">03 / The Archive Panorama</h3>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          탁 트인 와이드 파노라마 뷰로 마주하는 아틀리에의 전경. 긴 수평선이 주는 안정감과 모던한 여백은 바쁜 일상 속에서 깊은 성숙의 휴식을 제안합니다.
+          끝없이 확장되는 연구의 지평을 표현한 수평 구도입니다. 축적된 문헌들의 파노라마를 통해 긴 시간 동안 변하지 않는 지식 아카이브 고유의 깊고 고요한 여백을 전달하고자 합니다.
         </p>
       </div>
     </section>
@@ -108,36 +101,36 @@
 
     <!-- 5. 큰 사진 배치 + 오른쪽 위쪽 작은 사진 겹쳐지게 배치 + 아래 설명 -->
     <section class="w-full max-w-5xl mx-auto px-4">
-      <div class="relative w-[85%] md:w-[75%] aspect-[4/3] overflow-hidden border border-gray-200 ml-auto">
-        <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1000&q=80" alt="Layered Main 2" class="w-full h-full object-cover">
-        
-        <!-- 오른쪽 위쪽으로 겹쳐진 작은 사각형 사진 -->
-        <div class="absolute -top-12 -left-12 md:-left-16 w-[42%] aspect-square overflow-hidden border-4 border-[#F6F5F2] shadow-xl bg-gray-100">
-          <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" alt="Layered Sub 2" class="w-full h-full object-cover">
+      <div class="relative w-[85%] md:w-[75%] aspect-[4/3] ml-auto">
+        <div class="w-full h-full overflow-hidden border border-[#D1C7BD]">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80" alt="Research 2" class="w-full h-full object-cover">
+        </div>
+        <!-- 오른쪽 위 방향으로 작게 배치되어 일부만 스치듯 겹친 서브 사진 -->
+        <div class="absolute -top-10 -left-10 md:-left-12 w-[28%] aspect-square overflow-hidden border-4 border-[#F4F3EF] shadow-2xl z-10">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Research Sub 2" class="w-full h-full object-cover">
         </div>
       </div>
 
-      <!-- 아래 설명 -->
       <div class="mt-16 max-w-xl text-right ml-auto pr-2">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#111111] mb-2">04 / Top-Left Overlap</h3>
+        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">04 / Epilogue: The Continuous Query</h3>
         <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          오른쪽으로 치우친 거대한 오브제 슬라이스 위에, 좌측 상단으로 빗겨 겹쳐 올린 감성적 스냅. 정교하게 계산된 오프셋 배치는 아방가르드하면서도 차분한 마무리를 선사합니다.
+          하나의 결론은 언제나 새로운 질문의 시작점이 됩니다. 정형화된 틀을 비껴 배치한 구조는 멈추지 않는 탐구의 연속성과 집요한 학문적 사유의 발자취를 온전히 반영합니다.
         </p>
       </div>
     </section>
 
   </div>
 
-  <!-- 미니멀 모던 푸터 -->
-  <footer class="bg-[#111111] text-gray-400 py-16 px-6 text-xs tracking-wider border-t border-gray-800">
+  <!-- 학술 저널 스타일의 차분한 네이비 푸터 -->
+  <footer class="bg-[#1A2636] text-[#D1C7BD] py-16 px-6 text-xs tracking-wider border-t border-gray-800">
     <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
       <div class="text-center md:text-left">
-        <p class="text-white font-medium text-sm tracking-widest">LE PETIT BONHEUR</p>
-        <p class="text-gray-500 mt-1">© 2026 MODERN MATURITY EDITION. ALL RIGHTS RESERVED.</p>
+        <p class="text-white font-medium text-sm tracking-widest">ACADEMIC RESEARCH ARCHIVE</p>
+        <p class="text-gray-400 mt-1">© 2026 JOURNAL OF INTELLECTUAL MATURITY. ALL RIGHTS RESERVED.</p>
       </div>
-      <div class="flex gap-8 text-gray-500">
-        <a href="#" class="hover:text-white transition">ARCHIVE</a>
-        <a href="#" class="hover:text-white transition">LEGAL</a>
+      <div class="flex gap-8 text-gray-400">
+        <a href="#" class="hover:text-white transition">RESOURCES</a>
+        <a href="#" class="hover:text-white transition">PUBLICATIONS</a>
       </div>
     </div>
   </footer>
