@@ -228,7 +228,11 @@ ARCH SVG TEXT FLOW
 
 }
 
-
+.arch-bottom-svg-text{
+    font-family:'Great Vibes',cursive;
+    font-size:22px;
+    fill:#8B6B4F;
+}
 /* =====================================
 CATEGORY
 ===================================== */
