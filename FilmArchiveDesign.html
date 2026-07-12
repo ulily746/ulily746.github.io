@@ -1,170 +1,1055 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Film Archive - Le Petit Bonheur</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    /* 6번 요구사항: 물결 사각형 테두리 */
-    .wavy-border {
-      border: 2px solid #3E2723;
-      border-radius: 40px 20px 40px 20px / 20px 40px 20px 40px;
-    }
-    /* 7,8,9번 요구사항: 필름 프레임 효과 (타공) */
-    .film-frame {
-      background-color: #1A110F;
-      padding: 24px 0px;
-      position: relative;
-      width: 100%;
-    }
-    .film-frame::before, .film-frame::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0;
-      height: 8px;
-      background-image: radial-gradient(circle, #F9F6F0 4px, transparent 5px);
-      background-size: 16px 8px;
-    }
-    .film-frame::before { top: 6px; }
-    .film-frame::after { bottom: 6px; }
-  </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travel Diary - Le Petit Bonheur</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =====================================
+   COLOR SYSTEM
+===================================== */
+
+:root{
+
+--paper:#F5EFE4;
+--ink:#302B27;
+
+--olive:#7C8061;
+--stamp:#B36B5E;
+
+--line:#D9CDBB;
+
+--photo:#FFFDF8;
+
+}
+
+
+
+/* =====================================
+   GLOBAL
+===================================== */
+
+body{
+
+background:var(--paper);
+color:var(--ink);
+
+overflow-x:hidden;
+
+}
+
+
+
+
+/* =====================================
+   FONT SYSTEM
+===================================== */
+
+.diary-title{
+
+font-family:
+"Caveat",
+cursive;
+
+font-weight:600;
+
+}
+
+
+
+.diary-text{
+
+font-family:
+"Cormorant Garamond",
+serif;
+
+}
+
+
+
+.archive-code{
+
+font-family:
+"IBM Plex Mono",
+monospace;
+
+letter-spacing:.18em;
+
+font-size:.7rem;
+
+color:var(--olive);
+
+}
+
+
+
+/* =====================================
+   PAPER LINE
+===================================== */
+
+.paper-line{
+
+border-color:var(--line);
+
+}
+
+
+
+/* =====================================
+   PHOTO PRINT
+===================================== */
+
+
+.photo-print{
+
+background:white;
+
+padding:14px;
+
+box-shadow:
+0 15px 35px rgba(60,40,20,.15);
+
+position:relative;
+
+}
+
+
+
+/* masking tape */
+
+.photo-print::before{
+
+content:"";
+
+position:absolute;
+
+top:-13px;
+
+left:40%;
+
+
+width:90px;
+
+height:22px;
+
+
+background:
+rgba(218,200,160,.65);
+
+
+transform:
+rotate(-5deg);
+
+z-index:2;
+
+}
+
+
+
+
+.photo-print img{
+
+filter:
+sepia(10%)
+contrast(.95)
+brightness(.98);
+
+}
+
+
+
+/* =====================================
+   FILM FRAME
+===================================== */
+
+
+.film-frame{
+
+background:#191714;
+
+padding:28px 0;
+
+position:relative;
+
+width:100%;
+
+}
+
+
+
+.film-frame::before,
+.film-frame::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+right:0;
+
+height:8px;
+
+
+background-image:
+
+radial-gradient(
+circle,
+var(--paper) 3px,
+transparent 4px
+);
+
+
+background-size:
+18px 8px;
+
+
+}
+
+
+.film-frame::before{
+
+top:8px;
+
+}
+
+
+.film-frame::after{
+
+bottom:8px;
+
+}
+
+
+
+/* =====================================
+   WAVE NOTE BOX
+===================================== */
+
+
+.wavy-border{
+
+border:
+
+2px solid var(--olive);
+
+
+border-radius:
+
+45px 25px 45px 25px
+/
+25px 45px 25px 45px;
+
+
+}
+
+
+
+
+/* =====================================
+   HAND DRAW LINE
+===================================== */
+
+
+.travel-line{
+
+stroke:
+
+var(--olive);
+
+stroke-width:2;
+
+stroke-dasharray:6 8;
+
+fill:none;
+
+}
+
+
+
+</style>
+
+
 </head>
-<body class="bg-[#F9F6F0] text-[#3E2723] font-mono antialiased overflow-x-hidden">
 
-  <!-- 전체 컨테이너: 마진/패딩을 없애고 최대 너비 제한을 풀어 양옆 공백 최소화 (w-full, px-0) -->
-  <div class="w-full space-y-32 pb-24">
 
-    <!-- 1. 대제목 (왼쪽) + 전면 사진 + 대제목 (오른쪽) -->
-    <header class="w-full space-y-2">
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-left uppercase pl-4">Le Petit</h1>
-      <div class="w-full h-[60vh] overflow-hidden border-y border-[#D7CCC8]">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Archive Main" class="w-full h-full object-cover grayscale-20">
-      </div>
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-right uppercase pr-4">Bonheur</h1>
-    </header>
+<body class="antialiased">
 
-    <!-- 2. 괄호 안에 들어있는 설명 칸 (텍스트 자투리 여백만 유지) -->
-    <section class="w-full px-4 text-center">
-      <p class="text-xs md:text-sm text-[#8D6E63] leading-relaxed font-sans max-w-3xl mx-auto">
-        [ 매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트 스튜디오. 아날로그 필름의 결처럼 일상 속에 깊이 스며드는 르 쁘띠 보뇌르의 기록 조각들을 차례로 아카이빙합니다. ]
-      </p>
-    </section>
 
-    <!-- 3. 왼쪽 사각형 사진 + 오른쪽 세로 정중앙 배치된 설명 글 (화면 5:5 분할, 좌우 공백 0) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-y border-[#D7CCC8]">
-      <div class="w-full aspect-square overflow-hidden md:border-r border-[#D7CCC8]">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80" alt="Archive 1" class="w-full h-full object-cover">
-      </div>
-      <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF8F5]">
-        <span class="text-xs text-[#8D6E63] mb-2">// INDEX. 001</span>
-        <h3 class="text-xl font-bold mb-3">프렌치 클래식의 정수</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] max-w-sm leading-relaxed font-sans">오리지널 레시피를 기반으로 한 레이어와 깊은 텍스처의 순간을 포착했습니다.</p>
-      </div>
-    </section>
+<div class="w-full space-y-28 pb-24">
 
-    <!-- 4. 왼쪽 설명(가운데 정렬) + 오른쪽 약간 회전된 사진 (화면 가득 채우는 그리드) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-b border-[#D7CCC8]">
-      <div class="order-2 md:order-1 flex flex-col justify-center items-center text-center p-8 bg-[#FAF8F5]">
-        <span class="text-xs text-[#8D6E63] mb-2">// INDEX. 002</span>
-        <h3 class="text-xl font-bold mb-3">당일 생산의 원칙</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] max-w-sm leading-relaxed font-sans">새벽 공기와 함께 오븐에서 갓 구워져 나온 디저트가 가장 아름다운 순간.</p>
-      </div>
-      <div class="order-1 md:order-2 p-12 flex justify-center items-center overflow-hidden bg-white md:border-l border-[#D7CCC8]">
-        <!-- 회전 효과(rotate-3) 가미된 인화지 -->
-        <div class="w-full max-w-md aspect-[4/3] overflow-hidden border-8 border-white shadow-xl transform rotate-3 my-4">
-          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80" alt="Archive 2" class="w-full h-full object-cover">
-        </div>
-      </div>
-    </section>
 
-    <!-- 5. 왼쪽 약간 회전된 사진 + 오른쪽 설명 -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-b border-[#D7CCC8]">
-      <div class="p-12 flex justify-center items-center overflow-hidden bg-white md:border-r border-[#D7CCC8]">
-        <!-- 회전 효과(-rotate-2) 가미된 인화지 -->
-        <div class="w-full max-w-md aspect-[4/3] overflow-hidden border-8 border-white shadow-xl transform -rotate-2 my-4">
-          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80" alt="Archive 3" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF8F5]">
-        <span class="text-xs text-[#8D6E63] mb-2">// INDEX. 003</span>
-        <h3 class="text-xl font-bold mb-3">시간의 미학</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] max-w-sm leading-relaxed font-sans">느리게 흘러가는 아틀리에의 시간 속에서 디저트는 하나의 예술이 됩니다.</p>
-      </div>
-    </section>
 
-    <!-- 6. 물결 사각형 테두리 방 (양옆 여백 최소화 상태에서 박스 강조) -->
-    <section class="w-full px-4">
-      <div class="wavy-border w-full max-w-5xl mx-auto p-8 md:p-12 text-center bg-[#F5EBE6]/60 space-y-4">
-        <div class="flex justify-center text-[#8D6E63]">
-          <i data-lucide="clapperboard" class="w-7 h-7 animate-pulse"></i>
-        </div>
-        <h4 class="text-lg font-bold tracking-tight">A Note from the Atelier</h4>
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed max-w-2xl mx-auto font-sans">
-          빛과 어둠, 온도와 습도가 만들어낸 완벽한 조화. 르 쁘띠 보뇌르는 한 조각의 필름 컷처럼 당신의 기억 속에 영원히 남을 달콤함을 굽습니다. ☕️✨
-        </p>
-      </div>
-    </section>
+<!-- =====================================
+ HERO
+===================================== -->
 
-    <!-- 7. 왼쪽 필름 프레임 사진 + 오른쪽 설명 (양옆을 완전히 채우는 구조) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-y border-[#D7CCC8]">
-      <div class="film-frame shadow-xs">
-        <div class="w-full aspect-video overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=800&q=80" alt="Film Cut 1" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <div class="space-y-3 p-8 md:p-12 bg-[#FAF8F5]">
-        <span class="text-xs font-bold text-[#8D6E63] tracking-widest block">[ NEGATIVE FILM 400 ]</span>
-        <h3 class="text-2xl font-bold">오브제로서의 디저트</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed font-sans">
-          단순한 맛을 넘어 시각적 질감과 구조적 아름다움을 함께 담아내어, 테이블 위 작은 오브제 역할을 하는 시그니처 베이커리 컷입니다.
-        </p>
-      </div>
-    </section>
 
-    <!-- 8. 위아래 분리되는 느낌의 가로로 긴 사진 (화면 좌우 레이아웃을 완전히 꽉 채우는 필름 스트립) -->
-    <section class="w-full py-0">
-      <div class="film-frame shadow-md">
-        <div class="w-full h-40 md:h-56 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Horizontal Film Strip" class="w-full h-full object-cover brightness-95">
-        </div>
-      </div>
-    </section>
+<header class="w-full space-y-3">
 
-    <!-- 9. 왼쪽 설명 + 오른쪽 그림(필름 프레임) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-y border-[#D7CCC8]">
-      <div class="space-y-3 p-8 md:p-12 bg-[#FAF8F5] order-2 md:order-1">
-        <span class="text-xs font-bold text-[#8D6E63] tracking-widest block">[ DEVELOPING REEL ]</span>
-        <h3 class="text-2xl font-bold">아틀리에의 마무리를 기록하다</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed font-sans">
-          필름을 현상하듯 정성스럽게 정제된 가치관을 디저트 위에 표현하며, 오늘의 아카이브를 마칩니다.
-        </p>
-      </div>
-      <div class="film-frame shadow-xs order-1 md:order-2">
-        <div class="w-full aspect-video overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=80" alt="Film Cut 2" class="w-full h-full object-cover">
-        </div>
-      </div>
-    </section>
 
-  </div>
+<h1 class="diary-title text-7xl md:text-9xl pl-6">
 
-  <!-- 하단 아카이빙 스타일 전면 푸터 -->
-  <footer class="bg-[#3E2723] text-[#F9F6F0] py-16 px-6">
-    <div class="w-full max-w-none flex flex-col md:flex-row justify-between items-center gap-6 text-xs">
-      <div class="text-center md:text-left">
-        <p class="font-bold tracking-wider text-sm">LE PETIT BONHEUR ARCHIVE</p>
-        <p class="text-[#8D6E63] mt-1">© 2026 ALL RIGHTS RESERVED. RECORDED IN KOREA.</p>
-      </div>
-      <div class="flex gap-4">
-        <a href="#" class="border border-[#8D6E63] px-4 py-2 hover:bg-[#F9F6F0] hover:text-[#3E2723] transition">INSTAGRAM</a>
-        <a href="#" class="border border-[#8D6E63] px-4 py-2 hover:bg-[#F9F6F0] hover:text-[#3E2723] transition">CONTACT</a>
-      </div>
-    </div>
-  </footer>
+Le Petit
 
-  <script>lucide.createIcons();</script>
+</h1>
+
+
+
+<div class="w-full h-[60vh] overflow-hidden border-y paper-line">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80"
+
+class="w-full h-full object-cover"
+
+alt="travel cover"
+
+>
+
+
+</div>
+
+
+
+<h1 class="diary-title text-7xl md:text-9xl text-right pr-6">
+
+Bonheur
+
+</h1>
+
+
+
+</header>
+
+
+
+
+
+<!-- =====================================
+ INTRO NOTE
+===================================== -->
+
+
+<section class="px-6 text-center">
+
+
+<p class="archive-code mb-4">
+
+TRAVEL NOTE / FILM COLLECTION 01
+
+</p>
+
+
+
+<p class="diary-text text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+
+
+[ 작은 순간들을 모아 기록하는 여행 노트.
+낯선 거리의 빛, 오래된 건물의 온기,
+그리고 필름 속에 남겨진 작은 행복의 조각들. ]
+
+
+</p>
+
+
+
+</section>
+
+
+<!-- =====================================
+ PHOTO NOTE 01
+===================================== -->
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 items-center border-y paper-line">
+
+
+<div class="w-full aspect-square overflow-hidden">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80"
+
+class="w-full h-full object-cover"
+
+alt="travel photo"
+
+>
+
+
+</div>
+
+
+
+
+<div class="p-10 md:p-16 text-center">
+
+
+<span class="archive-code">
+
+DAY 01 / LITTLE MOMENT
+
+</span>
+
+
+
+<h2 class="diary-title text-5xl mt-5 mb-5">
+
+A quiet morning
+
+</h2>
+
+
+
+<p class="diary-text text-lg leading-relaxed">
+
+
+조용한 아침,
+작은 골목 사이로 들어오는 햇살.
+여행의 시작은 언제나
+천천히 찾아오는 작은 행복이었다.
+
+</p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- =====================================
+ PHOTO NOTE 02
+ ROTATED PRINT
+===================================== -->
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 items-center border-b paper-line">
+
+
+<div class="order-2 md:order-1 p-12 flex justify-center">
+
+
+<div class="photo-print w-full max-w-md transform rotate-3">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80"
+
+class="w-full aspect-[4/3] object-cover"
+
+>
+
+
+
+<div class="pt-4">
+
+
+<p class="archive-code">
+
+FILM 002
+
+</p>
+
+
+<p class="diary-text text-xl">
+
+PARIS, FRANCE
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="order-1 md:order-2 p-10 md:p-16">
+
+
+<span class="archive-code">
+
+08.24.2026 / MEMORY
+
+</span>
+
+
+
+<h2 class="diary-title text-5xl mt-5 mb-5">
+
+Lost in the streets
+
+</h2>
+
+
+
+<p class="diary-text text-lg leading-relaxed">
+
+
+계획 없이 걷던 작은 거리.
+우연히 발견한 카페와
+창가에 머물던 오후의 빛을 기록하다.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- =====================================
+ HAND DRAW CONNECTION
+===================================== -->
+
+
+<section class="relative h-32 hidden md:block">
+
+
+<svg
+
+class="absolute w-full h-full"
+
+viewBox="0 0 800 120"
+
+>
+
+
+<path
+
+d="M200 20
+C300 100,
+500 20,
+650 90"
+
+class="travel-line"
+
+/>
+
+
+
+</svg>
+
+
+
+<div class="absolute right-[18%] top-10 diary-title text-3xl">
+
+✈ little journey
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+ PHOTO NOTE 03
+===================================== -->
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 items-center border-b paper-line">
+
+
+
+
+
+<div class="p-12 flex justify-center">
+
+
+<div class="photo-print w-full max-w-md transform -rotate-3">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80"
+
+class="w-full aspect-[4/3] object-cover"
+
+>
+
+
+
+<div class="pt-4">
+
+
+<p class="archive-code">
+
+FILM 003
+
+</p>
+
+
+<p class="diary-text text-xl">
+
+A SMALL DISCOVERY
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="p-10 md:p-16 text-center">
+
+
+<span class="archive-code">
+
+DAY 03 / NOTES
+
+</span>
+
+
+
+<h2 class="diary-title text-5xl mt-5 mb-5">
+
+Tiny discoveries
+
+</h2>
+
+
+
+<p class="diary-text text-lg leading-relaxed">
+
+
+여행에서 가장 오래 기억되는 것은
+유명한 장소보다,
+그날 우연히 만난 작은 순간들이었다.
+
+</p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- =====================================
+ NOTE CARD
+===================================== -->
+
+
+<section class="px-6">
+
+
+<div class="wavy-border max-w-4xl mx-auto p-10 md:p-14 text-center">
+
+
+<div class="text-3xl mb-3">
+
+✦
+
+</div>
+
+
+
+<h3 class="diary-title text-5xl mb-5">
+
+A little note
+
+</h3>
+
+
+
+
+<p class="diary-text text-lg leading-relaxed">
+
+
+사진 한 장,
+짧은 메모 하나.
+그 순간의 온도를 오래 간직하기 위한
+작은 여행 기록.
+
+</p>
+
+
+
+</div>
+
+
+</section>
+
+<!-- =====================================
+ FILM FRAME 01
+===================================== -->
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 items-center border-y paper-line">
+
+
+<div class="film-frame">
+
+
+<div class="w-full aspect-video overflow-hidden">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=1000&q=80"
+
+class="w-full h-full object-cover"
+
+alt="film photo"
+
+>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="p-10 md:p-14">
+
+
+<span class="archive-code">
+
+NEGATIVE FILM 400
+
+</span>
+
+
+
+<h2 class="diary-title text-5xl mt-5 mb-5">
+
+Captured in motion
+
+</h2>
+
+
+
+<p class="diary-text text-lg leading-relaxed">
+
+
+필름 속에 남겨진 순간들은
+조금 느리고 조금 흐릿하지만,
+그래서 더 오래 기억된다.
+
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+<!-- =====================================
+ HORIZONTAL FILM STRIP
+===================================== -->
+
+
+<section>
+
+
+<div class="film-frame">
+
+
+<div class="h-44 md:h-64 overflow-hidden">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80"
+
+class="w-full h-full object-cover brightness-95"
+
+alt="film strip"
+
+>
+
+
+</div>
+
+
+
+<div class="text-center py-6">
+
+
+<p class="archive-code text-[#F5EFE4]">
+
+ROLL NO.03 / SUMMER JOURNEY
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- =====================================
+ FILM FRAME 02
+===================================== -->
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 items-center border-y paper-line">
+
+
+
+<div class="p-10 md:p-14 order-2 md:order-1">
+
+
+<span class="archive-code">
+
+DEVELOPING REEL
+
+</span>
+
+
+
+<h2 class="diary-title text-5xl mt-5 mb-5">
+
+Until next journey
+
+</h2>
+
+
+
+<p class="diary-text text-lg leading-relaxed">
+
+
+한 장의 사진으로 남겨진 여행.
+하지만 그 안에는
+수많은 이야기와 감정이 담겨 있다.
+
+</p>
+
+
+
+</div>
+
+
+
+
+<div class="film-frame order-1 md:order-2">
+
+
+<div class="aspect-video overflow-hidden">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=1000&q=80"
+
+class="w-full h-full object-cover"
+
+alt="final film"
+
+>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+ FINAL MESSAGE
+===================================== -->
+
+
+<section class="px-6">
+
+
+<div class="max-w-3xl mx-auto text-center py-16">
+
+
+<p class="archive-code mb-5">
+
+END OF FILM
+
+</p>
+
+
+<h2 class="diary-title text-6xl mb-6">
+
+See you again
+
+</h2>
+
+
+
+<p class="diary-text text-xl">
+
+
+다음 페이지에는
+또 다른 작은 행복이 기록될 예정입니다.
+
+</p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- =====================================
+ FOOTER
+===================================== -->
+
+
+<footer class="bg-[#302B27] text-[#F5EFE4] py-16 px-8">
+
+
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+
+
+
+<div class="text-center md:text-left">
+
+
+<p class="archive-code text-[#F5EFE4]">
+
+LE PETIT BONHEUR
+
+</p>
+
+
+
+<p class="diary-text text-lg mt-3">
+
+Travel Diary Archive
+
+</p>
+
+
+
+<p class="text-xs opacity-60 mt-3">
+
+© 2026 RECORDED MOMENTS
+
+</p>
+
+
+
+</div>
+
+
+
+
+<div class="diary-title text-4xl">
+
+✈ Bon voyage
+
+</div>
+
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+
 </body>
-</html>
+
+</html>  
