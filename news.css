@@ -134,69 +134,44 @@ HERO META
 /* =====================================
 HERO IMAGE & ARCH FRAME (완전 정돈됨)
 ===================================== */
-.hero-image{
-    position:relative;
-    width:100%;
-    height:650px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.hero-image {
+    position: relative;
+    width: 400px; /* 프레임 크기에 맞춤 */
+    height: 600px;
+    margin: 0 auto;
 }
 
-
-.arch-decoration{
-
-    position:absolute;
-
-    width:450px;
-    height:620px;
-
-    top:-45px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    z-index:4;
-
+.arch-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* 이미지도 아치형으로 깎기 */
+    border-radius: 200px 200px 0 0;
+    z-index: 3;
 }
 
-.arch-decoration svg{
-    background:transparent;
-}
-.arch-svg{
-
-    width:100%;
-    height:100%;
-
+.arch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-
-.arch-image{
-
-    position:relative;
-
-    width:400px;
-    height:550px;
-
-    transform:translateY(10px);
-
-    z-index:3;
-
-    overflow:hidden;
-
-    border-radius:200px 200px 0 0;
-
+.arch-decoration {
+    position: absolute;
+    top: -20px; /* SVG 선이 이미지 위로 살짝 올라오게 조정 */
+    left: -25px; /* 선 굵기만큼 좌측으로 이동 */
+    width: 450px; 
+    height: 650px;
+    pointer-events: none; /* 클릭 시 이미지가 선택되도록 프레임은 통과시킴 */
+    z-index: 4;
 }
 
-
-.arch-image img{
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
+.arch-decoration svg {
+    width: 100%;
+    height: 100%;
 }
 
 /* =====================================
