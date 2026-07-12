@@ -7,116 +7,119 @@
   <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif-title { font-family: 'Cinzel', serif; }
+  </style>
 </head>
-<body class="bg-[#F9F6F0] text-[#3E2723] font-sans antialiased">
+<!-- 웜 베이지 배경(bg-[#FAF7F2])과 딥 우드 브라운 텍스트(text-[#4A3B32]) 적용 -->
+<body class="bg-[#FAF7F2] text-[#4A3B32] antialiased overflow-x-hidden">
 
-  <!-- 전체 컨테이너: 양옆 공백 최소화 (w-full, px-2~4) -->
-  <div class="w-full max-w-7xl mx-auto px-4 md:px-8 py-12 space-y-32">
+  <!-- 전체 컨테이너: 양옆 공백 최소화 -->
+  <div class="w-full space-y-36 pb-32">
 
-    <!-- Section 1. 상단 히어로 (90도 회전 텍스트 + 우측 대형 아치 사진 + 하단 설명) -->
-    <section class="w-full">
-      <div class="flex items-start gap-4 relative">
-        <!-- 왼쪽: 90도 회전된 텍스트 영역 (세로 배치) -->
-        <div class="w-12 md:w-20 flex-shrink-0 pt-12">
-          <p class="text-xs md:text-sm tracking-widest uppercase font-serif font-bold whitespace-nowrap rotate-90 origin-left translate-x-3 text-[#8D6E63]">
-            Le Petit Bonheur — 2026
+    <!-- Section 1. 거울모드 레이아웃: 왼쪽 큰 제목 + 오른쪽으로 치우친 세로로 긴 반원 아치 대문 사진 -->
+    <header class="w-full pt-16 px-4 md:px-8 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        
+        <!-- 왼쪽에 배치된 큰 제목 -->
+        <div class="col-span-1 md:col-span-5 space-y-4 text-left order-2 md:order-1 z-10">
+          <span class="text-xs tracking-[0.25em] text-[#A39081] uppercase font-medium block">Architecture of Dessert</span>
+          <h1 class="text-4xl md:text-6xl font-serif-title font-light tracking-wide leading-[1.1] text-[#362A21]">
+            Le Petit<br>Bonheur
+          </h1>
+          <div class="w-16 h-[1px] bg-[#4A3B32] my-6"></div>
+          <p class="text-xs md:text-sm text-[#7A6B5E] max-w-sm leading-relaxed font-light">
+            여백 속에 숨겨진 완벽한 비율. 불필요한 장식을 걷어내고, 오직 디저트가 가진 본연의 순수한 선과 면을 포트폴리오의 형태로 정밀하게 아카이빙합니다.
           </p>
         </div>
-        <!-- 오른쪽: 대형 아치 사진 -->
-        <div class="flex-1 aspect-[4/5] max-h-[600px] rounded-t-full overflow-hidden border border-[#D7CCC8]">
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Hero Arch" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <!-- 하단 약간의 설명 칸 -->
-      <div class="mt-8 max-w-2xl ml-12 md:ml-24">
-        <h1 class="text-2xl font-serif font-bold tracking-wide mb-3">달콤한 위로의 공간</h1>
-        <p class="text-sm text-[#5D4037] leading-relaxed">
-          매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트로 당신의 하루에 작은 행복을 선물하는 아틀리에입니다.
-        </p>
-      </div>
-    </section>
 
-
-    <!-- Section 2. 좌상단 아치 사진 + 우측 및 하단 설명 -->
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-      <!-- 좌상단 아치 사진 (md 기준 5컬럼 차지) -->
-      <div class="col-span-1 md:col-span-5 aspect-[3/4] rounded-t-full overflow-hidden border border-[#D7CCC8]">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Arch Left" class="w-full h-full object-cover">
-      </div>
-      <!-- 우측 및 하단 설명 (md 기준 7컬럼 차지) -->
-      <div class="col-span-1 md:col-span-7 pt-4 md:pt-12 space-y-6">
-        <div class="border-b border-[#D7CCC8] pb-4">
-          <span class="text-xs text-[#8D6E63] uppercase tracking-wider block mb-1">01 / Craftsmanship</span>
-          <h2 class="text-xl font-bold font-serif">오른쪽 설명 영역</h2>
-          <p class="text-sm text-[#5D4037] leading-relaxed mt-2">
-            엄격하게 엄선된 프랑스산 AOP 버터와 정교한 파티시에의 손길이 만나 깊고 진한 디저트의 텍스처를 완성합니다. 입안 가득 퍼지는 풍미를 경험해 보세요.
-          </p>
-        </div>
-        <div>
-          <h2 class="text-xl font-bold font-serif">아래쪽 설명 영역</h2>
-          <p class="text-sm text-[#5D4037] leading-relaxed mt-2">
-            단순히 먹는 즐거움을 넘어 시각적인 아름다움까지 담아내는 미니멀한 디저트 오브제를 지향합니다. 모든 조각에는 오직 당신만을 위한 정성이 깃들어 있습니다.
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Section 3. 지그재그 원형 사진 배치 (좌상 원형 + 아래 설명 -> 우하 원형) -->
-    <section class="space-y-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- 좌상단 원형 사진과 그 아래 설명 -->
-        <div class="space-y-6">
-          <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-[#D7CCC8]">
-            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Circle Left" class="w-full h-full object-cover">
+        <!-- 오른쪽으로 치우친, 세로로 길어진 아치 창문 형태의 대문 사진 -->
+        <div class="col-span-1 md:col-span-7 flex justify-end order-1 md:order-2">
+          <div class="w-full max-w-xl aspect-[3/5] rounded-t-full overflow-hidden border border-[#E6DFD5] shadow-xs bg-[#F5EFE6]">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Minimal Main Arch" class="w-full h-full object-cover">
           </div>
-          <div class="max-w-sm pl-2">
-            <span class="text-xs font-serif italic text-[#8D6E63]">Signature Menu</span>
-            <h3 class="text-lg font-bold mt-1">딸기 프레지에 & 바닐라 까눌레</h3>
-            <p class="text-xs text-[#5D4037] leading-relaxed mt-2">
-              바삭함과 부드러움, 상반된 두 질감의 조화를 원형의 프레임 안에 미니멀하게 녹여냈습니다.
+        </div>
+
+      </div>
+    </header>
+
+
+    <!-- Section 2. 커진 원형 사진 파트: 위쪽 유닛 + 중간 대제목 + 아래쪽 유닛 -->
+    <section class="w-full max-w-6xl mx-auto px-4 md:px-8">
+      <div class="space-y-24">
+        
+        <!-- 위쪽 유닛: 커진 원형 사진 + 옆으로 옮겨진 설명 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <div class="col-span-1 md:col-span-5 flex justify-center">
+            <div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border border-[#E6DFD5] bg-[#F5EFE6] shadow-xs">
+              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Circle Aspect 1" class="w-full h-full object-cover">
+            </div>
+          </div>
+          <div class="col-span-1 md:col-span-7 space-y-3 md:pl-8">
+            <span class="text-xs tracking-widest text-[#A39081] font-medium block">OBJECT 01</span>
+            <h3 class="text-xl md:text-2xl font-serif-title text-[#362A21]">기하학적 텍스처</h3>
+            <p class="text-xs md:text-sm text-[#7A6B5E] leading-relaxed font-light max-w-xl">
+              원과 직선, 그리고 곡선이 만드는 시각적 편안함. 르 쁘띠 보뇌르는 베이킹의 모든 과정에서 구현되는 구도를 하나의 독립적인 오브제로 인식하고 이를 미니멀하게 절제합니다.
             </p>
           </div>
         </div>
 
-        <!-- 우하단 원형 사진 (flex를 이용해 오른쪽 정렬) -->
-        <div class="flex justify-end pt-12 md:pt-24">
-          <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border border-[#D7CCC8]">
-            <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Circle Right" class="w-full h-full object-cover">
+        <!-- 위쪽과 아래쪽 중간에 새롭게 끼어드는 대제목 (부드러운 우드 톤의 경계선) -->
+        <div class="w-full py-12 border-y border-[#E6DFD5] text-center">
+          <h2 class="text-2xl md:text-4xl font-serif-title font-light tracking-[0.15em] text-[#362A21] uppercase">
+            The Form Follows Flavor
+          </h2>
+          <p class="text-[10px] md:text-xs text-[#A39081] tracking-widest mt-2">형태는 맛의 본질을 따른다</p>
+        </div>
+
+        <!-- 아래쪽 유닛: 옆으로 옮겨진 설명 + 커진 원형 사진 -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <div class="col-span-1 md:col-span-7 space-y-3 md:pr-8 text-left md:text-right order-2 md:order-1">
+            <span class="text-xs tracking-widest text-[#A39081] font-medium block">OBJECT 02</span>
+            <h3 class="text-xl md:text-2xl font-serif-title text-[#362A21]">빛과 음영의 조화</h3>
+            <p class="text-xs md:text-sm text-[#7A6B5E] leading-relaxed font-light max-w-xl md:ml-auto">
+              오븐의 빛을 받고 뿜어져 나오는 유백색의 온기. 복잡한 기교를 배제하고 원재료가 가진 퓨어한 미색과 은은한 그림자만으로도 완벽한 완성도를 선사합니다.
+            </p>
+          </div>
+          <div class="col-span-1 md:col-span-5 flex justify-center order-1 md:order-2">
+            <div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border border-[#E6DFD5] bg-[#F5EFE6] shadow-xs">
+              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Circle Aspect 2" class="w-full h-full object-cover">
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
 
-    <!-- Section 4. 좌측 대형 아치 사진 + 우측 설명 -->
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-      <!-- 왼쪽에 크게 배치된 아치 사진 -->
-      <div class="col-span-1 md:col-span-7 aspect-[4/5] rounded-t-full overflow-hidden border border-[#D7CCC8]">
-        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80" alt="Large Arch Left" class="w-full h-full object-cover">
+    <!-- Section 3. 와이드 스퀘어 컷 (포트폴리오 엔딩 뷰) -->
+    <section class="w-full space-y-6">
+      <div class="w-[96%] max-w-7xl mx-auto aspect-[21/9] overflow-hidden border border-[#E6DFD5] shadow-xs">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Minimal Aesthetic Table" class="w-full h-full object-cover">
       </div>
-      <!-- 오른쪽에 배치된 설명 -->
-      <div class="col-span-1 md:col-span-5 space-y-4 px-2">
-        <span class="text-xs text-[#8D6E63] uppercase tracking-widest block">02 / Atmosphere</span>
-        <h2 class="text-2xl font-serif font-bold text-[#3E2723]">정제된 공간의 미학</h2>
-        <p class="text-sm text-[#5D4037] leading-relaxed">
-          르 쁘띠 보뇌르가 제안하는 포토폴리오 상세페이지는 불필요한 장식을 덜어내고, 제품 본연의 가치와 분위기에만 집중할 수 있도록 설계되었습니다. 차분한 베이지 톤과 브라운의 조화 속에서 시각적 편안함을 느껴보세요.
+      <div class="w-full max-w-xl mx-auto text-center px-6">
+        <p class="text-xs text-[#A39081] font-light leading-relaxed">
+          여백은 채우기 위한 공간이 아닌, 본질을 증명하기 위한 공간입니다. 르 쁘띠 보뇌르가 제안하는 단정하고 성숙한 미니멀 포트폴리오를 마칩니다.
         </p>
       </div>
     </section>
 
   </div>
 
-  <!-- 하단 푸터 (미니멀 스타일) -->
-  <footer class="bg-[#F5EBE6] border-t border-[#D7CCC8] mt-32 py-16 px-4">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-      <div>
-        <h4 class="font-serif font-bold text-lg">Le Petit Bonheur</h4>
-        <p class="text-xs text-[#8D6E63] mt-1">© 2026 LE PETIT BONHEUR. ALL RIGHTS RESERVED.</p>
+  <!-- 내추럴 무드 샌드/우드 푸터 -->
+  <footer class="bg-[#362A21] text-[#E6DFD5] py-16 px-6 text-xs font-light tracking-widest border-t border-[#4A3B32]">
+    <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <p class="text-white font-serif-title tracking-wider text-sm">LE PETIT BONHEUR</p>
+        <p class="text-[#A39081] mt-1">© 2026 MINIMAL PORTFOLIO EDITION. CURATED WITH SILENCE.</p>
       </div>
-      <div class="flex gap-4">
-        <a href="#" class="text-xs border border-[#3E2723] px-4 py-2 hover:bg-[#3E2723] hover:text-white transition">Instagram</a>
-        <a href="#" class="text-xs border border-[#3E2723] px-4 py-2 hover:bg-[#3E2723] hover:text-white transition">Kakao Talk</a>
+      <div class="flex gap-8 text-[#A39081]">
+        <a href="#" class="hover:text-white transition">COLLECTION</a>
+        <a href="#" class="hover:text-white transition">INQUIRY</a>
       </div>
     </div>
   </footer>
