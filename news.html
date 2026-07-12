@@ -64,13 +64,28 @@
         L25 225
         A200 200 0 0 1 425 225
         L425 620
+        Z    
         "
         fill="none"
         stroke="#B9AA95"
-        stroke-width="1"/>
+        stroke-width="0.8"/>
 
 
-      <!-- CURVED TEXT -->
+    <!-- ARCH LINE -->
+<path
+d="
+M25 620
+L25 225
+A200 200 0 0 1 425 225
+L425 620
+Z
+"
+fill="none"
+stroke="#B9AA95"
+stroke-width="0.8"/>
+
+
+<!-- CURVED TEXT -->
 <text 
 class="arch-svg-text"
 transform="rotate(5 225 220)">
@@ -82,24 +97,13 @@ transform="rotate(5 225 220)">
 </text>
 
 
-<!-- BOTTOM CURVED TEXT -->
-
-<defs>
-    <path
-    id="bottomTextPath"
-    d="M300 500 A120 120 0 0 0 420 500"
-    />
-</defs>
-
-
-<text class="arch-svg-text">
-
-    <textPath href="#bottomTextPath">
-        little by little
-    </textPath>
-
+<!-- BOTTOM TEXT -->
+<text
+class="arch-bottom-svg-text"
+x="330"
+y="560">
+    little by little
 </text>
-
     </svg>
 
 </div>
