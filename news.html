@@ -82,13 +82,21 @@ transform="rotate(-5 225 220)">
 </text>
 
 
-<!-- BOTTOM TEXT -->
-<text 
-class="arch-svg-text"
-x="330"
-y="560">
+<!-- BOTTOM CURVED TEXT -->
 
-    little by little
+<defs>
+    <path
+    id="bottomTextPath"
+    d="M300 500 A120 120 0 0 0 420 500"
+    />
+</defs>
+
+
+<text class="arch-svg-text">
+
+    <textPath href="#bottomTextPath">
+        little by little
+    </textPath>
 
 </text>
 
