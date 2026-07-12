@@ -157,11 +157,13 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 
     transform:translateX(-50%);
 
-    z-index:5;
+    z-index:4;
 
 }
 
-
+.arch-decoration svg{
+    background:transparent;
+}
 .arch-svg{
 
     width:100%;
@@ -179,7 +181,7 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 
     transform:translateY(10px);
 
-    z-index:2;
+    z-index:3;
 
     overflow:hidden;
 
