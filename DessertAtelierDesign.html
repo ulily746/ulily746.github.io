@@ -3,113 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>디저트 아틀리에 - 르 쁘띠 보뇌르</title>
+  <title>Dessert Atelier - Academic Edition</title>
   <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif-title { font-family: 'Cinzel', serif; }
+  </style>
 </head>
-<body class="bg-[#F9F6F0] text-[#3E2723] font-sans antialiased">
+<!-- 연구/학문 색감: 은은한 논문지 톤 아이보리(bg-[#F4F3EF]) + 지적인 딥 네이비(text-[#1C2D42]) -->
+<body class="bg-[#F4F3EF] text-[#1C2D42] antialiased overflow-x-hidden">
 
-  <!-- 1. 상단 히어로 (와이드 사각형 이미지 + 제목 + 설명) -->
-  <header class="w-full">
-    <div class="w-full h-[60vh] max-h-[500px] overflow-hidden relative">
-      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Dessert Atelier Hero" class="w-full h-full object-cover">
-      <!-- 브라운 베이지 톤과 자연스럽게 이어지는 그라데이션 내림 -->
-      <div class="absolute inset-0 bg-gradient-to-t from-[#F9F6F0] via-transparent to-transparent"></div>
-    </div>
-    
-    <div class="max-w-4xl mx-auto px-4 pt-8 pb-12 text-center">
-      <p class="text-xs text-[#8D6E63] tracking-widest uppercase mb-2">Dessert Atelier & Cafe</p>
-      <h1 class="text-3xl md:text-4xl font-serif text-[#3E2723] tracking-wide font-bold">Le Petit Bonheur</h1>
-      <div class="w-12 h-[1px] bg-[#D7CCC8] mx-auto my-6"></div>
-      <p class="text-sm md:text-base leading-relaxed text-[#5D4037] max-w-2xl mx-auto">
-        '작은 행복'이라는 뜻의 르 쁘띠 보뇌르입니다. 매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트로 당신의 하루에 달콤한 위로를 선물합니다.
-      </p>
-    </div>
-  </header>
+  <!-- 전체 컨테이너 -->
+  <div class="w-full space-y-40 pb-32">
 
-  <!-- 메인 콘텐츠 영역 -->
-  <main class="max-w-5xl mx-auto px-4 pb-24 space-y-20">
-
-    <!-- 2. 2x3 교차 배열 그리드 (글-사진 / 사진-글 / 글-사진) -->
-    <section class="space-y-6">
-      <div class="flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#8D6E63] uppercase border-b border-[#D7CCC8] pb-3">
-        <i data-lucide="sparkles" class="w-4 h-4 text-[#A1887F]"></i>
-        <span>Our Philosophy</span>
+    <!-- 1. [요구사항 1] 잡지 표지(Magazine Cover) 감성의 대문 섹션 -->
+    <header class="w-full max-w-5xl mx-auto pt-12 px-4 flex flex-col items-center">
+      <!-- 학술 잡지 헤드라인 스타일 마크업 -->
+      <div class="w-full border-b border-[#D1C7BD] pb-4 mb-6 flex justify-between items-end text-[10px] tracking-[0.3em] uppercase text-[#7A6953]">
+        <span>Research Quarterly</span>
+        <span class="font-medium text-xs">Vol. 12 / 2026</span>
+        <span>Atelier Study</span>
       </div>
       
-      <div class="grid grid-cols-2 gap-4 md:gap-6">
-        <!-- 1번째 줄: 글 & 사진 -->
-        <div class="bg-[#F5EBE6] p-6 md:p-8 rounded-2xl border border-[#EFE5E0] flex flex-col justify-center">
-          <span class="text-[10px] text-[#8D6E63] font-bold tracking-wider uppercase mb-2">01. Premium Ingredients</span>
-          <h3 class="text-base md:text-lg font-bold text-[#3E2723] mb-2">최상의 재료</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">AOP 인증 프랑스 버터와 유기농 밀가루만을 사용하여 깊은 풍미를 완성합니다.</p>
+      <!-- 잡지 표지 형태의 레이아웃 (세로 프레임 위에 타이포그래피 오버레이 효과) -->
+      <div class="relative w-full max-w-2xl aspect-[3/4] overflow-hidden bg-gray-200 shadow-xl border border-[#D1C7BD]">
+        <img src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=1200&q=80" alt="Magazine Cover Main" class="w-full h-full object-cover brightness-95">
+        
+        <!-- 표지 폰트 오버레이 -->
+        <div class="absolute inset-0 p-8 md:p-12 flex flex-col justify-between bg-gradient-to-t from-black/20 via-transparent to-black/10">
+          <h1 class="text-4xl md:text-7xl font-serif-title font-light tracking-wide text-white drop-shadow-xs leading-none text-center">
+            DESSERT<br><span class="text-sm md:text-base tracking-[0.4em] font-sans block mt-2 text-[#F4F3EF]">ANALYTICAL ATELIER</span>
+          </h1>
+          <div class="text-left max-w-xs text-white/90 space-y-1">
+            <p class="text-xs font-semibold tracking-widest font-serif-title">THEORETICAL FRAMEWORK</p>
+            <p class="text-[11px] leading-relaxed font-light text-white/70">식문화 구조주의: 미시적 관점에서 바라본 디저트의 형태학적 결합과 물리적 성숙에 관한 고찰.</p>
+          </div>
         </div>
-        <div class="h-40 md:h-60 rounded-2xl overflow-hidden border border-[#EFE5E0]">
-          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Ingredients" class="w-full h-full object-cover">
-        </div>
+      </div>
+    </header>
 
-        <!-- 2번째 줄: 사진 & 글 (교차) -->
-        <div class="h-40 md:h-60 rounded-2xl overflow-hidden border border-[#EFE5E0]">
-          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=500&q=80" alt="Baking" class="w-full h-full object-cover">
-        </div>
-        <div class="bg-[#F5EBE6] p-6 md:p-8 rounded-2xl border border-[#EFE5E0] flex flex-col justify-center">
-          <span class="text-[10px] text-[#8D6E63] font-bold tracking-wider uppercase mb-2">02. Daily Baking</span>
-          <h3 class="text-base md:text-lg font-bold text-[#3E2723] mb-2">당일 생산</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">매일 새벽 갓 구워낸 가장 신선하고 바삭한 디저트만을 선보입니다.</p>
-        </div>
 
-        <!-- 3번째 줄: 글 & 사진 -->
-        <div class="bg-[#F5EBE6] p-6 md:p-8 rounded-2xl border border-[#EFE5E0] flex flex-col justify-center">
-          <span class="text-[10px] text-[#8D6E63] font-bold tracking-wider uppercase mb-2">03. Fine Art</span>
-          <h3 class="text-base md:text-lg font-bold text-[#3E2723] mb-2">아틀리에 감성</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">단순한 디저트를 넘어, 하나의 예술 작품을 만들 듯 정성을 다합니다.</p>
-        </div>
-        <div class="h-40 md:h-60 rounded-2xl overflow-hidden border border-[#EFE5E0]">
-          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=500&q=80" alt="Artisan" class="w-full h-full object-cover">
-        </div>
+    <!-- 2. [요구사항 2] 세로로 긴 사각형 사진 + 글 가운데 정렬 배치의 징검다리 섹션 -->
+    <section class="w-full max-w-3xl mx-auto px-4 flex flex-col items-center text-center space-y-8">
+      <!-- 기존 스퀘어에서 세로가 대폭 강조된 aspect-[3/4] 비율의 단독 컷 -->
+      <div class="w-full max-w-md aspect-[3/4] overflow-hidden border border-[#D1C7BD] shadow-sm">
+        <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=800&q=80" alt="Vertical Single View" class="w-full h-full object-cover">
+      </div>
+      <!-- 글 정중앙 정렬 -->
+      <div class="max-w-xl space-y-3 px-4">
+        <span class="text-xs tracking-widest text-[#7A6953] uppercase font-medium">01 / Morphological Analysis</span>
+        <h2 class="text-2xl font-serif-title tracking-wide text-[#1A2636]">형태학적 수직 구조</h2>
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
+          모든 조형 예술의 시작은 수직과 수평의 조율에서 비롯됩니다. 본 연구는 사각형 프레임을 세로로 길게 확장함으로써 대상이 지닌 시각적 중력과 텍스처의 밀도를 더욱 선명하게 아카이빙합니다.
+        </p>
       </div>
     </section>
 
-    <!-- 3. 비대칭 3분할 사진 배치 (소제목 + 좌소/중대/우소) -->
-    <section class="space-y-6">
-      <div class="text-center space-y-1">
-        <span class="text-[10px] text-[#8D6E63] font-bold tracking-widest uppercase">Atelier Gallery</span>
-        <h2 class="text-xl font-serif font-bold text-[#3E2723]">르 쁘띠 보뇌르의 순간들</h2>
-      </div>
 
-      <div class="grid grid-cols-4 gap-3 items-center">
-        <!-- 왼쪽 작은 사진 -->
-        <div class="col-span-1 aspect-[3/4] rounded-xl overflow-hidden border border-[#D7CCC8]">
-          <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=300&q=80" alt="Gallery 1" class="w-full h-full object-cover">
-        </div>
+    <!-- 3. [요구사항 3] 테두리 선이 전혀 없는, 세로로 긴 3단 사진 배열 섹션 (하단 설명란 포함) -->
+    <section class="w-full max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         
-        <!-- 가운데 큰 사진 -->
-        <div class="col-span-2 aspect-square rounded-2xl overflow-hidden border-2 border-[#8D6E63] shadow-md">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Gallery Main" class="w-full h-full object-cover">
+        <!-- 사진 1 -->
+        <div class="space-y-4">
+          <!-- border-none 처리 및 세로로 긴 수직 비율 적용 -->
+          <div class="w-full aspect-[2/3] overflow-hidden shadow-xs">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Tri 1" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-semibold text-[#1A2636]">I. 열역학적 변화</h4>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">베이킹 프로세스 중 온도가 단백질 구조와 탄수화물 겔화에 미치는 역학 연구.</p>
+          </div>
         </div>
-        
-        <!-- 오른쪽 작은 사진 -->
-        <div class="col-span-1 aspect-[3/4] rounded-xl overflow-hidden border border-[#D7CCC8]">
-          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=300&q=80" alt="Gallery 2" class="w-full h-full object-cover">
+
+        <!-- 사진 2 -->
+        <div class="space-y-4">
+          <div class="w-full aspect-[2/3] overflow-hidden shadow-xs">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80" alt="Tri 2" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-semibold text-[#1A2636]">II. 점탄성 측정</h4>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">밀가루의 글루텐 네트워크 편성에 따른 내부 기포 유지력의 유체역학적 관찰.</p>
+          </div>
         </div>
+
+        <!-- 사진 3 -->
+        <div class="space-y-4">
+          <div class="w-full aspect-[2/3] overflow-hidden shadow-xs">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Tri 3" class="w-full h-full object-cover">
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-sm font-semibold text-[#1A2636]">III. 기하학적 균형</h4>
+            <p class="text-xs text-gray-500 font-light leading-relaxed">플레이팅 구성 시 시각적 안정감을 부여하는 수학적 황금비와 여백의 상관관계 규명.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
-  </main>
 
-  <!-- 4. 하단 소셜 링크 및 푸터 -->
-  <footer class="bg-[#F5EBE6] border-t border-[#D7CCC8] py-12 px-4">
-    <div class="max-w-md mx-auto text-center space-y-6">
-      <div class="flex justify-center gap-3">
-        <a href="#" class="flex items-center justify-center gap-2 bg-[#3E2723] text-white text-xs font-medium py-3 px-6 rounded-xl transition flex-1 hover:bg-[#5D4037]">
-          <i data-lucide="instagram" class="w-4 h-4"></i><span>인스타그램</span>
-        </a>
-        <a href="#" class="flex items-center justify-center gap-2 bg-white text-[#3E2723] border border-[#D7CCC8] text-xs font-medium py-3 px-6 rounded-xl transition flex-1 hover:bg-[#F9F6F0]">
-          <i data-lucide="message-circle" class="w-4 h-4"></i><span>카카오톡 문의</span>
-        </a>
+    <!-- 4. [요구사항 4] 4개의 사각형 카드가 가로 배치되며 [사진/글]이 지그재그 반복되는 구조 -->
+    <section class="w-full max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- 카드 1: [위 사진 / 아래 설명] -->
+        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between min-h-[380px] shadow-xs">
+          <div class="w-full aspect-square overflow-hidden border border-[#D1C7BD]">
+            <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=500&q=80" alt="Card 1" class="w-full h-full object-cover">
+          </div>
+          <div class="pt-4 space-y-1">
+            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.01</span>
+            <h5 class="text-sm font-medium text-[#1A2636]">분자 결합 분석</h5>
+            <p class="text-xs text-gray-600 font-light leading-snug">성분 배합비에 따른 분자 사슬의 결합 밀도 실험 아카이브.</p>
+          </div>
+        </div>
+
+        <!-- 카드 2: [위 설명 / 아래 사진] -->
+        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between min-h-[380px] shadow-xs">
+          <div class="pb-4 space-y-1 order-1">
+            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.02</span>
+            <h5 class="text-sm font-medium text-[#1A2636]">미각적 통계학</h5>
+            <p class="text-xs text-gray-600 font-light leading-snug">당도 변화에 따른 관능 검사 지표와 정량적 선호도 스케일 데이터 수집.</p>
+          </div>
+          <div class="w-full aspect-square overflow-hidden border border-[#D1C7BD] order-2">
+            <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=500&q=80" alt="Card 2" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <!-- 카드 3: [위 사진 / 아래 설명] -->
+        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between min-h-[380px] shadow-xs">
+          <div class="w-full aspect-square overflow-hidden border border-[#D1C7BD]">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Card 3" class="w-full h-full object-cover">
+          </div>
+          <div class="pt-4 space-y-1">
+            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.03</span>
+            <h5 class="text-sm font-medium text-[#1A2636]">질감의 계량화</h5>
+            <p class="text-xs text-gray-600 font-light leading-snug">크러스트의 파삭함(Crispiness) 강도를 기계적으로 기록한 음향 분석 스터디.</p>
+          </div>
+        </div>
+
+        <!-- 카드 4: [위 설명 / 아래 사진] -->
+        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between min-h-[380px] shadow-xs">
+          <div class="pb-4 space-y-1 order-1">
+            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.04</span>
+            <h5 class="text-sm font-medium text-[#1A2636]">온도차 리포트</h5>
+            <p class="text-xs text-gray-600 font-light leading-snug">동결 건조 공법이 아로마 보존에 미치는 영향력을 열화상 스캔한 정밀 결과.</p>
+          </div>
+          <div class="w-full aspect-square overflow-hidden border border-[#D1C7BD] order-2">
+            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80" alt="Card 4" class="w-full h-full object-cover">
+          </div>
+        </div>
+
       </div>
-      <p class="text-[10px] text-[#A1887F]">© 2026 LE PETIT BONHEUR. ALL RIGHTS RESERVED.</p>
+    </section>
+
+  </div>
+
+  <!-- 학술지 스타일의 단정하고 이성적인 푸터 -->
+  <footer class="bg-[#1A2636] text-[#D1C7BD] py-16 px-6 text-xs tracking-wider border-t border-[#D1C7BD]/20">
+    <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <p class="text-white font-serif-title tracking-widest text-sm">DESSERT ATELIER LAB</p>
+        <p class="text-gray-400 mt-1">© 2026 RESEARCH ARCHIVE SYSTEM FOR FOOD MORPHOLOGY. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="flex gap-8 text-gray-400 font-mono text-[10px]">
+        <a href="#" class="hover:text-white transition">DATA_SETS</a>
+        <a href="#" class="hover:text-white transition">ABSTRACTS</a>
+      </div>
     </div>
   </footer>
 
