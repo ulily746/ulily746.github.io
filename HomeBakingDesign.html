@@ -3,156 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homebaking Atelier - Le Petit Bonheur</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
+  <title>Homebaking & Travel Journal</title>
+  <!-- Tailwind CSS & Lucide Icons -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 레퍼런스 특유의 사랑스러운 손글씨/빈티지 서체를 위한 구글 폰트 매칭 -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Gaegu:wght@400;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Gaegu', sans-serif; /* 친근하고 사랑스러운 손글씨 무드 베이스 */
+    }
+    .font-handwrite-eng {
+      font-family: 'Caveat', cursive; /* 영어 텍스트용 흘림 손글씨 서체 */
+    }
+    .font-vintage-italic {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+    
+    /* 레퍼런스 속 가늘고 사랑스러운 이중 타원형(Capsule) 버튼용 효과 */
+    .double-oval-btn {
+      border: 1px solid #D15A5A;
+      position: relative;
+    }
+    .double-oval-btn::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border: 1px dashed #D15A5A;
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+  </style>
 </head>
-<body class="bg-[#F9F6F0] text-[#3E2723] font-sans antialiased overflow-x-hidden">
+<!-- 레퍼런스의 배경인 체크 식탁보와 빈티지 홈무드: 연한 딸기우유빛 베이지 바탕 -->
+<body class="bg-[#F9F1EB] text-[#5A4545] antialiased min-h-screen py-10 px-4 flex flex-col items-center justify-center">
 
-  <!-- 전체 컨테이너: 양옆 공백 최소화 (w-full, px-2 md:px-4) -->
-  <div class="w-full space-y-28 pb-24">
+  <!-- 메인 스마트폰 목업 스케일 컨테이너 (레퍼런스 왼쪽의 길고 아기자기한 세로형 레이아웃 원본 비율 완벽 재현) -->
+  <div class="w-full max-w-[360px] bg-[#FFFBF7] rounded-[40px] shadow-xl overflow-hidden border border-[#EFE5DC] p-5 flex flex-col space-y-10 relative">
+    
+    <!-- 반짝이 별 장식 상단 오버레이 -->
+    <div class="absolute top-6 right-6 text-[#D15A5A] opacity-60 animate-pulse">
+      <i data-lucide="sparkles" class="w-5 h-5"></i>
+    </div>
 
-    <!-- Section 1. 상단 대문 (선이 둘러진 타원 사진 + 아래 설명 + 가로형 타원 테두리 소제목) -->
-    <header class="w-full pt-8 px-4 flex flex-col items-center text-center">
-      <!-- 이중 프레임 느낌의 선으로 둘러싸인 상단 대문 타원 사진 -->
-      <div class="p-3 border border-[#D7CCC8] rounded-[120px] w-full max-w-[500px] aspect-[4/5] flex items-center justify-center bg-[#F5EBE6]">
-        <div class="w-full h-full rounded-[120px] overflow-hidden border border-[#8D6E63]">
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Homebaking Main" class="w-full h-full object-cover">
-        </div>
+    <!-- 1. 프로필/상단: 레퍼런스 특유의 우아하고 아기자기한 오벌(타원형) 메인 액자 프레임 -->
+    <header class="text-center pt-4 space-y-4">
+      <div class="w-48 h-64 mx-auto rounded-[100px] overflow-hidden border-2 border-[#D15A5A] p-1.5 bg-white shadow-xs">
+        <!-- 베이킹 및 일상 여행 감성의 메인 사진 -->
+        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=600&q=80" alt="Baking & Me" class="w-full h-full object-cover rounded-[90px]">
       </div>
-
-      <!-- 타원 사진 아래 기본 설명 -->
-      <div class="mt-8 max-w-2xl px-2">
-        <h1 class="text-2xl md:text-3xl font-serif font-bold tracking-wide mb-3">Le Petit Bonheur</h1>
-        <p class="text-sm text-[#5D4037] leading-relaxed">
-          따스한 오븐 온기가 방 안 가득 퍼지는 순간, 르 쁘띠 보뇌르의 홈베이킹 아틀리에가 시작됩니다. 좋은 버터와 밀가루 향이 고스란히 배어있는 포근한 일상의 기록입니다.
+      
+      <!-- 아기자기한 손글씨 소개 단락 -->
+      <div class="space-y-1 px-4">
+        <h2 class="text-xl font-bold text-[#D15A5A] flex justify-center items-center gap-1">
+          <span class="font-handwrite-eng text-2xl">Sweet Life</span> 레시피 일기
+        </h2>
+        <p class="text-xs text-gray-500 leading-relaxed">
+          달콤한 빵 냄새를 따라 떠나는 여행, 일상 속 작은 오븐에서 구워내는 몽글몽글하고 행복한 베이킹 조각들을 기록합니다.
         </p>
       </div>
 
-      <!-- 밑에 배치되는 가로로 긴 타원 테두리를 가진 소제목 -->
-      <div class="mt-16 inline-block px-8 py-3 border border-[#3E2723] rounded-full bg-[#FAF6F4]">
-        <h2 class="text-xs md:text-sm tracking-widest uppercase font-serif font-bold text-[#3E2723]">Our Baking Journal</h2>
+      <!-- 레퍼런스의 상단 타원 캡슐형 커스텀 버튼 -->
+      <div class="pt-1 flex justify-center">
+        <a href="#" class="double-oval-btn px-6 py-1.5 rounded-full text-xs font-bold text-[#D15A5A] tracking-wider hover:bg-[#FFF0F0] transition-colors">
+          달콤한 조각들 구경하기
+        </a>
       </div>
     </header>
 
 
-    <!-- Section 2. 폴라로이드 스타일 지그재그 교차 배치 (2회 반복) -->
-    <main class="w-full max-w-5xl mx-auto px-4 space-y-24">
-      
-      <!-- [반복 1-1] 왼쪽: 회전된 폴라로이드 사진 / 오른쪽: 설명 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- 왼쪽: 폴라로이드 (약간 회전 rotate-3) -->
-        <div class="flex justify-center p-4">
-          <div class="bg-white p-4 pb-12 border border-[#D7CCC8] shadow-md transform rotate-3 w-full max-w-[340px] aspect-[4/5]">
-            <div class="w-full aspect-square overflow-hidden bg-gray-50 border border-[#EFE5E0]">
-              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Journal 1" class="w-full h-full object-cover">
-            </div>
+    <!-- 2. 중앙 색션: 빈티지 폴라로이드 스냅샷 & 텍스트 지그재그 배치 (레퍼런스 프라이스존 구조 반영) -->
+    <section class="space-y-8 px-1">
+      <!-- 타이틀 구역 -->
+      <div class="text-center">
+        <span class="font-vintage-italic text-2xl text-[#D15A5A] block">Our Sweet Treats</span>
+        <div class="text-[11px] text-[#A68F8F] tracking-widest uppercase mt-0.5">— baking menu & log —</div>
+      </div>
+
+      <!-- 아이템 1: 좌측 폴라로이드 스냅샷 + 우측 설명 설명 구조 -->
+      <div class="flex items-center gap-4">
+        <!-- 폴라로이드 스타일 프레임 -->
+        <div class="w-28 bg-white p-2 pb-4 border border-[#EFE5DC] shadow-xs transform -rotate-2 rounded-xs">
+          <div class="w-full aspect-square overflow-hidden bg-gray-100 mb-1.5">
+            <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=400&q=80" alt="Menu 1" class="w-full h-full object-cover">
           </div>
+          <p class="text-[9px] text-center text-[#D15A5A] font-handwrite-eng">Strawberry Macaron</p>
         </div>
-        <!-- 오른쪽: 설명 -->
-        <div class="space-y-3 px-4">
-          <span class="text-xs font-serif text-[#8D6E63] italic">Scene 01 / Morning Whisk</span>
-          <h3 class="text-xl font-bold font-serif">새벽에 피어나는 버터향</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">
-            프랑스 고메 버터가 반죽 속에서 부드럽게 녹아내리며 고유의 고소한 향을 뿜어냅니다. 정성스러운 손길로 빚어낸 베이킹의 첫 단계입니다.
-          </p>
+        <!-- 우측 설명 텍스트 -->
+        <div class="flex-1 space-y-1">
+          <h4 class="text-sm font-bold text-[#5A4545]">딸기 크림 마카롱</h4>
+          <p class="text-[11px] text-gray-500 leading-tight">입안 가득 번지는 수제 산딸기 퓨레의 사랑스럽고 상큼한 하모니.</p>
+          <span class="text-xs font-bold text-[#D15A5A]">6,500 원</span>
         </div>
       </div>
 
-      <!-- [반복 1-2] 왼쪽: 설명 / 오른쪽: 회전된 폴라로이드 사진 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- 왼쪽: 설명 (모바일 고려하여 order 설정) -->
-        <div class="order-2 md:order-1 space-y-3 px-4 text-left md:text-right">
-          <span class="text-xs font-serif text-[#8D6E63] italic">Scene 02 / Golden Crust</span>
-          <h3 class="text-xl font-bold font-serif">바삭함이 완성되는 온도</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">
-            노릇노릇하게 구워져 나온 크러스트의 크랙은 홈베이킹이 주는 가장 정직한 선물입니다. 겉은 바삭하고 속은 촉촉한 완벽한 질감을 만납니다.
-          </p>
+      <!-- 아이템 2: 우측 폴라로이드 스냅샷 + 좌측 설명 구조 (교차 지그재그) -->
+      <div class="flex items-center gap-4">
+        <!-- 좌측 설명 텍스트 -->
+        <div class="flex-1 text-right space-y-1">
+          <h4 class="text-sm font-bold text-[#5A4545]">여행지의 도시락 케이크</h4>
+          <p class="text-[11px] text-gray-500 leading-tight">기차 안에서 소소하게 즐겼던 부드러운 얼그레이 시폰의 추억.</p>
+          <span class="text-xs font-bold text-[#D15A5A]">18,000 원</span>
         </div>
-        <!-- 오른쪽: 폴라로이드 (약간 회전 -rotate-2) -->
-        <div class="order-1 md:order-2 flex justify-center p-4">
-          <div class="bg-white p-4 pb-12 border border-[#D7CCC8] shadow-md transform -rotate-2 w-full max-w-[340px] aspect-[4/5]">
-            <div class="w-full aspect-square overflow-hidden bg-gray-50 border border-[#EFE5E0]">
-              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Journal 2" class="w-full h-full object-cover">
-            </div>
+        <!-- 폴라로이드 스타일 프레임 -->
+        <div class="w-28 bg-white p-2 pb-4 border border-[#EFE5DC] shadow-xs transform rotate-3 rounded-xs">
+          <div class="w-full aspect-square overflow-hidden bg-gray-100 mb-1.5">
+            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13636?auto=format&fit=crop&w=400&q=80" alt="Menu 2" class="w-full h-full object-cover">
           </div>
+          <p class="text-[9px] text-center text-[#D15A5A] font-handwrite-eng">Bento Cake log</p>
         </div>
       </div>
 
-      <!-- [반복 2-1] 왼쪽: 회전된 폴라로이드 사진 / 오른쪽: 설명 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- 왼쪽: 폴라로이드 (약간 회전 rotate-2) -->
-        <div class="flex justify-center p-4">
-          <div class="bg-white p-4 pb-12 border border-[#D7CCC8] shadow-md transform rotate-2 w-full max-w-[340px] aspect-[4/5]">
-            <div class="w-full aspect-square overflow-hidden bg-gray-50 border border-[#EFE5E0]">
-              <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Journal 3" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
-        <!-- 오른쪽: 설명 -->
-        <div class="space-y-3 px-4">
-          <span class="text-xs font-serif text-[#8D6E63] italic">Scene 03 / Sweet Rest</span>
-          <h3 class="text-xl font-bold font-serif">식힘망 위의 달콤한 휴식</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">
-            오븐에서 나온 디저트들이 한 김 식어가며 본연의 깊은 내면의 맛을 단단하게 다지는 시간입니다. 기다림 마저 달콤한 순간입니다.
-          </p>
-        </div>
+      <!-- 아기자기한 별자리 장식 구분선 효과 -->
+      <div class="flex justify-center items-center gap-2 text-[#D15A5A]/40 pt-2">
+        <span>✦</span><span>•</span><span>✦</span>
       </div>
+    </section>
 
-      <!-- [반복 2-2] 왼쪽: 설명 / 오른쪽: 회전된 폴라로이드 사진 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <!-- 왼쪽: 설명 -->
-        <div class="order-2 md:order-1 space-y-3 px-4 text-left md:text-right">
-          <span class="text-xs font-serif text-[#8D6E63] italic">Scene 04 / Table Object</span>
-          <h3 class="text-xl font-bold font-serif">나만의 작은 홈 카페</h3>
-          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">
-            나만을 위해 정성스레 차려낸 내추럴 베이킹 테이블. 소박하지만 따뜻함이 가득 차오르는 조각들을 조심스레 건넵니다.
-          </p>
-        </div>
-        <!-- 오른쪽: 폴라로이드 (약간 회전 -rotate-3) -->
-        <div class="order-1 md:order-2 flex justify-center p-4">
-          <div class="bg-white p-4 pb-12 border border-[#D7CCC8] shadow-md transform -rotate-3 w-full max-w-[340px] aspect-[4/5]">
-            <div class="w-full aspect-square overflow-hidden bg-gray-50 border border-[#EFE5E0]">
-              <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Journal 4" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
+
+    <!-- 3. 하단 스냅 스케치: 아늑한 라이프스타일 한 컷 배너 -->
+    <section class="bg-[#FFF0F0] rounded-[24px] p-4 border border-[#FBE0E0] space-y-3">
+      <div class="w-full aspect-[16/10] overflow-hidden rounded-xl border border-white">
+        <img src="https://images.unsplash.com/photo-1513267048331-5611cad82e4f?auto=format&fit=crop&w=600&q=80" alt="Table Mood" class="w-full h-full object-cover">
       </div>
-
-    </main>
-
-
-    <!-- Section 3. 큰 사각형 사진 배치 + 밑에 약간의 설명 -->
-    <section class="w-full space-y-6">
-      <!-- 넓은 화면을 꽉 채우는 큰 사각형 사진 (양옆 공백 최소화) -->
-      <div class="w-[96%] max-w-7xl mx-auto h-[450px] overflow-hidden rounded-xl border border-[#D7CCC8] shadow-xs">
-        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Large Baking Table" class="w-full h-full object-cover">
-      </div>
-      
-      <!-- 밑에 들어가는 약간의 마무리 설명 -->
-      <div class="w-full max-w-2xl mx-auto text-center px-6 pt-2">
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed font-sans">
-          따뜻한 오븐의 문이 열리고, 일상에 달콤한 조각이 스며드는 순간. 르 쁘띠 보뇌르가 선사하는 소박하지만 깊이 있는 홈베이킹 아카이브를 당신의 테이블 위로 그대로 배달합니다.
+      <div class="text-center">
+        <p class="text-[11px] text-gray-500 leading-normal italic">
+          "오후 4시, 따스한 햇살이 드는 식탁 위에서<br>달콤함을 굽고 기록하는 행복한 베이킹 타임."
         </p>
       </div>
     </section>
 
-  </div>
+    <!-- 4. [요구사항 준수] 작성일 중심의 깔끔하고 매칭 컬러풀한 미니멀 디자인 푸터 -->
+    <footer class="pt-4 border-t border-dashed border-[#EFE5DC] text-center">
+      <p class="font-handwrite-eng text-lg font-bold text-[#D15A5A] leading-none mb-1">tuttidolce homebaking log</p>
+      <div class="text-[10px] text-gray-400 space-y-0.5 font-light">
+        <p>일기 작성일: 2026년 7월 12일 — Sweet Memory</p>
+        <p class="opacity-80 text-[9px]">© 2026 SWEET BAKING JOURNAL. ALL RIGHTS RESERVED.</p>
+      </div>
+    </footer>
 
-  <!-- 하단 푸터 영역 -->
-  <footer class="bg-[#F5EBE6] border-t border-[#D7CCC8] py-14 px-6">
-    <div class="w-full max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-      <div>
-        <h4 class="font-serif font-bold text-base">Le Petit Bonheur</h4>
-        <p class="text-[#8D6E63] mt-0.5">© 2026 HOMEBAKING JOURNAL. ALL RIGHTS RESERVED.</p>
-      </div>
-      <div class="flex gap-4">
-        <a href="#" class="text-[#3E2723] hover:underline">Instagram</a>
-        <a href="#" class="text-[#3E2723] hover:underline">Kakao Talk</a>
-      </div>
-    </div>
-  </footer>
+  </div>
 
   <script>lucide.createIcons();</script>
 </body>
