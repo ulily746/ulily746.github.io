@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>디저트 아틀리에</title>
+  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-[#FDFBF7] py-6 px-4 flex justify-center antialiased">
+
+  <!-- 모바일 뷰포트 컨테이너 -->
+  <div class="w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden flex flex-col relative text-[#4A3E3D] font-sans border border-[#F2ECE9]">
+    
+    <!-- 상단 뒤로가기 버튼 -->
+    <div class="absolute top-6 left-6 z-10">
+      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-[#FAF6F4] flex items-center justify-center text-[#4A3E3D] hover:bg-[#F2ECE9] transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- 1. 상단 히어로 (파스텔 핑크 아치 배경 + 대형 원형 이미지) -->
+    <div class="pt-20 px-6 pb-8 text-center bg-[#FDF5F2] rounded-b-[40px] border-b border-[#F2ECE9]">
+      <div class="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md mb-4">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="Dessert Atelier" class="w-full h-full object-cover">
+      </div>
+      <h1 class="text-2xl font-serif text-[#3A2F2E] tracking-wide font-bold">Le Petit Bonheur</h1>
+      <p class="text-xs text-[#A88B87] tracking-widest uppercase mt-1">Dessert Atelier & Cafe</p>
+    </div>
+
+    <!-- 2. 브랜드 소개 (부드러운 카드) -->
+    <div class="p-6 space-y-4">
+      <div class="bg-[#FAF6F4] p-5 rounded-2xl border border-[#F2ECE9]">
+        <span class="text-[10px] bg-[#E8DCD8] text-[#7A625E] font-bold px-2.5 py-0.5 rounded-full uppercase">Our Story</span>
+        <p class="text-xs leading-relaxed text-[#615250] mt-2.5">
+          '작은 행복'이라는 뜻의 르 쁘띠 보뇌르입니다. 매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트로 당신의 하루에 달콤한 위로를 선물합니다.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. 시그니처 메뉴 (격자형 그리드) -->
+    <div class="px-6 pb-6">
+      <div class="flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#A88B87] uppercase mb-4">
+        <i data-lucide="sparkles" class="w-4 h-4 text-[#FFB5B5]"></i>
+        <span>Signature Menu</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white p-3 rounded-xl border border-[#F2ECE9] text-center">
+          <div class="w-full aspect-square rounded-lg overflow-hidden bg-gray-50 mb-2">
+            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=200&q=80" alt="Menu 1" class="w-full h-full object-cover">
+          </div>
+          <span class="text-xs font-bold block truncate">딸기 프레지에</span>
+          <span class="text-[11px] text-[#FF9E9E] font-semibold mt-0.5 block">8,500원</span>
+        </div>
+        <div class="bg-white p-3 rounded-xl border border-[#F2ECE9] text-center">
+          <div class="w-full aspect-square rounded-lg overflow-hidden bg-gray-50 mb-2">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=200&q=80" alt="Menu 2" class="w-full h-full object-cover">
+          </div>
+          <span class="text-xs font-bold block truncate">바닐라 까눌레</span>
+          <span class="text-[11px] text-[#FF9E9E] font-semibold mt-0.5 block">3,800원</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 하단 소셜 링크 -->
+    <div class="mt-auto p-6 bg-[#FAF6F4] border-t border-[#F2ECE9] text-center">
+      <div class="flex justify-center gap-3 max-w-xs mx-auto">
+        <a href="#" class="flex items-center justify-center gap-2 bg-[#4A3E3D] text-white text-xs font-medium py-3 rounded-xl transition shadow-xs flex-1">
+          <i data-lucide="instagram" class="w-4 h-4"></i><span>인스타그램</span>
+        </a>
+        <a href="#" class="flex items-center justify-center gap-2 bg-white text-[#4A3E3D] border border-[#F2ECE9] text-xs font-medium py-3 rounded-xl transition flex-1">
+          <i data-lucide="message-circle" class="w-4 h-4"></i><span>카카오톡 문의</span>
+        </a>
+      </div>
+      <p class="text-[10px] text-gray-400 mt-4">© 2026 LE PETIT BONHEUR</p>
+    </div>
+
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
