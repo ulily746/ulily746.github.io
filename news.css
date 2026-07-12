@@ -170,6 +170,7 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
     inset:0;
 
     z-index:5;
+    pointer-events:none;
 
 }
 
