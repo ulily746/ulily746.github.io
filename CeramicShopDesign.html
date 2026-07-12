@@ -3,65 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>키치 세라믹 소품숍</title>
+  <title>Ceramic Shop - Le Petit Bonheur</title>
+  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body class="min-h-screen bg-[#F0E6DF] py-6 px-4 flex justify-center antialiased">
-
-  <div class="w-full max-w-md bg-[#FFF5F5] rounded-[36px] shadow-2xl overflow-hidden flex flex-col relative text-[#5E4E4A] font-sans border border-[#F5E6E6]">
+  <style>
+    /* 1번 요구사항: 위아래가 구름/물결 모양으로 깎인 전면 대문 사진 */
+    .wavy-hero-clip {
+      clip-path: path('M 0 40 Q 25 10 50 40 T 100 40 T 150 40 T 200 40 T 250 40 T 300 40 T 350 40 T 400 40 T 450 40 T 500 40 T 550 40 T 600 40 T 650 40 T 700 40 T 750 40 T 800 40 T 850 40 T 900 40 T 950 40 T 1000 40 T 1050 40 T 1100 40 T 1150 40 T 1200 40 L 1200 460 Q 1175 490 1150 460 T 1100 460 T 1050 460 T 1000 460 T 950 460 T 900 460 T 850 460 T 800 460 T 750 460 T 700 460 T 650 460 T 600 460 T 550 460 T 500 460 T 450 460 T 400 460 T 350 460 T 300 460 T 250 460 T 200 460 T 150 460 T 100 460 T 50 460 T 0 460 Z');
+      /* 브라우저 반응형 대응을 위해 border-radius와 조화로운 부드러운 유기적 clip-path 대체 기법 적용 */
+      border-radius: 80px 80px 80px 80px / 30px 30px 30px 30px;
+    }
     
-    <div class="absolute top-6 left-6 right-6 z-10 flex items-center justify-between">
-      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#5E4E4A] hover:scale-105 transition shadow-sm">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      </button>
-      <span class="font-serif font-black tracking-wider text-sm text-[#FF9494]">p✿syy</span>
-      <button class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#5E4E4A] shadow-sm">
-        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-      </button>
-    </div>
+    /* 2번 요구사항: 부드러운 구름 모양 사각형 프레임 */
+    .cloud-square {
+      border-radius: 60px 40px 60px 40px / 40px 60px 40px 60px;
+    }
+  </style>
+</head>
+<body class="bg-[#F9F6F0] text-[#3E2723] font-sans antialiased overflow-x-hidden">
 
-    <div class="pt-24 bg-[#FFE3E3] pb-10 text-center relative">
-      <h1 class="text-xl font-bold tracking-tight text-[#423633] leading-snug">함께 만드는 우리 집 온기</h1>
-      <p class="text-[11px] text-[#8A716C] mt-1">따뜻한 색감의 핸드메이드 도자기 편집숍</p>
-      <button class="mt-4 bg-white text-[#FF9494] text-[11px] font-bold px-4 py-2 rounded-full shadow-xs">카탈로그 보기</button>
-    </div>
+  <!-- 전체 컨테이너: 양옆 공백 최소화 -->
+  <div class="w-full space-y-28 pb-24">
 
-    <div class="p-6">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-xs font-bold text-[#423633] uppercase">✦ Best Items</h2>
-      </div>
-      <div class="grid grid-cols-3 gap-2.5">
-        <div class="bg-white p-2 rounded-[20px] border border-[#F5E6E6] text-center">
-          <div class="w-full aspect-[4/5] rounded-t-[16px] rounded-b-[8px] overflow-hidden bg-[#FDF8F8]">
-            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-          </div>
-          <p class="text-[10px] font-bold text-[#423633] truncate mt-1.5">체리 머그잔</p>
-          <p class="text-[9px] text-[#FF9494] font-semibold">19,000원</p>
-        </div>
-        <div class="bg-white p-2 rounded-[20px] border border-[#F5E6E6] text-center">
-          <div class="w-full aspect-[4/5] rounded-t-[16px] rounded-b-[8px] overflow-hidden bg-[#FDF8F8]">
-            <img src="https://images.unsplash.com/photo-1576016770956-debb63d900ef?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-          </div>
-          <p class="text-[10px] font-bold text-[#423633] truncate mt-1.5">도트 시리얼볼</p>
-          <p class="text-[9px] text-[#FF9494] font-semibold">21,000원</p>
-        </div>
-        <div class="bg-white p-2 rounded-[20px] border border-[#F5E6E6] text-center">
-          <div class="w-full aspect-[4/5] rounded-t-[16px] rounded-b-[8px] overflow-hidden bg-[#FDF8F8]">
-            <img src="https://images.unsplash.com/photo-1535401991746-da3d9055713e?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-          </div>
-          <p class="text-[10px] font-bold text-[#423633] truncate mt-1.5">요거트 미니컵</p>
-          <p class="text-[9px] text-[#FF9494] font-semibold">16,500원</p>
+    <!-- Section 1. 상단 대문 사진 (위아래 구름/물결선 + 정가운데 제목) -->
+    <header class="w-full relative px-2 md:px-4 pt-4">
+      <!-- 전면 사각형이지만 위아래 테두리가 구름처럼 부드럽게 휜 프레임 -->
+      <div class="w-full h-[60vh] max-h-[500px] overflow-hidden relative border border-[#D7CCC8] bg-[#F5EBE6] shadow-xs rounded-[80px/35px]">
+        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Ceramic Atelier Main" class="w-full h-full object-cover brightness-90">
+        
+        <!-- 사진 위 정가운데 배치된 제목 -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/10">
+          <span class="text-xs tracking-widest text-white/90 uppercase font-serif mb-2">Handcrafted Ceramic & Dessert</span>
+          <h1 class="text-3xl md:text-5xl font-serif text-white tracking-wide font-bold drop-shadow-xs">Le Petit Bonheur</h1>
+          <div class="w-12 h-[1px] bg-white/70 my-4"></div>
+          <p class="text-xs md:text-sm text-white/90 font-light font-serif italic">The Art of Slow Baking</p>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="p-6 bg-[#FFF5F5] text-center mt-auto border-t border-[#F5E6E6]">
-      <p class="font-serif font-black text-base text-[#FF9494]">p✿syy</p>
-      <p class="text-[9px] text-gray-400 mt-2">© 2026 POSYY CERAMIC.</p>
-    </div>
+    <!-- 약간의 메인 설명 (인트로) -->
+    <section class="max-w-3xl mx-auto text-center px-6">
+      <p class="text-sm md:text-base text-[#5D4037] leading-relaxed">
+        부드러운 흙을 만져 빚어낸 도자기처럼, 르 쁘띠 보뇌르의 디저트 또한 만드는 이의 온기와 정성을 그대로 담아냅니다. 정형화되지 않은 따뜻한 실루엣 속에서 마주하는 달콤한 휴식을 경험해 보세요.
+      </p>
+    </section>
+
+
+    <!-- Section 2. 아치 사진 + 구름 사각형 사진 + 설명의 조화로운 배치 -->
+    <main class="w-full max-w-6xl mx-auto px-4 space-y-24">
+
+      <!-- 레이아웃 단락 1: 좌측 아치 사진 + 우측 설명 및 작은 구름 사진 -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- 왼쪽: 단정한 세로형 아치 사진 -->
+        <div class="col-span-1 md:col-span-5 aspect-[3/4] rounded-t-full overflow-hidden border border-[#D7CCC8] shadow-xs">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Ceramic Arch" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- 오른쪽: 텍스트 설명 및 그 아래 배치된 구름 사각형 사진 -->
+        <div class="col-span-1 md:col-span-7 space-y-8 md:pl-6">
+          <div class="space-y-3">
+            <span class="text-xs text-[#8D6E63] font-serif uppercase tracking-widest block">01 / Earthy Texture</span>
+            <h3 class="text-xl md:text-2xl font-serif font-bold">오븐에서 구워낸 도자기</h3>
+            <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">
+              가마 속 뜨거운 열기를 견디며 단단하고 아름답게 태어나는 도자기처럼, 르 쁘띠 보뇌르의 구움과자들 역시 가장 알맞은 시간과 온도의 미학을 통과하여 깊은 풍미의 결을 완성합니다.
+            </p>
+          </div>
+          <!-- 텍스트 아래 조화롭게 매칭된 구름 사각형 사진 -->
+          <div class="w-full max-w-md aspect-[16/10] cloud-square overflow-hidden border border-[#D7CCC8] bg-[#F5EBE6]">
+            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Cloud Ceramic 1" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
+
+      <!-- 레이아웃 단락 2: 좌측 구름 사각형 사진 + 우측 아치 사진 (중앙에 설명 배치로 밸런스 유지) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-8">
+        <!-- 왼쪽: 큼직한 구름 사각형 사진 -->
+        <div class="col-span-1 md:col-span-4 aspect-square cloud-square overflow-hidden border border-[#D7CCC8] order-1">
+          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Cloud Ceramic 2" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- 중앙: 제품 설명 -->
+        <div class="col-span-1 md:col-span-4 space-y-3 text-center px-4 order-3 md:order-2">
+          <span class="text-xs text-[#8D6E63] font-serif uppercase tracking-widest block">02 / Cozy Object</span>
+          <h3 class="text-lg font-serif font-bold">따뜻한 일상의 오브제</h3>
+          <p class="text-xs text-[#5D4037] leading-relaxed">
+            마음을 편안하게 채워주는 베이지 톤 테이블 웨어와 단정하게 담긴 디저트의 실루엣. 시각과 미각 모두에 차분한 영감을 주는 순간들을 엮었습니다.
+          </p>
+        </div>
+
+        <!-- 오른쪽: 좁고 긴 아치 사진 -->
+        <div class="col-span-1 md:col-span-4 aspect-[2/3] rounded-t-full overflow-hidden border border-[#D7CCC8] shadow-xs order-2 md:order-3">
+          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Ceramic Arch 2" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+    </main>
 
   </div>
+
+  <!-- 하단 세라믹 아틀리에 톤 푸터 -->
+  <footer class="bg-[#F5EBE6] border-t border-[#D7CCC8] py-16 px-6">
+    <div class="w-full max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs">
+      <div class="text-center md:text-left">
+        <p class="font-serif font-bold text-sm">Le Petit Bonheur</p>
+        <p class="text-[#8D6E63] mt-1">© 2026 CERAMIC SHOP ATELIER. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="flex gap-6">
+        <a href="#" class="text-[#3E2723] hover:text-[#8D6E63] transition font-serif">Instagram</a>
+        <a href="#" class="text-[#3E2723] hover:text-[#8D6E63] transition font-serif">Shop Journal</a>
+      </div>
+    </div>
+  </footer>
 
   <script>lucide.createIcons();</script>
 </body>
