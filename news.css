@@ -672,9 +672,17 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
 }
 
 .life-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
 }
 
 /* 세로로 긴 세련된 아치 프레임 이미지 */
