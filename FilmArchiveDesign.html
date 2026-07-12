@@ -3,164 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Film Archive - Le Petit Bonheur</title>
+  <title>Film Archive - Travel & Life Edition</title>
   <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- 아기자기한 무드를 위해 부드러운 산세리프와 감성 타이틀 폰트 매칭 -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* 6번 요구사항: 물결 사각형 테두리 */
-    .wavy-border {
-      border: 2px solid #3E2723;
-      border-radius: 40px 20px 40px 20px / 20px 40px 20px 40px;
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif-title { font-family: 'Cinzel', serif; }
+    
+    /* [요구사항 5] 아기자기한 느낌을 극대화하기 위한 물결 테두리(Wavy Border) 커스텀 CSS 기법 */
+    .wavy-box {
+      border: 2px dashed #D9A080;
+      border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     }
-    /* 7,8,9번 요구사항: 필름 프레임 효과 (타공) */
-    .film-frame {
-      background-color: #1A110F;
-      padding: 24px 0px;
-      position: relative;
-      width: 100%;
-    }
-    .film-frame::before, .film-frame::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0;
-      height: 8px;
-      background-image: radial-gradient(circle, #F9F6F0 4px, transparent 5px);
-      background-size: 16px 8px;
-    }
-    .film-frame::before { top: 6px; }
-    .film-frame::after { bottom: 6px; }
   </style>
 </head>
-<body class="bg-[#F9F6F0] text-[#3E2723] font-mono antialiased overflow-x-hidden">
+<!-- 아기자기한 여행/Life 색감: 살구빛이 감도는 따스한 샌드 베이지(bg-[#F9F3EB]) + 빈티지 시나몬 브라운(text-[#4E3629]) -->
+<body class="bg-[#F9F3EB] text-[#4E3629] antialiased overflow-x-hidden">
 
-  <!-- 전체 컨테이너: 마진/패딩을 없애고 최대 너비 제한을 풀어 양옆 공백 최소화 (w-full, px-0) -->
-  <div class="w-full space-y-32 pb-24">
+  <!-- 전체 컨테이너 -->
+  <div class="w-full space-y-36 pb-24">
 
-    <!-- 1. 대제목 (왼쪽) + 전면 사진 + 대제목 (오른쪽) -->
-    <header class="w-full space-y-2">
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-left uppercase pl-4">Le Petit</h1>
-      <div class="w-full h-[60vh] overflow-hidden border-y border-[#D7CCC8]">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Archive Main" class="w-full h-full object-cover grayscale-20">
+    <!-- 1. [요구사항 1] 대문 사진: 양옆에 손가락 한 마디 정도의 공백(px-6 md:px-12)을 준 와이드 프레임 -->
+    <header class="w-full max-w-6xl mx-auto pt-10 px-6 md:px-12">
+      <div class="relative w-full aspect-[21/9] md:aspect-[24/9] overflow-hidden rounded-2xl shadow-sm">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1800&q=80" alt="Film Main Banner" class="w-full h-full object-cover brightness-75">
+        
+        <!-- 중앙 타이틀 텍스트 레이어 -->
+        <div class="absolute inset-0 bg-black/15 flex flex-col justify-center items-center text-center p-4">
+          <span class="text-[10px] md:text-xs tracking-[0.4em] text-[#F3D9C9] uppercase font-medium block mb-1">Mellow Analog Log</span>
+          <h1 class="text-3xl md:text-5xl font-serif-title font-light tracking-widest text-white drop-shadow-xs">FILM ARCHIVE</h1>
+          <div class="w-10 h-[1px] bg-white/50 my-3"></div>
+          <span class="text-[9px] tracking-[0.2em] text-white/80 font-mono uppercase">Travel & Life Moments</span>
+        </div>
       </div>
-      <h1 class="text-4xl md:text-6xl font-bold tracking-tighter text-right uppercase pr-4">Bonheur</h1>
     </header>
 
-    <!-- 2. 괄호 안에 들어있는 설명 칸 (텍스트 자투리 여백만 유지) -->
-    <section class="w-full px-4 text-center">
-      <p class="text-xs md:text-sm text-[#8D6E63] leading-relaxed font-sans max-w-3xl mx-auto">
-        [ 매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트 스튜디오. 아날로그 필름의 결처럼 일상 속에 깊이 스며드는 르 쁘띠 보뇌르의 기록 조각들을 차례로 아카이빙합니다. ]
-      </p>
-    </section>
 
-    <!-- 3. 왼쪽 사각형 사진 + 오른쪽 세로 정중앙 배치된 설명 글 (화면 5:5 분할, 좌우 공백 0) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-y border-[#D7CCC8]">
-      <div class="w-full aspect-square overflow-hidden md:border-r border-[#D7CCC8]">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80" alt="Archive 1" class="w-full h-full object-cover">
-      </div>
-      <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF8F5]">
-        <span class="text-xs text-[#8D6E63] mb-2">// INDEX. 001</span>
-        <h3 class="text-xl font-bold mb-3">프렌치 클래식의 정수</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] max-w-sm leading-relaxed font-sans">오리지널 레시피를 기반으로 한 레이어와 깊은 텍스처의 순간을 포착했습니다.</p>
-      </div>
-    </section>
-
-    <!-- 4. 왼쪽 설명(가운데 정렬) + 오른쪽 약간 회전된 사진 (화면 가득 채우는 그리드) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-b border-[#D7CCC8]">
-      <div class="order-2 md:order-1 flex flex-col justify-center items-center text-center p-8 bg-[#FAF8F5]">
-        <span class="text-xs text-[#8D6E63] mb-2">// INDEX. 002</span>
-        <h3 class="text-xl font-bold mb-3">당일 생산의 원칙</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] max-w-sm leading-relaxed font-sans">새벽 공기와 함께 오븐에서 갓 구워져 나온 디저트가 가장 아름다운 순간.</p>
-      </div>
-      <div class="order-1 md:order-2 p-12 flex justify-center items-center overflow-hidden bg-white md:border-l border-[#D7CCC8]">
-        <!-- 회전 효과(rotate-3) 가미된 인화지 -->
-        <div class="w-full max-w-md aspect-[4/3] overflow-hidden border-8 border-white shadow-xl transform rotate-3 my-4">
-          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=80" alt="Archive 2" class="w-full h-full object-cover">
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. 왼쪽 약간 회전된 사진 + 오른쪽 설명 -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-b border-[#D7CCC8]">
-      <div class="p-12 flex justify-center items-center overflow-hidden bg-white md:border-r border-[#D7CCC8]">
-        <!-- 회전 효과(-rotate-2) 가미된 인화지 -->
-        <div class="w-full max-w-md aspect-[4/3] overflow-hidden border-8 border-white shadow-xl transform -rotate-2 my-4">
-          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80" alt="Archive 3" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF8F5]">
-        <span class="text-xs text-[#8D6E63] mb-2">// INDEX. 003</span>
-        <h3 class="text-xl font-bold mb-3">시간의 미학</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] max-w-sm leading-relaxed font-sans">느리게 흘러가는 아틀리에의 시간 속에서 디저트는 하나의 예술이 됩니다.</p>
-      </div>
-    </section>
-
-    <!-- 6. 물결 사각형 테두리 방 (양옆 여백 최소화 상태에서 박스 강조) -->
-    <section class="w-full px-4">
-      <div class="wavy-border w-full max-w-5xl mx-auto p-8 md:p-12 text-center bg-[#F5EBE6]/60 space-y-4">
-        <div class="flex justify-center text-[#8D6E63]">
-          <i data-lucide="clapperboard" class="w-7 h-7 animate-pulse"></i>
-        </div>
-        <h4 class="text-lg font-bold tracking-tight">A Note from the Atelier</h4>
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed max-w-2xl mx-auto font-sans">
-          빛과 어둠, 온도와 습도가 만들어낸 완벽한 조화. 르 쁘띠 보뇌르는 한 조각의 필름 컷처럼 당신의 기억 속에 영원히 남을 달콤함을 굽습니다. ☕️✨
+    <!-- 2. [요구사항 2] 가운데 배치된 엄청 큰 괄호 안에 들어가는 몇 줄의 설명문 -->
+    <section class="w-full max-w-3xl mx-auto px-6 text-center">
+      <div class="flex items-center justify-center gap-4 md:gap-6">
+        <!-- 왼쪽 거대 대괄호 -->
+        <span class="text-5xl md:text-7xl font-extralight text-[#D9A080] select-none font-serif leading-none">[</span>
+        
+        <!-- 내부 설명 문구 -->
+        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light max-w-lg py-2">
+          필름 한 롤에 새겨지는 여행의 속도는 느리지만 정겹습니다.<br>
+          바쁜 일상에서 한 걸음 물러나 햇살이 머무는 자리를 셔터로 포착하고,<br>
+          지나간 시간의 온도를 고스란히 봉인해둔 아기자기한 조각들의 모음집.
         </p>
+        
+        <!-- 오른쪽 거대 대괄호 -->
+        <span class="text-5xl md:text-7xl font-extralight text-[#D9A080] select-none font-serif leading-none">]</span>
       </div>
     </section>
 
-    <!-- 7. 왼쪽 필름 프레임 사진 + 오른쪽 설명 (양옆을 완전히 채우는 구조) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-y border-[#D7CCC8]">
-      <div class="film-frame shadow-xs">
-        <div class="w-full aspect-video overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=800&q=80" alt="Film Cut 1" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <div class="space-y-3 p-8 md:p-12 bg-[#FAF8F5]">
-        <span class="text-xs font-bold text-[#8D6E63] tracking-widest block">[ NEGATIVE FILM 400 ]</span>
-        <h3 class="text-2xl font-bold">오브제로서의 디저트</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed font-sans">
-          단순한 맛을 넘어 시각적 질감과 구조적 아름다움을 함께 담아내어, 테이블 위 작은 오브제 역할을 하는 시그니처 베이커리 컷입니다.
-        </p>
+
+    <!-- 3. [요구사항 3] 사이즈를 컴팩트하게 축소한 다음 사진 섹션 -->
+    <section class="w-full max-w-md mx-auto px-6 flex justify-center">
+      <!-- 기존 대형 이미지에서 한눈에 쏙 들어오는 귀여운 컴팩트 사이즈로 대폭 축소 -->
+      <div class="w-full aspect-[4/3] overflow-hidden rounded-xl shadow-xs">
+        <img src="https://images.unsplash.com/photo-1473163928189-364b2c4e1135?auto=format&fit=crop&w=800&q=80" alt="Compact Next Section Image" class="w-full h-full object-cover">
       </div>
     </section>
 
-    <!-- 8. 위아래 분리되는 느낌의 가로로 긴 사진 (화면 좌우 레이아웃을 완전히 꽉 채우는 필름 스트립) -->
-    <section class="w-full py-0">
-      <div class="film-frame shadow-md">
-        <div class="w-full h-40 md:h-56 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Horizontal Film Strip" class="w-full h-full object-cover brightness-95">
-        </div>
-      </div>
-    </section>
 
-    <!-- 9. 왼쪽 설명 + 오른쪽 그림(필름 프레임) -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-0 items-center border-y border-[#D7CCC8]">
-      <div class="space-y-3 p-8 md:p-12 bg-[#FAF8F5] order-2 md:order-1">
-        <span class="text-xs font-bold text-[#8D6E63] tracking-widest block">[ DEVELOPING REEL ]</span>
-        <h3 class="text-2xl font-bold">아틀리에의 마무리를 기록하다</h3>
-        <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed font-sans">
-          필름을 현상하듯 정성스럽게 정제된 가치관을 디저트 위에 표현하며, 오늘의 아카이브를 마칩니다.
-        </p>
-      </div>
-      <div class="film-frame shadow-xs order-1 md:order-2">
-        <div class="w-full aspect-video overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=80" alt="Film Cut 2" class="w-full h-full object-cover">
+    <!-- 4. [요구사항 4, 5] 배경 없이 사진만 단독으로 회전 + 물결 모양 테두리를 가진 빈 정사각형 스케치 박스 배치 -->
+    <!-- *모든 실선 구분선 및 사진의 인위적인 하얀 카드 배경/테두리는 전부 제거되었습니다.* -->
+    <section class="w-full max-w-5xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+        
+        <!-- 요소 1: [요구사항 4] 순수 사진 단독 왼쪽 회전 (-rotate-3) -->
+        <div class="flex justify-center items-center">
+          <div class="w-64 aspect-[4/5] overflow-hidden rounded-lg transform -rotate-3 transition-transform duration-300 hover:rotate-0">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" alt="Rotated Image 1" class="w-full h-full object-cover">
+          </div>
         </div>
+
+        <!-- 요소 2: [요구사항 5] 색이 비어있고 테두리가 물결 모양인 아기자기한 정사각형 박스 -->
+        <div class="flex justify-center items-center">
+          <div class="w-64 aspect-square wavy-box flex flex-col justify-center items-center text-center p-6 bg-transparent">
+            <span class="text-[10px] font-mono tracking-widest text-[#D9A080] mb-2">SNAP LOG</span>
+            <h4 class="text-sm font-semibold text-[#4E3629] mb-1">오후 3시의 노스탤지어</h4>
+            <p class="text-[11px] text-gray-500 font-light leading-relaxed">
+              프레임도, 선도 없이 오직 아날로그 필름의 결만 남겨둔 레이아웃. 자유로운 기울기로 시각적 리듬을 부여합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 요소 3: [요구사항 4] 순수 사진 단독 오른쪽 회전 (rotate-3) -->
+        <div class="flex justify-center items-center">
+          <div class="w-64 aspect-[4/5] overflow-hidden rounded-lg transform rotate-3 transition-transform duration-300 hover:rotate-0">
+            <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=600&q=80" alt="Rotated Image 2" class="w-full h-full object-cover">
+          </div>
+        </div>
+
       </div>
     </section>
 
   </div>
 
-  <!-- 하단 아카이빙 스타일 전면 푸터 -->
-  <footer class="bg-[#3E2723] text-[#F9F6F0] py-16 px-6">
-    <div class="w-full max-w-none flex flex-col md:flex-row justify-between items-center gap-6 text-xs">
-      <div class="text-center md:text-left">
-        <p class="font-bold tracking-wider text-sm">LE PETIT BONHEUR ARCHIVE</p>
-        <p class="text-[#8D6E63] mt-1">© 2026 ALL RIGHTS RESERVED. RECORDED IN KOREA.</p>
-      </div>
-      <div class="flex gap-4">
-        <a href="#" class="border border-[#8D6E63] px-4 py-2 hover:bg-[#F9F6F0] hover:text-[#3E2723] transition">INSTAGRAM</a>
-        <a href="#" class="border border-[#8D6E63] px-4 py-2 hover:bg-[#F9F6F0] hover:text-[#3E2723] transition">CONTACT</a>
+  <!-- [요구사항 6] 오직 작성일 정보만 미니멀하고 단정하게 남긴 하단 감성 탭 푸터 -->
+  <footer class="bg-[#4E3629] text-[#F3D9C9] py-10 px-6 text-[11px] tracking-wider font-light">
+    <div class="w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+      <p class="font-serif-title tracking-widest text-white text-xs">FILM ARCHIVE JOURNAL</p>
+      <div class="text-[#D9A080]/80 text-[10px] sm:text-right space-y-0.5">
+        <p>작성일: 2026년 7월 12일 — Travel & Life Record</p>
+        <p class="text-[9px] opacity-60">© 2026 MELLOW PIXEL. ALL RIGHTS RESERVED.</p>
       </div>
     </div>
   </footer>
