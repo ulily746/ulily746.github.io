@@ -2,422 +2,125 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive | Yuri Choi</title>
+    
+    <link rel="stylesheet" href="archive.css">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Archive | Yuri Choi</title>
-
-<link rel="stylesheet" href="news.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 
 <body>
 
+    <div class="nav">
+        <a href="index.html">Main</a>
+        <a href="research.html">Research</a>
+        <a href="cv.html">CV</a>
+        <a href="news.html">News</a>
+    </div>
+
+    <div class="archive-wrapper">
+
+        <aside class="archive-sidebar">
+            <div class="sidebar-sticky">
+                <div class="sidebar-title">
+                    <span class="sub-script">Choi Yuri</span>
+                    <h2>Archive</h2>
+                </div>
+
+                <div class="search-box">
+                    <input type="text" placeholder="Search archive...">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <nav class="category-nav">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li class="active"><a href="#all">All <span class="count">5</span></a></li>
+                        <li><a href="#research">Research <span class="count">1</span></a></li>
+                        <li><a href="#academic">Academic <span class="count">1</span></a></li>
+                        <li><a href="#travel">Travel <span class="count">1</span></a></li>
+                        <li><a href="#life">Life <span class="count">1</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="tag-box">
+                    <h3>Popular Tags</h3>
+                    <div class="tags">
+                        <a href="#">#CancerTherapy</a>
+                        <a href="#">#ACS2026</a>
+                        <a href="#">#Alps</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="archive-content">
+            
+            <div class="archive-grid" id="all">
+
+                <article class="archive-card type-arch" onclick="location.href='MinimalPortfolioDesign.html'">
+                    <div class="card-img-wrap">
+                        <img src="research1.jpg" alt="Dual Metabolic Therapy">
+                    </div>
+                    <div class="card-txt">
+                        <span class="category">Research · 2026</span>
+                        <h2 class="title">Dual Metabolic Therapy</h2>
+                        <p class="date">PLGA-PEG nanoparticle platform</p>
+                    </div>
+                </article>
+
+                <article class="archive-card type-oval" onclick="location.href='MinimalPortfolioDesign.html'">
+                    <div class="card-img-wrap">
+                        <img src="research2.jpg" alt="Paper Writing">
+                    </div>
+                    <div class="card-txt">
+                        <span class="category">Publication · 2026</span>
+                        <h2 class="title">Paper Writing</h2>
+                        <p class="date">Manuscript preparation</p>
+                    </div>
+                </article>
+
+                <article class="archive-card type-bottom-round" onclick="location.href='MinimalPortfolioDesign.html'">
+                    <div class="card-img-wrap">
+                        <img src="academic1.jpg" alt="ACS Spring Presentation">
+                    </div>
+                    <div class="card-txt">
+                        <span class="category">Academic · 2026</span>
+                        <h2 class="title">ACS Spring Presentation</h2>
+                        <p class="date">Conference presentation</p>
+                    </div>
+                </article>
+
+                <article class="archive-card type-rect" onclick="location.href='FloristGardenDesign.html'">
+                    <div class="card-img-wrap">
+                        <img src="travel1.jpg" alt="Switzerland">
+                    </div>
+                    <div class="card-txt">
+                        <span class="category">Travel · 2026</span>
+                        <h2 class="title">Switzerland</h2>
+                        <p class="date">Alps and personal inspiration</p>
+                    </div>
+                </article>
+
+                <article class="archive-card type-arch" onclick="location.href='VintageFlowerDesign.html'">
+                    <div class="card-img-wrap">
+                        <img src="life1.jpg" alt="Beauty & Lifestyle">
+                    </div>
+                    <div class="card-txt">
+                        <span class="category">Life · Style</span>
+                        <h2 class="title">Beauty & Lifestyle</h2>
+                        <p class="date">Daily inspiration, aesthetics</p>
+                    </div>
+                </article>
 
-<!-- =====================================
-NAVIGATION
-===================================== -->
+            </div>
+        </main>
 
-<div class="nav">
-
-<a href="index.html">Main</a>
-<a href="research.html">Research</a>
-<a href="cv.html">CV</a>
-<a href="news.html">News</a>
-
-</div>
-
-
-
-
-
-<!-- =====================================
-ARCHIVE
-===================================== -->
-
-
-<section class="news-all-page">
-
-
-<div class="news-all-layout">
-
-
-
-<!-- LEFT SIDEBAR -->
-
-<aside class="news-sidebar">
-
-
-<h3>
-Archive
-</h3>
-
-
-<ul>
-
-<li>
-<a href="#all" class="active">
-All
-</a>
-</li>
-
-
-<li>
-<a href="#research">
-Research
-</a>
-</li>
-
-
-<li>
-<a href="#academic">
-Academic
-</a>
-</li>
-
-
-<li>
-<a href="#travel">
-Travel
-</a>
-</li>
-
-
-<li>
-<a href="#life">
-Life
-</a>
-</li>
-
-
-</ul>
-
-
-</aside>
-
-
-
-
-
-
-<!-- RIGHT CONTENT -->
-
-<div class="news-all-content">
-
-
-
-<header class="news-all-header">
-
-
-<span>
-PERSONAL ARCHIVE
-</span>
-
-
-<h1>
-All Stories
-</h1>
-
-
-<p>
-A collection of research, learning, journeys and moments that shaped my path.
-</p>
-
-
-</header>
-
-
-
-
-
-<!-- NEWS LIST -->
-
-
-<div class="news-list" id="all">
-
-
-
-<!-- ITEM 1 -->
-
-<article class="news-item">
-
-
-<div class="news-item-image">
-
-<img src="research1.jpg">
-
-</div>
-
-
-<div class="news-item-info">
-
-
-<span>
-Research · 2026
-</span>
-
-
-<h2>
-Dual Metabolic Therapy
-</h2>
-
-
-<p>
-PLGA-PEG nanoparticle platform for metabolic cancer therapy.
-</p>
-
-
-<a class="news-more" href="MinimalPortfolioDesign.html">
-View Story →
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-<!-- ITEM 2 -->
-
-
-<article class="news-item">
-
-
-<div class="news-item-image">
-
-<img src="research2.jpg">
-
-</div>
-
-
-<div class="news-item-info">
-
-
-<span>
-Publication · 2026
-</span>
-
-
-<h2>
-Paper Writing
-</h2>
-
-
-<p>
-Manuscript preparation and scientific communication.
-</p>
-
-
-<a class="news-more" href="MinimalPortfolioDesign.html">
-View Story →
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-
-
-<!-- ITEM 3 -->
-
-
-<article class="news-item">
-
-
-<div class="news-item-image">
-
-<img src="academic1.jpg">
-
-</div>
-
-
-<div class="news-item-info">
-
-
-<span>
-Academic · 2026
-</span>
-
-
-<h2>
-ACS Spring Presentation
-</h2>
-
-
-<p>
-Conference presentation and academic journey.
-</p>
-
-
-<a class="news-more" href="MinimalPortfolioDesign.html">
-View Story →
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-
-
-<!-- ITEM 4 -->
-
-
-<article class="news-item">
-
-
-<div class="news-item-image">
-
-<img src="travel1.jpg">
-
-</div>
-
-
-<div class="news-item-info">
-
-
-<span>
-Travel · 2026
-</span>
-
-
-<h2>
-Switzerland
-</h2>
-
-
-<p>
-Alps, landscapes and personal inspiration.
-</p>
-
-
-<a class="news-more" href="FloristGardenDesign.html">
-View Gallery →
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-
-
-
-
-
-<!-- ITEM 5 -->
-
-
-<article class="news-item">
-
-
-<div class="news-item-image">
-
-<img src="life1.jpg">
-
-</div>
-
-
-<div class="news-item-info">
-
-
-<span>
-Life · Style
-</span>
-
-
-<h2>
-Beauty & Lifestyle
-</h2>
-
-
-<p>
-Daily inspiration, aesthetics and personal interests.
-</p>
-
-
-<a class="news-more" href="VintageFlowerDesign.html">
-View Story →
-</a>
-
-
-</div>
-
-
-</article>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- FOOTER -->
-
-<footer class="news-footer">
-
-
-<div class="footer-name">
-Yuri Choi
-</div>
-
-
-<p>
-Research · Learning · Travel · Life
-</p>
-
-
-<span>
-© 2026 Yuri Choi. All rights reserved.
-</span>
-
-
-</footer>
-
-
-
+    </div>
 
 </body>
-
 </html>
