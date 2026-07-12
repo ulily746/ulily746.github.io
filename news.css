@@ -148,10 +148,10 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 
     position:absolute;
 
-    width:500px;
-    height:760px;
+    width:560px;
+    height:820px;
 
-    top:-20px;
+    top:-40px;
 
     left:50%;
 
@@ -183,7 +183,7 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 
     overflow:hidden;
 
-    border-radius:200px 200px 0 0;
+    border-radius:190px 190px 0 0;
 
 }
 
