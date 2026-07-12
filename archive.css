@@ -1,1 +1,205 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
+
+body{
+
+    background:#F2F2DF;
+
+    color:#222;
+
+    font-family:'Inter',sans-serif;
+
+}
+
+
+
+.archive-layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+
+
+
+
+.archive-sidebar{
+
+    width:260px;
+
+    height:100vh;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    background:#111;
+
+    color:#F2F2DF;
+
+    padding:60px 40px;
+
+}
+
+
+
+
+.archive-logo{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:40px;
+
+    margin-bottom:80px;
+
+}
+
+
+
+
+.archive-sidebar nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+
+
+.archive-sidebar a{
+
+    color:#F2F2DF;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+
+}
+
+
+
+
+
+.back{
+
+    position:absolute;
+
+    bottom:50px;
+
+}
+
+
+
+
+
+.archive-content{
+
+    margin-left:260px;
+
+    padding:100px 80px;
+
+    width:100%;
+
+}
+
+
+
+section{
+
+    min-height:500px;
+
+    margin-bottom:100px;
+
+}
+
+
+
+section span{
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+    color:#8B7355;
+
+}
+
+
+
+
+h1{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:70px;
+
+    font-weight:400;
+
+    margin:20px 0 50px;
+
+}
+
+
+
+
+
+.archive-card{
+
+    background:white;
+
+    padding:35px;
+
+    margin-bottom:25px;
+
+    max-width:700px;
+
+    box-shadow:0 15px 30px rgba(0,0,0,.04);
+
+}
+
+
+
+.archive-card h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:32px;
+
+    font-weight:400;
+
+}
+
+
+
+.archive-card p{
+
+    margin-top:10px;
+
+    color:#666;
+
+}
+
+
+
+.archive-card small{
+
+    display:block;
+
+    margin-top:20px;
+
+    color:#999;
+
+}
