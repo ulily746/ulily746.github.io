@@ -3,80 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>디저트 아틀리에</title>
+  <title>디저트 아틀리에 - 르 쁘띠 보뇌르</title>
   <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="min-h-screen bg-[#FDFBF7] py-6 px-4 flex justify-center antialiased">
+<body class="bg-[#F9F6F0] text-[#3E2723] font-sans antialiased">
 
-  <!-- 모바일 뷰포트 컨테이너 -->
-  <div class="w-full max-w-md bg-white rounded-[32px] shadow-2xl overflow-hidden flex flex-col relative text-[#4A3E3D] font-sans border border-[#F2ECE9]">
+  <!-- 1. 상단 히어로 (와이드 사각형 이미지 + 제목 + 설명) -->
+  <header class="w-full">
+    <div class="w-full h-[60vh] max-h-[500px] overflow-hidden relative">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Dessert Atelier Hero" class="w-full h-full object-cover">
+      <!-- 브라운 베이지 톤과 자연스럽게 이어지는 그라데이션 내림 -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#F9F6F0] via-transparent to-transparent"></div>
+    </div>
     
-    <!-- 상단 뒤로가기 버튼 -->
-    <div class="absolute top-6 left-6 z-10">
-      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-[#FAF6F4] flex items-center justify-center text-[#4A3E3D] hover:bg-[#F2ECE9] transition">
-        <i data-lucide="arrow-left" class="w-5 h-5"></i>
-      </button>
+    <div class="max-w-4xl mx-auto px-4 pt-8 pb-12 text-center">
+      <p class="text-xs text-[#8D6E63] tracking-widest uppercase mb-2">Dessert Atelier & Cafe</p>
+      <h1 class="text-3xl md:text-4xl font-serif text-[#3E2723] tracking-wide font-bold">Le Petit Bonheur</h1>
+      <div class="w-12 h-[1px] bg-[#D7CCC8] mx-auto my-6"></div>
+      <p class="text-sm md:text-base leading-relaxed text-[#5D4037] max-w-2xl mx-auto">
+        '작은 행복'이라는 뜻의 르 쁘띠 보뇌르입니다. 매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트로 당신의 하루에 달콤한 위로를 선물합니다.
+      </p>
     </div>
+  </header>
 
-    <!-- 1. 상단 히어로 (파스텔 핑크 아치 배경 + 대형 원형 이미지) -->
-    <div class="pt-20 px-6 pb-8 text-center bg-[#FDF5F2] rounded-b-[40px] border-b border-[#F2ECE9]">
-      <div class="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md mb-4">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=400&q=80" alt="Dessert Atelier" class="w-full h-full object-cover">
-      </div>
-      <h1 class="text-2xl font-serif text-[#3A2F2E] tracking-wide font-bold">Le Petit Bonheur</h1>
-      <p class="text-xs text-[#A88B87] tracking-widest uppercase mt-1">Dessert Atelier & Cafe</p>
-    </div>
+  <!-- 메인 콘텐츠 영역 -->
+  <main class="max-w-5xl mx-auto px-4 pb-24 space-y-20">
 
-    <!-- 2. 브랜드 소개 (부드러운 카드) -->
-    <div class="p-6 space-y-4">
-      <div class="bg-[#FAF6F4] p-5 rounded-2xl border border-[#F2ECE9]">
-        <span class="text-[10px] bg-[#E8DCD8] text-[#7A625E] font-bold px-2.5 py-0.5 rounded-full uppercase">Our Story</span>
-        <p class="text-xs leading-relaxed text-[#615250] mt-2.5">
-          '작은 행복'이라는 뜻의 르 쁘띠 보뇌르입니다. 매일 아침 유기농 밀가루와 프랑스산 고메 버터로 구워내는 수제 디저트로 당신의 하루에 달콤한 위로를 선물합니다.
-        </p>
+    <!-- 2. 2x3 교차 배열 그리드 (글-사진 / 사진-글 / 글-사진) -->
+    <section class="space-y-6">
+      <div class="flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#8D6E63] uppercase border-b border-[#D7CCC8] pb-3">
+        <i data-lucide="sparkles" class="w-4 h-4 text-[#A1887F]"></i>
+        <span>Our Philosophy</span>
       </div>
-    </div>
-
-    <!-- 3. 시그니처 메뉴 (격자형 그리드) -->
-    <div class="px-6 pb-6">
-      <div class="flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#A88B87] uppercase mb-4">
-        <i data-lucide="sparkles" class="w-4 h-4 text-[#FFB5B5]"></i>
-        <span>Signature Menu</span>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="bg-white p-3 rounded-xl border border-[#F2ECE9] text-center">
-          <div class="w-full aspect-square rounded-lg overflow-hidden bg-gray-50 mb-2">
-            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=200&q=80" alt="Menu 1" class="w-full h-full object-cover">
-          </div>
-          <span class="text-xs font-bold block truncate">딸기 프레지에</span>
-          <span class="text-[11px] text-[#FF9E9E] font-semibold mt-0.5 block">8,500원</span>
+      
+      <div class="grid grid-cols-2 gap-4 md:gap-6">
+        <!-- 1번째 줄: 글 & 사진 -->
+        <div class="bg-[#F5EBE6] p-6 md:p-8 rounded-2xl border border-[#EFE5E0] flex flex-col justify-center">
+          <span class="text-[10px] text-[#8D6E63] font-bold tracking-wider uppercase mb-2">01. Premium Ingredients</span>
+          <h3 class="text-base md:text-lg font-bold text-[#3E2723] mb-2">최상의 재료</h3>
+          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">AOP 인증 프랑스 버터와 유기농 밀가루만을 사용하여 깊은 풍미를 완성합니다.</p>
         </div>
-        <div class="bg-white p-3 rounded-xl border border-[#F2ECE9] text-center">
-          <div class="w-full aspect-square rounded-lg overflow-hidden bg-gray-50 mb-2">
-            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=200&q=80" alt="Menu 2" class="w-full h-full object-cover">
-          </div>
-          <span class="text-xs font-bold block truncate">바닐라 까눌레</span>
-          <span class="text-[11px] text-[#FF9E9E] font-semibold mt-0.5 block">3,800원</span>
+        <div class="h-40 md:h-60 rounded-2xl overflow-hidden border border-[#EFE5E0]">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Ingredients" class="w-full h-full object-cover">
+        </div>
+
+        <!-- 2번째 줄: 사진 & 글 (교차) -->
+        <div class="h-40 md:h-60 rounded-2xl overflow-hidden border border-[#EFE5E0]">
+          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=500&q=80" alt="Baking" class="w-full h-full object-cover">
+        </div>
+        <div class="bg-[#F5EBE6] p-6 md:p-8 rounded-2xl border border-[#EFE5E0] flex flex-col justify-center">
+          <span class="text-[10px] text-[#8D6E63] font-bold tracking-wider uppercase mb-2">02. Daily Baking</span>
+          <h3 class="text-base md:text-lg font-bold text-[#3E2723] mb-2">당일 생산</h3>
+          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">매일 새벽 갓 구워낸 가장 신선하고 바삭한 디저트만을 선보입니다.</p>
+        </div>
+
+        <!-- 3번째 줄: 글 & 사진 -->
+        <div class="bg-[#F5EBE6] p-6 md:p-8 rounded-2xl border border-[#EFE5E0] flex flex-col justify-center">
+          <span class="text-[10px] text-[#8D6E63] font-bold tracking-wider uppercase mb-2">03. Fine Art</span>
+          <h3 class="text-base md:text-lg font-bold text-[#3E2723] mb-2">아틀리에 감성</h3>
+          <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">단순한 디저트를 넘어, 하나의 예술 작품을 만들 듯 정성을 다합니다.</p>
+        </div>
+        <div class="h-40 md:h-60 rounded-2xl overflow-hidden border border-[#EFE5E0]">
+          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=500&q=80" alt="Artisan" class="w-full h-full object-cover">
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 4. 하단 소셜 링크 -->
-    <div class="mt-auto p-6 bg-[#FAF6F4] border-t border-[#F2ECE9] text-center">
-      <div class="flex justify-center gap-3 max-w-xs mx-auto">
-        <a href="#" class="flex items-center justify-center gap-2 bg-[#4A3E3D] text-white text-xs font-medium py-3 rounded-xl transition shadow-xs flex-1">
+    <!-- 3. 비대칭 3분할 사진 배치 (소제목 + 좌소/중대/우소) -->
+    <section class="space-y-6">
+      <div class="text-center space-y-1">
+        <span class="text-[10px] text-[#8D6E63] font-bold tracking-widest uppercase">Atelier Gallery</span>
+        <h2 class="text-xl font-serif font-bold text-[#3E2723]">르 쁘띠 보뇌르의 순간들</h2>
+      </div>
+
+      <div class="grid grid-cols-4 gap-3 items-center">
+        <!-- 왼쪽 작은 사진 -->
+        <div class="col-span-1 aspect-[3/4] rounded-xl overflow-hidden border border-[#D7CCC8]">
+          <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=300&q=80" alt="Gallery 1" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- 가운데 큰 사진 -->
+        <div class="col-span-2 aspect-square rounded-2xl overflow-hidden border-2 border-[#8D6E63] shadow-md">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Gallery Main" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- 오른쪽 작은 사진 -->
+        <div class="col-span-1 aspect-[3/4] rounded-xl overflow-hidden border border-[#D7CCC8]">
+          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=300&q=80" alt="Gallery 2" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 4. 하단 소셜 링크 및 푸터 -->
+  <footer class="bg-[#F5EBE6] border-t border-[#D7CCC8] py-12 px-4">
+    <div class="max-w-md mx-auto text-center space-y-6">
+      <div class="flex justify-center gap-3">
+        <a href="#" class="flex items-center justify-center gap-2 bg-[#3E2723] text-white text-xs font-medium py-3 px-6 rounded-xl transition flex-1 hover:bg-[#5D4037]">
           <i data-lucide="instagram" class="w-4 h-4"></i><span>인스타그램</span>
         </a>
-        <a href="#" class="flex items-center justify-center gap-2 bg-white text-[#4A3E3D] border border-[#F2ECE9] text-xs font-medium py-3 rounded-xl transition flex-1">
+        <a href="#" class="flex items-center justify-center gap-2 bg-white text-[#3E2723] border border-[#D7CCC8] text-xs font-medium py-3 px-6 rounded-xl transition flex-1 hover:bg-[#F9F6F0]">
           <i data-lucide="message-circle" class="w-4 h-4"></i><span>카카오톡 문의</span>
         </a>
       </div>
-      <p class="text-[10px] text-gray-400 mt-4">© 2026 LE PETIT BONHEUR</p>
+      <p class="text-[10px] text-[#A1887F]">© 2026 LE PETIT BONHEUR. ALL RIGHTS RESERVED.</p>
     </div>
-
-  </div>
+  </footer>
 
   <script>lucide.createIcons();</script>
 </body>
