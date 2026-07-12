@@ -1,198 +1,1496 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Life & Travel Archive - Vintage Flower</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-serif-title { font-family: 'Cinzel', serif; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Life & Travel Archive - Vintage Flower</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="
+https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap"
+rel="stylesheet">
+
+
+<style>
+
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+
+/* 타이틀 */
+.font-serif-title{
+    font-family:'Cinzel',serif;
+}
+
+
+/* 손글씨 */
+.font-hand{
+    font-family:'Caveat',cursive;
+}
+
+
+/* 종이 질감 */
+.paper-bg{
+    background:
+    radial-gradient(
+        circle at top,
+        rgba(255,255,255,.8),
+        transparent 45%
+    ),
+    #F4EFE6;
+}
+
+
+/* 사진 공통 */
+.photo-frame{
+    position:relative;
+}
+
+
+/* 빈티지 테이프 */
+.washi-left,
+.washi-right{
+
+    position:absolute;
+    width:75px;
+    height:22px;
+
+    background:#D8C7B5;
+    opacity:.65;
+
+    z-index:5;
+}
+
+
+.washi-left{
+    top:-10px;
+    left:25px;
+    transform:rotate(-8deg);
+}
+
+
+.washi-right{
+    top:-10px;
+    right:25px;
+    transform:rotate(7deg);
+}
+
+
+/* 작은 여행 스탬프 */
+
+.travel-stamp{
+
+    width:75px;
+    height:75px;
+
+    border:1px solid #A08E81;
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    font-size:10px;
+    letter-spacing:.15em;
+
+    color:#8B7355;
+
+    transform:rotate(-12deg);
+
+}
+
+
+/* 기록 라벨 */
+
+.archive-label{
+
+    font-size:10px;
+
+    letter-spacing:.35em;
+
+    color:#9B8777;
+
+}
+
+</style>
+
+
 </head>
-<!-- Life/여행 최적화 색감: 부드러운 밀크티 베이지(bg-[#F9F6F0]) + 깊은 에스프레소 브라운(text-[#3E342F]) -->
-<body class="bg-[#F9F6F0] text-[#3E342F] antialiased overflow-x-hidden">
-
-  <!-- 전체 컨테이너 -->
-  <div class="w-full space-y-36 pb-24">
-
-    <!-- 1. [요구사항 1] 대문 사진 위에 제목과 설명이 완전히 얹어지는(오버레이) 형태 -->
-    <header class="w-full px-0">
-      <div class="relative w-full aspect-[21/9] md:aspect-[24/9] overflow-hidden border-b border-[#E5DEC9]">
-        <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1800&q=80" alt="Top Full Width Banner" class="w-full h-full object-cover brightness-75">
-        
-        <!-- 이미지 위의 텍스트 레이어 -->
-        <div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center p-6">
-          <span class="text-[10px] md:text-xs tracking-[0.4em] text-[#E5DEC9] uppercase font-medium block mb-2">Wanderlust & Collectibles</span>
-          <h1 class="text-3xl md:text-6xl font-serif-title font-light tracking-widest text-white">VINTAGE FLOWER</h1>
-          <div class="w-16 h-[1px] bg-white/40 my-4"></div>
-          <p class="text-[11px] md:text-xs text-white/90 leading-relaxed font-light max-w-xl mx-auto drop-shadow-xs">
-            낯선 유럽의 골목길, 오래된 서점의 책장 사이에서 발견한 말린 꽃잎의 기록. 일상과 여행이 교차하는 순간의 기록들을 조용히 엮어둡니다.
-          </p>
-        </div>
-      </div>
-    </header>
 
 
-    <!-- 2. [요구사항 2] 펜던트처럼 갸름하고 커진 타원형 사진(우측) + 소제목/설명(좌측) 배치 -->
-    <section class="w-full max-w-5xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <!-- 좌측: 소제목과 설명 -->
-        <div class="col-span-1 md:col-span-6 space-y-3">
-          <span class="text-xs font-mono text-[#A08E81] tracking-widest">CHAPTER. 01</span>
-          <h3 class="text-xl md:text-2xl font-serif-title tracking-wide text-[#3E342F]">시간을 머금은 펜던트</h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-            둥글고 투박한 알약 형태를 완전히 벗어나, 아래위로 길고 유려하게 떨어지는 주얼리 펜던트 실루엣의 타원 프레임입니다. 사진의 스케일을 키워 우측에 배치하고, 좌측에는 여행지의 아침 공기와 비하인드 스토리를 담아 여유로운 레이아웃을 완성했습니다.
-          </p>
-        </div>
-        <!-- 우측: 펜던트형 대형 타원 사진 (수직 인장 비례 강조) -->
-        <div class="col-span-1 md:col-span-6 flex justify-center md:justify-end">
-          <div class="w-72 md:w-80 aspect-[1/2] rounded-[160px] overflow-hidden border border-[#E5DEC9] shadow-sm bg-white">
-            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Pendant Ellipse 1" class="w-full h-full object-cover">
-          </div>
-        </div>
-      </div>
-    </section>
+<body class="
+paper-bg
+text-[#40352D]
+antialiased
+overflow-x-hidden
+">
 
 
-    <!-- 3. [요구사항 3] 가로로 긴 띠 형태의 슬림한 이미지 배너 (기존 대비 1/5 두께) -->
-    <section class="w-full px-0">
-      <!-- aspect-[21/9]에서 아주 얇은 슬릿 형태인 aspect-[21/2] 혹은 고정 높이(h-24 md:h-36)로 띠 연출 -->
-      <div class="w-full h-24 md:h-36 overflow-hidden border-y border-[#E5DEC9]">
-        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80" alt="Slim Ribbon Image" class="w-full h-full object-cover">
-      </div>
-    </section>
+<div class="w-full space-y-36 pb-24">
 
 
-    <!-- 4. [요구사항 6 반영] 누운 아치 직전 세로 타원 사진 세트 -->
-    <section class="w-full max-w-5xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <!-- 좌측: 펜던트형 대형 타원 사진 -->
-        <div class="col-span-1 md:col-span-6 flex justify-center md:justify-start">
-          <div class="w-72 md:w-80 aspect-[1/2] rounded-[160px] overflow-hidden border border-[#E5DEC9] shadow-sm bg-white">
-            <img src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80" alt="Pendant Ellipse 2" class="w-full h-full object-cover">
-          </div>
-        </div>
-        <!-- 우측: 소제목과 설명 -->
-        <div class="col-span-1 md:col-span-6 space-y-3">
-          <span class="text-xs font-mono text-[#A08E81] tracking-widest">CHAPTER. 02</span>
-          <h3 class="text-xl md:text-2xl font-serif-title tracking-wide text-[#3E342F]">조각난 여정의 수집</h3>
-          <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-            여행지에서 마주친 수많은 오브제 중, 가장 사소하지만 영원히 바래지 않을 조각들을 보존합니다. 길쭉한 프레임 틈새로 비쳐 들어오는 채도 낮은 감성들은 일상을 환기시키는 시각적 쉼표가 됩니다.
-          </p>
-        </div>
-      </div>
-    </section>
+
+<!-- ============================= -->
+<!-- HERO -->
+<!-- ============================= -->
 
 
-    <!-- 5. [요구사항 4] 부활한 3단 아치 창문 세로 사진 + 하단 각각 설명 배치 섹션 -->
-    <section class="w-full max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- 아치 창문 1 -->
-        <div class="space-y-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-[2/3] rounded-t-full overflow-hidden border border-[#E5DEC9] bg-white shadow-xs">
-            <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Arch Window 1" class="w-full h-full object-cover">
-          </div>
-          <div class="space-y-1">
-            <h4 class="text-sm font-semibold text-[#3E342F]">Routine .01</h4>
-            <p class="text-xs text-gray-500 font-light leading-relaxed px-2">로컬 마켓에서 데려온 빈티지 소품들과 말린 유칼립투스의 정렬.</p>
-          </div>
-        </div>
-
-        <!-- 아치 창문 2 -->
-        <div class="space-y-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-[2/3] rounded-t-full overflow-hidden border border-[#E5DEC9] bg-white shadow-xs">
-            <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Arch Window 2" class="w-full h-full object-cover">
-          </div>
-          <div class="space-y-1">
-            <h4 class="text-sm font-semibold text-[#3E342F]">Routine .02</h4>
-            <p class="text-xs text-gray-500 font-light leading-relaxed px-2">햇살이 부서지는 창가 자리에 모아둔 트래블 저널과 드로잉 잉크.</p>
-          </div>
-        </div>
-
-        <!-- 아치 창문 3 -->
-        <div class="space-y-4 flex flex-col items-center text-center">
-          <div class="w-full aspect-[2/3] rounded-t-full overflow-hidden border border-[#E5DEC9] bg-white shadow-xs">
-            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Arch Window 3" class="w-full h-full object-cover">
-          </div>
-          <div class="space-y-1">
-            <h4 class="text-sm font-semibold text-[#3E342F]">Routine .03</h4>
-            <p class="text-xs text-gray-500 font-light leading-relaxed px-2">작은 카페테라스에서 보낸 오후의 커피 향과 조용한 사유의 조각.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
+<header class="w-full">
 
 
-    <!-- 6. [요구사항 5 유지] 옆으로 누운 아치 창문 지그재그 그리드 (양옆 공백 없음) -->
-    <section class="w-full space-y-6">
-      <div class="w-full flex flex-col">
-        
-        <!-- [누운 아치 1] -->
-        <div class="grid grid-cols-1 md:grid-cols-2 w-full items-center border-b border-[#E5DEC9]/40 py-8 md:py-0">
-          <div class="w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden border border-[#E5DEC9] rounded-r-full bg-white">
-            <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80" alt="Lying Arch 1" class="w-full h-full object-cover">
-          </div>
-          <div class="p-8 md:p-16 space-y-2 text-left">
-            <span class="text-[10px] font-mono text-[#A08E81] tracking-widest block">MEMORIES. A</span>
-            <h4 class="text-base font-semibold text-[#3E342F]">영색의 기억과 드라이플라워</h4>
-            <p class="text-xs text-gray-600 font-light leading-relaxed">
-              화면 끝에서 흘러나와 안쪽으로 둥글게 스며드는 반원 형태. 바스러질 듯 연약하지만 가장 아름다운 색을 품고 있는 꽃잎들의 흔적을 프레임 안에 안전하게 밀봉합니다.
-            </p>
-          </div>
-        </div>
+<div class="
+relative 
+w-full 
+aspect-[16/7]
+overflow-hidden
+border-b
+border-[#D8C7B5]
+">
 
-        <!-- [누운 아치 2] -->
-        <div class="grid grid-cols-1 md:grid-cols-2 w-full items-center border-b border-[#E5DEC9]/40 py-8 md:py-0">
-          <div class="p-8 md:p-16 space-y-2 text-left md:text-right order-2 md:order-1">
-            <span class="text-[10px] font-mono text-[#A08E81] tracking-widest block">MEMORIES. B</span>
-            <h4 class="text-base font-semibold text-[#3E342F]">골목길 플리마켓의 수확</h4>
-            <p class="text-xs text-gray-600 font-light leading-relaxed">
-              우측 경계선에 딱 붙어 안으로 곡선을 그리는 형태입니다. 여행 가방 깊숙이 소중하게 넣어온 빈티지 레터와 스탬프북들이 가진 시간의 두께를 차분하게 시각화합니다.
-            </p>
-          </div>
-          <div class="w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden border border-[#E5DEC9] rounded-l-full bg-white order-1 md:order-2">
-            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80" alt="Lying Arch 2" class="w-full h-full object-cover">
-          </div>
-        </div>
 
-        <!-- [누운 아치 3] -->
-        <div class="grid grid-cols-1 md:grid-cols-2 w-full items-center py-8 md:py-0">
-          <div class="w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden border border-[#E5DEC9] rounded-r-full bg-white">
-            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1000&q=80" alt="Lying Arch 3" class="w-full h-full object-cover">
-          </div>
-          <div class="p-8 md:p-16 space-y-2 text-left">
-            <span class="text-[10px] font-mono text-[#A08E81] tracking-widest block">MEMORIES. C</span>
-            <h4 class="text-base font-semibold text-[#3E342F]">다시 이어질 여정의 여운</h4>
-            <p class="text-xs text-gray-600 font-light leading-relaxed">
-              마지막 기록을 장식하는 수평 아치 윈도우입니다. 닫혀있지 않고 내부를 향해 활짝 열린 아치 라인을 통해, 앞으로 채워나갈 새로운 여정과 라이프스타일의 무한한 가능성을 열어둡니다.
-            </p>
-          </div>
-        </div>
+<img
 
-      </div>
-    </section>
+src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1800&q=80"
 
-  </div>
+class="
+w-full
+h-full
+object-cover
+brightness-[0.72]
+">
 
-  <!-- [요구사항 5] 연락 배너가 전혀 없는, 오직 작성일과 기록 정보만 담은 간결한 푸터 -->
-  <footer class="bg-[#3E342F] text-[#E5DEC9] py-10 px-6 text-[11px] font-light tracking-wider border-t border-[#E5DEC9]/20">
-    <div class="w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left text-gray-400">
-      <p class="font-serif-title tracking-widest text-white text-xs">VINTAGE FLOWER TRAVEL JOURNAL</p>
-      <div class="space-y-1 sm:text-right text-[10px] text-gray-400">
-        <p>최초 작성일: 2026년 7월 12일 — Life & Travel Log</p>
-        <p>© 2026 MY VINTAGE ATELIER EDITION. ALL RIGHTS RESERVED.</p>
-      </div>
-    </div>
-  </footer>
 
-  <script>lucide.createIcons();</script>
+<div class="
+absolute
+inset-0
+bg-black/20
+flex
+flex-col
+justify-center
+items-center
+text-center
+p-6
+">
+
+
+<div class="
+absolute
+top-10
+left-10
+travel-stamp
+hidden
+md:flex
+">
+
+TRAVEL<br>
+LOG<br>
+2026
+
+</div>
+
+
+
+<span class="
+text-[10px]
+md:text-xs
+tracking-[0.4em]
+text-[#E8DCCB]
+uppercase
+mb-3
+">
+
+Wanderlust & Collectibles
+
+</span>
+
+
+
+<h1 class="
+text-4xl
+md:text-6xl
+font-serif-title
+tracking-widest
+text-white
+">
+
+VINTAGE FLOWER
+
+</h1>
+
+
+<div class="
+w-16
+h-[1px]
+bg-white/50
+my-5
+">
+</div>
+
+
+<p class="
+text-xs
+text-white/90
+leading-relaxed
+font-light
+max-w-xl
+">
+
+낯선 유럽의 골목길,
+오래된 서점의 책장 사이에서 발견한
+말린 꽃잎과 여행의 기록.
+
+일상과 여행이 교차하는 순간을
+한 페이지씩 조용히 엮어둡니다.
+
+</p>
+
+
+
+<div class="
+absolute
+bottom-8
+right-10
+font-hand
+text-white
+text-2xl
+opacity-80
+rotate-[-5deg]
+">
+
+July memories
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- CHAPTER 01 -->
+<!-- ============================= -->
+
+
+<section class="
+w-full
+max-w-5xl
+mx-auto
+px-6
+">
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-12
+gap-8
+items-center
+">
+
+
+<!-- TEXT -->
+
+
+<div class="
+md:col-span-6
+space-y-4
+">
+
+
+<span class="archive-label">
+
+CHAPTER. 01
+
+</span>
+
+
+<h3 class="
+text-xl
+md:text-2xl
+font-serif-title
+tracking-wide
+">
+
+시간을 머금은 펜던트
+
+</h3>
+
+
+
+<p class="
+text-xs
+md:text-sm
+text-[#74665D]
+leading-relaxed
+font-light
+">
+
+
+둥글고 투박한 형태를 벗어나,
+오래된 주얼리 펜던트처럼 떨어지는
+길고 유려한 타원 프레임.
+
+여행지에서 모은 작은 기억들을
+하나의 보석처럼 보존합니다.
+
+
+</p>
+
+
+
+<div class="
+font-hand
+text-xl
+text-[#9B8777]
+pt-3
+">
+
+"Small moments become memories."
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- IMAGE -->
+
+
+<div class="
+md:col-span-6
+flex
+justify-center
+md:justify-end
+">
+
+
+<div class="photo-frame">
+
+
+<div class="washi-left"></div>
+
+
+
+<div class="
+w-72
+md:w-80
+aspect-[3/5]
+rounded-[160px]
+overflow-hidden
+border
+border-[#D8C7B5]
+shadow-sm
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- ============================= -->
+<!-- SLIM TRAVEL RIBBON -->
+<!-- ============================= -->
+
+
+<section class="w-full px-0">
+
+
+<div class="
+relative
+w-full
+h-24
+md:h-36
+overflow-hidden
+border-y
+border-[#D8C7B5]
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80"
+
+class="
+w-full
+h-full
+object-cover
+brightness-[0.85]
+">
+
+
+<div class="
+absolute
+inset-0
+flex
+items-center
+justify-center
+">
+
+
+<p class="
+font-hand
+text-white
+text-3xl
+tracking-wide
+rotate-[-3deg]
+drop-shadow
+">
+
+postcards & little memories
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- CHAPTER 02 -->
+<!-- ============================= -->
+
+
+<section class="
+w-full
+max-w-5xl
+mx-auto
+px-6
+">
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-12
+gap-8
+items-center
+">
+
+
+<!-- IMAGE -->
+
+
+<div class="
+md:col-span-6
+flex
+justify-center
+md:justify-start
+">
+
+
+<div class="photo-frame">
+
+
+<div class="washi-right"></div>
+
+
+<div class="
+w-72
+md:w-80
+aspect-[3/5]
+rounded-[160px]
+overflow-hidden
+border
+border-[#D8C7B5]
+shadow-sm
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- TEXT -->
+
+
+<div class="
+md:col-span-6
+space-y-4
+">
+
+
+<span class="archive-label">
+
+CHAPTER. 02
+
+</span>
+
+
+
+<h3 class="
+text-xl
+md:text-2xl
+font-serif-title
+tracking-wide
+">
+
+조각난 여정의 수집
+
+</h3>
+
+
+
+<p class="
+text-xs
+md:text-sm
+text-[#74665D]
+leading-relaxed
+font-light
+">
+
+여행지에서 마주친 작은 오브제,
+빛바랜 편지와 오래된 꽃잎.
+
+사라질 것 같은 순간들을
+한 페이지씩 모아 기록합니다.
+
+</p>
+
+
+
+<div class="
+border-l
+border-[#C8B49A]
+pl-4
+mt-4
+">
+
+
+<p class="
+font-hand
+text-xl
+text-[#8B7355]
+">
+
+July 12
+
+</p>
+
+
+<p class="
+text-[10px]
+tracking-widest
+text-[#9B8777]
+">
+
+EUROPE MEMORY ARCHIVE
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- THREE ARCH WINDOWS -->
+<!-- ============================= -->
+
+
+<section class="
+w-full
+max-w-6xl
+mx-auto
+px-6
+">
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-3
+gap-8
+">
+
+
+
+<!-- ARCH 01 -->
+
+
+<div class="
+space-y-4
+flex
+flex-col
+items-center
+text-center
+">
+
+
+<div class="photo-frame w-full">
+
+
+<div class="washi-left"></div>
+
+
+<div class="
+w-full
+aspect-[2/3]
+rounded-t-full
+overflow-hidden
+border
+border-[#D8C7B5]
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+</div>
+
+
+</div>
+
+
+
+<div>
+
+
+<h4 class="
+text-sm
+font-semibold
+">
+
+PAGE .01
+
+</h4>
+
+
+<p class="
+font-hand
+text-lg
+text-[#9B8777]
+">
+
+Morning Market
+
+</p>
+
+
+<p class="
+text-xs
+text-[#74665D]
+leading-relaxed
+px-2
+">
+
+로컬 마켓에서 발견한
+작은 빈티지 오브제와
+말린 꽃의 기록.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ARCH 02 -->
+
+
+<div class="
+space-y-4
+flex
+flex-col
+items-center
+text-center
+">
+
+
+<div class="photo-frame w-full">
+
+
+<div class="washi-right"></div>
+
+
+<div class="
+w-full
+aspect-[2/3]
+rounded-t-full
+overflow-hidden
+border
+border-[#D8C7B5]
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+</div>
+
+
+</div>
+
+
+
+<div>
+
+
+<h4 class="
+text-sm
+font-semibold
+">
+
+PAGE .02
+
+</h4>
+
+
+<p class="
+font-hand
+text-lg
+text-[#9B8777]
+">
+
+Quiet Afternoon
+
+</p>
+
+
+<p class="
+text-xs
+text-[#74665D]
+leading-relaxed
+px-2
+">
+
+햇살이 머무는 창가,
+여행 노트와 드로잉 잉크.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ARCH 03 -->
+
+
+<div class="
+space-y-4
+flex
+flex-col
+items-center
+text-center
+">
+
+
+<div class="photo-frame w-full">
+
+
+<div class="washi-left"></div>
+
+
+<div class="
+w-full
+aspect-[2/3]
+rounded-t-full
+overflow-hidden
+border
+border-[#D8C7B5]
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+</div>
+
+
+</div>
+
+
+
+<div>
+
+
+<h4 class="
+text-sm
+font-semibold
+">
+
+PAGE .03
+
+</h4>
+
+
+<p class="
+font-hand
+text-lg
+text-[#9B8777]
+">
+
+Cafe Memory
+
+</p>
+
+
+<p class="
+text-xs
+text-[#74665D]
+leading-relaxed
+px-2
+">
+
+작은 카페테라스에서
+머문 오후의 기록.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+<!-- ============================= -->
+<!-- HORIZONTAL ARCH MEMORY -->
+<!-- ============================= -->
+
+
+<section class="
+w-full
+space-y-6
+">
+
+
+<div class="w-full flex flex-col">
+
+
+
+
+
+<!-- MEMORY A -->
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-2
+w-full
+items-center
+border-b
+border-[#D8C7B5]/50
+py-8
+md:py-0
+">
+
+
+
+<div class="photo-frame">
+
+
+<div class="washi-left"></div>
+
+
+<div class="
+w-full
+aspect-[16/8]
+md:aspect-[2/1]
+overflow-hidden
+border
+border-[#D8C7B5]
+rounded-r-full
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="
+p-8
+md:p-16
+space-y-3
+text-left
+">
+
+
+<span class="archive-label">
+
+MEMORIES. A
+
+</span>
+
+
+
+<h4 class="
+text-base
+font-semibold
+">
+
+영원의 기억과 드라이플라워
+
+</h4>
+
+
+
+<p class="
+text-xs
+text-[#74665D]
+leading-relaxed
+font-light
+">
+
+화면 끝에서 부드럽게 이어지는
+반원 형태의 여행 기록.
+
+바스러질 듯 작은 꽃잎 하나에도
+그날의 공기와 시간이 남아있습니다.
+
+</p>
+
+
+
+<div class="
+font-hand
+text-xl
+text-[#9B8777]
+">
+
+Paris · 10:30 AM
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- MEMORY B -->
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-2
+w-full
+items-center
+border-b
+border-[#D8C7B5]/50
+py-8
+md:py-0
+">
+
+
+
+<div class="
+p-8
+md:p-16
+space-y-3
+text-left
+md:text-right
+order-2
+md:order-1
+">
+
+
+<span class="archive-label">
+
+MEMORIES. B
+
+</span>
+
+
+
+<h4 class="
+text-base
+font-semibold
+">
+
+골목길 플리마켓의 수집
+
+</h4>
+
+
+
+<p class="
+text-xs
+text-[#74665D]
+leading-relaxed
+font-light
+">
+
+오래된 거리에서 발견한
+빛바랜 엽서와 작은 소품들.
+
+여행 가방 깊숙이 넣어온
+시간의 조각을 기록합니다.
+
+</p>
+
+
+
+<div class="
+font-hand
+text-xl
+text-[#9B8777]
+">
+
+Found in old street
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="
+photo-frame
+order-1
+md:order-2
+">
+
+
+<div class="washi-right"></div>
+
+
+<div class="
+w-full
+aspect-[16/8]
+md:aspect-[2/1]
+overflow-hidden
+border
+border-[#D8C7B5]
+rounded-l-full
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- MEMORY C -->
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-2
+w-full
+items-center
+py-8
+md:py-0
+">
+
+
+
+<div class="photo-frame">
+
+
+<div class="washi-left"></div>
+
+
+<div class="
+w-full
+aspect-[16/8]
+md:aspect-[2/1]
+overflow-hidden
+border
+border-[#D8C7B5]
+rounded-r-full
+bg-white
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1000&q=80"
+
+class="
+w-full
+h-full
+object-cover
+">
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="
+p-8
+md:p-16
+space-y-3
+text-left
+">
+
+
+<span class="archive-label">
+
+MEMORIES. C
+
+</span>
+
+
+
+<h4 class="
+text-base
+font-semibold
+">
+
+다시 이어질 여정의 여운
+
+</h4>
+
+
+
+<p class="
+text-xs
+text-[#74665D]
+leading-relaxed
+font-light
+">
+
+마지막 페이지를 장식하는
+열린 아치 윈도우.
+
+끝이 아닌 새로운 여행의 시작을
+기록합니다.
+
+</p>
+
+
+
+<div class="
+font-hand
+text-xl
+text-[#9B8777]
+">
+
+To be continued...
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- FOOTER -->
+<!-- ============================= -->
+
+
+<footer class="
+bg-[#40352D]
+text-[#E8DCCB]
+py-10
+px-6
+text-[11px]
+tracking-wider
+border-t
+border-[#D8C7B5]/20
+">
+
+
+<div class="
+w-full
+max-w-7xl
+mx-auto
+flex
+flex-col
+sm:flex-row
+justify-between
+items-center
+gap-4
+text-center
+sm:text-left
+">
+
+
+
+<div>
+
+
+<p class="
+font-serif-title
+tracking-widest
+text-white
+text-xs
+">
+
+VINTAGE FLOWER
+
+</p>
+
+
+<p class="
+font-hand
+text-lg
+text-[#D8C7B5]
+mt-2
+">
+
+Travel diary archive
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="
+sm:text-right
+text-[10px]
+text-[#C8B49A]
+">
+
+
+<p>
+
+First page written :
+2026.07.12
+
+</p>
+
+
+<p>
+
+© MY VINTAGE ATELIER EDITION
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</footer>
+
+
+
+
+</div>
+
+
+
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+
 </body>
-</html>
+</html>  
