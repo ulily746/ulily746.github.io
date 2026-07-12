@@ -52,49 +52,48 @@
     </header>
 
 
-    <!-- 2. [요구사항 2] 2x3 배열 6개 사각형 배치 수정 -->
-    <!-- 첫 줄: [설명] -> [사진] -> [설명]  /  둘째 줄: [사진] -> [설명] -> [사진] -->
-    <section class="w-full max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-        
-        <!-- [첫 번째 줄, 1열] 설명 상자 -->
-        <div class="flex flex-col justify-center items-center text-center p-6 bg-[#EBE9E2] border border-[#D1C7BD] aspect-[3/4] rounded-2xl shadow-xs">
-          <span class="text-[10px] font-mono text-[#7A6953] tracking-widest mb-2">PHASE 01</span>
-          <h4 class="text-sm font-semibold mb-2">물성 변화 측정</h4>
-          <p class="text-[11px] text-gray-600 font-light leading-relaxed">온도 변화에 따른 단백질 분자 사슬의 결합 밀도 변화 관찰.</p>
-        </div>
+  <!-- 2. [교정 버전] 6개 사각형 배열: 모서리를 대폭 늘리고 여백을 준 감성 레이아웃 -->
+<section class="w-full px-2">
+  <div class="grid grid-cols-2 gap-4">
+    
+    <!-- [행 1 - 열 1] 텍스트 상자: 조약돌처럼 둥글게(rounded-[35px]), 글자는 작고 여백은 넓게 -->
+    <div class="flex flex-col justify-center items-center text-center p-5 bg-[#FAF2EB] border border-[#E8DDD3] aspect-square rounded-[35px] shadow-xs">
+      <p class="text-[10.5px] text-[#5A4E4A] font-light leading-relaxed tracking-tight">
+        모든 여정은 오래된 레시피 노트를 분석하고 구조화하는 것에서 시작되었습니다.
+      </p>
+    </div>
+    
+    <!-- [행 1 - 열 2] 사진 상자: 이미지도 똑같이 둥글게 깎기 -->
+    <div class="w-full aspect-square overflow-hidden border border-[#E8DDD3] rounded-[35px] shadow-xs">
+      <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Archive Material 1" class="w-full h-full object-cover">
+    </div>
 
-        <!-- [첫 번째 줄, 2열] 사진 상자 -->
-        <div class="w-full aspect-[3/4] overflow-hidden border border-[#D1C7BD] rounded-2xl shadow-xs">
-          <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=600&q=80" alt="Grid 1" class="w-full h-full object-cover">
-        </div>
+    <!-- [행 2 - 열 1] 사진 상자 -->
+    <div class="w-full aspect-square overflow-hidden border border-[#E8DDD3] rounded-[35px] shadow-xs">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80" alt="Archive Material 2" class="w-full h-full object-cover">
+    </div>
+    
+    <!-- [행 2 - 열 2] 텍스트 상자 -->
+    <div class="flex flex-col justify-center items-center text-center p-5 bg-[#FAF2EB] border border-[#E8DDD3] aspect-square rounded-[35px] shadow-xs">
+      <p class="text-[10.5px] text-[#5A4E4A] font-light leading-relaxed tracking-tight">
+        오늘날 구워내는 프리미엄 가치는 전통적인 물성과 현대의 밸런스가 이룬 조화입니다.
+      </p>
+    </div>
 
-        <!-- [첫 번째 줄, 3열] 설명 상자 -->
-        <div class="flex flex-col justify-center items-center text-center p-6 bg-[#EBE9E2] border border-[#D1C7BD] aspect-[3/4] rounded-2xl shadow-xs">
-          <span class="text-[10px] font-mono text-[#7A6953] tracking-widest mb-2">PHASE 02</span>
-          <h4 class="text-sm font-semibold mb-2">점탄성 분석</h4>
-          <p class="text-[11px] text-gray-600 font-light leading-relaxed">글루텐 매트릭스 형성에 따른 내부 기포 유지력 통계 데이터.</p>
-        </div>
+    <!-- [행 3 - 열 1] 텍스트 상자 -->
+    <div class="flex flex-col justify-center items-center text-center p-5 bg-[#FAF2EB] border border-[#E8DDD3] aspect-square rounded-[35px] shadow-xs">
+      <p class="text-[10.5px] text-[#5A4E4A] font-light leading-relaxed tracking-tight">
+        단순히 달콤함을 넘어 시각적 형태학과 텍스처를 지표화하는 연구 아카이브.
+      </p>
+    </div>
+    
+    <!-- [행 3 - 열 2] 사진 상자 -->
+    <div class="w-full aspect-square overflow-hidden border border-[#E8DDD3] rounded-[35px] shadow-xs">
+      <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80" alt="Archive Material 3" class="w-full h-full object-cover">
+    </div>
 
-        <!-- [두 번째 줄, 1열] 사진 상자 -->
-        <div class="w-full aspect-[3/4] overflow-hidden border border-[#D1C7BD] rounded-2xl shadow-xs">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" alt="Grid 2" class="w-full h-full object-cover">
-        </div>
-
-        <!-- [두 번째 줄, 2열] 설명 상자 -->
-        <div class="flex flex-col justify-center items-center text-center p-6 bg-[#EBE9E2] border border-[#D1C7BD] aspect-[3/4] rounded-2xl shadow-xs">
-          <span class="text-[10px] font-mono text-[#7A6953] tracking-widest mb-2">PHASE 03</span>
-          <h4 class="text-sm font-semibold mb-2">기하학적 매칭</h4>
-          <p class="text-[11px] text-gray-600 font-light leading-relaxed">플레이팅 구성 시 시각적 안정감을 부여하는 수학적 여백 연구.</p>
-        </div>
-
-        <!-- [두 번째 줄, 3열] 사진 상자 -->
-        <div class="w-full aspect-[3/4] overflow-hidden border border-[#D1C7BD] rounded-2xl shadow-xs">
-          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=600&q=80" alt="Grid 3" class="w-full h-full object-cover">
-        </div>
-
-      </div>
-    </section>
+  </div>
+</section>
 
 
     <!-- 3. 기존 레이아웃 유지: 3개 사진 배치 (양옆은 작고 가운데는 큰 세로 비율) -->
