@@ -1,205 +1,230 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* =====================================
+SOFT NATURAL EDITORIAL ARCHIVE SYSTEM
+===================================== */
+
+/* 0. 기본 세팅 (아이보리 배경 감성) */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2DF; /* 기존 사이트 시그니처 배경색 */
+    font-family: 'Noto Serif KR', 'Times New Roman', serif;
+    color: #333;
 }
 
-
-body{
-
-    background:#F2F2DF;
-
-    color:#222;
-
-    font-family:'Inter',sans-serif;
-
+.archive-wrapper {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
 }
 
-
-
-.archive-layout{
-
-    display:flex;
-
-    min-height:100vh;
-
+/* =====================================
+1. LEFT SIDEBAR (사이드바 스타일)
+===================================== */
+.archive-sidebar {
+    width: 320px;
+    padding: 60px 40px;
+    border-right: 1px solid #E5DFD3; /* 은은한 구분선 */
 }
 
-
-
-
-
-.archive-sidebar{
-
-    width:260px;
-
-    height:100vh;
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    background:#111;
-
-    color:#F2F2DF;
-
-    padding:60px 40px;
-
+/* 스크롤을 내려도 사이드바는 고정되도록 */
+.sidebar-sticky {
+    position: sticky;
+    top: 60px;
 }
 
-
-
-
-.archive-logo{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:40px;
-
-    margin-bottom:80px;
-
+.sidebar-title {
+    margin-bottom: 40px;
 }
 
-
-
-
-.archive-sidebar nav{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:30px;
-
+.sidebar-title .sub-script {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    color: #8B6B4F;
+    display: block;
+    margin-bottom: -5px;
 }
 
-
-
-.archive-sidebar a{
-
-    color:#F2F2DF;
-
-    text-decoration:none;
-
-    font-size:14px;
-
-    letter-spacing:2px;
-
+.sidebar-title h2 {
+    font-size: 36px;
+    margin: 0;
+    font-weight: normal;
+    letter-spacing: 1px;
 }
 
-
-
-
-
-.back{
-
-    position:absolute;
-
-    bottom:50px;
-
+/* 검색창 */
+.search-box {
+    position: relative;
+    margin-bottom: 45px;
 }
 
-
-
-
-
-.archive-content{
-
-    margin-left:260px;
-
-    padding:100px 80px;
-
-    width:100%;
-
+.search-box input {
+    width: 100%;
+    padding: 12px 15px;
+    background: transparent;
+    border: 1px solid #B9AA95;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    color: #333;
+    box-sizing: border-box;
 }
 
-
-
-section{
-
-    min-height:500px;
-
-    margin-bottom:100px;
-
+.search-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-
-
-section span{
-
-    letter-spacing:3px;
-
-    font-size:12px;
-
-    color:#8B7355;
-
+/* 메뉴 및 태그 공통 스타일 */
+.category-nav h3, .tag-box h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #8B6B4F;
+    margin-bottom: 20px;
 }
 
-
-
-
-h1{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:70px;
-
-    font-weight:400;
-
-    margin:20px 0 50px;
-
+.category-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 45px 0;
 }
 
-
-
-
-
-.archive-card{
-
-    background:white;
-
-    padding:35px;
-
-    margin-bottom:25px;
-
-    max-width:700px;
-
-    box-shadow:0 15px 30px rgba(0,0,0,.04);
-
+.category-nav li {
+    margin-bottom: 15px;
 }
 
-
-
-.archive-card h2{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:32px;
-
-    font-weight:400;
-
+.category-nav a {
+    text-decoration: none;
+    color: #666;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    transition: color 0.3s;
 }
 
-
-
-.archive-card p{
-
-    margin-top:10px;
-
-    color:#666;
-
+.category-nav li.active a, .category-nav a:hover {
+    color: #111;
+    font-weight: bold;
 }
 
+.category-nav .count {
+    font-size: 12px;
+    color: #999;
+}
 
+.tags a {
+    display: inline-block;
+    text-decoration: none;
+    color: #777;
+    font-size: 13px;
+    margin: 0 8px 8px 0;
+    transition: color 0.3s;
+}
 
-.archive-card small{
+.tags a:hover {
+    color: #111;
+}
 
-    display:block;
+/* =====================================
+2. RIGHT MAIN LIST (비대칭 아치 카드 레이아웃)
+===================================== */
+.archive-content {
+    flex: 1;
+    padding: 80px 60px;
+}
 
-    margin-top:20px;
+/* 2열 배열 그리드 */
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px 50px; /* 행 여백을 넓게 주어 오브제 느낌 강조 */
+}
 
-    color:#999;
+/* 카드 공통 스타일 */
+.archive-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+}
 
+/* 🌟 레퍼런스 감성 치트키: 짝수번째 카드를 아래로 슬쩍 내려 지그재그 리듬감 부여 */
+.archive-card:nth-child(even) {
+    margin-top: 60px;
+}
+
+.card-img-wrap {
+    width: 100%;
+    height: 480px; /* 고정 크기 내에서 프레임 모양으로 자름 */
+    overflow: hidden;
+    background-color: #E5DCD5;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    transition: box-shadow 0.4s;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* Hover 마우스 올렸을 때 액자 효과 */
+.archive-card:hover {
+    transform: translateY(-5px);
+}
+
+.archive-card:hover .card-img-wrap img {
+    transform: scale(1.03);
+}
+
+/* 🎨 카드별 모양 깎기 (오브제 프레임 디자인) */
+.type-arch .card-img-wrap {
+    border-radius: 240px 240px 0 0; /* 완벽한 아치형 */
+}
+
+.type-oval .card-img-wrap {
+    border-radius: 240px; /* 긴 알약/타원 형태 */
+}
+
+.type-bottom-round .card-img-wrap {
+    border-radius: 0 0 240px 240px; /* 하단만 아치형 */
+}
+
+.type-rect .card-img-wrap {
+    border-radius: 4px; /* 단정한 사각형 */
+}
+
+/* 카드 하단 텍스트 정렬 */
+.card-txt {
+    padding: 25px 10px 0 10px;
+    text-align: center; /* 레퍼런스 특유의 중앙 정렬 감성 */
+}
+
+.card-txt .category {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #8B6B4F;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.card-txt .title {
+    font-size: 19px;
+    font-weight: normal;
+    margin: 0 0 8px 0;
+    color: #222;
+    line-height: 1.4;
+}
+
+.card-txt .date {
+    font-size: 12px;
+    color: #999;
+    margin: 0;
 }
