@@ -148,10 +148,10 @@ HERO IMAGE & ARCH FRAME (완전 정돈됨)
 
     position:absolute;
 
-    width:540px;     /* 좌우 폭 증가 */
-    height:780px;
+    width:580px;     /* 좌우 폭 증가 */
+    height:820px;
 
-    top:-55px;       /* 아치 전체 위로 이동 */
+    top:-60px;       /* 아치 전체 위로 이동 */
 
     left:50%;
 
