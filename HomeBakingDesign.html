@@ -40,11 +40,9 @@
     }
   </style>
 </head>
-<!-- 레퍼런스의 배경인 체크 식탁보와 빈티지 홈무드: 연한 딸기우유빛 베이지 바탕 -->
-<body class="bg-[#F9F1EB] text-[#5A4545] antialiased min-h-screen py-10 px-4 flex flex-col items-center justify-center">
+<body class="bg-[#F6EFE6] text-[#5A4545] antialiased min-h-screen">
 
-  <!-- 메인 스마트폰 목업 스케일 컨테이너 (레퍼런스 왼쪽의 길고 아기자기한 세로형 레이아웃 원본 비율 완벽 재현) -->
-  <div class="w-full max-w-[360px] bg-[#FFFBF7] rounded-[40px] shadow-xl overflow-hidden border border-[#EFE5DC] p-5 flex flex-col space-y-10 relative">
+<div class="w-full min-h-screen bg-[#FFFBF7] relative overflow-hidden">
     
     <!-- 반짝이 별 장식 상단 오버레이 -->
     <div class="absolute top-6 right-6 text-[#D15A5A] opacity-60 animate-pulse">
@@ -53,7 +51,7 @@
 
     <!-- 1. 프로필/상단: 레퍼런스 특유의 우아하고 아기자기한 오벌(타원형) 메인 액자 프레임 -->
     <header class="text-center pt-4 space-y-4">
-      <div class="w-48 h-64 mx-auto rounded-[100px] overflow-hidden border-2 border-[#D15A5A] p-1.5 bg-white shadow-xs">
+     <div class="w-64 h-[360px] md:w-72 md:h-[420px] mx-auto rounded-[150px] overflow-hidden border-2 border-[#B9857B] p-2 bg-white shadow-sm">
         <!-- 베이킹 및 일상 여행 감성의 메인 사진 -->
         <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=600&q=80" alt="Baking & Me" class="w-full h-full object-cover rounded-[90px]">
       </div>
@@ -78,7 +76,7 @@
 
 
     <!-- 2. 중앙 색션: 빈티지 폴라로이드 스냅샷 & 텍스트 지그재그 배치 (레퍼런스 프라이스존 구조 반영) -->
-    <section class="space-y-8 px-1">
+   <section class="space-y-16 px-2 md:px-8">
       <!-- 타이틀 구역 -->
       <div class="text-center">
         <span class="font-vintage-italic text-2xl text-[#D15A5A] block">Our Sweet Treats</span>
@@ -88,7 +86,7 @@
       <!-- 아이템 1: 좌측 폴라로이드 스냅샷 + 우측 설명 설명 구조 -->
       <div class="flex items-center gap-4">
         <!-- 폴라로이드 스타일 프레임 -->
-        <div class="w-28 bg-white p-2 pb-4 border border-[#EFE5DC] shadow-xs transform -rotate-2 rounded-xs">
+        <div class="w-48 md:w-56 bg-white p-3 pb-8 border border-[#E8D8C3] shadow-md transform -rotate-3">
           <div class="w-full aspect-square overflow-hidden bg-gray-100 mb-1.5">
             <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=400&q=80" alt="Menu 1" class="w-full h-full object-cover">
           </div>
@@ -111,7 +109,7 @@
           <span class="text-xs font-bold text-[#D15A5A]">18,000 원</span>
         </div>
         <!-- 폴라로이드 스타일 프레임 -->
-        <div class="w-28 bg-white p-2 pb-4 border border-[#EFE5DC] shadow-xs transform rotate-3 rounded-xs">
+       <div class="w-48 md:w-56 bg-white p-3 pb-8 border border-[#E8D8C3] shadow-md transform rotate-3">
           <div class="w-full aspect-square overflow-hidden bg-gray-100 mb-1.5">
             <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13636?auto=format&fit=crop&w=400&q=80" alt="Menu 2" class="w-full h-full object-cover">
           </div>
@@ -127,7 +125,7 @@
 
 
     <!-- 3. 하단 스냅 스케치: 아늑한 라이프스타일 한 컷 배너 -->
-    <section class="bg-[#FFF0F0] rounded-[24px] p-4 border border-[#FBE0E0] space-y-3">
+    <section class="bg-[#F8EDE5] rounded-[32px] p-8 border border-[#E8D8C3] space-y-6">
       <div class="w-full aspect-[16/10] overflow-hidden rounded-xl border border-white">
         <img src="https://images.unsplash.com/photo-1513267048331-5611cad82e4f?auto=format&fit=crop&w=600&q=80" alt="Table Mood" class="w-full h-full object-cover">
       </div>
