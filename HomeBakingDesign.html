@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홈베이킹 기록 일기</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-[#D0D7DE] py-6 px-4 flex justify-center antialiased">
+
+  <div class="w-full max-w-md bg-[#F4F7F9] rounded-[40px] shadow-2xl overflow-hidden flex flex-col relative text-[#4E5660] font-sans border border-[#E0E7EC]">
+    
+    <div class="absolute top-6 left-6 z-10">
+      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-white/80 backdrop-blur-xs flex items-center justify-center text-[#4E5660] hover:bg-white transition">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <div class="pt-20 px-6 pb-6 bg-[#E5ECEF] text-center">
+      <span class="text-[9px] tracking-[0.2em] uppercase font-bold text-[#8A97A4] block">My cozy kitchen</span>
+      <h1 class="text-lg font-bold text-[#333C46] mt-1">달라의 홈베이킹 기록 일기</h1>
+      
+      <div class="mt-4 mx-auto w-[65%] bg-white p-2.5 pb-6 rounded-xs shadow-md border border-[#D0D7DE] rotate-[-1.5deg]">
+        <div class="aspect-square rounded-xs overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6">
+      <div class="flex items-center gap-1 text-[10px] font-bold text-[#738496] uppercase mb-3">
+        <i data-lucide="calendar" class="w-3.5 h-3.5"></i><span>Recent Recipe Log</span>
+      </div>
+      
+      <div class="bg-white p-4 pb-5 rounded-xl shadow-xs border border-[#E0E7EC] relative">
+        <div class="absolute -top-1.5 left-1/2 transform -translate-x-1/2 w-16 h-3 bg-[#A2B5CD]/20 border border-dashed border-[#A2B5CD]/40 rounded-xs"></div>
+        <div class="aspect-[4/3] rounded-xs overflow-hidden mb-3">
+          <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+        <h3 class="text-xs font-bold text-[#333C46]">주말의 홈카페: 딸기 생크림 스콘</h3>
+      </div>
+    </div>
+
+    <div class="mt-auto p-6 bg-white border-t border-[#E0E7EC] text-center">
+      <a href="#" class="inline-flex items-center justify-center gap-1.5 bg-[#333C46] text-white text-xs font-medium py-3 px-6 rounded-xl shadow-xs w-full max-w-xs">
+        <i data-lucide="message-circle" class="w-3.5 h-3.5"></i><span>클래스 문의하기</span>
+      </a>
+    </div>
+
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
