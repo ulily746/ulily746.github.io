@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모던 머추어리티</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="min-h-screen bg-[#111111] py-6 px-4 flex justify-center antialiased">
+
+  <div class="w-full max-w-md bg-[#1A1A1A] rounded-[24px] shadow-2xl overflow-hidden flex flex-col relative text-[#D4D4D4] font-sans border border-[#2A2A2A]">
+    
+    <div class="absolute top-6 left-6 z-10">
+      <button onclick="window.history.back()" class="w-10 h-10 rounded-full bg-[#262626] flex items-center justify-center text-white hover:bg-[#333] transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- 1. 히어로 배너 (다크 무드 와이드 이미지) -->
+    <div class="relative w-full aspect-[16/10] bg-zinc-800">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Architecture" class="w-full h-full object-cover opacity-75 mix-blend-luminosity">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] to-transparent"></div>
+    </div>
+
+    <!-- 2. 헤드라인 타이틀 -->
+    <div class="px-6 pt-2 pb-6 text-center">
+      <p class="text-[9px] tracking-[0.3em] text-[#A3A3A3] uppercase font-semibold">Premium Arch & Space</p>
+      <h1 class="text-xl font-light tracking-widest text-white mt-1 uppercase">ARCHIVE STRUCT</h1>
+    </div>
+
+    <!-- 3. 본문 텍스트 정보 -->
+    <div class="px-6 pb-6 space-y-4">
+      <div class="border-l-2 border-[#E5E5E5] pl-4 py-1">
+        <p class="text-xs leading-relaxed text-[#A3A3A3]">
+          우리는 보이지 않는 구조의 본질에 집중합니다. 선과 면, 빛과 그림자가 만들어내는 최소한의 개입을 통해 공간 속에 묵직한 서사를 구현합니다.
+        </p>
+      </div>
+
+      <!-- 프로필 디테일 리스트 -->
+      <div class="bg-[#222222] rounded-xl p-4 space-y-3 border border-[#2A2A2A]">
+        <div class="flex justify-between items-center text-xs">
+          <span class="text-[#737373] flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Location</span>
+          <span class="text-white font-medium">Seoul, Korea</span>
+        </div>
+        <div class="flex justify-between items-center text-xs border-t border-zinc-800 pt-2.5">
+          <span class="text-[#737373] flex items-center gap-1.5"><i data-lucide="layers" class="w-3.5 h-3.5"></i> Expertise</span>
+          <span class="text-white font-medium">Spatial & Branding</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. 하단 미니멀 링크 -->
+    <div class="mt-auto p-6 bg-[#161616] border-t border-[#2A2A2A] text-center">
+      <div class="space-y-2 max-w-xs mx-auto">
+        <a href="#" class="flex items-center justify-between bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium py-3.5 px-5 rounded-xl transition border border-zinc-700">
+          <span>공식 포트폴리오 웹사이트</span><i data-lucide="external-link" class="w-3.5 h-3.5 text-zinc-400"></i>
+        </a>
+        <a href="#" class="flex items-center justify-between bg-transparent hover:bg-zinc-800 text-[#A3A3A3] text-xs font-medium py-3.5 px-5 rounded-xl transition border border-zinc-800">
+          <span>비즈니스 프로젝트 문의</span><i data-lucide="mail" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>
