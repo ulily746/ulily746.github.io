@@ -1,129 +1,1009 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minimal Portfolio - Le Petit Bonheur</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-serif-title { font-family: 'Cinzel', serif; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Minimal Portfolio - Travel Archive</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<style>
+
+body { 
+  font-family: 'Plus Jakarta Sans', sans-serif;
+
+  background-color:#EDE4D4;
+
+  /* Paper Texture */
+  background-image:
+  radial-gradient(
+    rgba(80,60,40,0.05) 1px,
+    transparent 1px
+  );
+
+  background-size:4px 4px;
+}
+
+
+.font-serif-title { 
+  font-family:'Cinzel', serif; 
+}
+
+
+/* subtle paper overlay */
+
+.paper-layer{
+  position:relative;
+}
+
+.paper-layer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+  linear-gradient(
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.08)
+  );
+
+  pointer-events:none;
+}
+
+
+/* image softness */
+
+.archive-image{
+  filter:
+  saturate(85%)
+  contrast(95%);
+}
+
+
+</style>
+
 </head>
-<!-- 웜 베이지 배경(bg-[#FAF7F2])과 딥 우드 브라운 텍스트(text-[#4A3B32]) 적용 -->
-<body class="bg-[#FAF7F2] text-[#4A3B32] antialiased overflow-x-hidden">
-
-  <!-- 전체 컨테이너: 양옆 공백 최소화 -->
-  <div class="w-full space-y-36 pb-32">
-
-    <!-- Section 1. 거울모드 레이아웃: 왼쪽 큰 제목 + 오른쪽으로 치우친 세로로 긴 반원 아치 대문 사진 -->
-    <header class="w-full pt-16 px-4 md:px-8 max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        
-        <!-- 왼쪽에 배치된 큰 제목 -->
-        <div class="col-span-1 md:col-span-5 space-y-4 text-left order-2 md:order-1 z-10">
-          <span class="text-xs tracking-[0.25em] text-[#A39081] uppercase font-medium block">Architecture of Dessert</span>
-          <h1 class="text-4xl md:text-6xl font-serif-title font-light tracking-wide leading-[1.1] text-[#362A21]">
-            Le Petit<br>Bonheur
-          </h1>
-          <div class="w-16 h-[1px] bg-[#4A3B32] my-6"></div>
-          <p class="text-xs md:text-sm text-[#7A6B5E] max-w-sm leading-relaxed font-light">
-            여백 속에 숨겨진 완벽한 비율. 불필요한 장식을 걷어내고, 오직 디저트가 가진 본연의 순수한 선과 면을 포트폴리오의 형태로 정밀하게 아카이빙합니다.
-          </p>
-        </div>
-
-        <!-- 오른쪽으로 치우친, 세로로 길어진 아치 창문 형태의 대문 사진 -->
-        <div class="col-span-1 md:col-span-7 flex justify-end order-1 md:order-2">
-          <div class="w-full max-w-xl aspect-[3/5] rounded-t-full overflow-hidden border border-[#E6DFD5] shadow-xs bg-[#F5EFE6]">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Minimal Main Arch" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-      </div>
-    </header>
 
 
-    <!-- Section 2. 커진 원형 사진 파트: 위쪽 유닛 + 중간 대제목 + 아래쪽 유닛 -->
-    <section class="w-full max-w-6xl mx-auto px-4 md:px-8">
-      <div class="space-y-24">
-        
-        <!-- 위쪽 유닛: 커진 원형 사진 + 옆으로 옮겨진 설명 -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div class="col-span-1 md:col-span-5 flex justify-center">
-            <div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border border-[#E6DFD5] bg-[#F5EFE6] shadow-xs">
-              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Circle Aspect 1" class="w-full h-full object-cover">
-            </div>
-          </div>
-          <div class="col-span-1 md:col-span-7 space-y-3 md:pl-8">
-            <span class="text-xs tracking-widest text-[#A39081] font-medium block">OBJECT 01</span>
-            <h3 class="text-xl md:text-2xl font-serif-title text-[#362A21]">기하학적 텍스처</h3>
-            <p class="text-xs md:text-sm text-[#7A6B5E] leading-relaxed font-light max-w-xl">
-              원과 직선, 그리고 곡선이 만드는 시각적 편안함. 르 쁘띠 보뇌르는 베이킹의 모든 과정에서 구현되는 구도를 하나의 독립적인 오브제로 인식하고 이를 미니멀하게 절제합니다.
-            </p>
-          </div>
-        </div>
-
-        <!-- 위쪽과 아래쪽 중간에 새롭게 끼어드는 대제목 (부드러운 우드 톤의 경계선) -->
-        <div class="w-full py-12 border-y border-[#E6DFD5] text-center">
-          <h2 class="text-2xl md:text-4xl font-serif-title font-light tracking-[0.15em] text-[#362A21] uppercase">
-            The Form Follows Flavor
-          </h2>
-          <p class="text-[10px] md:text-xs text-[#A39081] tracking-widest mt-2">형태는 맛의 본질을 따른다</p>
-        </div>
-
-        <!-- 아래쪽 유닛: 옆으로 옮겨진 설명 + 커진 원형 사진 -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-          <div class="col-span-1 md:col-span-7 space-y-3 md:pr-8 text-left md:text-right order-2 md:order-1">
-            <span class="text-xs tracking-widest text-[#A39081] font-medium block">OBJECT 02</span>
-            <h3 class="text-xl md:text-2xl font-serif-title text-[#362A21]">빛과 음영의 조화</h3>
-            <p class="text-xs md:text-sm text-[#7A6B5E] leading-relaxed font-light max-w-xl md:ml-auto">
-              오븐의 빛을 받고 뿜어져 나오는 유백색의 온기. 복잡한 기교를 배제하고 원재료가 가진 퓨어한 미색과 은은한 그림자만으로도 완벽한 완성도를 선사합니다.
-            </p>
-          </div>
-          <div class="col-span-1 md:col-span-5 flex justify-center order-1 md:order-2">
-            <div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border border-[#E6DFD5] bg-[#F5EFE6] shadow-xs">
-              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Circle Aspect 2" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
+<body 
+class="
+bg-[#EDE4D4]
+text-[#4B4036]
+antialiased
+overflow-x-hidden
+">
 
 
-    <!-- Section 3. 와이드 스퀘어 컷 (포트폴리오 엔딩 뷰) -->
-    <section class="w-full space-y-6">
-      <div class="w-[96%] max-w-7xl mx-auto aspect-[21/9] overflow-hidden border border-[#E6DFD5] shadow-xs">
-        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Minimal Aesthetic Table" class="w-full h-full object-cover">
-      </div>
-      <div class="w-full max-w-xl mx-auto text-center px-6">
-        <p class="text-xs text-[#A39081] font-light leading-relaxed">
-          여백은 채우기 위한 공간이 아닌, 본질을 증명하기 위한 공간입니다. 르 쁘띠 보뇌르가 제안하는 단정하고 성숙한 미니멀 포트폴리오를 마칩니다.
-        </p>
-      </div>
-    </section>
+<div class="w-full space-y-36 pb-32">
 
-  </div>
 
-  <!-- 내추럴 무드 샌드/우드 푸터 -->
-  <footer class="bg-[#362A21] text-[#E6DFD5] py-16 px-6 text-xs font-light tracking-widest border-t border-[#4A3B32]">
-    <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-      <div class="text-center md:text-left">
-        <p class="text-white font-serif-title tracking-wider text-sm">LE PETIT BONHEUR</p>
-        <p class="text-[#A39081] mt-1">© 2026 MINIMAL PORTFOLIO EDITION. CURATED WITH SILENCE.</p>
-      </div>
-      <div class="flex gap-8 text-[#A39081]">
-        <a href="#" class="hover:text-white transition">COLLECTION</a>
-        <a href="#" class="hover:text-white transition">INQUIRY</a>
-      </div>
-    </div>
-  </footer>
 
-  <script>lucide.createIcons();</script>
+<!-- ================================= -->
+<!-- HERO SECTION -->
+<!-- ================================= -->
+
+
+<header class="
+w-full 
+pt-16 
+px-4 
+md:px-8 
+max-w-7xl 
+mx-auto
+">
+
+
+<div class="
+grid 
+grid-cols-1 
+md:grid-cols-12 
+gap-8 
+items-center
+">
+
+
+<!-- LEFT TEXT -->
+
+<div class="
+col-span-1 
+md:col-span-5 
+space-y-4 
+text-left 
+order-2 
+md:order-1 
+z-10
+">
+
+
+<span 
+class="
+text-xs 
+tracking-[0.3em] 
+text-[#B29A78]
+uppercase 
+font-medium 
+block
+">
+
+Travel Archive
+
+</span>
+
+
+
+<h1 
+class="
+text-4xl 
+md:text-6xl 
+font-serif-title 
+font-light 
+tracking-wide 
+leading-[1.1]
+text-[#4B4036]
+">
+
+Quiet<br>
+Journeys
+
+</h1>
+
+
+
+<div 
+class="
+w-16 
+h-[1px] 
+bg-[#B29A78]
+my-6
+">
+</div>
+
+
+
+<p 
+class="
+text-xs 
+md:text-sm 
+text-[#766B5C]
+max-w-sm 
+leading-relaxed 
+font-light
+">
+
+작은 순간들을 기록하는 여행 아카이브.
+자연과 공간, 그리고 그 안에서 발견한 조용한 아름다움을 하나의 이야기로 담아냅니다.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<!-- RIGHT ARCH IMAGE -->
+
+
+<div 
+class="
+col-span-1 
+md:col-span-7 
+flex 
+justify-end 
+order-1 
+md:order-2
+">
+
+
+<div 
+class="
+w-full 
+max-w-xl 
+aspect-[3/5]
+rounded-t-full
+overflow-hidden
+border
+border-[#D8CBB8]
+shadow-sm
+bg-[#E6D9C5]
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80"
+
+alt="Travel Archive Main"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+/>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</header>
+
+<!-- ================================= -->
+<!-- SECTION 2 -->
+<!-- ================================= -->
+
+
+<section class="
+w-full 
+max-w-6xl 
+mx-auto 
+px-4 
+md:px-8
+">
+
+
+<div class="space-y-24">
+
+
+
+
+
+<!-- =============================== -->
+<!-- OBJECT 01 -->
+<!-- =============================== -->
+
+
+<div 
+class="
+grid 
+grid-cols-1 
+md:grid-cols-12 
+gap-8 
+items-center
+">
+
+
+<div 
+class="
+col-span-1 
+md:col-span-5 
+flex 
+justify-center
+">
+
+
+<div 
+class="
+w-72 
+h-72 
+md:w-96 
+md:h-96
+rounded-full
+overflow-hidden
+border
+border-[#D8CBB8]
+bg-[#E6D9C5]
+shadow-sm
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
+
+alt="Archive Object 01"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+/>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div 
+class="
+col-span-1 
+md:col-span-7 
+space-y-3 
+md:pl-8
+">
+
+
+<span 
+class="
+text-xs
+tracking-[0.3em]
+text-[#B29A78]
+font-medium
+block
+">
+
+PLACE 01
+
+</span>
+
+
+
+
+<h3 
+class="
+text-xl 
+md:text-2xl 
+font-serif-title 
+text-[#4B4036]
+">
+
+Hidden Villages
+
+</h3>
+
+
+
+
+<p 
+class="
+text-xs 
+md:text-sm 
+text-[#766B5C]
+leading-relaxed
+font-light
+max-w-xl
+">
+
+오래된 건축과 자연이 공존하는 장소.
+빠르게 지나가는 여행보다 천천히 머무르며 발견하는 순간을 기록합니다.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =============================== -->
+<!-- STATEMENT -->
+<!-- =============================== -->
+
+
+<div 
+class="
+w-full 
+py-12 
+border-y 
+border-[#D8CBB8]
+text-center
+">
+
+
+<span 
+class="
+text-[10px]
+tracking-[0.4em]
+text-[#B29A78]
+">
+
+COLLECTED MOMENTS
+
+</span>
+
+
+
+<h2 
+class="
+text-2xl 
+md:text-4xl 
+font-serif-title
+font-light
+tracking-[0.15em]
+text-[#4B4036]
+uppercase
+mt-4
+">
+
+The Beauty Of Slow Living
+
+</h2>
+
+
+
+<p 
+class="
+text-[10px]
+md:text-xs
+text-[#766B5C]
+tracking-widest
+mt-3
+">
+
+천천히 머무는 순간의 아름다움
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =============================== -->
+<!-- OBJECT 02 -->
+<!-- =============================== -->
+
+
+<div 
+class="
+grid 
+grid-cols-1 
+md:grid-cols-12 
+gap-8 
+items-center
+">
+
+
+
+<div 
+class="
+col-span-1 
+md:col-span-7 
+space-y-3 
+md:pr-8
+text-left
+md:text-right
+order-2
+md:order-1
+">
+
+
+<span 
+class="
+text-xs
+tracking-[0.3em]
+text-[#B29A78]
+font-medium
+block
+">
+
+PLACE 02
+
+</span>
+
+
+
+<h3 
+class="
+text-xl 
+md:text-2xl 
+font-serif-title
+text-[#4B4036]
+">
+
+Mountain Light
+
+</h3>
+
+
+
+
+<p 
+class="
+text-xs
+md:text-sm
+text-[#766B5C]
+leading-relaxed
+font-light
+max-w-xl
+md:ml-auto
+">
+
+자연이 만들어내는 빛과 그림자.
+아침의 공기, 작은 골목, 창문 너머의 풍경을 통해 여행의 감각을 기록합니다.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div 
+class="
+col-span-1 
+md:col-span-5 
+flex 
+justify-center
+order-1
+md:order-2
+">
+
+
+<div 
+class="
+w-72
+h-72
+md:w-96
+md:h-96
+rounded-full
+overflow-hidden
+border
+border-[#D8CBB8]
+bg-[#E6D9C5]
+shadow-sm
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80"
+
+alt="Archive Object 02"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+/>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =============================== -->
+<!-- MINI GALLERY -->
+<!-- =============================== -->
+
+
+<section 
+class="
+w-full
+pt-10
+">
+
+
+<div class="text-center mb-12">
+
+
+<span 
+class="
+text-xs
+tracking-[0.35em]
+text-[#B29A78]
+">
+
+COLLECTION
+
+</span>
+
+
+
+<h2 
+class="
+text-2xl
+md:text-4xl
+font-serif-title
+text-[#4B4036]
+mt-4
+">
+
+Moments Along The Way
+
+</h2>
+
+
+
+<p 
+class="
+text-xs
+text-[#766B5C]
+mt-3
+font-light
+">
+
+Fragments of places, light and memories.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div 
+class="
+grid
+grid-cols-3
+gap-4
+md:gap-8
+items-start
+">
+
+
+
+<div class="aspect-square overflow-hidden">
+
+<img
+
+src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=80"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+>
+
+</div>
+
+
+
+
+
+
+<div 
+class="
+aspect-square
+overflow-hidden
+mt-8
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="aspect-square overflow-hidden">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=500&q=80"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+</div>
+
+
+</section>
+
+<!-- ================================= -->
+<!-- SECTION 3 : ENDING VIEW -->
+<!-- ================================= -->
+
+
+<section 
+class="
+w-full 
+space-y-8
+">
+
+
+<div 
+class="
+w-[96%]
+max-w-7xl
+mx-auto
+aspect-[21/9]
+overflow-hidden
+border
+border-[#D8CBB8]
+shadow-sm
+">
+
+
+<img
+
+src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80"
+
+alt="Travel Ending Archive"
+
+class="
+w-full
+h-full
+object-cover
+archive-image
+"
+
+/>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- POSTCARD MESSAGE -->
+
+
+<div 
+class="
+w-full
+max-w-xl
+mx-auto
+text-center
+px-6
+space-y-4
+">
+
+
+<span
+class="
+text-[10px]
+tracking-[0.4em]
+text-[#B29A78]
+">
+
+POSTCARD FROM MEMORY
+
+</span>
+
+
+
+
+<p 
+class="
+text-xs
+md:text-sm
+text-[#766B5C]
+font-light
+leading-relaxed
+">
+
+어떤 장소는 지나가는 것이 아니라,
+오래 기억되는 순간으로 남습니다.
+<br>
+조용한 풍경과 작은 순간들을 하나의 여행 기록으로 담았습니다.
+
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ================================= -->
+<!-- FOOTER -->
+<!-- ================================= -->
+
+
+<footer 
+
+class="
+bg-[#3A332C]
+text-[#EDE4D4]
+py-16
+px-6
+text-xs
+font-light
+tracking-widest
+border-t
+border-[#B29A78]
+">
+
+
+<div 
+class="
+w-full
+max-w-7xl
+mx-auto
+flex
+flex-col
+md:flex-row
+justify-between
+items-center
+gap-6
+">
+
+
+
+<div 
+class="
+text-center
+md:text-left
+">
+
+
+<p 
+class="
+text-white
+font-serif-title
+tracking-wider
+text-sm
+">
+
+TRAVEL ARCHIVE
+
+</p>
+
+
+
+<p 
+class="
+text-[#B29A78]
+mt-2
+">
+
+© 2026 MINIMAL JOURNAL EDITION.
+CURATED WITH SILENCE.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div 
+class="
+flex
+gap-8
+text-[#B29A78]
+">
+
+
+<a 
+href="#"
+class="
+hover:text-white
+transition
+">
+
+COLLECTION
+
+</a>
+
+
+<a 
+href="#"
+class="
+hover:text-white
+transition
+">
+
+INQUIRY
+
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+</footer>
+
+
+
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+
 </body>
-</html>
+</html>  
