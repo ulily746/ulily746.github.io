@@ -3,152 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homebaking & Travel Journal</title>
-  <!-- Tailwind CSS & Lucide Icons -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- 레퍼런스 특유의 사랑스러운 손글씨/빈티지 서체를 위한 구글 폰트 매칭 -->
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Gaegu:wght@400;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
-  
+  <title>Homebaking Diary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: 'Gaegu', sans-serif; /* 친근하고 사랑스러운 손글씨 무드 베이스 */
-    }
-    .font-handwrite-eng {
-      font-family: 'Caveat', cursive; /* 영어 텍스트용 흘림 손글씨 서체 */
-    }
-    .font-vintage-italic {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-    }
+    /* 빈티지 다꾸 감성 배경과 손글씨 폰트 */
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Playfair+Display:ital@1&display=swap');
     
-    /* 레퍼런스 속 가늘고 사랑스러운 이중 타원형(Capsule) 버튼용 효과 */
-    .double-oval-btn {
-      border: 1px solid #D15A5A;
-      position: relative;
+    body {
+      background-color: #F5EFE6; /* 따뜻한 빈티지 종이색 */
+      font-family: 'Nanum Pen Script', cursive;
     }
-    .double-oval-btn::after {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      border: 1px dashed #D15A5A;
+    .vintage-paper {
+      background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    }
+    /* 요청하신 알약 모양(Capsule) 소제목 스타일 */
+    .capsule-title {
+      border: 2px solid #D4A373;
       border-radius: 9999px;
-      pointer-events: none;
+      padding: 2px 15px;
+      display: inline-block;
+      background-color: #FAEDCD;
+      color: #9C6644;
+      font-size: 1.1rem;
     }
   </style>
 </head>
-<!-- 레퍼런스의 배경인 체크 식탁보와 빈티지 홈무드: 연한 딸기우유빛 베이지 바탕 -->
-<body class="bg-[#F9F1EB] text-[#5A4545] antialiased min-h-screen py-10 px-4 flex flex-col items-center justify-center">
+<body class="vintage-paper">
 
-  <!-- 메인 스마트폰 목업 스케일 컨테이너 (레퍼런스 왼쪽의 길고 아기자기한 세로형 레이아웃 원본 비율 완벽 재현) -->
-  <div class="w-full max-w-[360px] bg-[#FFFBF7] rounded-[40px] shadow-xl overflow-hidden border border-[#EFE5DC] p-5 flex flex-col space-y-10 relative">
-    
-    <!-- 반짝이 별 장식 상단 오버레이 -->
-    <div class="absolute top-6 right-6 text-[#D15A5A] opacity-60 animate-pulse">
-      <i data-lucide="sparkles" class="w-5 h-5"></i>
-    </div>
+  <main class="max-w-[400px] mx-auto p-4 space-y-6">
 
-    <!-- 1. 프로필/상단: 레퍼런스 특유의 우아하고 아기자기한 오벌(타원형) 메인 액자 프레임 -->
-    <header class="text-center pt-4 space-y-4">
-      <div class="w-48 h-64 mx-auto rounded-[100px] overflow-hidden border-2 border-[#D15A5A] p-1.5 bg-white shadow-xs">
-        <!-- 베이킹 및 일상 여행 감성의 메인 사진 -->
-        <img src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=600&q=80" alt="Baking & Me" class="w-full h-full object-cover rounded-[90px]">
-      </div>
-      
-      <!-- 아기자기한 손글씨 소개 단락 -->
-      <div class="space-y-1 px-4">
-        <h2 class="text-xl font-bold text-[#D15A5A] flex justify-center items-center gap-1">
-          <span class="font-handwrite-eng text-2xl">Sweet Life</span> 레시피 일기
-        </h2>
-        <p class="text-xs text-gray-500 leading-relaxed">
-          달콤한 빵 냄새를 따라 떠나는 여행, 일상 속 작은 오븐에서 구워내는 몽글몽글하고 행복한 베이킹 조각들을 기록합니다.
-        </p>
-      </div>
-
-      <!-- 레퍼런스의 상단 타원 캡슐형 커스텀 버튼 -->
-      <div class="pt-1 flex justify-center">
-        <a href="#" class="double-oval-btn px-6 py-1.5 rounded-full text-xs font-bold text-[#D15A5A] tracking-wider hover:bg-[#FFF0F0] transition-colors">
-          달콤한 조각들 구경하기
-        </a>
-      </div>
+    <header class="text-center pt-4">
+      <h1 class="font-['Playfair_Display'] italic text-3xl text-[#9C6644] mb-2">Home Baking Log</h1>
+      <p class="text-[#BC8A5F]">소소한 오븐 속 작은 행복 기록들</p>
     </header>
 
-
-    <!-- 2. 중앙 색션: 빈티지 폴라로이드 스냅샷 & 텍스트 지그재그 배치 (레퍼런스 프라이스존 구조 반영) -->
-    <section class="space-y-8 px-1">
-      <!-- 타이틀 구역 -->
-      <div class="text-center">
-        <span class="font-vintage-italic text-2xl text-[#D15A5A] block">Our Sweet Treats</span>
-        <div class="text-[11px] text-[#A68F8F] tracking-widest uppercase mt-0.5">— baking menu & log —</div>
-      </div>
-
-      <!-- 아이템 1: 좌측 폴라로이드 스냅샷 + 우측 설명 설명 구조 -->
-      <div class="flex items-center gap-4">
-        <!-- 폴라로이드 스타일 프레임 -->
-        <div class="w-28 bg-white p-2 pb-4 border border-[#EFE5DC] shadow-xs transform -rotate-2 rounded-xs">
-          <div class="w-full aspect-square overflow-hidden bg-gray-100 mb-1.5">
-            <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=400&q=80" alt="Menu 1" class="w-full h-full object-cover">
-          </div>
-          <p class="text-[9px] text-center text-[#D15A5A] font-handwrite-eng">Strawberry Macaron</p>
+    <section>
+      <div class="capsule-title mb-4">오늘의 베이킹</div>
+      
+      <div class="flex gap-2 justify-center -rotate-2">
+        <div class="bg-white p-2 shadow-md border border-gray-100">
+          <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 object-cover">
+          <p class="text-center text-xs mt-1">갓 구운 스콘</p>
         </div>
-        <!-- 우측 설명 텍스트 -->
-        <div class="flex-1 space-y-1">
-          <h4 class="text-sm font-bold text-[#5A4545]">딸기 크림 마카롱</h4>
-          <p class="text-[11px] text-gray-500 leading-tight">입안 가득 번지는 수제 산딸기 퓨레의 사랑스럽고 상큼한 하모니.</p>
-          <span class="text-xs font-bold text-[#D15A5A]">6,500 원</span>
+        <div class="bg-white p-2 shadow-md border border-gray-100 rotate-3">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=200&q=80" class="w-32 h-32 object-cover">
+          <p class="text-center text-xs mt-1">딸기 케이크</p>
         </div>
-      </div>
-
-      <!-- 아이템 2: 우측 폴라로이드 스냅샷 + 좌측 설명 구조 (교차 지그재그) -->
-      <div class="flex items-center gap-4">
-        <!-- 좌측 설명 텍스트 -->
-        <div class="flex-1 text-right space-y-1">
-          <h4 class="text-sm font-bold text-[#5A4545]">여행지의 도시락 케이크</h4>
-          <p class="text-[11px] text-gray-500 leading-tight">기차 안에서 소소하게 즐겼던 부드러운 얼그레이 시폰의 추억.</p>
-          <span class="text-xs font-bold text-[#D15A5A]">18,000 원</span>
-        </div>
-        <!-- 폴라로이드 스타일 프레임 -->
-        <div class="w-28 bg-white p-2 pb-4 border border-[#EFE5DC] shadow-xs transform rotate-3 rounded-xs">
-          <div class="w-full aspect-square overflow-hidden bg-gray-100 mb-1.5">
-            <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13636?auto=format&fit=crop&w=400&q=80" alt="Menu 2" class="w-full h-full object-cover">
-          </div>
-          <p class="text-[9px] text-center text-[#D15A5A] font-handwrite-eng">Bento Cake log</p>
-        </div>
-      </div>
-
-      <!-- 아기자기한 별자리 장식 구분선 효과 -->
-      <div class="flex justify-center items-center gap-2 text-[#D15A5A]/40 pt-2">
-        <span>✦</span><span>•</span><span>✦</span>
       </div>
     </section>
 
-
-    <!-- 3. 하단 스냅 스케치: 아늑한 라이프스타일 한 컷 배너 -->
-    <section class="bg-[#FFF0F0] rounded-[24px] p-4 border border-[#FBE0E0] space-y-3">
-      <div class="w-full aspect-[16/10] overflow-hidden rounded-xl border border-white">
-        <img src="https://images.unsplash.com/photo-1513267048331-5611cad82e4f?auto=format&fit=crop&w=600&q=80" alt="Table Mood" class="w-full h-full object-cover">
-      </div>
-      <div class="text-center">
-        <p class="text-[11px] text-gray-500 leading-normal italic">
-          "오후 4시, 따스한 햇살이 드는 식탁 위에서<br>달콤함을 굽고 기록하는 행복한 베이킹 타임."
-        </p>
+    <section class="mt-6 border-t-2 border-dashed border-[#D4A373] pt-6">
+      <div class="capsule-title mb-4">여행 & 일상</div>
+      <p class="text-[#7F5539] leading-relaxed mb-4">
+        여행지에서 만난 작은 카페들, 그리고 집에서 직접 구워내는 따뜻한 빵 냄새가 가득한 일상. 손으로 꾸미듯 차곡차곡 기록해 나갑니다.
+      </p>
+      
+      <div class="grid grid-cols-2 gap-2">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=300&q=80" class="rounded-lg shadow-sm">
+        <img src="https://images.unsplash.com/photo-1520699049848-528c25000780?auto=format&fit=crop&w=300&q=80" class="rounded-lg shadow-sm">
       </div>
     </section>
 
-    <!-- 4. [요구사항 준수] 작성일 중심의 깔끔하고 매칭 컬러풀한 미니멀 디자인 푸터 -->
-    <footer class="pt-4 border-t border-dashed border-[#EFE5DC] text-center">
-      <p class="font-handwrite-eng text-lg font-bold text-[#D15A5A] leading-none mb-1">tuttidolce homebaking log</p>
-      <div class="text-[10px] text-gray-400 space-y-0.5 font-light">
-        <p>일기 작성일: 2026년 7월 12일 — Sweet Memory</p>
-        <p class="opacity-80 text-[9px]">© 2026 SWEET BAKING JOURNAL. ALL RIGHTS RESERVED.</p>
-      </div>
-    </footer>
+  </main>
 
-  </div>
-
-  <script>lucide.createIcons();</script>
 </body>
 </html>
