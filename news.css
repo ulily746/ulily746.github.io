@@ -145,7 +145,7 @@ HERO IMAGE & ARCH FRAME
 
 .arch-image {
     position: absolute;
-    top: 75;
+    top: 30px;
     left: 0;
 
     width: 100%;
