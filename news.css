@@ -132,46 +132,64 @@ HERO META
 }
 
 /* =====================================
-HERO IMAGE & ARCH FRAME (완전 정돈됨)
+HERO IMAGE & ARCH FRAME
 ===================================== */
+
 .hero-image {
     position: relative;
-    width: 400px; /* 프레임 크기에 맞춤 */
+    width: 400px;
     height: 600px;
     margin: 0 auto;
 }
+
 
 .arch-image {
     position: absolute;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 100%;
+
     overflow: hidden;
-    /* 이미지도 아치형으로 깎기 */
+
     border-radius: 200px 200px 0 0;
-    z-index: 3;
+
+    z-index: 2;
 }
+
 
 .arch-image img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
+
+    display: block;
 }
+
 
 .arch-decoration {
+
     position: absolute;
-    top: -20px; /* SVG 선이 이미지 위로 살짝 올라오게 조정 */
-    left: -25px; /* 선 굵기만큼 좌측으로 이동 */
-    width: 450px; 
+
+    top: -20px;
+    left: -25px;
+
+    width: 450px;
     height: 650px;
-    pointer-events: none; /* 클릭 시 이미지가 선택되도록 프레임은 통과시킴 */
-    z-index: 4;
+
+    pointer-events: none;
+
+    z-index: 3;
 }
 
+
 .arch-decoration svg {
-    width: 100%;
-    height: 100%;
+
+    width:100%;
+    height:100%;
+
 }
 
 /* =====================================
