@@ -3,67 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Diary - Full Screen Layout</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant+Garamond:wght@300;600&display=swap" rel="stylesheet">
+    <title>Travel Diary - Hero</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #F7F2EA; font-family: 'Caveat', cursive; color: #5A4C43; }
-        .hand { font-family: 'Caveat', cursive; }
+        body { background-color: #F7F2EA; color: #5A4C43; margin: 0; }
         .serif { font-family: 'Cormorant Garamond', serif; }
+        .hand { font-family: 'Caveat', cursive; }
     </style>
 </head>
-<body class="w-full overflow-x-hidden">
+<body>
 
-    <header class="w-full text-center py-24">
-        <h1 class="text-[8rem] serif text-[#3C312C]">Travel Diary</h1>
-        <div class="max-w-[800px] mx-auto border-t border-[#C7A98A] pt-8">
-            <p class="text-3xl">작은 골목, 창가, 필름 카메라로 오늘을 기록하는 여행.</p>
+    <header class="relative w-full h-screen p-16 flex flex-col justify-between">
+        
+        <div class="z-10">
+            <h1 class="serif text-[10rem] leading-none font-bold">Travel</h1>
         </div>
+        
+        <div class="absolute inset-0 flex items-center justify-center p-32">
+            <div class="w-full h-full border-[20px] border-white shadow-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80" 
+                     class="w-full h-full object-cover">
+            </div>
+        </div>
+
+        <div class="z-10 text-right">
+            <h1 class="serif text-[10rem] leading-none font-bold">Diary</h1>
+        </div>
+        
     </header>
-
-    <main class="w-full flex flex-col gap-32 pb-32">
-
-        <section class="w-full flex items-center px-[10%] gap-16">
-            <div class="flex-1 rotate-[-3deg] border-[12px] border-white shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963" class="w-full">
-            </div>
-            <div class="flex-1 text-center">
-                <h2 class="text-6xl mb-8">A Little Street</h2>
-                <div class="bg-[#FFFDF8] border-2 border-dashed border-[#E6D5C6] p-10 inline-block">
-                    <p class="text-2xl">이름도 몰랐던 작은 골목. 우연이 더 아름답다는 것을 천천히 배워가는 하루.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="w-full flex items-center px-[10%] gap-16">
-            <div class="flex-1 text-center">
-                <h2 class="text-6xl mb-8">Coffee Break</h2>
-                <div class="bg-[#FFFDF8] border-2 border-dashed border-[#E6D5C6] p-10 inline-block">
-                    <p class="text-2xl">아무것도 하지 않아도 여행은 충분히 행복했다.</p>
-                </div>
-            </div>
-            <div class="flex-1 rotate-[3deg] border-[12px] border-white shadow-2xl">
-                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" class="w-full">
-            </div>
-        </section>
-
-        <section class="w-full bg-[#2D2723] py-16 px-10 flex gap-6 border-y-[20px] border-[#2D2723]">
-            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429" class="flex-1 h-[300px] object-cover border-4 border-white">
-            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60" class="flex-1 h-[300px] object-cover border-4 border-white">
-            <img src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a" class="flex-1 h-[300px] object-cover border-4 border-white">
-        </section>
-
-        <section class="w-full flex items-center px-[10%] gap-16">
-            <div class="flex-1 text-center">
-                <h2 class="text-6xl mb-8">Until Next Trip</h2>
-                <p class="text-2xl">여행은 끝났지만 기억은 계속된다.</p>
-            </div>
-            <div class="flex-1 border-[15px] border-[#2D2723] p-2">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" class="w-full">
-            </div>
-        </section>
-
-    </main>
 
 </body>
 </html>
