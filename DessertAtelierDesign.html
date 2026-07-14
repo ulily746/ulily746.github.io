@@ -1,184 +1,104 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dessert Atelier - Academic Edition</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .font-serif-title { font-family: 'Cinzel', serif; }
-  </style>
-</head>
-<!-- 연구/학문 색감: 은은한 논문지 톤 아이보리(bg-[#F4F3EF]) + 지적인 딥 네이비(text-[#1C2D42]) -->
-<body class="bg-[#F4F3EF] text-[#1C2D42] antialiased overflow-x-hidden">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아냐의 디저트 작업실</title>
+    <style>
+        /* 배경 및 전체 폰트 */
+        body { 
+            background-color: #fcf9f7; 
+            font-family: 'AppleSDGothicNeo-Regular', 'Malgun Gothic', sans-serif; 
+            color: #5d4a46; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center;
+        }
+        .container { max-width: 500px; width: 100%; }
 
-  <!-- 전체 컨테이너 -->
-  <div class="w-full space-y-40 pb-24">
+        /* 네비게이션 */
+        nav { display: flex; justify-content: space-around; padding: 20px 0; font-size: 14px; letter-spacing: 1px; }
 
-    <!-- 1. [요구사항 1] 대문 사진 세로 길이를 기존의 두 배 수준인 세로형 도록 비례(aspect-[3/4])로 확장 -->
-    <header class="w-full max-w-4xl mx-auto pt-12 px-4 flex flex-col items-center">
-      <div class="w-full border-b border-[#D1C7BD] pb-4 mb-6 flex justify-between items-end text-[10px] tracking-[0.3em] uppercase text-[#7A6953]">
-        <span>Research Quarterly</span>
-        <span class="font-medium text-xs">Vol. 12 / 2026</span>
-        <span>Atelier Study</span>
-      </div>
-      
-      <!-- [요구사항 1] 세로로 훨씬 깊어진 고전 아카이브 서적 커버 비율 -->
-      <div class="relative w-full aspect-[3/4] max-h-[750px] overflow-hidden bg-gray-200 shadow-2xl border border-[#D1C7BD]">
-        <img src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=1600&q=80" alt="Magazine Cover Main" class="w-full h-full object-cover brightness-90">
+        /* 헤더 섹션 */
+        .hero { text-align: center; padding: 40px 0; }
+        .hero-img { width: 220px; height: 220px; border-radius: 50%; border: 3px solid #e8d5d1; object-fit: cover; }
+        .hero h1 { font-size: 20px; margin: 20px 0 10px; }
+        .hero p { font-size: 13px; line-height: 1.6; color: #8c7673; }
+        .order-btn { display: inline-block; margin-top: 20px; padding: 10px 40px; border: 1px solid #dcbdbd; border-radius: 25px; text-decoration: none; color: #5d4a46; font-size: 13px; }
+
+        /* 가격 섹션 */
+        .price-section { margin-top: 50px; }
+        .section-title { text-align: center; font-size: 22px; margin-bottom: 50px; color: #5d4a46; }
         
-        <!-- 표지 폰트 오버레이 -->
-        <div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-between bg-gradient-to-t from-black/40 via-transparent to-black/20">
-          <h1 class="text-4xl md:text-6xl font-serif-title font-light tracking-wide text-white drop-shadow-xs leading-none text-left">
-            DESSERT ATELIER<br><span class="text-xs md:text-sm tracking-[0.4em] font-sans block mt-3 text-[#F4F3EF]">ANALYTICAL ARCHIVE</span>
-          </h1>
-          <span class="text-[10px] tracking-[0.25em] text-white/90 font-serif-title">THEORETICAL FRAMEWORK</span>
-        </div>
-      </div>
+        .item-row { display: flex; align-items: flex-start; margin-bottom: 60px; gap: 20px; }
+        .item-row:nth-child(even) { flex-direction: row-reverse; }
 
-      <!-- 대문 사진 바로 아래 설명문 -->
-      <div class="mt-10 max-w-3xl text-center px-4 space-y-2">
-        <h2 class="text-xl font-serif-title text-[#1A2636] tracking-wide">식문화 구조주의와 형태학적 아카이브</h2>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light max-w-2xl mx-auto">
-          미시적 관점에서 바라본 재료의 결합과 물리적 성숙에 관한 고찰. 본 아틀리에 저널은 복잡하게 얽힌 조리 과학의 인과관계를 시각적 프레임워크를 통해 분해하고 기록하는 연구 목적의 데이터베이스입니다.
-        </p>
-      </div>
+        /* 폴라로이드 스타일 */
+        .polaroid { background: white; padding: 10px 10px 30px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); width: 160px; transform: rotate(-3deg); }
+        .item-row:nth-child(even) .polaroid { transform: rotate(3deg); }
+        .polaroid img { width: 100%; height: 160px; object-fit: cover; }
+
+        /* 텍스트 내용 */
+        .content { flex: 1; padding-top: 10px; }
+        .content h2 { font-size: 16px; margin-bottom: 10px; }
+        .content ul { list-style: none; padding: 0; font-size: 14px; line-height: 2; }
+        .note { font-size: 12px; color: #a89492; margin-top: 5px; }
+
+        /* 별 포인트 */
+        .sparkle { color: #dcbdbd; margin: 0 5px; }
+
+        /* 모바일 대응 */
+        @media (max-width: 480px) {
+            .item-row, .item-row:nth-child(even) { flex-direction: column; align-items: center; text-align: center; }
+            .polaroid { transform: rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <span>프라이스</span><span>질문</span><span>연락처</span>
+    </nav>
+
+    <header class="hero">
+        <img src="이미지주소.jpg" alt="프로필" class="hero-img">
+        <h1>아냐</h1>
+        <p>홈 베이킹 3년차입니다.<br>가장 맛있는 케이크를 만듭니다.</p>
+        <a href="#" class="order-btn">주문하기</a>
     </header>
 
+    <section class="price-section">
+        <h2 class="section-title">✨ 가격표 ✨</h2>
 
-  <!-- 2. [교정 버전] 6개 사각형 배열: 모서리를 대폭 늘리고 여백을 준 감성 레이아웃 -->
-<section class="w-full max-w-4xl mx-auto px-6">
-  <div class="grid grid-cols-2 gap-6 md:gap-8">
-    
-    <!-- [행 1 - 열 1] 텍스트 상자: 조약돌처럼 둥글게(rounded-[35px]), 글자는 작고 여백은 넓게 -->
-    <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF2EB] border border-[#E8DDD3] aspect-square rounded-[28px] shadow-xs">
-      <p class="text-[10.5px] text-[#5A4E4A] font-light leading-relaxed tracking-tight">
-        모든 여정은 오래된 레시피 노트를 분석하고 구조화하는 것에서 시작되었습니다.
-      </p>
-    </div>
-    
-    <!-- [행 1 - 열 2] 사진 상자: 이미지도 똑같이 둥글게 깎기 -->
-    <div class="w-full aspect-square overflow-hidden border border-[#E8DDD3] rounded-[28px] shadow-xs">
-      <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=400&q=80" alt="Archive Material 1" class="w-full h-full object-cover">
-    </div>
-
-    <!-- [행 2 - 열 1] 사진 상자 -->
-    <div class="w-full aspect-square overflow-hidden border border-[#E8DDD3] rounded-[28px] shadow-xs">
-      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80" alt="Archive Material 2" class="w-full h-full object-cover">
-    </div>
-    
-    <!-- [행 2 - 열 2] 텍스트 상자 -->
-    <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF2EB] border border-[#E8DDD3] aspect-square rounded-[28px] shadow-xs">
-      <p class="text-[10.5px] text-[#5A4E4A] font-light leading-relaxed tracking-tight">
-        오늘날 구워내는 프리미엄 가치는 전통적인 물성과 현대의 밸런스가 이룬 조화입니다.
-      </p>
-    </div>
-
-    <!-- [행 3 - 열 1] 텍스트 상자 -->
-    <div class="flex flex-col justify-center items-center text-center p-8 bg-[#FAF2EB] border border-[#E8DDD3] aspect-square rounded-[28px] shadow-xs">
-      <p class="text-[10.5px] text-[#5A4E4A] font-light leading-relaxed tracking-tight">
-        단순히 달콤함을 넘어 시각적 형태학과 텍스처를 지표화하는 연구 아카이브.
-      </p>
-    </div>
-    
-    <!-- [행 3 - 열 2] 사진 상자 -->
-    <div class="w-full aspect-square overflow-hidden border border-[#E8DDD3] rounded-[28px] shadow-xs">
-      <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=80" alt="Archive Material 3" class="w-full h-full object-cover">
-    </div>
-
-  </div>
-</section>
-
-
-    <!-- 3. 기존 레이아웃 유지: 3개 사진 배치 (양옆은 작고 가운데는 큰 세로 비율) -->
-    <section class="w-full max-w-5xl mx-auto px-4">
-      <div class="flex items-center justify-center gap-4 md:gap-8">
-        <div class="w-[28%] aspect-[2/3] overflow-hidden border border-[#D1C7BD] shadow-xs">
-          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=500&q=80" alt="Side Left" class="w-full h-full object-cover">
+        <div class="item-row">
+            <div class="polaroid"><img src="마카롱사진.jpg" alt="마카롱"></div>
+            <div class="content">
+                <h2>"마카롱"</h2>
+                <ul>
+                    <li>6구: 600원</li>
+                    <li>9구: 900원</li>
+                    <li>12구: 1200원</li>
+                </ul>
+                <div class="note">맛: 레몬, 딸기, 바닐라, 초콜릿</div>
+            </div>
         </div>
-        <div class="w-[44%] aspect-[2/3] overflow-hidden border border-[#D1C7BD] shadow-md">
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80" alt="Center Main" class="w-full h-full object-cover">
+
+        <div class="item-row">
+            <div class="polaroid"><img src="케이크사진.jpg" alt="벤토케이크"></div>
+            <div class="content">
+                <h2>"벤토 케이크"</h2>
+                <ul>
+                    <li>2인: 800원</li>
+                    <li>4인: 1200원</li>
+                    <li>6인: 1700원</li>
+                </ul>
+                <div class="note">맛: 딸기, 바닐라, 초콜릿</div>
+            </div>
         </div>
-        <div class="w-[28%] aspect-[2/3] overflow-hidden border border-[#D1C7BD] shadow-xs">
-          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=500&q=80" alt="Side Right" class="w-full h-full object-cover">
-        </div>
-      </div>
-      <div class="mt-6 text-center max-w-xl mx-auto">
-        <p class="text-[11px] text-gray-500 font-light">그리드 밸런스 팩터: 수직 축을 중심으로 전개되는 구조적 대비 실험 뷰</p>
-      </div>
     </section>
+</div>
 
-
-    <!-- 4. 기존 레이아웃 유지: 4개 사진 카드 세로 확장 및 지그재그 배치 -->
-    <section class="w-full max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
-          <div class="w-full aspect-[4/5] overflow-hidden border border-[#D1C7BD]">
-            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Card 1" class="w-full h-full object-cover">
-          </div>
-          <div class="pt-4 space-y-1">
-            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.01</span>
-            <h5 class="text-sm font-medium text-[#1A2636]">계량 데이터 수집</h5>
-            <p class="text-[11px] text-gray-600 font-light leading-snug">성분 배합비에 따른 분자 구조의 인장 밀도 실험 결과군.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
-          <div class="pb-4 space-y-1 order-1">
-            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.02</span>
-            <h5 class="text-sm font-medium text-[#1A2636]">통계적 매커니즘</h5>
-            <p class="text-[11px] text-gray-600 font-light leading-snug">당도 표본 집단에 따른 관능 검사 지표 스케일 데이터셋 분석.</p>
-          </div>
-          <div class="w-full aspect-[4/5] overflow-hidden border border-[#D1C7BD] order-2">
-            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=500&q=80" alt="Card 2" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
-          <div class="w-full aspect-[4/5] overflow-hidden border border-[#D1C7BD]">
-            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=500&q=80" alt="Card 3" class="w-full h-full object-cover">
-          </div>
-          <div class="pt-4 space-y-1">
-            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.03</span>
-            <h5 class="text-sm font-medium text-[#1A2636]">텍스처의 지표화</h5>
-            <p class="text-[11px] text-gray-600 font-light leading-snug">밀도 차이에 의한 파삭함(Crispiness) 강도의 머신러닝 측정기록.</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col bg-[#EBE9E2] border border-[#D1C7BD] overflow-hidden p-4 justify-between aspect-[3/5] shadow-xs">
-          <div class="pb-4 space-y-1 order-1">
-            <span class="text-[10px] font-mono tracking-widest text-[#7A6953]">DATA.04</span>
-            <h5 class="text-sm font-medium text-[#1A2636]">열화상 스캔 리포트</h5>
-            <p class="text-[11px] text-gray-600 font-light leading-snug">동결 건조 공법이 풍미 화합물 보존에 미치는 한계 유효성 리포트.</p>
-          </div>
-          <div class="w-full aspect-[4/5] overflow-hidden border border-[#D1C7BD] order-2">
-            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=500&q=80" alt="Card 4" class="w-full h-full object-cover">
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </div>
-
-  <!-- 기존 푸터 유지: 작성일 위주의 미니멀 디자인 -->
-  <footer class="bg-[#1A2636] text-gray-400 py-10 px-6 text-[11px] tracking-wider border-t border-[#D1C7BD]/20">
-    <div class="w-full max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
-      <p class="font-serif-title text-white tracking-widest text-xs">DESSERT ATELIER LAB ARCHIVE</p>
-      <div class="text-gray-500 text-[10px] sm:text-right">
-        <p>최초 등록일: 2026년 7월 12일 — Academic Monograph</p>
-        <p>© 2026 LAB FOR FOOD MORPHOLOGY. ALL RIGHTS RESERVED.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>lucide.createIcons();</script>
 </body>
 </html>
