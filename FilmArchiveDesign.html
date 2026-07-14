@@ -2,36 +2,77 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Diary - Hero</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #F7F2EA; color: #5A4C43; margin: 0; }
-        .serif { font-family: 'Cormorant Garamond', serif; }
-        .hand { font-family: 'Caveat', cursive; }
+        /* 기본 배경 및 폰트 */
+        body {
+            background-color: #f4efdc; /* 빈티지 종이 색상 */
+            font-family: 'Georgia', serif;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* 대문 섹션 */
+        .hero { text-align: center; margin-bottom: 50px; }
+        .hero h1 { font-size: 3rem; letter-spacing: 2px; margin: 0; }
+        .hero img { width: 100%; border: 5px solid #fff; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); }
+
+        /* 사진 배치 기본 스타일 */
+        .photo-box { margin: 40px 0; display: flex; align-items: center; justify-content: center; }
+        
+        /* 필름 프레임 효과 */
+        .film-frame {
+            background: #000;
+            padding: 10px 10px 30px 10px; /* 아래쪽을 길게 하여 필름 느낌 */
+            border-radius: 5px;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
+        }
+        .film-frame img { width: 100%; display: block; }
+
+        /* 기울어진 사진 효과 */
+        .tilted {
+            transform: rotate(-3deg);
+            background: white;
+            padding: 10px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+        }
+
+        /* 텍스트 스타일 */
+        .text-note { font-style: italic; color: #555; text-align: center; margin: 10px 0; }
     </style>
 </head>
 <body>
 
-    <header class="relative w-full h-screen p-16 flex flex-col justify-between">
-        
-        <div class="z-10">
-            <h1 class="serif text-[10rem] leading-none font-bold">Travel</h1>
-        </div>
-        
-        <div class="absolute inset-0 flex items-center justify-center p-32">
-            <div class="w-full h-full border-[20px] border-white shadow-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80" 
-                     class="w-full h-full object-cover">
-            </div>
-        </div>
-
-        <div class="z-10 text-right">
-            <h1 class="serif text-[10rem] leading-none font-bold">Diary</h1>
-        </div>
-        
+<div class="container">
+    <!-- 대문 -->
+    <header class="hero">
+        <h1>CHILDHOOD</h1>
+        <img src="https://picsum.photos/600/400" alt="main">
+        <h2>IN THE COUNTRYSIDE</h2>
     </header>
+
+    <!-- 필름 섹션 -->
+    <section class="photo-box">
+        <div class="film-frame">
+            <img src="https://picsum.photos/500/250" alt="film">
+        </div>
+    </section>
+
+    <p class="text-note">"바람 소리와 함께 걷던 그날의 기억들"</p>
+
+    <!-- 기울어진 사진 섹션 -->
+    <section class="photo-box">
+        <img src="https://picsum.photos/300/400" class="tilted" alt="photo">
+    </section>
+
+    <p class="text-note">어디서든 행복했던 시간.</p>
+</div>
 
 </body>
 </html>
