@@ -2,77 +2,131 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Childhood in the Countryside</title>
     <style>
-        /* 기본 배경 및 폰트 */
+        /* 폰트 불러오기 */
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+        /* 기본 설정 */
         body {
-            background-color: #f4efdc; /* 빈티지 종이 색상 */
-            font-family: 'Georgia', serif;
-            display: flex;
-            justify-content: center;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #eae7d6; /* 빈티지 베이지 배경 */
+            color: #333;
         }
 
-        .container {
+        /* 전체 페이지를 감싸는 컨테이너 */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
+        }
+
+        /* 1. Hero 섹션 */
+        .hero { width: 100%; padding: 50px 0; }
+        .content-wrapper {
+            position: relative;
+            width: 90%; 
             max-width: 600px;
+            margin: 0 auto;
+            border: 10px solid white;
+            padding: 60px 40px;
+            box-sizing: border-box;
         }
-
-        /* 대문 섹션 */
-        .hero { text-align: center; margin-bottom: 50px; }
-        .hero h1 { font-size: 3rem; letter-spacing: 2px; margin: 0; }
-        .hero img { width: 100%; border: 5px solid #fff; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); }
-
-        /* 사진 배치 기본 스타일 */
-        .photo-box { margin: 40px 0; display: flex; align-items: center; justify-content: center; }
+        .image-container img { width: 100%; display: block; }
         
-        /* 필름 프레임 효과 */
-        .film-frame {
-            background: #000;
-            padding: 10px 10px 30px 10px; /* 아래쪽을 길게 하여 필름 느낌 */
-            border-radius: 5px;
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
-        }
-        .film-frame img { width: 100%; display: block; }
+        h1 { margin: 0; font-weight: normal; font-size: 2.5rem; }
+        .hero-title-top { position: absolute; top: 20px; left: 30px; }
+        .hero-title-bottom { position: absolute; bottom: 20px; right: 30px; text-align: right; }
 
-        /* 기울어진 사진 효과 */
-        .tilted {
-            transform: rotate(-3deg);
-            background: white;
-            padding: 10px;
-            box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+        /* 2. 설명 섹션 */
+        .description-section { 
+            display: flex; justify-content: center; align-items: center; 
+            margin: 40px 0; font-style: italic; color: #4a4a4a; 
         }
+        .bracket-left, .bracket-right { font-size: 2.5rem; margin: 0 10px; }
+        .description-text { text-align: center; font-size: 1rem; line-height: 1.5; margin: 0; }
 
-        /* 텍스트 스타일 */
-        .text-note { font-style: italic; color: #555; text-align: center; margin: 10px 0; }
+        /* 3. 갤러리 섹션 */
+        .gallery { padding: 50px 20px; font-family: 'Nanum Pen Script', cursive; }
+        .item { margin-bottom: 100px; display: flex; flex-direction: column; align-items: center; }
+        .photo { border: 5px solid white; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); }
+        .item-1 .photo { width: 300px; transform: rotate(-5deg); }
+        .item-2 .photo { width: 200px; transform: rotate(8deg); }
+        .text { text-align: center; font-size: 1.5rem; margin-top: 20px; color: #555; }
+
+        /* 4. 필름 섹션 */
+        .film-section { display: flex; flex-direction: column; gap: 60px; padding: 50px 20px; align-items: center; }
+        .film-item { display: flex; align-items: center; gap: 30px; }
+        .film-item.reverse { flex-direction: row-reverse; }
+        .film-frame { padding: 15px; background: black; border-radius: 5px; }
+        .film-frame img { width: 250px; display: block; }
+        .desc { font-family: 'Nanum Pen Script', cursive; font-size: 1.2rem; width: 150px; text-align: center; }
+        .line-connect { border-top: 1px dashed #a68b70; width: 80px; }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .content-wrapper { padding: 20px; }
+            h1 { font-size: 1.5rem; }
+            .film-item, .film-item.reverse { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- 대문 -->
-    <header class="hero">
-        <h1>CHILDHOOD</h1>
-        <img src="https://picsum.photos/600/400" alt="main">
-        <h2>IN THE COUNTRYSIDE</h2>
-    </header>
-
-    <!-- 필름 섹션 -->
-    <section class="photo-box">
-        <div class="film-frame">
-            <img src="https://picsum.photos/500/250" alt="film">
+    <main class="main-container">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="content-wrapper">
+                <div class="hero-title-top"><h1>CHILDHOOD</h1></div>
+                <div class="image-container">
+                    <img src="your-fairies-image.jpg" alt="메인 이미지">
+                </div>
+                <div class="hero-title-bottom">
+                    <h1>IN THE</h1>
+                    <h1>COUNTRYSIDE</h1>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 설명 -->
+        <div class="description-section">
+            <span class="bracket-left">(</span>
+            <p class="description-text">
+                어린 시절의 소중한 기억들을<br>이곳에 기록해보세요.
+            </p>
+            <span class="bracket-right">)</span>
         </div>
-    </section>
 
-    <p class="text-note">"바람 소리와 함께 걷던 그날의 기억들"</p>
+        <!-- 갤러리 -->
+        <div class="gallery">
+            <div class="item item-1">
+                <img src="photo1.jpg" class="photo" alt="사진1">
+                <p class="text">따뜻한 햇살 아래 평화로운 오후</p>
+            </div>
+            <div class="item item-2">
+                <img src="photo2.jpg" class="photo" alt="사진2">
+                <p class="text">들판을 뛰놀던 추억들</p>
+            </div>
+        </div>
 
-    <!-- 기울어진 사진 섹션 -->
-    <section class="photo-box">
-        <img src="https://picsum.photos/300/400" class="tilted" alt="photo">
-    </section>
-
-    <p class="text-note">어디서든 행복했던 시간.</p>
-</div>
+        <!-- 필름 -->
+        <section class="film-section">
+            <div class="film-item">
+                <div class="film-frame"><img src="photo1.jpg" alt="필름1"></div>
+                <div class="line-connect"></div>
+                <div class="desc">할머니와 나누던 다정한 대화</div>
+            </div>
+            <div class="film-item reverse">
+                <div class="film-frame"><img src="photo2.jpg" alt="필름2"></div>
+                <div class="line-connect"></div>
+                <div class="desc">매일 저녁 자전거 타기</div>
+            </div>
+        </section>
+    </main>
 
 </body>
 </html>
