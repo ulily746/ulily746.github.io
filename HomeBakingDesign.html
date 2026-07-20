@@ -6,22 +6,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Home Bakery</title>
+<title>Anya Bakery</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Manrope:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+/* CSS는 마지막 Part에서 모두 넣을 예정 */
+
+</style>
 
 </head>
 
 <body>
 
-<header class="hero-header">
+<header>
 
-<nav class="nav-menu">
+<nav class="nav">
 
 <a href="#">ПРАЙС</a>
 
@@ -33,41 +37,59 @@
 
 </header>
 
-<section class="oval-hero">
+<main>
 
-<div class="oval-frame">
+<!-- ================= HERO ================= -->
 
-<img src="your-image.jpg" class="hero-img">
+<section class="hero">
 
-<span class="star left-star">✦</span>
+<div class="oval-wrapper">
 
-<span class="star right-star">✦</span>
+<div class="oval-border"></div>
+
+<div class="oval">
+
+<img src="images/hero.jpg" alt="Bakery">
+
+<div class="star star-left">
+
+✦
 
 </div>
 
-<div class="intro-section">
+<div class="star star-right">
 
-<h2>
+✦
+
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-text">
+
+<h1>
 
 Аня
 
-<span>
+</h1>
 
-홈베이커, 3년 이상의 경력을 가진 파티시에입니다.
+<p>
 
-당신을 위한 가장 맛있고 스타일리시한 케이크를 만들어 드립니다.
+Домашний кондитер.
 
-</span>
+Создаю нежные десерты,
 
-</h2>
+которые делают праздник
 
-</div>
+ещё теплее.
 
-<div class="button-section">
+</p>
 
-<a href="#" class="oval-button">
+<a href="#" class="order-btn">
 
-주문하기
+Заказать
 
 </a>
 
@@ -75,67 +97,256 @@
 
 </section>
 
+<!-- ================= PRICE ================= -->
 
+<section class="price">
 
-<section class="price-section">
+<div class="title-box">
 
-<h2 class="section-title">Прайс</h2>
+<h2>
 
-<div class="menu-item">
+Прайс
 
-<div class="polaroid">
-
-<img src="item1.jpg">
-
-</div>
-
-<div class="menu-desc">
-
-<h3>Макарони</h3>
+</h2>
 
 <p>
 
-6개 세트 · 600 RUB
-
-<br>
-
-9개 세트 · 900 RUB
-
-<br>
-
-12개 세트 · 1200 RUB
+Handmade desserts made with love.
 
 </p>
 
 </div>
 
+<!-- =========================
+     SCRAPBOOK PRICE
+========================= -->
+
+<div class="scrapbook">
+
+    <!-- Item 1 -->
+    <article class="scrap-item item1">
+
+        <div class="polaroid rotate-left">
+            <img src="images/macaron.jpg" alt="Macaron">
+        </div>
+
+        <div class="item-text">
+            <span class="mini-star">✦</span>
+
+            <h3>Макароны</h3>
+
+            <p>
+                Набор из 6 — 600 ₽<br>
+                Набор из 9 — 900 ₽<br>
+                Набор из 12 — 1200 ₽
+            </p>
+
+        </div>
+
+    </article>
+
+
+    <!-- Item 2 -->
+    <article class="scrap-item item2">
+
+        <div class="item-text">
+
+            <span class="mini-star">✧</span>
+
+            <h3>Бенто торт</h3>
+
+            <p>
+
+                2 порции — 800 ₽<br>
+                4 порции — 1200 ₽<br>
+                6 порции — 1700 ₽
+
+            </p>
+
+        </div>
+
+        <div class="polaroid rotate-right">
+
+            <img src="images/bento.jpg" alt="Bento Cake">
+
+        </div>
+
+    </article>
+
+
+    <!-- Item 3 -->
+    <article class="scrap-item item3">
+
+        <div class="polaroid rotate-left-small">
+
+            <img src="images/cake.jpg" alt="Cake">
+
+        </div>
+
+        <div class="item-text">
+
+            <span class="mini-star">✦</span>
+
+            <h3>Торт</h3>
+
+            <p>
+
+                От 2 кг<br>
+
+                Индивидуальный дизайн<br>
+
+                По запросу
+
+            </p>
+
+        </div>
+
+    </article>
+
 </div>
 
+<div class="gallery-grid">
 
+    <!-- Photo 1 -->
+    <div class="gallery-card large rotate-left">
 
-<div class="menu-item reverse">
+        <img src="images/gallery1.jpg" alt="Dessert">
 
-<div class="polaroid">
+        <span class="tape tape-left"></span>
 
-<img src="item2.jpg">
+    </div>
+
+    <!-- Photo 2 -->
+    <div class="gallery-card small rotate-right">
+
+        <img src="images/gallery2.jpg" alt="Cake">
+
+        <span class="tape tape-right"></span>
+
+    </div>
+
+    <!-- Photo 3 -->
+    <div class="gallery-card medium rotate-left-small">
+
+        <img src="images/gallery3.jpg" alt="Cookie">
+
+        <span class="tape tape-center"></span>
+
+    </div>
+
+    <!-- Photo 4 -->
+    <div class="gallery-card tall rotate-right-small">
+
+        <img src="images/gallery4.jpg" alt="Macaron">
+
+        <span class="tape tape-left"></span>
+
+    </div>
 
 </div>
 
-<div class="menu-desc">
+</section>
 
-<h3>Бенто-торт</h3>
+<!-- =========================
+        ABOUT
+========================= -->
+
+<section class="about">
+
+    <div class="about-wrapper">
+
+        <div class="about-image">
+
+            <img src="images/about.jpg" alt="About">
+
+        </div>
+
+        <div class="about-text">
+
+            <span class="small-title">
+                ABOUT
+            </span>
+
+            <h2>
+
+                Homemade desserts
+                with love.
+
+            </h2>
+
+            <p>
+
+                Every dessert is handcrafted
+                using carefully selected ingredients.
+
+                I believe beautiful sweets
+                make beautiful memories.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+          FAQ
+========================= -->
+
+<section class="faq" id="faq">
+
+<h2>
+
+Frequently Asked Questions
+
+</h2>
+
+<div class="faq-list">
+
+<div class="faq-item">
+
+<h3>
+
+How do I place an order?
+
+</h3>
 
 <p>
 
-2인 · 800 RUB
+Contact me via Instagram or Telegram.
 
-<br>
+</p>
 
-4인 · 1200 RUB
+</div>
 
-<br>
+<div class="faq-item">
 
-6인 · 1700 RUB
+<h3>
+
+How many days in advance?
+
+</h3>
+
+<p>
+
+Usually 3~5 days.
+
+</p>
+
+</div>
+
+<div class="faq-item">
+
+<h3>
+
+Custom design?
+
+</h3>
+
+<p>
+
+Yes, every cake can be customized.
 
 </p>
 
@@ -145,400 +356,1118 @@
 
 </section>
 
-</body>
+<!-- =========================
+        CONTACT
+========================= -->
 
-</html>
+<footer id="contact">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+<h2>
 
-body{
+Let's make your day sweeter ♡
 
-background:#fbf8f5;
+</h2>
 
-font-family:'Manrope',sans-serif;
+<div class="contact-links">
 
-color:#5f5653;
+<a href="#">
 
-}
+Instagram
 
-a{
-text-decoration:none;
-color:inherit;
-}
+</a>
 
-/* ---------------------- */
+<a href="#">
 
-.hero-header{
+Telegram
 
-padding:40px 0;
+</a>
 
-}
+<a href="#">
 
-.nav-menu{
+WhatsApp
 
-display:flex;
+</a>
 
-justify-content:center;
+</div>
 
-gap:60px;
+<p class="copyright">
 
-font-size:13px;
+© 2026 Anya Bakery
 
-letter-spacing:3px;
+</p>
 
-color:#bc8e8b;
+</footer>
 
-}
+</main>
 
-.nav-menu a{
+/* ===================================
+   PRICE - SCRAPBOOK LAYOUT
+=================================== */
 
-position:relative;
+.scrapbook{
 
-transition:.3s;
+    position:relative;
 
-}
+    width:100%;
 
-.nav-menu a::after{
+    max-width:1100px;
 
-content:"";
-
-position:absolute;
-
-bottom:-8px;
-
-left:50%;
-
-width:0;
-
-height:1px;
-
-background:#bc8e8b;
-
-transition:.3s;
-
-transform:translateX(-50%);
+    margin:0 auto 140px;
 
 }
 
-.nav-menu a:hover::after{
+/* ---------------- Item ---------------- */
 
-width:100%;
+.scrap-item{
 
-}
+    display:flex;
 
-/* ---------------------- */
+    align-items:center;
 
-.oval-hero{
+    justify-content:space-between;
 
-display:flex;
+    margin-bottom:140px;
 
-flex-direction:column;
-
-align-items:center;
+    position:relative;
 
 }
 
-/* ---------------------- */
+.item2{
 
-.oval-frame{
-
-width:420px;
-
-height:560px;
-
-border:1.5px solid #c99895;
-
-border-radius:50%/60%;
-
-overflow:hidden;
-
-position:relative;
+    flex-direction:row-reverse;
 
 }
 
-.hero-img{
+.item3{
 
-width:100%;
+    width:85%;
 
-height:100%;
-
-object-fit:cover;
-
-transition:.6s;
+    margin-left:auto;
 
 }
 
-.hero-img:hover{
-
-transform:scale(1.05);
-
-}
-
-.star{
-
-position:absolute;
-
-font-size:24px;
-
-color:#c99895;
-
-}
-
-.left-star{
-
-left:-18px;
-
-bottom:120px;
-
-}
-
-.right-star{
-
-right:-18px;
-
-top:120px;
-
-}
-
-/* ---------------------- */
-
-.intro-section{
-
-margin-top:50px;
-
-max-width:700px;
-
-padding:0 40px;
-
-}
-
-.intro-section h2{
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:48px;
-
-font-weight:600;
-
-color:#a16f6f;
-
-line-height:1.3;
-
-}
-
-.intro-section span{
-
-display:block;
-
-font-family:'Manrope';
-
-margin-top:18px;
-
-font-size:18px;
-
-line-height:1.9;
-
-color:#756867;
-
-}
-
-/* ---------------------- */
-
-.button-section{
-
-margin-top:50px;
-
-margin-bottom:90px;
-
-}
-
-.oval-button{
-
-padding:15px 55px;
-
-border-radius:60px;
-
-border:1px solid #bf9490;
-
-letter-spacing:2px;
-
-font-size:14px;
-
-transition:.4s;
-
-}
-
-.oval-button:hover{
-
-background:#bf9490;
-
-color:white;
-
-}
-
-/* ---------------------- */
-
-.price-section{
-
-width:min(1100px,90%);
-
-margin:auto;
-
-padding:50px 0 120px;
-
-}
-
-.section-title{
-
-text-align:center;
-
-font-family:'Cormorant Garamond';
-
-font-size:60px;
-
-margin-bottom:80px;
-
-color:#9d6c6c;
-
-}
-
-/* ---------------------- */
-
-.menu-item{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:100px;
-
-margin-bottom:100px;
-
-}
-
-.reverse{
-
-flex-direction:row-reverse;
-
-}
-
-/* ---------------------- */
+/* ---------------- Polaroid ---------------- */
 
 .polaroid{
 
-background:white;
+    background:#fff;
 
-padding:15px 15px 45px;
+    padding:14px 14px 42px;
 
-box-shadow:
+    box-shadow:
 
-0 15px 35px rgba(0,0,0,.08);
+    0 12px 30px rgba(0,0,0,.08);
 
-transform:rotate(-4deg);
-
-transition:.4s;
+    transition:.35s;
 
 }
 
-.reverse .polaroid{
+.polaroid img{
 
-transform:rotate(4deg);
+    width:280px;
+
+    height:340px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.rotate-left{
+
+    transform:rotate(-5deg);
+
+}
+
+.rotate-right{
+
+    transform:rotate(6deg);
+
+}
+
+.rotate-left-small{
+
+    transform:rotate(-2deg);
 
 }
 
 .polaroid:hover{
 
-transform:rotate(0deg) scale(1.03);
+    transform:scale(1.04) rotate(0deg);
 
 }
 
-.polaroid img{
+/* ---------------- Text ---------------- */
 
-display:block;
+.item-text{
 
-width:280px;
+    width:360px;
 
-height:340px;
+    text-align:center;
 
-object-fit:cover;
+    position:relative;
+
+}
+
+.item-text h3{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:42px;
+
+    color:#a06f6d;
+
+    margin-bottom:20px;
+
+}
+
+.item-text p{
+
+    font-size:17px;
+
+    line-height:2.1;
+
+    color:#6f6460;
+
+}
+
+/* 작은 별 */
+
+.mini-star{
+
+    display:block;
+
+    font-size:22px;
+
+    color:#c39b95;
+
+    margin-bottom:20px;
+
+}
+
+/* ---------------- 연결선 ---------------- */
+
+.scrap-item::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+
+    border-top:1.5px dashed #ccb5aa;
+
+}
+
+.item1::after{
+
+    left:45%;
+
+    top:52%;
+
+}
+
+.item2::after{
+
+    right:45%;
+
+    top:48%;
+
+}
+
+.item3::after{
+
+    left:40%;
+
+    top:52%;
+
+}
+
+/* ---------------- Decoration ---------------- */
+
+.scrapbook::before{
+
+    content:"✧";
+
+    position:absolute;
+
+    left:8%;
+
+    top:120px;
+
+    color:#c8a09a;
+
+    font-size:24px;
+
+}
+
+.scrapbook::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    right:12%;
+
+    bottom:120px;
+
+    color:#c8a09a;
+
+    font-size:24px;
+
+}
+/* ===================================
+   PRICE DETAIL
+=================================== */
+
+/* 사진 크기 조금씩 다르게 */
+
+.item1 .polaroid img{
+
+    width:300px;
+    height:360px;
+
+}
+
+.item2 .polaroid img{
+
+    width:240px;
+    height:300px;
+
+}
+
+.item3 .polaroid img{
+
+    width:260px;
+    height:330px;
+
+}
+
+/* 사진 위치를 살짝 어긋나게 */
+
+.item1{
+
+    transform:translateX(-20px);
+
+}
+
+.item2{
+
+    transform:translateX(30px);
+
+}
+
+.item3{
+
+    transform:translateX(-10px);
+
+}
+
+/* 사진 밑 흰 여백 */
+
+.polaroid{
+
+    position:relative;
+
+}
+
+.polaroid::after{
+
+    content:"";
+
+    display:block;
+
+    height:18px;
+
+}
+
+/* 마스킹테이프 */
+
+.polaroid::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:70px;
+
+    height:18px;
+
+    background:rgba(234,223,203,.85);
+
+    top:-10px;
+
+    left:50%;
+
+    transform:translateX(-50%) rotate(-4deg);
+
+    border-radius:2px;
+
+}
+
+/* 손글씨 느낌 */
+
+.item-text{
+
+    font-family:'Caveat',cursive;
+
+}
+
+.item-text h3{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:46px;
+
+    margin-bottom:18px;
+
+}
+
+.item-text p{
+
+    font-family:'Caveat',cursive;
+
+    font-size:30px;
+
+    line-height:1.5;
+
+    color:#7b7069;
+
+}
+
+/* 작은 장식 */
+
+.item-text::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    top:-18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:18px;
+
+    color:#c59a96;
+
+}
+
+.item-text::after{
+
+    content:"❋";
+
+    position:absolute;
+
+    bottom:-20px;
+
+    right:50%;
+
+    transform:translateX(50%);
+
+    color:#ccb3a7;
+
+    font-size:16px;
+
+}
+
+/* 살짝 떠있는 효과 */
+
+.polaroid:hover{
+
+    transform:translateY(-8px) rotate(0deg);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+
+}
+
+/* 여백 */
+
+.scrap-item:last-child{
+
+    margin-bottom:40px;
+
+}
+/* ===================================
+   GALLERY
+=================================== */
+
+.gallery{
+
+    padding:120px 0;
+
+    position:relative;
+
+}
+
+.section-heading{
+
+    text-align:center;
+
+    margin-bottom:90px;
+
+}
+
+.section-heading h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:60px;
+
+    font-weight:500;
+
+    color:#a06f6d;
+
+}
+
+.section-heading p{
+
+    margin-top:12px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    font-size:13px;
+
+    color:#9f938d;
 
 }
 
 /* ---------------------- */
 
-.menu-desc{
+.gallery-grid{
 
-max-width:380px;
+    width:min(1200px,92%);
 
-}
+    margin:auto;
 
-.menu-desc h3{
+    position:relative;
 
-font-family:'Cormorant Garamond';
-
-font-size:42px;
-
-margin-bottom:25px;
-
-color:#a16f6f;
-
-}
-
-.menu-desc p{
-
-line-height:2.2;
-
-font-size:17px;
+    min-height:850px;
 
 }
 
 /* ---------------------- */
 
-@media(max-width:900px){
+.gallery-card{
 
-.oval-frame{
+    position:absolute;
 
-width:330px;
+    background:#fff;
 
-height:460px;
+    padding:14px;
 
-}
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
 
-.intro-section h2{
-
-font-size:38px;
+    transition:.45s;
 
 }
 
-.menu-item,
+.gallery-card img{
 
-.reverse{
+    display:block;
 
-flex-direction:column;
+    width:100%;
 
-gap:40px;
+    height:100%;
 
-text-align:center;
+    object-fit:cover;
 
 }
 
-.section-title{
+/* ---------------------- */
+/* 사진 크기 */
 
-font-size:46px;
+.large{
+
+    width:320px;
+
+    height:400px;
+
+    left:0;
+
+    top:40px;
+
+}
+
+.medium{
+
+    width:260px;
+
+    height:330px;
+
+    left:390px;
+
+    top:330px;
+
+}
+
+.small{
+
+    width:220px;
+
+    height:280px;
+
+    right:120px;
+
+    top:0;
+
+}
+
+.tall{
+
+    width:250px;
+
+    height:360px;
+
+    right:0;
+
+    bottom:30px;
+
+}
+
+/* ---------------------- */
+/* 회전 */
+
+.rotate-left{
+
+    transform:rotate(-5deg);
+
+}
+
+.rotate-right{
+
+    transform:rotate(6deg);
+
+}
+
+.rotate-left-small{
+
+    transform:rotate(-2deg);
+
+}
+
+.rotate-right-small{
+
+    transform:rotate(3deg);
+
+}
+
+/* ---------------------- */
+
+.gallery-card:hover{
+
+    transform:translateY(-10px) rotate(0deg);
+
+    box-shadow:0 28px 60px rgba(0,0,0,.14);
+
+}
+
+/* ---------------------- */
+/* 마스킹테이프 */
+
+.tape{
+
+    position:absolute;
+
+    width:80px;
+
+    height:18px;
+
+    background:rgba(236,225,206,.85);
+
+}
+
+.tape-left{
+
+    top:-10px;
+
+    left:18px;
+
+    transform:rotate(-8deg);
+
+}
+
+.tape-right{
+
+    top:-10px;
+
+    right:18px;
+
+    transform:rotate(8deg);
+
+}
+
+.tape-center{
+
+    top:-12px;
+
+    left:50%;
+
+    transform:translateX(-50%) rotate(-2deg);
+
+}
+
+/* ---------------------- */
+/* 별 장식 */
+
+.gallery::before{
+
+    content:"✦";
+
+    position:absolute;
+
+    left:10%;
+
+    top:180px;
+
+    font-size:28px;
+
+    color:#c89f98;
+
+}
+
+.gallery::after{
+
+    content:"✧";
+
+    position:absolute;
+
+    right:12%;
+
+    bottom:120px;
+
+    font-size:26px;
+
+    color:#c89f98;
+
+}
+/* ===================================
+   ABOUT
+=================================== */
+
+.about{
+
+    padding:140px 0;
+
+}
+
+.about-wrapper{
+
+    width:min(1100px,92%);
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:100px;
+
+    align-items:center;
+
+}
+
+.about-image{
+
+    position:relative;
+
+}
+
+.about-image img{
+
+    width:100%;
+
+    max-width:450px;
+
+    display:block;
+
+    margin:auto;
+
+    border:14px solid #fff;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.08);
+
+    transform:rotate(-3deg);
+
+}
+
+.about-image::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:110px;
+
+    height:26px;
+
+    background:#efe0c9;
+
+    top:-12px;
+
+    left:50%;
+
+    transform:translateX(-50%) rotate(-6deg);
+
+}
+
+.small-title{
+
+    display:block;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+    color:#bc9b95;
+
+    margin-bottom:18px;
+
+}
+
+.about-text h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:56px;
+
+    color:#9d6d6a;
+
+    line-height:1.15;
+
+    margin-bottom:30px;
+
+}
+
+.about-text p{
+
+    font-size:17px;
+
+    line-height:2;
+
+    color:#726763;
+
+    max-width:470px;
+
+}
+
+/* ===================================
+   FAQ
+=================================== */
+
+.faq{
+
+    padding:140px 0;
+
+    width:min(900px,90%);
+
+    margin:auto;
+
+}
+
+.faq h2{
+
+    text-align:center;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:56px;
+
+    color:#a16f6d;
+
+    margin-bottom:70px;
+
+}
+
+.faq-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.faq-item{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+}
+
+.faq-item h3{
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+    color:#8d6764;
+
+}
+
+.faq-item p{
+
+    line-height:1.9;
+
+    color:#7b716d;
+
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+footer{
+
+    margin-top:120px;
+
+    padding:120px 20px 80px;
+
+    text-align:center;
+
+    border-top:1px solid #e4d5cf;
+
+}
+
+footer h2{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:52px;
+
+    color:#9d6c69;
+
+    margin-bottom:45px;
+
+}
+
+.contact-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:50px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:40px;
+
+}
+
+.contact-links a{
+
+    color:#b38280;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+.contact-links a:hover{
+
+    color:#8f6260;
+
+}
+
+.copyright{
+
+    color:#9f948f;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media(max-width:992px){
+
+.hero-wrap{
+
+    width:300px;
+
+    height:410px;
+
+}
+
+.price-title h2,
+.section-heading h2,
+.about-text h2,
+.faq h2,
+footer h2{
+
+    font-size:42px;
+
+}
+
+.about-wrapper{
+
+    grid-template-columns:1fr;
+
+    gap:60px;
+
+}
+
+.about-text{
+
+    text-align:center;
+
+}
+
+.about-text p{
+
+    margin:auto;
+
+}
+
+/* Price */
+
+.scrap-item,
+.item2{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:40px;
+
+    transform:none;
+
+}
+
+.item3{
+
+    width:100%;
+
+    margin-left:0;
+
+}
+
+.scrap-item::after{
+
+    display:none;
+
+}
+
+/* Gallery */
+
+.gallery-grid{
+
+    position:static;
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:35px;
+
+    min-height:auto;
+
+}
+
+.gallery-card{
+
+    position:relative;
+
+    width:100% !important;
+
+    height:auto !important;
+
+    left:auto;
+
+    right:auto;
+
+    top:auto;
+
+    bottom:auto;
+
+    transform:none;
+
+}
+
+.gallery-card img{
+
+    aspect-ratio:4/5;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.nav{
+
+    gap:20px;
+
+}
+
+.nav a{
+
+    font-size:11px;
+
+    letter-spacing:1px;
+
+}
+
+.hero{
+
+    padding-bottom:60px;
+
+}
+
+.hero-wrap{
+
+    width:250px;
+
+    height:340px;
 
 }
 
 .polaroid img{
 
-width:240px;
+    width:220px !important;
 
-height:300px;
+    height:280px !important;
+
+}
+
+.item-text h3{
+
+    font-size:34px;
+
+}
+
+.item-text p{
+
+    font-size:22px;
+
+}
+
+.about-text h2{
+
+    font-size:36px;
+
+}
+
+footer h2{
+
+    font-size:34px;
 
 }
 
