@@ -11,9 +11,11 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="
+https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap
+" rel="stylesheet">
 
 
 <style>
@@ -24,13 +26,13 @@
 
 body{
     font-family:'Plus Jakarta Sans', sans-serif;
-    background:#F7F3EC;
-    color:#4A4038;
+    background:#F3F1E8;
+    color:#3F473D;
 }
 
 
 /* ========================================
-   TITLE FONT
+   TITLE
 ======================================== */
 
 .font-serif-title{
@@ -39,11 +41,38 @@ body{
 
 
 /* ========================================
-   PHOTO FRAME
+   HANDWRITING
 ======================================== */
 
-.photo-frame{
-    position:relative;
+.font-hand{
+    font-family:'Caveat', cursive;
+}
+
+
+/* ========================================
+   BOTANICAL COLORS
+======================================== */
+
+:root{
+
+    --paper:#F3F1E8;
+
+    --paper-light:#F8F7F1;
+
+    --moss:#5E6958;
+
+    --deep-moss:#3F4B40;
+
+    --sage:#899681;
+
+    --line:#B8B9A8;
+
+    --soft-line:#D4D5C7;
+
+    --text:#3F473D;
+
+    --subtext:#6F766A;
+
 }
 
 
@@ -57,7 +86,230 @@ body{
 
     letter-spacing:.35em;
 
-    color:#7F806B;
+    color:#71806D;
+
+}
+
+
+/* ========================================
+   BOTANICAL DIVIDER
+======================================== */
+
+.botanical-divider{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    color:#7B8974;
+
+    font-size:12px;
+
+    letter-spacing:.3em;
+
+    opacity:.7;
+
+}
+
+.botanical-divider::before,
+.botanical-divider::after{
+
+    content:"";
+
+    display:block;
+
+    width:70px;
+
+    height:1px;
+
+    background:#C5C9BC;
+
+}
+
+
+/* ========================================
+   HAND DRAWN PHOTO FRAME
+======================================== */
+
+.photo-frame{
+
+    position:relative;
+
+    display:inline-block;
+
+}
+
+
+/* 기본 사진 */
+
+.hand-photo{
+
+    position:relative;
+
+    border:1px solid #B7BCAF;
+
+    background:#F9F8F2;
+
+    box-shadow:
+        3px 3px 0 rgba(105,116,99,.08),
+        -2px -2px 0 rgba(150,157,139,.06);
+
+}
+
+
+/* 손으로 그린 듯한 외곽선 */
+
+.hand-photo::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-5px;
+
+    border:1px solid rgba(104,116,99,.45);
+
+    pointer-events:none;
+
+    z-index:5;
+
+}
+
+
+/* 두 번째 불규칙 라인 */
+
+.hand-photo::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-8px -6px -5px -7px;
+
+    border:1px solid rgba(142,151,133,.22);
+
+    border-radius:3px;
+
+    transform:rotate(-0.4deg);
+
+    pointer-events:none;
+
+    z-index:5;
+
+}
+
+
+/* ========================================
+   BOTANICAL LINE DECORATION
+======================================== */
+
+.botanical-line{
+
+    position:absolute;
+
+    width:80px;
+
+    height:100px;
+
+    pointer-events:none;
+
+    z-index:8;
+
+    opacity:.65;
+
+}
+
+
+.botanical-line svg{
+
+    width:100%;
+
+    height:100%;
+
+    fill:none;
+
+    stroke:#71806D;
+
+    stroke-width:1.2;
+
+    stroke-linecap:round;
+
+    stroke-linejoin:round;
+
+}
+
+
+/* 사진 주변 식물 위치 */
+
+.botanical-top{
+
+    top:-45px;
+
+    right:-35px;
+
+    transform:rotate(8deg);
+
+}
+
+
+.botanical-bottom{
+
+    bottom:-45px;
+
+    left:-35px;
+
+    transform:rotate(-10deg);
+
+}
+
+
+/* ========================================
+   SMALL BOTANICAL MARK
+======================================== */
+
+.botanical-mark{
+
+    color:#788574;
+
+    font-size:15px;
+
+    opacity:.7;
+
+}
+
+
+/* ========================================
+   SLIM IMAGE RIBBON
+======================================== */
+
+.ribbon-section{
+
+    position:relative;
+
+}
+
+
+.ribbon-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+
+    left:0;
+
+    width:100%;
+
+    height:1px;
+
+    background:#C9CDC0;
+
+    z-index:-1;
 
 }
 
@@ -70,11 +322,30 @@ body{
 
     position:relative;
 
-    background:#E8E1D6;
+    background:#E8E9DF;
 
-    border:1px solid #D8D0C3;
+    border:1px solid #B9BDAF;
 
     padding:10px;
+
+}
+
+
+/* 손그림 외곽선 */
+
+.video-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-5px;
+
+    border:1px solid rgba(104,116,99,.35);
+
+    transform:rotate(.3deg);
+
+    pointer-events:none;
 
 }
 
@@ -89,7 +360,7 @@ body{
 
     overflow:hidden;
 
-    background:#D9D1C4;
+    background:#D9DDD2;
 
 }
 
@@ -104,8 +375,6 @@ body{
 
 }
 
-
-/* 영상 중앙 플레이 버튼 */
 
 .video-play{
 
@@ -126,11 +395,11 @@ body{
 
 .video-play span{
 
-    width:60px;
+    width:58px;
 
-    height:60px;
+    height:58px;
 
-    border:1px solid rgba(255,255,255,.8);
+    border:1px solid rgba(255,255,255,.85);
 
     border-radius:50%;
 
@@ -142,7 +411,7 @@ body{
 
     color:white;
 
-    background:rgba(50,45,40,.18);
+    background:rgba(55,65,55,.2);
 
     backdrop-filter:blur(3px);
 
@@ -150,31 +419,113 @@ body{
 
 
 /* ========================================
-   FOOTER NAV
+   FOOTER
 ======================================== */
 
 .archive-footer{
 
-    background:#747A68;
+    background:#526052;
 
-    color:#F3EFE6;
+    color:#EEF0E7;
 
 }
 
 
 .footer-link{
 
+    position:relative;
+
     transition:opacity .3s ease;
+
+}
+
+
+.footer-link::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-5px;
+
+    width:0;
+
+    height:1px;
+
+    background:#DCE2D5;
+
+    transition:width .3s ease;
 
 }
 
 
 .footer-link:hover{
 
-    opacity:.55;
+    opacity:.75;
 
 }
 
+
+.footer-link:hover::after{
+
+    width:100%;
+
+}
+
+
+/* ========================================
+   FOOTER BOTANICAL
+======================================== */
+
+.footer-botanical{
+
+    width:100%;
+
+    height:1px;
+
+    background:rgba(230,235,223,.3);
+
+    position:relative;
+
+}
+
+
+.footer-botanical::after{
+
+    content:"✦";
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    background:#526052;
+
+    padding:0 15px;
+
+    color:#DDE4D7;
+
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media(max-width:768px){
+
+    .botanical-line{
+
+        display:none;
+
+    }
+
+}
 
 </style>
 
@@ -184,12 +535,7 @@ body{
 <body class="antialiased overflow-x-hidden">
 
 
-<!-- ========================================
-     MAIN
-======================================== -->
-
 <div class="w-full space-y-36 pb-0">
-
 
 
 <!-- ========================================
@@ -204,7 +550,7 @@ w-full
 aspect-[16/7]
 overflow-hidden
 border-b
-border-[#D8D0C3]
+border-[#C9CDC0]
 ">
 
 
@@ -218,7 +564,7 @@ class="
 w-full
 h-full
 object-cover
-brightness-[0.72]
+brightness-[0.70]
 ">
 
 
@@ -239,7 +585,7 @@ p-6
 text-[10px]
 md:text-xs
 tracking-[0.4em]
-text-[#EEE8DE]
+text-[#E8ECE2]
 uppercase
 mb-3
 ">
@@ -299,7 +645,6 @@ max-w-xl
 
 
 
-
 <!-- ========================================
      CHAPTER 01
 ======================================== -->
@@ -320,8 +665,6 @@ gap-8
 items-center
 ">
 
-
-<!-- TEXT -->
 
 <div class="
 md:col-span-6
@@ -351,7 +694,7 @@ tracking-wide
 <p class="
 text-xs
 md:text-sm
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 font-light
 ">
@@ -364,6 +707,13 @@ font-light
 하나의 보석처럼 보존합니다.
 
 </p>
+
+
+<div class="botanical-divider pt-4">
+
+✦
+
+</div>
 
 
 </div>
@@ -381,16 +731,33 @@ md:justify-end
 ">
 
 
+<div class="photo-frame">
+
+
+<div class="botanical-line botanical-top">
+
+<svg viewBox="0 0 100 120">
+
+<path d="M20 110 C30 80 45 55 70 20"/>
+
+<path d="M42 70 C30 60 22 48 20 35"/>
+
+<path d="M53 55 C68 52 78 44 82 32"/>
+
+<path d="M30 88 C18 83 10 75 8 65"/>
+
+</svg>
+
+</div>
+
+
 <div class="
+hand-photo
 w-72
 md:w-80
 aspect-[3/5]
 rounded-[160px]
 overflow-hidden
-border
-border-[#D8D0C3]
-shadow-sm
-bg-white
 ">
 
 
@@ -406,7 +773,6 @@ h-full
 object-cover
 ">
 
-
 </div>
 
 
@@ -415,10 +781,10 @@ object-cover
 
 </div>
 
+
+</div>
 
 </section>
-
-
 
 
 
@@ -432,12 +798,13 @@ object-cover
 
 
 <div class="
+ribbon-section
 w-full
 h-24
 md:h-36
 overflow-hidden
 border-y
-border-[#D8D0C3]
+border-[#C9CDC0]
 ">
 
 
@@ -451,16 +818,13 @@ class="
 w-full
 h-full
 object-cover
-brightness-[0.88]
+brightness-[0.85]
 ">
 
 
 </div>
 
-
 </section>
-
-
 
 
 
@@ -497,16 +861,33 @@ md:justify-start
 ">
 
 
+<div class="photo-frame">
+
+
+<div class="botanical-line botanical-bottom">
+
+<svg viewBox="0 0 100 120">
+
+<path d="M80 110 C65 85 55 55 25 15"/>
+
+<path d="M57 70 C70 62 78 52 80 40"/>
+
+<path d="M48 55 C35 50 25 40 22 30"/>
+
+<path d="M67 88 C78 83 87 75 90 65"/>
+
+</svg>
+
+</div>
+
+
 <div class="
+hand-photo
 w-72
 md:w-80
 aspect-[3/5]
 rounded-[160px]
 overflow-hidden
-border
-border-[#D8D0C3]
-shadow-sm
-bg-white
 ">
 
 
@@ -521,6 +902,9 @@ w-full
 h-full
 object-cover
 ">
+
+
+</div>
 
 
 </div>
@@ -562,7 +946,7 @@ tracking-wide
 <p class="
 text-xs
 md:text-sm
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 font-light
 ">
@@ -578,7 +962,7 @@ font-light
 
 <div class="
 border-l
-border-[#9A9D87]
+border-[#8D9A86]
 pl-4
 mt-4
 ">
@@ -587,7 +971,7 @@ mt-4
 <p class="
 text-[10px]
 tracking-widest
-text-[#7F806B]
+text-[#71806D]
 ">
 
 EUROPE MEMORY ARCHIVE
@@ -597,7 +981,7 @@ EUROPE MEMORY ARCHIVE
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 mt-1
 ">
 
@@ -616,8 +1000,6 @@ mt-1
 
 
 </section>
-
-
 
 
 
@@ -655,16 +1037,6 @@ md:col-span-8
 
 
 <div class="video-inner">
-
-
-<!--
-    아래 src에 실제 영상 파일을 넣으면 됩니다.
-
-    예:
-    <video autoplay muted loop playsinline>
-        <source src="video/travel-memory.mp4" type="video/mp4">
-    </video>
--->
 
 
 <video
@@ -737,7 +1109,7 @@ A Day in Between
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 font-light
 ">
@@ -756,7 +1128,7 @@ font-light
 pt-2
 text-[10px]
 tracking-widest
-text-[#7F806B]
+text-[#71806D]
 ">
 
 LIFE / TRAVEL / 2026
@@ -771,8 +1143,6 @@ LIFE / TRAVEL / 2026
 
 
 </section>
-
-
 
 
 
@@ -798,7 +1168,6 @@ gap-8
 ">
 
 
-
 <!-- ARCH 01 -->
 
 <div class="
@@ -810,14 +1179,15 @@ text-center
 ">
 
 
+<div class="photo-frame w-full">
+
+
 <div class="
+hand-photo
 w-full
 aspect-[2/3]
 rounded-t-full
 overflow-hidden
-border
-border-[#D8D0C3]
-bg-white
 ">
 
 
@@ -832,6 +1202,8 @@ w-full
 h-full
 object-cover
 ">
+
+</div>
 
 </div>
 
@@ -851,7 +1223,7 @@ PAGE .01
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 px-2
 mt-2
@@ -873,7 +1245,6 @@ mt-2
 
 
 
-
 <!-- ARCH 02 -->
 
 <div class="
@@ -885,14 +1256,15 @@ text-center
 ">
 
 
+<div class="photo-frame w-full">
+
+
 <div class="
+hand-photo
 w-full
 aspect-[2/3]
 rounded-t-full
 overflow-hidden
-border
-border-[#D8D0C3]
-bg-white
 ">
 
 
@@ -907,6 +1279,8 @@ w-full
 h-full
 object-cover
 ">
+
+</div>
 
 </div>
 
@@ -926,7 +1300,7 @@ PAGE .02
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 px-2
 mt-2
@@ -947,7 +1321,6 @@ mt-2
 
 
 
-
 <!-- ARCH 03 -->
 
 <div class="
@@ -959,14 +1332,15 @@ text-center
 ">
 
 
+<div class="photo-frame w-full">
+
+
 <div class="
+hand-photo
 w-full
 aspect-[2/3]
 rounded-t-full
 overflow-hidden
-border
-border-[#D8D0C3]
-bg-white
 ">
 
 
@@ -981,6 +1355,8 @@ w-full
 h-full
 object-cover
 ">
+
+</div>
 
 </div>
 
@@ -1000,7 +1376,7 @@ PAGE .03
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 px-2
 mt-2
@@ -1022,8 +1398,6 @@ mt-2
 
 
 </section>
-
-
 
 
 
@@ -1052,24 +1426,22 @@ md:grid-cols-2
 w-full
 items-center
 border-b
-border-[#D8D0C3]/60
+border-[#C9CDC0]/70
 py-8
 md:py-0
 ">
 
 
-<div>
+<div class="photo-frame">
 
 
 <div class="
+hand-photo
 w-full
 aspect-[16/8]
 md:aspect-[2/1]
 overflow-hidden
-border
-border-[#D8D0C3]
 rounded-r-full
-bg-white
 ">
 
 
@@ -1121,7 +1493,7 @@ font-semibold
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 font-light
 ">
@@ -1153,7 +1525,7 @@ md:grid-cols-2
 w-full
 items-center
 border-b
-border-[#D8D0C3]/60
+border-[#C9CDC0]/70
 py-8
 md:py-0
 ">
@@ -1189,7 +1561,7 @@ font-semibold
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 font-light
 ">
@@ -1214,15 +1586,16 @@ md:order-2
 ">
 
 
+<div class="photo-frame">
+
+
 <div class="
+hand-photo
 w-full
 aspect-[16/8]
 md:aspect-[2/1]
 overflow-hidden
-border
-border-[#D8D0C3]
 rounded-l-full
-bg-white
 ">
 
 
@@ -1248,6 +1621,8 @@ object-cover
 </div>
 
 
+</div>
+
 
 
 
@@ -1265,18 +1640,16 @@ md:py-0
 ">
 
 
-<div>
+<div class="photo-frame">
 
 
 <div class="
+hand-photo
 w-full
 aspect-[16/8]
 md:aspect-[2/1]
 overflow-hidden
-border
-border-[#D8D0C3]
 rounded-r-full
-bg-white
 ">
 
 
@@ -1328,7 +1701,7 @@ font-semibold
 
 <p class="
 text-xs
-text-[#756B62]
+text-[#6F766A]
 leading-relaxed
 font-light
 ">
@@ -1357,10 +1730,8 @@ font-light
 
 
 
-
-
 <!-- ========================================
-     ARCHIVE FOOTER
+     FOOTER
 ======================================== -->
 
 <footer class="archive-footer">
@@ -1372,6 +1743,9 @@ mx-auto
 px-6
 py-14
 ">
+
+
+<div class="footer-botanical mb-12"></div>
 
 
 <div class="
@@ -1406,8 +1780,8 @@ opacity-70
 leading-relaxed
 ">
 
-A collection of places,
-moments and memories.
+A quiet archive of
+places, flowers and memories.
 
 </p>
 
@@ -1426,11 +1800,11 @@ moments and memories.
 <p class="
 text-[10px]
 tracking-[0.3em]
-mb-4
+mb-5
 opacity-60
 ">
 
-ARCHIVE
+EXPLORE THE ARCHIVE
 
 </p>
 
@@ -1438,8 +1812,8 @@ ARCHIVE
 <div class="
 flex
 flex-wrap
-gap-x-6
-gap-y-3
+gap-x-7
+gap-y-4
 text-xs
 ">
 
@@ -1460,14 +1834,21 @@ TRAVEL
 
 <a href="#" class="footer-link">
 
-MEMORIES
+PLACES
 
 </a>
 
 
 <a href="#" class="footer-link">
 
-PLACES
+JOURNAL
+
+</a>
+
+
+<a href="#" class="footer-link">
+
+MEMORIES
 
 </a>
 
@@ -1490,7 +1871,7 @@ md:text-right
 
 <p class="text-xs">
 
-Life & Travel Archive
+Vintage Flower Archive
 
 </p>
 
