@@ -1,230 +1,1102 @@
-/* =====================================
-SOFT NATURAL EDITORIAL ARCHIVE SYSTEM
-===================================== */
+```css
+/* =====================================================
+   ROOT
+===================================================== */
 
-/* 0. 기본 세팅 (아이보리 배경 감성) */
-body {
+:root {
+
+    --ivory: #f3f0e8;
+    --paper: #e9e3d7;
+    --black: #171715;
+    --brown: #8b6b4f;
+    --muted: #8f887d;
+    --line: #cfc7ba;
+
+}
+
+
+* {
+
     margin: 0;
     padding: 0;
-    background-color: #F2F2DF; /* 기존 사이트 시그니처 배경색 */
-    font-family: 'Noto Serif KR', 'Times New Roman', serif;
-    color: #333;
-}
 
-.archive-wrapper {
-    display: flex;
-    max-width: 1400px;
-    margin: 0 auto;
-    min-height: 100vh;
-}
-
-/* =====================================
-1. LEFT SIDEBAR (사이드바 스타일)
-===================================== */
-.archive-sidebar {
-    width: 320px;
-    padding: 60px 40px;
-    border-right: 1px solid #E5DFD3; /* 은은한 구분선 */
-}
-
-/* 스크롤을 내려도 사이드바는 고정되도록 */
-.sidebar-sticky {
-    position: sticky;
-    top: 60px;
-}
-
-.sidebar-title {
-    margin-bottom: 40px;
-}
-
-.sidebar-title .sub-script {
-    font-family: 'Great Vibes', cursive;
-    font-size: 28px;
-    color: #8B6B4F;
-    display: block;
-    margin-bottom: -5px;
-}
-
-.sidebar-title h2 {
-    font-size: 36px;
-    margin: 0;
-    font-weight: normal;
-    letter-spacing: 1px;
-}
-
-/* 검색창 */
-.search-box {
-    position: relative;
-    margin-bottom: 45px;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 12px 15px;
-    background: transparent;
-    border: 1px solid #B9AA95;
-    border-radius: 4px;
-    font-size: 14px;
-    outline: none;
-    color: #333;
     box-sizing: border-box;
+
 }
 
-.search-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
+
+html {
+
+    scroll-behavior: smooth;
+
 }
 
-/* 메뉴 및 태그 공통 스타일 */
-.category-nav h3, .tag-box h3 {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #8B6B4F;
-    margin-bottom: 20px;
+
+body {
+
+    background: var(--ivory);
+
+    color: var(--black);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-weight: 300;
+
+    overflow-x: hidden;
+
 }
 
-.category-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 45px 0;
-}
 
-.category-nav li {
-    margin-bottom: 15px;
-}
+/* =====================================================
+   TOP NAVIGATION
+===================================================== */
 
-.category-nav a {
-    text-decoration: none;
-    color: #666;
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;
-    transition: color 0.3s;
-}
+.top-nav {
 
-.category-nav li.active a, .category-nav a:hover {
-    color: #111;
-    font-weight: bold;
-}
-
-.category-nav .count {
-    font-size: 12px;
-    color: #999;
-}
-
-.tags a {
-    display: inline-block;
-    text-decoration: none;
-    color: #777;
-    font-size: 13px;
-    margin: 0 8px 8px 0;
-    transition: color 0.3s;
-}
-
-.tags a:hover {
-    color: #111;
-}
-
-/* =====================================
-2. RIGHT MAIN LIST (비대칭 아치 카드 레이아웃)
-===================================== */
-.archive-content {
-    flex: 1;
-    padding: 80px 60px;
-}
-
-/* 2열 배열 그리드 */
-.archive-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 80px 50px; /* 행 여백을 넓게 주어 오브제 느낌 강조 */
-}
-
-/* 카드 공통 스타일 */
-.archive-card {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: transform 0.4s ease;
-}
-
-/* 🌟 레퍼런스 감성 치트키: 짝수번째 카드를 아래로 슬쩍 내려 지그재그 리듬감 부여 */
-.archive-card:nth-child(even) {
-    margin-top: 60px;
-}
-
-.card-img-wrap {
     width: 100%;
-    height: 480px; /* 고정 크기 내에서 프레임 모양으로 자름 */
-    overflow: hidden;
-    background-color: #E5DCD5;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-    transition: box-shadow 0.4s;
+
+    height: 56px;
+
+    background: var(--black);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
 }
 
-.card-img-wrap img {
+
+.nav-inner {
+
     width: 100%;
+
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 0;
+
 }
 
-/* Hover 마우스 올렸을 때 액자 효과 */
-.archive-card:hover {
-    transform: translateY(-5px);
-}
 
-.archive-card:hover .card-img-wrap img {
-    transform: scale(1.03);
-}
+.nav-link {
 
-/* 🎨 카드별 모양 깎기 (오브제 프레임 디자인) */
-.type-arch .card-img-wrap {
-    border-radius: 240px 240px 0 0; /* 완벽한 아치형 */
-}
+    height: 100%;
 
-.type-oval .card-img-wrap {
-    border-radius: 240px; /* 긴 알약/타원 형태 */
-}
+    min-width: 130px;
 
-.type-bottom-round .card-img-wrap {
-    border-radius: 0 0 240px 240px; /* 하단만 아치형 */
-}
+    padding: 0 30px;
 
-.type-rect .card-img-wrap {
-    border-radius: 4px; /* 단정한 사각형 */
-}
+    display: flex;
 
-/* 카드 하단 텍스트 정렬 */
-.card-txt {
-    padding: 25px 10px 0 10px;
-    text-align: center; /* 레퍼런스 특유의 중앙 정렬 감성 */
-}
+    align-items: center;
 
-.card-txt .category {
+    justify-content: center;
+
+    color: #f3f0e8;
+
+    text-decoration: none;
+
     font-size: 11px;
-    letter-spacing: 2px;
-    color: #8B6B4F;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    border-left: 1px solid rgba(255,255,255,0.12);
+
+    transition: all 0.3s ease;
+
+}
+
+
+.nav-link:last-child {
+
+    border-right:
+        1px solid rgba(255,255,255,0.12);
+
+}
+
+
+.nav-link:hover {
+
+    background: #292925;
+
+}
+
+
+.nav-link.active {
+
+    background: #f3f0e8;
+
+    color: var(--black);
+
+}
+
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.archive-page {
+
+    width: min(1400px, 90%);
+
+    margin: 0 auto;
+
+}
+
+
+
+/* =====================================================
+   ARCHIVE HERO
+===================================================== */
+
+.archive-hero {
+
+    padding:
+
+        120px
+
+        5vw
+
+        70px;
+
+    text-align: center;
+
+}
+
+
+.hero-small-label {
+
+    font-size: 10px;
+
+    letter-spacing: 0.2em;
+
+    text-transform: uppercase;
+
+    color: var(--brown);
+
+    margin-bottom: 30px;
+
+}
+
+
+.archive-hero h1 {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: clamp(70px, 10vw, 150px);
+
+    font-weight: 400;
+
+    line-height: 0.75;
+
+    letter-spacing: -0.04em;
+
+}
+
+
+.archive-hero h1 span {
+
     display: block;
-    margin-bottom: 8px;
+
+    font-size: 0.7em;
+
+    font-style: italic;
+
+    margin-left: 180px;
+
+    margin-top: 15px;
+
 }
 
-.card-txt .title {
-    font-size: 19px;
-    font-weight: normal;
-    margin: 0 0 8px 0;
-    color: #222;
-    line-height: 1.4;
+
+.hero-description {
+
+    max-width: 500px;
+
+    margin: 60px auto 50px;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: #68645c;
+
 }
 
-.card-txt .date {
-    font-size: 12px;
-    color: #999;
-    margin: 0;
+
+.hero-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-top: 20px;
+
+    border-top: 1px solid var(--line);
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
 }
+
+
+.archive-count {
+
+    color: var(--brown);
+
+}
+
+
+.search-toggle {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    color: var(--black);
+
+}
+
+
+.search-toggle span {
+
+    font-size: 18px;
+
+    margin-left: 10px;
+
+}
+
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-panel {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    border-bottom: 1px solid var(--line);
+
+    transition:
+
+        max-height 0.5s ease,
+
+        opacity 0.5s ease;
+
+}
+
+
+.search-panel.active {
+
+    max-height: 100px;
+
+    opacity: 1;
+
+}
+
+
+.search-panel input {
+
+    flex: 1;
+
+    padding: 25px 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family:
+
+        'Cormorant Garamond',
+
+        serif;
+
+    font-size: 30px;
+
+    color: var(--black);
+
+}
+
+
+.search-panel button {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    font-size: 25px;
+
+}
+
+
+
+/* =====================================================
+   ARCHIVE LIST
+===================================================== */
+
+.archive-list {
+
+    padding:
+
+        60px
+
+        5vw
+
+        150px;
+
+}
+
+
+
+/* =====================================================
+   ARCHIVE ENTRY
+===================================================== */
+
+.archive-entry {
+
+    position: relative;
+
+    min-height: 600px;
+
+    display: grid;
+
+    grid-template-columns:
+
+        1fr
+
+        1fr;
+
+    align-items: center;
+
+    gap: 100px;
+
+    margin-bottom: 180px;
+
+}
+
+
+.entry-number {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    font-family:
+
+        'Cormorant Garamond',
+
+        serif;
+
+    font-size: 16px;
+
+    color: var(--brown);
+
+}
+
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.entry-image {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--paper);
+
+}
+
+
+.entry-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter: saturate(0.85);
+
+    transition:
+
+        transform 0.8s ease,
+
+        filter 0.8s ease;
+
+}
+
+
+.entry-image:hover img {
+
+    transform: scale(1.04);
+
+    filter: saturate(1);
+
+}
+
+
+
+/* =====================================================
+   IMAGE SHAPES
+===================================================== */
+
+.image-arch {
+
+    width: 100%;
+
+    max-width: 470px;
+
+    height: 600px;
+
+    border-radius:
+
+        240px
+
+        240px
+
+        0
+
+        0;
+
+}
+
+
+.image-oval {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    height: 390px;
+
+    border-radius: 50%;
+
+}
+
+
+.image-round {
+
+    width: 450px;
+
+    height: 450px;
+
+    border-radius: 50%;
+
+}
+
+
+.image-rect {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    height: 430px;
+
+}
+
+
+.image-bottom-round {
+
+    width: 100%;
+
+    max-width: 470px;
+
+    height: 560px;
+
+    border-radius:
+
+        0
+
+        0
+
+        240px
+
+        240px;
+
+}
+
+
+
+/* =====================================================
+   IMAGE HOVER LINK
+===================================================== */
+
+.image-link {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+
+        translate(
+
+            -50%,
+
+            -50%
+
+        );
+
+    padding: 14px 24px;
+
+    background: var(--ivory);
+
+    color: var(--black);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+
+}
+
+
+.entry-image:hover .image-link {
+
+    opacity: 1;
+
+}
+
+
+
+/* =====================================================
+   ENTRY INFO
+===================================================== */
+
+.entry-info {
+
+    max-width: 480px;
+
+}
+
+
+.entry-category {
+
+    display: block;
+
+    margin-bottom: 25px;
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    color: var(--brown);
+
+}
+
+
+.entry-info h2 {
+
+    font-family:
+
+        'Cormorant Garamond',
+
+        serif;
+
+    font-size: clamp(
+
+        48px,
+
+        5vw,
+
+        78px
+
+    );
+
+    font-weight: 400;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.03em;
+
+    margin-bottom: 35px;
+
+}
+
+
+.entry-info p {
+
+    max-width: 380px;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: #6e6a62;
+
+    margin-bottom: 35px;
+
+}
+
+
+.entry-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 7px;
+
+    border-bottom: 1px solid var(--black);
+
+    color: var(--black);
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    transition: gap 0.3s ease;
+
+}
+
+
+.entry-link:hover {
+
+    gap: 25px;
+
+}
+
+
+
+/* =====================================================
+   ENTRY POSITIONS
+===================================================== */
+
+.entry-left {
+
+    grid-template-columns:
+
+        1.1fr
+
+        0.9fr;
+
+}
+
+
+.entry-left .entry-image {
+
+    margin-left: 40px;
+
+}
+
+
+.entry-right {
+
+    grid-template-columns:
+
+        0.9fr
+
+        1.1fr;
+
+}
+
+
+.entry-right .entry-image {
+
+    justify-self: end;
+
+}
+
+
+.entry-center {
+
+    grid-template-columns:
+
+        1fr
+
+        1fr;
+
+    max-width: 1100px;
+
+    margin-left: auto;
+
+    margin-right: auto;
+
+}
+
+
+.entry-center .entry-image {
+
+    justify-self: center;
+
+}
+
+
+.entry-wide {
+
+    grid-template-columns:
+
+        1.3fr
+
+        0.7fr;
+
+}
+
+
+.entry-wide .entry-image {
+
+    max-width: 650px;
+
+}
+
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.archive-footer {
+
+    padding:
+
+        0
+
+        5vw
+
+        60px;
+
+}
+
+
+.footer-line {
+
+    width: 100%;
+
+    height: 1px;
+
+    background: var(--line);
+
+    margin-bottom: 20px;
+
+}
+
+
+.footer-content {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 9px;
+
+    letter-spacing: 0.15em;
+
+    text-transform: uppercase;
+
+    color: var(--muted);
+
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (
+
+    max-width: 900px
+
+) {
+
+
+    .nav-link {
+
+        min-width: 25vw;
+
+        padding: 0 10px;
+
+        font-size: 9px;
+
+    }
+
+
+    .archive-hero {
+
+        padding-top: 90px;
+
+    }
+
+
+    .archive-hero h1 {
+
+        font-size: 80px;
+
+    }
+
+
+    .archive-hero h1 span {
+
+        margin-left: 80px;
+
+    }
+
+
+    .archive-entry,
+
+    .entry-left,
+
+    .entry-right,
+
+    .entry-center,
+
+    .entry-wide {
+
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+
+        min-height: auto;
+
+        margin-bottom: 130px;
+
+    }
+
+
+    .entry-image,
+
+    .image-arch,
+
+    .image-oval,
+
+    .image-round,
+
+    .image-rect,
+
+    .image-bottom-round {
+
+        width: 100%;
+
+        max-width: 100%;
+
+    }
+
+
+    .image-round {
+
+        height: 400px;
+
+    }
+
+
+    .entry-left .entry-image,
+
+    .entry-right .entry-image {
+
+        margin-left: 0;
+
+        justify-self: start;
+
+    }
+
+
+    .entry-info {
+
+        max-width: 100%;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (
+
+    max-width: 600px
+
+) {
+
+
+    .archive-page {
+
+        width: 100%;
+
+    }
+
+
+    .archive-hero {
+
+        padding:
+
+            80px
+
+            25px
+
+            50px;
+
+    }
+
+
+    .archive-hero h1 {
+
+        font-size: 65px;
+
+    }
+
+
+    .archive-hero h1 span {
+
+        margin-left: 40px;
+
+    }
+
+
+    .hero-description {
+
+        font-size: 12px;
+
+        margin-top: 45px;
+
+    }
+
+
+    .hero-bottom {
+
+        font-size: 8px;
+
+    }
+
+
+    .archive-list {
+
+        padding:
+
+            40px
+
+            25px
+
+            100px;
+
+    }
+
+
+    .archive-entry {
+
+        margin-bottom: 110px;
+
+    }
+
+
+    .entry-info h2 {
+
+        font-size: 50px;
+
+    }
+
+
+    .image-arch {
+
+        height: 450px;
+
+    }
+
+
+    .image-oval {
+
+        height: 300px;
+
+    }
+
+
+    .image-round {
+
+        height: 330px;
+
+    }
+
+
+    .image-rect {
+
+        height: 280px;
+
+    }
+
+
+    .image-bottom-round {
+
+        height: 450px;
+
+    }
+
+
+    .footer-content {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+}
+```
