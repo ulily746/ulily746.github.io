@@ -401,6 +401,239 @@ WhatsApp
 </main>
 
 /* ===================================
+   HEADER
+=================================== */
+
+header{
+
+    width:100%;
+
+    padding:30px 0;
+
+}
+
+.nav{
+
+    width:min(1100px,92%);
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:45px;
+
+}
+
+.nav a{
+
+    text-decoration:none;
+
+    color:#8d7772;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+.nav a:hover{
+
+    color:#a06f6d;
+
+}
+
+
+/* ===================================
+   HERO
+=================================== */
+
+.hero{
+
+    min-height:720px;
+
+    padding:80px 20px 120px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:100px;
+
+    width:min(1200px,92%);
+
+    margin:auto;
+
+}
+
+.oval-wrapper{
+
+    position:relative;
+
+    width:420px;
+
+    height:560px;
+
+    flex-shrink:0;
+
+}
+
+.oval-border{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    border:1px solid #c9aaa3;
+
+    border-radius:50%;
+
+    transform:rotate(-8deg);
+
+    left:-15px;
+
+    top:10px;
+
+}
+
+.oval{
+
+    position:relative;
+
+    width:100%;
+
+    height:100%;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.08);
+
+}
+
+.oval img{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+.star{
+
+    position:absolute;
+
+    font-size:28px;
+
+    color:#c49b94;
+
+    z-index:2;
+
+}
+
+.star-left{
+
+    left:-30px;
+
+    top:25%;
+
+}
+
+.star-right{
+
+    right:-25px;
+
+    bottom:20%;
+
+}
+
+.hero-text{
+
+    max-width:400px;
+
+}
+
+.hero-text h1{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:100px;
+
+    font-weight:400;
+
+    line-height:.8;
+
+    color:#9d6d6a;
+
+    margin-bottom:35px;
+
+}
+
+.hero-text p{
+
+    font-family:'Caveat',cursive;
+
+    font-size:28px;
+
+    line-height:1.6;
+
+    color:#756b67;
+
+    margin-bottom:35px;
+
+    white-space:pre-line;
+
+}
+
+.order-btn{
+
+    display:inline-block;
+
+    padding:14px 35px;
+
+    border:1px solid #b9908b;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    color:#9d6d6a;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+.order-btn:hover{
+
+    background:#9d6d6a;
+
+    color:white;
+
+}     
+     
+/* ===================================
    PRICE - SCRAPBOOK LAYOUT
 =================================== */
 
@@ -1298,177 +1531,263 @@ footer h2{
 
 @media(max-width:992px){
 
-.hero-wrap{
+    /* =========================
+       HERO
+    ========================= */
 
-    width:300px;
+    .hero{
 
-    height:410px;
+        flex-direction:column;
+
+        gap:60px;
+
+        min-height:auto;
+
+        padding:60px 20px 100px;
+
+        text-align:center;
+
+    }
+
+    .oval-wrapper{
+
+        width:300px;
+
+        height:410px;
+
+    }
+
+    .hero-text{
+
+        max-width:500px;
+
+    }
+
+    .hero-text h1{
+
+        font-size:80px;
+
+    }
+
+    /* =========================
+       SECTION TITLES
+    ========================= */
+
+    .title-box h2,
+    .about-text h2,
+    .faq h2,
+    footer h2{
+
+        font-size:42px;
+
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-wrapper{
+
+        grid-template-columns:1fr;
+
+        gap:60px;
+
+    }
+
+    .about-text{
+
+        text-align:center;
+
+    }
+
+    .about-text p{
+
+        margin:auto;
+
+    }
+
+    /* =========================
+       PRICE
+    ========================= */
+
+    .scrap-item,
+    .item2{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:40px;
+
+        transform:none;
+
+    }
+
+    .item3{
+
+        width:100%;
+
+        margin-left:0;
+
+    }
+
+    .scrap-item::after{
+
+        display:none;
+
+    }
+
+    /* =========================
+       GALLERY
+    ========================= */
+
+    .gallery-grid{
+
+        position:static;
+
+        display:grid;
+
+        grid-template-columns:1fr;
+
+        gap:35px;
+
+        min-height:auto;
+
+    }
+
+    .gallery-card{
+
+        position:relative;
+
+        width:100% !important;
+
+        height:auto !important;
+
+        left:auto;
+
+        right:auto;
+
+        top:auto;
+
+        bottom:auto;
+
+        transform:none;
+
+    }
+
+    .gallery-card img{
+
+        aspect-ratio:4/5;
+
+    }
 
 }
 
-.price-title h2,
-.section-heading h2,
-.about-text h2,
-.faq h2,
-footer h2{
 
-    font-size:42px;
-
-}
-
-.about-wrapper{
-
-    grid-template-columns:1fr;
-
-    gap:60px;
-
-}
-
-.about-text{
-
-    text-align:center;
-
-}
-
-.about-text p{
-
-    margin:auto;
-
-}
-
-/* Price */
-
-.scrap-item,
-.item2{
-
-    flex-direction:column;
-
-    text-align:center;
-
-    gap:40px;
-
-    transform:none;
-
-}
-
-.item3{
-
-    width:100%;
-
-    margin-left:0;
-
-}
-
-.scrap-item::after{
-
-    display:none;
-
-}
-
-/* Gallery */
-
-.gallery-grid{
-
-    position:static;
-
-    display:grid;
-
-    grid-template-columns:1fr;
-
-    gap:35px;
-
-    min-height:auto;
-
-}
-
-.gallery-card{
-
-    position:relative;
-
-    width:100% !important;
-
-    height:auto !important;
-
-    left:auto;
-
-    right:auto;
-
-    top:auto;
-
-    bottom:auto;
-
-    transform:none;
-
-}
-
-.gallery-card img{
-
-    aspect-ratio:4/5;
-
-}
-
-}
+/* ===================================
+   MOBILE
+=================================== */
 
 @media(max-width:600px){
 
-.nav{
+    .nav{
 
-    gap:20px;
+        gap:20px;
 
-}
+    }
 
-.nav a{
+    .nav a{
 
-    font-size:11px;
+        font-size:11px;
 
-    letter-spacing:1px;
+        letter-spacing:1px;
 
-}
+    }
 
-.hero{
+    /* =========================
+       HERO
+    ========================= */
 
-    padding-bottom:60px;
+    .hero{
 
-}
+        padding:40px 15px 80px;
 
-.hero-wrap{
+        gap:45px;
 
-    width:250px;
+    }
 
-    height:340px;
+    .oval-wrapper{
 
-}
+        width:250px;
 
-.polaroid img{
+        height:340px;
 
-    width:220px !important;
+    }
 
-    height:280px !important;
+    .hero-text h1{
 
-}
+        font-size:65px;
 
-.item-text h3{
+    }
 
-    font-size:34px;
+    .hero-text p{
 
-}
+        font-size:24px;
 
-.item-text p{
+    }
 
-    font-size:22px;
+    /* =========================
+       PRICE
+    ========================= */
 
-}
+    .polaroid img{
 
-.about-text h2{
+        width:220px !important;
 
-    font-size:36px;
+        height:280px !important;
 
-}
+    }
 
-footer h2{
+    .item-text h3{
 
-    font-size:34px;
+        font-size:34px;
 
-}
+    }
+
+    .item-text p{
+
+        font-size:22px;
+
+    }
+
+    /* =========================
+       ABOUT
+    ========================= */
+
+    .about-text h2{
+
+        font-size:36px;
+
+    }
+
+    /* =========================
+       FAQ
+    ========================= */
+
+    .faq h2{
+
+        font-size:36px;
+
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer h2{
+
+        font-size:34px;
+
+    }
 
 }
