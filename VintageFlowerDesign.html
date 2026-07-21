@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,109 +10,46 @@
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 
-
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="
-https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 
 <style>
 
+/* ========================================
+   BASE
+======================================== */
+
 body{
-    font-family:'Plus Jakarta Sans',sans-serif;
+    font-family:'Plus Jakarta Sans', sans-serif;
+    background:#F7F3EC;
+    color:#4A4038;
 }
 
 
-/* 타이틀 */
+/* ========================================
+   TITLE FONT
+======================================== */
+
 .font-serif-title{
-    font-family:'Cinzel',serif;
+    font-family:'Cinzel', serif;
 }
 
 
-/* 손글씨 */
-.font-hand{
-    font-family:'Caveat',cursive;
-}
+/* ========================================
+   PHOTO FRAME
+======================================== */
 
-
-/* 종이 질감 */
-.paper-bg{
-    background:
-    radial-gradient(
-        circle at top,
-        rgba(255,255,255,.8),
-        transparent 45%
-    ),
-    #F4EFE6;
-}
-
-
-/* 사진 공통 */
 .photo-frame{
     position:relative;
 }
 
 
-/* 빈티지 테이프 */
-.washi-left,
-.washi-right{
-
-    position:absolute;
-    width:75px;
-    height:22px;
-
-    background:#D8C7B5;
-    opacity:.65;
-
-    z-index:5;
-}
-
-
-.washi-left{
-    top:-10px;
-    left:25px;
-    transform:rotate(-8deg);
-}
-
-
-.washi-right{
-    top:-10px;
-    right:25px;
-    transform:rotate(7deg);
-}
-
-
-/* 작은 여행 스탬프 */
-
-.travel-stamp{
-
-    width:75px;
-    height:75px;
-
-    border:1px solid #A08E81;
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    font-size:10px;
-    letter-spacing:.15em;
-
-    color:#8B7355;
-
-    transform:rotate(-12deg);
-
-}
-
-
-/* 기록 라벨 */
+/* ========================================
+   ARCHIVE LABEL
+======================================== */
 
 .archive-label{
 
@@ -119,49 +57,162 @@ body{
 
     letter-spacing:.35em;
 
-    color:#9B8777;
+    color:#7F806B;
 
 }
 
-</style>
 
+/* ========================================
+   VIDEO
+======================================== */
+
+.video-frame{
+
+    position:relative;
+
+    background:#E8E1D6;
+
+    border:1px solid #D8D0C3;
+
+    padding:10px;
+
+}
+
+
+.video-inner{
+
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/7;
+
+    overflow:hidden;
+
+    background:#D9D1C4;
+
+}
+
+
+.video-inner video{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* 영상 중앙 플레이 버튼 */
+
+.video-play{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    pointer-events:none;
+
+}
+
+
+.video-play span{
+
+    width:60px;
+
+    height:60px;
+
+    border:1px solid rgba(255,255,255,.8);
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    background:rgba(50,45,40,.18);
+
+    backdrop-filter:blur(3px);
+
+}
+
+
+/* ========================================
+   FOOTER NAV
+======================================== */
+
+.archive-footer{
+
+    background:#747A68;
+
+    color:#F3EFE6;
+
+}
+
+
+.footer-link{
+
+    transition:opacity .3s ease;
+
+}
+
+
+.footer-link:hover{
+
+    opacity:.55;
+
+}
+
+
+</style>
 
 </head>
 
 
-<body class="
-paper-bg
-text-[#40352D]
-antialiased
-overflow-x-hidden
-">
+<body class="antialiased overflow-x-hidden">
 
 
-<div class="w-full space-y-36 pb-24">
+<!-- ========================================
+     MAIN
+======================================== -->
+
+<div class="w-full space-y-36 pb-0">
 
 
 
-<!-- ============================= -->
-<!-- HERO -->
-<!-- ============================= -->
-
+<!-- ========================================
+     HERO
+======================================== -->
 
 <header class="w-full">
 
-
 <div class="
-relative 
-w-full 
+relative
+w-full
 aspect-[16/7]
 overflow-hidden
 border-b
-border-[#D8C7B5]
+border-[#D8D0C3]
 ">
 
 
 <img
 
 src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1800&q=80"
+
+alt="Vintage Flower Travel Journal"
 
 class="
 w-full
@@ -184,28 +235,11 @@ p-6
 ">
 
 
-<div class="
-absolute
-top-10
-left-10
-travel-stamp
-hidden
-md:flex
-">
-
-TRAVEL<br>
-LOG<br>
-2026
-
-</div>
-
-
-
 <span class="
 text-[10px]
 md:text-xs
 tracking-[0.4em]
-text-[#E8DCCB]
+text-[#EEE8DE]
 uppercase
 mb-3
 ">
@@ -213,7 +247,6 @@ mb-3
 Wanderlust & Collectibles
 
 </span>
-
 
 
 <h1 class="
@@ -256,28 +289,9 @@ max-w-xl
 </p>
 
 
-
-<div class="
-absolute
-bottom-8
-right-10
-font-hand
-text-white
-text-2xl
-opacity-80
-rotate-[-5deg]
-">
-
-July memories
-
 </div>
 
-
 </div>
-
-
-</div>
-
 
 </header>
 
@@ -286,10 +300,9 @@ July memories
 
 
 
-<!-- ============================= -->
-<!-- CHAPTER 01 -->
-<!-- ============================= -->
-
+<!-- ========================================
+     CHAPTER 01
+======================================== -->
 
 <section class="
 w-full
@@ -309,7 +322,6 @@ items-center
 
 
 <!-- TEXT -->
-
 
 <div class="
 md:col-span-6
@@ -336,15 +348,13 @@ tracking-wide
 </h3>
 
 
-
 <p class="
 text-xs
 md:text-sm
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 font-light
 ">
-
 
 둥글고 투박한 형태를 벗어나,
 오래된 주얼리 펜던트처럼 떨어지는
@@ -353,31 +363,15 @@ font-light
 여행지에서 모은 작은 기억들을
 하나의 보석처럼 보존합니다.
 
-
 </p>
 
 
-
-<div class="
-font-hand
-text-xl
-text-[#9B8777]
-pt-3
-">
-
-"Small moments become memories."
-
 </div>
-
-
-</div>
-
 
 
 
 
 <!-- IMAGE -->
-
 
 <div class="
 md:col-span-6
@@ -387,13 +381,6 @@ md:justify-end
 ">
 
 
-<div class="photo-frame">
-
-
-<div class="washi-left"></div>
-
-
-
 <div class="
 w-72
 md:w-80
@@ -401,7 +388,7 @@ aspect-[3/5]
 rounded-[160px]
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 shadow-sm
 bg-white
 ">
@@ -411,6 +398,8 @@ bg-white
 
 src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
 
+alt="Vintage Travel Memory"
+
 class="
 w-full
 h-full
@@ -427,28 +416,28 @@ object-cover
 </div>
 
 
-</div>
-
-
 </section>
 
 
-<!-- ============================= -->
-<!-- SLIM TRAVEL RIBBON -->
-<!-- ============================= -->
 
+
+
+
+
+<!-- ========================================
+     SLIM IMAGE RIBBON
+======================================== -->
 
 <section class="w-full px-0">
 
 
 <div class="
-relative
 w-full
 h-24
 md:h-36
 overflow-hidden
 border-y
-border-[#D8C7B5]
+border-[#D8D0C3]
 ">
 
 
@@ -456,38 +445,14 @@ border-[#D8C7B5]
 
 src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80"
 
+alt="Travel Journal Detail"
+
 class="
 w-full
 h-full
 object-cover
-brightness-[0.85]
+brightness-[0.88]
 ">
-
-
-<div class="
-absolute
-inset-0
-flex
-items-center
-justify-center
-">
-
-
-<p class="
-font-hand
-text-white
-text-3xl
-tracking-wide
-rotate-[-3deg]
-drop-shadow
-">
-
-postcards & little memories
-
-</p>
-
-
-</div>
 
 
 </div>
@@ -500,10 +465,10 @@ postcards & little memories
 
 
 
-<!-- ============================= -->
-<!-- CHAPTER 02 -->
-<!-- ============================= -->
 
+<!-- ========================================
+     CHAPTER 02
+======================================== -->
 
 <section class="
 w-full
@@ -524,19 +489,12 @@ items-center
 
 <!-- IMAGE -->
 
-
 <div class="
 md:col-span-6
 flex
 justify-center
 md:justify-start
 ">
-
-
-<div class="photo-frame">
-
-
-<div class="washi-right"></div>
 
 
 <div class="
@@ -546,7 +504,7 @@ aspect-[3/5]
 rounded-[160px]
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 shadow-sm
 bg-white
 ">
@@ -555,6 +513,8 @@ bg-white
 <img
 
 src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80"
+
+alt="Travel Collection"
 
 class="
 w-full
@@ -569,15 +529,10 @@ object-cover
 </div>
 
 
-</div>
-
-
-
 
 
 
 <!-- TEXT -->
-
 
 <div class="
 md:col-span-6
@@ -592,7 +547,6 @@ CHAPTER. 02
 </span>
 
 
-
 <h3 class="
 text-xl
 md:text-2xl
@@ -605,11 +559,10 @@ tracking-wide
 </h3>
 
 
-
 <p class="
 text-xs
 md:text-sm
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 font-light
 ">
@@ -623,33 +576,32 @@ font-light
 </p>
 
 
-
 <div class="
 border-l
-border-[#C8B49A]
+border-[#9A9D87]
 pl-4
 mt-4
 ">
 
 
 <p class="
-font-hand
-text-xl
-text-[#8B7355]
+text-[10px]
+tracking-widest
+text-[#7F806B]
 ">
 
-July 12
+EUROPE MEMORY ARCHIVE
 
 </p>
 
 
 <p class="
-text-[10px]
-tracking-widest
-text-[#9B8777]
+text-xs
+text-[#756B62]
+mt-1
 ">
 
-EUROPE MEMORY ARCHIVE
+2026. 07. 12
 
 </p>
 
@@ -671,10 +623,164 @@ EUROPE MEMORY ARCHIVE
 
 
 
-<!-- ============================= -->
-<!-- THREE ARCH WINDOWS -->
-<!-- ============================= -->
+<!-- ========================================
+     VIDEO MEMORY
+======================================== -->
 
+<section class="
+w-full
+max-w-6xl
+mx-auto
+px-6
+">
+
+
+<div class="
+grid
+grid-cols-1
+md:grid-cols-12
+gap-10
+items-center
+">
+
+
+<!-- VIDEO -->
+
+<div class="
+md:col-span-8
+">
+
+
+<div class="video-frame">
+
+
+<div class="video-inner">
+
+
+<!--
+    아래 src에 실제 영상 파일을 넣으면 됩니다.
+
+    예:
+    <video autoplay muted loop playsinline>
+        <source src="video/travel-memory.mp4" type="video/mp4">
+    </video>
+-->
+
+
+<video
+autoplay
+muted
+loop
+playsinline
+>
+
+
+<source
+src="video/travel-memory.mp4"
+type="video/mp4"
+>
+
+
+</video>
+
+
+<div class="video-play">
+
+
+<span>
+
+<i data-lucide="play" size="20"></i>
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- VIDEO TEXT -->
+
+<div class="
+md:col-span-4
+space-y-4
+">
+
+
+<span class="archive-label">
+
+MOVING MEMORIES
+
+</span>
+
+
+<h3 class="
+text-xl
+font-serif-title
+tracking-wide
+">
+
+A Day in Between
+
+</h3>
+
+
+<p class="
+text-xs
+text-[#756B62]
+leading-relaxed
+font-light
+">
+
+사진으로는 남길 수 없었던
+빛과 움직임을 짧은 영상으로 기록합니다.
+
+낯선 도시의 거리,
+창문 너머로 지나가는 풍경,
+그리고 그날의 작은 순간들.
+
+</p>
+
+
+<div class="
+pt-2
+text-[10px]
+tracking-widest
+text-[#7F806B]
+">
+
+LIFE / TRAVEL / 2026
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- ========================================
+     THREE ARCH WINDOWS
+======================================== -->
 
 <section class="
 w-full
@@ -695,7 +801,6 @@ gap-8
 
 <!-- ARCH 01 -->
 
-
 <div class="
 space-y-4
 flex
@@ -705,19 +810,13 @@ text-center
 ">
 
 
-<div class="photo-frame w-full">
-
-
-<div class="washi-left"></div>
-
-
 <div class="
 w-full
 aspect-[2/3]
 rounded-t-full
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 bg-white
 ">
 
@@ -726,6 +825,8 @@ bg-white
 
 src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80"
 
+alt="Morning Market"
+
 class="
 w-full
 h-full
@@ -733,10 +834,6 @@ object-cover
 ">
 
 </div>
-
-
-</div>
-
 
 
 <div>
@@ -753,21 +850,11 @@ PAGE .01
 
 
 <p class="
-font-hand
-text-lg
-text-[#9B8777]
-">
-
-Morning Market
-
-</p>
-
-
-<p class="
 text-xs
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 px-2
+mt-2
 ">
 
 로컬 마켓에서 발견한
@@ -787,10 +874,7 @@ px-2
 
 
 
-
-
 <!-- ARCH 02 -->
-
 
 <div class="
 space-y-4
@@ -801,19 +885,13 @@ text-center
 ">
 
 
-<div class="photo-frame w-full">
-
-
-<div class="washi-right"></div>
-
-
 <div class="
 w-full
 aspect-[2/3]
 rounded-t-full
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 bg-white
 ">
 
@@ -822,6 +900,8 @@ bg-white
 
 src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80"
 
+alt="Quiet Afternoon"
+
 class="
 w-full
 h-full
@@ -829,10 +909,6 @@ object-cover
 ">
 
 </div>
-
-
-</div>
-
 
 
 <div>
@@ -849,21 +925,11 @@ PAGE .02
 
 
 <p class="
-font-hand
-text-lg
-text-[#9B8777]
-">
-
-Quiet Afternoon
-
-</p>
-
-
-<p class="
 text-xs
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 px-2
+mt-2
 ">
 
 햇살이 머무는 창가,
@@ -882,10 +948,7 @@ px-2
 
 
 
-
-
 <!-- ARCH 03 -->
-
 
 <div class="
 space-y-4
@@ -896,19 +959,13 @@ text-center
 ">
 
 
-<div class="photo-frame w-full">
-
-
-<div class="washi-left"></div>
-
-
 <div class="
 w-full
 aspect-[2/3]
 rounded-t-full
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 bg-white
 ">
 
@@ -917,6 +974,8 @@ bg-white
 
 src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
 
+alt="Cafe Memory"
+
 class="
 w-full
 h-full
@@ -924,10 +983,6 @@ object-cover
 ">
 
 </div>
-
-
-</div>
-
 
 
 <div>
@@ -944,21 +999,11 @@ PAGE .03
 
 
 <p class="
-font-hand
-text-lg
-text-[#9B8777]
-">
-
-Cafe Memory
-
-</p>
-
-
-<p class="
 text-xs
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 px-2
+mt-2
 ">
 
 작은 카페테라스에서
@@ -973,18 +1018,20 @@ px-2
 </div>
 
 
-
-
 </div>
 
 
 </section>
 
 
-<!-- ============================= -->
-<!-- HORIZONTAL ARCH MEMORY -->
-<!-- ============================= -->
 
+
+
+
+
+<!-- ========================================
+     HORIZONTAL ARCH MEMORY
+======================================== -->
 
 <section class="
 w-full
@@ -996,10 +1043,7 @@ space-y-6
 
 
 
-
-
 <!-- MEMORY A -->
-
 
 <div class="
 grid
@@ -1008,17 +1052,13 @@ md:grid-cols-2
 w-full
 items-center
 border-b
-border-[#D8C7B5]/50
+border-[#D8D0C3]/60
 py-8
 md:py-0
 ">
 
 
-
-<div class="photo-frame">
-
-
-<div class="washi-left"></div>
+<div>
 
 
 <div class="
@@ -1027,7 +1067,7 @@ aspect-[16/8]
 md:aspect-[2/1]
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 rounded-r-full
 bg-white
 ">
@@ -1036,6 +1076,8 @@ bg-white
 <img
 
 src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80"
+
+alt="Memory A"
 
 class="
 w-full
@@ -1048,7 +1090,6 @@ object-cover
 
 
 </div>
-
 
 
 
@@ -1068,7 +1109,6 @@ MEMORIES. A
 </span>
 
 
-
 <h4 class="
 text-base
 font-semibold
@@ -1079,10 +1119,9 @@ font-semibold
 </h4>
 
 
-
 <p class="
 text-xs
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 font-light
 ">
@@ -1096,32 +1135,16 @@ font-light
 </p>
 
 
-
-<div class="
-font-hand
-text-xl
-text-[#9B8777]
-">
-
-Paris · 10:30 AM
-
-</div>
-
-
-
 </div>
 
 
 </div>
-
-
 
 
 
 
 
 <!-- MEMORY B -->
-
 
 <div class="
 grid
@@ -1130,11 +1153,10 @@ md:grid-cols-2
 w-full
 items-center
 border-b
-border-[#D8C7B5]/50
+border-[#D8D0C3]/60
 py-8
 md:py-0
 ">
-
 
 
 <div class="
@@ -1155,7 +1177,6 @@ MEMORIES. B
 </span>
 
 
-
 <h4 class="
 text-base
 font-semibold
@@ -1166,10 +1187,9 @@ font-semibold
 </h4>
 
 
-
 <p class="
 text-xs
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 font-light
 ">
@@ -1183,34 +1203,15 @@ font-light
 </p>
 
 
-
-<div class="
-font-hand
-text-xl
-text-[#9B8777]
-">
-
-Found in old street
-
-</div>
-
-
 </div>
 
 
 
 
-
-
-
 <div class="
-photo-frame
 order-1
 md:order-2
 ">
-
-
-<div class="washi-right"></div>
 
 
 <div class="
@@ -1219,7 +1220,7 @@ aspect-[16/8]
 md:aspect-[2/1]
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 rounded-l-full
 bg-white
 ">
@@ -1228,6 +1229,8 @@ bg-white
 <img
 
 src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80"
+
+alt="Memory B"
 
 class="
 w-full
@@ -1249,10 +1252,7 @@ object-cover
 
 
 
-
-
 <!-- MEMORY C -->
-
 
 <div class="
 grid
@@ -1265,11 +1265,7 @@ md:py-0
 ">
 
 
-
-<div class="photo-frame">
-
-
-<div class="washi-left"></div>
+<div>
 
 
 <div class="
@@ -1278,7 +1274,7 @@ aspect-[16/8]
 md:aspect-[2/1]
 overflow-hidden
 border
-border-[#D8C7B5]
+border-[#D8D0C3]
 rounded-r-full
 bg-white
 ">
@@ -1287,6 +1283,8 @@ bg-white
 <img
 
 src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1000&q=80"
+
+alt="Memory C"
 
 class="
 w-full
@@ -1299,9 +1297,6 @@ object-cover
 
 
 </div>
-
-
-
 
 
 
@@ -1321,7 +1316,6 @@ MEMORIES. C
 </span>
 
 
-
 <h4 class="
 text-base
 font-semibold
@@ -1332,10 +1326,9 @@ font-semibold
 </h4>
 
 
-
 <p class="
 text-xs
-text-[#74665D]
+text-[#756B62]
 leading-relaxed
 font-light
 ">
@@ -1349,24 +1342,10 @@ font-light
 </p>
 
 
-
-<div class="
-font-hand
-text-xl
-text-[#9B8777]
-">
-
-To be continued...
-
-</div>
-
-
-
 </div>
 
 
 </div>
-
 
 
 </div>
@@ -1380,38 +1359,31 @@ To be continued...
 
 
 
-<!-- ============================= -->
-<!-- FOOTER -->
-<!-- ============================= -->
+<!-- ========================================
+     ARCHIVE FOOTER
+======================================== -->
+
+<footer class="archive-footer">
 
 
-<footer class="
-bg-[#40352D]
-text-[#E8DCCB]
-py-10
+<div class="
+max-w-7xl
+mx-auto
 px-6
-text-[11px]
-tracking-wider
-border-t
-border-[#D8C7B5]/20
+py-14
 ">
 
 
 <div class="
-w-full
-max-w-7xl
-mx-auto
-flex
-flex-col
-sm:flex-row
-justify-between
-items-center
-gap-4
-text-center
-sm:text-left
+grid
+grid-cols-1
+md:grid-cols-3
+gap-10
+items-start
 ">
 
 
+<!-- TITLE -->
 
 <div>
 
@@ -1419,23 +1391,23 @@ sm:text-left
 <p class="
 font-serif-title
 tracking-widest
-text-white
-text-xs
+text-sm
 ">
 
-VINTAGE FLOWER
+LIFE & TRAVEL
 
 </p>
 
 
 <p class="
-font-hand
-text-lg
-text-[#D8C7B5]
-mt-2
+text-xs
+mt-3
+opacity-70
+leading-relaxed
 ">
 
-Travel diary archive
+A collection of places,
+moments and memories.
 
 </p>
 
@@ -1444,32 +1416,111 @@ Travel diary archive
 
 
 
+
+
+<!-- NAVIGATION -->
+
+<div>
+
+
+<p class="
+text-[10px]
+tracking-[0.3em]
+mb-4
+opacity-60
+">
+
+ARCHIVE
+
+</p>
 
 
 <div class="
-sm:text-right
-text-[10px]
-text-[#C8B49A]
+flex
+flex-wrap
+gap-x-6
+gap-y-3
+text-xs
 ">
 
 
-<p>
+<a href="#" class="footer-link">
 
-First page written :
-2026.07.12
+LIFE
+
+</a>
+
+
+<a href="#" class="footer-link">
+
+TRAVEL
+
+</a>
+
+
+<a href="#" class="footer-link">
+
+MEMORIES
+
+</a>
+
+
+<a href="#" class="footer-link">
+
+PLACES
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- INFO -->
+
+<div class="
+md:text-right
+">
+
+
+<p class="text-xs">
+
+Life & Travel Archive
 
 </p>
 
 
-<p>
+<p class="
+text-[10px]
+opacity-60
+mt-2
+">
 
-© MY VINTAGE ATELIER EDITION
+First page written · 2026.07.12
+
+</p>
+
+
+<p class="
+text-[10px]
+opacity-60
+mt-1
+">
+
+© 2026 MY VINTAGE ATELIER
 
 </p>
 
 
 </div>
 
+
+</div>
 
 
 </div>
@@ -1478,10 +1529,7 @@ First page written :
 </footer>
 
 
-
-
 </div>
-
 
 
 
@@ -1493,4 +1541,4 @@ lucide.createIcons();
 
 
 </body>
-</html>  
+</html>
