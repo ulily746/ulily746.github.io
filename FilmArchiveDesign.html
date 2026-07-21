@@ -1722,6 +1722,278 @@ body{
     }
 
 
+/* =========================================================
+   MOVING MEMORIES / VIDEO
+========================================================= */
+
+.moving-memories{
+
+    padding:110px 0 140px;
+
+}
+
+
+/* -----------------------------------------
+   VIDEO HEADING
+----------------------------------------- */
+
+.moving-heading{
+
+    text-align:center;
+
+    margin-bottom:55px;
+
+}
+
+
+.moving-label{
+
+    display:block;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#a0927e;
+
+    margin-bottom:15px;
+
+}
+
+
+.moving-heading h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:52px;
+
+    font-weight:500;
+
+    color:#655b50;
+
+    line-height:1;
+
+}
+
+
+.moving-heading p{
+
+    margin-top:12px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:22px;
+
+    color:#968876;
+
+    transform:rotate(-2deg);
+
+}
+
+
+/* -----------------------------------------
+   VIDEO CONTAINER
+----------------------------------------- */
+
+.video-wrapper{
+
+    width:100%;
+
+    position:relative;
+
+}
+
+
+/* 영상 */
+
+.memory-video{
+
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:16 / 9;
+
+    object-fit:cover;
+
+    background:#1c1b19;
+
+    border:10px solid #171614;
+
+    box-shadow:
+        0 18px 35px rgba(40,35,28,.16);
+
+}
+
+
+/* 영상 아래 캡션 */
+
+.video-caption{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 12px 0;
+
+}
+
+
+.video-caption span{
+
+    font-family:'Caveat', cursive;
+
+    font-size:27px;
+
+    color:#75695d;
+
+    transform:rotate(-2deg);
+
+}
+
+
+.video-caption small{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#a0927e;
+
+}
+
+
+/* -----------------------------------------
+   VIDEO DECORATIVE LINES
+----------------------------------------- */
+
+.video-wrapper::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-25px;
+
+    top:35px;
+
+    width:45px;
+
+    height:1px;
+
+    background:#a49682;
+
+}
+
+
+.video-wrapper::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-25px;
+
+    bottom:55px;
+
+    width:45px;
+
+    height:1px;
+
+    background:#a49682;
+
+}
+
+
+/* =========================================================
+   VIDEO RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    .moving-memories{
+
+        padding:80px 0 100px;
+
+    }
+
+
+    .moving-heading{
+
+        margin-bottom:40px;
+
+    }
+
+
+    .moving-heading h2{
+
+        font-size:40px;
+
+    }
+
+
+    .moving-heading p{
+
+        font-size:19px;
+
+    }
+
+
+    .memory-video{
+
+        border-width:7px;
+
+    }
+
+
+    .video-caption{
+
+        padding:15px 5px 0;
+
+        gap:15px;
+
+    }
+
+
+    .video-caption span{
+
+        font-size:21px;
+
+    }
+
+
+    .video-caption small{
+
+        font-size:8px;
+
+    }
+
+
+    .video-wrapper::before{
+
+        left:-10px;
+
+        width:20px;
+
+    }
+
+
+    .video-wrapper::after{
+
+        right:-10px;
+
+        width:20px;
+
+    }
+
+}
+     
     /* FILM */
 
     .film{
@@ -2292,7 +2564,60 @@ body{
 
 </section>
 
+<!-- =====================================================
+     MOVING MEMORIES
+===================================================== -->
 
+<section class="moving-memories">
+
+    <div class="moving-heading">
+
+        <span class="moving-label">
+            MOVING MEMORIES
+        </span>
+
+        <h2>
+            Little moments in motion.
+        </h2>
+
+        <p>
+            some memories are better when they move.
+        </p>
+
+    </div>
+
+
+    <div class="video-wrapper">
+
+        <video
+            class="memory-video"
+            controls
+            poster="images/video-poster.jpg"
+            preload="metadata">
+
+            <source
+                src="videos/memory-video.mp4"
+                type="video/mp4">
+
+            Your browser does not support the video tag.
+
+        </video>
+
+        <div class="video-caption">
+
+            <span>
+                A summer afternoon.
+            </span>
+
+            <small>
+                MOVING MEMORY · 001
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- =====================================================
      FILM MEMORIES
