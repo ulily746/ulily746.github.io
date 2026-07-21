@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,13 +6,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Life & Travel Archive - Vintage Flower</title>
+<title>Life & Travel Archive - Botanical Diary</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="
 https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap
@@ -24,54 +25,109 @@ https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jak
    BASE
 ======================================== */
 
-body{
-    font-family:'Plus Jakarta Sans', sans-serif;
-    background:#F3F1E8;
-    color:#3F473D;
+:root{
+
+    --paper:#F3F1E8;
+    --paper-light:#F8F7F1;
+
+    --sage-bg:#E7EDE3;
+    --sage-light:#EEF2EA;
+
+    --moss:#5E6958;
+    --deep-moss:#3F4B40;
+
+    --sage:#899681;
+
+    --line:#B8B9A8;
+    --soft-line:#D4D5C7;
+
+    --text:#3F473D;
+    --subtext:#6F766A;
+
+    --warm:#EDE7DB;
+
 }
 
 
-/* ========================================
-   TITLE
-======================================== */
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+
+    margin:0;
+
+    font-family:'Plus Jakarta Sans', sans-serif;
+
+    background:var(--paper);
+
+    color:var(--text);
+
+}
+
 
 .font-serif-title{
     font-family:'Cinzel', serif;
 }
 
 
-/* ========================================
-   HANDWRITING
-======================================== */
-
 .font-hand{
     font-family:'Caveat', cursive;
 }
 
 
+::selection{
+
+    background:#AEB9A6;
+
+    color:white;
+
+}
+
+
 /* ========================================
-   BOTANICAL COLORS
+   SECTION BACKGROUNDS
 ======================================== */
 
-:root{
+.section-paper{
 
-    --paper:#F3F1E8;
+    background:
 
-    --paper-light:#F8F7F1;
+    radial-gradient(
+        circle at 15% 20%,
+        rgba(255,255,255,.55),
+        transparent 30%
+    ),
 
-    --moss:#5E6958;
+    var(--paper);
 
-    --deep-moss:#3F4B40;
+}
 
-    --sage:#899681;
 
-    --line:#B8B9A8;
+.section-sage{
 
-    --soft-line:#D4D5C7;
+    background:
 
-    --text:#3F473D;
+    linear-gradient(
+        180deg,
+        #E7EDE3 0%,
+        #EAF0E6 100%
+    );
 
-    --subtext:#6F766A;
+}
+
+
+.section-light{
+
+    background:#F8F7F1;
+
+}
+
+
+.section-warm{
+
+    background:#EDE7DB;
 
 }
 
@@ -92,7 +148,7 @@ body{
 
 
 /* ========================================
-   BOTANICAL DIVIDER
+   SMALL DECORATIVE MARK
 ======================================== */
 
 .botanical-divider{
@@ -103,62 +159,111 @@ body{
 
     justify-content:center;
 
-    gap:12px;
+    gap:14px;
 
-    color:#7B8974;
+    color:#788574;
 
-    font-size:12px;
+    font-size:13px;
 
     letter-spacing:.3em;
 
-    opacity:.7;
+    opacity:.75;
 
 }
+
 
 .botanical-divider::before,
 .botanical-divider::after{
 
     content:"";
 
-    display:block;
-
-    width:70px;
+    width:65px;
 
     height:1px;
 
-    background:#C5C9BC;
+    background:#BEC6B7;
 
 }
 
 
 /* ========================================
-   HAND-DRAWN PHOTO FRAME
+   SMALL SPARKLE
 ======================================== */
 
-.photo-frame{
-    position:relative;
-    display:inline-block;
+.sparkle{
+
+    color:#84917C;
+
+    font-size:13px;
+
+    opacity:.65;
+
 }
 
 
-/* 사진 기본 테두리 */
+.sparkle-line{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#7C8976;
+
+}
+
+
+.sparkle-line::before{
+
+    content:"";
+
+    width:30px;
+
+    height:1px;
+
+    background:#B8C0B1;
+
+}
+
+
+/* ========================================
+   HAND DRAWN PHOTO FRAME
+======================================== */
+
+.photo-frame{
+
+    position:relative;
+
+    display:inline-block;
+
+}
+
+
+/* Main frame */
 
 .hand-photo{
 
     position:relative;
 
-    border:1px solid #B7BCAF;
+    border:
+
+        1px solid
+
+        rgba(108,120,102,.55);
 
     background:#F9F8F2;
 
     box-shadow:
-        3px 3px 0 rgba(105,116,99,.08),
+
+        3px 3px 0 rgba(105,116,99,.07),
+
         -2px -2px 0 rgba(150,157,139,.05);
 
 }
 
 
-/* 첫 번째 손그림 라인 */
+/* Hand drawn outer line */
 
 .hand-photo::before{
 
@@ -168,7 +273,11 @@ body{
 
     inset:-5px;
 
-    border:1px solid rgba(104,116,99,.42);
+    border:
+
+        1px solid
+
+        rgba(104,116,99,.38);
 
     pointer-events:none;
 
@@ -177,7 +286,7 @@ body{
 }
 
 
-/* 두 번째 살짝 어긋난 라인 */
+/* Slightly imperfect second line */
 
 .hand-photo::after{
 
@@ -187,11 +296,15 @@ body{
 
     inset:-8px -6px -5px -7px;
 
-    border:1px solid rgba(142,151,133,.20);
+    border:
+
+        1px solid
+
+        rgba(142,151,133,.18);
 
     border-radius:4px;
 
-    transform:rotate(-0.4deg);
+    transform:rotate(-.35deg);
 
     pointer-events:none;
 
@@ -199,23 +312,24 @@ body{
 
 }
 
+
 /* ========================================
-   SMALL BOTANICAL MARK
+   HERO
 ======================================== */
 
-.botanical-mark{
+.hero-border{
 
-    color:#788574;
+    border-bottom:
 
-    font-size:15px;
+        1px solid
 
-    opacity:.7;
+        rgba(201,205,192,.8);
 
 }
 
 
 /* ========================================
-   SLIM IMAGE RIBBON
+   RIBBON
 ======================================== */
 
 .ribbon-section{
@@ -231,17 +345,44 @@ body{
 
     position:absolute;
 
+    left:8%;
+
+    right:8%;
+
     top:50%;
-
-    left:0;
-
-    width:100%;
 
     height:1px;
 
-    background:#C9CDC0;
+    background:rgba(203,209,196,.8);
 
-    z-index:-1;
+    z-index:0;
+
+}
+
+
+.ribbon-caption{
+
+    position:absolute;
+
+    bottom:12px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:3;
+
+    white-space:nowrap;
+
+    background:rgba(243,241,232,.88);
+
+    padding:5px 16px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:18px;
+
+    color:#65715F;
 
 }
 
@@ -254,16 +395,18 @@ body{
 
     position:relative;
 
-    background:#E8E9DF;
+    background:#F7F6EF;
 
-    border:1px solid #B9BDAF;
+    border:
+
+        1px solid
+
+        #C3C8BB;
 
     padding:10px;
 
 }
 
-
-/* 손그림 외곽선 */
 
 .video-frame::before{
 
@@ -273,9 +416,13 @@ body{
 
     inset:-5px;
 
-    border:1px solid rgba(104,116,99,.35);
+    border:
 
-    transform:rotate(.3deg);
+        1px solid
+
+        rgba(104,116,99,.25);
+
+    transform:rotate(.25deg);
 
     pointer-events:none;
 
@@ -331,7 +478,11 @@ body{
 
     height:58px;
 
-    border:1px solid rgba(255,255,255,.85);
+    border:
+
+        1px solid
+
+        rgba(255,255,255,.85);
 
     border-radius:50%;
 
@@ -346,6 +497,54 @@ body{
     background:rgba(55,65,55,.2);
 
     backdrop-filter:blur(3px);
+
+}
+
+
+/* ========================================
+   ARCHIVE SECTION TITLE
+======================================== */
+
+.section-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:16px;
+
+    margin-bottom:50px;
+
+}
+
+
+.section-heading::before,
+.section-heading::after{
+
+    content:"";
+
+    width:42px;
+
+    height:1px;
+
+    background:#AEB8A9;
+
+}
+
+
+/* ========================================
+   MEMORY DIVIDER
+======================================== */
+
+.memory-divider{
+
+    border-bottom:
+
+        1px solid
+
+        rgba(160,169,151,.35);
 
 }
 
@@ -408,7 +607,7 @@ body{
 
 
 /* ========================================
-   FOOTER BOTANICAL
+   FOOTER DIVIDER
 ======================================== */
 
 .footer-botanical{
@@ -451,9 +650,9 @@ body{
 
 @media(max-width:768px){
 
-    .botanical-line{
+    .ribbon-caption{
 
-        display:none;
+        font-size:15px;
 
     }
 
@@ -467,22 +666,20 @@ body{
 <body class="antialiased overflow-x-hidden">
 
 
-<div class="w-full space-y-36 pb-0">
+<div class="w-full">
 
 
 <!-- ========================================
      HERO
 ======================================== -->
 
-<header class="w-full">
+<header class="w-full section-paper hero-border">
 
 <div class="
 relative
 w-full
 aspect-[16/7]
 overflow-hidden
-border-b
-border-[#C9CDC0]
 ">
 
 
@@ -582,6 +779,14 @@ max-w-xl
 ======================================== -->
 
 <section class="
+section-paper
+w-full
+py-28
+md:py-36
+">
+
+
+<div class="
 w-full
 max-w-5xl
 mx-auto
@@ -597,6 +802,8 @@ gap-8
 items-center
 ">
 
+
+<!-- TEXT -->
 
 <div class="
 md:col-span-6
@@ -653,6 +860,7 @@ font-light
 
 
 
+
 <!-- IMAGE -->
 
 <div class="
@@ -664,8 +872,6 @@ md:justify-end
 
 
 <div class="photo-frame">
-
-
 
 
 <div class="
@@ -701,6 +907,9 @@ object-cover
 
 </div>
 
+
+</div>
+
 </section>
 
 
@@ -711,7 +920,7 @@ object-cover
      SLIM IMAGE RIBBON
 ======================================== -->
 
-<section class="w-full px-0">
+<section class="w-full section-light">
 
 
 <div class="
@@ -720,8 +929,6 @@ w-full
 h-24
 md:h-36
 overflow-hidden
-border-y
-border-[#C9CDC0]
 ">
 
 
@@ -739,6 +946,13 @@ brightness-[0.85]
 ">
 
 
+<div class="ribbon-caption">
+
+little things I remember
+
+</div>
+
+
 </div>
 
 </section>
@@ -752,6 +966,14 @@ brightness-[0.85]
 ======================================== -->
 
 <section class="
+section-paper
+w-full
+py-28
+md:py-36
+">
+
+
+<div class="
 w-full
 max-w-5xl
 mx-auto
@@ -781,7 +1003,6 @@ md:justify-start
 <div class="photo-frame">
 
 
-
 <div class="
 hand-photo
 w-72
@@ -803,7 +1024,6 @@ w-full
 h-full
 object-cover
 ">
-
 
 </div>
 
@@ -900,6 +1120,8 @@ mt-1
 </div>
 
 
+</div>
+
 </section>
 
 
@@ -911,11 +1133,30 @@ mt-1
 ======================================== -->
 
 <section class="
+section-light
+w-full
+py-28
+md:py-36
+">
+
+
+<div class="
 w-full
 max-w-6xl
 mx-auto
 px-6
 ">
+
+
+<div class="section-heading">
+
+<span class="archive-label">
+
+MOVING MEMORIES
+
+</span>
+
+</div>
 
 
 <div class="
@@ -992,7 +1233,7 @@ space-y-4
 
 <span class="archive-label">
 
-MOVING MEMORIES
+A DAY IN BETWEEN
 
 </span>
 
@@ -1003,7 +1244,7 @@ font-serif-title
 tracking-wide
 ">
 
-A Day in Between
+Moving Memories
 
 </h3>
 
@@ -1025,12 +1266,7 @@ font-light
 </p>
 
 
-<div class="
-pt-2
-text-[10px]
-tracking-widest
-text-[#71806D]
-">
+<div class="sparkle-line pt-2">
 
 LIFE / TRAVEL / 2026
 
@@ -1043,6 +1279,8 @@ LIFE / TRAVEL / 2026
 </div>
 
 
+</div>
+
 </section>
 
 
@@ -1051,9 +1289,18 @@ LIFE / TRAVEL / 2026
 
 <!-- ========================================
      THREE ARCH WINDOWS
+     BOTANICAL GREEN SECTION
 ======================================== -->
 
 <section class="
+section-sage
+w-full
+py-28
+md:py-36
+">
+
+
+<div class="
 w-full
 max-w-6xl
 mx-auto
@@ -1061,18 +1308,30 @@ px-6
 ">
 
 
+<div class="section-heading">
+
+<span class="archive-label">
+
+A FEW QUIET MOMENTS
+
+</span>
+
+</div>
+
+
 <div class="
 grid
 grid-cols-1
 md:grid-cols-3
-gap-8
+gap-10
 ">
+
 
 
 <!-- ARCH 01 -->
 
 <div class="
-space-y-4
+space-y-5
 flex
 flex-col
 items-center
@@ -1115,11 +1374,24 @@ object-cover
 <h4 class="
 text-sm
 font-semibold
+tracking-wide
 ">
 
 PAGE .01
 
 </h4>
+
+
+<p class="
+font-hand
+text-xl
+text-[#66745F]
+mt-1
+">
+
+Morning Market
+
+</p>
 
 
 <p class="
@@ -1149,7 +1421,7 @@ mt-2
 <!-- ARCH 02 -->
 
 <div class="
-space-y-4
+space-y-5
 flex
 flex-col
 items-center
@@ -1192,11 +1464,24 @@ object-cover
 <h4 class="
 text-sm
 font-semibold
+tracking-wide
 ">
 
 PAGE .02
 
 </h4>
+
+
+<p class="
+font-hand
+text-xl
+text-[#66745F]
+mt-1
+">
+
+Quiet Afternoon
+
+</p>
 
 
 <p class="
@@ -1225,7 +1510,7 @@ mt-2
 <!-- ARCH 03 -->
 
 <div class="
-space-y-4
+space-y-5
 flex
 flex-col
 items-center
@@ -1268,11 +1553,24 @@ object-cover
 <h4 class="
 text-sm
 font-semibold
+tracking-wide
 ">
 
 PAGE .03
 
 </h4>
+
+
+<p class="
+font-hand
+text-xl
+text-[#66745F]
+mt-1
+">
+
+Cafe Memory
+
+</p>
 
 
 <p class="
@@ -1298,6 +1596,8 @@ mt-2
 </div>
 
 
+</div>
+
 </section>
 
 
@@ -1309,8 +1609,8 @@ mt-2
 ======================================== -->
 
 <section class="
+section-warm
 w-full
-space-y-6
 ">
 
 
@@ -1321,14 +1621,13 @@ space-y-6
 <!-- MEMORY A -->
 
 <div class="
+memory-divider
 grid
 grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-border-b
-border-[#C9CDC0]/70
-py-8
+py-10
 md:py-0
 ">
 
@@ -1358,11 +1657,11 @@ h-full
 object-cover
 ">
 
-
 </div>
 
 
 </div>
+
 
 
 
@@ -1408,6 +1707,13 @@ font-light
 </p>
 
 
+<div class="sparkle-line pt-2">
+
+PARIS · 10:30 AM
+
+</div>
+
+
 </div>
 
 
@@ -1420,14 +1726,13 @@ font-light
 <!-- MEMORY B -->
 
 <div class="
+memory-divider
 grid
 grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-border-b
-border-[#C9CDC0]/70
-py-8
+py-10
 md:py-0
 ">
 
@@ -1476,7 +1781,19 @@ font-light
 </p>
 
 
+<div class="
+sparkle-line
+pt-2
+md:justify-end
+">
+
+FOUND IN OLD STREET
+
 </div>
+
+
+</div>
+
 
 
 
@@ -1512,7 +1829,6 @@ h-full
 object-cover
 ">
 
-
 </div>
 
 
@@ -1536,7 +1852,7 @@ grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-py-8
+py-10
 md:py-0
 ">
 
@@ -1566,11 +1882,11 @@ h-full
 object-cover
 ">
 
-
 </div>
 
 
 </div>
+
 
 
 
@@ -1616,6 +1932,13 @@ font-light
 </p>
 
 
+<div class="sparkle-line pt-2">
+
+TO BE CONTINUED
+
+</div>
+
+
 </div>
 
 
@@ -1623,7 +1946,6 @@ font-light
 
 
 </div>
-
 
 </section>
 
@@ -1675,7 +1997,7 @@ LIFE & TRAVEL
 
 
 <p class="
-text-xs
+font-xs
 mt-3
 opacity-70
 leading-relaxed
@@ -1765,9 +2087,7 @@ MEMORIES
 
 <!-- INFO -->
 
-<div class="
-md:text-right
-">
+<div class="md:text-right">
 
 
 <p class="text-xs">
@@ -1814,7 +2134,6 @@ mt-1
 </div>
 
 
-
 <script>
 
 lucide.createIcons();
@@ -1824,3 +2143,4 @@ lucide.createIcons();
 
 </body>
 </html>
+```
