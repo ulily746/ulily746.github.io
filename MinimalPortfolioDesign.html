@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 
 <head>
@@ -8,24 +9,20 @@
 
 <title>Life & Travel Archive - Yuri Choi</title>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
 
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-
 <style>
-
 
 /* ================================= */
 /* GLOBAL */
 /* ================================= */
-
 
 html,
 body {
@@ -36,28 +33,24 @@ width:100%;
 
 }
 
-
 body {
 
 font-family:'Plus Jakarta Sans', sans-serif;
 
-background-color:#F5EFE6;
+background-color:#F7F3D9;
 
-
-/* Subtle paper texture */
+/* Soft paper texture */
 
 background-image:
 
 radial-gradient(
-rgba(74,59,50,0.035) 1px,
+rgba(104,119,95,0.045) 1px,
 transparent 1px
 );
 
 background-size:5px 5px;
 
 }
-
-
 
 .font-serif-title {
 
@@ -66,17 +59,16 @@ font-family:'Cinzel', serif;
 }
 
 
-
 /* ================================= */
 /* IMAGE TREATMENT */
 /* ================================= */
 
-
 .archive-image {
 
 filter:
-saturate(90%)
-contrast(96%);
+saturate(82%)
+contrast(95%)
+sepia(5%);
 
 transition:
 transform 0.8s ease,
@@ -84,39 +76,35 @@ filter 0.8s ease;
 
 }
 
-
-
 .archive-image:hover {
 
 transform:scale(1.03);
 
 filter:
-saturate(100%)
-contrast(100%);
+saturate(96%)
+contrast(100%)
+sepia(2%);
 
 }
-
 
 
 /* ================================= */
 /* VIDEO */
 /* ================================= */
 
-
 .archive-video {
 
 filter:
-saturate(85%)
-contrast(96%);
+saturate(82%)
+contrast(95%)
+sepia(5%);
 
 }
-
 
 
 /* ================================= */
 /* FOOTER LINK */
 /* ================================= */
-
 
 .footer-link {
 
@@ -126,8 +114,6 @@ letter-spacing 0.3s ease;
 
 }
 
-
-
 .footer-link:hover {
 
 letter-spacing:0.12em;
@@ -135,19 +121,15 @@ letter-spacing:0.12em;
 }
 
 
-
 /* ================================= */
-/* PAPER TEXTURE OVERLAY */
+/* PAPER TEXTURE */
 /* ================================= */
-
 
 .paper-texture {
 
 position:relative;
 
 }
-
-
 
 .paper-texture::after {
 
@@ -159,12 +141,12 @@ inset:0;
 
 pointer-events:none;
 
-opacity:0.35;
+opacity:0.25;
 
 background-image:
 
 radial-gradient(
-rgba(74,59,50,0.025) 1px,
+rgba(104,119,95,0.035) 1px,
 transparent 1px
 );
 
@@ -173,59 +155,67 @@ background-size:4px 4px;
 }
 
 
+/* ================================= */
+/* SOFT SECTION LINE */
+/* ================================= */
+
+.soft-line {
+
+border-color:#D9DDB2;
+
+}
+
+
+/* ================================= */
+/* FOOTER */
+/* ================================= */
+
+.site-footer {
+
+background-color:#B8C7A0;
+
+border-top:1px solid #A8B991;
+
+}
 
 </style>
 
-
 </head>
-
-
-
 
 <body class="
 m-0
 p-0
-bg-[#F5EFE6]
-text-[#4A3B32]
+bg-[#F7F3D9]
+text-[#68775F]
 antialiased
 overflow-x-hidden
 ">
 
-
-
-
-
 <!-- ================================= -->
+
 <!-- MAIN PAGE CONTENT -->
+
 <!-- ================================= -->
 
-
-<div class="
+<main class="
 w-full
-space-y-36
-pb-48
 ">
 
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- HERO SECTION -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <header class="
 w-full
 pt-16
+pb-36
 px-4
 md:px-8
 max-w-7xl
 mx-auto
 ">
-
 
 <div class="
 grid
@@ -235,10 +225,7 @@ gap-8
 items-center
 ">
 
-
-
 <!-- LEFT CONTENT -->
-
 
 <div class="
 col-span-1
@@ -250,11 +237,10 @@ md:order-1
 z-10
 ">
 
-
 <span class="
 text-xs
 tracking-[0.25em]
-text-[#A39081]
+text-[#8B986D]
 uppercase
 font-medium
 block
@@ -264,9 +250,6 @@ Life & Travel Archive
 
 </span>
 
-
-
-
 <h1 class="
 text-4xl
 md:text-6xl
@@ -274,7 +257,7 @@ font-serif-title
 font-light
 tracking-wide
 leading-[1.1]
-text-[#4A3B32]
+text-[#59664F]
 ">
 
 Quiet<br>
@@ -282,25 +265,19 @@ Journeys
 
 </h1>
 
-
-
-
 <div class="
 w-16
 h-[1px]
-bg-[#A39081]
+bg-[#A8B991]
 my-6
 ">
 
 </div>
 
-
-
-
 <p class="
 text-xs
 md:text-sm
-text-[#7A6B5E]
+text-[#747B65]
 max-w-sm
 leading-relaxed
 font-light
@@ -311,17 +288,9 @@ font-light
 
 </p>
 
-
 </div>
 
-
-
-
-
-
-
 <!-- RIGHT ARCH IMAGE -->
-
 
 <div class="
 col-span-1
@@ -332,7 +301,6 @@ order-1
 md:order-2
 ">
 
-
 <div class="
 w-full
 max-w-xl
@@ -340,11 +308,10 @@ aspect-[3/5]
 rounded-t-full
 overflow-hidden
 border
-border-[#DDD2C2]
+border-[#D9DDB2]
 shadow-sm
-bg-[#EFE6DA]
+bg-[#E9E8C5]
 ">
-
 
 <img
 
@@ -361,28 +328,19 @@ archive-image
 
 />
 
+</div>
 
 </div>
 
-
 </div>
-
-
-</div>
-
 
 </header>
 
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- CONTENT SECTION -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <section class="
 w-full
@@ -392,19 +350,13 @@ px-4
 md:px-8
 ">
 
-
 <div class="space-y-24">
 
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- OBJECT 01 -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <div class="
 grid
@@ -414,14 +366,12 @@ gap-8
 items-center
 ">
 
-
 <div class="
 col-span-1
 md:col-span-5
 flex
 justify-center
 ">
-
 
 <div class="
 w-72
@@ -431,11 +381,10 @@ md:h-96
 rounded-full
 overflow-hidden
 border
-border-[#DDD2C2]
-bg-[#EFE6DA]
+border-[#D9DDB2]
+bg-[#E9E8C5]
 shadow-sm
 ">
-
 
 <img
 
@@ -452,15 +401,9 @@ archive-image
 
 />
 
-
 </div>
 
-
 </div>
-
-
-
-
 
 <div class="
 col-span-1
@@ -469,11 +412,10 @@ space-y-3
 md:pl-8
 ">
 
-
 <span class="
 text-xs
 tracking-widest
-text-[#A39081]
+text-[#8B986D]
 font-medium
 block
 ">
@@ -482,27 +424,21 @@ PLACE 01
 
 </span>
 
-
-
-
 <h3 class="
 text-xl
 md:text-2xl
 font-serif-title
-text-[#4A3B32]
+text-[#59664F]
 ">
 
 Hidden Corners
 
 </h3>
 
-
-
-
 <p class="
 text-xs
 md:text-sm
-text-[#7A6B5E]
+text-[#747B65]
 leading-relaxed
 font-light
 max-w-xl
@@ -513,46 +449,33 @@ max-w-xl
 
 </p>
 
-
 </div>
 
-
 </div>
-
-
-
-
-
-
-
-
 
 <!-- ================================= -->
+
 <!-- STATEMENT -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <div class="
 w-full
 py-12
 border-y
-border-[#DDD2C2]
+border-[#D9DDB2]
 text-center
 ">
-
 
 <span class="
 text-[10px]
 tracking-[0.35em]
-text-[#A39081]
+text-[#8B986D]
 ">
 
 COLLECTED MOMENTS
 
 </span>
-
-
-
 
 <h2 class="
 text-2xl
@@ -560,7 +483,7 @@ md:text-4xl
 font-serif-title
 font-light
 tracking-[0.15em]
-text-[#4A3B32]
+text-[#59664F]
 uppercase
 mt-4
 ">
@@ -569,13 +492,10 @@ The Beauty Of Slow Living
 
 </h2>
 
-
-
-
 <p class="
 text-[10px]
 md:text-xs
-text-[#7A6B5E]
+text-[#747B65]
 tracking-widest
 mt-2
 ">
@@ -584,21 +504,13 @@ mt-2
 
 </p>
 
-
 </div>
 
-
-
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- OBJECT 02 -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <div class="
 grid
@@ -607,7 +519,6 @@ md:grid-cols-12
 gap-8
 items-center
 ">
-
 
 <div class="
 col-span-1
@@ -620,11 +531,10 @@ order-2
 md:order-1
 ">
 
-
 <span class="
 text-xs
 tracking-widest
-text-[#A39081]
+text-[#8B986D]
 font-medium
 block
 ">
@@ -633,27 +543,21 @@ PLACE 02
 
 </span>
 
-
-
-
 <h3 class="
 text-xl
 md:text-2xl
 font-serif-title
-text-[#4A3B32]
+text-[#59664F]
 ">
 
 Light & Memory
 
 </h3>
 
-
-
-
 <p class="
 text-xs
 md:text-sm
-text-[#7A6B5E]
+text-[#747B65]
 leading-relaxed
 font-light
 max-w-xl
@@ -665,14 +569,7 @@ md:ml-auto
 
 </p>
 
-
 </div>
-
-
-
-
-
-
 
 <div class="
 col-span-1
@@ -683,7 +580,6 @@ order-1
 md:order-2
 ">
 
-
 <div class="
 w-72
 h-72
@@ -692,11 +588,10 @@ md:h-96
 rounded-full
 overflow-hidden
 border
-border-[#DDD2C2]
-bg-[#EFE6DA]
+border-[#D9DDB2]
+bg-[#E9E8C5]
 shadow-sm
 ">
-
 
 <img
 
@@ -713,58 +608,43 @@ archive-image
 
 />
 
+</div>
 
 </div>
 
-
 </div>
-
-
-</div>
-
-
-
-
-
-
-
-
 
 <!-- ================================= -->
+
 <!-- MINI GALLERY -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <section class="
 w-full
 pt-12
 ">
 
-
 <div class="
 text-center
 mb-12
 ">
 
-
 <span class="
 text-xs
 tracking-[0.35em]
-text-[#A39081]
+text-[#8B986D]
 ">
 
 COLLECTION
 
 </span>
 
-
-
-
 <h2 class="
 text-2xl
 md:text-4xl
 font-serif-title
-text-[#4A3B32]
+text-[#59664F]
 mt-4
 ">
 
@@ -772,12 +652,9 @@ Moments Along The Way
 
 </h2>
 
-
-
-
 <p class="
 text-xs
-text-[#7A6B5E]
+text-[#747B65]
 mt-3
 font-light
 ">
@@ -786,14 +663,7 @@ Collected fragments of places, seasons, and quiet memories.
 
 </p>
 
-
 </div>
-
-
-
-
-
-
 
 <div class="
 grid
@@ -803,15 +673,12 @@ md:gap-8
 items-start
 ">
 
-
-
 <!-- IMAGE 01 -->
 
 <div class="
 aspect-square
 overflow-hidden
 ">
-
 
 <img
 
@@ -828,12 +695,7 @@ archive-image
 
 />
 
-
 </div>
-
-
-
-
 
 <!-- IMAGE 02 -->
 
@@ -842,7 +704,6 @@ aspect-square
 overflow-hidden
 mt-8
 ">
-
 
 <img
 
@@ -859,12 +720,7 @@ archive-image
 
 />
 
-
 </div>
-
-
-
-
 
 <!-- IMAGE 03 -->
 
@@ -872,7 +728,6 @@ archive-image
 aspect-square
 overflow-hidden
 ">
-
 
 <img
 
@@ -889,12 +744,7 @@ archive-image
 
 />
 
-
 </div>
-
-
-
-
 
 <!-- IMAGE 04 -->
 
@@ -902,7 +752,6 @@ archive-image
 aspect-square
 overflow-hidden
 ">
-
 
 <img
 
@@ -919,12 +768,7 @@ archive-image
 
 />
 
-
 </div>
-
-
-
-
 
 <!-- IMAGE 05 -->
 
@@ -933,7 +777,6 @@ aspect-square
 overflow-hidden
 mt-8
 ">
-
 
 <img
 
@@ -950,12 +793,7 @@ archive-image
 
 />
 
-
 </div>
-
-
-
-
 
 <!-- IMAGE 06 -->
 
@@ -963,7 +801,6 @@ archive-image
 aspect-square
 overflow-hidden
 ">
-
 
 <img
 
@@ -980,58 +817,43 @@ archive-image
 
 />
 
-
 </div>
 
-
 </div>
-
 
 </section>
 
-
-
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- MOVING MEMORIES -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <section class="
 w-full
 pt-16
 ">
 
-
 <div class="
 text-center
 mb-10
 ">
 
-
 <span class="
 text-xs
 tracking-[0.35em]
-text-[#A39081]
+text-[#8B986D]
 ">
 
 MOVING MEMORIES
 
 </span>
 
-
-
-
 <h2 class="
 text-2xl
 md:text-4xl
 font-serif-title
-text-[#4A3B32]
+text-[#59664F]
 mt-4
 ">
 
@@ -1039,12 +861,9 @@ A Moment In Motion
 
 </h2>
 
-
-
-
 <p class="
 text-xs
-text-[#7A6B5E]
+text-[#747B65]
 mt-3
 font-light
 ">
@@ -1053,25 +872,17 @@ A few seconds from somewhere, sometime, once.
 
 </p>
 
-
 </div>
-
-
-
-
-
-
 
 <div class="
 w-full
 aspect-[21/9]
 overflow-hidden
 border
-border-[#DDD2C2]
-bg-[#EFE6DA]
+border-[#D9DDB2]
+bg-[#E9E8C5]
 shadow-sm
 ">
-
 
 <video
 
@@ -1093,16 +904,11 @@ playsinline
 
 </video>
 
-
 </div>
-
-
-
-
 
 <p class="
 text-[10px]
-text-[#A39081]
+text-[#8B986D]
 tracking-[0.25em]
 text-center
 mt-4
@@ -1112,21 +918,13 @@ FRAME 01 · A QUIET MOMENT
 
 </p>
 
-
 </section>
 
-
-
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- FINAL CHAPTER -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <div class="
 text-center
@@ -1134,25 +932,21 @@ pt-16
 mb-12
 ">
 
-
 <span class="
 text-xs
 tracking-[0.35em]
-text-[#A39081]
+text-[#8B986D]
 ">
 
 FINAL CHAPTER
 
 </span>
 
-
-
-
 <h2 class="
 text-2xl
 md:text-4xl
 font-serif-title
-text-[#4A3B32]
+text-[#59664F]
 mt-4
 ">
 
@@ -1160,12 +954,9 @@ A Place To Remember
 
 </h2>
 
-
-
-
 <p class="
 text-xs
-text-[#7A6B5E]
+text-[#747B65]
 mt-3
 font-light
 ">
@@ -1174,27 +965,18 @@ Fragments of a journey, collected through time.
 
 </p>
 
-
 </div>
 
-
-
-
-
-
-
-
-
 <!-- ================================= -->
+
 <!-- ENDING IMAGE -->
-<!-- ================================= -->
 
+<!-- ================================= -->
 
 <section class="
 w-full
 space-y-6
 ">
-
 
 <div class="
 w-full
@@ -1203,10 +985,9 @@ mx-auto
 aspect-[21/9]
 overflow-hidden
 border
-border-[#DDD2C2]
+border-[#D9DDB2]
 shadow-sm
 ">
-
 
 <img
 
@@ -1223,17 +1004,9 @@ archive-image
 
 />
 
-
 </div>
 
-
-
-
-
-
-
 <!-- ENDING QUOTE -->
-
 
 <div class="
 w-full
@@ -1242,13 +1015,13 @@ mx-auto
 text-center
 px-6
 pt-10
+pb-24
 ">
-
 
 <span class="
 text-[10px]
 tracking-[0.35em]
-text-[#A39081]
+text-[#8B986D]
 block
 mb-5
 ">
@@ -1257,173 +1030,211 @@ A NOTE FROM THE JOURNEY
 
 </span>
 
-
-
-
 <p class="
 text-sm
 md:text-base
-text-[#7A6B5E]
+text-[#747B65]
 font-light
 leading-[2]
 ">
 
 어떤 순간은 사진으로 남고,
-어떤 장소는 기억으로 남습니다.
-<br>
+어떤 장소는 기억으로 남습니다. <br>
 
 작은 풍경과 조용한 시간을 하나의 이야기로 기록합니다.
 
 </p>
 
-
 </div>
-
 
 </section>
 
+</div>
 
-
-
-
-
-
-
+</section>
 
 </main>
 
-
 <!-- ================================= -->
-<!-- FOOTER -->
+
+<!-- PASTEL FOOTER -->
+
 <!-- ================================= -->
 
 <footer class="
+site-footer
 w-full
 m-0
 p-0
-bg-[#362A21]
-text-[#F5EFE6]
-border-t
-border-[#A39081]
+text-[#59664F]
 ">
 
-  <div class="
-  w-full
-  px-6
-  md:px-8
-  py-16
-  ">
+<div class="
+w-full
+px-6
+md:px-8
+py-8
+">
 
-    <div class="
-    w-full
-    max-w-7xl
-    mx-auto
-    flex
-    flex-col
-    md:flex-row
-    justify-between
-    items-center
-    gap-8
-    ">
+<div class="
+w-full
+max-w-7xl
+mx-auto
+flex
+flex-col
+md:flex-row
+justify-between
+items-center
+gap-6
+">
 
-      <!-- 홈페이지 소개 -->
-      <div class="
-      text-center
-      md:text-left
-      ">
+<!-- WEBSITE IDENTITY -->
 
-        <p class="
-        text-white
-        font-serif-title
-        tracking-wider
-        text-sm
-        ">
-          YURI CHOI
-        </p>
+<div class="
+text-center
+md:text-left
+">
 
-        <p class="
-        text-[#C9B9A7]
-        mt-2
-        tracking-[0.12em]
-        ">
-          LIFE · TRAVEL · RESEARCH · ARCHIVE
-        </p>
+<p class="
+font-serif-title
+text-sm
+tracking-[0.12em]
+text-[#59664F]
+">
 
-        <p class="
-        text-[#A39081]
-        mt-3
-        tracking-normal
-        leading-relaxed
-        ">
-          일상과 여행, 그리고 연구의 순간을<br>
-          하나의 기록으로 담아갑니다.
-        </p>
+YURI CHOI
 
-      </div>
+</p>
 
+<p class="
+text-[9px]
+mt-1.5
+tracking-[0.16em]
+text-[#748262]
+">
 
-      <!-- 홈페이지 메뉴 -->
-      <nav class="
-      flex
-      flex-wrap
-      justify-center
-      gap-x-8
-      gap-y-3
-      text-[#C9B9A7]
-      ">
+LIFE · TRAVEL · RESEARCH · ARCHIVE
 
-        <a href="#" class="hover:text-white transition">
-          HOME
-        </a>
+</p>
 
-        <a href="#" class="hover:text-white transition">
-          RESEARCH
-        </a>
+</div>
 
-        <a href="#" class="hover:text-white transition">
-          CV
-        </a>
+<!-- CENTER PHRASE -->
 
-        <a href="#" class="hover:text-white transition">
-          NEWS
-        </a>
+<div class="
+hidden
+md:block
+text-center
+">
 
-      </nav>
+<p class="
+text-[9px]
+tracking-[0.2em]
+text-[#748262]
+">
 
-    </div>
+ALL MOMENTS, QUIETLY COLLECTED.
 
+</p>
 
-    <!-- 하단 카피라이트 -->
+</div>
 
-    <div class="
-    w-full
-    max-w-7xl
-    mx-auto
-    mt-12
-    pt-6
-    border-t
-    border-[#5A493D]
-    text-center
-    ">
+<!-- WEBSITE NAVIGATION -->
 
-      <p class="
-      text-[10px]
-      text-[#A39081]
-      tracking-[0.2em]
-      ">
-        © 2026 YURI CHOI · ALL MOMENTS, QUIETLY COLLECTED.
-      </p>
+<nav class="
+flex
+flex-wrap
+justify-center
+gap-x-6
+gap-y-2
+text-[9px]
+tracking-[0.15em]
+text-[#68775F]
+">
 
-    </div>
+<a
+href="#"
+class="
+footer-link
+hover:text-[#59664F]
+">
 
-  </div>
+HOME
+
+</a>
+
+<a
+href="#"
+class="
+footer-link
+hover:text-[#59664F]
+">
+
+RESEARCH
+
+</a>
+
+<a
+href="#"
+class="
+footer-link
+hover:text-[#59664F]
+">
+
+CV
+
+</a>
+
+<a
+href="#"
+class="
+footer-link
+hover:text-[#59664F]
+">
+
+NEWS
+
+</a>
+
+</nav>
+
+</div>
+
+<!-- COPYRIGHT -->
+
+<div class="
+w-full
+max-w-7xl
+mx-auto
+mt-6
+pt-4
+border-t
+border-[#A8B991]
+text-center
+">
+
+<p class="
+text-[8px]
+tracking-[0.18em]
+text-[#748262]
+">
+
+© 2026 YURI CHOI · ALL MOMENTS, QUIETLY COLLECTED.
+
+</p>
+
+</div>
+
+</div>
 
 </footer>
 
-
 <script>
+
 lucide.createIcons();
+
 </script>
 
 </body>
+
 </html>
