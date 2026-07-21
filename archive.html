@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +17,56 @@
 
 
 <style>
+
+/* ============================= */
+/* NAVIGATION */
+/* ============================= */
+
+.nav{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:50px;
+
+    height:70px;
+
+    background:#000;
+
+    border-bottom:1px solid #e5dcc8;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+
+.nav a{
+
+    color:#F2F2DF;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+
+.nav a:hover{
+
+    color:#8B6B4F;
+
+}   
 
 /* =========================================================
    ROOT
@@ -1353,29 +1403,17 @@ a {
      EXISTING WEBSITE NAVIGATION
 ========================================================= -->
 
-<header class="site-nav">
+<div class="nav">
 
-    <nav class="site-nav-inner">
+    <a href="index.html">Main</a>
 
-        <a href="index.html">
-            Main
-        </a>
+    <a href="research.html">Research</a>
 
-        <a href="research.html" class="active">
-            Research
-        </a>
+    <a href="cv.html">CV</a>
 
-        <a href="cv.html">
-            CV
-        </a>
+    <a href="news.html">News</a>
 
-        <a href="news.html">
-            News
-        </a>
-
-    </nav>
-
-</header>
+</div>
 
 
 
