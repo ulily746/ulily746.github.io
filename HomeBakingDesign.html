@@ -57,39 +57,6 @@ a {
 }
 
 
-/* =========================================================
-   HEADER
-========================================================= */
-
-header {
-    width: 100%;
-    padding: 28px 5vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 20;
-}
-
-.nav {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 42px;
-}
-
-.nav a {
-    font-family: 'Manrope', sans-serif;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #876f6b;
-    transition: .3s;
-}
-
-.nav a:hover {
-    color: #ad7771;
-}
-
 
 /* =========================================================
    HERO
@@ -113,11 +80,9 @@ header {
 /* Hero 타원 전체 */
 
 .hero-oval-wrap {
-    width: min(760px, 78vw);
-    aspect-ratio: 1.45 / 1;
-
+    width: min(520px, 68vw);
+    aspect-ratio: 0.78 / 1;
     position: relative;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -300,12 +265,20 @@ header {
 
     text-align: center;
 
-    transform: rotate(-2deg);
+    transform: none;
 
     background: #f8f1eb;
 }
 
-
+.oval-title::before {
+    content: "";
+    position: absolute;
+    inset: -4px 3px 3px -3px;
+    border: 1px solid #d2b3ac;
+    border-radius: 50%;
+    transform: rotate(1.5deg);
+    pointer-events: none;
+}
 .oval-title::after {
     content: "";
 
@@ -800,137 +773,133 @@ header {
 }
 
 
-/* =========================================================
-   FAQ
-========================================================= */
-
-.faq {
-
-    width: min(900px, 90vw);
-
-    margin: auto;
-
-    padding: 150px 0;
-}
 
 
-.faq-title {
-
-    text-align: center;
-
-    margin-bottom: 70px;
-}
-
-
-.faq-title h2 {
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-size: 55px;
-
-    font-weight: 500;
-
-    color: #9c6d68;
-}
-
-
-.faq-list {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 25px;
-}
-
-
-.faq-item {
-
-    padding: 30px 35px;
-
-    border-top: 1px dashed #c7aaa2;
-
-    border-bottom: 1px dashed #c7aaa2;
-}
-
-
-.faq-item h3 {
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-size: 27px;
-
-    color: #966864;
-
-    margin-bottom: 8px;
-}
-
-
-.faq-item p {
-
-    font-family: 'Caveat', cursive;
-
-    font-size: 21px;
-
-    color: #756864;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
 
 footer {
-
-    padding: 120px 5vw 60px;
+    padding: 130px 5vw 60px;
 
     text-align: center;
 
     background: #eee1d8;
 
     position: relative;
+
+    overflow: hidden;
 }
 
 
-footer h2 {
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-size: clamp(40px, 6vw, 60px);
-
-    font-weight: 500;
-
-    color: #966864;
-
-    margin-bottom: 45px;
-}
-
-
-.contact-links {
-
+.footer-decoration {
     display: flex;
 
     justify-content: center;
 
-    gap: 40px;
+    align-items: center;
+
+    gap: 45px;
+
+    margin-bottom: 35px;
+
+    color: #b98d86;
+
+    font-family: 'Caveat', cursive;
+
+    font-size: 25px;
+}
+
+
+.footer-decoration span:nth-child(1) {
+    transform: rotate(-15deg);
+}
+
+.footer-decoration span:nth-child(2) {
+    font-size: 32px;
+}
+
+.footer-decoration span:nth-child(3) {
+    transform: rotate(15deg);
+}
+
+
+.footer-note {
+    font-family: 'Caveat', cursive;
+
+    font-size: 22px;
+
+    color: #a9827b;
+
+    margin-bottom: 10px;
+}
+
+
+footer h2 {
+    font-family: 'Cormorant Garamond', serif;
+
+    font-size: clamp(42px, 6vw, 65px);
+
+    font-weight: 500;
+
+    line-height: 1.1;
+
+    color: #966864;
+
+    margin-bottom: 40px;
+}
+
+
+.contact-links {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 18px;
 
     flex-wrap: wrap;
 
-    margin-bottom: 50px;
+    margin-bottom: 55px;
 }
 
 
 .contact-links a {
-
     font-family: 'Caveat', cursive;
 
     font-size: 22px;
 
     color: #a47771;
+
+    transition: .3s;
+}
+
+
+.contact-links a:hover {
+    color: #8d5f59;
+
+    transform: translateY(-2px);
+}
+
+
+.contact-links span {
+    color: #c09b94;
+
+    font-size: 18px;
+}
+
+
+.footer-line {
+    width: min(500px, 70vw);
+
+    height: 1px;
+
+    margin: auto;
+
+    border-top: 1px dashed #c7aaa2;
 }
 
 
 .copyright {
+    margin-top: 25px;
 
     font-size: 10px;
 
@@ -1004,25 +973,7 @@ footer h2 {
 
 @media (max-width: 600px) {
 
-    header {
-
-        padding: 22px 20px;
-    }
-
-
-    .nav {
-
-        gap: 18px;
-    }
-
-
-    .nav a {
-
-        font-size: 9px;
-
-        letter-spacing: 1px;
-    }
-
+   
 
     .hero {
 
@@ -1032,12 +983,10 @@ footer h2 {
     }
 
 
-    .hero-oval-wrap {
-
-        width: 90vw;
-
-        aspect-ratio: 1.25 / 1;
-    }
+   .hero-oval-wrap {
+    width: min(340px, 78vw);
+    aspect-ratio: 0.78 / 1;
+}
 
 
     .hero-doodle.one {
@@ -1213,26 +1162,6 @@ footer h2 {
 
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header>
-
-<nav class="nav">
-
-<a href="#price">BAKING</a>
-
-<a href="#about">ABOUT</a>
-
-<a href="#faq">FAQ</a>
-
-<a href="#contact">CONTACT</a>
-
-</nav>
-
-</header>
 
 
 <!-- =====================================================
@@ -1540,61 +1469,6 @@ make beautiful memories.
 
 
 
-<!-- =====================================================
-     FAQ
-===================================================== -->
-
-<section class="faq" id="faq">
-
-
-<div class="faq-title">
-
-<h2>Questions & Answers</h2>
-
-</div>
-
-
-<div class="faq-list">
-
-
-<div class="faq-item">
-
-<h3>How do I place an order?</h3>
-
-<p>
-Contact me via Instagram or Telegram.
-</p>
-
-</div>
-
-
-<div class="faq-item">
-
-<h3>How many days in advance?</h3>
-
-<p>
-Usually 3–5 days before your celebration.
-</p>
-
-</div>
-
-
-<div class="faq-item">
-
-<h3>Can I request a custom design?</h3>
-
-<p>
-Yes. Every cake can be customized
-for your special moment.
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
 
 
 <!-- =====================================================
@@ -1603,33 +1477,41 @@ for your special moment.
 
 <footer id="contact">
 
+    <div class="footer-decoration">
+        <span>✦</span>
+        <span>♡</span>
+        <span>✧</span>
+    </div>
 
-<h2>
-Let's make your day sweeter ♡
-</h2>
+    <p class="footer-note">
+        a little sweetness, made just for you
+    </p>
 
+    <h2>
+        Let's make your day sweeter ♡
+    </h2>
 
-<div class="contact-links">
+    <div class="contact-links">
 
-<a href="#">Instagram</a>
+        <a href="#">Instagram</a>
 
-<a href="#">Telegram</a>
+        <span>·</span>
 
-<a href="#">WhatsApp</a>
+        <a href="#">Telegram</a>
 
-</div>
+        <span>·</span>
 
+        <a href="#">WhatsApp</a>
 
-<p class="copyright">
+    </div>
 
-© 2026 ANYA BAKERY
+    <div class="footer-line"></div>
 
-</p>
-
+    <p class="copyright">
+        with love, Anya Bakery · 2026
+    </p>
 
 </footer>
-
-
 </body>
 
 </html>
