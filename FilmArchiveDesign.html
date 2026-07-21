@@ -748,96 +748,143 @@ body::before{
 }
 
 
+```css
 /* =========================================================
    MEMORY CONNECTORS
+   사진과 글이 하나의 세로 흐름으로 연결되도록 수정
 ========================================================= */
 
 .memory-connector{
-
     position:absolute;
-
     pointer-events:none;
-
-    z-index:1;
-
+    z-index:2;
     overflow:visible;
-
 }
-
 
 .memory-connector path{
-
     fill:none;
-
-    stroke:#8299a2;
-
+    stroke:#a49682;
     stroke-width:2;
-
     stroke-linecap:round;
-
-    stroke-dasharray:4 8;
-
+    stroke-dasharray:5 7;
 }
 
 
-/* photo1 → note1 */
+/* =========================================================
+   CONNECTOR 1
+   PHOTO 1 → MEMORY 01 글
+   첫 번째 사진에서 글을 향해 자연스럽게 연결
+========================================================= */
 
 .connector-1{
 
-    left:34%;
+    left:250px;
+    top:85px;
 
-    top:150px;
-
-    width:180px;
-
-    height:120px;
+    width:250px;
+    height:150px;
 
 }
 
 
-/* note1 → photo2 */
+/* =========================================================
+   CONNECTOR 2
+   MEMORY 01 → MEMORY 02
+   기존보다 아래쪽으로 내려와서
+   MEMORY 02 글을 가리키도록 조정
+========================================================= */
 
 .connector-2{
 
-    right:28%;
+    right:220px;
 
-    top:520px;
+    top:280px;
 
-    width:240px;
+    width:300px;
 
-    height:180px;
+    height:250px;
 
 }
 
 
-/* photo2 → photo3 */
+.connector-2 path{
+
+    d:path(
+        "M20 10
+         C80 80
+         100 180
+         210 215"
+    );
+
+}
+
+
+/* =========================================================
+   CONNECTOR 3
+   PHOTO 2 → PHOTO 3 / MEMORY 03
+   기존보다 길게 뻗어서 MEMORY 03 글을 향하도록
+========================================================= */
 
 .connector-3{
 
-    left:35%;
+    left:150px;
 
-    top:830px;
+    top:470px;
 
-    width:260px;
+    width:360px;
 
-    height:180px;
+    height:230px;
 
 }
 
 
-/* note3 → photo4 */
+.connector-3 path{
+
+    d:path(
+        "M10 190
+         C80 70
+         210 30
+         350 110"
+    );
+
+}
+
+
+/* =========================================================
+   CONNECTOR 4
+   MEMORY 03 글 → PHOTO 4
+   마지막 연결은 길게 아래로 내려가면서
+   글과 작은 사진이 이어지는 느낌
+========================================================= */
 
 .connector-4{
 
-    right:25%;
+    right:80px;
 
-    top:1120px;
+    top:620px;
 
-    width:230px;
+    width:300px;
 
-    height:180px;
+    height:300px;
 
 }
+
+
+.connector-4 path{
+
+    d:path(
+        "M20 20
+         C100 20
+         190 100
+         230 180
+         C250 220
+         230 260
+         200 285"
+    );
+
+}
+```
+
 
 
 /* =========================================================
