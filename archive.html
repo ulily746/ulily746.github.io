@@ -4,123 +4,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive | Yuri Choi</title>
-    
+
+    <title>Research Archive | Yuri Choi</title>
+
+    <!-- Archive CSS -->
     <link rel="stylesheet" href="archive.css">
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
+
 
 <body>
 
-    <div class="nav">
-        <a href="index.html">Main</a>
-        <a href="research.html">Research</a>
-        <a href="cv.html">CV</a>
-        <a href="news.html">News</a>
-    </div>
+<!-- =====================================================
+     TOP NAVIGATION
+===================================================== -->
 
-    <div class="archive-wrapper">
+<header class="top-nav">
 
-        <aside class="archive-sidebar">
-            <div class="sidebar-sticky">
-                <div class="sidebar-title">
-                    <span class="sub-script">Choi Yuri</span>
-                    <h2>Archive</h2>
-                </div>
+    <div class="nav-inner">
 
-                <div class="search-box">
-                    <input type="text" placeholder="Search archive...">
-                    <button class="search-btn">🔍</button>
-                </div>
+        <a href="index.html" class="nav-link">
+            Main
+        </a>
 
-                <nav class="category-nav">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li class="active"><a href="#all">All <span class="count">5</span></a></li>
-                        <li><a href="#research">Research <span class="count">1</span></a></li>
-                        <li><a href="#academic">Academic <span class="count">1</span></a></li>
-                        <li><a href="#travel">Travel <span class="count">1</span></a></li>
-                        <li><a href="#life">Life <span class="count">1</span></a></li>
-                    </ul>
-                </nav>
+        <a href="research.html" class="nav-link active">
+            Research
+        </a>
 
-                <div class="tag-box">
-                    <h3>Popular Tags</h3>
-                    <div class="tags">
-                        <a href="#">#CancerTherapy</a>
-                        <a href="#">#ACS2026</a>
-                        <a href="#">#Alps</a>
-                    </div>
-                </div>
-            </div>
-        </aside>
+        <a href="cv.html" class="nav-link">
+            CV
+        </a>
 
-        <main class="archive-content">
-            
-            <div class="archive-grid" id="all">
-
-                <article class="archive-card type-arch" onclick="location.href='MinimalPortfolioDesign.html'">
-                    <div class="card-img-wrap">
-                        <img src="research1.jpg" alt="Dual Metabolic Therapy">
-                    </div>
-                    <div class="card-txt">
-                        <span class="category">Research · 2026</span>
-                        <h2 class="title">Dual Metabolic Therapy</h2>
-                        <p class="date">PLGA-PEG nanoparticle platform</p>
-                    </div>
-                </article>
-
-                <article class="archive-card type-oval" onclick="location.href='MinimalPortfolioDesign.html'">
-                    <div class="card-img-wrap">
-                        <img src="research2.jpg" alt="Paper Writing">
-                    </div>
-                    <div class="card-txt">
-                        <span class="category">Publication · 2026</span>
-                        <h2 class="title">Paper Writing</h2>
-                        <p class="date">Manuscript preparation</p>
-                    </div>
-                </article>
-
-                <article class="archive-card type-bottom-round" onclick="location.href='MinimalPortfolioDesign.html'">
-                    <div class="card-img-wrap">
-                        <img src="academic1.jpg" alt="ACS Spring Presentation">
-                    </div>
-                    <div class="card-txt">
-                        <span class="category">Academic · 2026</span>
-                        <h2 class="title">ACS Spring Presentation</h2>
-                        <p class="date">Conference presentation</p>
-                    </div>
-                </article>
-
-                <article class="archive-card type-rect" onclick="location.href='FloristGardenDesign.html'">
-                    <div class="card-img-wrap">
-                        <img src="travel1.jpg" alt="Switzerland">
-                    </div>
-                    <div class="card-txt">
-                        <span class="category">Travel · 2026</span>
-                        <h2 class="title">Switzerland</h2>
-                        <p class="date">Alps and personal inspiration</p>
-                    </div>
-                </article>
-
-                <article class="archive-card type-arch" onclick="location.href='VintageFlowerDesign.html'">
-                    <div class="card-img-wrap">
-                        <img src="life1.jpg" alt="Beauty & Lifestyle">
-                    </div>
-                    <div class="card-txt">
-                        <span class="category">Life · Style</span>
-                        <h2 class="title">Beauty & Lifestyle</h2>
-                        <p class="date">Daily inspiration, aesthetics</p>
-                    </div>
-                </article>
-
-            </div>
-        </main>
+        <a href="news.html" class="nav-link">
+            News
+        </a>
 
     </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN ARCHIVE
+===================================================== -->
+
+<main class="archive-page">
+
+
+    <!-- =================================================
+         ARCHIVE HERO
+    ================================================== -->
+
+    <section class="archive-hero">
+
+        <div class="hero-small-label">
+            Choi Yuri · Research
+        </div>
+
+        <h1>
+            Research
+            <span>Archive</span>
+        </h1>
+
+        <p class="hero-description">
+            A collection of research projects, publications,
+            experiments, and ideas developed throughout my academic journey.
+        </p>
+
+        <div class="hero-bottom">
+
+            <span class="archive-year">
+                2026
+            </span>
+
+            <span class="archive-count">
+                05 Entries
+            </span>
+
+            <button class="search-toggle" id="searchToggle">
+                Search Archive
+                <span>⌕</span>
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SEARCH PANEL
+    ================================================== -->
+
+    <div class="search-panel" id="searchPanel">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search research archive..."
+        >
+
+        <button id="closeSearch">
+            ×
+        </button>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ARCHIVE CONTENT
+    ================================================== -->
+
+    <section class="archive-list" id="archiveList">
+
+
+        <!-- =================================================
+             ENTRY 01
+        ================================================== -->
+
+        <article class="archive-entry entry-left"
+                 data-title="Dual Metabolic Therapy">
+
+            <div class="entry-number">
+                01
+            </div>
+
+
+            <div class="entry-image image-arch">
+
+                <img
+                    src="research1.jpg"
+                    alt="Dual Metabolic Therapy"
+                >
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="image-link"
+                >
+                    View Entry →
+                </a>
+
+            </div>
+
+
+            <div class="entry-info">
+
+                <span class="entry-category">
+                    Research · 2026
+                </span>
+
+                <h2>
+                    Dual Metabolic
+                    <br>
+                    Therapy
+                </h2>
+
+                <p>
+                    A dual metabolic therapy approach targeting
+                    glycolysis and mitochondrial metabolism
+                    through a PLGA-PEG nanoparticle platform.
+                </p>
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="entry-link"
+                >
+                    Explore project
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ENTRY 02
+        ================================================== -->
+
+        <article class="archive-entry entry-right"
+                 data-title="Paper Writing">
+
+            <div class="entry-number">
+                02
+            </div>
+
+
+            <div class="entry-info">
+
+                <span class="entry-category">
+                    Publication · 2026
+                </span>
+
+                <h2>
+                    Paper
+                    <br>
+                    Writing
+                </h2>
+
+                <p>
+                    Manuscript preparation and the process of
+                    translating experimental findings into
+                    scientific communication.
+                </p>
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="entry-link"
+                >
+                    Explore project
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+
+            <div class="entry-image image-oval">
+
+                <img
+                    src="research2.jpg"
+                    alt="Paper Writing"
+                >
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="image-link"
+                >
+                    View Entry →
+                </a>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ENTRY 03
+        ================================================== -->
+
+        <article class="archive-entry entry-center"
+                 data-title="PLGA-PEG Nanoparticle Platform">
+
+            <div class="entry-number">
+                03
+            </div>
+
+
+            <div class="entry-image image-round">
+
+                <img
+                    src="research3.jpg"
+                    alt="PLGA PEG Nanoparticle Platform"
+                >
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="image-link"
+                >
+                    View Entry →
+                </a>
+
+            </div>
+
+
+            <div class="entry-info">
+
+                <span class="entry-category">
+                    Research · 2026
+                </span>
+
+                <h2>
+                    PLGA-PEG
+                    <br>
+                    Nanoparticle Platform
+                </h2>
+
+                <p>
+                    Development of a nanoparticle-based delivery
+                    system designed for targeted metabolic
+                    intervention.
+                </p>
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="entry-link"
+                >
+                    Explore project
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ENTRY 04
+        ================================================== -->
+
+        <article class="archive-entry entry-wide"
+                 data-title="Cancer Metabolism">
+
+            <div class="entry-number">
+                04
+            </div>
+
+
+            <div class="entry-image image-rect">
+
+                <img
+                    src="research4.jpg"
+                    alt="Cancer Metabolism"
+                >
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="image-link"
+                >
+                    View Entry →
+                </a>
+
+            </div>
+
+
+            <div class="entry-info">
+
+                <span class="entry-category">
+                    Research Notes · 2026
+                </span>
+
+                <h2>
+                    Cancer
+                    Metabolism
+                </h2>
+
+                <p>
+                    Exploring the metabolic vulnerabilities of
+                    cancer cells and strategies for therapeutic
+                    intervention.
+                </p>
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="entry-link"
+                >
+                    Explore project
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ENTRY 05
+        ================================================== -->
+
+        <article class="archive-entry entry-left"
+                 data-title="Metabolic Therapy Notes">
+
+            <div class="entry-number">
+                05
+            </div>
+
+
+            <div class="entry-image image-bottom-round">
+
+                <img
+                    src="research5.jpg"
+                    alt="Metabolic Therapy Notes"
+                >
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="image-link"
+                >
+                    View Entry →
+                </a>
+
+            </div>
+
+
+            <div class="entry-info">
+
+                <span class="entry-category">
+                    Research Notes · 2026
+                </span>
+
+                <h2>
+                    Metabolic
+                    <br>
+                    Therapy Notes
+                </h2>
+
+                <p>
+                    A collection of thoughts, observations,
+                    and working notes gathered during the
+                    research process.
+                </p>
+
+                <a
+                    href="MinimalPortfolioDesign.html"
+                    class="entry-link"
+                >
+                    Explore project
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="archive-footer">
+
+        <div class="footer-line"></div>
+
+        <div class="footer-content">
+
+            <span>
+                Research Archive
+            </span>
+
+            <span>
+                Yuri Choi · 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     SEARCH SCRIPT
+===================================================== -->
+
+<script>
+
+const searchToggle =
+    document.getElementById("searchToggle");
+
+const searchPanel =
+    document.getElementById("searchPanel");
+
+const closeSearch =
+    document.getElementById("closeSearch");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const entries =
+    document.querySelectorAll(".archive-entry");
+
+
+
+/* Open Search */
+
+searchToggle.addEventListener("click", () => {
+
+    searchPanel.classList.add("active");
+
+    searchInput.focus();
+
+});
+
+
+
+/* Close Search */
+
+closeSearch.addEventListener("click", () => {
+
+    searchPanel.classList.remove("active");
+
+    searchInput.value = "";
+
+    entries.forEach(entry => {
+
+        entry.style.display = "";
+
+    });
+
+});
+
+
+
+/* Search */
+
+searchInput.addEventListener("input", () => {
+
+    const keyword =
+        searchInput.value.toLowerCase().trim();
+
+
+    entries.forEach(entry => {
+
+        const title =
+            entry.dataset.title.toLowerCase();
+
+
+        if (title.includes(keyword)) {
+
+            entry.style.display = "";
+
+        } else {
+
+            entry.style.display = "none";
+
+        }
+
+    });
+
+});
+
+</script>
+
 
 </body>
 </html>
