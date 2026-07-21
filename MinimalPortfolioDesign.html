@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Travel Archive - Minimal Portfolio</title>
+<title>Life & Travel Archive - Yuri Choi</title>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -22,6 +22,21 @@
 <style>
 
 
+/* ================================= */
+/* GLOBAL */
+/* ================================= */
+
+
+html,
+body {
+
+margin:0;
+padding:0;
+width:100%;
+
+}
+
+
 body {
 
 font-family:'Plus Jakarta Sans', sans-serif;
@@ -29,7 +44,7 @@ font-family:'Plus Jakarta Sans', sans-serif;
 background-color:#F5EFE6;
 
 
-/* subtle paper texture */
+/* Subtle paper texture */
 
 background-image:
 
@@ -52,11 +67,108 @@ font-family:'Cinzel', serif;
 
 
 
+/* ================================= */
+/* IMAGE TREATMENT */
+/* ================================= */
+
+
 .archive-image {
 
 filter:
 saturate(90%)
 contrast(96%);
+
+transition:
+transform 0.8s ease,
+filter 0.8s ease;
+
+}
+
+
+
+.archive-image:hover {
+
+transform:scale(1.03);
+
+filter:
+saturate(100%)
+contrast(100%);
+
+}
+
+
+
+/* ================================= */
+/* VIDEO */
+/* ================================= */
+
+
+.archive-video {
+
+filter:
+saturate(85%)
+contrast(96%);
+
+}
+
+
+
+/* ================================= */
+/* FOOTER LINK */
+/* ================================= */
+
+
+.footer-link {
+
+transition:
+color 0.3s ease,
+letter-spacing 0.3s ease;
+
+}
+
+
+
+.footer-link:hover {
+
+letter-spacing:0.12em;
+
+}
+
+
+
+/* ================================= */
+/* PAPER TEXTURE OVERLAY */
+/* ================================= */
+
+
+.paper-texture {
+
+position:relative;
+
+}
+
+
+
+.paper-texture::after {
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:0.35;
+
+background-image:
+
+radial-gradient(
+rgba(74,59,50,0.025) 1px,
+transparent 1px
+);
+
+background-size:4px 4px;
 
 }
 
@@ -79,7 +191,18 @@ overflow-x-hidden
 
 
 
-<div class="w-full space-y-36 pb-32">
+
+
+<!-- ================================= -->
+<!-- MAIN PAGE CONTENT -->
+<!-- ================================= -->
+
+
+<div class="
+w-full
+space-y-36
+pb-48
+">
 
 
 
@@ -92,7 +215,6 @@ overflow-x-hidden
 <!-- ================================= -->
 
 
-
 <header class="
 w-full
 pt-16
@@ -103,7 +225,6 @@ mx-auto
 ">
 
 
-
 <div class="
 grid
 grid-cols-1
@@ -111,8 +232,6 @@ md:grid-cols-12
 gap-8
 items-center
 ">
-
-
 
 
 
@@ -128,7 +247,6 @@ order-2
 md:order-1
 z-10
 ">
-
 
 
 <span class="
@@ -171,8 +289,8 @@ h-[1px]
 bg-[#A39081]
 my-6
 ">
-</div>
 
+</div>
 
 
 
@@ -192,12 +310,7 @@ font-light
 </p>
 
 
-
-
 </div>
-
-
-
 
 
 
@@ -218,9 +331,6 @@ md:order-2
 ">
 
 
-
-
-
 <div class="
 w-full
 max-w-xl
@@ -232,7 +342,6 @@ border-[#DDD2C2]
 shadow-sm
 bg-[#EFE6DA]
 ">
-
 
 
 <img
@@ -251,22 +360,21 @@ archive-image
 />
 
 
-
 </div>
-
-
-
 
 
 </div>
 
 
-
 </div>
-
 
 
 </header>
+
+
+
+
+
 
 
 <!-- ================================= -->
@@ -289,6 +397,8 @@ md:px-8
 
 
 
+
+
 <!-- ================================= -->
 <!-- OBJECT 01 -->
 <!-- ================================= -->
@@ -301,7 +411,6 @@ md:grid-cols-12
 gap-8
 items-center
 ">
-
 
 
 <div class="
@@ -351,15 +460,12 @@ archive-image
 
 
 
-
-
 <div class="
 col-span-1
 md:col-span-7
 space-y-3
 md:pl-8
 ">
-
 
 
 <span class="
@@ -406,9 +512,7 @@ max-w-xl
 </p>
 
 
-
 </div>
-
 
 
 </div>
@@ -465,6 +569,7 @@ The Beauty Of Slow Living
 
 
 
+
 <p class="
 text-[10px]
 md:text-xs
@@ -476,7 +581,6 @@ mt-2
 천천히 바라보는 순간의 아름다움
 
 </p>
-
 
 
 </div>
@@ -503,7 +607,6 @@ items-center
 ">
 
 
-
 <div class="
 col-span-1
 md:col-span-7
@@ -514,7 +617,6 @@ md:text-right
 order-2
 md:order-1
 ">
-
 
 
 <span class="
@@ -562,7 +664,6 @@ md:ml-auto
 </p>
 
 
-
 </div>
 
 
@@ -581,7 +682,6 @@ md:order-2
 ">
 
 
-
 <div class="
 w-72
 h-72
@@ -594,7 +694,6 @@ border-[#DDD2C2]
 bg-[#EFE6DA]
 shadow-sm
 ">
-
 
 
 <img
@@ -613,12 +712,10 @@ archive-image
 />
 
 
-
 </div>
 
 
 </div>
-
 
 
 </div>
@@ -640,7 +737,6 @@ archive-image
 w-full
 pt-12
 ">
-
 
 
 <div class="
@@ -707,8 +803,6 @@ items-start
 
 
 
-
-
 <!-- IMAGE 01 -->
 
 <div class="
@@ -730,11 +824,10 @@ object-cover
 archive-image
 "
 
->
+/>
+
 
 </div>
-
-
 
 
 
@@ -762,11 +855,10 @@ object-cover
 archive-image
 "
 
->
+/>
+
 
 </div>
-
-
 
 
 
@@ -793,11 +885,10 @@ object-cover
 archive-image
 "
 
->
+/>
+
 
 </div>
-
-
 
 
 
@@ -824,11 +915,10 @@ object-cover
 archive-image
 "
 
->
+/>
+
 
 </div>
-
-
 
 
 
@@ -856,11 +946,10 @@ object-cover
 archive-image
 "
 
->
+/>
+
 
 </div>
-
-
 
 
 
@@ -887,28 +976,162 @@ object-cover
 archive-image
 "
 
->
-
-</div>
-
-
-
+/>
 
 
 </div>
 
+
+</div>
 
 
 </section>
 
+
+
+
+
+
+
+
+
 <!-- ================================= -->
-<!-- ENDING IMAGE SECTION -->
+<!-- MOVING MEMORIES -->
 <!-- ================================= -->
+
+
+<section class="
+w-full
+pt-16
+">
+
 
 <div class="
 text-center
+mb-10
+">
+
+
+<span class="
+text-xs
+tracking-[0.35em]
+text-[#A39081]
+">
+
+MOVING MEMORIES
+
+</span>
+
+
+
+
+<h2 class="
+text-2xl
+md:text-4xl
+font-serif-title
+text-[#4A3B32]
+mt-4
+">
+
+A Moment In Motion
+
+</h2>
+
+
+
+
+<p class="
+text-xs
+text-[#7A6B5E]
+mt-3
+font-light
+">
+
+A few seconds from somewhere, sometime, once.
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="
+w-full
+aspect-[21/9]
+overflow-hidden
+border
+border-[#DDD2C2]
+bg-[#EFE6DA]
+shadow-sm
+">
+
+
+<video
+
+class="
+w-full
+h-full
+object-cover
+archive-video
+"
+
+autoplay
+muted
+loop
+playsinline
+
+>
+
+<source src="video.mp4" type="video/mp4">
+
+</video>
+
+
+</div>
+
+
+
+
+
+<p class="
+text-[10px]
+text-[#A39081]
+tracking-[0.25em]
+text-center
+mt-4
+">
+
+FRAME 01 · A QUIET MOMENT
+
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================================= -->
+<!-- FINAL CHAPTER -->
+<!-- ================================= -->
+
+
+<div class="
+text-center
+pt-16
 mb-12
 ">
+
 
 <span class="
 text-xs
@@ -919,6 +1142,8 @@ text-[#A39081]
 FINAL CHAPTER
 
 </span>
+
+
 
 
 <h2 class="
@@ -934,6 +1159,8 @@ A Place To Remember
 </h2>
 
 
+
+
 <p class="
 text-xs
 text-[#7A6B5E]
@@ -945,17 +1172,30 @@ Fragments of a journey, collected through time.
 
 </p>
 
+
 </div>
-  
+
+
+
+
+
+
+
+
+
+<!-- ================================= -->
+<!-- ENDING IMAGE -->
+<!-- ================================= -->
+
+
 <section class="
 w-full
 space-y-6
 ">
 
 
-
 <div class="
-w-[96%]
+w-full
 max-w-7xl
 mx-auto
 aspect-[21/9]
@@ -990,14 +1230,17 @@ archive-image
 
 
 
+<!-- ENDING QUOTE -->
+
+
 <div class="
 w-full
-max-w-xl
+max-w-2xl
 mx-auto
 text-center
 px-6
+pt-10
 ">
-
 
 
 <span class="
@@ -1005,7 +1248,7 @@ text-[10px]
 tracking-[0.35em]
 text-[#A39081]
 block
-mb-4
+mb-5
 ">
 
 A NOTE FROM THE JOURNEY
@@ -1016,11 +1259,11 @@ A NOTE FROM THE JOURNEY
 
 
 <p class="
-text-xs
-md:text-sm
+text-sm
+md:text-base
 text-[#7A6B5E]
 font-light
-leading-relaxed
+leading-[2]
 ">
 
 어떤 순간은 사진으로 남고,
@@ -1032,9 +1275,7 @@ leading-relaxed
 </p>
 
 
-
 </div>
-
 
 
 </section>
@@ -1043,7 +1284,14 @@ leading-relaxed
 
 
 
+
+
+
+
 </div>
+
+
+
 
 
 
@@ -1056,51 +1304,49 @@ leading-relaxed
 
 
 <footer class="
-relative
-left-1/2
--translate-x-1/2
-w-screen
+w-full
 bg-[#362A21]
 text-[#F5EFE6]
-py-16
-px-6
-text-xs
-font-light
-tracking-widest
 border-t
 border-[#A39081]
 ">
 
 
 <div class="
-w-full
 max-w-7xl
 mx-auto
-flex
-flex-col
-md:flex-row
-justify-between
-items-center
-gap-6
+px-6
+py-20
 ">
-
 
 
 <div class="
-text-center
-md:text-left
+grid
+grid-cols-1
+md:grid-cols-12
+gap-12
 ">
 
+
+
+
+
+<!-- FOOTER INTRO -->
+
+
+<div class="
+md:col-span-5
+">
 
 
 <p class="
 text-white
 font-serif-title
 tracking-wider
-text-sm
+text-lg
 ">
 
-TRAVEL ARCHIVE
+YURI CHOI
 
 </p>
 
@@ -1109,67 +1355,210 @@ TRAVEL ARCHIVE
 
 <p class="
 text-[#A39081]
-mt-2
+text-[10px]
+tracking-[0.25em]
+mt-3
 ">
 
-© 2026 MINIMAL PORTFOLIO EDITION.
-CURATED WITH SILENCE.
+LIFE & TRAVEL ARCHIVE
 
 </p>
 
 
 
+
+<p class="
+text-[#D6C8B8]
+text-xs
+font-light
+leading-relaxed
+max-w-sm
+mt-8
+">
+
+A collection of research, places,
+memories, and things worth remembering.
+
+</p>
+
+
 </div>
 
 
 
+
+
+
+
+<!-- FOOTER NAVIGATION -->
+
+
+<div class="
+md:col-span-7
+">
+
+
+<p class="
+text-[10px]
+tracking-[0.3em]
+text-[#A39081]
+mb-6
+">
+
+EXPLORE
+
+</p>
 
 
 
 
 <div class="
-flex
-gap-8
-text-[#A39081]
+grid
+grid-cols-2
+sm:grid-cols-3
+gap-y-5
+gap-x-8
 ">
-
-
-
-<a 
-href="#"
-class="
-hover:text-white
-transition
-">
-
-COLLECTION
-
-</a>
-
 
 
 <a
-href="#"
+href="index.html"
 class="
-hover:text-white
-transition
+footer-link
+text-xs
+text-[#F5EFE6]
 ">
 
-INQUIRY
+HOME
 
 </a>
 
 
+<a
+href="research.html"
+class="
+footer-link
+text-xs
+text-[#F5EFE6]
+">
+
+RESEARCH
+
+</a>
+
+
+<a
+href="cv.html"
+class="
+footer-link
+text-xs
+text-[#F5EFE6]
+">
+
+CV
+
+</a>
+
+
+<a
+href="news.html"
+class="
+footer-link
+text-xs
+text-[#F5EFE6]
+">
+
+NEWS
+
+</a>
+
+
+<a
+href="life.html"
+class="
+footer-link
+text-xs
+text-[#F5EFE6]
+">
+
+LIFE
+
+</a>
+
+
+<a
+href="travel.html"
+class="
+footer-link
+text-xs
+text-[#F5EFE6]
+">
+
+TRAVEL
+
+</a>
+
+
+</div>
+
+
+</div>
+
 
 </div>
 
 
 
+
+
+
+
+<!-- FOOTER BOTTOM -->
+
+
+<div class="
+mt-16
+pt-6
+border-t
+border-[#5A4A3E]
+flex
+flex-col
+md:flex-row
+justify-between
+gap-4
+text-[10px]
+text-[#A39081]
+tracking-widest
+">
+
+
+<p>
+
+© 2026 YURI CHOI
+
+</p>
+
+
+
+
+<p>
+
+PERSONAL ARCHIVE · LIFE · TRAVEL · RESEARCH
+
+</p>
+
+
 </div>
 
+
+</div>
 
 
 </footer>
+
+
+
+
 
 
 
@@ -1184,4 +1573,4 @@ lucide.createIcons();
 
 </body>
 
-</html>  
+</html>
