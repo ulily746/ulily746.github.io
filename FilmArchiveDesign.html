@@ -42,15 +42,15 @@ html{
 }
 
 body{
-    background:#d9dde1;
-    color:#4d4943;
+    background:#c9d5dc;
+    color:#4e5960;
     font-family:'Manrope', sans-serif;
     overflow-x:hidden;
 }
 
 
 /* =========================================================
-   FULL PAGE BACKGROUND
+   PAGE BACKGROUND
 ========================================================= */
 
 body::before{
@@ -58,83 +58,62 @@ body::before{
     position:fixed;
     inset:0;
     z-index:-2;
+
     background:
         linear-gradient(
-            to bottom,
-            rgba(217,221,225,.2),
-            rgba(185,191,188,.45)
-        );
-}
-
-
-/* 양옆 숲 느낌 */
-
-body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    pointer-events:none;
-    opacity:.12;
-    background:
-        radial-gradient(
-            ellipse at 3% 20%,
-            #68756b 0,
-            transparent 18%
-        ),
-        radial-gradient(
-            ellipse at 97% 35%,
-            #68756b 0,
-            transparent 18%
-        ),
-        radial-gradient(
-            ellipse at 0% 80%,
-            #7c887c 0,
-            transparent 20%
-        ),
-        radial-gradient(
-            ellipse at 100% 75%,
-            #7c887c 0,
-            transparent 20%
+            180deg,
+            rgba(205,220,227,.92),
+            rgba(174,193,201,.95)
         );
 }
 
 
 /* =========================================================
-   MAIN PAPER
+   MAIN PAGE
 ========================================================= */
 
 .paper{
+
     width:100%;
     max-width:none;
+
     margin:0;
-    padding:55px 7vw 70px;
-    background:#f7f2e7;
-    border-radius:0;
+
+    padding:70px clamp(40px, 6vw, 110px) 0;
+
+    background:#f2f5f3;
+
     position:relative;
+
     overflow:hidden;
+
     box-shadow:none;
+
 }
 
 
-/* 종이 질감 */
+/* subtle paper texture */
 
 .paper::before{
+
     content:"";
+
     position:absolute;
+
     inset:0;
+
     background-image:
         radial-gradient(
-            rgba(80,70,60,.035) 1px,
+            rgba(70,90,100,.025) 1px,
             transparent 1px
         );
+
     background-size:8px 8px;
-    opacity:.45;
+
     pointer-events:none;
+
 }
 
-
-/* 콘텐츠 */
 
 .paper > *{
     position:relative;
@@ -143,130 +122,243 @@ body::after{
 
 
 /* =========================================================
+   SECTION COLOR DIVISION
+========================================================= */
+
+.hero{
+    background:#e9f0f1;
+}
+
+.intro{
+    background:#dce8eb;
+}
+
+.memory{
+    background:#e7eff0;
+}
+
+.moving-memories{
+    background:#cfdee3;
+}
+
+.film{
+    background:#e5edef;
+}
+
+.travel-journal{
+    background:#d8e5e8;
+}
+
+
+/* =========================================================
    HERO
 ========================================================= */
 
 .hero{
-    margin-bottom:150px;
+
+    margin:0 -110px 0;
+
+    padding:
+        80px
+        clamp(50px, 9vw, 150px)
+        110px;
+
 }
 
 
 .hero-card{
+
     position:relative;
-    background:#f8f3e8;
-    border:1px solid #d4cbbb;
-    border-radius:0;
-    padding:30px 38px 42px;
+
+    max-width:1350px;
+
+    margin:0 auto;
+
+    background:transparent;
+
+    border:none;
+
+    padding:0;
+
 }
 
 
-/* 제목 */
+/* =========================================================
+   HERO TITLE ABOVE IMAGE
+========================================================= */
 
 .hero-top{
-    position:absolute;
-    left:70px;
-    top:48px;
-    z-index:5;
-    margin:0;
+
+    display:block;
+
+    position:relative;
+
+    margin-bottom:30px;
+
 }
 
 
 .hero-top h1{
+
     font-family:'Cormorant Garamond', serif;
-    font-size:clamp(58px, 7vw, 105px);
-    line-height:.8;
+
+    font-size:clamp(70px, 9vw, 145px);
+
+    line-height:.78;
+
     font-weight:500;
-    letter-spacing:2px;
-    color:#514a42;
+
+    letter-spacing:-2px;
+
+    color:#40545d;
+
+    position:relative;
+
+    z-index:3;
+
 }
 
 
-/* Hero 이미지 */
+/* 작은 글씨 */
+
+.hero-top::after{
+
+    content:"CHILDHOOD ARCHIVE · SUMMER";
+
+    display:block;
+
+    margin-top:25px;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    color:#7d929a;
+
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
 
 .hero-image{
-    width:86%;
-    max-width:1120px;
-    margin:0 auto;
+
+    width:82%;
+
+    max-width:1100px;
+
+    margin-left:auto;
+
+    margin-right:5%;
+
     position:relative;
+
+}
+
+
+.hero-image::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-15px;
+
+    border:1px solid rgba(90,115,125,.25);
+
+    pointer-events:none;
+
 }
 
 
 .hero-image img{
+
     display:block;
+
     width:100%;
-    aspect-ratio:16 / 9;
+
+    aspect-ratio:16 / 8;
+
     object-fit:cover;
+
+    filter:saturate(.78);
+
     transition:.5s ease;
+
 }
 
 
 .hero-image:hover img{
+
     transform:scale(1.015);
+
 }
 
 
-/* 아래 제목 */
+/* =========================================================
+   HERO TITLE BELOW IMAGE
+========================================================= */
 
 .hero-bottom{
-    display:flex;
-    justify-content:flex-end;
-    align-items:flex-end;
-    margin-top:35px;
-    padding-right:5%;
-    min-height:100px;
+
+    display:block;
+
+    position:relative;
+
+    min-height:160px;
+
+    margin-top:30px;
+
 }
 
 
 .hero-title{
+
+    position:absolute;
+
+    right:3%;
+
+    top:0;
+
     text-align:right;
-    position:relative;
-    z-index:3;
+
 }
 
 
 .hero-title h2{
+
     font-family:'Cormorant Garamond', serif;
+
     font-size:clamp(50px, 6vw, 90px);
-    line-height:.82;
+
+    line-height:.78;
+
     font-weight:500;
-    color:#514a42;
+
+    color:#40545d;
+
 }
 
 
 .hero-title::after{
+
     content:"a summer memory";
+
     display:block;
-    margin-top:14px;
+
+    margin-top:20px;
+
     font-family:'Caveat', cursive;
-    font-size:22px;
-    color:#9a8d7b;
+
+    font-size:25px;
+
+    color:#78909a;
+
     transform:rotate(-3deg);
-}
 
-
-/* Hero 모서리 장식 */
-
-.hero-card::before{
-    content:"";
-    position:absolute;
-    left:25px;
-    top:25px;
-    width:70px;
-    height:70px;
-    border-top:1px solid rgba(130,120,100,.35);
-    border-left:1px solid rgba(130,120,100,.35);
-}
-
-
-.hero-card::after{
-    content:"";
-    position:absolute;
-    right:25px;
-    bottom:25px;
-    width:70px;
-    height:70px;
-    border-bottom:1px solid rgba(130,120,100,.35);
-    border-right:1px solid rgba(130,120,100,.35);
 }
 
 
@@ -275,41 +367,68 @@ body::after{
 ========================================================= */
 
 .intro{
-    margin-bottom:170px;
-    padding:0 10%;
+
+    margin:0 -110px;
+
+    padding:150px 30px;
+
 }
 
 
 .intro-wrapper{
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
-    gap:45px;
+
+    gap:50px;
+
+    max-width:850px;
+
+    margin:auto;
+
 }
 
 
 .left-brace,
 .right-brace{
-    width:50px;
-    height:200px;
+
+    width:55px;
+
+    height:220px;
+
     flex-shrink:0;
-    stroke:#9f9078;
+
+    stroke:#78919b;
+
     stroke-width:1.5;
+
     fill:none;
+
 }
 
 
 .intro-text{
-    max-width:700px;
+
+    max-width:650px;
+
     text-align:center;
+
 }
 
 
 .intro-text p{
-    font-family:'Caveat', cursive;
-    font-size:clamp(28px, 3vw, 42px);
-    line-height:1.45;
-    color:#7f715e;
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:clamp(32px, 3vw, 48px);
+
+    line-height:1.25;
+
+    color:#50656e;
+
 }
 
 
@@ -318,38 +437,64 @@ body::after{
 ========================================================= */
 
 .memory{
-    padding:30px 4vw 170px;
+
+    margin:0 -110px;
+
+    padding:
+        130px
+        clamp(50px, 9vw, 150px)
+        160px;
+
 }
 
 
 .memory-heading{
+
     text-align:center;
+
     margin-bottom:120px;
+
 }
 
 
 .memory-heading h2{
+
     font-family:'Cormorant Garamond', serif;
-    font-size:clamp(52px, 5vw, 75px);
+
+    font-size:clamp(55px, 6vw, 90px);
+
     font-weight:500;
-    color:#655b50;
+
+    color:#40545d;
+
 }
 
 
 .memory-heading p{
-    margin-top:8px;
+
+    margin-top:15px;
+
     font-family:'Caveat', cursive;
-    font-size:24px;
-    color:#958875;
+
+    font-size:27px;
+
+    color:#78909a;
+
 }
 
 
-/* Memory 전체 */
+/* =========================================================
+   MEMORY BOARD
+========================================================= */
 
 .memory-board{
+
+    max-width:1150px;
+
+    margin:auto;
+
     position:relative;
-    width:min(1100px, 100%);
-    margin:0 auto;
+
 }
 
 
@@ -358,71 +503,113 @@ body::after{
 ========================================================= */
 
 .memory-row{
+
     width:100%;
+
+    min-height:430px;
+
     display:flex;
+
     align-items:center;
+
     position:relative;
-    min-height:390px;
-}
 
+    margin-bottom:20px;
 
-/* 사진 */
-
-.memory-photo{
-    position:relative;
-    flex-shrink:0;
-    background:#fff;
-    padding:14px 14px 38px;
-    box-shadow:
-        0 15px 30px rgba(60,50,40,.14);
-    transition:.4s ease;
-    z-index:3;
-}
-
-
-.memory-photo:hover{
-    transform:scale(1.025) rotate(0deg) !important;
-    z-index:10;
-}
-
-
-.memory-photo img{
-    display:block;
-    width:100%;
-    height:100%;
-    object-fit:cover;
 }
 
 
 /* =========================================================
-   BIGGER MEMORY PHOTOS
+   MEMORY PHOTO
+========================================================= */
+
+.memory-photo{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    background:#f8faf9;
+
+    padding:14px 14px 35px;
+
+    box-shadow:
+        0 18px 35px rgba(60,80,90,.13);
+
+    z-index:3;
+
+    transition:.5s ease;
+
+}
+
+
+.memory-photo:hover{
+
+    transform:scale(1.025) rotate(0deg);
+
+    z-index:10;
+
+}
+
+
+.memory-photo img{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================================================
+   BIGGER MEMORY SIZES
 ========================================================= */
 
 .row-1 .memory-photo{
+
     width:430px;
-    height:360px;
+
+    height:390px;
+
     transform:rotate(-3deg);
+
 }
 
 
 .row-2 .memory-photo{
-    width:360px;
-    height:315px;
+
+    width:350px;
+
+    height:320px;
+
     transform:rotate(3deg);
+
 }
 
 
 .row-3 .memory-photo{
-    width:310px;
-    height:285px;
-    transform:rotate(-4deg);
+
+    width:290px;
+
+    height:270px;
+
+    transform:rotate(-3deg);
+
 }
 
 
 .row-4 .memory-photo{
-    width:250px;
-    height:230px;
+
+    width:230px;
+
+    height:215px;
+
     transform:rotate(4deg);
+
 }
 
 
@@ -431,154 +618,225 @@ body::after{
 ========================================================= */
 
 .memory-note{
-    position:relative;
-    max-width:280px;
+
+    max-width:310px;
+
     font-family:'Caveat', cursive;
-    font-size:32px;
-    line-height:1.35;
-    color:#75695d;
+
+    font-size:34px;
+
+    line-height:1.3;
+
+    color:#60747d;
+
     text-align:center;
+
     z-index:3;
+
 }
 
 
 .memory-note small{
+
     display:block;
-    margin-bottom:10px;
+
+    margin-bottom:15px;
+
     font-family:'Manrope', sans-serif;
+
     font-size:10px;
+
     letter-spacing:3px;
-    color:#a69a89;
+
+    color:#8ca0a8;
+
 }
 
 
 /* =========================================================
-   ZIGZAG MEMORY LAYOUT
+   MEMORY ROW POSITIONS
 ========================================================= */
 
-
-/* 01 사진 → 글 */
-
 .row-1{
+
     justify-content:flex-start;
-    padding-left:4%;
+
+    padding-left:5%;
+
     gap:100px;
+
 }
 
 
 .row-1 .memory-note{
-    margin-top:-70px;
+
+    margin-top:-50px;
+
 }
 
 
-/* 02 글 → 사진 */
+/* row 2 */
 
 .row-2{
+
     justify-content:flex-end;
-    padding-right:5%;
+
+    padding-right:7%;
+
     gap:100px;
-    margin-top:-20px;
+
+    margin-top:-40px;
+
 }
 
 
 .row-2 .memory-note{
+
     order:1;
-    margin-top:50px;
+
+    margin-top:-30px;
+
 }
 
 
 .row-2 .memory-photo{
+
     order:2;
+
 }
 
 
-/* 03 사진 → 글 */
+/* row 3 */
 
 .row-3{
+
     justify-content:flex-start;
-    padding-left:15%;
+
+    padding-left:22%;
+
     gap:90px;
+
     margin-top:-20px;
+
 }
 
 
 .row-3 .memory-note{
-    margin-top:-30px;
+
+    margin-top:-20px;
+
 }
 
 
-/* 04 작은 사진 */
+/* row 4 */
 
 .row-4{
+
     justify-content:flex-end;
-    padding-right:15%;
-    margin-top:-15px;
+
+    padding-right:16%;
+
+    margin-top:-30px;
+
 }
 
 
 .row-4 .memory-photo{
-    margin-top:-40px;
+
+    margin-top:-20px;
+
 }
 
 
 /* =========================================================
-   ORGANIC CONNECTOR
+   MEMORY CONNECTORS
 ========================================================= */
 
 .memory-connector{
+
     position:absolute;
+
     pointer-events:none;
+
     z-index:1;
+
     overflow:visible;
+
 }
 
 
 .memory-connector path{
+
     fill:none;
-    stroke:#a49682;
-    stroke-width:1.6;
+
+    stroke:#8299a2;
+
+    stroke-width:2;
+
     stroke-linecap:round;
+
     stroke-dasharray:4 8;
+
 }
 
 
-/* 사진1 → 글1 */
+/* photo1 → note1 */
 
 .connector-1{
-    left:340px;
-    top:210px;
-    width:300px;
-    height:150px;
+
+    left:34%;
+
+    top:150px;
+
+    width:180px;
+
+    height:120px;
+
 }
 
 
-/* 글1 → 사진2 */
+/* note1 → photo2 */
 
 .connector-2{
-    right:300px;
-    top:500px;
-    width:330px;
-    height:200px;
+
+    right:28%;
+
+    top:520px;
+
+    width:240px;
+
+    height:180px;
+
 }
 
 
-/* 사진2 → 글3 */
+/* photo2 → photo3 */
 
 .connector-3{
-    left:280px;
-    top:790px;
-    width:330px;
-    height:200px;
+
+    left:35%;
+
+    top:830px;
+
+    width:260px;
+
+    height:180px;
+
 }
 
 
-/* 글3 → 사진4 */
+/* note3 → photo4 */
 
 .connector-4{
-    right:220px;
-    top:1080px;
-    width:330px;
-    height:200px;
+
+    right:25%;
+
+    top:1120px;
+
+    width:230px;
+
+    height:180px;
+
 }
 
 
@@ -587,86 +845,140 @@ body::after{
 ========================================================= */
 
 .moving-memories{
-    width:100%;
-    padding:100px 3vw 180px;
+
+    margin:0 -110px;
+
+    padding:
+        150px
+        clamp(40px, 7vw, 120px)
+        170px;
+
 }
 
 
 .moving-heading{
-    text-align:center;
-    margin-bottom:70px;
+
+    max-width:1200px;
+
+    margin:0 auto 70px;
+
+    text-align:left;
+
 }
 
 
 .moving-label{
+
     display:block;
+
     font-family:'Manrope', sans-serif;
+
     font-size:10px;
+
     letter-spacing:5px;
-    color:#a0927e;
-    margin-bottom:18px;
+
+    color:#78909a;
+
+    margin-bottom:20px;
+
 }
 
 
 .moving-heading h2{
+
     font-family:'Cormorant Garamond', serif;
-    font-size:clamp(55px, 5vw, 80px);
+
+    font-size:clamp(55px, 6vw, 90px);
+
     font-weight:500;
-    color:#655b50;
-    line-height:1;
+
+    color:#40545d;
+
 }
 
 
 .moving-heading p{
-    margin-top:14px;
+
+    margin-top:15px;
+
     font-family:'Caveat', cursive;
-    font-size:25px;
-    color:#968876;
+
+    font-size:27px;
+
+    color:#718991;
+
 }
 
 
-/* 영상 */
+/* =========================================================
+   LARGE VIDEO
+========================================================= */
 
 .video-wrapper{
+
     width:100%;
-    max-width:1280px;
-    margin:0 auto;
-    position:relative;
+
+    max-width:1350px;
+
+    margin:auto;
+
 }
 
 
 .memory-video{
+
     display:block;
+
     width:100%;
-    aspect-ratio:16 / 8.5;
+
+    aspect-ratio:16 / 8;
+
     object-fit:cover;
-    background:#1c1b19;
-    border:12px solid #171614;
+
+    background:#26343a;
+
+    border:12px solid #34464d;
+
     box-shadow:
-        0 22px 45px rgba(40,35,28,.18);
+        0 25px 50px rgba(50,70,80,.2);
+
 }
 
 
 .video-caption{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    padding:25px 15px 0;
+
+    padding:25px 5px 0;
+
 }
 
 
 .video-caption span{
+
     font-family:'Caveat', cursive;
+
     font-size:30px;
-    color:#75695d;
+
+    color:#617780;
+
 }
 
 
 .video-caption small{
+
     font-family:'Manrope', sans-serif;
+
     font-size:10px;
+
     letter-spacing:3px;
-    color:#a0927e;
+
+    color:#81959d;
+
 }
 
 
@@ -675,229 +987,384 @@ body::after{
 ========================================================= */
 
 .film{
-    padding:120px 5vw 100px;
+
+    margin:0 -110px;
+
+    padding:
+        150px
+        clamp(50px, 8vw, 130px)
+        120px;
+
 }
 
 
 .film-title{
+
     font-family:'Cormorant Garamond', serif;
-    font-size:clamp(55px, 5vw, 80px);
+
+    font-size:clamp(55px, 6vw, 90px);
+
     font-weight:500;
+
     text-align:center;
-    color:#66584c;
-    margin-bottom:90px;
+
+    color:#40545d;
+
+    margin-bottom:15px;
+
 }
 
 
 .film-subtitle{
+
     text-align:center;
-    margin-top:-70px;
-    margin-bottom:90px;
+
+    margin-bottom:100px;
+
     font-family:'Caveat', cursive;
-    font-size:24px;
-    color:#968876;
+
+    font-size:27px;
+
+    color:#78909a;
+
 }
 
 
-/* Film item */
+/* =========================================================
+   FILM ITEM
+========================================================= */
 
 .film-item{
+
     position:relative;
+
     display:flex;
+
     align-items:center;
-    width:min(1000px, 100%);
-    margin:0 auto 120px;
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:0 auto 130px;
+
 }
 
 
 .film-item.left-photo{
+
     justify-content:flex-start;
-    gap:80px;
+
+    gap:90px;
+
 }
 
 
 .film-item.right-photo{
+
     justify-content:flex-end;
-    gap:80px;
+
+    gap:90px;
+
 }
 
 
-/* Film frame */
+/* =========================================================
+   FILM FRAME
+========================================================= */
 
 .film-frame{
+
     position:relative;
+
     flex-shrink:0;
-    background:#11100f;
+
+    background:#26343a;
+
     padding:24px 14px;
+
     box-shadow:
-        0 15px 30px rgba(30,25,20,.18);
+        0 20px 40px rgba(50,65,70,.18);
+
 }
 
 
 .film-frame::before,
 .film-frame::after{
+
     content:"";
+
     position:absolute;
-    left:7px;
-    right:7px;
-    height:11px;
+
+    left:6px;
+
+    right:6px;
+
+    height:12px;
+
     background-image:
         radial-gradient(
             circle,
-            #f7f2e7 4px,
+            #e5edef 4px,
             transparent 4.5px
         );
-    background-size:18px 11px;
+
+    background-size:20px 12px;
+
     background-repeat:repeat-x;
+
 }
 
 
 .film-frame::before{
-    top:6px;
+    top:5px;
 }
 
 
 .film-frame::after{
-    bottom:6px;
+    bottom:5px;
 }
 
 
 .film-frame img{
+
     display:block;
+
     width:100%;
+
     height:100%;
+
     object-fit:cover;
+
 }
 
 
+/* vertical */
+
 .film-frame.vertical{
-    width:340px;
+
+    width:400px;
+
 }
 
 
 .film-frame.vertical img{
-    height:430px;
+
+    height:500px;
+
+}
+
+
+/* horizontal */
+
+.film-item.horizontal-film{
+
+    display:block;
+
+    max-width:1350px;
+
+    margin:
+        0 auto
+        150px;
+
 }
 
 
 .film-frame.horizontal{
+
     width:100%;
+
+    padding:24px 14px;
+
+    transform:rotate(.5deg);
+
 }
 
 
 .film-frame.horizontal img{
-    height:420px;
+
+    width:100%;
+
+    height:auto;
+
+    aspect-ratio:21 / 8;
+
+    object-fit:cover;
+
 }
 
 
-/* Film text */
+/* horizontal photo no caption */
 
-.film-text{
-    max-width:300px;
-}
+.horizontal-film .film-caption{
 
+    display:none;
 
-.film-text .film-label{
-    font-family:'Manrope', sans-serif;
-    font-size:10px;
-    letter-spacing:4px;
-    color:#a0927e;
-    margin-bottom:14px;
-}
-
-
-.film-text h3{
-    font-family:'Caveat', cursive;
-    font-size:40px;
-    font-weight:600;
-    line-height:1.15;
-    color:#655b50;
-    margin-bottom:14px;
-}
-
-
-.film-text p{
-    font-family:'Manrope', sans-serif;
-    font-size:12px;
-    line-height:1.9;
-    color:#81766a;
 }
 
 
 /* =========================================================
-   TRAVEL NOTES
+   FILM TEXT
 ========================================================= */
 
-.travel-notes{
-    max-width:1100px;
-    margin:60px auto 0;
-    padding:100px 0 120px;
-    border-top:1px solid #d4cbbb;
+.film-text{
+
+    max-width:330px;
+
 }
 
 
-.travel-notes-heading{
-    text-align:center;
-    margin-bottom:65px;
-}
+.film-text .film-label{
 
-
-.travel-notes-heading span{
     font-family:'Manrope', sans-serif;
+
     font-size:10px;
+
     letter-spacing:4px;
-    color:#a0927e;
-}
 
+    color:#8299a2;
 
-.travel-notes-heading h2{
-    margin-top:12px;
-    font-family:'Cormorant Garamond', serif;
-    font-size:60px;
-    font-weight:500;
-    color:#655b50;
-}
-
-
-.travel-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:25px;
-}
-
-
-.travel-card{
-    padding:35px 30px;
-    min-height:260px;
-    border:1px solid #d8cfbf;
-    background:rgba(248,243,232,.55);
-}
-
-
-.travel-card span{
-    display:block;
-    font-family:'Manrope', sans-serif;
-    font-size:9px;
-    letter-spacing:3px;
-    color:#a0927e;
-    margin-bottom:20px;
-}
-
-
-.travel-card h3{
-    font-family:'Cormorant Garamond', serif;
-    font-size:32px;
-    font-weight:500;
-    color:#655b50;
     margin-bottom:15px;
+
 }
 
 
-.travel-card p{
+.film-text h3{
+
+    font-family:'Caveat', cursive;
+
+    font-size:42px;
+
+    font-weight:600;
+
+    line-height:1.1;
+
+    color:#596e77;
+
+    margin-bottom:15px;
+
+}
+
+
+.film-text p{
+
     font-family:'Manrope', sans-serif;
-    font-size:11px;
+
+    font-size:12px;
+
     line-height:1.9;
-    color:#81766a;
+
+    color:#71828a;
+
+}
+
+
+/* =========================================================
+   TRAVEL JOURNAL
+========================================================= */
+
+.travel-journal{
+
+    margin:0 -110px;
+
+    padding:
+        140px
+        clamp(50px, 8vw, 130px)
+        160px;
+
+}
+
+
+.journal-heading{
+
+    text-align:center;
+
+    margin-bottom:80px;
+
+}
+
+
+.journal-heading h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:clamp(50px, 5vw, 75px);
+
+    font-weight:500;
+
+    color:#40545d;
+
+}
+
+
+.journal-heading p{
+
+    margin-top:12px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:25px;
+
+    color:#78909a;
+
+}
+
+
+/* =========================================================
+   JOURNAL GRID
+========================================================= */
+
+.journal-grid{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:70px;
+
+}
+
+
+.journal-card{
+
+    background:rgba(245,248,247,.65);
+
+    padding:35px;
+
+    border-top:1px solid rgba(90,115,125,.25);
+
+}
+
+
+.journal-card h3{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:38px;
+
+    font-weight:500;
+
+    color:#50656e;
+
+    margin-bottom:15px;
+
+}
+
+
+.journal-card p{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:12px;
+
+    line-height:1.9;
+
+    color:#71828a;
+
 }
 
 
@@ -906,132 +1373,81 @@ body::after{
 ========================================================= */
 
 .footer{
-    padding:80px 0 30px;
+
+    margin:0 -110px;
+
+    padding:80px 30px 40px;
+
     text-align:center;
-    border-top:1px solid #d4cbbb;
+
+    background:#c6d6db;
+
 }
 
 
 .footer p{
+
     font-family:'Caveat', cursive;
-    font-size:27px;
-    color:#8f8273;
+
+    font-size:28px;
+
+    color:#5e737c;
+
 }
 
 
 .footer small{
+
     display:block;
+
     margin-top:12px;
+
     font-family:'Manrope', sans-serif;
+
     font-size:9px;
+
     letter-spacing:3px;
-    color:#aaa092;
+
+    color:#81949b;
+
 }
 
 
 /* =========================================================
-   TABLET
+   RESPONSIVE
 ========================================================= */
 
 @media(max-width:900px){
 
     .paper{
-        padding:35px 5vw 50px;
+        padding:40px 25px 0;
     }
 
-
-    .hero-top{
-        left:40px;
-        top:35px;
+    .hero,
+    .intro,
+    .memory,
+    .moving-memories,
+    .film,
+    .travel-journal,
+    .footer{
+        margin-left:-25px;
+        margin-right:-25px;
     }
 
-
-    .hero-top h1{
-        font-size:65px;
-    }
-
-
-    .hero-image{
-        width:92%;
-    }
-
-
-    .row-1,
-    .row-2,
-    .row-3{
-        gap:55px;
-    }
-
-
-    .row-1 .memory-photo{
-        width:360px;
-        height:310px;
-    }
-
-
-    .row-2 .memory-photo{
-        width:310px;
-        height:280px;
-    }
-
-
-    .row-3 .memory-photo{
-        width:270px;
-        height:250px;
-    }
-
-
-    .memory-note{
-        font-size:27px;
-        max-width:220px;
-    }
-
-
-    .travel-grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:700px){
-
-    .paper{
-        padding:20px 18px 40px;
-    }
-
-
-    /* HERO */
 
     .hero{
-        margin-bottom:90px;
-    }
-
-
-    .hero-card{
-        padding:18px 15px 30px;
-    }
-
-
-    .hero-top{
-        position:relative;
-        left:auto;
-        top:auto;
-        margin-bottom:15px;
+        padding:60px 25px 80px;
     }
 
 
     .hero-top h1{
-        font-size:48px;
+        font-size:70px;
     }
 
 
     .hero-image{
         width:100%;
+        margin:0;
     }
 
 
@@ -1040,166 +1456,124 @@ body::after{
     }
 
 
-    .hero-bottom{
-        margin-top:25px;
-        padding-right:0;
+    .hero-title{
+        right:0;
     }
 
 
     .hero-title h2{
-        font-size:43px;
+        font-size:48px;
     }
 
-
-    /* INTRO */
-
-    .intro{
-        padding:0 5%;
-        margin-bottom:100px;
-    }
-
-
-    .intro-wrapper{
-        gap:12px;
-    }
-
-
-    .left-brace,
-    .right-brace{
-        width:25px;
-        height:130px;
-    }
-
-
-    .intro-text p{
-        font-size:25px;
-    }
-
-
-    /* MEMORY */
 
     .memory{
-        padding:20px 0 100px;
-    }
-
-
-    .memory-heading{
-        margin-bottom:70px;
-    }
-
-
-    .memory-heading h2{
-        font-size:46px;
+        padding:90px 25px 110px;
     }
 
 
     .memory-row{
         min-height:0;
+        margin-bottom:80px;
     }
 
 
     .row-1,
     .row-2,
     .row-3{
-        gap:20px;
         padding:0;
+        gap:40px;
     }
 
 
     .row-1 .memory-photo{
-        width:62%;
+        width:48%;
         height:auto;
-        aspect-ratio:1.08 / 1;
+        aspect-ratio:1 / .9;
     }
 
 
     .row-2 .memory-photo{
-        width:55%;
+        width:42%;
         height:auto;
-        aspect-ratio:1.05 / 1;
+        aspect-ratio:1 / .9;
     }
 
 
     .row-3 .memory-photo{
-        width:48%;
+        width:38%;
         height:auto;
-        aspect-ratio:1 / 1;
+        aspect-ratio:1 / .9;
     }
 
 
     .row-4{
-        padding-right:5%;
+        padding:0;
     }
 
 
     .row-4 .memory-photo{
-        width:35%;
+        width:30%;
         height:auto;
-        aspect-ratio:1 / 1;
+        aspect-ratio:1 / .9;
     }
 
 
     .memory-note{
-        font-size:21px;
-        max-width:38%;
+        font-size:27px;
+        max-width:45%;
     }
 
 
-    /* VIDEO */
-
-    .moving-memories{
-        padding:70px 0 100px;
+    .connector-1{
+        left:35%;
+        top:100px;
+        width:25%;
     }
 
 
-    .moving-heading{
-        margin-bottom:45px;
+    .connector-2{
+        right:28%;
+        top:420px;
+        width:25%;
     }
 
 
-    .moving-heading h2{
-        font-size:43px;
+    .connector-3{
+        left:30%;
+        top:720px;
+        width:25%;
+    }
+
+
+    .connector-4{
+        right:20%;
+        top:950px;
+        width:25%;
+    }
+
+
+    .moving-memories,
+    .film,
+    .travel-journal{
+        padding-left:25px;
+        padding-right:25px;
     }
 
 
     .memory-video{
-        aspect-ratio:16 / 10;
-        border-width:7px;
-    }
-
-
-    .video-caption{
-        padding:16px 3px 0;
-    }
-
-
-    .video-caption span{
-        font-size:22px;
-    }
-
-
-    .video-caption small{
-        font-size:8px;
-    }
-
-
-    /* FILM */
-
-    .film{
-        padding:80px 0 60px;
+        aspect-ratio:16 / 9;
+        border-width:8px;
     }
 
 
     .film-item.left-photo,
     .film-item.right-photo{
-        width:100%;
-        gap:25px;
+        gap:35px;
     }
 
 
     .film-frame.vertical{
-        width:50%;
-        padding:14px 8px;
+        width:45%;
     }
 
 
@@ -1215,91 +1589,217 @@ body::after{
 
 
     .film-text h3{
-        font-size:27px;
+        font-size:32px;
     }
 
 
-    .film-text p{
-        font-size:10px;
-        line-height:1.6;
-    }
-
-
-    .film-frame.horizontal{
-        width:100%;
-    }
-
-
-    .film-frame.horizontal img{
-        height:auto;
-        aspect-ratio:16 / 9;
-    }
-
-
-    /* TRAVEL NOTES */
-
-    .travel-notes{
-        padding:70px 0 80px;
-    }
-
-
-    .travel-notes-heading h2{
-        font-size:45px;
-    }
-
-
-    .travel-grid{
+    .journal-grid{
         grid-template-columns:1fr;
-    }
-
-
-    .travel-card{
-        min-height:auto;
+        gap:30px;
     }
 
 }
 
 
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
+@media(max-width:600px){
 
-@media(max-width:400px){
+    .paper{
+        padding:20px 15px 0;
+    }
+
+
+    .hero,
+    .intro,
+    .memory,
+    .moving-memories,
+    .film,
+    .travel-journal,
+    .footer{
+        margin-left:-15px;
+        margin-right:-15px;
+    }
+
+
+    .hero{
+        padding:50px 20px 70px;
+    }
+
 
     .hero-top h1{
-        font-size:40px;
+        font-size:54px;
     }
 
 
     .hero-title h2{
-        font-size:35px;
+        font-size:38px;
+    }
+
+
+    .intro{
+        padding:90px 20px;
+    }
+
+
+    .left-brace,
+    .right-brace{
+        display:none;
     }
 
 
     .intro-text p{
-        font-size:22px;
+        font-size:30px;
     }
 
 
-    .memory-note{
-        font-size:18px;
+    .memory{
+        padding:80px 20px 100px;
+    }
+
+
+    .memory-heading{
+        margin-bottom:70px;
+    }
+
+
+    .memory-row{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:35px;
+        margin-bottom:90px;
+    }
+
+
+    .row-1,
+    .row-2,
+    .row-3,
+    .row-4{
+        padding:0;
+        margin-top:0;
+    }
+
+
+    .row-1 .memory-photo,
+    .row-2 .memory-photo,
+    .row-3 .memory-photo,
+    .row-4 .memory-photo{
+        width:75%;
+        height:auto;
+        aspect-ratio:1 / .9;
+        order:1;
+    }
+
+
+    .row-1 .memory-note,
+    .row-2 .memory-note,
+    .row-3 .memory-note{
+        order:2;
+        max-width:80%;
+        margin:0;
+        font-size:28px;
+    }
+
+
+    .connector-1,
+    .connector-2,
+    .connector-3,
+    .connector-4{
+        display:none;
+    }
+
+
+    .memory-note small{
+        font-size:9px;
+    }
+
+
+    .moving-memories{
+        padding:80px 20px 100px;
+    }
+
+
+    .moving-heading h2{
+        font-size:48px;
+    }
+
+
+    .memory-video{
+        aspect-ratio:16 / 10;
+        border-width:6px;
+    }
+
+
+    .video-caption{
+        display:block;
+    }
+
+
+    .video-caption small{
+        display:block;
+        margin-top:10px;
+    }
+
+
+    .film{
+        padding:90px 20px;
+    }
+
+
+    .film-item.left-photo,
+    .film-item.right-photo{
+        flex-direction:column;
+        gap:35px;
+        align-items:center;
+    }
+
+
+    .film-frame.vertical{
+        width:85%;
+    }
+
+
+    .film-text{
+        max-width:85%;
+        text-align:center;
     }
 
 
     .film-text h3{
-        font-size:23px;
+        font-size:34px;
+    }
+
+
+    .film-item.horizontal-film{
+        margin-bottom:90px;
+    }
+
+
+    .film-frame.horizontal{
+        padding:15px 8px;
+    }
+
+
+    .film-frame.horizontal img{
+        aspect-ratio:16 / 9;
+    }
+
+
+    .travel-journal{
+        padding:90px 20px 100px;
+    }
+
+
+    .journal-card{
+        padding:25px;
     }
 
 }
 
 </style>
 
+</style>
 
-</head>
-
-
-<body>
-
+</head>     
 
 <div class="paper">
 
@@ -1975,6 +2475,90 @@ body::after{
                 Some places are not meant to be rushed.
                 Maybe that is why I still remember
                 this one so clearly.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>  
+
+<section class="travel-journal">
+
+    <div class="journal-heading">
+
+        <h2>Places I Remember</h2>
+
+        <p>
+            little places that stayed with me
+        </p>
+
+    </div>
+
+
+    <div class="journal-grid">
+
+
+        <article class="journal-card">
+
+            <h3>
+                The Lavender Field
+            </h3>
+
+            <p>
+                Somewhere between the quiet roads
+                and the warm afternoon light,
+                everything felt slower here.
+                I remember walking without knowing
+                where the path would end.
+            </p>
+
+        </article>
+
+
+        <article class="journal-card">
+
+            <h3>
+                The Old Garden
+            </h3>
+
+            <p>
+                A small garden behind the house,
+                filled with wild flowers,
+                old wooden chairs,
+                and the soft sound of summer wind.
+            </p>
+
+        </article>
+
+
+        <article class="journal-card">
+
+            <h3>
+                The Long Way Home
+            </h3>
+
+            <p>
+                The road home always seemed longer
+                in the evening.
+                Maybe that was why
+                I never wanted the day to end.
+            </p>
+
+        </article>
+
+
+        <article class="journal-card">
+
+            <h3>
+                One More Summer
+            </h3>
+
+            <p>
+                Some places disappear,
+                but the feeling of being there
+                stays somewhere in memory.
             </p>
 
         </article>
