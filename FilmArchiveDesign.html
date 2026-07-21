@@ -1061,58 +1061,148 @@ transform:rotate(-2deg) scale(1.02);
         max-width:40%;
     }
 
-    /* FILM */
+   /* ===========================
+        FILM RESPONSIVE
+=========================== */
 
-    .film{
-        padding:80px 0;
-    }
+.film{
 
-    .film-title{
-        font-size:42px;
-        margin-bottom:60px;
-    }
+    padding:80px 0;
 
-    .film-board{
-        width:100%;
-        gap:70px;
-    }
+    width:100%;
 
-    .film-item{
-        max-width:100%;
-    }
+    overflow:hidden;
 
-    .film-item.top,
-    .film-item.middle,
-    .film-item.bottom{
-        align-self:center;
-        margin-left:0;
-        margin-right:0;
-    }
+}
 
-    .film-frame{
-        max-width:100%;
-        padding:12px;
-    }
+.film-title{
 
-    .small img{
-        width:min(250px, 65vw);
-        height:auto;
-        aspect-ratio:5 / 6;
-    }
+    font-size:42px;
 
-    .wide{
-        width:100%;
-    }
+    margin-bottom:60px;
 
-    .wide img{
-        width:100%;
-        height:auto;
-        aspect-ratio:16 / 9;
-    }
+}
 
-    .film-item p{
-        font-size:25px;
-        max-width:280px;
-    }
+.film-board{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:70px;
+
+}
+
+.film-item{
+
+    width:100%;
+
+    max-width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+/* 모든 위치 초기화 */
+
+.film-item.top,
+.film-item.middle,
+.film-item.bottom{
+
+    align-self:center;
+
+    margin-left:0;
+
+    margin-right:0;
+
+}
+
+/* 필름 프레임 */
+
+.film-frame{
+
+    box-sizing:border-box;
+
+    max-width:100%;
+
+    padding:12px;
+
+}
+
+/* 세로 사진 */
+
+.small{
+
+    width:min(286px, 100%);
+
+}
+
+.small img{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    aspect-ratio:5 / 6;
+
+    object-fit:cover;
+
+}
+
+/* 가로 사진 */
+
+.wide{
+
+    width:100%;
+
+    max-width:100%;
+
+}
+
+.wide img{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    aspect-ratio:16 / 9;
+
+    object-fit:cover;
+
+}
+
+/* 설명 */
+
+.film-item p{
+
+    width:100%;
+
+    max-width:280px;
+
+    margin-top:25px;
+
+    font-size:25px;
+
+    line-height:1.5;
+
+}
+
+/* 필름 연결선 */
+
+.film-item::after{
+
+    height:50px;
 
 }
