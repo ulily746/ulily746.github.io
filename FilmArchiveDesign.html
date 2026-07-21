@@ -1,180 +1,2210 @@
 <!DOCTYPE html>
-
-<html lang="ko">
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Life & Travel Archive - Yuri Choi</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<title>Childhood in the Countryside</title>
 
-<script src="https://unpkg.com/lucide@latest"></script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- =========================================================
+     GOOGLE FONTS
+========================================================= -->
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Manrope:wght@300;400;500&display=swap"
+rel="stylesheet">
+
 
 <style>
 
-/* ================================= */
-/* GLOBAL */
-/* ================================= */
+/* =========================================================
+   RESET
+========================================================= */
 
-html,
-body {
-
-margin:0;
-padding:0;
-width:100%;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-
-font-family:'Plus Jakarta Sans', sans-serif;
-
-background-color:#F7F3D9;
-
-/* Soft paper texture */
-
-background-image:
-
-radial-gradient(
-rgba(104,119,95,0.045) 1px,
-transparent 1px
-);
-
-background-size:5px 5px;
-
+html{
+    scroll-behavior:smooth;
 }
 
-.font-serif-title {
+body{
 
-font-family:'Cinzel', serif;
+    min-width:320px;
+
+    background:
+        linear-gradient(
+            rgba(35,58,40,.18),
+            rgba(35,58,40,.18)
+        ),
+        #647765;
+
+    color:#4f574b;
+
+    font-family:'Manrope', sans-serif;
+
+    overflow-x:hidden;
 
 }
 
 
-/* ================================= */
-/* IMAGE TREATMENT */
-/* ================================= */
+/* =========================================================
+   MAIN PAPER
+   홈페이지 규격 유지
+========================================================= */
 
-.archive-image {
+.paper{
 
-filter:
-saturate(82%)
-contrast(95%)
-sepia(5%);
+    width:min(1440px, 94%);
 
-transition:
-transform 0.8s ease,
-filter 0.8s ease;
+    margin:35px auto 60px;
 
-}
+    padding:50px 70px;
 
-.archive-image:hover {
+    background:#f5f0df;
 
-transform:scale(1.03);
+    border-radius:28px;
 
-filter:
-saturate(96%)
-contrast(100%)
-sepia(2%);
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 20px 60px rgba(30,45,32,.22);
 
 }
 
 
-/* ================================= */
+/* 종이 질감 */
+
+.paper::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        radial-gradient(
+            rgba(75,88,65,.045) 1px,
+            transparent 1px
+        );
+
+    background-size:9px 9px;
+
+    opacity:.45;
+
+    pointer-events:none;
+
+}
+
+
+/* 모든 콘텐츠를 질감 위로 */
+
+.paper > *{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    margin-bottom:120px;
+
+}
+
+
+/* Hero Card */
+
+.hero-card{
+
+    position:relative;
+
+    background:#f7f2e3;
+
+    border:1px solid #c9cbb5;
+
+    border-radius:24px;
+
+    padding:28px;
+
+}
+
+
+/* Hero 제목 영역 */
+
+.hero-top{
+
+    position:relative;
+
+    margin-bottom:24px;
+
+}
+
+
+/* 사진 위 왼쪽 제목 */
+
+.hero-top h1{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:64px;
+
+    line-height:.85;
+
+    font-weight:500;
+
+    letter-spacing:2px;
+
+    color:#4d5549;
+
+}
+
+
+/* 작은 손글씨 */
+
+.hero-top::after{
+
+    content:"little memories from the countryside";
+
+    position:absolute;
+
+    left:4px;
+
+    top:70px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:20px;
+
+    color:#87947d;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* Hero Image */
+
+.hero-image{
+
+    width:88%;
+
+    margin:0 auto;
+
+    position:relative;
+
+}
+
+
+/* 사진 크기 조절 */
+
+.hero-image img{
+
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:16 / 8.5;
+
+    object-fit:cover;
+
+    transition:.5s ease;
+
+}
+
+
+.hero-image:hover img{
+
+    transform:scale(1.015);
+
+}
+
+
+/* Hero 아래 */
+
+.hero-bottom{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:flex-start;
+
+    margin-top:28px;
+
+    padding-right:2%;
+
+}
+
+
+/* 사진 아래 오른쪽 제목 */
+
+.hero-title{
+
+    text-align:right;
+
+}
+
+
+.hero-title h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:55px;
+
+    line-height:.86;
+
+    font-weight:500;
+
+    color:#4d5549;
+
+}
+
+
+.hero-title::after{
+
+    content:"a summer memory";
+
+    display:block;
+
+    margin-top:12px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:21px;
+
+    color:#87947d;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* Hero 장식 모서리 */
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:25px;
+
+    top:25px;
+
+    width:60px;
+
+    height:60px;
+
+    border-top:1px solid #aeb5a1;
+
+    border-left:1px solid #aeb5a1;
+
+    border-radius:18px 0 0 0;
+
+}
+
+
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:25px;
+
+    bottom:25px;
+
+    width:60px;
+
+    height:60px;
+
+    border-bottom:1px solid #aeb5a1;
+
+    border-right:1px solid #aeb5a1;
+
+    border-radius:0 0 18px 0;
+
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro{
+
+    margin-left:-70px;
+
+    margin-right:-70px;
+
+    padding:95px 70px;
+
+    margin-bottom:0;
+
+    background:#e3e9d8;
+
+}
+
+
+.intro-wrapper{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:35px;
+
+    max-width:900px;
+
+    margin:0 auto;
+
+}
+
+
+/* 괄호 */
+
+.left-brace,
+.right-brace{
+
+    width:50px;
+
+    height:180px;
+
+    flex-shrink:0;
+
+    stroke:#89987f;
+
+    stroke-width:1.8;
+
+    fill:none;
+
+}
+
+
+/* Intro Text */
+
+.intro-text{
+
+    max-width:620px;
+
+    text-align:center;
+
+}
+
+
+.intro-text p{
+
+    font-family:'Caveat', cursive;
+
+    font-size:34px;
+
+    line-height:1.4;
+
+    color:#697762;
+
+}
+
+
+/* =========================================================
+   MEMORY SECTION
+========================================================= */
+
+.memory{
+
+    margin-left:-70px;
+
+    margin-right:-70px;
+
+    padding:120px 70px 150px;
+
+    background:#f5f0df;
+
+}
+
+
+.memory-heading{
+
+    text-align:center;
+
+    margin-bottom:105px;
+
+}
+
+
+.memory-heading h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:58px;
+
+    font-weight:500;
+
+    color:#58634f;
+
+}
+
+
+.memory-heading p{
+
+    margin-top:7px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:23px;
+
+    color:#87947d;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* =========================================================
+   MEMORY BOARD
+========================================================= */
+
+.memory-board{
+
+    position:relative;
+
+    width:min(1000px,100%);
+
+    min-height:1350px;
+
+    margin:0 auto;
+
+}
+
+
+/* =========================================================
+   MEMORY ROW
+========================================================= */
+
+.memory-row{
+
+    position:absolute;
+
+    display:flex;
+
+    align-items:center;
+
+    z-index:3;
+
+}
+
+
+/* 사진 */
+
+.memory-photo{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    background:#fffdf5;
+
+    padding:12px 12px 34px;
+
+    box-shadow:
+        0 14px 28px rgba(58,68,52,.15);
+
+    transition:.4s ease;
+
+}
+
+
+.memory-photo:hover{
+
+    transform:scale(1.035) rotate(0deg) !important;
+
+    z-index:10;
+
+}
+
+
+.memory-photo img{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================================================
+   MEMORY PHOTO SIZES
+   전체적으로 확대
+========================================================= */
+
+.row-1 .memory-photo{
+
+    width:390px;
+
+    height:340px;
+
+    transform:rotate(-4deg);
+
+}
+
+
+.row-2 .memory-photo{
+
+    width:320px;
+
+    height:300px;
+
+    transform:rotate(5deg);
+
+}
+
+
+.row-3 .memory-photo{
+
+    width:270px;
+
+    height:255px;
+
+    transform:rotate(-5deg);
+
+}
+
+
+.row-4 .memory-photo{
+
+    width:215px;
+
+    height:205px;
+
+    transform:rotate(5deg);
+
+}
+
+
+/* =========================================================
+   MEMORY TEXT
+========================================================= */
+
+.memory-note{
+
+    position:relative;
+
+    width:230px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:30px;
+
+    line-height:1.3;
+
+    color:#69755f;
+
+    text-align:center;
+
+}
+
+
+.memory-note small{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#9aa48f;
+
+}
+
+
+/* =========================================================
+   ROW POSITIONS
+
+   1
+   PHOTO → NOTE
+
+   2
+   NOTE → PHOTO
+
+   3
+   PHOTO → NOTE
+
+   4
+   NOTE 3 → PHOTO 4
+========================================================= */
+
+
+/* MEMORY 1 */
+
+.row-1{
+
+    top:0;
+
+    left:0;
+
+    gap:95px;
+
+}
+
+
+.row-1 .memory-note{
+
+    margin-top:-45px;
+
+}
+
+
+/* MEMORY 2 */
+
+.row-2{
+
+    top:330px;
+
+    right:0;
+
+    gap:90px;
+
+}
+
+
+.row-2 .memory-note{
+
+    order:1;
+
+    margin-top:-20px;
+
+}
+
+
+.row-2 .memory-photo{
+
+    order:2;
+
+}
+
+
+/* MEMORY 3 */
+
+.row-3{
+
+    top:650px;
+
+    left:120px;
+
+    gap:100px;
+
+}
+
+
+.row-3 .memory-note{
+
+    margin-top:-20px;
+
+}
+
+
+/* MEMORY 4 */
+
+.row-4{
+
+    top:1010px;
+
+    right:80px;
+
+    gap:85px;
+
+}
+
+
+/* =========================================================
+   MEMORY CONNECTOR
+========================================================= */
+
+.memory-connector{
+
+    position:absolute;
+
+    pointer-events:none;
+
+    z-index:1;
+
+    overflow:visible;
+
+}
+
+
+.memory-connector path{
+
+    fill:none;
+
+    stroke:#8d9a80;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+
+    stroke-dasharray:5 8;
+
+}
+
+
+/* =========================================================
+   CONNECTOR 1
+   PHOTO 1 → NOTE 1
+========================================================= */
+
+.connector-1{
+
+    left:300px;
+
+    top:120px;
+
+    width:300px;
+
+    height:170px;
+
+}
+
+
+/* =========================================================
+   CONNECTOR 2
+   NOTE 2 → PHOTO 2
+
+   글씨 쪽으로 내려가며 연결
+========================================================= */
+
+.connector-2{
+
+    right:260px;
+
+    top:390px;
+
+    width:330px;
+
+    height:220px;
+
+}
+
+
+/* =========================================================
+   CONNECTOR 3
+   PHOTO 3 → NOTE 3
+
+   더 길게 뻗어서 글씨를 가리킴
+========================================================= */
+
+.connector-3{
+
+    left:290px;
+
+    top:700px;
+
+    width:390px;
+
+    height:220px;
+
+}
+
+
+/* =========================================================
+   CONNECTOR 4
+   NOTE 3 → PHOTO 4
+
+   아래쪽으로 자연스럽게 이어짐
+========================================================= */
+
+.connector-4{
+
+    right:220px;
+
+    top:900px;
+
+    width:350px;
+
+    height:260px;
+
+}
+
+
+/* =========================================================
+   MOVING MEMORIES
+========================================================= */
+
+.moving-memories{
+
+    margin-left:-70px;
+
+    margin-right:-70px;
+
+    padding:125px 70px 150px;
+
+    background:#e0e8d7;
+
+}
+
+
+.moving-heading{
+
+    text-align:center;
+
+    margin-bottom:65px;
+
+}
+
+
+.moving-label{
+
+    display:block;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#8a987f;
+
+    margin-bottom:16px;
+
+}
+
+
+.moving-heading h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:58px;
+
+    font-weight:500;
+
+    color:#58634f;
+
+    line-height:1;
+
+}
+
+
+.moving-heading p{
+
+    margin-top:13px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:23px;
+
+    color:#7f8d75;
+
+}
+
+
 /* VIDEO */
-/* ================================= */
 
-.archive-video {
+.video-wrapper{
 
-filter:
-saturate(82%)
-contrast(95%)
-sepia(5%);
+    width:100%;
 
-}
+    max-width:1220px;
 
-
-/* ================================= */
-/* FOOTER LINK */
-/* ================================= */
-
-.footer-link {
-
-transition:
-color 0.3s ease,
-letter-spacing 0.3s ease;
-
-}
-
-.footer-link:hover {
-
-letter-spacing:0.12em;
+    margin:0 auto;
 
 }
 
 
-/* ================================= */
-/* PAPER TEXTURE */
-/* ================================= */
+.memory-video{
 
-.paper-texture {
+    display:block;
 
-position:relative;
+    width:100%;
 
-}
+    aspect-ratio:16 / 8.5;
 
-.paper-texture::after {
+    object-fit:cover;
 
-content:"";
+    background:#273027;
 
-position:absolute;
+    border:12px solid #414b3d;
 
-inset:0;
-
-pointer-events:none;
-
-opacity:0.25;
-
-background-image:
-
-radial-gradient(
-rgba(104,119,95,0.035) 1px,
-transparent 1px
-);
-
-background-size:4px 4px;
+    box-shadow:
+        0 20px 40px rgba(45,58,43,.2);
 
 }
 
 
-/* ================================= */
-/* SOFT SECTION LINE */
-/* ================================= */
+/* VIDEO CAPTION */
 
-.soft-line {
+.video-caption{
 
-border-color:#D9DDB2;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 15px 0;
 
 }
 
 
-/* ================================= */
-/* FOOTER */
-/* ================================= */
+.video-caption span{
 
-.site-footer {
+    font-family:'Caveat', cursive;
 
-background-color:#B8C7A0;
+    font-size:29px;
 
-border-top:1px solid #A8B991;
+    color:#69755f;
+
+}
+
+
+.video-caption small{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#8a987f;
+
+}
+
+
+/* =========================================================
+   FILM SECTION
+========================================================= */
+
+.film{
+
+    margin-left:-70px;
+
+    margin-right:-70px;
+
+    padding:125px 70px 130px;
+
+    background:#f5f0df;
+
+}
+
+
+.film-title{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:60px;
+
+    font-weight:500;
+
+    text-align:center;
+
+    color:#58634f;
+
+    margin-bottom:90px;
+
+}
+
+
+.film-subtitle{
+
+    text-align:center;
+
+    margin-top:-70px;
+
+    margin-bottom:80px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:23px;
+
+    color:#87947d;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* FILM ITEM */
+
+.film-item{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    width:min(1150px,100%);
+
+    margin:0 auto 120px;
+
+}
+
+
+.film-item.left-photo{
+
+    justify-content:flex-start;
+
+    gap:75px;
+
+}
+
+
+.film-item.right-photo{
+
+    justify-content:flex-end;
+
+    gap:75px;
+
+}
+
+
+/* FILM FRAME */
+
+.film-frame{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    background:#343b32;
+
+    padding:24px 14px;
+
+    box-shadow:
+        0 15px 30px rgba(45,55,42,.2);
+
+}
+
+
+/* 타공 */
+
+.film-frame::before,
+.film-frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:7px;
+
+    right:7px;
+
+    height:10px;
+
+    background-image:
+        radial-gradient(
+            circle,
+            #f5f0df 4px,
+            transparent 4.5px
+        );
+
+    background-size:19px 10px;
+
+    background-repeat:repeat-x;
+
+}
+
+
+.film-frame::before{
+
+    top:6px;
+
+}
+
+
+.film-frame::after{
+
+    bottom:6px;
+
+}
+
+
+/* FILM IMAGE */
+
+.film-frame img{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* 세로 필름 */
+
+.film-frame.vertical{
+
+    width:350px;
+
+}
+
+
+.film-frame.vertical img{
+
+    height:450px;
+
+}
+
+
+/* =========================================================
+   FILM TEXT
+========================================================= */
+
+.film-text{
+
+    max-width:280px;
+
+}
+
+
+.film-text .film-label{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#94a08b;
+
+    margin-bottom:12px;
+
+}
+
+
+.film-text h3{
+
+    font-family:'Caveat', cursive;
+
+    font-size:38px;
+
+    font-weight:600;
+
+    line-height:1.1;
+
+    color:#65715d;
+
+    margin-bottom:12px;
+
+}
+
+
+.film-text p{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    color:#7d8877;
+
+}
+
+
+/* FILM 1 */
+
+.film-item-1 .film-frame{
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* FILM 3 */
+
+.film-item-3 .film-frame{
+
+    transform:rotate(4deg);
+
+}
+
+
+.film-item-3 .film-text{
+
+    text-align:right;
+
+}
+
+
+/* =========================================================
+   HORIZONTAL FILM
+   설명 없이 넓게
+========================================================= */
+
+.film-item.horizontal-film{
+
+    display:block;
+
+    width:100%;
+
+    max-width:1250px;
+
+    margin:20px auto 130px;
+
+}
+
+
+.film-item.horizontal-film .film-frame{
+
+    width:100%;
+
+    padding:24px 14px;
+
+    transform:rotate(1deg);
+
+}
+
+
+.film-frame.horizontal img{
+
+    width:100%;
+
+    height:480px;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================================================
+   TRAVEL NOTES
+========================================================= */
+
+.travel-notes{
+
+    margin-left:-70px;
+
+    margin-right:-70px;
+
+    padding:120px 70px 140px;
+
+    background:#dce6d3;
+
+}
+
+
+.travel-heading{
+
+    text-align:center;
+
+    margin-bottom:75px;
+
+}
+
+
+.travel-heading span{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#87947d;
+
+}
+
+
+.travel-heading h2{
+
+    margin-top:12px;
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:58px;
+
+    font-weight:500;
+
+    color:#58634f;
+
+}
+
+
+.travel-heading p{
+
+    margin-top:8px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:23px;
+
+    color:#7d8b74;
+
+}
+
+
+/* NOTES GRID */
+
+.travel-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:35px;
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+}
+
+
+/* NOTE CARD */
+
+.journal-card{
+
+    background:#f7f2e3;
+
+    padding:25px;
+
+    border:1px solid #cbd2bf;
+
+    box-shadow:
+        0 12px 25px rgba(55,70,50,.1);
+
+}
+
+
+.journal-card img{
+
+    display:block;
+
+    width:100%;
+
+    height:280px;
+
+    object-fit:cover;
+
+    margin-bottom:22px;
+
+}
+
+
+.journal-card .journal-label{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#97a18e;
+
+}
+
+
+.journal-card h3{
+
+    margin-top:9px;
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:34px;
+
+    font-weight:500;
+
+    color:#5d6957;
+
+}
+
+
+.journal-card p{
+
+    margin-top:10px;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    color:#788373;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    margin-left:-70px;
+
+    margin-right:-70px;
+
+    padding:75px 70px 35px;
+
+    text-align:center;
+
+    background:#f5f0df;
+
+}
+
+
+.footer p{
+
+    font-family:'Caveat', cursive;
+
+    font-size:25px;
+
+    color:#7a8871;
+
+}
+
+
+.footer small{
+
+    display:block;
+
+    margin-top:12px;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#a0a997;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .paper{
+
+        width:94%;
+
+        padding:35px 30px;
+
+    }
+
+
+    .intro,
+    .memory,
+    .moving-memories,
+    .film,
+    .travel-notes,
+    .footer{
+
+        margin-left:-30px;
+
+        margin-right:-30px;
+
+        padding-left:30px;
+
+        padding-right:30px;
+
+    }
+
+
+    /* HERO */
+
+    .hero-top h1{
+
+        font-size:52px;
+
+    }
+
+
+    .hero-image{
+
+        width:94%;
+
+    }
+
+
+    .hero-title h2{
+
+        font-size:45px;
+
+    }
+
+
+    /* MEMORY */
+
+    .memory-board{
+
+        min-height:1250px;
+
+        transform:scale(.9);
+
+        transform-origin:top center;
+
+        margin-bottom:-120px;
+
+    }
+
+
+    /* FILM */
+
+    .film-item{
+
+        width:100%;
+
+    }
+
+
+    .film-frame.vertical{
+
+        width:300px;
+
+    }
+
+
+    .film-frame.vertical img{
+
+        height:390px;
+
+    }
+
+
+    .film-frame.horizontal img{
+
+        height:380px;
+
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    .paper{
+
+        width:100%;
+
+        margin:0;
+
+        padding:25px 18px;
+
+        border-radius:0;
+
+    }
+
+
+    .intro,
+    .memory,
+    .moving-memories,
+    .film,
+    .travel-notes,
+    .footer{
+
+        margin-left:-18px;
+
+        margin-right:-18px;
+
+        padding-left:18px;
+
+        padding-right:18px;
+
+    }
+
+
+    /* HERO */
+
+    .hero{
+
+        margin-bottom:80px;
+
+    }
+
+
+    .hero-card{
+
+        padding:18px;
+
+    }
+
+
+    .hero-top h1{
+
+        font-size:42px;
+
+    }
+
+
+    .hero-top::after{
+
+        top:50px;
+
+        font-size:16px;
+
+    }
+
+
+    .hero-image{
+
+        width:100%;
+
+    }
+
+
+    .hero-image img{
+
+        aspect-ratio:4 / 3;
+
+    }
+
+
+    .hero-title h2{
+
+        font-size:36px;
+
+    }
+
+
+    .hero-title::after{
+
+        font-size:17px;
+
+    }
+
+
+    /* INTRO */
+
+    .intro{
+
+        padding-top:75px;
+
+        padding-bottom:75px;
+
+    }
+
+
+    .intro-wrapper{
+
+        gap:8px;
+
+    }
+
+
+    .left-brace,
+    .right-brace{
+
+        width:25px;
+
+        height:120px;
+
+    }
+
+
+    .intro-text p{
+
+        font-size:25px;
+
+    }
+
+
+    /* MEMORY */
+
+    .memory{
+
+        padding-top:90px;
+
+        padding-bottom:100px;
+
+    }
+
+
+    .memory-heading{
+
+        margin-bottom:60px;
+
+    }
+
+
+    .memory-heading h2{
+
+        font-size:43px;
+
+    }
+
+
+    .memory-board{
+
+        min-height:1050px;
+
+        transform:none;
+
+        margin-bottom:0;
+
+    }
+
+
+    .memory-row{
+
+        position:absolute;
+
+    }
+
+
+    .row-1{
+
+        top:0;
+
+        left:0;
+
+        gap:15px;
+
+    }
+
+
+    .row-1 .memory-photo{
+
+        width:58vw;
+
+        max-width:300px;
+
+        height:250px;
+
+    }
+
+
+    .row-1 .memory-note{
+
+        width:32vw;
+
+        font-size:21px;
+
+    }
+
+
+    .row-2{
+
+        top:270px;
+
+        right:0;
+
+        gap:12px;
+
+    }
+
+
+    .row-2 .memory-photo{
+
+        width:43vw;
+
+        max-width:230px;
+
+        height:215px;
+
+    }
+
+
+    .row-2 .memory-note{
+
+        width:38vw;
+
+        font-size:21px;
+
+    }
+
+
+    .row-3{
+
+        top:520px;
+
+        left:20px;
+
+        gap:15px;
+
+    }
+
+
+    .row-3 .memory-photo{
+
+        width:36vw;
+
+        max-width:190px;
+
+        height:180px;
+
+    }
+
+
+    .row-3 .memory-note{
+
+        width:40vw;
+
+        font-size:20px;
+
+    }
+
+
+    .row-4{
+
+        top:770px;
+
+        right:25px;
+
+    }
+
+
+    .row-4 .memory-photo{
+
+        width:28vw;
+
+        max-width:145px;
+
+        height:140px;
+
+    }
+
+
+    /* MOBILE CONNECTORS */
+
+    .connector-1{
+
+        left:35%;
+
+        top:100px;
+
+        width:45%;
+
+        height:130px;
+
+    }
+
+
+    .connector-2{
+
+        right:25%;
+
+        top:330px;
+
+        width:50%;
+
+        height:150px;
+
+    }
+
+
+    .connector-3{
+
+        left:25%;
+
+        top:570px;
+
+        width:60%;
+
+        height:150px;
+
+    }
+
+
+    .connector-4{
+
+        right:15%;
+
+        top:700px;
+
+        width:55%;
+
+        height:170px;
+
+    }
+
+
+    /* VIDEO */
+
+    .moving-memories{
+
+        padding-top:85px;
+
+        padding-bottom:100px;
+
+    }
+
+
+    .moving-heading h2{
+
+        font-size:43px;
+
+    }
+
+
+    .moving-heading p{
+
+        font-size:19px;
+
+    }
+
+
+    .memory-video{
+
+        aspect-ratio:4 / 3;
+
+        border-width:7px;
+
+    }
+
+
+    .video-caption{
+
+        display:block;
+
+    }
+
+
+    .video-caption span{
+
+        font-size:23px;
+
+    }
+
+
+    .video-caption small{
+
+        display:block;
+
+        margin-top:8px;
+
+    }
+
+
+    /* FILM */
+
+    .film{
+
+        padding-top:90px;
+
+        padding-bottom:90px;
+
+    }
+
+
+    .film-title{
+
+        font-size:45px;
+
+    }
+
+
+    .film-subtitle{
+
+        font-size:19px;
+
+        margin-top:-60px;
+
+    }
+
+
+    .film-item.left-photo,
+    .film-item.right-photo{
+
+        gap:18px;
+
+        margin-bottom:80px;
+
+    }
+
+
+    .film-frame.vertical{
+
+        width:52%;
+
+        padding:15px 8px;
+
+    }
+
+
+    .film-frame.vertical img{
+
+        height:auto;
+
+        aspect-ratio:4 / 5;
+
+    }
+
+
+    .film-text{
+
+        max-width:43%;
+
+    }
+
+
+    .film-text h3{
+
+        font-size:27px;
+
+    }
+
+
+    .film-text p{
+
+        font-size:10px;
+
+        line-height:1.6;
+
+    }
+
+
+    /* HORIZONTAL FILM */
+
+    .film-item.horizontal-film{
+
+        margin-bottom:90px;
+
+    }
+
+
+    .film-frame.horizontal{
+
+        padding:15px 8px;
+
+    }
+
+
+    .film-frame.horizontal img{
+
+        height:auto;
+
+        aspect-ratio:16 / 9;
+
+    }
+
+
+    /* TRAVEL NOTES */
+
+    .travel-notes{
+
+        padding-top:85px;
+
+        padding-bottom:100px;
+
+    }
+
+
+    .travel-heading h2{
+
+        font-size:45px;
+
+    }
+
+
+    .travel-grid{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+    }
+
+
+    .journal-card img{
+
+        height:230px;
+
+    }
+
+
+    /* FOOTER */
+
+    .footer{
+
+        padding-top:55px;
+
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .hero-top h1{
+
+        font-size:37px;
+
+    }
+
+
+    .hero-title h2{
+
+        font-size:31px;
+
+    }
+
+
+    .intro-text p{
+
+        font-size:22px;
+
+    }
+
+
+    .memory-heading h2{
+
+        font-size:38px;
+
+    }
+
+
+    .row-1 .memory-note,
+    .row-2 .memory-note,
+    .row-3 .memory-note{
+
+        font-size:18px;
+
+    }
+
+
+    .film-title{
+
+        font-size:40px;
+
+    }
+
+
+    .film-text h3{
+
+        font-size:23px;
+
+    }
 
 }
 
@@ -182,1058 +2212,601 @@ border-top:1px solid #A8B991;
 
 </head>
 
-<body class="
-m-0
-p-0
-bg-[#F7F3D9]
-text-[#68775F]
-antialiased
-overflow-x-hidden
-">
 
-<!-- ================================= -->
+<body>
 
-<!-- MAIN PAGE CONTENT -->
 
-<!-- ================================= -->
+<div class="paper">
 
-<main class="
-w-full
-">
 
-<!-- ================================= -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-<!-- HERO SECTION -->
+<section class="hero">
 
-<!-- ================================= -->
+    <div class="hero-card">
 
-<header class="
-w-full
-pt-16
-pb-36
-px-4
-md:px-8
-max-w-7xl
-mx-auto
-">
+        <div class="hero-top">
 
-<div class="
-grid
-grid-cols-1
-md:grid-cols-12
-gap-8
-items-center
-">
+            <h1>CHILDHOOD</h1>
 
-<!-- LEFT CONTENT -->
+        </div>
 
-<div class="
-col-span-1
-md:col-span-5
-space-y-4
-text-left
-order-2
-md:order-1
-z-10
-">
 
-<span class="
-text-xs
-tracking-[0.25em]
-text-[#8B986D]
-uppercase
-font-medium
-block
-">
+        <div class="hero-image">
 
-Life & Travel Archive
+            <img
+            src="images/hero.jpg"
+            alt="Childhood countryside">
 
-</span>
+        </div>
 
-<h1 class="
-text-4xl
-md:text-6xl
-font-serif-title
-font-light
-tracking-wide
-leading-[1.1]
-text-[#59664F]
-">
 
-Quiet<br>
-Journeys
+        <div class="hero-bottom">
 
-</h1>
+            <div class="hero-title">
 
-<div class="
-w-16
-h-[1px]
-bg-[#A8B991]
-my-6
-">
+                <h2>IN THE</h2>
 
-</div>
+                <h2>COUNTRYSIDE</h2>
 
-<p class="
-text-xs
-md:text-sm
-text-[#747B65]
-max-w-sm
-leading-relaxed
-font-light
-">
+            </div>
 
-여백 속에 담긴 여행의 순간.
-공간과 자연, 그리고 일상의 작은 아름다움을 하나의 아카이브로 기록합니다.
+        </div>
 
-</p>
-
-</div>
-
-<!-- RIGHT ARCH IMAGE -->
-
-<div class="
-col-span-1
-md:col-span-7
-flex
-justify-end
-order-1
-md:order-2
-">
-
-<div class="
-w-full
-max-w-xl
-aspect-[3/5]
-rounded-t-full
-overflow-hidden
-border
-border-[#D9DDB2]
-shadow-sm
-bg-[#E9E8C5]
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80"
-
-alt="Minimal Travel Arch"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-</div>
-
-</div>
-
-</header>
-
-<!-- ================================= -->
-
-<!-- CONTENT SECTION -->
-
-<!-- ================================= -->
-
-<section class="
-w-full
-max-w-6xl
-mx-auto
-px-4
-md:px-8
-">
-
-<div class="space-y-24">
-
-<!-- ================================= -->
-
-<!-- OBJECT 01 -->
-
-<!-- ================================= -->
-
-<div class="
-grid
-grid-cols-1
-md:grid-cols-12
-gap-8
-items-center
-">
-
-<div class="
-col-span-1
-md:col-span-5
-flex
-justify-center
-">
-
-<div class="
-w-72
-h-72
-md:w-96
-md:h-96
-rounded-full
-overflow-hidden
-border
-border-[#D9DDB2]
-bg-[#E9E8C5]
-shadow-sm
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
-
-alt="Travel Object 01"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-</div>
-
-<div class="
-col-span-1
-md:col-span-7
-space-y-3
-md:pl-8
-">
-
-<span class="
-text-xs
-tracking-widest
-text-[#8B986D]
-font-medium
-block
-">
-
-PLACE 01
-
-</span>
-
-<h3 class="
-text-xl
-md:text-2xl
-font-serif-title
-text-[#59664F]
-">
-
-Hidden Corners
-
-</h3>
-
-<p class="
-text-xs
-md:text-sm
-text-[#747B65]
-leading-relaxed
-font-light
-max-w-xl
-">
-
-오래된 거리와 자연이 만들어내는 조용한 풍경.
-천천히 머무르며 발견하는 장소의 이야기를 기록합니다.
-
-</p>
-
-</div>
-
-</div>
-
-<!-- ================================= -->
-
-<!-- STATEMENT -->
-
-<!-- ================================= -->
-
-<div class="
-w-full
-py-12
-border-y
-border-[#D9DDB2]
-text-center
-">
-
-<span class="
-text-[10px]
-tracking-[0.35em]
-text-[#8B986D]
-">
-
-COLLECTED MOMENTS
-
-</span>
-
-<h2 class="
-text-2xl
-md:text-4xl
-font-serif-title
-font-light
-tracking-[0.15em]
-text-[#59664F]
-uppercase
-mt-4
-">
-
-The Beauty Of Slow Living
-
-</h2>
-
-<p class="
-text-[10px]
-md:text-xs
-text-[#747B65]
-tracking-widest
-mt-2
-">
-
-천천히 바라보는 순간의 아름다움
-
-</p>
-
-</div>
-
-<!-- ================================= -->
-
-<!-- OBJECT 02 -->
-
-<!-- ================================= -->
-
-<div class="
-grid
-grid-cols-1
-md:grid-cols-12
-gap-8
-items-center
-">
-
-<div class="
-col-span-1
-md:col-span-7
-space-y-3
-md:pr-8
-text-left
-md:text-right
-order-2
-md:order-1
-">
-
-<span class="
-text-xs
-tracking-widest
-text-[#8B986D]
-font-medium
-block
-">
-
-PLACE 02
-
-</span>
-
-<h3 class="
-text-xl
-md:text-2xl
-font-serif-title
-text-[#59664F]
-">
-
-Light & Memory
-
-</h3>
-
-<p class="
-text-xs
-md:text-sm
-text-[#747B65]
-leading-relaxed
-font-light
-max-w-xl
-md:ml-auto
-">
-
-빛과 그림자가 만들어내는 여행의 기록.
-작은 순간들이 모여 하나의 오래된 기억이 됩니다.
-
-</p>
-
-</div>
-
-<div class="
-col-span-1
-md:col-span-5
-flex
-justify-center
-order-1
-md:order-2
-">
-
-<div class="
-w-72
-h-72
-md:w-96
-md:h-96
-rounded-full
-overflow-hidden
-border
-border-[#D9DDB2]
-bg-[#E9E8C5]
-shadow-sm
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80"
-
-alt="Travel Object 02"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================================= -->
-
-<!-- MINI GALLERY -->
-
-<!-- ================================= -->
-
-<section class="
-w-full
-pt-12
-">
-
-<div class="
-text-center
-mb-12
-">
-
-<span class="
-text-xs
-tracking-[0.35em]
-text-[#8B986D]
-">
-
-COLLECTION
-
-</span>
-
-<h2 class="
-text-2xl
-md:text-4xl
-font-serif-title
-text-[#59664F]
-mt-4
-">
-
-Moments Along The Way
-
-</h2>
-
-<p class="
-text-xs
-text-[#747B65]
-mt-3
-font-light
-">
-
-Collected fragments of places, seasons, and quiet memories.
-
-</p>
-
-</div>
-
-<div class="
-grid
-grid-cols-3
-gap-4
-md:gap-8
-items-start
-">
-
-<!-- IMAGE 01 -->
-
-<div class="
-aspect-square
-overflow-hidden
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80"
-
-alt="Gallery Image 01"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-<!-- IMAGE 02 -->
-
-<div class="
-aspect-square
-overflow-hidden
-mt-8
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-
-alt="Gallery Image 02"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-<!-- IMAGE 03 -->
-
-<div class="
-aspect-square
-overflow-hidden
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"
-
-alt="Gallery Image 03"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-<!-- IMAGE 04 -->
-
-<div class="
-aspect-square
-overflow-hidden
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"
-
-alt="Gallery Image 04"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-<!-- IMAGE 05 -->
-
-<div class="
-aspect-square
-overflow-hidden
-mt-8
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80"
-
-alt="Gallery Image 05"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-<!-- IMAGE 06 -->
-
-<div class="
-aspect-square
-overflow-hidden
-">
-
-<img
-
-src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"
-
-alt="Gallery Image 06"
-
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
-
-/>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!-- ================================= -->
 
-<!-- MOVING MEMORIES -->
 
-<!-- ================================= -->
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
-<section class="
-w-full
-pt-16
-">
+<section class="intro">
 
-<div class="
-text-center
-mb-10
-">
+    <div class="intro-wrapper">
 
-<span class="
-text-xs
-tracking-[0.35em]
-text-[#8B986D]
-">
 
-MOVING MEMORIES
+        <svg
+        class="left-brace"
+        viewBox="0 0 100 300">
 
-</span>
+            <path
+            d="
+            M80 0
+            C20 0
+            20 60
+            55 90
+            C75 110
+            75 190
+            55 210
+            C20 240
+            20 300
+            80 300
+            " />
 
-<h2 class="
-text-2xl
-md:text-4xl
-font-serif-title
-text-[#59664F]
-mt-4
-">
+        </svg>
 
-A Moment In Motion
 
-</h2>
+        <div class="intro-text">
 
-<p class="
-text-xs
-text-[#747B65]
-mt-3
-font-light
-">
+            <p>
+                The countryside always smelled like warm grass,
+                fresh bread,
+                and quiet summer afternoons.
+            </p>
 
-A few seconds from somewhere, sometime, once.
+        </div>
 
-</p>
 
-</div>
+        <svg
+        class="right-brace"
+        viewBox="0 0 100 300">
 
-<div class="
-w-full
-aspect-[21/9]
-overflow-hidden
-border
-border-[#D9DDB2]
-bg-[#E9E8C5]
-shadow-sm
-">
+            <path
+            d="
+            M20 0
+            C80 0
+            80 60
+            45 90
+            C25 110
+            25 190
+            45 210
+            C80 240
+            80 300
+            20 300
+            " />
 
-<video
+        </svg>
 
-class="
-w-full
-h-full
-object-cover
-archive-video
-"
-
-autoplay
-muted
-loop
-playsinline
-
->
-
-<source src="video.mp4" type="video/mp4">
-
-</video>
-
-</div>
-
-<p class="
-text-[10px]
-text-[#8B986D]
-tracking-[0.25em]
-text-center
-mt-4
-">
-
-FRAME 01 · A QUIET MOMENT
-
-</p>
+    </div>
 
 </section>
 
-<!-- ================================= -->
 
-<!-- FINAL CHAPTER -->
 
-<!-- ================================= -->
+<!-- =====================================================
+     MEMORY
+===================================================== -->
 
-<div class="
-text-center
-pt-16
-mb-12
-">
+<section class="memory">
 
-<span class="
-text-xs
-tracking-[0.35em]
-text-[#8B986D]
-">
 
-FINAL CHAPTER
+    <div class="memory-heading">
 
-</span>
+        <h2>Little Memories</h2>
 
-<h2 class="
-text-2xl
-md:text-4xl
-font-serif-title
-text-[#59664F]
-mt-4
-">
+        <p>things I still remember...</p>
 
-A Place To Remember
+    </div>
 
-</h2>
 
-<p class="
-text-xs
-text-[#747B65]
-mt-3
-font-light
-">
+    <div class="memory-board">
 
-Fragments of a journey, collected through time.
 
-</p>
+        <!-- MEMORY 1 -->
 
-</div>
+        <div class="memory-row row-1">
 
-<!-- ================================= -->
+            <div class="memory-photo">
 
-<!-- ENDING IMAGE -->
+                <img
+                src="images/photo1.jpg"
+                alt="Memory 1">
 
-<!-- ================================= -->
+            </div>
 
-<section class="
-w-full
-space-y-6
-">
 
-<div class="
-w-full
-max-w-7xl
-mx-auto
-aspect-[21/9]
-overflow-hidden
-border
-border-[#D9DDB2]
-shadow-sm
-">
+            <div class="memory-note">
 
-<img
+                <small>MEMORY 01</small>
 
-src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80"
+                Every morning
+                smelled like
+                fresh grass.
 
-alt="Travel Archive Ending"
+            </div>
 
-class="
-w-full
-h-full
-object-cover
-archive-image
-"
+        </div>
 
-/>
 
-</div>
+        <!-- CONNECTOR 1 -->
 
-<!-- ENDING QUOTE -->
+        <svg
+        class="memory-connector connector-1"
+        viewBox="0 0 300 170">
 
-<div class="
-w-full
-max-w-2xl
-mx-auto
-text-center
-px-6
-pt-10
-pb-24
-">
+            <path
+            d="
+            M10 20
+            C80 0
+            150 140
+            290 145
+            " />
 
-<span class="
-text-[10px]
-tracking-[0.35em]
-text-[#8B986D]
-block
-mb-5
-">
+        </svg>
 
-A NOTE FROM THE JOURNEY
 
-</span>
 
-<p class="
-text-sm
-md:text-base
-text-[#747B65]
-font-light
-leading-[2]
-">
+        <!-- MEMORY 2 -->
 
-어떤 순간은 사진으로 남고,
-어떤 장소는 기억으로 남습니다. <br>
+        <div class="memory-row row-2">
 
-작은 풍경과 조용한 시간을 하나의 이야기로 기록합니다.
+            <div class="memory-note">
 
-</p>
+                <small>MEMORY 02</small>
 
-</div>
+                Linen dancing
+                softly
+                in the wind.
+
+            </div>
+
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo2.jpg"
+                alt="Memory 2">
+
+            </div>
+
+        </div>
+
+
+        <!-- CONNECTOR 2 -->
+
+        <svg
+        class="memory-connector connector-2"
+        viewBox="0 0 330 220">
+
+            <path
+            d="
+            M20 20
+            C90 110
+            170 50
+            320 205
+            " />
+
+        </svg>
+
+
+
+        <!-- MEMORY 3 -->
+
+        <div class="memory-row row-3">
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo3.jpg"
+                alt="Memory 3">
+
+            </div>
+
+
+            <div class="memory-note">
+
+                <small>MEMORY 03</small>
+
+                Warm afternoon
+                sunshine
+                on the table.
+
+            </div>
+
+        </div>
+
+
+        <!-- CONNECTOR 3 -->
+
+        <svg
+        class="memory-connector connector-3"
+        viewBox="0 0 390 220">
+
+            <path
+            d="
+            M10 150
+            C100 10
+            220 50
+            380 100
+            " />
+
+        </svg>
+
+
+
+        <!-- MEMORY 4 -->
+
+        <div class="memory-row row-4">
+
+            <div class="memory-note">
+
+                <small>MEMORY 04</small>
+
+                And somehow,
+                the afternoon
+                always stayed.
+
+            </div>
+
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo4.jpg"
+                alt="Memory 4">
+
+            </div>
+
+        </div>
+
+
+        <!-- CONNECTOR 4 -->
+
+        <svg
+        class="memory-connector connector-4"
+        viewBox="0 0 350 260">
+
+            <path
+            d="
+            M20 20
+            C100 80
+            130 200
+            340 245
+            " />
+
+        </svg>
+
+
+    </div>
 
 </section>
 
-</div>
+
+
+<!-- =====================================================
+     MOVING MEMORIES
+===================================================== -->
+
+<section class="moving-memories">
+
+
+    <div class="moving-heading">
+
+        <span class="moving-label">
+            MOVING MEMORIES
+        </span>
+
+        <h2>
+            Little moments in motion.
+        </h2>
+
+        <p>
+            some memories are better when they move.
+        </p>
+
+    </div>
+
+
+    <div class="video-wrapper">
+
+        <video
+            class="memory-video"
+            controls
+            poster="images/video-poster.jpg"
+            preload="metadata">
+
+            <source
+                src="videos/memory-video.mp4"
+                type="video/mp4">
+
+            Your browser does not support the video tag.
+
+        </video>
+
+
+        <div class="video-caption">
+
+            <span>
+                A summer afternoon.
+            </span>
+
+            <small>
+                MOVING MEMORY · 001
+            </small>
+
+        </div>
+
+    </div>
 
 </section>
 
-</main>
 
-<!-- ================================= -->
 
-<!-- PASTEL FOOTER -->
+<!-- =====================================================
+     FILM MEMORIES
+===================================================== -->
 
-<!-- ================================= -->
+<section class="film">
 
-<footer class="
-site-footer
-w-full
-m-0
-p-0
-text-[#59664F]
-">
 
-<div class="
-w-full
-px-6
-md:px-8
-py-8
-">
+    <h2 class="film-title">
+        Film Memories
+    </h2>
 
-<div class="
-w-full
-max-w-7xl
-mx-auto
-flex
-flex-col
-md:flex-row
-justify-between
-items-center
-gap-6
-">
 
-<!-- WEBSITE IDENTITY -->
+    <div class="film-subtitle">
+        little moments, captured on film
+    </div>
 
-<div class="
-text-center
-md:text-left
-">
 
-<p class="
-font-serif-title
-text-sm
-tracking-[0.12em]
-text-[#59664F]
-">
 
-YURI CHOI
+    <!-- FILM 1 -->
 
-</p>
+    <div class="film-item left-photo film-item-1">
 
-<p class="
-text-[9px]
-mt-1.5
-tracking-[0.16em]
-text-[#748262]
-">
 
-LIFE · TRAVEL · RESEARCH · ARCHIVE
+        <div class="film-frame vertical">
 
-</p>
+            <img
+            src="images/film1.jpg"
+            alt="Film memory 1">
 
-</div>
+        </div>
 
-<!-- CENTER PHRASE -->
 
-<div class="
-hidden
-md:block
-text-center
-">
+        <div class="film-text">
 
-<p class="
-text-[9px]
-tracking-[0.2em]
-text-[#748262]
-">
+            <div class="film-label">
+                FRAME 001
+            </div>
 
-ALL MOMENTS, QUIETLY COLLECTED.
 
-</p>
+            <h3>
+                Walking through
+                lavender fields.
+            </h3>
 
-</div>
 
-<!-- WEBSITE NAVIGATION -->
+            <p>
+                A quiet afternoon,
+                somewhere between
+                summer and a dream.
+            </p>
 
-<nav class="
-flex
-flex-wrap
-justify-center
-gap-x-6
-gap-y-2
-text-[9px]
-tracking-[0.15em]
-text-[#68775F]
-">
+        </div>
 
-<a
-href="#"
-class="
-footer-link
-hover:text-[#59664F]
-">
+    </div>
 
-HOME
 
-</a>
 
-<a
-href="#"
-class="
-footer-link
-hover:text-[#59664F]
-">
+    <!-- FILM 2 -->
 
-RESEARCH
+    <div class="film-item horizontal-film">
 
-</a>
 
-<a
-href="#"
-class="
-footer-link
-hover:text-[#59664F]
-">
+        <div class="film-frame horizontal">
 
-CV
+            <img
+            src="images/film2.jpg"
+            alt="Film memory 2">
 
-</a>
+        </div>
 
-<a
-href="#"
-class="
-footer-link
-hover:text-[#59664F]
-">
+    </div>
 
-NEWS
 
-</a>
 
-</nav>
+    <!-- FILM 3 -->
 
-</div>
+    <div class="film-item right-photo film-item-3">
 
-<!-- COPYRIGHT -->
 
-<div class="
-w-full
-max-w-7xl
-mx-auto
-mt-6
-pt-4
-border-t
-border-[#A8B991]
-text-center
-">
+        <div class="film-text">
 
-<p class="
-text-[8px]
-tracking-[0.18em]
-text-[#748262]
-">
+            <div class="film-label">
+                FRAME 003
+            </div>
 
-© 2026 YURI CHOI · ALL MOMENTS, QUIETLY COLLECTED.
 
-</p>
+            <h3>
+                Summer
+                never ended.
+            </h3>
 
-</div>
 
-</div>
+            <p>
+                Some memories
+                stay warm,
+                even after years.
+            </p>
+
+        </div>
+
+
+        <div class="film-frame vertical">
+
+            <img
+            src="images/film3.jpg"
+            alt="Film memory 3">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRAVEL NOTES
+===================================================== -->
+
+<section class="travel-notes">
+
+
+    <div class="travel-heading">
+
+        <span>
+            TRAVEL NOTES
+        </span>
+
+        <h2>
+            Places I Still Remember
+        </h2>
+
+        <p>
+            little places, quiet days, and the feeling they left behind.
+        </p>
+
+    </div>
+
+
+    <div class="travel-grid">
+
+
+        <!-- NOTE 1 -->
+
+        <article class="journal-card">
+
+            <img
+            src="images/travel-note1.jpg"
+            alt="A quiet countryside road">
+
+            <span class="journal-label">
+                PLACE 001 · SUMMER
+            </span>
+
+            <h3>
+                Somewhere Between
+                the Fields
+            </h3>
+
+            <p>
+                There was always another path to follow,
+                another field beyond the trees,
+                and nowhere we really needed to be.
+            </p>
+
+        </article>
+
+
+
+        <!-- NOTE 2 -->
+
+        <article class="journal-card">
+
+            <img
+            src="images/travel-note2.jpg"
+            alt="A countryside landscape">
+
+            <span class="journal-label">
+                PLACE 002 · AFTERNOON
+            </span>
+
+            <h3>
+                Where Time
+                Moved Slowly
+            </h3>
+
+            <p>
+                Some places stay with you
+                not because something happened there,
+                but because of how peaceful you felt.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <p>
+        collecting little pieces of life ♡
+    </p>
+
+    <small>
+        CHILDHOOD ARCHIVE · 2026
+    </small>
 
 </footer>
 
-<script>
 
-lucide.createIcons();
+</div>
 
-</script>
 
 </body>
 
