@@ -514,7 +514,7 @@ TRAVEL
 .travel-word{
     position:absolute;
     left:30%;
-    top:-130px;
+    top:-1450px;
     font-family:'Great Vibes',cursive;
     font-size:240px;
     color:#D8CDBB;
@@ -562,7 +562,7 @@ TRAVEL
     width:460px;
     height:330px;
     left:50%;
-    transform:translateX(240px);
+    transform:translateX(220px);
     top:90px;
 }
 
