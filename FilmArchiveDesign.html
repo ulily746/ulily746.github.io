@@ -60,12 +60,9 @@ body{
 ========================================================= */
 
 .paper{
-
     width:min(1440px, 94%);
-
     margin:35px auto 60px;
-
-    padding:50px 70px;
+    padding:70px 100px 90px;
 
     background:#f7f2e7;
 
@@ -77,9 +74,7 @@ body{
 
     box-shadow:
         0 15px 40px rgba(65,55,45,.13);
-
 }
-
 
 /* 종이 질감 */
 
@@ -122,9 +117,7 @@ body{
 ========================================================= */
 
 .hero{
-
-    margin-bottom:110px;
-
+    margin-bottom:150px;
 }
 
 
@@ -136,94 +129,60 @@ body{
 
     background:#f8f3e8;
 
-    border:2px solid #d4cbbb;
+    border:1px solid #d4cbbb;
 
     border-radius:24px;
 
-    padding:20px;
+    padding:28px 45px 35px;
 
 }
 
 
-/* Hero 위쪽 제목 */
+/* 제목 영역 */
 
 .hero-top{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    margin-bottom:18px;
-
     position:relative;
+
+    margin-bottom:20px;
+
+    height:65px;
 
 }
 
 
-/* 왼쪽 메인 제목 */
+/* CHILDHOOD */
 
 .hero-top h1{
 
+    position:absolute;
+
+    left:0;
+
+    bottom:0;
+
     font-family:'Cormorant Garamond', serif;
 
-    font-size:58px;
+    font-size:62px;
 
-    line-height:.9;
+    line-height:.8;
 
     font-weight:500;
 
-    letter-spacing:1px;
+    letter-spacing:2px;
 
     color:#514a42;
 
 }
 
 
-/* 오른쪽 작은 장식 */
-
-.vase{
-
-    font-size:32px;
-
-    line-height:1;
-
-    transform:rotate(7deg);
-
-    opacity:.85;
-
-}
-
-
-/* 작은 손글씨 장식 */
-
-.hero-top::after{
-
-    content:"little memories";
-
-    position:absolute;
-
-    right:48px;
-
-    top:42px;
-
-    font-family:'Caveat', cursive;
-
-    font-size:19px;
-
-    color:#9a8d7b;
-
-    transform:rotate(-6deg);
-
-}
-
-
-/* Hero 이미지 */
+/* 사진 */
 
 .hero-image{
 
-    width:94%;
+    width:88%;
+
+    max-width:1050px;
 
     margin:0 auto;
 
@@ -238,7 +197,7 @@ body{
 
     width:100%;
 
-    aspect-ratio:4 / 3;
+    aspect-ratio:16 / 8.5;
 
     object-fit:cover;
 
@@ -249,54 +208,35 @@ body{
 
 .hero-image:hover img{
 
-    transform:scale(1.025);
+    transform:scale(1.015);
 
 }
 
 
-/* 사진 아래 영역 */
+/* 사진 아래 */
 
 .hero-bottom{
 
-    display:flex;
+    position:relative;
 
-    justify-content:space-between;
+    min-height:130px;
 
-    align-items:flex-end;
-
-    margin-top:20px;
-
-    min-height:100px;
+    margin-top:15px;
 
 }
 
 
-/* 작은 이모지 장식 */
-
-.icons{
-
-    display:flex;
-
-    gap:12px;
-
-    font-size:25px;
-
-    padding-bottom:8px;
-
-}
-
-
-/* 아래 오른쪽 제목 */
+/* COUNTRYSIDE */
 
 .hero-title{
 
+    position:absolute;
+
+    right:0;
+
+    bottom:0;
+
     text-align:right;
-
-    padding-right:3px;
-
-    position:relative;
-
-    z-index:3;
 
 }
 
@@ -305,9 +245,9 @@ body{
 
     font-family:'Cormorant Garamond', serif;
 
-    font-size:48px;
+    font-size:58px;
 
-    line-height:.9;
+    line-height:.82;
 
     font-weight:500;
 
@@ -316,7 +256,7 @@ body{
 }
 
 
-/* 아래쪽 작은 장식 글자 */
+/* 작은 손글씨 */
 
 .hero-title::after{
 
@@ -324,11 +264,11 @@ body{
 
     display:block;
 
-    margin-top:10px;
+    margin-top:14px;
 
     font-family:'Caveat', cursive;
 
-    font-size:20px;
+    font-size:21px;
 
     color:#9a8d7b;
 
@@ -337,7 +277,7 @@ body{
 }
 
 
-/* Hero 장식 모서리 */
+/* 장식선 */
 
 .hero-card::before{
 
@@ -349,17 +289,13 @@ body{
 
     top:25px;
 
-    width:60px;
+    width:70px;
 
-    height:60px;
+    height:70px;
 
     border-top:1px solid rgba(130,120,100,.35);
 
     border-left:1px solid rgba(130,120,100,.35);
-
-    border-radius:18px 0 0 0;
-
-    pointer-events:none;
 
 }
 
@@ -374,17 +310,13 @@ body{
 
     bottom:25px;
 
-    width:60px;
+    width:70px;
 
-    height:60px;
+    height:70px;
 
     border-bottom:1px solid rgba(130,120,100,.35);
 
     border-right:1px solid rgba(130,120,100,.35);
-
-    border-radius:0 0 18px 0;
-
-    pointer-events:none;
 
 }
 
@@ -458,23 +390,21 @@ body{
 
 
 /* =========================================================
-   MEMORY SECTION
+   MEMORY BOARD
 ========================================================= */
 
 .memory{
 
-    padding:20px 0 130px;
+    padding:40px 0 170px;
 
 }
 
-
-/* 제목 */
 
 .memory-heading{
 
     text-align:center;
 
-    margin-bottom:90px;
+    margin-bottom:110px;
 
 }
 
@@ -483,7 +413,7 @@ body{
 
     font-family:'Cormorant Garamond', serif;
 
-    font-size:48px;
+    font-size:58px;
 
     font-weight:500;
 
@@ -494,20 +424,18 @@ body{
 
 .memory-heading p{
 
-    margin-top:5px;
+    margin-top:8px;
 
     font-family:'Caveat', cursive;
 
-    font-size:22px;
+    font-size:24px;
 
     color:#958875;
-
-    transform:rotate(-3deg);
 
 }
 
 
-/* 전체 Memory Board */
+/* 전체 흐름 */
 
 .memory-board{
 
@@ -519,14 +447,10 @@ body{
 
     flex-direction:column;
 
-    gap:0;
-
 }
 
 
-/* =========================================================
-   MEMORY ROW 공통
-========================================================= */
+/* 공통 Row */
 
 .memory-row{
 
@@ -538,7 +462,7 @@ body{
 
     position:relative;
 
-    min-height:260px;
+    min-height:340px;
 
 }
 
@@ -553,14 +477,12 @@ body{
 
     background:#fff;
 
-    padding:10px 10px 28px;
+    padding:12px 12px 35px;
 
     box-shadow:
-        0 10px 22px rgba(60,50,40,.11);
+        0 14px 30px rgba(60,50,40,.12);
 
     transition:.4s ease;
-
-    z-index:3;
 
 }
 
@@ -588,56 +510,56 @@ body{
 
 
 /* =========================================================
-   PHOTO SIZES
+   PHOTO SIZE
 ========================================================= */
 
 
-/* Photo 1 - 가장 큼 */
+/* 1 */
 
 .row-1 .memory-photo{
 
-    width:300px;
+    width:360px;
 
-    height:260px;
+    height:315px;
 
     transform:rotate(-4deg);
 
 }
 
 
-/* Photo 2 - 작아짐 */
+/* 2 */
 
 .row-2 .memory-photo{
 
-    width:220px;
+    width:290px;
 
-    height:205px;
+    height:270px;
 
     transform:rotate(5deg);
 
 }
 
 
-/* Photo 3 - 더 작아짐 */
+/* 3 */
 
 .row-3 .memory-photo{
 
-    width:160px;
+    width:240px;
 
-    height:150px;
+    height:230px;
 
-    transform:rotate(-6deg);
+    transform:rotate(-5deg);
 
 }
 
 
-/* Photo 4 - 가장 작음 */
+/* 4 */
 
 .row-4 .memory-photo{
 
-    width:110px;
+    width:190px;
 
-    height:105px;
+    height:185px;
 
     transform:rotate(5deg);
 
@@ -645,18 +567,18 @@ body{
 
 
 /* =========================================================
-   MEMORY TEXT
+   MEMORY NOTE
 ========================================================= */
 
 .memory-note{
 
     position:relative;
 
-    max-width:210px;
+    max-width:260px;
 
     font-family:'Caveat', cursive;
 
-    font-size:27px;
+    font-size:30px;
 
     line-height:1.35;
 
@@ -664,24 +586,20 @@ body{
 
     text-align:center;
 
-    z-index:3;
-
 }
 
-
-/* 작은 날짜 */
 
 .memory-note small{
 
     display:block;
 
-    margin-bottom:7px;
+    margin-bottom:10px;
 
     font-family:'Manrope', sans-serif;
 
     font-size:9px;
 
-    letter-spacing:2px;
+    letter-spacing:3px;
 
     color:#a69a89;
 
@@ -690,54 +608,48 @@ body{
 
 /* =========================================================
    ROW 1
-   PHOTO 1 → 점선 → 설명 1
 ========================================================= */
 
 .row-1{
 
     justify-content:flex-start;
 
-    padding-left:25px;
+    padding-left:60px;
 
-    gap:55px;
+    gap:100px;
 
 }
 
 
-/* Photo 1 설명 */
-
 .row-1 .memory-note{
 
-    margin-top:-30px;
+    margin-top:-40px;
 
 }
 
 
 /* =========================================================
    ROW 2
-   설명 2 → 점선 → PHOTO 2
 ========================================================= */
 
 .row-2{
 
     justify-content:flex-end;
 
-    padding-right:30px;
+    padding-right:80px;
 
-    gap:55px;
+    gap:100px;
 
-    margin-top:-10px;
+    margin-top:20px;
 
 }
 
-
-/* 순서상 설명이 왼쪽 */
 
 .row-2 .memory-note{
 
     order:1;
 
-    margin-top:-20px;
+    margin-top:-30px;
 
 }
 
@@ -751,41 +663,39 @@ body{
 
 /* =========================================================
    ROW 3
-   PHOTO 3 → 점선 → 설명 3
 ========================================================= */
 
 .row-3{
 
     justify-content:flex-start;
 
-    padding-left:100px;
+    padding-left:180px;
 
-    gap:55px;
+    gap:100px;
 
-    margin-top:-5px;
+    margin-top:20px;
 
 }
 
 
 .row-3 .memory-note{
 
-    margin-top:-10px;
+    margin-top:-20px;
 
 }
 
 
 /* =========================================================
    ROW 4
-   마지막 작은 사진
 ========================================================= */
 
 .row-4{
 
     justify-content:flex-end;
 
-    padding-right:70px;
+    padding-right:150px;
 
-    margin-top:5px;
+    margin-top:20px;
 
 }
 
@@ -795,7 +705,6 @@ body{
     margin-top:-20px;
 
 }
-
 
 /* =========================================================
    MEMORY 연결 점선
@@ -1919,78 +1828,135 @@ body{
 
     .moving-memories{
 
-        padding:80px 0 100px;
+    padding:140px 0 180px;
 
-    }
-
-
-    .moving-heading{
-
-        margin-bottom:40px;
-
-    }
+}
 
 
-    .moving-heading h2{
+.moving-heading{
 
-        font-size:40px;
+    text-align:center;
 
-    }
+    margin-bottom:65px;
 
-
-    .moving-heading p{
-
-        font-size:19px;
-
-    }
+}
 
 
-    .memory-video{
+.moving-label{
 
-        border-width:7px;
+    display:block;
 
-    }
+    font-family:'Manrope', sans-serif;
 
+    font-size:10px;
 
-    .video-caption{
+    letter-spacing:4px;
 
-        padding:15px 5px 0;
+    color:#a0927e;
 
-        gap:15px;
+    margin-bottom:18px;
 
-    }
-
-
-    .video-caption span{
-
-        font-size:21px;
-
-    }
+}
 
 
-    .video-caption small{
+.moving-heading h2{
 
-        font-size:8px;
+    font-family:'Cormorant Garamond', serif;
 
-    }
+    font-size:64px;
+
+    font-weight:500;
+
+    color:#655b50;
+
+    line-height:1;
+
+}
 
 
-    .video-wrapper::before{
+.moving-heading p{
 
-        left:-10px;
+    margin-top:15px;
 
-        width:20px;
+    font-family:'Caveat', cursive;
 
-    }
+    font-size:24px;
+
+    color:#968876;
+
+}
 
 
-    .video-wrapper::after{
+/* 영상 */
 
-        right:-10px;
+.video-wrapper{
 
-        width:20px;
+    width:94%;
 
-    }
+    max-width:1100px;
+
+    margin:0 auto;
+
+    position:relative;
+
+}
+
+
+.memory-video{
+
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:16 / 8.5;
+
+    object-fit:cover;
+
+    background:#1c1b19;
+
+    border:12px solid #171614;
+
+    box-shadow:
+        0 20px 45px rgba(40,35,28,.18);
+
+}
+
+
+/* 영상 설명 */
+
+.video-caption{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:25px 15px 0;
+
+}
+
+
+.video-caption span{
+
+    font-family:'Caveat', cursive;
+
+    font-size:31px;
+
+    color:#75695d;
+
+}
+
+
+.video-caption small{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#a0927e;
 
 }
      
@@ -2201,6 +2167,107 @@ body{
     }
 
 }
+
+/* =========================================================
+   FINAL MEMORY
+========================================================= */
+
+.final-memory{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:1.4fr .8fr;
+
+    gap:90px;
+
+    align-items:center;
+
+    padding:120px 40px 100px;
+
+    border-top:1px solid #d4cbbb;
+
+}
+
+
+.final-memory-image{
+
+    position:relative;
+
+}
+
+
+.final-memory-image img{
+
+    width:100%;
+
+    aspect-ratio:16 / 10;
+
+    object-fit:cover;
+
+    display:block;
+
+    transform:rotate(-2deg);
+
+    box-shadow:
+        0 18px 35px rgba(60,50,40,.14);
+
+}
+
+
+.final-memory-text{
+
+    padding-right:20px;
+
+}
+
+
+.final-memory-text span{
+
+    display:block;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:4px;
+
+    color:#a0927e;
+
+    margin-bottom:20px;
+
+}
+
+
+.final-memory-text h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:54px;
+
+    font-weight:500;
+
+    line-height:1.05;
+
+    color:#655b50;
+
+    margin-bottom:30px;
+
+}
+
+
+.final-memory-text p{
+
+    font-family:'Caveat', cursive;
+
+    font-size:27px;
+
+    line-height:1.5;
+
+    color:#7c7064;
+
+}     
 
 </style>
 
@@ -2780,7 +2847,35 @@ body{
 
 </section>
 
+<section class="final-memory">
 
+    <div class="final-memory-image">
+
+        <img
+            src="images/final-memory.jpg"
+            alt="Final childhood memory">
+
+    </div>
+
+    <div class="final-memory-text">
+
+        <span>THE LAST PAGE</span>
+
+        <h2>
+            Some places
+            never really leave us.
+        </h2>
+
+        <p>
+            Even after growing up,
+            a small part of me
+            still lives in those
+            quiet summer afternoons.
+        </p>
+
+    </div>
+
+</section>
 
 <!-- =====================================================
      FOOTER
