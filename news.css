@@ -513,8 +513,8 @@ TRAVEL
 }
 .travel-word{
     position:absolute;
-    left:28%;
-    top:-120px;
+    left:30%;
+    top:-130px;
     font-family:'Great Vibes',cursive;
     font-size:240px;
     color:#D8CDBB;
@@ -592,7 +592,7 @@ TRAVEL
 .travel-caption{
     position:absolute;
     left:50%;
-    transform:translateX(400px);
+    transform:translateX(380px);
     top:560px;
     z-index:4;
 }
