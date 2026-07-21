@@ -132,19 +132,16 @@ body{
 
 
 /* ========================================
-   HAND DRAWN PHOTO FRAME
+   HAND-DRAWN PHOTO FRAME
 ======================================== */
 
 .photo-frame{
-
     position:relative;
-
     display:inline-block;
-
 }
 
 
-/* 기본 사진 */
+/* 사진 기본 테두리 */
 
 .hand-photo{
 
@@ -156,12 +153,12 @@ body{
 
     box-shadow:
         3px 3px 0 rgba(105,116,99,.08),
-        -2px -2px 0 rgba(150,157,139,.06);
+        -2px -2px 0 rgba(150,157,139,.05);
 
 }
 
 
-/* 손으로 그린 듯한 외곽선 */
+/* 첫 번째 손그림 라인 */
 
 .hand-photo::before{
 
@@ -171,7 +168,7 @@ body{
 
     inset:-5px;
 
-    border:1px solid rgba(104,116,99,.45);
+    border:1px solid rgba(104,116,99,.42);
 
     pointer-events:none;
 
@@ -180,7 +177,7 @@ body{
 }
 
 
-/* 두 번째 불규칙 라인 */
+/* 두 번째 살짝 어긋난 라인 */
 
 .hand-photo::after{
 
@@ -190,9 +187,9 @@ body{
 
     inset:-8px -6px -5px -7px;
 
-    border:1px solid rgba(142,151,133,.22);
+    border:1px solid rgba(142,151,133,.20);
 
-    border-radius:3px;
+    border-radius:4px;
 
     transform:rotate(-0.4deg);
 
@@ -201,71 +198,6 @@ body{
     z-index:5;
 
 }
-
-
-/* ========================================
-   BOTANICAL LINE DECORATION
-======================================== */
-
-.botanical-line{
-
-    position:absolute;
-
-    width:80px;
-
-    height:100px;
-
-    pointer-events:none;
-
-    z-index:8;
-
-    opacity:.65;
-
-}
-
-
-.botanical-line svg{
-
-    width:100%;
-
-    height:100%;
-
-    fill:none;
-
-    stroke:#71806D;
-
-    stroke-width:1.2;
-
-    stroke-linecap:round;
-
-    stroke-linejoin:round;
-
-}
-
-
-/* 사진 주변 식물 위치 */
-
-.botanical-top{
-
-    top:-45px;
-
-    right:-35px;
-
-    transform:rotate(8deg);
-
-}
-
-
-.botanical-bottom{
-
-    bottom:-45px;
-
-    left:-35px;
-
-    transform:rotate(-10deg);
-
-}
-
 
 /* ========================================
    SMALL BOTANICAL MARK
@@ -734,21 +666,6 @@ md:justify-end
 <div class="photo-frame">
 
 
-<div class="botanical-line botanical-top">
-
-<svg viewBox="0 0 100 120">
-
-<path d="M20 110 C30 80 45 55 70 20"/>
-
-<path d="M42 70 C30 60 22 48 20 35"/>
-
-<path d="M53 55 C68 52 78 44 82 32"/>
-
-<path d="M30 88 C18 83 10 75 8 65"/>
-
-</svg>
-
-</div>
 
 
 <div class="
@@ -863,22 +780,6 @@ md:justify-start
 
 <div class="photo-frame">
 
-
-<div class="botanical-line botanical-bottom">
-
-<svg viewBox="0 0 100 120">
-
-<path d="M80 110 C65 85 55 55 25 15"/>
-
-<path d="M57 70 C70 62 78 52 80 40"/>
-
-<path d="M48 55 C35 50 25 40 22 30"/>
-
-<path d="M67 88 C78 83 87 75 90 65"/>
-
-</svg>
-
-</div>
 
 
 <div class="
