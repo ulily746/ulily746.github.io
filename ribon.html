@@ -1,86 +1,609 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리의 결혼식에 초대합니다</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+
+```
+<title>우리의 결혼식에 초대합니다</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Noto+Sans+KR:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+
+<style>
+
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: #eef2f5;
+        color: #4c5968;
+        font-family: 'Noto Sans KR', sans-serif;
+        font-weight: 300;
+    }
+
+
+    /* =========================
+       MAIN CARD
+    ========================= */
+
+    .wedding-card {
+        width: min(100%, 520px);
+        min-height: 100vh;
+        margin: 0 auto;
+        background: #fffdfa;
+        overflow: hidden;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+        position: relative;
+        min-height: 650px;
+        padding: 80px 30px 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        background:
+            linear-gradient(
+                rgba(255,253,250,0.75),
+                rgba(255,253,250,0.88)
+            ),
+            url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1000&q=85');
+
+        background-size: cover;
+        background-position: center;
+    }
+
+
+    /* Decorative border */
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 22px;
+        border: 1px solid rgba(93,124,164,0.35);
+        pointer-events: none;
+    }
+
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+
+
+    .invitation-label {
+        margin-bottom: 35px;
+
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #71849b;
+    }
+
+
+    .hero h1 {
+        margin: 0;
+
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(40px, 10vw, 60px);
+        font-weight: 400;
+        line-height: 1.2;
+        color: #334456;
+    }
+
+
+    .ampersand {
+        display: block;
+        margin: 8px 0;
+
+        font-family: 'Parisienne', cursive;
+        font-size: 38px;
+        color: #7d91a8;
+    }
+
+
+    .date {
+        margin-top: 35px;
+
+        font-family: 'DM Serif Display', serif;
+        font-size: 17px;
+        letter-spacing: 4px;
+        color: #5d7188;
+    }
+
+
+    .divider {
+        width: 45px;
+        height: 1px;
+
+        margin: 28px auto;
+
+        background: #7c91a8;
+    }
+
+
+    .hero-message {
+        margin: 0;
+
+        font-size: 13px;
+        line-height: 2;
+        color: #687788;
+    }
+
+
+    /* =========================
+       COMMON SECTION
+    ========================= */
+
+    section:not(.hero) {
+        padding: 65px 35px;
+        text-align: center;
+    }
+
+
+    .section-label {
+        display: block;
+        margin-bottom: 12px;
+
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: #8a9bae;
+        text-transform: uppercase;
+    }
+
+
+    h2 {
+        margin: 0 0 30px;
+
+        font-family: 'DM Serif Display', serif;
+        font-size: 28px;
+        font-weight: 400;
+        color: #3c4d60;
+    }
+
+
+    /* =========================
+       DETAILS
+    ========================= */
+
+    .details {
+        background: #fffdfa;
+    }
+
+
+    .info-box {
+        padding: 25px 20px;
+
+        border-top: 1px solid #dfe4e8;
+        border-bottom: 1px solid #dfe4e8;
+    }
+
+
+    .info-item {
+        margin: 15px 0;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+
+    .info-item strong {
+        display: block;
+
+        margin-bottom: 3px;
+
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        color: #7a8da2;
+    }
+
+
+    /* =========================
+       MAP BUTTON
+    ========================= */
+
+    .map-btn {
+        display: inline-block;
+
+        margin-top: 30px;
+        padding: 13px 32px;
+
+        border: 1px solid #8b9db0;
+        border-radius: 30px;
+
+        background: transparent;
+        color: #5d7188;
+
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 12px;
+        text-decoration: none;
+
+        transition: all 0.3s ease;
+    }
+
+
+    .map-btn:hover {
+        background: #5d7188;
+        color: white;
+    }
+
+
+    /* =========================
+       TIMELINE
+    ========================= */
+
+    .timeline {
+        background: #f3f6f8;
+    }
+
+
+    .timeline-list {
+        position: relative;
+
+        max-width: 330px;
+        margin: 0 auto;
+        padding: 10px 0;
+    }
+
+
+    .timeline-list::before {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+
+        width: 1px;
+
+        background: #ccd5dd;
+    }
+
+
+    .timeline-item {
+        position: relative;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        margin: 25px 0;
+    }
+
+
+    .timeline-time {
+        padding-right: 25px;
+
+        text-align: right;
+
+        font-family: 'DM Serif Display', serif;
+        font-size: 16px;
+        color: #61758b;
+    }
+
+
+    .timeline-event {
+        padding-left: 25px;
+
+        text-align: left;
+
+        font-size: 13px;
+        line-height: 1.8;
+        color: #657383;
+    }
+
+
+    .timeline-item::before {
+        content: "";
+
+        position: absolute;
+        left: 50%;
+        top: 5px;
+
+        width: 7px;
+        height: 7px;
+
+        transform: translateX(-50%);
+
+        background: #71869c;
+        border: 3px solid #f3f6f8;
+        border-radius: 50%;
+    }
+
+
+    /* =========================
+       RSVP
+    ========================= */
+
+    .rsvp {
+        padding-bottom: 80px !important;
+    }
+
+
+    .rsvp p {
+        margin-bottom: 30px;
+
+        font-size: 13px;
+        line-height: 2;
+        color: #74808d;
+    }
+
+
+    .rsvp-btn {
+        display: inline-block;
+
+        padding: 14px 38px;
+
+        background: #5d7188;
+        color: white;
+
+        border-radius: 30px;
+
+        font-size: 12px;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+
+        transition: all 0.3s ease;
+    }
+
+
+    .rsvp-btn:hover {
+        background: #405469;
+        transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        padding: 30px 20px 40px;
+
+        text-align: center;
+
+        border-top: 1px solid #edf0f2;
+
+        background: #fffdfa;
+    }
+
+
+    footer p {
+        margin: 0;
+
+        font-family: 'Parisienne', cursive;
+        font-size: 25px;
+        color: #8b9caf;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 480px) {
+
+        .hero {
+            min-height: 600px;
+            padding: 60px 25px;
+        }
+
+        .hero::before {
+            inset: 16px;
+        }
+
+        section:not(.hero) {
+            padding: 55px 25px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+        }
+
+    }
+
+</style>
+```
+
 </head>
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #eef2f7;
-    font-family: 'Noto Sans KR', sans-serif;
-    color: #4a5568;
-}
-
-.wedding-card {
-    max-width: 480px;
-    margin: 20px auto;
-    background: #ffffff;
-    padding: 40px 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-}
-
-h1 { font-family: 'Playfair Display', serif; color: #2c3e50; }
-h2 { color: #5d7ca4; border-bottom: 1px solid #dcdde1; padding-bottom: 10px; }
-
-.hero { text-align: center; padding: 50px 0; }
-.divider { width: 50px; height: 2px; background: #5d7ca4; margin: 20px auto; }
-
-.details, .timeline, .rsvp { margin-top: 40px; text-align: center; }
-
-ul { list-style: none; padding: 0; }
-li { margin: 10px 0; font-weight: 300; }
-
-.map-btn, .rsvp-btn {
-    display: inline-block;
-    padding: 12px 30px;
-    background: #5d7ca4;
-    color: white;
-    text-decoration: none;
-    border-radius: 30px;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.map-btn:hover, .rsvp-btn:hover { background: #4a678d; }    
-    
 <body>
-    <div class="wedding-card">
-        <section class="hero">
-            <div class="frame">
-                <h1>Andrey & Varvara</h1>
-                <p class="date">2026. 08. 17</p>
-                <div class="divider"></div>
+
+```
+<main class="wedding-card">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="invitation-label">
+                WEDDING INVITATION
             </div>
-        </section>
 
-        <section class="details">
-            <h2>일정 및 장소</h2>
-            <p><strong>장소:</strong> 레스토랑 디나스티</p>
-            <p><strong>시간:</strong> 오후 2시 (등록)</p>
-            <button class="map-btn">지도 보기</button>
-        </section>
+            <h1>
+                Andrey
+                <span class="ampersand">&amp;</span>
+                Varvara
+            </h1>
 
-        <section class="timeline">
-            <h2>예식 순서</h2>
-            <ul>
-                <li><span>13:00</span> - 하객 맞이</li>
-                <li><span>14:00</span> - 예식 시작</li>
-                <li><span>17:00</span> - 피로연</li>
-            </ul>
-        </section>
+            <div class="date">
+                17 · 08 · 2026
+            </div>
 
-        <section class="rsvp">
-            <h2>참석 여부</h2>
-            <p>소중한 발걸음을 기다립니다.</p>
-            <a href="https://docs.google.com/forms" class="rsvp-btn">참석 응답하기</a>
-        </section>
-    </div>
+            <div class="divider"></div>
+
+            <p class="hero-message">
+                저희 두 사람이 사랑으로 하나 되는 날,<br>
+                소중한 분들을 모시고 기쁨을 함께 나누고자 합니다.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- DETAILS -->
+
+    <section class="details">
+
+        <span class="section-label">
+            Our Day
+        </span>
+
+        <h2>
+            일정 및 장소
+        </h2>
+
+        <div class="info-box">
+
+            <div class="info-item">
+                <strong>DATE</strong>
+                2026년 8월 17일
+            </div>
+
+            <div class="info-item">
+                <strong>TIME</strong>
+                오후 2시
+            </div>
+
+            <div class="info-item">
+                <strong>VENUE</strong>
+                레스토랑 디나스티
+            </div>
+
+            <div class="info-item">
+                <strong>RECEPTION</strong>
+                오후 5시
+            </div>
+
+        </div>
+
+        <a href="#" class="map-btn">
+            지도 보기
+        </a>
+
+    </section>
+
+
+    <!-- TIMELINE -->
+
+    <section class="timeline">
+
+        <span class="section-label">
+            Schedule
+        </span>
+
+        <h2>
+            예식 순서
+        </h2>
+
+        <div class="timeline-list">
+
+            <div class="timeline-item">
+
+                <div class="timeline-time">
+                    13:00
+                </div>
+
+                <div class="timeline-event">
+                    하객 맞이
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-time">
+                    14:00
+                </div>
+
+                <div class="timeline-event">
+                    결혼식 시작
+                </div>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-time">
+                    17:00
+                </div>
+
+                <div class="timeline-event">
+                    피로연
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RSVP -->
+
+    <section class="rsvp">
+
+        <span class="section-label">
+            RSVP
+        </span>
+
+        <h2>
+            참석 여부
+        </h2>
+
+        <p>
+            저희의 특별한 날에 함께해 주세요.<br>
+            소중한 발걸음을 기다립니다.
+        </p>
+
+        <a
+            href="https://docs.google.com/forms"
+            target="_blank"
+            class="rsvp-btn"
+        >
+            참석 응답하기
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            With Love, Andrey &amp; Varvara
+        </p>
+
+    </footer>
+
+</main>
+```
+
 </body>
 </html>
-
