@@ -1,107 +1,1479 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Research Archive | Yuri Choi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Archive CSS -->
-    <link rel="stylesheet" href="archive.css">
+<title>Research Archive | Yuri Choi</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --ivory: #f4f1e9;
+    --soft-ivory: #ebe6dc;
+    --paper: #e4ddd1;
+
+    --black: #171715;
+    --brown: #8b6b4f;
+
+    --text-soft: #716b62;
+    --line: #cfc7ba;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    background: var(--ivory);
+
+    color: var(--black);
+
+    font-family:
+        'Inter',
+        sans-serif;
+
+    font-weight: 300;
+
+    overflow-x: hidden;
+
+}
+
+
+button,
+input {
+
+    font-family: inherit;
+
+}
+
+
+a {
+
+    color: inherit;
+
+}
+
+
+
+/* =========================================================
+   EXISTING WEBSITE NAVIGATION
+   ---------------------------------------------------------
+   이 부분은 네 기존 홈페이지의 실제 NAV 코드로
+   교체하면 돼.
+========================================================= */
+
+.site-nav {
+
+    width: 100%;
+
+    height: 58px;
+
+    background: #111;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.site-nav-inner {
+
+    display: flex;
+
+    height: 100%;
+
+}
+
+
+.site-nav a {
+
+    min-width: 130px;
+
+    padding: 0 28px;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #f4f1e9;
+
+    text-decoration: none;
+
+    font-size: 10px;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
+
+    border-left:
+        1px solid
+        rgba(255,255,255,.12);
+
+    transition: .3s ease;
+
+}
+
+
+.site-nav a:last-child {
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.12);
+
+}
+
+
+.site-nav a:hover {
+
+    background: #292925;
+
+}
+
+
+.site-nav a.active {
+
+    background: var(--ivory);
+
+    color: var(--black);
+
+}
+
+
+
+/* =========================================================
+   PAGE WRAPPER
+========================================================= */
+
+.archive-page {
+
+    width: min(1400px, 92%);
+
+    margin: 0 auto;
+
+}
+
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.archive-hero {
+
+    padding:
+
+        115px
+
+        6vw
+
+        70px;
+
+}
+
+
+.hero-topline {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.hero-label {
+
+    font-size: 10px;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+    color: var(--brown);
+
+}
+
+
+.hero-year {
+
+    font-size: 10px;
+
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+
+    color: var(--text-soft);
+
+}
+
+
+.archive-title {
+
+    padding-top: 55px;
+
+    text-align: center;
+
+}
+
+
+.archive-title h1 {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(80px, 13vw, 180px);
+
+    line-height: .72;
+
+    font-weight: 400;
+
+    letter-spacing: -.06em;
+
+}
+
+
+.archive-title h1 span {
+
+    display: block;
+
+    margin-left: 170px;
+
+    margin-top: 22px;
+
+    font-size: .55em;
+
+    font-style: italic;
+
+}
+
+
+.archive-subtitle {
+
+    max-width: 480px;
+
+    margin:
+
+        70px auto 0;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+    color: var(--text-soft);
+
+}
+
+
+
+/* =========================================================
+   ARCHIVE META
+========================================================= */
+
+.archive-meta {
+
+    margin-top: 70px;
+
+    padding:
+
+        20px 0;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.entry-total {
+
+    font-size: 10px;
+
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+
+}
+
+
+.entry-total strong {
+
+    color: var(--brown);
+
+    font-weight: 400;
+
+}
+
+
+.search-button {
+
+    background: none;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+
+}
+
+
+.search-button span {
+
+    font-size: 17px;
+
+    margin-left: 8px;
+
+}
+
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.search-area {
+
+    max-height: 0;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    transition:
+
+        max-height .5s ease,
+
+        opacity .5s ease;
+
+}
+
+
+.search-area.open {
+
+    max-height: 100px;
+
+    opacity: 1;
+
+}
+
+
+.search-inner {
+
+    padding:
+
+        20px 0;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.search-inner input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 28px;
+
+    color: var(--black);
+
+}
+
+
+.search-close {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    font-size: 22px;
+
+}
+
+
+
+/* =========================================================
+   FILTER + SORT
+========================================================= */
+
+.archive-controls {
+
+    padding:
+
+        35px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.filter-group {
+
+    display: flex;
+
+    gap: 25px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.filter-btn {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    padding-bottom: 7px;
+
+    font-size: 10px;
+
+    letter-spacing: .13em;
+
+    text-transform: uppercase;
+
+    color: var(--text-soft);
+
+    border-bottom:
+        1px solid
+        transparent;
+
+    transition: .3s ease;
+
+}
+
+
+.filter-btn:hover {
+
+    color: var(--black);
+
+}
+
+
+.filter-btn.active {
+
+    color: var(--black);
+
+    border-bottom:
+        1px solid
+        var(--black);
+
+}
+
+
+.sort-select {
+
+    border: none;
+
+    background: transparent;
+
+    outline: none;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    letter-spacing: .13em;
+
+    text-transform: uppercase;
+
+    color: var(--black);
+
+}
+
+
+
+/* =========================================================
+   ARCHIVE LIST
+========================================================= */
+
+.archive-list {
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+
+/* =========================================================
+   ARCHIVE ITEM
+========================================================= */
+
+.archive-item {
+
+    display: grid;
+
+    grid-template-columns:
+
+        70px
+
+        115px
+
+        minmax(250px, 1fr)
+
+        160px
+
+        100px;
+
+    align-items: center;
+
+    gap: 30px;
+
+    min-height: 150px;
+
+    padding:
+
+        25px 0;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+    text-decoration: none;
+
+    position: relative;
+
+    transition:
+
+        padding .4s ease,
+
+        background .4s ease;
+
+}
+
+
+.archive-item:hover {
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+
+    background:
+        rgba(255,255,255,.25);
+
+}
+
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.item-number {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 20px;
+
+    color: var(--brown);
+
+}
+
+
+
+/* =========================================================
+   THUMBNAIL
+========================================================= */
+
+.item-thumb {
+
+    width: 100px;
+
+    height: 100px;
+
+    overflow: hidden;
+
+    background: var(--paper);
+
+    position: relative;
+
+}
+
+
+.item-thumb img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        saturate(.78);
+
+    transition:
+
+        transform .7s ease,
+
+        filter .7s ease;
+
+}
+
+
+.archive-item:hover
+.item-thumb img {
+
+    transform:
+        scale(1.08);
+
+    filter:
+        saturate(1);
+
+}
+
+
+
+/* =========================================================
+   THUMBNAIL SHAPES
+========================================================= */
+
+.thumb-arch {
+
+    border-radius:
+
+        55px
+
+        55px
+
+        0
+
+        0;
+
+}
+
+
+.thumb-oval {
+
+    height: 72px;
+
+    border-radius: 50%;
+
+}
+
+
+.thumb-round {
+
+    border-radius: 50%;
+
+}
+
+
+.thumb-bottom-round {
+
+    border-radius:
+
+        0
+
+        0
+
+        55px
+
+        55px;
+
+}
+
+
+.thumb-rect {
+
+    border-radius: 0;
+
+}
+
+
+
+/* =========================================================
+   TITLE AREA
+========================================================= */
+
+.item-main {
+
+    min-width: 0;
+
+}
+
+
+.item-category {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 9px;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+
+    color: var(--brown);
+
+}
+
+
+.item-title {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 34px;
+
+    line-height: .95;
+
+    font-weight: 500;
+
+    letter-spacing: -.02em;
+
+    transition:
+
+        transform .35s ease;
+
+}
+
+
+.archive-item:hover
+.item-title {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+.item-description {
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    color: var(--text-soft);
+
+}
+
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+.item-year {
+
+    font-size: 10px;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    color: var(--text-soft);
+
+}
+
+
+
+/* =========================================================
+   VIEW
+========================================================= */
+
+.item-view {
+
+    justify-self: end;
+
+    font-size: 9px;
+
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    opacity: .5;
+
+    transition:
+
+        opacity .3s ease,
+
+        transform .3s ease;
+
+}
+
+
+.archive-item:hover
+.item-view {
+
+    opacity: 1;
+
+    transform:
+        translateX(5px);
+
+}
+
+
+
+/* =========================================================
+   LOAD MORE
+========================================================= */
+
+.load-more-area {
+
+    display: flex;
+
+    justify-content: center;
+
+    padding:
+
+        70px 0
+
+        120px;
+
+}
+
+
+.load-more {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    padding:
+
+        14px 25px;
+
+    border-bottom:
+        1px solid
+        var(--black);
+
+    font-size: 10px;
+
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+
+    transition:
+
+        letter-spacing .3s ease;
+
+}
+
+
+.load-more:hover {
+
+    letter-spacing: .22em;
+
+}
+
+
+.no-results {
+
+    display: none;
+
+    padding:
+
+        80px 0;
+
+    text-align: center;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 30px;
+
+    color: var(--text-soft);
+
+}
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.archive-footer {
+
+    padding:
+
+        0 6vw
+
+        60px;
+
+}
+
+
+.footer-line {
+
+    height: 1px;
+
+    background:
+        var(--line);
+
+    margin-bottom: 20px;
+
+}
+
+
+.footer-inner {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 9px;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+
+    color: var(--text-soft);
+
+}
+
+
+
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+
+    .archive-item {
+
+        grid-template-columns:
+
+            55px
+
+            100px
+
+            minmax(180px, 1fr)
+
+            90px;
+
+        gap: 20px;
+
+    }
+
+
+    .item-description {
+
+        display: none;
+
+    }
+
+
+    .item-title {
+
+        font-size: 30px;
+
+    }
+
+
+    .item-thumb {
+
+        width: 85px;
+
+        height: 85px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RESPONSIVE MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+
+    .site-nav a {
+
+        min-width: 25vw;
+
+        padding: 0 8px;
+
+        font-size: 8px;
+
+    }
+
+
+    .archive-page {
+
+        width: 100%;
+
+    }
+
+
+    .archive-hero {
+
+        padding:
+
+            80px 25px
+
+            50px;
+
+    }
+
+
+    .hero-topline {
+
+        font-size: 9px;
+
+    }
+
+
+    .archive-title h1 {
+
+        font-size: 70px;
+
+    }
+
+
+    .archive-title h1 span {
+
+        margin-left: 55px;
+
+    }
+
+
+    .archive-subtitle {
+
+        font-size: 12px;
+
+        margin-top: 55px;
+
+    }
+
+
+    .archive-meta {
+
+        margin-top: 55px;
+
+    }
+
+
+    .archive-controls {
+
+        padding:
+
+            25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .filter-group {
+
+        gap: 18px;
+
+    }
+
+
+    .archive-list {
+
+        margin: 0 25px;
+
+    }
+
+
+    .archive-item {
+
+        grid-template-columns:
+
+            50px
+
+            75px
+
+            1fr;
+
+        gap: 18px;
+
+        min-height: 125px;
+
+        padding:
+
+            20px 0;
+
+    }
+
+
+    .archive-item:hover {
+
+        padding-left: 10px;
+
+        padding-right: 10px;
+
+    }
+
+
+    .item-thumb {
+
+        width: 70px;
+
+        height: 70px;
+
+    }
+
+
+    .item-title {
+
+        font-size: 26px;
+
+    }
+
+
+    .item-category {
+
+        font-size: 8px;
+
+    }
+
+
+    .item-year {
+
+        display: none;
+
+    }
+
+
+    .item-view {
+
+        display: none;
+
+    }
+
+
+    .load-more-area {
+
+        padding:
+
+            60px 0
+
+            100px;
+
+    }
+
+
+    .archive-footer {
+
+        padding:
+
+            0 25px
+
+            50px;
+
+    }
+
+
+    .footer-inner {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+
+    .archive-title h1 {
+
+        font-size: 58px;
+
+    }
+
+
+    .archive-title h1 span {
+
+        margin-left: 30px;
+
+    }
+
+
+    .item-number {
+
+        font-size: 16px;
+
+    }
+
+
+    .item-title {
+
+        font-size: 23px;
+
+    }
+
+
+    .archive-item {
+
+        grid-template-columns:
+
+            35px
+
+            65px
+
+            1fr;
+
+        gap: 13px;
+
+    }
+
+
+    .item-thumb {
+
+        width: 62px;
+
+        height: 62px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 
 <body>
 
-<!-- =====================================================
-     TOP NAVIGATION
-===================================================== -->
 
-<header class="top-nav">
+<!-- =========================================================
+     EXISTING WEBSITE NAVIGATION
+========================================================= -->
 
-    <div class="nav-inner">
+<header class="site-nav">
 
-        <a href="index.html" class="nav-link">
+    <nav class="site-nav-inner">
+
+        <a href="index.html">
             Main
         </a>
 
-        <a href="research.html" class="nav-link active">
+        <a href="research.html" class="active">
             Research
         </a>
 
-        <a href="cv.html" class="nav-link">
+        <a href="cv.html">
             CV
         </a>
 
-        <a href="news.html" class="nav-link">
+        <a href="news.html">
             News
         </a>
 
-    </div>
+    </nav>
 
 </header>
 
 
-<!-- =====================================================
-     MAIN ARCHIVE
-===================================================== -->
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main class="archive-page">
 
 
-    <!-- =================================================
-         ARCHIVE HERO
-    ================================================== -->
 
-    <section class="archive-hero">
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-        <div class="hero-small-label">
+<section class="archive-hero">
+
+
+    <div class="hero-topline">
+
+        <span class="hero-label">
             Choi Yuri · Research
-        </div>
+        </span>
+
+        <span class="hero-year">
+            Archive / 2026
+        </span>
+
+    </div>
+
+
+    <div class="archive-title">
 
         <h1>
+
             Research
-            <span>Archive</span>
+
+            <span>
+                Archive
+            </span>
+
         </h1>
 
-        <p class="hero-description">
-            A collection of research projects, publications,
-            experiments, and ideas developed throughout my academic journey.
-        </p>
+    </div>
 
-        <div class="hero-bottom">
 
-            <span class="archive-year">
-                2026
+    <p class="archive-subtitle">
+
+        A collection of research projects,
+        publications, experiments, and ideas
+        developed throughout my academic journey.
+
+    </p>
+
+
+    <div class="archive-meta">
+
+        <span class="entry-total">
+
+            <strong id="visibleCount">
+                05
+            </strong>
+
+            Entries
+
+        </span>
+
+
+        <button
+            class="search-button"
+            id="searchButton"
+        >
+
+            Search
+
+            <span>
+                ⌕
             </span>
 
-            <span class="archive-count">
-                05 Entries
-            </span>
+        </button>
 
-            <button class="search-toggle" id="searchToggle">
-                Search Archive
-                <span>⌕</span>
-            </button>
+    </div>
 
-        </div>
 
-    </section>
+</section>
 
 
 
-    <!-- =================================================
-         SEARCH PANEL
-    ================================================== -->
+<!-- =========================================================
+     SEARCH
+========================================================= -->
 
-    <div class="search-panel" id="searchPanel">
+<section
+    class="search-area"
+    id="searchArea"
+>
+
+    <div class="search-inner">
 
         <input
             type="text"
@@ -109,437 +1481,909 @@
             placeholder="Search research archive..."
         >
 
-        <button id="closeSearch">
+        <button
+            class="search-close"
+            id="searchClose"
+        >
             ×
         </button>
 
     </div>
 
+</section>
 
 
-    <!-- =================================================
-         ARCHIVE CONTENT
-    ================================================== -->
 
-    <section class="archive-list" id="archiveList">
+<!-- =========================================================
+     FILTER + SORT
+========================================================= -->
 
+<section class="archive-controls">
 
-        <!-- =================================================
-             ENTRY 01
-        ================================================== -->
 
-        <article class="archive-entry entry-left"
-                 data-title="Dual Metabolic Therapy">
+    <div class="filter-group">
 
-            <div class="entry-number">
-                01
-            </div>
+        <button
+            class="filter-btn active"
+            data-filter="all"
+        >
+            All
+        </button>
 
 
-            <div class="entry-image image-arch">
+        <button
+            class="filter-btn"
+            data-filter="project"
+        >
+            Projects
+        </button>
 
-                <img
-                    src="research1.jpg"
-                    alt="Dual Metabolic Therapy"
-                >
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="image-link"
-                >
-                    View Entry →
-                </a>
+        <button
+            class="filter-btn"
+            data-filter="publication"
+        >
+            Publications
+        </button>
 
-            </div>
 
+        <button
+            class="filter-btn"
+            data-filter="note"
+        >
+            Notes
+        </button>
 
-            <div class="entry-info">
+    </div>
 
-                <span class="entry-category">
-                    Research · 2026
-                </span>
 
-                <h2>
-                    Dual Metabolic
-                    <br>
-                    Therapy
-                </h2>
+    <select
+        class="sort-select"
+        id="sortSelect"
+    >
 
-                <p>
-                    A dual metabolic therapy approach targeting
-                    glycolysis and mitochondrial metabolism
-                    through a PLGA-PEG nanoparticle platform.
-                </p>
+        <option value="latest">
+            Latest
+        </option>
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="entry-link"
-                >
-                    Explore project
-                    <span>↗</span>
-                </a>
+        <option value="oldest">
+            Oldest
+        </option>
 
-            </div>
+        <option value="az">
+            A — Z
+        </option>
 
-        </article>
+    </select>
 
 
+</section>
 
-        <!-- =================================================
-             ENTRY 02
-        ================================================== -->
 
-        <article class="archive-entry entry-right"
-                 data-title="Paper Writing">
 
-            <div class="entry-number">
-                02
-            </div>
+<!-- =========================================================
+     ARCHIVE LIST
+========================================================= -->
 
+<section
+    class="archive-list"
+    id="archiveList"
+>
 
-            <div class="entry-info">
 
-                <span class="entry-category">
-                    Publication · 2026
-                </span>
 
-                <h2>
-                    Paper
-                    <br>
-                    Writing
-                </h2>
+<!-- ENTRY 01 -->
 
-                <p>
-                    Manuscript preparation and the process of
-                    translating experimental findings into
-                    scientific communication.
-                </p>
+<a
+    href="MinimalPortfolioDesign.html"
+    class="archive-item"
+    data-type="project"
+    data-year="2026"
+    data-title="Dual Metabolic Therapy"
+>
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="entry-link"
-                >
-                    Explore project
-                    <span>↗</span>
-                </a>
+    <span class="item-number">
+        01
+    </span>
 
-            </div>
 
+    <div class="item-thumb thumb-arch">
 
-            <div class="entry-image image-oval">
+        <img
+            src="research1.jpg"
+            alt="Dual Metabolic Therapy"
+        >
 
-                <img
-                    src="research2.jpg"
-                    alt="Paper Writing"
-                >
+    </div>
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="image-link"
-                >
-                    View Entry →
-                </a>
 
-            </div>
+    <div class="item-main">
 
-        </article>
+        <span class="item-category">
+            Research Project
+        </span>
 
+        <h2 class="item-title">
+            Dual Metabolic Therapy
+        </h2>
 
+        <p class="item-description">
+            PLGA-PEG nanoparticle platform
+            for dual metabolic inhibition.
+        </p>
 
-        <!-- =================================================
-             ENTRY 03
-        ================================================== -->
+    </div>
 
-        <article class="archive-entry entry-center"
-                 data-title="PLGA-PEG Nanoparticle Platform">
 
-            <div class="entry-number">
-                03
-            </div>
+    <span class="item-year">
+        2026
+    </span>
 
 
-            <div class="entry-image image-round">
+    <span class="item-view">
+        View Entry →
+    </span>
 
-                <img
-                    src="research3.jpg"
-                    alt="PLGA PEG Nanoparticle Platform"
-                >
+</a>
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="image-link"
-                >
-                    View Entry →
-                </a>
 
-            </div>
 
+<!-- ENTRY 02 -->
 
-            <div class="entry-info">
+<a
+    href="MinimalPortfolioDesign.html"
+    class="archive-item"
+    data-type="publication"
+    data-year="2026"
+    data-title="Paper Writing"
+>
 
-                <span class="entry-category">
-                    Research · 2026
-                </span>
+    <span class="item-number">
+        02
+    </span>
 
-                <h2>
-                    PLGA-PEG
-                    <br>
-                    Nanoparticle Platform
-                </h2>
 
-                <p>
-                    Development of a nanoparticle-based delivery
-                    system designed for targeted metabolic
-                    intervention.
-                </p>
+    <div class="item-thumb thumb-oval">
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="entry-link"
-                >
-                    Explore project
-                    <span>↗</span>
-                </a>
+        <img
+            src="research2.jpg"
+            alt="Paper Writing"
+        >
 
-            </div>
+    </div>
 
-        </article>
 
+    <div class="item-main">
 
+        <span class="item-category">
+            Publication
+        </span>
 
-        <!-- =================================================
-             ENTRY 04
-        ================================================== -->
+        <h2 class="item-title">
+            Paper Writing
+        </h2>
 
-        <article class="archive-entry entry-wide"
-                 data-title="Cancer Metabolism">
+        <p class="item-description">
+            Manuscript preparation and
+            scientific communication.
+        </p>
 
-            <div class="entry-number">
-                04
-            </div>
+    </div>
 
 
-            <div class="entry-image image-rect">
+    <span class="item-year">
+        2026
+    </span>
 
-                <img
-                    src="research4.jpg"
-                    alt="Cancer Metabolism"
-                >
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="image-link"
-                >
-                    View Entry →
-                </a>
+    <span class="item-view">
+        View Entry →
+    </span>
 
-            </div>
+</a>
 
 
-            <div class="entry-info">
 
-                <span class="entry-category">
-                    Research Notes · 2026
-                </span>
+<!-- ENTRY 03 -->
 
-                <h2>
-                    Cancer
-                    Metabolism
-                </h2>
+<a
+    href="MinimalPortfolioDesign.html"
+    class="archive-item"
+    data-type="project"
+    data-year="2025"
+    data-title="PLGA-PEG Nanoparticle Platform"
+>
 
-                <p>
-                    Exploring the metabolic vulnerabilities of
-                    cancer cells and strategies for therapeutic
-                    intervention.
-                </p>
+    <span class="item-number">
+        03
+    </span>
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="entry-link"
-                >
-                    Explore project
-                    <span>↗</span>
-                </a>
 
-            </div>
+    <div class="item-thumb thumb-round">
 
-        </article>
+        <img
+            src="research3.jpg"
+            alt="PLGA PEG Nanoparticle Platform"
+        >
 
+    </div>
 
 
-        <!-- =================================================
-             ENTRY 05
-        ================================================== -->
+    <div class="item-main">
 
-        <article class="archive-entry entry-left"
-                 data-title="Metabolic Therapy Notes">
+        <span class="item-category">
+            Research Project
+        </span>
 
-            <div class="entry-number">
-                05
-            </div>
+        <h2 class="item-title">
+            PLGA-PEG Nanoparticle Platform
+        </h2>
 
+        <p class="item-description">
+            Development of a nanoparticle-based
+            drug delivery platform.
+        </p>
 
-            <div class="entry-image image-bottom-round">
+    </div>
 
-                <img
-                    src="research5.jpg"
-                    alt="Metabolic Therapy Notes"
-                >
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="image-link"
-                >
-                    View Entry →
-                </a>
+    <span class="item-year">
+        2025
+    </span>
 
-            </div>
 
+    <span class="item-view">
+        View Entry →
+    </span>
 
-            <div class="entry-info">
+</a>
 
-                <span class="entry-category">
-                    Research Notes · 2026
-                </span>
 
-                <h2>
-                    Metabolic
-                    <br>
-                    Therapy Notes
-                </h2>
 
-                <p>
-                    A collection of thoughts, observations,
-                    and working notes gathered during the
-                    research process.
-                </p>
+<!-- ENTRY 04 -->
 
-                <a
-                    href="MinimalPortfolioDesign.html"
-                    class="entry-link"
-                >
-                    Explore project
-                    <span>↗</span>
-                </a>
+<a
+    href="MinimalPortfolioDesign.html"
+    class="archive-item"
+    data-type="note"
+    data-year="2025"
+    data-title="Cancer Metabolism"
+>
 
-            </div>
+    <span class="item-number">
+        04
+    </span>
 
-        </article>
 
+    <div class="item-thumb thumb-rect">
 
-    </section>
+        <img
+            src="research4.jpg"
+            alt="Cancer Metabolism"
+        >
 
+    </div>
 
-    <!-- =================================================
-         FOOTER
-    ================================================== -->
 
-    <footer class="archive-footer">
+    <div class="item-main">
 
-        <div class="footer-line"></div>
+        <span class="item-category">
+            Research Note
+        </span>
 
-        <div class="footer-content">
+        <h2 class="item-title">
+            Cancer Metabolism
+        </h2>
 
-            <span>
-                Research Archive
-            </span>
+        <p class="item-description">
+            Exploring metabolic vulnerabilities
+            of cancer cells.
+        </p>
 
-            <span>
-                Yuri Choi · 2026
-            </span>
+    </div>
 
-        </div>
 
-    </footer>
+    <span class="item-year">
+        2025
+    </span>
+
+
+    <span class="item-view">
+        View Entry →
+    </span>
+
+</a>
+
+
+
+<!-- ENTRY 05 -->
+
+<a
+    href="MinimalPortfolioDesign.html"
+    class="archive-item"
+    data-type="note"
+    data-year="2024"
+    data-title="Metabolic Therapy Notes"
+>
+
+    <span class="item-number">
+        05
+    </span>
+
+
+    <div class="item-thumb thumb-bottom-round">
+
+        <img
+            src="research5.jpg"
+            alt="Metabolic Therapy Notes"
+        >
+
+    </div>
+
+
+    <div class="item-main">
+
+        <span class="item-category">
+            Research Note
+        </span>
+
+        <h2 class="item-title">
+            Metabolic Therapy Notes
+        </h2>
+
+        <p class="item-description">
+            Thoughts and observations gathered
+            throughout the research process.
+        </p>
+
+    </div>
+
+
+    <span class="item-year">
+        2024
+    </span>
+
+
+    <span class="item-view">
+        View Entry →
+    </span>
+
+</a>
+
+
+
+</section>
+
+
+
+<!-- NO RESULTS -->
+
+<div
+    class="no-results"
+    id="noResults"
+>
+
+    No entries found.
+
+</div>
+
+
+
+<!-- =========================================================
+     LOAD MORE
+========================================================= -->
+
+<div class="load-more-area">
+
+    <button
+        class="load-more"
+        id="loadMore"
+    >
+
+        Load More
+
+    </button>
+
+</div>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="archive-footer">
+
+    <div class="footer-line"></div>
+
+    <div class="footer-inner">
+
+        <span>
+            Research Archive
+        </span>
+
+        <span>
+            Yuri Choi · 2026
+        </span>
+
+    </div>
+
+</footer>
+
 
 
 </main>
 
 
 
-<!-- =====================================================
-     SEARCH SCRIPT
-===================================================== -->
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
 <script>
 
-const searchToggle =
-    document.getElementById("searchToggle");
 
-const searchPanel =
-    document.getElementById("searchPanel");
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-const closeSearch =
-    document.getElementById("closeSearch");
+const searchButton =
+    document.getElementById(
+        'searchButton'
+    );
+
+
+const searchArea =
+    document.getElementById(
+        'searchArea'
+    );
+
+
+const searchClose =
+    document.getElementById(
+        'searchClose'
+    );
+
 
 const searchInput =
-    document.getElementById("searchInput");
-
-const entries =
-    document.querySelectorAll(".archive-entry");
-
+    document.getElementById(
+        'searchInput'
+    );
 
 
-/* Open Search */
-
-searchToggle.addEventListener("click", () => {
-
-    searchPanel.classList.add("active");
-
-    searchInput.focus();
-
-});
+const filterButtons =
+    document.querySelectorAll(
+        '.filter-btn'
+    );
 
 
-
-/* Close Search */
-
-closeSearch.addEventListener("click", () => {
-
-    searchPanel.classList.remove("active");
-
-    searchInput.value = "";
-
-    entries.forEach(entry => {
-
-        entry.style.display = "";
-
-    });
-
-});
+const sortSelect =
+    document.getElementById(
+        'sortSelect'
+    );
 
 
-
-/* Search */
-
-searchInput.addEventListener("input", () => {
-
-    const keyword =
-        searchInput.value.toLowerCase().trim();
+const archiveList =
+    document.getElementById(
+        'archiveList'
+    );
 
 
-    entries.forEach(entry => {
+const visibleCount =
+    document.getElementById(
+        'visibleCount'
+    );
 
-        const title =
-            entry.dataset.title.toLowerCase();
+
+const noResults =
+    document.getElementById(
+        'noResults'
+    );
 
 
-        if (title.includes(keyword)) {
+const loadMore =
+    document.getElementById(
+        'loadMore'
+    );
 
-            entry.style.display = "";
 
-        } else {
 
-            entry.style.display = "none";
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let currentFilter = 'all';
+
+let currentSearch = '';
+
+let visibleItems = 5;
+
+const itemsPerLoad = 5;
+
+
+
+/* =========================================================
+   SEARCH OPEN
+========================================================= */
+
+searchButton.addEventListener(
+    'click',
+    () => {
+
+        searchArea.classList.add(
+            'open'
+        );
+
+        searchInput.focus();
+
+    }
+);
+
+
+
+/* =========================================================
+   SEARCH CLOSE
+========================================================= */
+
+searchClose.addEventListener(
+    'click',
+    () => {
+
+        searchInput.value = '';
+
+        currentSearch = '';
+
+        searchArea.classList.remove(
+            'open'
+        );
+
+        updateArchive();
+
+    }
+);
+
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchInput.addEventListener(
+    'input',
+    () => {
+
+        currentSearch =
+            searchInput.value
+            .toLowerCase()
+            .trim();
+
+        visibleItems = 5;
+
+        updateArchive();
+
+    }
+);
+
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+filterButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            'click',
+            () => {
+
+                filterButtons
+                    .forEach(
+                        btn =>
+                            btn.classList
+                            .remove('active')
+                    );
+
+
+                button.classList.add(
+                    'active'
+                );
+
+
+                currentFilter =
+                    button.dataset.filter;
+
+
+                visibleItems = 5;
+
+                updateArchive();
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   SORT
+========================================================= */
+
+sortSelect.addEventListener(
+    'change',
+    () => {
+
+        sortItems();
+
+        updateArchive();
+
+    }
+);
+
+
+
+/* =========================================================
+   SORT FUNCTION
+========================================================= */
+
+function sortItems() {
+
+
+    const items =
+        Array.from(
+            document.querySelectorAll(
+                '.archive-item'
+            )
+        );
+
+
+    const sortType =
+        sortSelect.value;
+
+
+    items.sort(
+        (a, b) => {
+
+
+            if (
+                sortType ===
+                'latest'
+            ) {
+
+                return (
+                    Number(
+                        b.dataset.year
+                    )
+                    -
+                    Number(
+                        a.dataset.year
+                    )
+                );
+
+            }
+
+
+            if (
+                sortType ===
+                'oldest'
+            ) {
+
+                return (
+                    Number(
+                        a.dataset.year
+                    )
+                    -
+                    Number(
+                        b.dataset.year
+                    )
+                );
+
+            }
+
+
+            if (
+                sortType ===
+                'az'
+            ) {
+
+                return (
+                    a.dataset.title
+                    .localeCompare(
+                        b.dataset.title
+                    )
+                );
+
+            }
 
         }
+    );
 
-    });
 
-});
+    items.forEach(
+        item => {
+
+            archiveList.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   UPDATE ARCHIVE
+========================================================= */
+
+function updateArchive() {
+
+
+    const items =
+        Array.from(
+            document.querySelectorAll(
+                '.archive-item'
+            )
+        );
+
+
+    let matchedItems = [];
+
+
+    items.forEach(
+        (item, index) => {
+
+
+            const type =
+                item.dataset.type;
+
+
+            const title =
+                item.dataset.title
+                .toLowerCase();
+
+
+            const matchesFilter =
+                currentFilter === 'all'
+                ||
+                type === currentFilter;
+
+
+            const matchesSearch =
+                title.includes(
+                    currentSearch
+                );
+
+
+            if (
+                matchesFilter
+                &&
+                matchesSearch
+            ) {
+
+                matchedItems.push(
+                    item
+                );
+
+            }
+
+        }
+    );
+
+
+
+    items.forEach(
+        item => {
+
+            item.style.display =
+                'none';
+
+        }
+    );
+
+
+
+    matchedItems
+        .slice(
+            0,
+            visibleItems
+        )
+        .forEach(
+            item => {
+
+                item.style.display =
+                    'grid';
+
+            }
+        );
+
+
+
+    /* Update count */
+
+    visibleCount.textContent =
+        String(
+            matchedItems.length
+        ).padStart(
+            2,
+            '0'
+        );
+
+
+
+    /* No results */
+
+    if (
+        matchedItems.length === 0
+    ) {
+
+        noResults.style.display =
+            'block';
+
+    } else {
+
+        noResults.style.display =
+            'none';
+
+    }
+
+
+
+    /* Load More */
+
+    if (
+        visibleItems
+        <
+        matchedItems.length
+    ) {
+
+        loadMore.style.display =
+            'block';
+
+    } else {
+
+        loadMore.style.display =
+            'none';
+
+    }
+
+}
+
+
+
+/* =========================================================
+   LOAD MORE
+========================================================= */
+
+loadMore.addEventListener(
+    'click',
+    () => {
+
+        visibleItems +=
+            itemsPerLoad;
+
+        updateArchive();
+
+    }
+);
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+sortItems();
+
+updateArchive();
+
 
 </script>
 
 
 </body>
+
 </html>
+```
