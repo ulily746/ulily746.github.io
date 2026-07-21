@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Research Archive | Yuri Choi</title>
+<title>Archive | Yuri Choi</title>
 
-<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -18,9 +16,76 @@
 
 <style>
 
-/* ============================= */
-/* NAVIGATION */
-/* ============================= */
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+
+    --ivory:#F2F2DF;
+    --soft-ivory:#ebe6dc;
+    --paper:#e4ddd1;
+
+    --black:#000;
+    --text:#1A1A1A;
+
+    --brown:#8B6B4F;
+
+    --text-soft:#716b62;
+    --line:#d5cec1;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+
+    background:var(--ivory);
+
+    color:var(--text);
+
+    font-family:'Inter',sans-serif;
+
+    font-weight:300;
+
+    overflow-x:hidden;
+
+}
+
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+
+
+/* =========================================================
+   NAVIGATION
+   기존 홈페이지 NAV와 동일한 스타일
+========================================================= */
 
 .nav{
 
@@ -66,182 +131,19 @@
 
     color:#8B6B4F;
 
-}   
-
-/* =========================================================
-   ROOT
-========================================================= */
-
-:root {
-
-    --ivory: #f4f1e9;
-    --soft-ivory: #ebe6dc;
-    --paper: #e4ddd1;
-
-    --black: #171715;
-    --brown: #8b6b4f;
-
-    --text-soft: #716b62;
-    --line: #cfc7ba;
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-
-    margin: 0;
-    padding: 0;
-
-    box-sizing: border-box;
-
-}
-
-
-html {
-
-    scroll-behavior: smooth;
-
-}
-
-
-body {
-
-    background: var(--ivory);
-
-    color: var(--black);
-
-    font-family:
-        'Inter',
-        sans-serif;
-
-    font-weight: 300;
-
-    overflow-x: hidden;
-
-}
-
-
-button,
-input {
-
-    font-family: inherit;
-
-}
-
-
-a {
-
-    color: inherit;
-
 }
 
 
 
 /* =========================================================
-   EXISTING WEBSITE NAVIGATION
-   ---------------------------------------------------------
-   이 부분은 네 기존 홈페이지의 실제 NAV 코드로
-   교체하면 돼.
+   PAGE
 ========================================================= */
 
-.site-nav {
+.archive-page{
 
-    width: 100%;
+    width:min(1400px,92%);
 
-    height: 58px;
-
-    background: #111;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-}
-
-
-.site-nav-inner {
-
-    display: flex;
-
-    height: 100%;
-
-}
-
-
-.site-nav a {
-
-    min-width: 130px;
-
-    padding: 0 28px;
-
-    height: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #f4f1e9;
-
-    text-decoration: none;
-
-    font-size: 10px;
-
-    letter-spacing: .16em;
-
-    text-transform: uppercase;
-
-    border-left:
-        1px solid
-        rgba(255,255,255,.12);
-
-    transition: .3s ease;
-
-}
-
-
-.site-nav a:last-child {
-
-    border-right:
-        1px solid
-        rgba(255,255,255,.12);
-
-}
-
-
-.site-nav a:hover {
-
-    background: #292925;
-
-}
-
-
-.site-nav a.active {
-
-    background: var(--ivory);
-
-    color: var(--black);
-
-}
-
-
-
-/* =========================================================
-   PAGE WRAPPER
-========================================================= */
-
-.archive-page {
-
-    width: min(1400px, 92%);
-
-    margin: 0 auto;
+    margin:0 auto;
 
 }
 
@@ -251,211 +153,199 @@ a {
    HERO
 ========================================================= */
 
-.archive-hero {
+.archive-hero{
 
     padding:
 
-        115px
-
-        6vw
-
-        70px;
+        100px 6vw 60px;
 
 }
 
 
-.hero-topline {
+.hero-topline{
 
-    display: flex;
+    display:flex;
 
-    justify-content: space-between;
+    justify-content:space-between;
 
-    align-items: center;
+    align-items:center;
 
-    padding-bottom: 20px;
+    padding-bottom:20px;
 
-    border-bottom:
-        1px solid
-        var(--line);
+    border-bottom:1px solid var(--line);
 
 }
 
 
-.hero-label {
+.hero-label{
 
-    font-size: 10px;
+    font-size:10px;
 
-    letter-spacing: .18em;
+    letter-spacing:.18em;
 
-    text-transform: uppercase;
+    text-transform:uppercase;
 
-    color: var(--brown);
-
-}
-
-
-.hero-year {
-
-    font-size: 10px;
-
-    letter-spacing: .15em;
-
-    text-transform: uppercase;
-
-    color: var(--text-soft);
+    color:var(--brown);
 
 }
 
 
-.archive-title {
+.hero-year{
 
-    padding-top: 55px;
+    font-size:10px;
 
-    text-align: center;
+    letter-spacing:.15em;
 
-}
+    text-transform:uppercase;
 
-
-.archive-title h1 {
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size:
-        clamp(80px, 13vw, 180px);
-
-    line-height: .72;
-
-    font-weight: 400;
-
-    letter-spacing: -.06em;
-
-}
-
-
-.archive-title h1 span {
-
-    display: block;
-
-    margin-left: 170px;
-
-    margin-top: 22px;
-
-    font-size: .55em;
-
-    font-style: italic;
-
-}
-
-
-.archive-subtitle {
-
-    max-width: 480px;
-
-    margin:
-
-        70px auto 0;
-
-    text-align: center;
-
-    font-size: 13px;
-
-    line-height: 1.9;
-
-    color: var(--text-soft);
+    color:var(--text-soft);
 
 }
 
 
 
 /* =========================================================
-   ARCHIVE META
+   CATEGORY TITLE
 ========================================================= */
 
-.archive-meta {
+.archive-title{
 
-    margin-top: 70px;
+    padding-top:65px;
 
-    padding:
-
-        20px 0;
-
-    border-top:
-        1px solid
-        var(--line);
-
-    border-bottom:
-        1px solid
-        var(--line);
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
+    text-align:center;
 
 }
 
 
-.entry-total {
+.archive-title h1{
 
-    font-size: 10px;
+    font-family:'Cormorant Garamond',serif;
 
-    letter-spacing: .15em;
+    font-size:clamp(80px,12vw,170px);
 
-    text-transform: uppercase;
+    line-height:.72;
 
-}
+    font-weight:400;
 
-
-.entry-total strong {
-
-    color: var(--brown);
-
-    font-weight: 400;
+    letter-spacing:-.06em;
 
 }
 
 
-.search-button {
+.archive-title h1 span{
 
-    background: none;
+    display:block;
 
-    border: none;
+    margin-left:160px;
 
-    cursor: pointer;
+    margin-top:25px;
 
-    font-size: 10px;
+    font-size:.48em;
 
-    letter-spacing: .15em;
-
-    text-transform: uppercase;
+    font-style:italic;
 
 }
 
 
-.search-button span {
+.archive-subtitle{
 
-    font-size: 17px;
+    max-width:520px;
 
-    margin-left: 8px;
+    margin:70px auto 0;
+
+    text-align:center;
+
+    font-size:13px;
+
+    line-height:1.9;
+
+    color:var(--text-soft);
 
 }
 
 
 
 /* =========================================================
-   SEARCH BOX
+   META
 ========================================================= */
 
-.search-area {
+.archive-meta{
 
-    max-height: 0;
+    margin-top:70px;
 
-    opacity: 0;
+    padding:20px 0;
 
-    overflow: hidden;
+    border-top:1px solid var(--line);
+
+    border-bottom:1px solid var(--line);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.entry-total{
+
+    font-size:10px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+}
+
+
+.entry-total strong{
+
+    color:var(--brown);
+
+    font-weight:400;
+
+}
+
+
+.search-button{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+}
+
+
+.search-button span{
+
+    font-size:18px;
+
+    margin-left:8px;
+
+}
+
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-area{
+
+    max-height:0;
+
+    opacity:0;
+
+    overflow:hidden;
 
     transition:
 
@@ -466,161 +356,147 @@ a {
 }
 
 
-.search-area.open {
+.search-area.open{
 
-    max-height: 100px;
+    max-height:100px;
 
-    opacity: 1;
-
-}
-
-
-.search-inner {
-
-    padding:
-
-        20px 0;
-
-    border-bottom:
-        1px solid
-        var(--line);
-
-    display: flex;
-
-    align-items: center;
+    opacity:1;
 
 }
 
 
-.search-inner input {
+.search-inner{
 
-    width: 100%;
+    padding:20px 0;
 
-    border: none;
+    border-bottom:1px solid var(--line);
 
-    outline: none;
+    display:flex;
 
-    background: transparent;
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 28px;
-
-    color: var(--black);
+    align-items:center;
 
 }
 
 
-.search-close {
+.search-inner input{
 
-    border: none;
+    width:100%;
 
-    background: none;
+    border:none;
 
-    cursor: pointer;
+    outline:none;
 
-    font-size: 22px;
+    background:transparent;
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:28px;
+
+    color:var(--text);
+
+}
+
+
+.search-close{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    font-size:25px;
 
 }
 
 
 
 /* =========================================================
-   FILTER + SORT
+   FILTER
 ========================================================= */
 
-.archive-controls {
+.archive-controls{
 
-    padding:
+    padding:35px 0;
 
-        35px 0;
+    display:flex;
 
-    display: flex;
+    justify-content:space-between;
 
-    justify-content: space-between;
+    align-items:center;
 
-    align-items: center;
-
-    gap: 30px;
+    gap:30px;
 
 }
 
 
-.filter-group {
+.filter-group{
 
-    display: flex;
+    display:flex;
 
-    gap: 25px;
+    gap:25px;
 
-    flex-wrap: wrap;
-
-}
-
-
-.filter-btn {
-
-    border: none;
-
-    background: none;
-
-    cursor: pointer;
-
-    padding-bottom: 7px;
-
-    font-size: 10px;
-
-    letter-spacing: .13em;
-
-    text-transform: uppercase;
-
-    color: var(--text-soft);
-
-    border-bottom:
-        1px solid
-        transparent;
-
-    transition: .3s ease;
+    flex-wrap:wrap;
 
 }
 
 
-.filter-btn:hover {
+.filter-btn{
 
-    color: var(--black);
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    padding-bottom:7px;
+
+    font-size:10px;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+
+    color:var(--text-soft);
+
+    border-bottom:1px solid transparent;
+
+    transition:.3s;
 
 }
 
 
-.filter-btn.active {
+.filter-btn:hover{
 
-    color: var(--black);
-
-    border-bottom:
-        1px solid
-        var(--black);
+    color:var(--text);
 
 }
 
 
-.sort-select {
+.filter-btn.active{
 
-    border: none;
+    color:var(--text);
 
-    background: transparent;
+    border-bottom:1px solid var(--text);
 
-    outline: none;
+}
 
-    cursor: pointer;
 
-    font-size: 10px;
+.sort-select{
 
-    letter-spacing: .13em;
+    border:none;
 
-    text-transform: uppercase;
+    background:transparent;
 
-    color: var(--black);
+    outline:none;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
 
 }
 
@@ -630,11 +506,9 @@ a {
    ARCHIVE LIST
 ========================================================= */
 
-.archive-list {
+.archive-list{
 
-    border-top:
-        1px solid
-        var(--line);
+    border-top:1px solid var(--line);
 
 }
 
@@ -644,9 +518,9 @@ a {
    ARCHIVE ITEM
 ========================================================= */
 
-.archive-item {
+.archive-item{
 
-    display: grid;
+    display:grid;
 
     grid-template-columns:
 
@@ -654,29 +528,23 @@ a {
 
         115px
 
-        minmax(250px, 1fr)
+        minmax(250px,1fr)
 
         160px
 
-        100px;
+        110px;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 30px;
+    gap:30px;
 
-    min-height: 150px;
+    min-height:150px;
 
-    padding:
+    padding:25px 0;
 
-        25px 0;
+    border-bottom:1px solid var(--line);
 
-    border-bottom:
-        1px solid
-        var(--line);
-
-    text-decoration: none;
-
-    position: relative;
+    position:relative;
 
     transition:
 
@@ -687,14 +555,13 @@ a {
 }
 
 
-.archive-item:hover {
+.archive-item:hover{
 
-    padding-left: 20px;
+    padding-left:20px;
 
-    padding-right: 20px;
+    padding-right:20px;
 
-    background:
-        rgba(255,255,255,.25);
+    background:rgba(255,255,255,.3);
 
 }
 
@@ -704,51 +571,46 @@ a {
    NUMBER
 ========================================================= */
 
-.item-number {
+.item-number{
 
-    font-family:
-        'Cormorant Garamond',
-        serif;
+    font-family:'Cormorant Garamond',serif;
 
-    font-size: 20px;
+    font-size:20px;
 
-    color: var(--brown);
+    color:var(--brown);
 
 }
 
 
 
 /* =========================================================
-   THUMBNAIL
+   IMAGE
 ========================================================= */
 
-.item-thumb {
+.item-thumb{
 
-    width: 100px;
+    width:100px;
 
-    height: 100px;
+    height:100px;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    background: var(--paper);
-
-    position: relative;
+    background:var(--paper);
 
 }
 
 
-.item-thumb img {
+.item-thumb img{
 
-    width: 100%;
+    width:100%;
 
-    height: 100%;
+    height:100%;
 
-    object-fit: cover;
+    object-fit:cover;
 
-    display: block;
+    display:block;
 
-    filter:
-        saturate(.78);
+    filter:saturate(.8);
 
     transition:
 
@@ -759,24 +621,21 @@ a {
 }
 
 
-.archive-item:hover
-.item-thumb img {
+.archive-item:hover .item-thumb img{
 
-    transform:
-        scale(1.08);
+    transform:scale(1.08);
 
-    filter:
-        saturate(1);
+    filter:saturate(1);
 
 }
 
 
 
 /* =========================================================
-   THUMBNAIL SHAPES
+   IMAGE SHAPES
 ========================================================= */
 
-.thumb-arch {
+.thumb-arch{
 
     border-radius:
 
@@ -791,23 +650,23 @@ a {
 }
 
 
-.thumb-oval {
+.thumb-oval{
 
-    height: 72px;
+    height:70px;
 
-    border-radius: 50%;
-
-}
-
-
-.thumb-round {
-
-    border-radius: 50%;
+    border-radius:50%;
 
 }
 
 
-.thumb-bottom-round {
+.thumb-round{
+
+    border-radius:50%;
+
+}
+
+
+.thumb-bottom-round{
 
     border-radius:
 
@@ -822,136 +681,129 @@ a {
 }
 
 
-.thumb-rect {
+.thumb-rect{
 
-    border-radius: 0;
-
-}
-
-
-
-/* =========================================================
-   TITLE AREA
-========================================================= */
-
-.item-main {
-
-    min-width: 0;
-
-}
-
-
-.item-category {
-
-    display: block;
-
-    margin-bottom: 9px;
-
-    font-size: 9px;
-
-    letter-spacing: .14em;
-
-    text-transform: uppercase;
-
-    color: var(--brown);
-
-}
-
-
-.item-title {
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 34px;
-
-    line-height: .95;
-
-    font-weight: 500;
-
-    letter-spacing: -.02em;
-
-    transition:
-
-        transform .35s ease;
-
-}
-
-
-.archive-item:hover
-.item-title {
-
-    transform:
-        translateX(5px);
-
-}
-
-
-.item-description {
-
-    font-size: 11px;
-
-    line-height: 1.6;
-
-    color: var(--text-soft);
+    border-radius:0;
 
 }
 
 
 
 /* =========================================================
-   YEAR
+   CONTENT
 ========================================================= */
 
-.item-year {
+.item-category{
 
-    font-size: 10px;
+    display:block;
 
-    letter-spacing: .12em;
+    margin-bottom:9px;
 
-    text-transform: uppercase;
+    font-size:9px;
 
-    color: var(--text-soft);
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+    color:var(--brown);
+
+}
+
+
+.item-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:34px;
+
+    line-height:.95;
+
+    font-weight:500;
+
+    letter-spacing:-.02em;
+
+    transition:.35s;
+
+}
+
+
+.archive-item:hover .item-title{
+
+    transform:translateX(5px);
+
+}
+
+
+.item-description{
+
+    margin-top:10px;
+
+    font-size:11px;
+
+    line-height:1.6;
+
+    color:var(--text-soft);
+
+}
+
+
+.item-year{
+
+    font-size:10px;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    color:var(--text-soft);
+
+}
+
+
+.item-view{
+
+    justify-self:end;
+
+    font-size:9px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    opacity:.5;
+
+    transition:.3s;
+
+}
+
+
+.archive-item:hover .item-view{
+
+    opacity:1;
+
+    transform:translateX(5px);
 
 }
 
 
 
 /* =========================================================
-   VIEW
+   NO RESULT
 ========================================================= */
 
-.item-view {
+.no-results{
 
-    justify-self: end;
+    display:none;
 
-    font-size: 9px;
+    padding:80px 0;
 
-    letter-spacing: .15em;
+    text-align:center;
 
-    text-transform: uppercase;
+    font-family:'Cormorant Garamond',serif;
 
-    white-space: nowrap;
+    font-size:30px;
 
-    opacity: .5;
-
-    transition:
-
-        opacity .3s ease,
-
-        transform .3s ease;
-
-}
-
-
-.archive-item:hover
-.item-view {
-
-    opacity: 1;
-
-    transform:
-        translateX(5px);
+    color:var(--text-soft);
 
 }
 
@@ -961,74 +813,43 @@ a {
    LOAD MORE
 ========================================================= */
 
-.load-more-area {
+.load-more-area{
 
-    display: flex;
+    display:flex;
 
-    justify-content: center;
+    justify-content:center;
 
-    padding:
-
-        70px 0
-
-        120px;
+    padding:70px 0 120px;
 
 }
 
 
-.load-more {
+.load-more{
 
-    border: none;
+    border:none;
 
-    background: none;
+    background:none;
 
-    cursor: pointer;
+    cursor:pointer;
 
-    padding:
+    padding:14px 25px;
 
-        14px 25px;
+    border-bottom:1px solid var(--text);
 
-    border-bottom:
-        1px solid
-        var(--black);
+    font-size:10px;
 
-    font-size: 10px;
+    letter-spacing:.15em;
 
-    letter-spacing: .15em;
+    text-transform:uppercase;
 
-    text-transform: uppercase;
-
-    transition:
-
-        letter-spacing .3s ease;
+    transition:.3s;
 
 }
 
 
-.load-more:hover {
+.load-more:hover{
 
-    letter-spacing: .22em;
-
-}
-
-
-.no-results {
-
-    display: none;
-
-    padding:
-
-        80px 0;
-
-    text-align: center;
-
-    font-family:
-        'Cormorant Garamond',
-        serif;
-
-    font-size: 30px;
-
-    color: var(--text-soft);
+    letter-spacing:.22em;
 
 }
 
@@ -1038,265 +859,176 @@ a {
    FOOTER
 ========================================================= */
 
-.archive-footer {
+.archive-footer{
 
-    padding:
-
-        0 6vw
-
-        60px;
+    padding:0 6vw 60px;
 
 }
 
 
-.footer-line {
+.footer-line{
 
-    height: 1px;
+    height:1px;
 
-    background:
-        var(--line);
+    background:var(--line);
 
-    margin-bottom: 20px;
+    margin-bottom:20px;
 
 }
 
 
-.footer-inner {
+.footer-inner{
 
-    display: flex;
+    display:flex;
 
-    justify-content: space-between;
+    justify-content:space-between;
 
-    font-size: 9px;
+    font-size:9px;
 
-    letter-spacing: .14em;
+    letter-spacing:.14em;
 
-    text-transform: uppercase;
+    text-transform:uppercase;
 
-    color: var(--text-soft);
+    color:var(--text-soft);
 
 }
 
 
 
 /* =========================================================
-   RESPONSIVE TABLET
+   MOBILE
 ========================================================= */
 
-@media (max-width: 1000px) {
+@media(max-width:700px){
 
+    .nav{
 
-    .archive-item {
-
-        grid-template-columns:
-
-            55px
-
-            100px
-
-            minmax(180px, 1fr)
-
-            90px;
-
-        gap: 20px;
+        gap:20px;
 
     }
 
 
-    .item-description {
+    .nav a{
 
-        display: none;
-
-    }
-
-
-    .item-title {
-
-        font-size: 30px;
+        font-size:12px;
 
     }
 
 
-    .item-thumb {
+    .archive-page{
 
-        width: 85px;
-
-        height: 85px;
-
-    }
-
-}
-
-
-
-/* =========================================================
-   RESPONSIVE MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-
-    .site-nav a {
-
-        min-width: 25vw;
-
-        padding: 0 8px;
-
-        font-size: 8px;
+        width:100%;
 
     }
 
 
-    .archive-page {
-
-        width: 100%;
-
-    }
-
-
-    .archive-hero {
+    .archive-hero{
 
         padding:
 
-            80px 25px
-
-            50px;
+            70px 25px 40px;
 
     }
 
 
-    .hero-topline {
+    .archive-title h1{
 
-        font-size: 9px;
-
-    }
-
-
-    .archive-title h1 {
-
-        font-size: 70px;
+        font-size:70px;
 
     }
 
 
-    .archive-title h1 span {
+    .archive-title h1 span{
 
-        margin-left: 55px;
-
-    }
-
-
-    .archive-subtitle {
-
-        font-size: 12px;
-
-        margin-top: 55px;
+        margin-left:60px;
 
     }
 
 
-    .archive-meta {
+    .archive-subtitle{
 
-        margin-top: 55px;
-
-    }
-
-
-    .archive-controls {
-
-        padding:
-
-            25px;
-
-        flex-direction: column;
-
-        align-items: flex-start;
+        margin-top:55px;
 
     }
 
 
-    .filter-group {
+    .archive-meta{
 
-        gap: 18px;
-
-    }
-
-
-    .archive-list {
-
-        margin: 0 25px;
+        margin-top:55px;
 
     }
 
 
-    .archive-item {
+    .archive-controls{
+
+        padding:25px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+
+    .archive-list{
+
+        margin:0 25px;
+
+    }
+
+
+    .archive-item{
 
         grid-template-columns:
 
-            50px
+            45px
 
-            75px
+            70px
 
             1fr;
 
-        gap: 18px;
+        gap:15px;
 
-        min-height: 125px;
+        min-height:120px;
 
-        padding:
-
-            20px 0;
+        padding:20px 0;
 
     }
 
 
-    .archive-item:hover {
+    .item-thumb{
 
-        padding-left: 10px;
+        width:65px;
 
-        padding-right: 10px;
-
-    }
-
-
-    .item-thumb {
-
-        width: 70px;
-
-        height: 70px;
+        height:65px;
 
     }
 
 
-    .item-title {
+    .item-title{
 
-        font-size: 26px;
-
-    }
-
-
-    .item-category {
-
-        font-size: 8px;
+        font-size:25px;
 
     }
 
 
-    .item-year {
+    .item-description{
 
-        display: none;
-
-    }
-
-
-    .item-view {
-
-        display: none;
+        display:none;
 
     }
 
 
-    .load-more-area {
+    .item-year,
+
+    .item-view{
+
+        display:none;
+
+    }
+
+
+    .load-more-area{
 
         padding:
 
@@ -1307,84 +1039,11 @@ a {
     }
 
 
-    .archive-footer {
+    .footer-inner{
 
-        padding:
+        flex-direction:column;
 
-            0 25px
-
-            50px;
-
-    }
-
-
-    .footer-inner {
-
-        flex-direction: column;
-
-        gap: 10px;
-
-    }
-
-}
-
-
-
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
-
-@media (max-width: 420px) {
-
-
-    .archive-title h1 {
-
-        font-size: 58px;
-
-    }
-
-
-    .archive-title h1 span {
-
-        margin-left: 30px;
-
-    }
-
-
-    .item-number {
-
-        font-size: 16px;
-
-    }
-
-
-    .item-title {
-
-        font-size: 23px;
-
-    }
-
-
-    .archive-item {
-
-        grid-template-columns:
-
-            35px
-
-            65px
-
-            1fr;
-
-        gap: 13px;
-
-    }
-
-
-    .item-thumb {
-
-        width: 62px;
-
-        height: 62px;
+        gap:10px;
 
     }
 
@@ -1400,25 +1059,33 @@ a {
 
 
 <!-- =========================================================
-     EXISTING WEBSITE NAVIGATION
+     NAVIGATION
 ========================================================= -->
 
 <div class="nav">
 
-    <a href="index.html">Main</a>
+    <a href="index.html">
+        Main
+    </a>
 
-    <a href="research.html">Research</a>
+    <a href="research.html">
+        Research
+    </a>
 
-    <a href="cv.html">CV</a>
+    <a href="cv.html">
+        CV
+    </a>
 
-    <a href="news.html">News</a>
+    <a href="news.html">
+        News
+    </a>
 
 </div>
 
 
 
 <!-- =========================================================
-     MAIN
+     PAGE
 ========================================================= -->
 
 <main class="archive-page">
@@ -1431,28 +1098,34 @@ a {
 
 <section class="archive-hero">
 
-
     <div class="hero-topline">
 
-        <span class="hero-label">
-            Choi Yuri · Research
+        <span
+            class="hero-label"
+            id="heroLabel"
+        >
+            Choi Yuri · Archive
         </span>
 
-        <span class="hero-year">
+        <span
+            class="hero-year"
+            id="heroYear"
+        >
             Archive / 2026
         </span>
 
     </div>
 
 
+
     <div class="archive-title">
 
-        <h1>
+        <h1 id="archiveTitle">
 
-            Research
+            Archive
 
             <span>
-                Archive
+                Collection
             </span>
 
         </h1>
@@ -1460,13 +1133,19 @@ a {
     </div>
 
 
-    <p class="archive-subtitle">
 
-        A collection of research projects,
-        publications, experiments, and ideas
-        developed throughout my academic journey.
+    <p
+        class="archive-subtitle"
+        id="archiveSubtitle"
+    >
+
+        A collection of research,
+        academic experiences,
+        travels and moments
+        gathered throughout my journey.
 
     </p>
+
 
 
     <div class="archive-meta">
@@ -1474,12 +1153,13 @@ a {
         <span class="entry-total">
 
             <strong id="visibleCount">
-                05
+                00
             </strong>
 
             Entries
 
         </span>
+
 
 
         <button
@@ -1489,14 +1169,11 @@ a {
 
             Search
 
-            <span>
-                ⌕
-            </span>
+            <span>⌕</span>
 
         </button>
 
     </div>
-
 
 </section>
 
@@ -1516,7 +1193,7 @@ a {
         <input
             type="text"
             id="searchInput"
-            placeholder="Search research archive..."
+            placeholder="Search archive..."
         >
 
         <button
@@ -1538,41 +1215,13 @@ a {
 
 <section class="archive-controls">
 
-
-    <div class="filter-group">
-
-        <button
-            class="filter-btn active"
-            data-filter="all"
-        >
-            All
-        </button>
-
-
-        <button
-            class="filter-btn"
-            data-filter="project"
-        >
-            Projects
-        </button>
-
-
-        <button
-            class="filter-btn"
-            data-filter="publication"
-        >
-            Publications
-        </button>
-
-
-        <button
-            class="filter-btn"
-            data-filter="note"
-        >
-            Notes
-        </button>
+    <div
+        class="filter-group"
+        id="filterGroup"
+    >
 
     </div>
+
 
 
     <select
@@ -1594,7 +1243,6 @@ a {
 
     </select>
 
-
 </section>
 
 
@@ -1608,293 +1256,13 @@ a {
     id="archiveList"
 >
 
-
-
-<!-- ENTRY 01 -->
-
-<a
-    href="MinimalPortfolioDesign.html"
-    class="archive-item"
-    data-type="project"
-    data-year="2026"
-    data-title="Dual Metabolic Therapy"
->
-
-    <span class="item-number">
-        01
-    </span>
-
-
-    <div class="item-thumb thumb-arch">
-
-        <img
-            src="research1.jpg"
-            alt="Dual Metabolic Therapy"
-        >
-
-    </div>
-
-
-    <div class="item-main">
-
-        <span class="item-category">
-            Research Project
-        </span>
-
-        <h2 class="item-title">
-            Dual Metabolic Therapy
-        </h2>
-
-        <p class="item-description">
-            PLGA-PEG nanoparticle platform
-            for dual metabolic inhibition.
-        </p>
-
-    </div>
-
-
-    <span class="item-year">
-        2026
-    </span>
-
-
-    <span class="item-view">
-        View Entry →
-    </span>
-
-</a>
-
-
-
-<!-- ENTRY 02 -->
-
-<a
-    href="MinimalPortfolioDesign.html"
-    class="archive-item"
-    data-type="publication"
-    data-year="2026"
-    data-title="Paper Writing"
->
-
-    <span class="item-number">
-        02
-    </span>
-
-
-    <div class="item-thumb thumb-oval">
-
-        <img
-            src="research2.jpg"
-            alt="Paper Writing"
-        >
-
-    </div>
-
-
-    <div class="item-main">
-
-        <span class="item-category">
-            Publication
-        </span>
-
-        <h2 class="item-title">
-            Paper Writing
-        </h2>
-
-        <p class="item-description">
-            Manuscript preparation and
-            scientific communication.
-        </p>
-
-    </div>
-
-
-    <span class="item-year">
-        2026
-    </span>
-
-
-    <span class="item-view">
-        View Entry →
-    </span>
-
-</a>
-
-
-
-<!-- ENTRY 03 -->
-
-<a
-    href="MinimalPortfolioDesign.html"
-    class="archive-item"
-    data-type="project"
-    data-year="2025"
-    data-title="PLGA-PEG Nanoparticle Platform"
->
-
-    <span class="item-number">
-        03
-    </span>
-
-
-    <div class="item-thumb thumb-round">
-
-        <img
-            src="research3.jpg"
-            alt="PLGA PEG Nanoparticle Platform"
-        >
-
-    </div>
-
-
-    <div class="item-main">
-
-        <span class="item-category">
-            Research Project
-        </span>
-
-        <h2 class="item-title">
-            PLGA-PEG Nanoparticle Platform
-        </h2>
-
-        <p class="item-description">
-            Development of a nanoparticle-based
-            drug delivery platform.
-        </p>
-
-    </div>
-
-
-    <span class="item-year">
-        2025
-    </span>
-
-
-    <span class="item-view">
-        View Entry →
-    </span>
-
-</a>
-
-
-
-<!-- ENTRY 04 -->
-
-<a
-    href="MinimalPortfolioDesign.html"
-    class="archive-item"
-    data-type="note"
-    data-year="2025"
-    data-title="Cancer Metabolism"
->
-
-    <span class="item-number">
-        04
-    </span>
-
-
-    <div class="item-thumb thumb-rect">
-
-        <img
-            src="research4.jpg"
-            alt="Cancer Metabolism"
-        >
-
-    </div>
-
-
-    <div class="item-main">
-
-        <span class="item-category">
-            Research Note
-        </span>
-
-        <h2 class="item-title">
-            Cancer Metabolism
-        </h2>
-
-        <p class="item-description">
-            Exploring metabolic vulnerabilities
-            of cancer cells.
-        </p>
-
-    </div>
-
-
-    <span class="item-year">
-        2025
-    </span>
-
-
-    <span class="item-view">
-        View Entry →
-    </span>
-
-</a>
-
-
-
-<!-- ENTRY 05 -->
-
-<a
-    href="MinimalPortfolioDesign.html"
-    class="archive-item"
-    data-type="note"
-    data-year="2024"
-    data-title="Metabolic Therapy Notes"
->
-
-    <span class="item-number">
-        05
-    </span>
-
-
-    <div class="item-thumb thumb-bottom-round">
-
-        <img
-            src="research5.jpg"
-            alt="Metabolic Therapy Notes"
-        >
-
-    </div>
-
-
-    <div class="item-main">
-
-        <span class="item-category">
-            Research Note
-        </span>
-
-        <h2 class="item-title">
-            Metabolic Therapy Notes
-        </h2>
-
-        <p class="item-description">
-            Thoughts and observations gathered
-            throughout the research process.
-        </p>
-
-    </div>
-
-
-    <span class="item-year">
-        2024
-    </span>
-
-
-    <span class="item-view">
-        View Entry →
-    </span>
-
-</a>
-
-
-
 </section>
 
 
 
-<!-- NO RESULTS -->
+<!-- =========================================================
+     NO RESULTS
+========================================================= -->
 
 <div
     class="no-results"
@@ -1911,7 +1279,10 @@ a {
      LOAD MORE
 ========================================================= -->
 
-<div class="load-more-area">
+<div
+    class="load-more-area"
+    id="loadMoreArea"
+>
 
     <button
         class="load-more"
@@ -1937,11 +1308,11 @@ a {
     <div class="footer-inner">
 
         <span>
-            Research Archive
+            Yuri Choi Archive
         </span>
 
         <span>
-            Yuri Choi · 2026
+            Research · Academic · Travel · Life
         </span>
 
     </div>
@@ -1949,80 +1320,398 @@ a {
 </footer>
 
 
-
 </main>
 
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
 <script>
+
+/* =========================================================
+   CONTENT DATABASE
+   여기만 추가하면 콘텐츠가 늘어남
+========================================================= */
+
+
+const archiveData = {
+
+
+/* =========================================================
+   RESEARCH
+========================================================= */
+
+research:{
+
+    label:"Choi Yuri · Research",
+
+    title:"Research",
+
+    subtitle:
+    "A collection of research projects, publications, experiments, and ideas developed throughout my academic journey.",
+
+    filters:[
+        ["all","All"],
+        ["project","Projects"],
+        ["publication","Publications"],
+        ["note","Notes"]
+    ],
+
+    items:[
+
+        {
+            title:"Dual Metabolic Therapy",
+            type:"project",
+            category:"Research Project",
+            year:2026,
+            description:
+            "PLGA-PEG nanoparticle platform for dual metabolic inhibition.",
+            image:"research1.jpg",
+            shape:"thumb-arch",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"Paper Writing",
+            type:"publication",
+            category:"Publication",
+            year:2026,
+            description:
+            "Manuscript preparation and scientific communication.",
+            image:"research2.jpg",
+            shape:"thumb-oval",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"PLGA-PEG Nanoparticle Platform",
+            type:"project",
+            category:"Research Project",
+            year:2025,
+            description:
+            "Development of a nanoparticle-based drug delivery platform.",
+            image:"research3.jpg",
+            shape:"thumb-round",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"Cancer Metabolism",
+            type:"note",
+            category:"Research Note",
+            year:2025,
+            description:
+            "Exploring metabolic vulnerabilities of cancer cells.",
+            image:"research4.jpg",
+            shape:"thumb-rect",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"Metabolic Therapy Notes",
+            type:"note",
+            category:"Research Note",
+            year:2024,
+            description:
+            "Thoughts and observations gathered throughout the research process.",
+            image:"research5.jpg",
+            shape:"thumb-bottom-round",
+            link:"MinimalPortfolioDesign.html"
+        }
+
+    ]
+
+},
+
+
+
+/* =========================================================
+   ACADEMIC
+========================================================= */
+
+academic:{
+
+    label:"Choi Yuri · Academic",
+
+    title:"Academic",
+
+    subtitle:
+    "Conferences, certifications, awards, language learning, and continuous academic growth.",
+
+    filters:[
+        ["all","All"],
+        ["conference","Conference"],
+        ["certificate","Certificates"],
+        ["language","Language"],
+        ["award","Awards"]
+    ],
+
+    items:[
+
+        {
+            title:"ACS Spring 2026",
+            type:"conference",
+            category:"Conference",
+            year:2026,
+            description:
+            "Poster presentation and academic networking.",
+            image:"academic1.jpg",
+            shape:"thumb-arch",
+            link:"ribon.html"
+        },
+
+        {
+            title:"Python Programming",
+            type:"certificate",
+            category:"Certificate",
+            year:2026,
+            description:
+            "Programming and data analysis studies.",
+            image:"academic2.jpg",
+            shape:"thumb-round",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"German Language Study",
+            type:"language",
+            category:"Language",
+            year:2026,
+            description:
+            "German language learning and B1 preparation.",
+            image:"academic3.jpg",
+            shape:"thumb-oval",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"Academic Achievement",
+            type:"award",
+            category:"Award",
+            year:2026,
+            description:
+            "Academic achievement and scholarship.",
+            image:"academic4.jpg",
+            shape:"thumb-bottom-round",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"TOEFL Preparation",
+            type:"language",
+            category:"Language",
+            year:2025,
+            description:
+            "Academic English and communication preparation.",
+            image:"academic5.jpg",
+            shape:"thumb-rect",
+            link:"MinimalPortfolioDesign.html"
+        }
+
+    ]
+
+},
+
+
+
+/* =========================================================
+   TRAVEL
+========================================================= */
+
+travel:{
+
+    label:"Choi Yuri · Travel",
+
+    title:"Travel",
+
+    subtitle:
+    "Places, landscapes, and quiet moments that became part of my personal archive.",
+
+    filters:[
+        ["all","All"],
+        ["journey","Journeys"],
+        ["nature","Nature"],
+        ["city","Cities"]
+    ],
+
+    items:[
+
+        {
+            title:"Switzerland",
+            type:"journey",
+            category:"Travel Journal",
+            year:2026,
+            description:
+            "Alps, mountains, and personal inspiration.",
+            image:"travel1.jpg",
+            shape:"thumb-arch",
+            link:"FilmArchiveDesign.html"
+        },
+
+        {
+            title:"Swiss Alps",
+            type:"nature",
+            category:"Nature",
+            year:2026,
+            description:
+            "A visual diary of the Alps.",
+            image:"travel2.jpg",
+            shape:"thumb-round",
+            link:"FloristGardenDesign.html"
+        },
+
+        {
+            title:"Mountain Journey",
+            type:"journey",
+            category:"Journey",
+            year:2026,
+            description:
+            "Walking through landscapes and quiet places.",
+            image:"travel3.jpg",
+            shape:"thumb-oval",
+            link:"FloristGardenDesign.html"
+        }
+
+    ]
+
+},
+
+
+
+/* =========================================================
+   LIFE
+========================================================= */
+
+life:{
+
+    label:"Choi Yuri · Life & Style",
+
+    title:"Life & Style",
+
+    subtitle:
+    "Small moments of beauty, wellness, creativity, and everyday inspiration.",
+
+    filters:[
+        ["all","All"],
+        ["beauty","Beauty"],
+        ["wellness","Wellness"],
+        ["home","Home"],
+        ["hobby","Hobbies"]
+    ],
+
+    items:[
+
+        {
+            title:"Beauty & Lifestyle",
+            type:"beauty",
+            category:"Beauty",
+            year:2026,
+            description:
+            "Daily inspiration, beauty, and personal aesthetics.",
+            image:"life1.jpg",
+            shape:"thumb-arch",
+            link:"MinimalPortfolioDesign.html"
+        },
+
+        {
+            title:"Sports & Wellness",
+            type:"wellness",
+            category:"Wellness",
+            year:2026,
+            description:
+            "Movement, wellness, and maintaining balance.",
+            image:"life2.jpg",
+            shape:"thumb-round",
+            link:"CeramicShopDesign.html"
+        },
+
+        {
+            title:"Home & Decor",
+            type:"home",
+            category:"Home",
+            year:2026,
+            description:
+            "Spaces, objects, and small details at home.",
+            image:"life3.jpg",
+            shape:"thumb-oval",
+            link:"HomeBakingDesign.html"
+        },
+
+        {
+            title:"Home Baking",
+            type:"hobby",
+            category:"Hobbies",
+            year:2026,
+            description:
+            "Baking, making, and creating something by hand.",
+            image:"life4.jpg",
+            shape:"thumb-bottom-round",
+            link:"HomeBakingDesign.html"
+        },
+
+        {
+            title:"Mind & Balance",
+            type:"wellness",
+            category:"Wellness",
+            year:2025,
+            description:
+            "Thoughts on balance, growth, and everyday life.",
+            image:"life5.jpg",
+            shape:"thumb-rect",
+            link:"ModernMaturity.html"
+        }
+
+    ]
+
+}
+
+};
+
 
 
 /* =========================================================
    ELEMENTS
 ========================================================= */
 
-const searchButton =
-    document.getElementById(
-        'searchButton'
-    );
+const archiveTitle =
+document.getElementById("archiveTitle");
 
+const archiveSubtitle =
+document.getElementById("archiveSubtitle");
 
-const searchArea =
-    document.getElementById(
-        'searchArea'
-    );
+const heroLabel =
+document.getElementById("heroLabel");
 
-
-const searchClose =
-    document.getElementById(
-        'searchClose'
-    );
-
-
-const searchInput =
-    document.getElementById(
-        'searchInput'
-    );
-
-
-const filterButtons =
-    document.querySelectorAll(
-        '.filter-btn'
-    );
-
-
-const sortSelect =
-    document.getElementById(
-        'sortSelect'
-    );
-
+const filterGroup =
+document.getElementById("filterGroup");
 
 const archiveList =
-    document.getElementById(
-        'archiveList'
-    );
-
+document.getElementById("archiveList");
 
 const visibleCount =
-    document.getElementById(
-        'visibleCount'
-    );
-
+document.getElementById("visibleCount");
 
 const noResults =
-    document.getElementById(
-        'noResults'
-    );
-
+document.getElementById("noResults");
 
 const loadMore =
-    document.getElementById(
-        'loadMore'
-    );
+document.getElementById("loadMore");
+
+const loadMoreArea =
+document.getElementById("loadMoreArea");
+
+const searchButton =
+document.getElementById("searchButton");
+
+const searchArea =
+document.getElementById("searchArea");
+
+const searchInput =
+document.getElementById("searchInput");
+
+const searchClose =
+document.getElementById("searchClose");
+
+const sortSelect =
+document.getElementById("sortSelect");
 
 
 
@@ -2030,9 +1719,11 @@ const loadMore =
    VARIABLES
 ========================================================= */
 
-let currentFilter = 'all';
+let currentSection = "research";
 
-let currentSearch = '';
+let currentFilter = "all";
+
+let currentSearch = "";
 
 let visibleItems = 5;
 
@@ -2041,15 +1732,438 @@ const itemsPerLoad = 5;
 
 
 /* =========================================================
+   GET SECTION FROM URL
+========================================================= */
+
+function getSection(){
+
+    const hash =
+    window.location.hash
+    .replace("#","")
+    .toLowerCase();
+
+    if(archiveData[hash]){
+
+        return hash;
+
+    }
+
+    return "research";
+
+}
+
+
+
+/* =========================================================
+   LOAD SECTION
+========================================================= */
+
+function loadSection(){
+
+    currentSection =
+    getSection();
+
+    const data =
+    archiveData[currentSection];
+
+
+    currentFilter =
+    "all";
+
+    currentSearch =
+    "";
+
+    visibleItems =
+    5;
+
+
+    searchInput.value =
+    "";
+
+
+    heroLabel.textContent =
+    data.label;
+
+
+    archiveTitle.innerHTML =
+    `${data.title}<span>Archive</span>`;
+
+
+    archiveSubtitle.textContent =
+    data.subtitle;
+
+
+    createFilters(
+        data.filters
+    );
+
+
+    renderArchive();
+
+}
+
+
+
+/* =========================================================
+   CREATE FILTER BUTTONS
+========================================================= */
+
+function createFilters(filters){
+
+    filterGroup.innerHTML =
+    "";
+
+
+    filters.forEach(
+        filter => {
+
+            const button =
+            document.createElement(
+                "button"
+            );
+
+
+            button.className =
+            "filter-btn";
+
+
+            if(
+                filter[0] === "all"
+            ){
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            button.dataset.filter =
+            filter[0];
+
+
+            button.textContent =
+            filter[1];
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                    .querySelectorAll(
+                        ".filter-btn"
+                    )
+                    .forEach(
+                        btn =>
+                        btn.classList
+                        .remove(
+                            "active"
+                        )
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    currentFilter =
+                    button.dataset.filter;
+
+
+                    visibleItems =
+                    5;
+
+
+                    renderArchive();
+
+                }
+            );
+
+
+            filterGroup.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   SORT
+========================================================= */
+
+function getSortedItems(){
+
+    const data =
+    archiveData[currentSection];
+
+
+    let items =
+    [...data.items];
+
+
+    if(
+        currentFilter !== "all"
+    ){
+
+        items =
+        items.filter(
+            item =>
+            item.type ===
+            currentFilter
+        );
+
+    }
+
+
+    if(
+        currentSearch
+    ){
+
+        items =
+        items.filter(
+            item =>
+
+            item.title
+            .toLowerCase()
+            .includes(
+                currentSearch
+            )
+
+            ||
+
+            item.description
+            .toLowerCase()
+            .includes(
+                currentSearch
+            )
+
+        );
+
+    }
+
+
+    if(
+        sortSelect.value ===
+        "latest"
+    ){
+
+        items.sort(
+            (a,b) =>
+            b.year - a.year
+        );
+
+    }
+
+
+    if(
+        sortSelect.value ===
+        "oldest"
+    ){
+
+        items.sort(
+            (a,b) =>
+            a.year - b.year
+        );
+
+    }
+
+
+    if(
+        sortSelect.value ===
+        "az"
+    ){
+
+        items.sort(
+            (a,b) =>
+            a.title.localeCompare(
+                b.title
+            )
+        );
+
+    }
+
+
+    return items;
+
+}
+
+
+
+/* =========================================================
+   RENDER ARCHIVE
+========================================================= */
+
+function renderArchive(){
+
+    const items =
+    getSortedItems();
+
+
+    archiveList.innerHTML =
+    "";
+
+
+    visibleCount.textContent =
+    String(
+        items.length
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+    if(
+        items.length === 0
+    ){
+
+        noResults.style.display =
+        "block";
+
+        loadMoreArea.style.display =
+        "none";
+
+        return;
+
+    }
+
+
+    noResults.style.display =
+    "none";
+
+
+    const visible =
+    items.slice(
+        0,
+        visibleItems
+    );
+
+
+    visible.forEach(
+        (item,index) => {
+
+
+            const article =
+            document.createElement(
+                "a"
+            );
+
+
+            article.className =
+            "archive-item";
+
+
+            article.href =
+            item.link;
+
+
+            article.innerHTML = `
+
+                <span class="item-number">
+
+                    ${String(
+                        index + 1
+                    ).padStart(
+                        2,
+                        "0"
+                    )}
+
+                </span>
+
+
+                <div class="item-thumb ${item.shape}">
+
+                    <img
+                        src="${item.image}"
+                        alt="${item.title}"
+                    >
+
+                </div>
+
+
+                <div class="item-main">
+
+                    <span class="item-category">
+
+                        ${item.category}
+
+                    </span>
+
+
+                    <h2 class="item-title">
+
+                        ${item.title}
+
+                    </h2>
+
+
+                    <p class="item-description">
+
+                        ${item.description}
+
+                    </p>
+
+                </div>
+
+
+                <span class="item-year">
+
+                    ${item.year}
+
+                </span>
+
+
+                <span class="item-view">
+
+                    View Entry →
+
+                </span>
+
+            `;
+
+
+            archiveList.appendChild(
+                article
+            );
+
+        }
+    );
+
+
+    if(
+        visibleItems <
+        items.length
+    ){
+
+        loadMoreArea.style.display =
+        "flex";
+
+    }else{
+
+        loadMoreArea.style.display =
+        "none";
+
+    }
+
+}
+
+
+
+/* =========================================================
    SEARCH OPEN
 ========================================================= */
 
 searchButton.addEventListener(
-    'click',
+    "click",
     () => {
 
         searchArea.classList.add(
-            'open'
+            "open"
         );
 
         searchInput.focus();
@@ -2064,18 +2178,20 @@ searchButton.addEventListener(
 ========================================================= */
 
 searchClose.addEventListener(
-    'click',
+    "click",
     () => {
 
-        searchInput.value = '';
+        searchInput.value =
+        "";
 
-        currentSearch = '';
+        currentSearch =
+        "";
 
         searchArea.classList.remove(
-            'open'
+            "open"
         );
 
-        updateArchive();
+        renderArchive();
 
     }
 );
@@ -2087,57 +2203,20 @@ searchClose.addEventListener(
 ========================================================= */
 
 searchInput.addEventListener(
-    'input',
+    "input",
     () => {
 
         currentSearch =
-            searchInput.value
-            .toLowerCase()
-            .trim();
-
-        visibleItems = 5;
-
-        updateArchive();
-
-    }
-);
+        searchInput.value
+        .toLowerCase()
+        .trim();
 
 
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-filterButtons.forEach(
-    button => {
-
-        button.addEventListener(
-            'click',
-            () => {
-
-                filterButtons
-                    .forEach(
-                        btn =>
-                            btn.classList
-                            .remove('active')
-                    );
+        visibleItems =
+        5;
 
 
-                button.classList.add(
-                    'active'
-                );
-
-
-                currentFilter =
-                    button.dataset.filter;
-
-
-                visibleItems = 5;
-
-                updateArchive();
-
-            }
-        );
+        renderArchive();
 
     }
 );
@@ -2149,245 +2228,13 @@ filterButtons.forEach(
 ========================================================= */
 
 sortSelect.addEventListener(
-    'change',
+    "change",
     () => {
 
-        sortItems();
-
-        updateArchive();
+        renderArchive();
 
     }
 );
-
-
-
-/* =========================================================
-   SORT FUNCTION
-========================================================= */
-
-function sortItems() {
-
-
-    const items =
-        Array.from(
-            document.querySelectorAll(
-                '.archive-item'
-            )
-        );
-
-
-    const sortType =
-        sortSelect.value;
-
-
-    items.sort(
-        (a, b) => {
-
-
-            if (
-                sortType ===
-                'latest'
-            ) {
-
-                return (
-                    Number(
-                        b.dataset.year
-                    )
-                    -
-                    Number(
-                        a.dataset.year
-                    )
-                );
-
-            }
-
-
-            if (
-                sortType ===
-                'oldest'
-            ) {
-
-                return (
-                    Number(
-                        a.dataset.year
-                    )
-                    -
-                    Number(
-                        b.dataset.year
-                    )
-                );
-
-            }
-
-
-            if (
-                sortType ===
-                'az'
-            ) {
-
-                return (
-                    a.dataset.title
-                    .localeCompare(
-                        b.dataset.title
-                    )
-                );
-
-            }
-
-        }
-    );
-
-
-    items.forEach(
-        item => {
-
-            archiveList.appendChild(
-                item
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
-   UPDATE ARCHIVE
-========================================================= */
-
-function updateArchive() {
-
-
-    const items =
-        Array.from(
-            document.querySelectorAll(
-                '.archive-item'
-            )
-        );
-
-
-    let matchedItems = [];
-
-
-    items.forEach(
-        (item, index) => {
-
-
-            const type =
-                item.dataset.type;
-
-
-            const title =
-                item.dataset.title
-                .toLowerCase();
-
-
-            const matchesFilter =
-                currentFilter === 'all'
-                ||
-                type === currentFilter;
-
-
-            const matchesSearch =
-                title.includes(
-                    currentSearch
-                );
-
-
-            if (
-                matchesFilter
-                &&
-                matchesSearch
-            ) {
-
-                matchedItems.push(
-                    item
-                );
-
-            }
-
-        }
-    );
-
-
-
-    items.forEach(
-        item => {
-
-            item.style.display =
-                'none';
-
-        }
-    );
-
-
-
-    matchedItems
-        .slice(
-            0,
-            visibleItems
-        )
-        .forEach(
-            item => {
-
-                item.style.display =
-                    'grid';
-
-            }
-        );
-
-
-
-    /* Update count */
-
-    visibleCount.textContent =
-        String(
-            matchedItems.length
-        ).padStart(
-            2,
-            '0'
-        );
-
-
-
-    /* No results */
-
-    if (
-        matchedItems.length === 0
-    ) {
-
-        noResults.style.display =
-            'block';
-
-    } else {
-
-        noResults.style.display =
-            'none';
-
-    }
-
-
-
-    /* Load More */
-
-    if (
-        visibleItems
-        <
-        matchedItems.length
-    ) {
-
-        loadMore.style.display =
-            'block';
-
-    } else {
-
-        loadMore.style.display =
-            'none';
-
-    }
-
-}
 
 
 
@@ -2396,13 +2243,37 @@ function updateArchive() {
 ========================================================= */
 
 loadMore.addEventListener(
-    'click',
+    "click",
     () => {
 
         visibleItems +=
-            itemsPerLoad;
+        itemsPerLoad;
 
-        updateArchive();
+        renderArchive();
+
+    }
+);
+
+
+
+/* =========================================================
+   HASH CHANGE
+   archive.html#research
+   archive.html#academic
+   archive.html#travel
+   archive.html#life
+========================================================= */
+
+window.addEventListener(
+    "hashchange",
+    () => {
+
+        loadSection();
+
+        window.scrollTo(
+            0,
+            0
+        );
 
     }
 );
@@ -2413,15 +2284,11 @@ loadMore.addEventListener(
    INITIALIZE
 ========================================================= */
 
-sortItems();
-
-updateArchive();
+loadSection();
 
 
 </script>
 
-
 </body>
 
 </html>
-```
