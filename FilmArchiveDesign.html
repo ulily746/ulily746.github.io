@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
 
@@ -11,7 +11,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Childhood in the Countryside</title>
 
 
-<!-- ================================
+<!-- ===============================
      GOOGLE FONTS
 ================================ -->
 
@@ -22,15 +22,15 @@ href="https://fonts.googleapis.com">
 href="https://fonts.gstatic.com"
 crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Manrope:wght@300;400;500&display=swap"
 rel="stylesheet">
 
 
 <style>
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 *{
     margin:0;
@@ -44,38 +44,39 @@ html{
 
 body{
 
-    background:#d9ddd9;
+    background:#d9dde1;
 
-    color:#554a43;
+    color:#4d4943;
 
-    font-family:'Manrope',
-    sans-serif;
+    font-family:'Manrope', sans-serif;
 
     overflow-x:hidden;
 
 }
 
 
-/* =====================================================
-   PAPER
-   홈페이지 상세페이지 전체를 사용하는 구조
-===================================================== */
+/* =========================================================
+   MAIN PAPER
+========================================================= */
 
 .paper{
 
-    width:100%;
+    width:min(780px, 94%);
 
-    max-width:1600px;
+    margin:35px auto 60px;
 
-    margin:0 auto;
+    padding:32px;
 
-    background:#F7F1E5;
+    background:#f7f2e7;
+
+    border-radius:28px;
 
     position:relative;
 
     overflow:hidden;
 
-    min-height:100vh;
+    box-shadow:
+        0 15px 40px rgba(65,55,45,.13);
 
 }
 
@@ -90,27 +91,22 @@ body{
 
     inset:0;
 
-    pointer-events:none;
-
-    z-index:20;
-
-    opacity:.28;
-
     background-image:
-
-    radial-gradient(
-        rgba(90,75,60,.06) 1px,
-        transparent 1px
-    );
+        radial-gradient(
+            rgba(80,70,60,.035) 1px,
+            transparent 1px
+        );
 
     background-size:8px 8px;
 
-    mix-blend-mode:multiply;
+    opacity:.45;
+
+    pointer-events:none;
 
 }
 
 
-/* 모든 콘텐츠를 질감 위에 */
+/* 모든 실제 콘텐츠를 질감 위로 */
 
 .paper > *{
 
@@ -121,157 +117,104 @@ body{
 }
 
 
-/* =====================================================
-   COMMON
-===================================================== */
-
-.serif{
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-}
-
-.hand{
-
-    font-family:
-    'Caveat',
-    cursive;
-
-}
-
-.mono{
-
-    font-family:
-    'Manrope',
-    sans-serif;
-
-    letter-spacing:3px;
-
-}
-
-
-/* =====================================================
-   DECORATION
-===================================================== */
-
-.doodle{
-
-    position:absolute;
-
-    pointer-events:none;
-
-    z-index:5;
-
-    color:#A58D73;
-
-    font-family:'Caveat',cursive;
-
-}
-
-
-/* 별 */
-
-.star{
-
-    font-size:30px;
-
-    color:#D3A88E;
-
-}
-
-
-/* 작은 꽃 */
-
-.flower{
-
-    font-size:28px;
-
-}
-
-
-/* =====================================================
+/* =========================================================
    HERO
-===================================================== */
+========================================================= */
 
 .hero{
 
-    width:100%;
-
-    padding:
-
-    clamp(40px,6vw,100px)
-
-    clamp(24px,7vw,120px)
-
-    clamp(80px,10vw,150px);
+    margin-bottom:110px;
 
 }
 
 
-/* Hero 내부 */
+/* Hero 카드 */
 
 .hero-card{
 
     position:relative;
 
-    width:100%;
+    background:#f8f3e8;
+
+    border:2px solid #d4cbbb;
+
+    border-radius:24px;
+
+    padding:20px;
 
 }
 
 
-/* 제목 1 */
+/* Hero 위쪽 제목 */
 
-.hero-heading-top{
+.hero-top{
 
-    position:absolute;
+    display:flex;
 
-    left:0;
+    justify-content:space-between;
 
-    top:-30px;
+    align-items:flex-start;
 
-    z-index:5;
+    margin-bottom:18px;
 
-    font-family:
-    'Cormorant Garamond',
-    serif;
+    position:relative;
 
-    font-size:
-    clamp(55px,8vw,120px);
+}
+
+
+/* 왼쪽 메인 제목 */
+
+.hero-top h1{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:58px;
+
+    line-height:.9;
 
     font-weight:500;
 
-    line-height:.8;
+    letter-spacing:1px;
 
-    letter-spacing:2px;
-
-    color:#55483E;
+    color:#514a42;
 
 }
 
 
-/* 손글씨 작은 메모 */
+/* 오른쪽 작은 장식 */
 
-.hero-note{
+.vase{
+
+    font-size:32px;
+
+    line-height:1;
+
+    transform:rotate(7deg);
+
+    opacity:.85;
+
+}
+
+
+/* 작은 손글씨 장식 */
+
+.hero-top::after{
+
+    content:"little memories";
 
     position:absolute;
 
-    left:2%;
+    right:48px;
 
-    top:100px;
+    top:42px;
 
-    font-family:
-    'Caveat',
-    cursive;
+    font-family:'Caveat', cursive;
 
-    font-size:28px;
+    font-size:19px;
 
-    color:#A28C76;
+    color:#9a8d7b;
 
-    transform:rotate(-8deg);
-
-    z-index:6;
+    transform:rotate(-6deg);
 
 }
 
@@ -280,161 +223,212 @@ body{
 
 .hero-image{
 
-    width:100%;
+    width:94%;
 
-    padding-top:100px;
+    margin:0 auto;
 
     position:relative;
 
 }
 
 
-/* 사진 */
-
 .hero-image img{
-
-    width:100%;
-
-    height:
-
-    clamp(400px,60vw,780px);
-
-    object-fit:cover;
 
     display:block;
 
-    filter:
-    saturate(.88)
-    contrast(.96);
+    width:100%;
+
+    aspect-ratio:4 / 3;
+
+    object-fit:cover;
+
+    transition:.5s ease;
 
 }
 
 
-/* 사진 위 장식 */
+.hero-image:hover img{
 
-.hero-image::after{
+    transform:scale(1.025);
+
+}
+
+
+/* 사진 아래 영역 */
+
+.hero-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-top:20px;
+
+    min-height:100px;
+
+}
+
+
+/* 작은 이모지 장식 */
+
+.icons{
+
+    display:flex;
+
+    gap:12px;
+
+    font-size:25px;
+
+    padding-bottom:8px;
+
+}
+
+
+/* 아래 오른쪽 제목 */
+
+.hero-title{
+
+    text-align:right;
+
+    padding-right:3px;
+
+    position:relative;
+
+    z-index:3;
+
+}
+
+
+.hero-title h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:48px;
+
+    line-height:.9;
+
+    font-weight:500;
+
+    color:#514a42;
+
+}
+
+
+/* 아래쪽 작은 장식 글자 */
+
+.hero-title::after{
+
+    content:"a summer memory";
+
+    display:block;
+
+    margin-top:10px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:20px;
+
+    color:#9a8d7b;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* Hero 장식 모서리 */
+
+.hero-card::before{
 
     content:"";
 
     position:absolute;
 
-    inset:90px 0 0;
+    left:25px;
 
-    border:
+    top:25px;
 
-    1px solid
+    width:60px;
 
-    rgba(100,85,70,.25);
+    height:60px;
+
+    border-top:1px solid rgba(130,120,100,.35);
+
+    border-left:1px solid rgba(130,120,100,.35);
+
+    border-radius:18px 0 0 0;
 
     pointer-events:none;
 
 }
 
 
-/* 제목 2 */
+.hero-card::after{
 
-.hero-heading-bottom{
+    content:"";
 
     position:absolute;
 
-    right:0;
+    right:25px;
 
-    bottom:-90px;
+    bottom:25px;
 
-    z-index:6;
+    width:60px;
 
-    font-family:
-    'Cormorant Garamond',
-    serif;
+    height:60px;
 
-    font-size:
-    clamp(55px,8vw,120px);
+    border-bottom:1px solid rgba(130,120,100,.35);
 
-    font-weight:500;
+    border-right:1px solid rgba(130,120,100,.35);
 
-    line-height:.8;
+    border-radius:0 0 18px 0;
 
-    text-align:right;
-
-    color:#55483E;
+    pointer-events:none;
 
 }
 
 
-/* Hero 낙서 */
-
-.hero-doodle{
-
-    position:absolute;
-
-    right:4%;
-
-    bottom:-130px;
-
-    font-family:
-    'Caveat',
-    cursive;
-
-    font-size:28px;
-
-    color:#A68D76;
-
-    transform:rotate(6deg);
-
-}
-
-
-/* =====================================================
+/* =========================================================
    INTRO
-===================================================== */
+========================================================= */
 
 .intro{
 
-    padding:
-
-    100px
-
-    clamp(30px,8vw,150px)
-
-    130px;
+    margin-bottom:125px;
 
 }
 
-
-/* 괄호 구조 */
 
 .intro-wrapper{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    gap:clamp(20px,5vw,70px);
+    align-items:center;
+
+    gap:25px;
 
 }
 
 
-/* SVG */
+/* 양쪽 낙서 괄호 */
 
 .left-brace,
-
 .right-brace{
 
-    width:70px;
+    width:45px;
 
-    height:220px;
+    height:180px;
 
     flex-shrink:0;
 
+    stroke:#9f9078;
+
+    stroke-width:2.2;
+
     fill:none;
-
-    stroke:#A38D76;
-
-    stroke-width:2;
-
-    opacity:.8;
 
 }
 
@@ -443,63 +437,33 @@ body{
 
 .intro-text{
 
-    max-width:720px;
+    max-width:450px;
 
     text-align:center;
 
 }
 
 
-/* 손글씨 */
-
 .intro-text p{
 
-    font-family:
-    'Caveat',
-    cursive;
+    font-family:'Caveat', cursive;
 
-    font-size:
-    clamp(28px,3vw,46px);
+    font-size:32px;
 
     line-height:1.45;
 
-    color:#796A5D;
+    color:#7f715e;
 
 }
 
 
-/* 작은 문구 */
-
-.intro-small{
-
-    margin-top:20px;
-
-    font-family:
-    'Manrope',
-    sans-serif;
-
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    color:#B39C82;
-
-}
-
-
-/* =====================================================
-   MEMORY COLLAGE
-===================================================== */
+/* =========================================================
+   MEMORY SECTION
+========================================================= */
 
 .memory{
 
-    padding:
-
-    60px
-
-    clamp(30px,8vw,150px)
-
-    180px;
+    padding:20px 0 130px;
 
 }
 
@@ -510,77 +474,107 @@ body{
 
     text-align:center;
 
-    margin-bottom:70px;
-
-}
-
-
-.memory-heading span{
-
-    font-family:'Caveat',cursive;
-
-    font-size:30px;
-
-    color:#A68E76;
+    margin-bottom:90px;
 
 }
 
 
 .memory-heading h2{
 
-    font-family:
-    'Cormorant Garamond',
-    serif;
+    font-family:'Cormorant Garamond', serif;
 
-    font-size:
-    clamp(45px,6vw,85px);
+    font-size:48px;
 
     font-weight:500;
 
-    color:#594C43;
+    color:#655b50;
 
 }
 
 
-/* Board */
+.memory-heading p{
+
+    margin-top:5px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:22px;
+
+    color:#958875;
+
+    transform:rotate(-3deg);
+
+}
+
+
+/* 전체 Memory Board */
 
 .memory-board{
 
     position:relative;
 
-    height:
-    clamp(850px,75vw,1250px);
+    width:100%;
 
-    max-width:1250px;
+    display:flex;
 
-    margin:0 auto;
+    flex-direction:column;
+
+    gap:0;
 
 }
 
 
-/* 공통 사진 */
+/* =========================================================
+   MEMORY ROW 공통
+========================================================= */
 
-.photo{
+.memory-row{
 
-    position:absolute;
+    width:100%;
 
-    background:#fffdf8;
+    display:flex;
 
-    padding:14px;
+    align-items:center;
+
+    position:relative;
+
+    min-height:260px;
+
+}
+
+
+/* 사진 */
+
+.memory-photo{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    background:#fff;
+
+    padding:10px 10px 28px;
 
     box-shadow:
+        0 10px 22px rgba(60,50,40,.11);
 
-    0 18px 35px
-    rgba(70,55,45,.14);
+    transition:.4s ease;
 
-    transition:
-
-    transform .5s ease;
+    z-index:3;
 
 }
 
 
-.photo img{
+.memory-photo:hover{
+
+    transform:scale(1.035) rotate(0deg) !important;
+
+    z-index:10;
+
+}
+
+
+.memory-photo img{
 
     display:block;
 
@@ -593,198 +587,238 @@ body{
 }
 
 
-.photo:hover{
-
-    z-index:10;
-
-}
+/* =========================================================
+   PHOTO SIZES
+========================================================= */
 
 
-/* 큰 사진 */
+/* Photo 1 - 가장 큼 */
 
-.p1{
+.row-1 .memory-photo{
 
-    width:
-    clamp(280px,34vw,500px);
+    width:300px;
 
-    aspect-ratio:4/5;
+    height:260px;
 
-    left:3%;
-
-    top:0;
-
-    transform:
-    rotate(-5deg);
+    transform:rotate(-4deg);
 
 }
 
 
-.p1:hover{
+/* Photo 2 - 작아짐 */
 
-    transform:
-    rotate(-2deg)
-    scale(1.03);
+.row-2 .memory-photo{
 
-}
+    width:220px;
 
-
-/* 두번째 */
-
-.p2{
-
-    width:
-    clamp(160px,20vw,290px);
-
-    aspect-ratio:4/5;
-
-    right:10%;
-
-    top:170px;
-
-    transform:
-    rotate(7deg);
-
-}
-
-
-.p2:hover{
-
-    transform:
-    rotate(4deg)
-    scale(1.04);
-
-}
-
-
-/* 세번째 */
-
-.p3{
-
-    width:
-    clamp(190px,25vw,350px);
-
-    aspect-ratio:5/4;
-
-    left:22%;
-
-    top:580px;
-
-    transform:
-    rotate(-7deg);
-
-}
-
-
-.p3:hover{
-
-    transform:
-    rotate(-3deg)
-    scale(1.04);
-
-}
-
-
-/* 네번째 */
-
-.p4{
-
-    width:
-    clamp(100px,13vw,190px);
-
-    aspect-ratio:4/5;
-
-    right:5%;
-
-    top:700px;
-
-    transform:
-    rotate(5deg);
-
-}
-
-
-.p4:hover{
-
-    transform:
-    rotate(2deg)
-    scale(1.05);
-
-}
-
-
-/* =====================================================
-   MEMORY NOTES
-===================================================== */
-
-.note{
-
-    position:absolute;
-
-    width:
-    clamp(150px,18vw,250px);
-
-    font-family:
-    'Caveat',
-    cursive;
-
-    font-size:
-    clamp(22px,2.3vw,34px);
-
-    line-height:1.35;
-
-    text-align:center;
-
-    color:#79695C;
-
-}
-
-
-/* 메모 위치 */
-
-.n1{
-
-    right:3%;
-
-    top:20px;
+    height:205px;
 
     transform:rotate(5deg);
 
 }
 
 
-.n2{
+/* Photo 3 - 더 작아짐 */
 
-    left:3%;
+.row-3 .memory-photo{
 
-    top:430px;
+    width:160px;
+
+    height:150px;
 
     transform:rotate(-6deg);
 
 }
 
 
-.n3{
+/* Photo 4 - 가장 작음 */
 
-    right:18%;
+.row-4 .memory-photo{
 
-    top:600px;
+    width:110px;
 
-    transform:rotate(4deg);
+    height:105px;
+
+    transform:rotate(5deg);
 
 }
 
 
-/* =====================================================
-   MEMORY DOODLE LINES
-===================================================== */
+/* =========================================================
+   MEMORY TEXT
+========================================================= */
 
-.line{
+.memory-note{
+
+    position:relative;
+
+    max-width:210px;
+
+    font-family:'Caveat', cursive;
+
+    font-size:27px;
+
+    line-height:1.35;
+
+    color:#75695d;
+
+    text-align:center;
+
+    z-index:3;
+
+}
+
+
+/* 작은 날짜 */
+
+.memory-note small{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#a69a89;
+
+}
+
+
+/* =========================================================
+   ROW 1
+   PHOTO 1 → 점선 → 설명 1
+========================================================= */
+
+.row-1{
+
+    justify-content:flex-start;
+
+    padding-left:25px;
+
+    gap:55px;
+
+}
+
+
+/* Photo 1 설명 */
+
+.row-1 .memory-note{
+
+    margin-top:-30px;
+
+}
+
+
+/* =========================================================
+   ROW 2
+   설명 2 → 점선 → PHOTO 2
+========================================================= */
+
+.row-2{
+
+    justify-content:flex-end;
+
+    padding-right:30px;
+
+    gap:55px;
+
+    margin-top:-10px;
+
+}
+
+
+/* 순서상 설명이 왼쪽 */
+
+.row-2 .memory-note{
+
+    order:1;
+
+    margin-top:-20px;
+
+}
+
+
+.row-2 .memory-photo{
+
+    order:2;
+
+}
+
+
+/* =========================================================
+   ROW 3
+   PHOTO 3 → 점선 → 설명 3
+========================================================= */
+
+.row-3{
+
+    justify-content:flex-start;
+
+    padding-left:100px;
+
+    gap:55px;
+
+    margin-top:-5px;
+
+}
+
+
+.row-3 .memory-note{
+
+    margin-top:-10px;
+
+}
+
+
+/* =========================================================
+   ROW 4
+   마지막 작은 사진
+========================================================= */
+
+.row-4{
+
+    justify-content:flex-end;
+
+    padding-right:70px;
+
+    margin-top:5px;
+
+}
+
+
+.row-4 .memory-photo{
+
+    margin-top:-20px;
+
+}
+
+
+/* =========================================================
+   MEMORY 연결 점선
+========================================================= */
+
+.memory-connector{
 
     position:absolute;
 
+    pointer-events:none;
+
+    z-index:1;
+
+    overflow:visible;
+
+}
+
+
+.memory-connector path{
+
     fill:none;
 
-    stroke:#A8947B;
+    stroke:#a49682;
 
     stroke-width:2;
 
@@ -792,116 +826,128 @@ body{
 
     stroke-dasharray:5 7;
 
-    opacity:.9;
+}
 
-    pointer-events:none;
+
+/* 1 → 설명 */
+
+.connector-1{
+
+    left:250px;
+
+    top:95px;
+
+    width:180px;
+
+    height:120px;
 
 }
 
 
-.l1{
+/* 설명 1 → 사진 2 */
 
-    left:27%;
+.connector-2{
 
-    top:100px;
+    right:220px;
 
-    width:300px;
+    top:300px;
 
-}
+    width:220px;
 
-
-.l2{
-
-    left:18%;
-
-    top:430px;
-
-    width:280px;
+    height:180px;
 
 }
 
 
-.l3{
+/* 사진 2 → 설명 2 */
 
-    left:38%;
+.connector-3{
 
-    top:680px;
-
-    width:300px;
-
-}
-
-
-/* =====================================================
-   SMALL DECORATIONS
-===================================================== */
-
-.memory-star{
-
-    position:absolute;
-
-    font-family:'Caveat',cursive;
-
-    color:#D0A68D;
-
-    font-size:36px;
-
-}
-
-
-.star1{
-
-    left:50%;
-
-    top:80px;
-
-    transform:rotate(-15deg);
-
-}
-
-
-.star2{
-
-    right:28%;
+    left:180px;
 
     top:500px;
 
-    transform:rotate(15deg);
+    width:210px;
+
+    height:140px;
 
 }
 
 
-.flower1{
+/* 설명 3 → 사진 4 */
 
-    left:8%;
+.connector-4{
 
-    bottom:100px;
+    right:90px;
 
-}
+    top:650px;
 
+    width:200px;
 
-.flower2{
-
-    right:8%;
-
-    top:600px;
+    height:150px;
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   작은 낙서 별
+========================================================= */
+
+.memory-doodle{
+
+    position:absolute;
+
+    font-family:'Caveat', cursive;
+
+    color:#9a8d7b;
+
+    font-size:21px;
+
+    z-index:2;
+
+}
+
+
+.doodle-1{
+
+    top:10px;
+
+    right:35px;
+
+    transform:rotate(8deg);
+
+}
+
+
+.doodle-2{
+
+    top:410px;
+
+    left:20px;
+
+    transform:rotate(-8deg);
+
+}
+
+
+.doodle-3{
+
+    bottom:30px;
+
+    right:180px;
+
+    transform:rotate(5deg);
+
+}
+
+
+/* =========================================================
    FILM SECTION
-===================================================== */
+========================================================= */
 
 .film{
 
-    padding:
-
-    120px
-
-    0
-
-    180px;
+    padding:100px 0 130px;
 
 }
 
@@ -910,99 +956,124 @@ body{
 
 .film-title{
 
-    text-align:center;
+    font-family:'Cormorant Garamond', serif;
 
-    margin-bottom:100px;
-
-}
-
-
-.film-title small{
-
-    display:block;
-
-    font-family:
-    'Manrope',
-    sans-serif;
-
-    font-size:11px;
-
-    letter-spacing:5px;
-
-    color:#AD9278;
-
-    margin-bottom:12px;
-
-}
-
-
-.film-title h2{
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    font-size:
-    clamp(50px,6vw,90px);
+    font-size:52px;
 
     font-weight:500;
 
-    color:#55483F;
+    text-align:center;
+
+    color:#66584c;
+
+    margin-bottom:85px;
 
 }
 
 
-/* =====================================================
-   FILM FEATURE
-===================================================== */
+.film-subtitle{
 
-.film-feature{
+    text-align:center;
 
-    width:100%;
+    margin-top:-65px;
 
-    display:grid;
+    margin-bottom:75px;
 
-    grid-template-columns:
-    minmax(0,1fr)
-    minmax(0,1fr);
+    font-family:'Caveat', cursive;
 
-    align-items:center;
+    font-size:22px;
 
-    gap:0;
+    color:#968876;
 
-    margin-bottom:0;
+    transform:rotate(-3deg);
 
 }
 
 
-/* 두번째 반대 방향 */
+/* =========================================================
+   FILM ITEM
+========================================================= */
 
-.film-feature.reverse{
-
-    margin-top:0;
-
-}
-
-
-/* =====================================================
-   FILM FRAME
-===================================================== */
-
-.film-frame{
-
-    width:100%;
-
-    background:#171412;
-
-    padding:
-
-    38px
-
-    0;
+.film-item{
 
     position:relative;
 
-    overflow:hidden;
+    display:flex;
+
+    align-items:center;
+
+    width:100%;
+
+    margin-bottom:95px;
+
+}
+
+
+/* 첫번째 - 왼쪽 사진 */
+
+.film-item.left-photo{
+
+    justify-content:flex-start;
+
+    gap:45px;
+
+}
+
+
+/* 세번째 - 오른쪽 사진 */
+
+.film-item.right-photo{
+
+    justify-content:flex-end;
+
+    gap:45px;
+
+}
+
+
+/* =========================================================
+   FILM FRAME
+========================================================= */
+
+.film-frame{
+
+    position:relative;
+
+    flex-shrink:0;
+
+    background:#11100f;
+
+    padding:22px 12px;
+
+    box-shadow:
+        0 12px 25px rgba(30,25,20,.16);
+
+}
+
+
+.film-frame::before,
+.film-frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:6px;
+
+    right:6px;
+
+    height:10px;
+
+    background-image:
+        radial-gradient(
+            circle,
+            #f7f2e7 4px,
+            transparent 4.5px
+        );
+
+    background-size:18px 10px;
+
+    background-repeat:repeat-x;
 
 }
 
@@ -1011,27 +1082,7 @@ body{
 
 .film-frame::before{
 
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    top:10px;
-
-    height:14px;
-
-    background-image:
-
-    radial-gradient(
-        circle,
-        #F7F1E5 5px,
-        transparent 6px
-    );
-
-    background-size:22px 14px;
+    top:5px;
 
 }
 
@@ -1040,32 +1091,12 @@ body{
 
 .film-frame::after{
 
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    bottom:10px;
-
-    height:14px;
-
-    background-image:
-
-    radial-gradient(
-        circle,
-        #F7F1E5 5px,
-        transparent 6px
-    );
-
-    background-size:22px 14px;
+    bottom:5px;
 
 }
 
 
-/* Film 이미지 */
+/* 사진 */
 
 .film-frame img{
 
@@ -1073,470 +1104,296 @@ body{
 
     width:100%;
 
-    height:
-    clamp(350px,38vw,600px);
+    height:100%;
 
     object-fit:cover;
 
 }
 
 
-/* =====================================================
-   FILM TEXT
-===================================================== */
+/* 세로 필름 */
 
-.film-text{
+.film-frame.vertical{
 
-    min-height:
-    clamp(350px,38vw,600px);
-
-    padding:
-
-    70px
-
-    clamp(35px,7vw,110px);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    background:#F1E7D8;
+    width:280px;
 
 }
 
 
-.film-text .number{
+.film-frame.vertical img{
 
-    font-family:
-    'Manrope',
-    sans-serif;
+    height:350px;
 
-    font-size:10px;
+}
 
-    letter-spacing:4px;
 
-    color:#B08F73;
+/* 가로 필름 */
 
-    margin-bottom:20px;
+.film-frame.horizontal{
+
+    width:100%;
+
+    padding-left:12px;
+
+    padding-right:12px;
+
+}
+
+
+.film-frame.horizontal img{
+
+    width:100%;
+
+    height:300px;
+
+}
+
+
+/* =========================================================
+   FILM TEXT
+========================================================= */
+
+.film-text{
+
+    max-width:230px;
+
+}
+
+
+.film-text .film-label{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#a0927e;
+
+    margin-bottom:10px;
 
 }
 
 
 .film-text h3{
 
-    font-family:
-    'Caveat',
-    cursive;
+    font-family:'Caveat', cursive;
 
-    font-size:
-    clamp(42px,5vw,70px);
+    font-size:34px;
 
-    font-weight:500;
+    font-weight:600;
 
-    line-height:1;
+    line-height:1.15;
 
-    color:#5B4B41;
+    color:#655b50;
 
-    margin-bottom:30px;
+    margin-bottom:10px;
 
 }
 
 
 .film-text p{
 
-    max-width:430px;
+    font-family:'Manrope', sans-serif;
 
-    font-size:14px;
+    font-size:11px;
 
-    line-height:2;
+    line-height:1.8;
 
-    color:#75675D;
+    color:#81766a;
 
 }
 
 
-/* 손글씨 보충 */
+/* =========================================================
+   FILM 1
+========================================================= */
 
-.film-caption{
-
-    margin-top:30px;
-
-    font-family:
-    'Caveat',
-    cursive;
-
-    font-size:25px;
-
-    color:#A2876E;
+.film-item-1 .film-frame{
 
     transform:rotate(-3deg);
 
 }
 
 
-/* =====================================================
-   WIDE FILM STRIP
-===================================================== */
+.film-item-1 .film-text{
 
-.film-strip{
-
-    width:100%;
-
-    margin:100px 0;
-
-    background:#171412;
-
-    padding:
-
-    40px
-
-    0;
-
-    position:relative;
-
-    overflow:hidden;
+    margin-top:-20px;
 
 }
 
 
-/* 타공 */
+/* =========================================================
+   HORIZONTAL FILM
+========================================================= */
 
-.film-strip::before,
-
-.film-strip::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    right:0;
-
-    height:14px;
-
-    background-image:
-
-    radial-gradient(
-        circle,
-        #F7F1E5 5px,
-        transparent 6px
-    );
-
-    background-size:22px 14px;
-
-}
-
-
-.film-strip::before{
-
-    top:10px;
-
-}
-
-
-.film-strip::after{
-
-    bottom:10px;
-
-}
-
-
-/* 가로 사진 */
-
-.film-strip img{
+.film-item.horizontal-film{
 
     display:block;
 
     width:100%;
 
-    height:
-    clamp(220px,32vw,500px);
-
-    object-fit:cover;
-
-    filter:
-    saturate(.9);
+    margin:20px 0 105px;
 
 }
 
 
-/* Film 번호 */
+.horizontal-film .film-frame{
 
-.film-strip-label{
-
-    position:absolute;
-
-    left:40px;
-
-    top:50%;
-
-    transform:
-    translateY(-50%);
-
-    z-index:5;
-
-    color:white;
-
-    font-family:
-    'Manrope',
-    sans-serif;
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    opacity:.8;
+    transform:rotate(1deg);
 
 }
 
 
-/* =====================================================
-   TAPE
-===================================================== */
-
-.tape{
-
-    position:absolute;
-
-    width:120px;
-
-    height:32px;
-
-    background:
-
-    rgba(226,199,158,.72);
-
-    z-index:10;
-
-    transform:rotate(-6deg);
-
-}
-
-
-.tape-one{
-
-    top:-12px;
-
-    left:42%;
-
-}
-
-
-.tape-two{
-
-    bottom:-12px;
-
-    right:20%;
-
-    transform:rotate(8deg);
-
-}
-
-
-/* =====================================================
-   FILM DECORATION
-===================================================== */
-
-.film-doodle{
-
-    position:absolute;
-
-    font-family:
-    'Caveat',
-    cursive;
-
-    font-size:28px;
-
-    color:#A58B73;
-
-}
-
-
-.film-doodle.one{
-
-    left:7%;
-
-    top:30px;
-
-    transform:rotate(-8deg);
-
-}
-
-
-.film-doodle.two{
-
-    right:8%;
-
-    bottom:40px;
-
-    transform:rotate(7deg);
-
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.footer{
-
-    background:#55463E;
-
-    color:#F7F1E5;
-
-    padding:
-
-    80px
-
-    clamp(30px,8vw,120px);
+.horizontal-film .film-caption{
 
     display:flex;
 
     justify-content:space-between;
 
-    align-items:center;
+    align-items:flex-start;
 
-    gap:40px;
+    margin-top:25px;
 
-}
-
-
-.footer-title{
-
-    font-family:
-    'Cormorant Garamond',
-    serif;
-
-    font-size:40px;
+    padding:0 15px;
 
 }
 
 
-.footer-sub{
+.horizontal-film .film-caption span{
+
+    font-family:'Caveat', cursive;
+
+    font-size:27px;
+
+    color:#75695d;
+
+    transform:rotate(-3deg);
+
+}
+
+
+.horizontal-film .film-caption small{
+
+    font-family:'Manrope', sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#a0927e;
+
+}
+
+
+/* =========================================================
+   FILM 3
+========================================================= */
+
+.film-item-3 .film-frame{
+
+    transform:rotate(4deg);
+
+}
+
+
+.film-item-3 .film-text{
+
+    text-align:right;
+
+    margin-top:-25px;
+
+}
+
+
+/* =========================================================
+   FILM 연결선 장식
+========================================================= */
+
+.film-line{
+
+    position:absolute;
+
+    width:100px;
+
+    height:60px;
+
+    pointer-events:none;
+
+}
+
+
+.film-line path{
+
+    fill:none;
+
+    stroke:#a49682;
+
+    stroke-width:1.8;
+
+    stroke-dasharray:4 6;
+
+    stroke-linecap:round;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    padding:60px 0 20px;
+
+    text-align:center;
+
+}
+
+
+.footer p{
+
+    font-family:'Caveat', cursive;
+
+    font-size:23px;
+
+    color:#8f8273;
+
+}
+
+
+.footer small{
+
+    display:block;
 
     margin-top:10px;
 
-    font-size:10px;
+    font-family:'Manrope', sans-serif;
 
-    letter-spacing:4px;
+    font-size:9px;
 
-    color:#D4BBA1;
+    letter-spacing:2px;
 
-}
-
-
-.footer-note{
-
-    font-family:
-    'Caveat',
-    cursive;
-
-    font-size:28px;
-
-    color:#E1CBB5;
-
-    transform:rotate(-4deg);
+    color:#aaa092;
 
 }
 
 
-/* =====================================================
+/* =========================================================
    RESPONSIVE
-===================================================== */
-
-@media(max-width:900px){
-
-    .hero{
-
-        padding:
-
-        70px
-
-        30px
-
-        120px;
-
-    }
-
-
-    .hero-heading-top{
-
-        top:-20px;
-
-    }
-
-
-    .hero-note{
-
-        top:70px;
-
-        font-size:22px;
-
-    }
-
-
-    .hero-heading-bottom{
-
-        bottom:-65px;
-
-    }
-
-
-    .intro{
-
-        padding:
-
-        80px
-
-        30px
-
-        100px;
-
-    }
-
-
-    .memory{
-
-        padding:
-
-        40px
-
-        25px
-
-        120px;
-
-    }
-
-
-    .memory-board{
-
-        height:850px;
-
-    }
-
-
-    .film-text{
-
-        padding:
-
-        50px
-
-        40px;
-
-    }
-
-
-}
-
+========================================================= */
 
 @media(max-width:700px){
 
     .paper{
 
-        width:100%;
+        width:94%;
+
+        margin:20px auto 40px;
+
+        padding:20px;
+
+        border-radius:20px;
 
     }
 
@@ -1545,173 +1402,322 @@ body{
 
     .hero{
 
-        padding:
+        margin-bottom:80px;
 
-        70px
+    }
 
-        20px
 
-        110px;
+    .hero-card{
+
+        padding:14px;
+
+    }
+
+
+    .hero-top h1{
+
+        font-size:43px;
+
+    }
+
+
+    .hero-top::after{
+
+        right:10px;
+
+        top:38px;
+
+        font-size:16px;
+
+    }
+
+
+    .vase{
+
+        font-size:25px;
 
     }
 
 
     .hero-image{
 
-        padding-top:80px;
+        width:100%;
 
     }
 
 
-    .hero-image img{
+    .hero-bottom{
 
-        height:70vw;
-
-        min-height:350px;
+        min-height:90px;
 
     }
 
 
-    .hero-heading-top{
+    .icons{
 
-        font-size:54px;
+        font-size:20px;
 
-    }
-
-
-    .hero-heading-bottom{
-
-        font-size:54px;
-
-        bottom:-60px;
+        gap:7px;
 
     }
 
 
-    .hero-note{
+    .hero-title h2{
 
-        display:none;
+        font-size:36px;
+
+    }
+
+
+    .hero-title::after{
+
+        font-size:16px;
+
+        margin-top:7px;
 
     }
 
 
     /* INTRO */
 
+    .intro{
+
+        margin-bottom:90px;
+
+    }
+
+
     .intro-wrapper{
 
-        gap:8px;
+        gap:5px;
 
     }
 
 
     .left-brace,
-
     .right-brace{
 
-        width:28px;
+        width:24px;
 
-        height:150px;
+        height:130px;
 
     }
 
 
     .intro-text p{
 
-        font-size:28px;
+        font-size:25px;
 
     }
 
 
     /* MEMORY */
 
-    .memory-board{
+    .memory{
 
-        height:750px;
+        padding-bottom:80px;
 
     }
 
 
-    .p1{
+    .memory-heading{
+
+        margin-bottom:60px;
+
+    }
+
+
+    .memory-heading h2{
+
+        font-size:40px;
+
+    }
+
+
+    .memory-heading p{
+
+        font-size:19px;
+
+    }
+
+
+    .memory-row{
+
+        min-height:0;
+
+    }
+
+
+    /* 첫번째 */
+
+    .row-1{
+
+        padding-left:0;
+
+        gap:20px;
+
+        align-items:center;
+
+    }
+
+
+    .row-1 .memory-photo{
 
         width:58%;
 
-        left:0;
+        height:auto;
+
+        aspect-ratio:1.12 / 1;
 
     }
 
 
-    .p2{
+    .row-1 .memory-note{
 
-        width:32%;
+        max-width:35%;
 
-        right:0;
-
-        top:190px;
+        font-size:21px;
 
     }
 
 
-    .p3{
+    /* 두번째 */
 
-        width:44%;
+    .row-2{
 
-        left:7%;
+        padding-right:0;
 
-        top:460px;
+        gap:15px;
+
+        margin-top:20px;
 
     }
 
 
-    .p4{
+    .row-2 .memory-photo{
+
+        width:40%;
+
+        height:auto;
+
+        aspect-ratio:1.05 / 1;
+
+    }
+
+
+    .row-2 .memory-note{
+
+        max-width:42%;
+
+        font-size:21px;
+
+    }
+
+
+    /* 세번째 */
+
+    .row-3{
+
+        padding-left:35px;
+
+        gap:20px;
+
+        margin-top:30px;
+
+    }
+
+
+    .row-3 .memory-photo{
+
+        width:34%;
+
+        height:auto;
+
+        aspect-ratio:1 / 1;
+
+    }
+
+
+    .row-3 .memory-note{
+
+        max-width:42%;
+
+        font-size:20px;
+
+    }
+
+
+    /* 네번째 */
+
+    .row-4{
+
+        padding-right:35px;
+
+        margin-top:30px;
+
+    }
+
+
+    .row-4 .memory-photo{
 
         width:25%;
 
-        right:5%;
+        height:auto;
 
-        top:610px;
-
-    }
-
-
-    .note{
-
-        font-size:23px;
-
-        width:36%;
+        aspect-ratio:1 / 1;
 
     }
 
 
-    .n1{
+    /* 연결선 모바일 */
 
-        right:0;
+    .connector-1{
 
-        top:40px;
+        left:40%;
 
-    }
+        top:80px;
 
-
-    .n2{
-
-        left:0;
-
-        top:330px;
+        width:35%;
 
     }
 
 
-    .n3{
+    .connector-2{
 
-        right:0;
+        right:28%;
 
-        top:500px;
+        top:260px;
+
+        width:35%;
 
     }
 
 
-    .line{
+    .connector-3{
 
-        max-width:45%;
+        left:25%;
+
+        top:420px;
+
+        width:35%;
+
+    }
+
+
+    .connector-4{
+
+        right:15%;
+
+        top:570px;
+
+        width:35%;
+
+    }
+
+
+    .memory-doodle{
+
+        font-size:17px;
 
     }
 
@@ -1720,113 +1726,151 @@ body{
 
     .film{
 
-        padding:
-
-        80px
-
-        0
-
-        100px;
+        padding:70px 0 90px;
 
     }
 
 
     .film-title{
 
-        padding:0 20px;
+        font-size:42px;
+
+        margin-bottom:70px;
+
+    }
+
+
+    .film-subtitle{
+
+        font-size:19px;
+
+        margin-top:-55px;
 
         margin-bottom:60px;
 
     }
 
 
-    .film-feature{
+    /* Film 1 */
 
-        display:flex;
+    .film-item.left-photo,
+    .film-item.right-photo{
 
-        flex-direction:column;
+        width:100%;
 
-    }
-
-
-    .film-feature.reverse{
-
-        flex-direction:column;
+        gap:25px;
 
     }
 
 
-    .film-frame{
+    .film-item.left-photo{
 
-        padding:
-
-        28px
-
-        0;
+        justify-content:flex-start;
 
     }
 
 
-    .film-frame img{
+    .film-item.right-photo{
 
-        height:70vw;
+        justify-content:flex-end;
 
-        min-height:300px;
+    }
 
-        max-height:500px;
+
+    .film-frame.vertical{
+
+        width:48%;
+
+        padding:14px 8px;
+
+    }
+
+
+    .film-frame.vertical img{
+
+        height:auto;
+
+        aspect-ratio:4 / 5;
 
     }
 
 
     .film-text{
 
-        width:100%;
-
-        min-height:0;
-
-        padding:
-
-        60px
-
-        30px
-
-        70px;
+        max-width:42%;
 
     }
 
 
     .film-text h3{
 
-        font-size:48px;
+        font-size:27px;
 
     }
 
 
-    .film-strip{
+    .film-text p{
 
-        margin:
+        font-size:10px;
 
-        70px 0;
-
-        padding:
-
-        32px 0;
+        line-height:1.6;
 
     }
 
 
-    .film-strip img{
+    /* 가로 필름 */
 
-        height:55vw;
+    .film-item.horizontal-film{
 
-        min-height:200px;
+        margin:0 0 80px;
 
     }
 
 
-    .film-strip-label{
+    .film-frame.horizontal{
 
-        left:20px;
+        width:100%;
+
+        padding:15px 8px;
+
+    }
+
+
+    .film-frame.horizontal img{
+
+        height:auto;
+
+        aspect-ratio:16 / 9;
+
+    }
+
+
+    .horizontal-film .film-caption{
+
+        padding:0 5px;
+
+    }
+
+
+    .horizontal-film .film-caption span{
+
+        font-size:22px;
+
+    }
+
+
+    /* Film 3 */
+
+    .film-item-3{
+
+        margin-top:10px;
+
+    }
+
+
+    .film-item-3 .film-text{
+
+        margin-top:-15px;
 
     }
 
@@ -1835,105 +1879,52 @@ body{
 
     .footer{
 
-        flex-direction:column;
-
-        align-items:flex-start;
+        padding-top:40px;
 
     }
 
 }
 
 
-@media(max-width:480px){
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
 
-    .hero-heading-top,
+@media(max-width:400px){
 
-    .hero-heading-bottom{
+    .hero-top h1{
 
-        font-size:45px;
+        font-size:38px;
+
+    }
+
+
+    .hero-title h2{
+
+        font-size:31px;
 
     }
 
 
     .intro-text p{
 
-        font-size:24px;
+        font-size:22px;
 
     }
 
 
-    .memory-board{
+    .row-1 .memory-note,
+    .row-2 .memory-note,
+    .row-3 .memory-note{
 
-        height:680px;
-
-    }
-
-
-    .p1{
-
-        width:60%;
-
-    }
-
-
-    .p2{
-
-        top:170px;
-
-    }
-
-
-    .p3{
-
-        top:410px;
-
-    }
-
-
-    .p4{
-
-        top:560px;
-
-    }
-
-
-    .n1{
-
-        top:20px;
-
-    }
-
-
-    .n2{
-
-        top:290px;
-
-    }
-
-
-    .n3{
-
-        top:450px;
-
-    }
-
-
-    .film-text{
-
-        padding:
-
-        50px
-
-        25px
-
-        60px;
+        font-size:18px;
 
     }
 
 
     .film-text h3{
 
-        font-size:42px;
+        font-size:23px;
 
     }
 
@@ -1959,20 +1950,13 @@ body{
     <div class="hero-card">
 
 
-        <!-- 제목 1 : 사진 위 왼쪽 -->
+        <!-- 사진 위 왼쪽 제목 -->
 
-        <h1 class="hero-heading-top">
+        <div class="hero-top">
 
-            CHILDHOOD
+            <h1>CHILDHOOD</h1>
 
-        </h1>
-
-
-        <!-- 손글씨 -->
-
-        <div class="hero-note">
-
-            little moments ♡
+            <div class="vase">🏺</div>
 
         </div>
 
@@ -1983,31 +1967,35 @@ body{
 
             <img
             src="images/hero.jpg"
-            alt="Countryside memory">
-
-
-        </div>
-
-
-        <!-- 제목 2 : 사진 아래 오른쪽 -->
-
-        <h2 class="hero-heading-bottom">
-
-            IN THE<br>
-
-            COUNTRYSIDE
-
-        </h2>
-
-
-        <div class="hero-doodle">
-
-            memories from<br>
-
-            a slower summer →
+            alt="Childhood countryside">
 
         </div>
 
+
+        <!-- 사진 아래 오른쪽 제목 -->
+
+        <div class="hero-bottom">
+
+            <div class="icons">
+
+                <span>🍽️</span>
+
+                <span>🍒</span>
+
+                <span>🥣</span>
+
+            </div>
+
+
+            <div class="hero-title">
+
+                <h2>IN THE</h2>
+
+                <h2>COUNTRYSIDE</h2>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -2020,7 +2008,6 @@ body{
 ===================================================== -->
 
 <section class="intro">
-
 
     <div class="intro-wrapper">
 
@@ -2041,9 +2028,7 @@ body{
             C20 240
             20 300
             80 300
-            ">
-
-            </path>
+            " />
 
         </svg>
 
@@ -2057,12 +2042,6 @@ body{
                 and quiet summer afternoons.
 
             </p>
-
-            <div class="intro-small">
-
-                A COLLECTION OF LITTLE MEMORIES
-
-            </div>
 
         </div>
 
@@ -2083,9 +2062,7 @@ body{
             C80 240
             80 300
             20 300
-            ">
-
-            </path>
+            " />
 
         </svg>
 
@@ -2097,7 +2074,7 @@ body{
 
 
 <!-- =====================================================
-     MEMORY COLLAGE
+     MEMORY
 ===================================================== -->
 
 <section class="memory">
@@ -2105,17 +2082,9 @@ body{
 
     <div class="memory-heading">
 
-        <span>
+        <h2>Little Memories</h2>
 
-            a few things I remember
-
-        </span>
-
-        <h2>
-
-            Little Memories
-
-        </h2>
+        <p>things I still remember...</p>
 
     </div>
 
@@ -2123,152 +2092,212 @@ body{
     <div class="memory-board">
 
 
-        <!-- PHOTO 1 -->
+        <!-- 작은 낙서 -->
 
-        <div class="photo p1">
+        <div class="memory-doodle doodle-1">
 
-            <img
-            src="images/photo1.jpg"
-            alt="Memory photo 1">
+            ✦ oh, summer!
 
         </div>
 
 
-        <!-- NOTE 1 -->
+        <div class="memory-doodle doodle-2">
 
-        <div class="note n1">
-
-            Every morning<br>
-            smelled like<br>
-            fresh grass.
+            so warm...
 
         </div>
 
 
-        <!-- LINE 1 -->
+        <div class="memory-doodle doodle-3">
+
+            ♡
+
+        </div>
+
+
+
+        <!-- =================================================
+             PHOTO 1 + NOTE 1
+        ================================================== -->
+
+        <div class="memory-row row-1">
+
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo1.jpg"
+                alt="Memory 1">
+
+            </div>
+
+
+            <div class="memory-note">
+
+                <small>MEMORY 01</small>
+
+                Every morning
+                smelled like
+                fresh grass.
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PHOTO 1 → NOTE 1 연결 -->
 
         <svg
-        class="line l1"
+        class="memory-connector connector-1"
         viewBox="0 0 250 120">
 
             <path
-            d="M10 20 C60 0 130 40 240 100">
-
-            </path>
+            d="
+            M10 20
+            C70 0
+            120 90
+            240 100
+            " />
 
         </svg>
 
 
-        <!-- PHOTO 2 -->
 
-        <div class="photo p2">
+        <!-- =================================================
+             NOTE 2 + PHOTO 2
+        ================================================== -->
 
-            <img
-            src="images/photo2.jpg"
-            alt="Memory photo 2">
+        <div class="memory-row row-2">
+
+
+            <div class="memory-note">
+
+                <small>MEMORY 02</small>
+
+                Linen dancing
+                softly
+                in the wind.
+
+            </div>
+
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo2.jpg"
+                alt="Memory 2">
+
+            </div>
+
 
         </div>
 
 
-        <!-- NOTE 2 -->
 
-        <div class="note n2">
-
-            Linen dancing<br>
-            quietly in<br>
-            the wind.
-
-        </div>
-
-
-        <!-- LINE 2 -->
+        <!-- NOTE 1 → PHOTO 2 연결 -->
 
         <svg
-        class="line l2"
+        class="memory-connector connector-2"
         viewBox="0 0 220 150">
 
             <path
-            d="M20 10 C40 90 170 20 210 120">
-
-            </path>
+            d="
+            M20 10
+            C50 90
+            150 20
+            210 120
+            " />
 
         </svg>
 
 
-        <!-- PHOTO 3 -->
 
-        <div class="photo p3">
+        <!-- =================================================
+             PHOTO 3 + NOTE 3
+        ================================================== -->
 
-            <img
-            src="images/photo3.jpg"
-            alt="Memory photo 3">
+        <div class="memory-row row-3">
+
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo3.jpg"
+                alt="Memory 3">
+
+            </div>
+
+
+            <div class="memory-note">
+
+                <small>MEMORY 03</small>
+
+                Warm afternoon
+                sunshine
+                on the table.
+
+            </div>
+
 
         </div>
 
 
-        <!-- NOTE 3 -->
 
-        <div class="note n3">
-
-            Warm afternoon<br>
-            sunshine.
-
-        </div>
-
-
-        <!-- LINE 3 -->
+        <!-- PHOTO 2 → PHOTO 3 연결 -->
 
         <svg
-        class="line l3"
+        class="memory-connector connector-3"
         viewBox="0 0 250 150">
 
             <path
-            d="M10 120 C80 20 180 30 240 70">
-
-            </path>
+            d="
+            M10 120
+            C80 20
+            180 30
+            240 70
+            " />
 
         </svg>
 
 
-        <!-- PHOTO 4 -->
 
-        <div class="photo p4">
+        <!-- =================================================
+             PHOTO 4
+        ================================================== -->
 
-            <img
-            src="images/photo4.jpg"
-            alt="Memory photo 4">
+        <div class="memory-row row-4">
+
+
+            <div class="memory-photo">
+
+                <img
+                src="images/photo4.jpg"
+                alt="Memory 4">
+
+            </div>
+
 
         </div>
 
 
-        <!-- DECORATIONS -->
 
-        <div class="memory-star star1">
+        <!-- NOTE 3 → PHOTO 4 연결 -->
 
-            ✦
+        <svg
+        class="memory-connector connector-4"
+        viewBox="0 0 250 150">
 
-        </div>
+            <path
+            d="
+            M10 20
+            C70 0
+            130 100
+            240 120
+            " />
 
-
-        <div class="memory-star star2">
-
-            ✧
-
-        </div>
-
-
-        <div class="doodle flower1 flower">
-
-            ✿
-
-        </div>
-
-
-        <div class="doodle flower2 flower">
-
-            ❀
-
-        </div>
+        </svg>
 
 
     </div>
@@ -2284,39 +2313,30 @@ body{
 <section class="film">
 
 
-    <!-- TITLE -->
+    <h2 class="film-title">
 
-    <div class="film-title">
+        Film Memories
 
-        <small>
+    </h2>
 
-            A ROLL OF SUMMER
 
-        </small>
+    <div class="film-subtitle">
 
-        <h2>
-
-            Film Memories
-
-        </h2>
+        little moments, captured on film
 
     </div>
 
 
 
     <!-- =================================================
-         FILM 01
-         LEFT PHOTO / RIGHT TEXT
+         FILM 1
+         왼쪽 사진 + 오른쪽 설명
     ================================================== -->
 
-    <div class="film-feature">
+    <div class="film-item left-photo film-item-1">
 
 
-        <!-- LEFT FILM PHOTO -->
-
-        <div class="film-frame">
-
-            <div class="tape tape-one"></div>
+        <div class="film-frame vertical">
 
             <img
             src="images/film1.jpg"
@@ -2325,38 +2345,30 @@ body{
         </div>
 
 
-        <!-- RIGHT TEXT -->
-
         <div class="film-text">
 
-            <span class="number">
+            <div class="film-label">
 
-                FILM 01 · SUMMER
+                FRAME 001
 
-            </span>
+            </div>
+
 
             <h3>
 
-                Walking through<br>
-
+                Walking through
                 lavender fields.
 
             </h3>
 
+
             <p>
 
-                The road felt endless,
-                the afternoon sun was warm,
-                and everything seemed
-                to move a little slower.
+                A quiet afternoon,
+                somewhere between
+                summer and a dream.
 
             </p>
-
-            <div class="film-caption">
-
-                I wish I could go back there.
-
-            </div>
 
         </div>
 
@@ -2366,80 +2378,82 @@ body{
 
 
     <!-- =================================================
-         WIDE FILM STRIP
+         FILM 2
+         가로로 긴 필름 사진
     ================================================== -->
 
-    <div class="film-strip">
+    <div class="film-item horizontal-film">
 
 
-        <span class="film-strip-label">
+        <div class="film-frame horizontal">
 
-            FRAME 024 · SUMMER 2026
+            <img
+            src="images/film2.jpg"
+            alt="Film memory 2">
 
-        </span>
-
-
-        <img
-        src="images/film2.jpg"
-        alt="Wide film memory">
+        </div>
 
 
-        <div class="tape tape-two"></div>
+        <div class="film-caption">
 
+            <span>
 
-    </div>
-
-
-
-    <!-- =================================================
-         FILM 02
-         LEFT TEXT / RIGHT PHOTO
-    ================================================== -->
-
-    <div class="film-feature reverse">
-
-
-        <!-- LEFT TEXT -->
-
-        <div class="film-text">
-
-            <span class="number">
-
-                FILM 02 · EVENING
+                Every sunset looked
+                like a watercolor painting.
 
             </span>
 
-            <h3>
 
-                Every sunset<br>
+            <small>
 
-                looked like<br>
+                FRAME 002 · SUMMER
 
-                watercolor.
-
-            </h3>
-
-            <p>
-
-                We stayed until the sky
-                turned soft pink,
-                talking about nothing
-                and everything at once.
-
-            </p>
-
-            <div class="film-caption">
-
-                stay until the light disappears →
-
-            </div>
+            </small>
 
         </div>
 
 
-        <!-- RIGHT FILM PHOTO -->
+    </div>
 
-        <div class="film-frame">
+
+
+    <!-- =================================================
+         FILM 3
+         오른쪽 사진 + 왼쪽 설명
+    ================================================== -->
+
+    <div class="film-item right-photo film-item-3">
+
+
+        <div class="film-text">
+
+            <div class="film-label">
+
+                FRAME 003
+
+            </div>
+
+
+            <h3>
+
+                Summer
+                never ended.
+
+            </h3>
+
+
+            <p>
+
+                Some memories
+                stay warm,
+                even after years.
+
+            </p>
+
+        </div>
+
+
+        <div class="film-frame vertical">
 
             <img
             src="images/film3.jpg"
@@ -2462,31 +2476,22 @@ body{
 <footer class="footer">
 
 
-    <div>
+    <p>
 
-        <div class="footer-title">
+        collecting little pieces of life ♡
 
-            Childhood in the Countryside
-
-        </div>
-
-        <div class="footer-sub">
-
-            TRAVEL ARCHIVE · 2026
-
-        </div>
-
-    </div>
+    </p>
 
 
-    <div class="footer-note">
+    <small>
 
-        until the next summer ♡
+        CHILDHOOD ARCHIVE · 2026
 
-    </div>
+    </small>
 
 
 </footer>
+
 
 
 </div>
