@@ -188,9 +188,7 @@ C80 0
 
     <div class="film-board">
 
-        <!-- 첫 번째 -->
         <div class="film-item top">
-
             <div class="film-frame small">
                 <img src="images/film1.jpg">
             </div>
@@ -199,12 +197,9 @@ C80 0
                 Walking through
                 lavender fields.
             </p>
-
         </div>
 
-        <!-- 두 번째 -->
         <div class="film-item middle">
-
             <div class="film-frame wide">
                 <img src="images/film2.jpg">
             </div>
@@ -213,12 +208,9 @@ C80 0
                 Every sunset looked
                 like a watercolor painting.
             </p>
-
         </div>
 
-        <!-- 세 번째 -->
         <div class="film-item bottom">
-
             <div class="film-frame small">
                 <img src="images/film3.jpg">
             </div>
@@ -226,7 +218,6 @@ C80 0
             <p>
                 Summer never ended.
             </p>
-
         </div>
 
     </div>
@@ -947,25 +938,17 @@ color:#75675c;
 /* -------------------------- */
 
 .film-item.top{
-
-align-self:flex-start;
-
-margin-left:40px;
-
+    align-self:flex-start;
+    margin-left:40px;
 }
 
 .film-item.middle{
-
-align-self:center;
-
+    align-self:center;
 }
 
 .film-item.bottom{
-
-align-self:flex-end;
-
-margin-right:40px;
-
+    align-self:flex-end;
+    margin-right:40px;
 }
 
 /* -------------------------- */
@@ -979,5 +962,157 @@ transition:.4s;
 .film-frame:hover{
 
 transform:rotate(-2deg) scale(1.02);
+
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 700px){
+
+    .paper{
+        width:94%;
+        margin:20px auto;
+        padding:20px;
+        border-radius:20px;
+    }
+
+    /* HERO */
+
+    .hero-top h1{
+        font-size:42px;
+    }
+
+    .hero-title h2{
+        font-size:38px;
+    }
+
+    .icons{
+        font-size:24px;
+    }
+
+    /* INTRO */
+
+    .intro-wrapper{
+        gap:10px;
+    }
+
+    .left-brace,
+    .right-brace{
+        width:25px;
+        height:130px;
+    }
+
+    .intro-text p{
+        font-size:27px;
+    }
+
+    /* MEMORY */
+
+    .memory-board{
+        height:800px;
+    }
+
+    .p1{
+        width:55%;
+        left:0;
+    }
+
+    .p2{
+        width:32%;
+        right:0;
+        top:230px;
+    }
+
+    .p3{
+        width:42%;
+        left:5%;
+        top:480px;
+    }
+
+    .p4{
+        width:25%;
+        right:5%;
+        top:680px;
+    }
+
+    .note{
+        width:38%;
+        font-size:23px;
+    }
+
+    .n1{
+        right:0;
+        top:50px;
+    }
+
+    .n2{
+        left:0;
+        top:330px;
+    }
+
+    .n3{
+        right:0;
+        top:530px;
+    }
+
+    .line{
+        max-width:40%;
+    }
+
+    /* FILM */
+
+    .film{
+        padding:80px 0;
+    }
+
+    .film-title{
+        font-size:42px;
+        margin-bottom:60px;
+    }
+
+    .film-board{
+        width:100%;
+        gap:70px;
+    }
+
+    .film-item{
+        max-width:100%;
+    }
+
+    .film-item.top,
+    .film-item.middle,
+    .film-item.bottom{
+        align-self:center;
+        margin-left:0;
+        margin-right:0;
+    }
+
+    .film-frame{
+        max-width:100%;
+        padding:12px;
+    }
+
+    .small img{
+        width:min(250px, 65vw);
+        height:auto;
+        aspect-ratio:5 / 6;
+    }
+
+    .wide{
+        width:100%;
+    }
+
+    .wide img{
+        width:100%;
+        height:auto;
+        aspect-ratio:16 / 9;
+    }
+
+    .film-item p{
+        font-size:25px;
+        max-width:280px;
+    }
 
 }
