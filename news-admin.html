@@ -1,21 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>News Admin — Personal Archive</title>
+<title>News Admin — Yuri Choi</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="
-https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap
-" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -24,2090 +21,1466 @@ https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family
 }
 
 body{
-
     margin:0;
-
-    background:#F5F2EC;
-
-    color:#353B38;
-
-    font-family:'Manrope',sans-serif;
-
+    font-family:'Inter',sans-serif;
+    background:#F5F1E8;
+    color:#2E302C;
 }
 
-
-.font-serif{
-
+.serif{
     font-family:'Cormorant Garamond',serif;
-
 }
 
-
-.font-hand{
-
-    font-family:'Caveat',cursive;
-
+.admin-wrapper{
+    min-height:100vh;
+    display:flex;
 }
 
-
-/* ======================================
+/* =================================
    SIDEBAR
-====================================== */
+================================= */
 
 .sidebar{
-
     width:250px;
-
+    min-height:100vh;
+    background:#273027;
+    color:#F4F1E8;
+    padding:36px 26px;
     position:fixed;
-
-    top:0;
     left:0;
+    top:0;
     bottom:0;
-
-    background:#ECE8DF;
-
-    border-right:1px solid #D9D3C8;
-
-    padding:35px 25px;
-
 }
-
 
 .logo{
-
     font-family:'Cormorant Garamond',serif;
-
-    font-size:30px;
-
-    color:#3E4741;
-
+    font-size:25px;
+    letter-spacing:.12em;
+    margin-bottom:8px;
 }
-
 
 .logo-sub{
-
-    margin-top:3px;
-
     font-size:9px;
-
-    letter-spacing:.25em;
-
-    color:#8A8C82;
-
+    letter-spacing:.2em;
+    opacity:.5;
 }
 
-
-.nav{
-
-    margin-top:70px;
-
+.sidebar-nav{
+    margin-top:60px;
 }
 
-
-.nav-label{
-
-    font-size:9px;
-
-    letter-spacing:.25em;
-
-    color:#9A978E;
-
-    margin-bottom:15px;
-
+.sidebar-nav a{
+    display:block;
+    padding:13px 0;
+    color:#D8DDD3;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-
-.nav-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:12px 10px;
-
-    margin-bottom:4px;
-
-    font-size:12px;
-
-    color:#626A63;
-
-    cursor:pointer;
-
-    transition:.25s;
-
+.sidebar-nav a.active{
+    color:#FFFFFF;
 }
 
-
-.nav-item:hover{
-
-    background:#E3DED3;
-
+.sidebar-nav a:hover{
+    opacity:.7;
 }
 
-
-.nav-item.active{
-
-    background:#D9DED4;
-
-    color:#39433C;
-
-}
-
-
-.nav-icon{
-
-    width:6px;
-
-    height:6px;
-
-    border-radius:50%;
-
-    background:#9AA694;
-
-}
-
-
-.admin-footer{
-
-    position:absolute;
-
-    bottom:30px;
-
-    left:25px;
-
-    right:25px;
-
-    border-top:1px solid #D8D2C7;
-
-    padding-top:20px;
-
-    font-size:10px;
-
-    color:#98968E;
-
-}
-
-
-/* ======================================
+/* =================================
    MAIN
-====================================== */
+================================= */
 
 .main{
-
     margin-left:250px;
-
-    min-height:100vh;
-
+    width:calc(100% - 250px);
+    padding:50px 60px;
 }
-
 
 .topbar{
-
-    height:80px;
-
     display:flex;
-
     justify-content:space-between;
-
-    align-items:center;
-
-    padding:0 45px;
-
-    border-bottom:1px solid #DDD8CF;
-
-    background:#F8F6F1;
-
+    align-items:flex-start;
+    margin-bottom:45px;
 }
 
+.page-label{
+    font-size:9px;
+    letter-spacing:.35em;
+    color:#8B6B4F;
+    text-transform:uppercase;
+    margin-bottom:10px;
+}
 
 .page-title{
-
     font-family:'Cormorant Garamond',serif;
-
-    font-size:28px;
-
-}
-
-
-.topbar-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-}
-
-
-.status{
-
-    font-size:10px;
-
-    letter-spacing:.15em;
-
-    color:#778174;
-
-}
-
-
-.avatar{
-
-    width:34px;
-
-    height:34px;
-
-    border-radius:50%;
-
-    background:#D8DDD3;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-family:'Caveat',cursive;
-
-    font-size:17px;
-
-}
-
-
-/* ======================================
-   CONTENT
-====================================== */
-
-.content{
-
-    padding:45px;
-
-}
-
-
-.welcome{
-
-    margin-bottom:35px;
-
-}
-
-
-.welcome small{
-
-    font-size:10px;
-
-    letter-spacing:.25em;
-
-    color:#8C9087;
-
-}
-
-
-.welcome h1{
-
-    margin-top:8px;
-
-    font-family:'Cormorant Garamond',serif;
-
     font-size:42px;
-
     font-weight:500;
-
+    margin:0;
 }
 
-
-/* ======================================
-   STATS
-====================================== */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:
-
-        repeat(4,1fr);
-
-    gap:18px;
-
-    margin-bottom:45px;
-
-}
-
-
-.stat{
-
-    background:#FAF8F3;
-
-    border:1px solid #DDD8CF;
-
-    padding:25px;
-
-}
-
-
-.stat-label{
-
-    font-size:10px;
-
-    letter-spacing:.15em;
-
-    color:#92948B;
-
-}
-
-
-.stat-number{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:42px;
-
-    margin-top:10px;
-
-    color:#3E4741;
-
-}
-
-
-.stat-description{
-
-    font-size:10px;
-
-    color:#999B93;
-
-}
-
-
-/* ======================================
-   FILTER
-====================================== */
-
-.toolbar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-
-}
-
-
-.filters{
-
-    display:flex;
-
-    gap:8px;
-
-    flex-wrap:wrap;
-
-}
-
-
-.filter{
-
-    border:1px solid #D5D0C7;
-
-    background:#F8F6F1;
-
-    padding:8px 15px;
-
-    font-size:10px;
-
-    letter-spacing:.05em;
-
-    cursor:pointer;
-
-}
-
-
-.filter.active{
-
-    background:#566257;
-
-    color:white;
-
-    border-color:#566257;
-
-}
-
-
-.add-button{
-
-    background:#4D594F;
-
-    color:white;
-
-    border:none;
-
-    padding:12px 20px;
-
+.page-description{
     font-size:11px;
-
-    cursor:pointer;
-
+    color:#777A72;
+    margin-top:8px;
 }
 
-
-.add-button:hover{
-
-    background:#3D493F;
-
-}
-
-
-/* ======================================
-   NEWS TABLE
-====================================== */
-
-.news-list{
-
-    background:#FAF8F3;
-
-    border:1px solid #DDD8CF;
-
-}
-
-
-.news-header{
-
-    display:grid;
-
-    grid-template-columns:
-
-        90px
-        2fr
-        120px
-        120px
-        100px
-        100px;
-
-    padding:15px 20px;
-
-    background:#F0ECE4;
-
-    border-bottom:1px solid #DDD8CF;
-
-    font-size:9px;
-
-    letter-spacing:.15em;
-
-    color:#858880;
-
-}
-
-
-.news-row{
-
-    display:grid;
-
-    grid-template-columns:
-
-        90px
-        2fr
-        120px
-        120px
-        100px
-        100px;
-
-    align-items:center;
-
-    padding:16px 20px;
-
-    border-bottom:1px solid #E5E1D9;
-
-    transition:.2s;
-
-}
-
-
-.news-row:hover{
-
-    background:#F5F2EB;
-
-}
-
-
-.thumb{
-
-    width:65px;
-
-    height:45px;
-
-    object-fit:cover;
-
-}
-
-
-.news-title{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:20px;
-
-}
-
-
-.news-meta{
-
+.back-button{
+    border:1px solid #C9C4B8;
+    background:transparent;
+    padding:10px 18px;
     font-size:10px;
-
-    color:#96978F;
-
-    margin-top:3px;
-
-}
-
-
-.tag{
-
-    display:inline-block;
-
-    padding:5px 9px;
-
-    font-size:9px;
-
-    background:#E5EAE1;
-
-    color:#647064;
-
-}
-
-
-.design-tag{
-
-    font-size:9px;
-
-    letter-spacing:.05em;
-
-    color:#7D8179;
-
-}
-
-
-.status-published{
-
-    color:#64755F;
-
-}
-
-
-.status-draft{
-
-    color:#AA8B68;
-
-}
-
-
-.actions{
-
-    display:flex;
-
-    gap:12px;
-
-}
-
-
-.action{
-
-    font-size:10px;
-
+    letter-spacing:.1em;
     cursor:pointer;
-
-    color:#7E837C;
-
 }
 
-
-.action:hover{
-
-    color:#3E4741;
-
+.back-button:hover{
+    background:#2E302C;
+    color:white;
 }
 
+/* =================================
+   FORM
+================================= */
 
-/* ======================================
-   DESIGN SELECTOR
-====================================== */
-
-.design-panel{
-
-    margin-top:50px;
-
+.form-container{
+    max-width:1100px;
 }
 
+.form-section{
+    background:#FBF9F3;
+    border:1px solid #DED9CE;
+    padding:35px;
+    margin-bottom:25px;
+}
 
-.section-title{
-
+.form-section-title{
     font-family:'Cormorant Garamond',serif;
-
-    font-size:30px;
-
-    margin-bottom:20px;
-
+    font-size:25px;
+    margin:0 0 25px;
 }
 
-
-.design-grid{
-
+.form-grid{
     display:grid;
-
-    grid-template-columns:
-
-        repeat(5,1fr);
-
-    gap:15px;
-
+    grid-template-columns:1fr 1fr;
+    gap:20px;
 }
-
-
-.design-card{
-
-    background:#FAF8F3;
-
-    border:1px solid #DDD8CF;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-
-.design-card:hover{
-
-    transform:translateY(-4px);
-
-}
-
-
-.design-preview{
-
-    height:120px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:22px;
-
-}
-
-
-.design-1{
-
-    background:#EDE8DF;
-
-    color:#675F56;
-
-}
-
-
-.design-2{
-
-    background:#E8ECE7;
-
-    color:#566257;
-
-}
-
-
-.design-3{
-
-    background:#F8F1EB;
-
-    color:#9C6D68;
-
-}
-
-
-.design-4{
-
-    background:#E7EDE3;
-
-    color:#5E6958;
-
-}
-
-
-.design-5{
-
-    background:#F4F3EF;
-
-    color:#1C2D42;
-
-}
-
-
-.design-info{
-
-    padding:15px;
-
-}
-
-
-.design-name{
-
-    font-size:11px;
-
-    font-weight:600;
-
-}
-
-
-.design-type{
-
-    font-size:9px;
-
-    color:#96978F;
-
-    margin-top:5px;
-
-}
-
-
-/* ======================================
-   MODAL
-====================================== */
-
-.modal{
-
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(40,45,40,.35);
-
-    z-index:100;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-
-.modal.active{
-
-    display:flex;
-
-}
-
-
-.modal-box{
-
-    width:min(700px,90vw);
-
-    max-height:90vh;
-
-    overflow:auto;
-
-    background:#F9F7F2;
-
-    padding:40px;
-
-}
-
-
-.modal-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:30px;
-
-}
-
-
-.modal-title{
-
-    font-family:'Cormorant Garamond',serif;
-
-    font-size:32px;
-
-}
-
-
-.close{
-
-    cursor:pointer;
-
-    font-size:20px;
-
-}
-
 
 .form-group{
-
-    margin-bottom:20px;
-
+    display:flex;
+    flex-direction:column;
+    gap:8px;
 }
 
-
-.form-label{
-
-    display:block;
-
-    font-size:10px;
-
-    letter-spacing:.12em;
-
-    color:#858980;
-
-    margin-bottom:8px;
-
+.form-group.full{
+    grid-column:1 / -1;
 }
 
+label{
+    font-size:9px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:#74766F;
+}
 
 input,
 textarea,
 select{
-
     width:100%;
-
-    padding:12px;
-
-    border:1px solid #D8D3CA;
-
-    background:#FFFDF8;
-
-    font-family:'Manrope',sans-serif;
-
+    border:1px solid #D5D0C5;
+    background:#FFFFFF;
+    padding:13px 14px;
+    font-family:'Inter',sans-serif;
     font-size:12px;
-
+    color:#333;
+    outline:none;
 }
 
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#8B6B4F;
+}
 
 textarea{
-
     min-height:120px;
-
     resize:vertical;
-
 }
 
+/* =================================
+   DESIGN SELECT
+================================= */
 
-.form-grid{
-
+.design-grid{
     display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:15px;
-
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
 }
 
-
-.form-actions{
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:10px;
-
-    margin-top:30px;
-
+.design-card{
+    border:1px solid #D8D3C8;
+    background:#FFFFFF;
+    cursor:pointer;
+    transition:.25s ease;
+    position:relative;
 }
 
-
-.cancel{
-
-    padding:12px 20px;
-
-    border:1px solid #D5D0C7;
-
-    background:none;
-
+.design-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(0,0,0,.07);
 }
 
+.design-card.selected{
+    border:2px solid #8B6B4F;
+}
 
-.save{
+.design-preview{
+    height:180px;
+    overflow:hidden;
+}
 
-    padding:12px 25px;
+.design-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-    border:none;
+.design-info{
+    padding:15px;
+}
 
-    background:#4D594F;
+.design-number{
+    font-size:8px;
+    letter-spacing:.25em;
+    color:#8B6B4F;
+}
 
+.design-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:22px;
+    margin-top:4px;
+}
+
+.design-description{
+    font-size:9px;
+    line-height:1.6;
+    color:#777A72;
+    margin-top:5px;
+}
+
+.design-check{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#8B6B4F;
     color:white;
-
+    font-size:12px;
+    display:none;
+    align-items:center;
+    justify-content:center;
 }
 
+.design-card.selected .design-check{
+    display:flex;
+}
 
-/* ======================================
+/* =================================
+   IMAGE UPLOAD
+================================= */
+
+.image-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.image-upload{
+    border:1px dashed #C8C3B7;
+    background:#F8F6F0;
+    min-height:130px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+}
+
+.image-upload:hover{
+    border-color:#8B6B4F;
+}
+
+.image-upload input{
+    display:none;
+}
+
+.upload-text{
+    font-size:10px;
+    color:#888A82;
+    line-height:1.6;
+}
+
+.preview-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* =================================
+   DESIGN FIELDS
+================================= */
+
+.template-fields{
+    display:none;
+}
+
+.template-fields.active{
+    display:block;
+}
+
+.field-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:21px;
+    margin:0 0 18px;
+}
+
+.field-note{
+    font-size:10px;
+    color:#888A82;
+    margin-bottom:20px;
+}
+
+/* =================================
+   BUTTON
+================================= */
+
+.submit-area{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:30px;
+}
+
+.cancel-btn,
+.publish-btn{
+    padding:14px 28px;
+    border:1px solid #2E302C;
+    font-size:10px;
+    letter-spacing:.15em;
+    cursor:pointer;
+}
+
+.cancel-btn{
+    background:transparent;
+}
+
+.publish-btn{
+    background:#2E302C;
+    color:white;
+}
+
+.publish-btn:hover{
+    background:#8B6B4F;
+    border-color:#8B6B4F;
+}
+
+/* =================================
    RESPONSIVE
-====================================== */
+================================= */
 
-@media(max-width:1000px){
-
-    .stats{
-
-        grid-template-columns:
-
-            repeat(2,1fr);
-
-    }
-
-
-    .design-grid{
-
-        grid-template-columns:
-
-            repeat(3,1fr);
-
-    }
-
-
-}
-
-
-@media(max-width:750px){
+@media(max-width:900px){
 
     .sidebar{
-
-        width:70px;
-
-        padding:25px 10px;
-
+        width:200px;
     }
-
-
-    .logo{
-
-        font-size:20px;
-
-        text-align:center;
-
-    }
-
-
-    .logo-sub,
-    .nav-label,
-    .nav-item span,
-    .admin-footer{
-
-        display:none;
-
-    }
-
-
-    .nav-item{
-
-        justify-content:center;
-
-    }
-
 
     .main{
-
-        margin-left:70px;
-
+        margin-left:200px;
+        width:calc(100% - 200px);
+        padding:35px;
     }
-
-
-    .topbar{
-
-        padding:0 20px;
-
-    }
-
-
-    .content{
-
-        padding:25px 20px;
-
-    }
-
-
-    .stats{
-
-        grid-template-columns:1fr;
-
-    }
-
-
-    .news-header{
-
-        display:none;
-
-    }
-
-
-    .news-row{
-
-        grid-template-columns:70px 1fr;
-
-        gap:15px;
-
-    }
-
-
-    .news-row > *:nth-child(n+3){
-
-        display:none;
-
-    }
-
 
     .design-grid{
-
-        grid-template-columns:
-
-            repeat(2,1fr);
-
+        grid-template-columns:1fr;
     }
 
 }
 
+@media(max-width:700px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        min-height:auto;
+        padding:20px;
+    }
+
+    .sidebar-nav{
+        margin-top:20px;
+        display:flex;
+        gap:20px;
+    }
+
+    .sidebar-nav a{
+        border:0;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:25px 18px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .image-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .topbar{
+        flex-direction:column;
+        gap:20px;
+    }
+
+}
 
 </style>
 
 </head>
 
-
 <body>
 
+<div class="admin-wrapper">
 
-<!-- ======================================
+<!-- =================================
      SIDEBAR
-====================================== -->
+================================= -->
 
 <aside class="sidebar">
 
 <div class="logo">
-
-Anya
-
+YURI CHOI
 </div>
 
 <div class="logo-sub">
-
-PERSONAL ARCHIVE
-
+NEWS ADMINISTRATION
 </div>
 
+<nav class="sidebar-nav">
 
-<nav class="nav">
+<a href="#" class="active">
+NEWS
+</a>
 
-<div class="nav-label">
+<a href="news.html">
+VIEW NEWS
+</a>
 
-CONTENT
-
-</div>
-
-
-<div class="nav-item active">
-
-<div class="nav-icon"></div>
-
-<span>Dashboard</span>
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>All News</span>
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Published</span>
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Drafts</span>
-
-</div>
-
-
-<div class="nav-label mt-10">
-
-ARCHIVE
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Research</span>
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Life</span>
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Travel</span>
-
-</div>
-
-
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Baking</span>
-
-</div>
-
+<a href="index.html">
+MAIN WEBSITE
+</a>
 
 </nav>
 
-
-<div class="admin-footer">
-
-Archive Admin · 2026
-
-</div>
-
 </aside>
 
-
-
-<!-- ======================================
+<!-- =================================
      MAIN
-====================================== -->
+================================= -->
 
 <main class="main">
 
+<div class="topbar">
 
-<header class="topbar">
+<div>
 
-<div class="page-title">
-
-News Admin
-
+<div class="page-label">
+News Management
 </div>
 
-
-<div class="topbar-right">
-
-<div class="status">
-
-● SYSTEM ONLINE
-
-</div>
-
-<div class="avatar">
-
-A
-
-</div>
-
-</div>
-
-</header>
-
-
-
-<div class="content">
-
-
-<!-- WELCOME -->
-
-<div class="welcome">
-
-<small>
-
-PERSONAL ARCHIVE / CONTENT MANAGEMENT
-
-</small>
-
-<h1>
-
-Good evening, Anya.
-
+<h1 class="page-title">
+Create New Archive
 </h1>
 
-</div>
-
-
-
-<!-- STATS -->
-
-<div class="stats">
-
-
-<div class="stat">
-
-<div class="stat-label">
-
-TOTAL POSTS
+<p class="page-description">
+Create and publish a new story to the Yuri Choi archive.
+</p>
 
 </div>
 
-<div class="stat-number">
-
-24
-
-</div>
-
-<div class="stat-description">
-
-All archive entries
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-label">
-
-PUBLISHED
-
-</div>
-
-<div class="stat-number">
-
-18
-
-</div>
-
-<div class="stat-description">
-
-Currently visible
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-label">
-
-DRAFTS
-
-</div>
-
-<div class="stat-number">
-
-6
-
-</div>
-
-<div class="stat-description">
-
-Waiting for publication
-
-</div>
-
-</div>
-
-
-<div class="stat">
-
-<div class="stat-label">
-
-THIS MONTH
-
-</div>
-
-<div class="stat-number">
-
-04
-
-</div>
-
-<div class="stat-description">
-
-New entries
-
-</div>
-
-</div>
-
-
-</div>
-
-
-
-<!-- NEWS TOOLBAR -->
-
-<div class="toolbar">
-
-
-<div class="filters">
-
-<button class="filter active">
-
-ALL
-
-</button>
-
-<button class="filter">
-
-RESEARCH
-
-</button>
-
-<button class="filter">
-
-LIFE
-
-</button>
-
-<button class="filter">
-
-TRAVEL
-
-</button>
-
-<button class="filter">
-
-BAKING
-
+<button class="back-button" onclick="location.href='news.html'">
+VIEW NEWS
 </button>
 
 </div>
 
+<div class="form-container">
 
-<button
-class="add-button"
-onclick="openModal()"
->
+<!-- =================================
+     BASIC INFORMATION
+================================= -->
 
-+ NEW ENTRY
+<section class="form-section">
 
-</button>
-
-
-</div>
-
-
-
-<!-- NEWS LIST -->
-
-<div class="news-list">
-
-
-<div class="news-header">
-
-<div>IMAGE</div>
-
-<div>ENTRY</div>
-
-<div>CATEGORY</div>
-
-<div>DESIGN</div>
-
-<div>STATUS</div>
-
-<div>ACTION</div>
-
-</div>
-
-
-
-<!-- ROW 1 -->
-
-<div class="news-row">
-
-
-<img
-class="thumb"
-src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=300&q=80"
->
-
-
-<div>
-
-<div class="news-title">
-
-Metabolic Therapy Research
-
-</div>
-
-<div class="news-meta">
-
-2026.07.20 · Research Archive
-
-</div>
-
-</div>
-
-
-<div>
-
-<span class="tag">
-
-RESEARCH
-
-</span>
-
-</div>
-
-
-<div class="design-tag">
-
-DESIGN 5
-
-</div>
-
-
-<div class="status-published">
-
-PUBLISHED
-
-</div>
-
-
-<div class="actions">
-
-<span class="action">
-
-EDIT
-
-</span>
-
-<span class="action">
-
-DELETE
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-<!-- ROW 2 -->
-
-<div class="news-row">
-
-
-<img
-class="thumb"
-src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=300&q=80"
->
-
-
-<div>
-
-<div class="news-title">
-
-A Quiet Afternoon in Paris
-
-</div>
-
-<div class="news-meta">
-
-2026.07.12 · Travel Archive
-
-</div>
-
-</div>
-
-
-<div>
-
-<span class="tag">
-
-TRAVEL
-
-</span>
-
-</div>
-
-
-<div class="design-tag">
-
-DESIGN 4
-
-</div>
-
-
-<div class="status-published">
-
-PUBLISHED
-
-</div>
-
-
-<div class="actions">
-
-<span class="action">
-
-EDIT
-
-</span>
-
-<span class="action">
-
-DELETE
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-<!-- ROW 3 -->
-
-<div class="news-row">
-
-
-<img
-class="thumb"
-src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=300&q=80"
->
-
-
-<div>
-
-<div class="news-title">
-
-Sweet Little Notes
-
-</div>
-
-<div class="news-meta">
-
-2026.07.10 · Baking Archive
-
-</div>
-
-</div>
-
-
-<div>
-
-<span class="tag">
-
-BAKING
-
-</span>
-
-</div>
-
-
-<div class="design-tag">
-
-DESIGN 3
-
-</div>
-
-
-<div class="status-draft">
-
-DRAFT
-
-</div>
-
-
-<div class="actions">
-
-<span class="action">
-
-EDIT
-
-</span>
-
-<span class="action">
-
-DELETE
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-<!-- ======================================
-     DESIGN SELECTOR
-====================================== -->
-
-<section class="design-panel">
-
-
-<h2 class="section-title">
-
-Archive Designs
-
+<h2 class="form-section-title">
+Basic Information
 </h2>
 
+<div class="form-grid">
 
-<div class="design-grid">
+<div class="form-group">
 
+<label>
+Title
+</label>
 
-<div class="design-card">
+<input
+type="text"
+id="postTitle"
+placeholder="Enter article title"
 
-<div class="design-preview design-1">
-
-Design 01
-
-</div>
-
-<div class="design-info">
-
-<div class="design-name">
-
-Main Archive
+>
 
 </div>
 
-<div class="design-type">
+<div class="form-group">
 
-Personal / Portfolio
+<label>
+Date
+</label>
 
-</div>
+<input
+type="date"
+id="postDate"
 
-</div>
-
-</div>
-
-
-
-<div class="design-card">
-
-<div class="design-preview design-2">
-
-Design 02
+>
 
 </div>
 
-<div class="design-info">
+<div class="form-group">
 
-<div class="design-name">
+<label>
+Category
+</label>
 
-Archive Journal
+<select id="postCategory">
 
-</div>
+<option value="research">
+Research
+</option>
 
-<div class="design-type">
+<option value="academic">
+Academic
+</option>
 
-Personal Archive
+<option value="travel">
+Travel
+</option>
 
-</div>
+<option value="life">
+Life
+</option>
 
-</div>
-
-</div>
-
-
-
-<div class="design-card">
-
-<div class="design-preview design-3">
-
-Design 03
-
-</div>
-
-<div class="design-info">
-
-<div class="design-name">
-
-Anya Bakery
+</select>
 
 </div>
 
-<div class="design-type">
+<div class="form-group">
 
-Baking / Dessert
+<label>
+Location
+</label>
 
-</div>
+<input
+type="text"
+id="postLocation"
+placeholder="e.g. Paris, France"
 
-</div>
-
-</div>
-
-
-
-<div class="design-card">
-
-<div class="design-preview design-4">
-
-Design 04
+>
 
 </div>
 
-<div class="design-info">
+<div class="form-group full">
 
-<div class="design-name">
+<label>
+Short Description
+</label>
 
-Vintage Flower
-
-</div>
-
-<div class="design-type">
-
-Life / Travel
+<textarea
+id="postDescription"
+placeholder="Write a short description for the news card."
+></textarea>
 
 </div>
 
 </div>
-
-</div>
-
-
-
-<div class="design-card">
-
-<div class="design-preview design-5">
-
-Design 05
-
-</div>
-
-<div class="design-info">
-
-<div class="design-name">
-
-Modern Maturity
-
-</div>
-
-<div class="design-type">
-
-Academic / Research
-
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
 
 </section>
 
+<!-- =================================
+     DESIGN SELECT
+================================= -->
+
+<section class="form-section">
+
+<h2 class="form-section-title">
+Choose Design
+</h2>
+
+<div class="design-grid">
+
+<!-- DESIGN 3 -->
+
+<div
+class="design-card"
+data-design="3"
+onclick="selectDesign(3)"
+>
+
+<div class="design-check">
+✓
+</div>
+
+<div class="design-preview">
+
+<img
+src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=700&q=80"
+
+>
+
+</div>
+
+<div class="design-info">
+
+<div class="design-number">
+DESIGN 03
+</div>
+
+<div class="design-name">
+Quiet Journeys
+</div>
+
+<div class="design-description">
+Minimal travel archive with circular images and quiet editorial spacing.
+</div>
+
+</div>
+
+</div>
+
+<!-- DESIGN 4 -->
+
+<div
+class="design-card"
+data-design="4"
+onclick="selectDesign(4)"
+>
+
+<div class="design-check">
+✓
+</div>
+
+<div class="design-preview">
+
+<img
+src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80"
+
+>
+
+</div>
+
+<div class="design-info">
+
+<div class="design-number">
+DESIGN 04
+</div>
+
+<div class="design-name">
+Modern Maturity
+</div>
+
+<div class="design-description">
+Academic monograph layout with layered photography and editorial composition.
+</div>
+
+</div>
+
+</div>
+
+<!-- DESIGN 5 -->
+
+<div
+class="design-card"
+data-design="5"
+onclick="selectDesign(5)"
+>
+
+<div class="design-check">
+✓
+</div>
+
+<div class="design-preview">
+
+<img
+src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=700&q=80"
+
+>
+
+</div>
+
+<div class="design-info">
+
+<div class="design-number">
+DESIGN 05
+</div>
+
+<div class="design-name">
+Vintage Flower
+</div>
+
+<div class="design-description">
+Botanical travel diary with vintage frames, handwritten notes and arch windows.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =================================
+     DESIGN 3 FIELDS
+================================= -->
+
+<section
+class="form-section template-fields"
+id="designFields3"
+>
+
+<h2 class="field-title">
+Design 03 — Quiet Journeys
+</h2>
+
+<p class="field-note">
+Upload images for the travel archive layout.
+</p>
+
+<div class="image-grid">
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+HERO IMAGE
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+PLACE 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+PLACE 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+GALLERY 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+GALLERY 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+GALLERY 03
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+GALLERY 04
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+GALLERY 05
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+GALLERY 06
+</span>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- =================================
+     DESIGN 4 FIELDS
+================================= -->
+
+<section
+class="form-section template-fields"
+id="designFields4"
+>
+
+<h2 class="field-title">
+Design 04 — Modern Maturity
+</h2>
+
+<p class="field-note">
+Upload images for the academic monograph layout.
+</p>
+
+<div class="image-grid">
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+HERO IMAGE
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+RESEARCH 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+SUB IMAGE 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+DIAGONAL IMAGE 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+DIAGONAL IMAGE 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+WIDE IMAGE
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+RESEARCH 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+SUB IMAGE 02
+</span>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- =================================
+     DESIGN 5 FIELDS
+================================= -->
+
+<section
+class="form-section template-fields"
+id="designFields5"
+>
+
+<h2 class="field-title">
+Design 05 — Vintage Flower
+</h2>
+
+<p class="field-note">
+Upload images for the botanical travel diary layout.
+</p>
+
+<div class="image-grid">
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+HERO IMAGE
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+CHAPTER 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+RIBBON IMAGE
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+CHAPTER 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+VIDEO THUMBNAIL
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+ARCH 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+ARCH 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+ARCH 03
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+MEMORY 01
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+MEMORY 02
+</span>
+
+</label>
+
+<label class="image-upload">
+
+<input
+type="file"
+accept="image/*"
+onchange="previewImage(this)"
+
+>
+
+<span class="upload-text">
+MEMORY 03
+</span>
+
+</label>
+
+</div>
+
+</section>
+
+<!-- =================================
+     PUBLISH
+================================= -->
+
+<div class="submit-area">
+
+<button
+class="cancel-btn"
+onclick="resetForm()"
+
+>
+
+CANCEL
+
+</button>
+
+<button
+class="publish-btn"
+onclick="publishPost()"
+
+>
+
+PUBLISH ARCHIVE
+
+</button>
+
+</div>
 
 </div>
 
 </main>
 
-
-
-<!-- ======================================
-     NEW ENTRY MODAL
-====================================== -->
-
-<div
-class="modal"
-id="entryModal"
->
-
-
-<div class="modal-box">
-
-
-<div class="modal-header">
-
-<div class="modal-title">
-
-New Archive Entry
-
 </div>
-
-<div
-class="close"
-onclick="closeModal()"
->
-
-×
-
-</div>
-
-</div>
-
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-TITLE
-
-</label>
-
-<input
-type="text"
-placeholder="Entry title"
->
-
-
-</div>
-
-
-
-<div class="form-grid">
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-CATEGORY
-
-</label>
-
-<select>
-
-<option>Research</option>
-
-<option>Life</option>
-
-<option>Travel</option>
-
-<option>Baking</option>
-
-</select>
-
-</div>
-
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-DESIGN
-
-</label>
-
-<select>
-
-<option>Design 01</option>
-
-<option>Design 02</option>
-
-<option>Design 03 — Anya Bakery</option>
-
-<option>Design 04 — Vintage Flower</option>
-
-<option>Design 05 — Modern Maturity</option>
-
-</select>
-
-</div>
-
-
-</div>
-
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-SHORT DESCRIPTION
-
-</label>
-
-<textarea
-placeholder="Write a short description..."
-></textarea>
-
-</div>
-
-
-
-<div class="form-grid">
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-DATE
-
-</label>
-
-<input
-type="date"
->
-
-</div>
-
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-STATUS
-
-</label>
-
-<select>
-
-<option>Published</option>
-
-<option>Draft</option>
-
-</select>
-
-</div>
-
-
-</div>
-
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-IMAGE URL
-
-</label>
-
-<input
-type="text"
-placeholder="images/example.jpg"
->
-
-</div>
-
-
-
-<div class="form-actions">
-
-<button
-class="cancel"
-onclick="closeModal()"
->
-
-Cancel
-
-</button>
-
-
-<button class="save">
-
-Save Entry
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
-
 
 <script>
 
+/* =================================
+   DESIGN SELECT
+================================= */
 
-function openModal(){
+let selectedDesign = null;
+
+
+function selectDesign(number){
+
+    selectedDesign = number;
 
     document
-    .getElementById('entryModal')
+    .querySelectorAll('.design-card')
+    .forEach(card => {
+
+        card.classList.remove('selected');
+
+    });
+
+
+    document
+    .querySelector(`[data-design="${number}"]`)
+    .classList
+    .add('selected');
+
+
+    document
+    .querySelectorAll('.template-fields')
+    .forEach(field => {
+
+        field.classList.remove('active');
+
+    });
+
+
+    document
+    .getElementById(`designFields${number}`)
     .classList
     .add('active');
 
 }
 
 
-function closeModal(){
 
-    document
-    .getElementById('entryModal')
-    .classList
-    .remove('active');
+/* =================================
+   IMAGE PREVIEW
+================================= */
+
+function previewImage(input){
+
+    const container = input.parentElement;
+
+    const oldImage =
+    container.querySelector('.preview-image');
+
+    if(oldImage){
+
+        oldImage.remove();
+
+    }
+
+
+    if(input.files && input.files[0]){
+
+        const reader =
+        new FileReader();
+
+
+        reader.onload = function(e){
+
+            const img =
+            document.createElement('img');
+
+            img.src = e.target.result;
+
+            img.className =
+            'preview-image';
+
+            container.appendChild(img);
+
+        };
+
+
+        reader.readAsDataURL(input.files[0]);
+
+    }
 
 }
 
 
-document
-.getElementById('entryModal')
-.addEventListener(
-    'click',
-    function(e){
 
-        if(e.target === this){
+/* =================================
+   PUBLISH
+================================= */
 
-            closeModal();
+function publishPost(){
 
-        }
+    const title =
+    document
+    .getElementById('postTitle')
+    .value
+    .trim();
+
+
+    const date =
+    document
+    .getElementById('postDate')
+    .value;
+
+
+    if(!title){
+
+        alert('Please enter a title.');
+
+        return;
 
     }
-);
 
 
-/* FILTER */
+    if(!date){
 
-const filters =
-document.querySelectorAll('.filter');
+        alert('Please select a date.');
+
+        return;
+
+    }
 
 
-filters.forEach(filter => {
+    if(!selectedDesign){
 
-    filter.addEventListener(
-        'click',
-        function(){
+        alert('Please choose a design.');
 
-            filters.forEach(f =>
-                f.classList.remove('active')
-            );
+        return;
 
-            this.classList.add('active');
+    }
 
-        }
+
+    const postData = {
+
+        title:title,
+
+        date:date,
+
+        category:
+        document
+        .getElementById('postCategory')
+        .value,
+
+        location:
+        document
+        .getElementById('postLocation')
+        .value,
+
+        description:
+        document
+        .getElementById('postDescription')
+        .value,
+
+        design:selectedDesign,
+
+        createdAt:
+        new Date().toISOString()
+
+    };
+
+
+    console.log('POST DATA:',postData);
+
+
+    alert(
+    'Post information is ready.\n\nSupabase connection will be added next.'
     );
 
-});
+}
 
+
+
+/* =================================
+   RESET
+================================= */
+
+function resetForm(){
+
+    if(
+    confirm('Reset this post?')
+    ){
+
+        location.reload();
+
+    }
+
+}
 
 </script>
 
-
 </body>
-
 </html>
