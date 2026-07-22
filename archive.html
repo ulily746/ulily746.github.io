@@ -84,7 +84,6 @@ select{
 
 /* =========================================================
    NAVIGATION
-   기존 홈페이지 NAV와 동일한 스타일
 ========================================================= */
 
 .nav{
@@ -412,12 +411,254 @@ select{
 
 
 /* =========================================================
+   FEATURED ARCHIVE
+========================================================= */
+
+.featured-section{
+
+    padding:
+
+        65px 0 75px;
+
+}
+
+
+.featured-heading{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+.featured-label{
+
+    font-size:10px;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:var(--brown);
+
+}
+
+
+.featured-line{
+
+    flex:1;
+
+    height:1px;
+
+    background:var(--line);
+
+    margin-left:25px;
+
+}
+
+
+.featured-card{
+
+    display:grid;
+
+    grid-template-columns:
+
+        minmax(300px, 1.15fr)
+
+        minmax(300px, .85fr);
+
+    min-height:360px;
+
+    background:var(--soft-ivory);
+
+    border:1px solid var(--line);
+
+    overflow:hidden;
+
+    transition:
+
+        background .4s ease,
+
+        transform .4s ease;
+
+}
+
+
+.featured-card:hover{
+
+    background:#e8e2d8;
+
+}
+
+
+.featured-image{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:360px;
+
+    background:var(--paper);
+
+}
+
+
+.featured-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    filter:saturate(.82);
+
+    transition:
+
+        transform .8s ease,
+
+        filter .8s ease;
+
+}
+
+
+.featured-card:hover .featured-image img{
+
+    transform:scale(1.04);
+
+    filter:saturate(1);
+
+}
+
+
+.featured-content{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:55px 60px;
+
+}
+
+
+.featured-category{
+
+    font-size:9px;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:var(--brown);
+
+    margin-bottom:18px;
+
+}
+
+
+.featured-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:clamp(42px,4vw,68px);
+
+    line-height:.9;
+
+    font-weight:500;
+
+    letter-spacing:-.035em;
+
+}
+
+
+.featured-description{
+
+    max-width:400px;
+
+    margin-top:25px;
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    color:var(--text-soft);
+
+}
+
+
+.featured-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:45px;
+
+    padding-top:18px;
+
+    border-top:1px solid var(--line);
+
+}
+
+
+.featured-year{
+
+    font-size:9px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    color:var(--text-soft);
+
+}
+
+
+.featured-view{
+
+    font-size:9px;
+
+    letter-spacing:.15em;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+
+}
+
+
+.featured-card:hover .featured-view{
+
+    letter-spacing:.2em;
+
+}
+
+
+
+/* =========================================================
    FILTER
 ========================================================= */
 
 .archive-controls{
 
-    padding:35px 0;
+    padding:
+
+        30px 0
+
+        35px;
 
     display:flex;
 
@@ -426,6 +667,8 @@ select{
     align-items:center;
 
     gap:30px;
+
+    border-top:1px solid var(--line);
 
 }
 
@@ -585,6 +828,7 @@ select{
 
 /* =========================================================
    IMAGE
+   모든 목록 이미지를 정사각형으로 통일
 ========================================================= */
 
 .item-thumb{
@@ -593,9 +837,13 @@ select{
 
     height:100px;
 
+    aspect-ratio:1 / 1;
+
     overflow:hidden;
 
     background:var(--paper);
+
+    border-radius:0;
 
 }
 
@@ -626,64 +874,6 @@ select{
     transform:scale(1.08);
 
     filter:saturate(1);
-
-}
-
-
-
-/* =========================================================
-   IMAGE SHAPES
-========================================================= */
-
-.thumb-arch{
-
-    border-radius:
-
-        55px
-
-        55px
-
-        0
-
-        0;
-
-}
-
-
-.thumb-oval{
-
-    height:70px;
-
-    border-radius:50%;
-
-}
-
-
-.thumb-round{
-
-    border-radius:50%;
-
-}
-
-
-.thumb-bottom-round{
-
-    border-radius:
-
-        0
-
-        0
-
-        55px
-
-        55px;
-
-}
-
-
-.thumb-rect{
-
-    border-radius:0;
 
 }
 
@@ -959,9 +1149,72 @@ select{
     }
 
 
+    /* FEATURED MOBILE */
+
+    .featured-section{
+
+        padding:
+
+            45px 25px
+
+            55px;
+
+    }
+
+
+    .featured-card{
+
+        display:block;
+
+        min-height:0;
+
+    }
+
+
+    .featured-image{
+
+        height:260px;
+
+        min-height:260px;
+
+    }
+
+
+    .featured-content{
+
+        padding:35px 30px 40px;
+
+    }
+
+
+    .featured-title{
+
+        font-size:48px;
+
+    }
+
+
+    .featured-description{
+
+        margin-top:20px;
+
+    }
+
+
+    .featured-bottom{
+
+        margin-top:35px;
+
+    }
+
+
+    /* FILTER */
+
     .archive-controls{
 
-        padding:25px;
+        padding:
+
+            25px;
 
         flex-direction:column;
 
@@ -976,6 +1229,8 @@ select{
 
     }
 
+
+    /* ARCHIVE ITEM */
 
     .archive-item{
 
@@ -1210,6 +1465,95 @@ select{
 
 
 <!-- =========================================================
+     FEATURED
+========================================================= -->
+
+<section
+    class="featured-section"
+    id="featuredSection"
+>
+
+    <div class="featured-heading">
+
+        <span class="featured-label">
+            Featured Entry
+        </span>
+
+        <span class="featured-line"></span>
+
+    </div>
+
+
+    <a
+        href="#"
+        class="featured-card"
+        id="featuredCard"
+    >
+
+        <div class="featured-image">
+
+            <img
+                id="featuredImage"
+                src=""
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="featured-content">
+
+            <span
+                class="featured-category"
+                id="featuredCategory"
+            >
+                Research Project
+            </span>
+
+
+            <h2
+                class="featured-title"
+                id="featuredTitle"
+            >
+                Dual Metabolic Therapy
+            </h2>
+
+
+            <p
+                class="featured-description"
+                id="featuredDescription"
+            >
+                PLGA-PEG nanoparticle platform for dual metabolic inhibition.
+            </p>
+
+
+            <div class="featured-bottom">
+
+                <span
+                    class="featured-year"
+                    id="featuredYear"
+                >
+                    2026
+                </span>
+
+
+                <span class="featured-view">
+
+                    View Entry →
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </a>
+
+</section>
+
+
+
+<!-- =========================================================
      FILTER + SORT
 ========================================================= -->
 
@@ -1261,7 +1605,7 @@ select{
 
 
 <!-- =========================================================
-     NO RESULTS
+     NO RESULT
 ========================================================= -->
 
 <div
@@ -1328,9 +1672,7 @@ select{
 
 /* =========================================================
    CONTENT DATABASE
-   여기만 추가하면 콘텐츠가 늘어남
 ========================================================= */
-
 
 const archiveData = {
 
@@ -1714,6 +2056,27 @@ const sortSelect =
 document.getElementById("sortSelect");
 
 
+/* FEATURED ELEMENTS */
+
+const featuredCard =
+document.getElementById("featuredCard");
+
+const featuredImage =
+document.getElementById("featuredImage");
+
+const featuredCategory =
+document.getElementById("featuredCategory");
+
+const featuredTitle =
+document.getElementById("featuredTitle");
+
+const featuredDescription =
+document.getElementById("featuredDescription");
+
+const featuredYear =
+document.getElementById("featuredYear");
+
+
 
 /* =========================================================
    VARIABLES
@@ -1749,6 +2112,77 @@ function getSection(){
     }
 
     return "research";
+
+}
+
+
+
+/* =========================================================
+   RENDER FEATURED
+========================================================= */
+
+function renderFeatured(){
+
+    const data =
+    archiveData[currentSection];
+
+
+    if(
+        !data ||
+        !data.items ||
+        data.items.length === 0
+    ){
+
+        document
+        .getElementById(
+            "featuredSection"
+        )
+        .style.display =
+        "none";
+
+        return;
+
+    }
+
+
+    const featured =
+    data.items[0];
+
+
+    featuredImage.src =
+    featured.image;
+
+
+    featuredImage.alt =
+    featured.title;
+
+
+    featuredCategory.textContent =
+    featured.category;
+
+
+    featuredTitle.textContent =
+    featured.title;
+
+
+    featuredDescription.textContent =
+    featured.description;
+
+
+    featuredYear.textContent =
+    featured.year;
+
+
+    featuredCard.href =
+    featured.link;
+
+
+    document
+    .getElementById(
+        "featuredSection"
+    )
+    .style.display =
+    "block";
 
 }
 
@@ -1797,6 +2231,8 @@ function loadSection(){
         data.filters
     );
 
+
+    renderFeatured();
 
     renderArchive();
 
@@ -2076,7 +2512,7 @@ function renderArchive(){
                 </span>
 
 
-                <div class="item-thumb ${item.shape}">
+                <div class="item-thumb">
 
                     <img
                         src="${item.image}"
@@ -2258,10 +2694,6 @@ loadMore.addEventListener(
 
 /* =========================================================
    HASH CHANGE
-   archive.html#research
-   archive.html#academic
-   archive.html#travel
-   archive.html#life
 ========================================================= */
 
 window.addEventListener(
