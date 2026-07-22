@@ -612,151 +612,525 @@ TRAVEL
 
 
 /* =====================================
-LIFE (왼쪽 글귀 + 오른쪽 슬림한 4연속 아치 카드)
+LIFE
 ===================================== */
+
 .life-section {
-    padding: 100px 6% 160px 6%;
-    background: #1A1A1A; 
+padding: 120px 6% 160px;
+background: #1A1A1A;
 }
 
-/* 거대한 중앙 아치형 배경 */
+/* =====================================
+LARGE VERTICAL ARCH BACKGROUND
+===================================== */
+
 .large-arch-bg {
-    background: #F2F2DF; 
-    width: 100%;
-    border-radius: 50vw 50vw 0 0; 
-    padding: 100px 6%;
+
+```
+position: relative;
+
+width: 100%;
+
+background: #F2F2DF;
+
+/*
+가로로 넓은 반원 대신
+세로로 길게 올라오는 아치형 상단
+*/
+
+border-radius: 50vw 50vw 0 0;
+
+padding: 110px 7% 100px;
+
+overflow: hidden;
+```
+
 }
 
-/* 왼쪽 텍스트와 오른쪽 아치 카드를 좌우로 배치하는 컨테이너 */
+/* =====================================
+MAIN TITLE
+===================================== */
+
+.life-main-title {
+
+```
+text-align: center;
+
+margin-bottom: 100px;
+```
+
+}
+
+.life-main-title h2 {
+
+```
+font-family: 'Cormorant Garamond', serif;
+
+font-size: 72px;
+
+font-weight: 400;
+
+line-height: 1;
+
+color: #111;
+```
+
+}
+
+.life-main-title p {
+
+```
+max-width: 430px;
+
+margin: 25px auto 0;
+
+font-size: 14px;
+
+line-height: 1.8;
+
+color: #777;
+```
+
+}
+
+/* =====================================
+LIFE CONTENT
+LEFT TEXT + RIGHT ARCH WINDOWS
+===================================== */
+
 .life-container {
-    display: grid;
-    grid-template-columns: 1fr 2.2fr; /* 왼쪽은 좁게, 오른쪽 카드는 넓게 */
-    align-items: center;
-    gap: 50px;
-    max-width: 1400px;
-    margin: 0 auto;
+
+```
+display: grid;
+
+grid-template-columns: 0.85fr 2.4fr;
+
+align-items: center;
+
+gap: 70px;
+
+max-width: 1450px;
+
+margin: 0 auto;
+```
+
 }
 
-/* 왼쪽 헤더 (텍스트 영역) */
+/* =====================================
+LEFT TEXT
+===================================== */
+
 .life-header {
-    text-align: left; /* 왼쪽 정렬 */
-    margin-bottom: 0;
+
+```
+text-align: left;
+
+margin: 0;
+
+padding-left: 10px;
+```
+
 }
 
-.life-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 55px;
-    font-weight: 400;
-    color: #111;
-    line-height: 1.1;
+.life-eyebrow {
+
+```
+display: block;
+
+margin-bottom: 22px;
+
+font-size: 10px;
+
+letter-spacing: 3px;
+
+color: #8B7355;
+```
+
+}
+
+.life-header h3 {
+
+```
+font-family: 'Cormorant Garamond', serif;
+
+font-size: 42px;
+
+font-weight: 400;
+
+line-height: 1.15;
+
+color: #1A1A1A;
+```
+
 }
 
 .life-header p {
-    margin-top: 25px;
-    font-size: 14px;
-    color: #666;
-    line-height: 1.8;
+
+```
+max-width: 300px;
+
+margin-top: 28px;
+
+font-size: 14px;
+
+line-height: 1.9;
+
+color: #666;
+```
+
 }
 
-/* 오른쪽 아치 카드 4개 그리드 */
+/* =====================================
+ARCH WINDOW GRID
+===================================== */
+
 .life-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4개가 나란히 배치 */
-    gap: 20px;
-    width: 100%;
+
+```
+display: grid;
+
+grid-template-columns: repeat(4, 1fr);
+
+gap: 18px;
+
+width: 100%;
+```
+
 }
+
+/* =====================================
+LIFE CARD
+===================================== */
 
 .life-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    text-decoration: none;
+
+```
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+position: relative;
+
+text-decoration: none;
+```
+
 }
 
-/* 레퍼런스처럼 슬림하고 세로로 긴 아치 프레임 이미지 */
+/* =====================================
+TALL ARCH WINDOW
+===================================== */
+
 .life-arch-img {
-    width: 100%;
-    height: 340px; /* 세로로 길고 슬림하게 조정 */
-    border-radius: 100px 100px 0 0; /* 상단 아치 곡선 */
-    overflow: hidden;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 2;
+
+```
+width: 100%;
+
+/*
+기존 340px보다 훨씬 길게
+세로로 긴 아치창 느낌
+*/
+
+height: 470px;
+
+border-radius: 100px 100px 0 0;
+
+overflow: hidden;
+
+position: relative;
+
+background: #DDD;
+```
+
 }
 
 .life-arch-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .5s ease;
+
+```
+width: 100%;
+
+height: 100%;
+
+object-fit: cover;
+
+transition: transform .6s ease;
+```
+
 }
 
 .life-card:hover .life-arch-img img {
-    transform: scale(1.05);
+
+```
+transform: scale(1.06);
+```
+
 }
 
-/* LIFE HOVER 효과 */
+/* =====================================
+ARCH WINDOW FRAME
+===================================== */
+
+.life-arch-img::after {
+
+```
+content: "";
+
+position: absolute;
+
+inset: 0;
+
+border: 1px solid rgba(139,115,85,.35);
+
+border-radius: 100px 100px 0 0;
+
+pointer-events: none;
+```
+
+}
+
+/* =====================================
+HOVER
+===================================== */
+
 .life-hover {
-    position: absolute;
-    inset: 0;
-    z-index:3;
-    background: rgba(0,0,0,0.35);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: .4s;
+
+```
+position: absolute;
+
+inset: 0;
+
+z-index: 3;
+
+background: rgba(0,0,0,.32);
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+opacity: 0;
+
+transition: .4s;
+```
+
 }
 
 .life-hover span {
-    background: #111;
-    color: #F2F2DF;
-    padding: 10px 20px;
-    font-size: 11px;
-    letter-spacing: 2px;
+
+```
+background: #111;
+
+color: #F2F2DF;
+
+padding: 10px 20px;
+
+font-size: 10px;
+
+letter-spacing: 2px;
+```
+
 }
 
 .life-card:hover .life-hover {
-    opacity: 1;
+
+```
+opacity: 1;
+```
+
 }
 
-/* 하단 폰트 설명 (카드 아래 텍스트) */
+/* =====================================
+CARD LABEL
+===================================== */
+
 .life-card > span {
-    font-size: 13px;
-    color: #666;
-    letter-spacing: 0.5px;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
+
+```
+margin-top: 16px;
+
+font-family: 'Cormorant Garamond', serif;
+
+font-size: 15px;
+
+font-style: italic;
+
+color: #666;
+
+text-align: center;
+```
+
+}
+
+/* =====================================
+VIEW ALL
+===================================== */
+
+.life-view-all {
+
+```
+margin-top: 100px;
+
+text-align: center;
+```
+
+}
+
+.life-view-all a {
+
+```
+display: inline-block;
+
+padding: 14px 40px;
+
+border: 1px solid #222;
+
+font-size: 13px;
+
+letter-spacing: 2px;
+
+transition: .3s;
+```
+
+}
+
+.life-view-all a:hover {
+
+```
+background: #000;
+
+color: #F2F2DF;
+```
+
+}
+
+/* =====================================
+LIFE RESPONSIVE
+===================================== */
+
+@media(max-width:1200px) {
+
+
+.life-container {
+
+    grid-template-columns: 1fr;
+
+    gap: 60px;
+
+}
+
+.life-header {
+
     text-align: center;
+
+    padding-left: 0;
+
 }
 
-/* 반응형 처리 (태블릿/모바일) */
-@media(max-width: 1200px) {
-    .life-container {
-        grid-template-columns: 1fr; /* 화면이 줄어들면 위아래로 배치 */
-        gap: 40px;
-    }
-    .life-header {
-        text-align: center;
-    }
-    .life-header p {
-        max-width: 500px;
-        margin: 20px auto 0;
-    }
+.life-header p {
+
+    margin-left: auto;
+
+    margin-right: auto;
+
 }
 
-@media(max-width: 900px) {
-    .life-grid {
-        grid-template-columns: repeat(2, 1fr); /* 모바일에서는 2개씩 2줄로 */
-    }
+.life-grid {
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
 }
 
-@media(max-width: 500px) {
-    .life-grid {
-        grid-template-columns: 1fr; /* 아주 작은 화면에선 1개씩 */
-    }
+
 }
+
+@media(max-width:900px) {
+
+
+.large-arch-bg {
+
+    border-radius: 35vw 35vw 0 0;
+
+    padding-left: 5%;
+
+    padding-right: 5%;
+
+}
+
+.life-main-title h2 {
+
+    font-size: 60px;
+
+}
+
+.life-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 30px;
+
+}
+
+.life-arch-img {
+
+    height: 420px;
+
+}
+
+
+}
+
+@media(max-width:600px) {
+
+
+.life-section {
+
+    padding: 80px 20px 100px;
+
+}
+
+.large-arch-bg {
+
+    border-radius: 80px 80px 0 0;
+
+    padding: 80px 25px;
+
+}
+
+.life-main-title {
+
+    margin-bottom: 70px;
+
+}
+
+.life-main-title h2 {
+
+    font-size: 48px;
+
+}
+
+.life-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 40px;
+
+}
+
+.life-arch-img {
+
+    height: 460px;
+
+    max-width: 280px;
+
+}
+
+
+}
+
 /* =====================================
 FOOTER
 ===================================== */
