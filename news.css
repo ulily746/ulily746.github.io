@@ -610,28 +610,37 @@ TRAVEL
     color:#777;
 }
 
+
 /* =====================================
-LIFE (거대 배경 아치 + 4연속 아치 카드)
+LIFE (왼쪽 글귀 + 오른쪽 슬림한 4연속 아치 카드)
 ===================================== */
 .life-section {
     padding: 100px 6% 160px 6%;
-    background: #1A1A1A; /* 첫 번째 레퍼런스처럼 바깥쪽은 어두운 톤 */
+    background: #1A1A1A; 
 }
 
-/* 거대한 중앙 아치형 배경 (첫 번째 레퍼런스 구현) */
+/* 거대한 중앙 아치형 배경 */
 .large-arch-bg {
-    background: #F2F2DF; /* 웹사이트 기본 아이보리색으로 내부 채우기 */
+    background: #F2F2DF; 
     width: 100%;
-    border-radius: 50vw 50vw 0 0; /* 완벽한 거대 아치 곡선 생성 */
-    padding: 120px 8% 120px 8%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border-radius: 50vw 50vw 0 0; 
+    padding: 100px 6%;
 }
 
+/* 왼쪽 텍스트와 오른쪽 아치 카드를 좌우로 배치하는 컨테이너 */
+.life-container {
+    display: grid;
+    grid-template-columns: 1fr 2.2fr; /* 왼쪽은 좁게, 오른쪽 카드는 넓게 */
+    align-items: center;
+    gap: 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* 왼쪽 헤더 (텍스트 영역) */
 .life-header {
-    text-align: center;
-    margin-bottom: 80px;
+    text-align: left; /* 왼쪽 정렬 */
+    margin-bottom: 0;
 }
 
 .life-header h2 {
@@ -639,102 +648,41 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
     font-size: 55px;
     font-weight: 400;
     color: #111;
+    line-height: 1.1;
 }
 
 .life-header p {
-    margin-top: 15px;
-    font-size: 15px;
+    margin-top: 25px;
+    font-size: 14px;
     color: #666;
-    letter-spacing: 1px;
+    line-height: 1.8;
 }
 
-/* 두 번째 레퍼런스의 아치 카드 그리드 */
+/* 오른쪽 아치 카드 4개 그리드 */
 .life-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
+    grid-template-columns: repeat(4, 1fr); /* 4개가 나란히 배치 */
+    gap: 20px;
     width: 100%;
-    max-width: 1200px;
 }
 
 .life-card {
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    text-decoration:none;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
 }
 
-/* 세로로 긴 세련된 아치 프레임 이미지 */
-.life-arch-img{
-
-    width:100%;
-
-    height:380px;
-
-    border-radius:140px 140px 0 0;
-
-    overflow:hidden;
-
-    margin-bottom:20px;
-
-    position:relative;
-
-    z-index:2;
-
-}
-/* LIFE HOVER */
-
-.life-hover{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:3;
-
-    background:rgba(0,0,0,0.35);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    opacity:0;
-
-    transition:.4s;
-
-}
-
-
-.life-hover span{
-
-    background:#111;
-
-    color:#F2F2DF;
-
-    padding:12px 25px;
-
-    font-size:12px;
-
-    letter-spacing:2px;
-
-}
-
-
-.life-card:hover .life-hover{
-
-    opacity:1;
-
+/* 레퍼런스처럼 슬림하고 세로로 긴 아치 프레임 이미지 */
+.life-arch-img {
+    width: 100%;
+    height: 340px; /* 세로로 길고 슬림하게 조정 */
+    border-radius: 100px 100px 0 0; /* 상단 아치 곡선 */
+    overflow: hidden;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
 }
 
 .life-arch-img img {
@@ -748,14 +696,66 @@ LIFE (거대 배경 아치 + 4연속 아치 카드)
     transform: scale(1.05);
 }
 
-/* 하단 연한 폰트 설명 */
-.life-card span {
+/* LIFE HOVER 효과 */
+.life-hover {
+    position: absolute;
+    inset: 0;
+    z-index:3;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: .4s;
+}
+
+.life-hover span {
+    background: #111;
+    color: #F2F2DF;
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.life-card:hover .life-hover {
+    opacity: 1;
+}
+
+/* 하단 폰트 설명 (카드 아래 텍스트) */
+.life-card > span {
     font-size: 13px;
-    color: #888;
+    color: #666;
     letter-spacing: 0.5px;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     text-align: center;
+}
+
+/* 반응형 처리 (태블릿/모바일) */
+@media(max-width: 1200px) {
+    .life-container {
+        grid-template-columns: 1fr; /* 화면이 줄어들면 위아래로 배치 */
+        gap: 40px;
+    }
+    .life-header {
+        text-align: center;
+    }
+    .life-header p {
+        max-width: 500px;
+        margin: 20px auto 0;
+    }
+}
+
+@media(max-width: 900px) {
+    .life-grid {
+        grid-template-columns: repeat(2, 1fr); /* 모바일에서는 2개씩 2줄로 */
+    }
+}
+
+@media(max-width: 500px) {
+    .life-grid {
+        grid-template-columns: 1fr; /* 아주 작은 화면에선 1개씩 */
+    }
 }
 /* =====================================
 FOOTER
