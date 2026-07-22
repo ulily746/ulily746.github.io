@@ -1299,3 +1299,118 @@ RESPONSIVE
     .section-title h2, .travel-header h2, .life-header h2{ font-size:50px; }
     .academic-grid{ grid-template-columns:1fr; }
 }
+/* =====================================
+FIX : CATEGORY NAVIGATION
+===================================== */
+
+.category-nav{
+    position:relative;
+    z-index:50;
+}
+
+.category-links a{
+    cursor:pointer;
+}
+
+
+/* =====================================
+FIX : ADD NEWS BUTTON
+NAV 바로 아래 오른쪽
+===================================== */
+
+.news-admin-link{
+    width:100%;
+    height:70px;
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+
+    padding:0 8%;
+
+    background:#F2F2DF;
+
+    position:relative;
+    z-index:100;
+}
+
+.news-admin-link a{
+    display:inline-flex !important;
+    align-items:center;
+    justify-content:center;
+
+    padding:11px 22px;
+
+    border:1px solid #8B6B4F;
+
+    background:#F2F2DF;
+
+    color:#8B6B4F;
+
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    visibility:visible;
+    opacity:1;
+
+    transition:all .3s ease;
+}
+
+.news-admin-link a:hover{
+    background:#8B6B4F;
+    color:#FFFFFF;
+}
+
+
+/* =====================================
+FIX : LIFE ANCHOR SCROLL
+===================================== */
+
+#life{
+    scroll-margin-top:70px;
+}
+
+#research{
+    scroll-margin-top:70px;
+}
+
+#academic{
+    scroll-margin-top:70px;
+}
+
+#travel{
+    scroll-margin-top:70px;
+}
+
+
+/* =====================================
+FIX : LIFE GRID
+===================================== */
+
+@media(max-width:1000px){
+
+    .life-grid{
+        display:grid;
+        grid-template-columns:repeat(2, 1fr);
+        gap:30px;
+    }
+
+    .life-card{
+        margin-bottom:0;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .life-grid{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+}
