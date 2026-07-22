@@ -296,10 +296,8 @@ ADD NEWS
     display:flex;
     justify-content:flex-end;
     padding:0 8%;
-    margin-top:-80px;
-    margin-bottom:40px;
-    position:relative;
-    z-index:10;
+    margin-top:35px;
+    margin-bottom:20px;
 }
 
 .news-admin-link a{
@@ -311,7 +309,7 @@ ADD NEWS
 
     border:1px solid #8B6B4F;
 
-    background:#F2F2DF;
+    background:transparent;
 
     color:#8B6B4F;
 
@@ -324,9 +322,6 @@ ADD NEWS
     text-transform:uppercase;
 
     transition:all .3s ease;
-
-    position:relative;
-    z-index:11;
 }
 
 .news-admin-link a:hover{
