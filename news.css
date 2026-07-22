@@ -397,7 +397,17 @@ ACADEMIC
 ===================================== */
 .academic-section{
     padding:120px 8%;
-     background:#E8E9E3;
+    background:#1A1A1A;
+}
+
+/* Academic Title */
+
+.academic-section .section-title h2{
+    color:#F2F2DF;
+}
+
+.academic-section .section-title p{
+    color:#B9B4AA;
 }
 
 .academic-grid{
@@ -512,6 +522,15 @@ ACADEMIC
     background: #8B6B4F;
 }
 
+.academic-section .view-all a{
+    color:#F2F2DF;
+    border-color:#F2F2DF;
+}
+
+.academic-section .view-all a:hover{
+    background:#F2F2DF;
+    color:#1A1A1A;
+}
 /* =====================================
 TRAVEL
 ===================================== */
