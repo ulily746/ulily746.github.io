@@ -397,6 +397,7 @@ ACADEMIC
 ===================================== */
 .academic-section{
     padding:120px 8%;
+     background:#E8E9E3;
 }
 
 .academic-grid{
@@ -413,11 +414,25 @@ ACADEMIC
 }
 
 /* 고급 세라믹/인테리어 무드의 5가지 톤 다운 배색 */
-.academic-card:nth-child(5n+1){ background-color:#DDE3DA; }
-.academic-card:nth-child(5n+2){ background-color:#E2DCD5; }
-.academic-card:nth-child(5n+3){ background-color:#D4DCDE; }
-.academic-card:nth-child(5n+4){ background-color:#E6DFD9; }
-.academic-card:nth-child(5n+5){ background-color:#DDE3DA; }
+.academic-card:nth-child(5n+1){ 
+    background-color:#D5DDD5; 
+}
+
+.academic-card:nth-child(5n+2){ 
+    background-color:#DDD8D0; 
+}
+
+.academic-card:nth-child(5n+3){ 
+    background-color:#D2DDE0; 
+}
+
+.academic-card:nth-child(5n+4){ 
+    background-color:#E2DAD3; 
+}
+
+.academic-card:nth-child(5n+5){ 
+    background-color:#D8DED7; 
+}
 
 .academic-card:hover{
     transform:translateY(-8px);
