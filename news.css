@@ -1230,13 +1230,32 @@ VIEW ALL BUTTON
 RESPONSIVE
 ===================================== */
 @media(max-width:1000px){
-    .hero{ grid-template-columns:1fr; gap:50px; padding:80px 8%; }
-    .hero-text{ padding-left:0; }
-    .hero h1{ font-size:70px; }
-    .research-grid{ grid-template-columns:1fr; }
-    .academic-grid{ grid-template-columns:repeat(2,1fr); }
-    .travel-gallery, .life-grid{ display:block; }
-    .travel-card, .life-card{ margin-bottom:25px; }
+    .hero{
+        grid-template-columns:1fr;
+        gap:50px;
+        padding:80px 8%;
+    }
+
+    .hero-text{
+        padding-left:0;
+    }
+
+    .hero h1{
+        font-size:70px;
+    }
+
+    .research-grid{
+        grid-template-columns:1fr;
+    }
+
+    .academic-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .travel-card,
+    .life-card{
+        margin-bottom:25px;
+    }
 }
 
 @media(max-width:600px){
@@ -1365,4 +1384,11 @@ FIX : LIFE GRID
         gap:40px;
     }
 
+}
+
+#research,
+#academic,
+#travel,
+#life{
+    scroll-margin-top:100px;
 }
