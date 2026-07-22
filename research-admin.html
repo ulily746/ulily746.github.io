@@ -1,100 +1,1359 @@
 <!DOCTYPE html>
-<html lang="ko">
+
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Archive — Slow Moments</title>
-    <link rel="stylesheet" href="archive.css">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Research Admin</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:#F2F2DF;
+
+    padding:40px;
+
+    color:#1A1A1A;
+
+    margin:0;
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+#login-box{
+
+    max-width:450px;
+
+    margin:120px auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+}
+
+#login-box h2{
+
+    color:#8B6B4F;
+
+    margin-top:0;
+
+}
+
+
+#login-msg{
+
+    margin-top:15px;
+
+    font-weight:bold;
+
+    color:#b84c4c;
+
+}
+
+
+/* =========================
+   ADMIN PANEL
+========================= */
+
+.container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+
+}
+
+
+h1{
+
+    color:#8B6B4F;
+
+}
+
+
+h2{
+
+    margin-top:50px;
+
+    color:#8B6B4F;
+
+}
+
+
+label{
+
+    display:block;
+
+    margin-top:20px;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+}
+
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:8px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    box-sizing:border-box;
+
+    font-size:14px;
+
+}
+
+
+textarea{
+
+    height:120px;
+
+    resize:vertical;
+
+}
+
+
+button{
+
+    margin-top:20px;
+
+    padding:12px 25px;
+
+    border:none;
+
+    background:#8B6B4F;
+
+    color:white;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+
+button:hover{
+
+    background:#6a4e38;
+
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+.preview{
+
+    width:200px;
+
+    margin-top:15px;
+
+    border-radius:10px;
+
+    display:none;
+
+    object-fit:cover;
+
+}
+
+
+/* =========================
+   PROJECT LIST
+========================= */
+
+.project-box{
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    margin-top:20px;
+
+    background:#fafafa;
+
+}
+
+
+.project-box h3{
+
+    margin:0;
+
+    color:#8B6B4F;
+
+}
+
+
+.project-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+
+.project-buttons button{
+
+    margin-top:0;
+
+}
+
+
+.edit-btn{
+
+    background:#4c7aaf;
+
+}
+
+
+.edit-btn:hover{
+
+    background:#385f8a;
+
+}
+
+
+.delete-btn{
+
+    background:#b84c4c;
+
+}
+
+
+.delete-btn:hover{
+
+    background:#933939;
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message{
+
+    margin-top:20px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+hr{
+
+    margin:50px 0;
+
+    border:none;
+
+    border-top:1px solid #ddd;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    body{
+
+        padding:20px;
+
+    }
+
+    .container{
+
+        padding:25px;
+
+    }
+
+    #login-box{
+
+        margin:60px auto;
+
+        padding:25px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<div class="archive-wrapper">
-    
-    <aside class="archive-sidebar">
-        <div class="sidebar-sticky">
-            <div class="sidebar-title">
-                <span class="sub-script">Slow Living</span>
-                <h2>Archive</h2>
-            </div>
+<!-- =========================
+     LOGIN BOX
+========================= -->
 
-            <div class="search-box">
-                <input type="text" placeholder="Search our moments...">
-                <button type="button" class="search-btn">🔍</button>
-            </div>
+<div id="login-box">
 
-            <nav class="category-nav">
-                <h3>Categories</h3>
-                <ul>
-                    <li class="active"><a href="#">All Memories <span class="count">12</span></a></li>
-                    <li><a href="#">Travel <span class="count">4</span></a></li>
-                    <li><a href="#">Life <span class="count">5</span></a></li>
-                    <li><a href="#">Academic <span class="count">3</span></a></li>
-                </ul>
-            </nav>
+```
+<h2>
+    Administrator Login
+</h2>
 
-            <div class="tag-box">
-                <h3>Tags</h3>
-                <div class="tags">
-                    <a href="#">#제주바다</a>
-                    <a href="#">#오후티타임</a>
-                    <a href="#">#연구실</a>
-                    <a href="#">#일상기록</a>
-                </div>
-            </div>
-        </div>
-    </aside>
 
-    <main class="archive-content">
-        <div class="archive-grid">
-            
-            <div class="archive-card type-arch">
-                <div class="card-img-wrap">
-                    <img src="images/travel1.jpg" alt="Travel Image">
-                </div>
-                <div class="card-txt">
-                    <span class="category">TRAVEL</span>
-                    <h3 class="title">부서지는 파도와 맑은 조각달</h3>
-                    <p class="date">2026.07.12</p>
-                </div>
-            </div>
+<input
+    id="password"
+    type="password"
+    placeholder="Password"
+>
 
-            <div class="archive-card type-oval">
-                <div class="card-img-wrap">
-                    <img src="images/life1.jpg" alt="Life Image">
-                </div>
-                <div class="card-txt">
-                    <span class="category">LIFE</span>
-                    <h3 class="title">오후 4시의 따스한 밀크티</h3>
-                    <p class="date">2026.07.10</p>
-                </div>
-            </div>
 
-            <div class="archive-card type-bottom-round">
-                <div class="card-img-wrap">
-                    <img src="images/academic1.jpg" alt="Academic Image">
-                </div>
-                <div class="card-txt">
-                    <span class="category">ACADEMIC</span>
-                    <h3 class="title">생각의 흔적이 머무는 책상</h3>
-                    <p class="date">2026.07.05</p>
-                </div>
-            </div>
+<button id="login">
+    Login
+</button>
 
-            <div class="archive-card type-rect">
-                <div class="card-img-wrap">
-                    <img src="images/travel2.jpg" alt="Travel Image">
-                </div>
-                <div class="card-txt">
-                    <span class="category">TRAVEL</span>
-                    <h3 class="title">낯선 골목길에서 마주친 초록</h3>
-                    <p class="date">2026.06.28</p>
-                </div>
-            </div>
 
-        </div>
-    </main>
+<p id="login-msg"></p>
+```
 
 </div>
 
+<!-- =========================
+     ADMIN PANEL
+========================= -->
+
+<div
+    class="container"
+    id="admin-panel"
+    style="display:none;"
+>
+
+<h1>
+    Research Upload
+</h1>
+
+<!-- =========================
+     BASIC INFORMATION
+========================= -->
+
+<label>
+    Title
+</label>
+
+<input id="title">
+
+<label>
+    Type
+</label>
+
+<input id="type">
+
+<label>
+    Image Path
+</label>
+
+<input
+id="image"
+placeholder="example: scheme.png"
+
+>
+
+<img
+id="image-preview"
+class="preview"
+
+>
+
+<label>
+    Overview
+</label>
+
+<textarea id="overview"></textarea>
+
+<label>
+    Research Strategy
+</label>
+
+<textarea id="strategy"></textarea>
+
+<label>
+    Research Highlight
+</label>
+
+<textarea id="highlight"></textarea>
+
+<label>
+    Publication
+</label>
+
+<textarea id="publication"></textarea>
+
+<label>
+    Tags
+</label>
+
+<input
+id="tags"
+placeholder="Cancer Metabolism, Nanomedicine"
+
+>
+
+<hr>
+
+<!-- =========================
+     KEY RESULTS
+========================= -->
+
+<h2>
+    Key Results
+</h2>
+
+<label>
+    Result Images (use |)
+</label>
+
+<input
+id="resultsImages"
+placeholder="img1.png|img2.png|img3.png"
+
+>
+
+<label>
+    Result Titles (use |)
+</label>
+
+<input
+id="resultsTitles"
+placeholder="Title1|Title2|Title3"
+
+>
+
+<label>
+    Result Captions (use |)
+</label>
+
+<textarea
+    id="resultsCaptions"
+></textarea>
+
+<button id="save">
+    Save Project
+</button>
+
+<p id="message"></p>
+
+<hr>
+
+<!-- =========================
+     EXISTING PROJECTS
+========================= -->
+
+<h2>
+    Existing Projects
+</h2>
+
+<div id="project-list">
+
+</div>
+
+</div>
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+
+import { initializeApp }
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+    getFirestore,
+
+    collection,
+
+    addDoc,
+
+    getDocs,
+
+    doc,
+
+    updateDoc,
+
+    deleteDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
+
+    projectId:
+    "yuri-research-portfolio",
+
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
+
+    messagingSenderId:
+    "231317507996",
+
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
+
+    measurementId:
+    "G-57VHW2454E"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+
+
+/* =========================
+   ADMIN PASSWORD
+========================= */
+
+
+const ADMIN_PASSWORD = "yuri1234";
+
+
+
+/* =========================
+   CURRENT EDIT ID
+========================= */
+
+
+let currentEditId = null;
+
+
+
+/* =========================
+   DOM ELEMENTS
+========================= */
+
+
+const loginBox =
+document.getElementById("login-box");
+
+
+const adminPanel =
+document.getElementById("admin-panel");
+
+
+const loginButton =
+document.getElementById("login");
+
+
+const passwordInput =
+document.getElementById("password");
+
+
+const loginMessage =
+document.getElementById("login-msg");
+
+
+const saveButton =
+document.getElementById("save");
+
+
+const message =
+document.getElementById("message");
+
+
+const imageInput =
+document.getElementById("image");
+
+
+const imagePreview =
+document.getElementById("image-preview");
+
+
+const projectList =
+document.getElementById("project-list");
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+
+loginButton.addEventListener(
+"click",
+login
+);
+
+
+
+passwordInput.addEventListener(
+"keydown",
+(event)=>{
+
+    if(event.key === "Enter"){
+
+        login();
+
+    }
+
+}
+);
+
+
+
+function login(){
+
+
+    const password =
+    passwordInput.value.trim();
+
+
+    if(password === ADMIN_PASSWORD){
+
+
+        loginBox.style.display =
+        "none";
+
+
+        adminPanel.style.display =
+        "block";
+
+
+        loginMessage.innerHTML =
+        "";
+
+
+        loadProjects();
+
+
+    }
+
+    else{
+
+
+        loginMessage.innerHTML =
+        "Wrong password.";
+
+
+        passwordInput.value =
+        "";
+
+
+    }
+
+}
+
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+
+imageInput.addEventListener(
+"input",
+()=>{
+
+
+    const value =
+    imageInput.value.trim();
+
+
+    if(value){
+
+
+        imagePreview.src =
+        value;
+
+
+        imagePreview.style.display =
+        "block";
+
+
+    }
+
+    else{
+
+
+        imagePreview.style.display =
+        "none";
+
+
+    }
+
+
+}
+);
+
+
+
+/* =========================
+   SAVE / UPDATE PROJECT
+========================= */
+
+
+saveButton.addEventListener(
+"click",
+async ()=>{
+
+
+    const data = {
+
+
+        title:
+        document
+        .getElementById("title")
+        .value
+        .trim(),
+
+
+        type:
+        document
+        .getElementById("type")
+        .value
+        .trim(),
+
+
+        image:
+        document
+        .getElementById("image")
+        .value
+        .trim(),
+
+
+        overview:
+        document
+        .getElementById("overview")
+        .value
+        .trim(),
+
+
+        strategy:
+        document
+        .getElementById("strategy")
+        .value
+        .trim(),
+
+
+        highlight:
+        document
+        .getElementById("highlight")
+        .value
+        .trim(),
+
+
+        publication:
+        document
+        .getElementById("publication")
+        .value
+        .trim(),
+
+
+        tags:
+
+        document
+        .getElementById("tags")
+        .value
+        .split(",")
+        .map(
+            t => t.trim()
+        )
+        .filter(t => t),
+
+
+        resultsImages:
+
+        document
+        .getElementById("resultsImages")
+        .value
+        .split("|")
+        .map(
+            t => t.trim()
+        )
+        .filter(t => t),
+
+
+        resultsTitles:
+
+        document
+        .getElementById("resultsTitles")
+        .value
+        .split("|")
+        .map(
+            t => t.trim()
+        )
+        .filter(t => t),
+
+
+        resultsCaptions:
+
+        document
+        .getElementById("resultsCaptions")
+        .value
+        .split("|")
+        .map(
+            t => t.trim()
+        )
+        .filter(t => t)
+
+
+    };
+
+
+
+    try{
+
+
+        /* =========================
+           UPDATE EXISTING PROJECT
+        ========================= */
+
+
+        if(currentEditId){
+
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    "projects",
+                    currentEditId
+                ),
+
+                data
+
+            );
+
+
+            message.innerHTML =
+            "✅ Project updated successfully.";
+
+
+        }
+
+
+
+        /* =========================
+           CREATE NEW PROJECT
+        ========================= */
+
+
+        else{
+
+
+            await addDoc(
+
+                collection(
+                    db,
+                    "projects"
+                ),
+
+                data
+
+            );
+
+
+            message.innerHTML =
+            "✅ Project uploaded successfully.";
+
+
+        }
+
+
+
+        currentEditId =
+        null;
+
+
+        clearForm();
+
+
+        await loadProjects();
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+
+        message.innerHTML =
+        "❌ Error: " +
+        error.message;
+
+
+    }
+
+
+}
+);
+
+
+
+/* =========================
+   LOAD PROJECTS
+========================= */
+
+
+async function loadProjects(){
+
+
+    projectList.innerHTML =
+    "Loading...";
+
+
+    try{
+
+
+        const snapshot =
+        await getDocs(
+
+            collection(
+                db,
+                "projects"
+            )
+
+        );
+
+
+        projectList.innerHTML =
+        "";
+
+
+        if(snapshot.empty){
+
+
+            projectList.innerHTML =
+            "<p>No projects yet.</p>";
+
+
+            return;
+
+
+        }
+
+
+
+        snapshot.forEach(
+        (item)=>{
+
+
+            const data =
+            item.data();
+
+
+            const box =
+            document.createElement(
+                "div"
+            );
+
+
+            box.className =
+            "project-box";
+
+
+
+            box.innerHTML = `
+
+                <h3>
+                    ${data.title || ""}
+                </h3>
+
+                <p>
+                    <strong>Type:</strong>
+                    ${data.type || ""}
+                </p>
+
+                <p>
+                    <strong>Tags:</strong>
+                    ${(data.tags || []).join(", ")}
+                </p>
+
+                <div class="project-buttons">
+
+                    <button class="edit-btn">
+                        Edit
+                    </button>
+
+                    <button class="delete-btn">
+                        Delete
+                    </button>
+
+                </div>
+
+            `;
+
+
+
+            /* =========================
+               EDIT PROJECT
+            ========================= */
+
+
+            box
+            .querySelector(
+                ".edit-btn"
+            )
+            .addEventListener(
+            "click",
+            ()=>{
+
+
+                currentEditId =
+                item.id;
+
+
+
+                document
+                .getElementById("title")
+                .value =
+                data.title || "";
+
+
+
+                document
+                .getElementById("type")
+                .value =
+                data.type || "";
+
+
+
+                document
+                .getElementById("image")
+                .value =
+                data.image || "";
+
+
+
+                document
+                .getElementById("overview")
+                .value =
+                data.overview || "";
+
+
+
+                document
+                .getElementById("strategy")
+                .value =
+                data.strategy || "";
+
+
+
+                document
+                .getElementById("highlight")
+                .value =
+                data.highlight || "";
+
+
+
+                document
+                .getElementById("publication")
+                .value =
+                data.publication || "";
+
+
+
+                document
+                .getElementById("tags")
+                .value =
+                (data.tags || [])
+                .join(", ");
+
+
+
+                document
+                .getElementById("resultsImages")
+                .value =
+                (data.resultsImages || [])
+                .join("|");
+
+
+
+                document
+                .getElementById("resultsTitles")
+                .value =
+                (data.resultsTitles || [])
+                .join("|");
+
+
+
+                document
+                .getElementById("resultsCaptions")
+                .value =
+                (data.resultsCaptions || [])
+                .join("|");
+
+
+
+                if(data.image){
+
+
+                    imagePreview.src =
+                    data.image;
+
+
+                    imagePreview.style.display =
+                    "block";
+
+
+                }
+
+                else{
+
+
+                    imagePreview.style.display =
+                    "none";
+
+
+                }
+
+
+
+                saveButton.innerHTML =
+                "Update Project";
+
+
+
+                window.scrollTo({
+
+                    top:0,
+
+                    behavior:"smooth"
+
+                });
+
+
+            }
+            );
+
+
+
+            /* =========================
+               DELETE PROJECT
+            ========================= */
+
+
+            box
+            .querySelector(
+                ".delete-btn"
+            )
+            .addEventListener(
+            "click",
+            async ()=>{
+
+
+                const check =
+                confirm(
+                    "Are you sure you want to delete this project?"
+                );
+
+
+                if(!check){
+
+                    return;
+
+                }
+
+
+
+                try{
+
+
+                    await deleteDoc(
+
+                        doc(
+                            db,
+                            "projects",
+                            item.id
+                        )
+
+                    );
+
+
+                    message.innerHTML =
+                    "🗑 Project deleted successfully.";
+
+
+                    await loadProjects();
+
+
+                }
+
+
+                catch(error){
+
+
+                    console.error(
+                        error
+                    );
+
+
+                    message.innerHTML =
+                    "❌ Delete failed: " +
+                    error.message;
+
+
+                }
+
+
+            }
+            );
+
+
+
+            projectList.appendChild(
+                box
+            );
+
+
+        });
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            error
+        );
+
+
+        projectList.innerHTML =
+        "❌ Failed to load projects.";
+
+
+    }
+
+
+}
+
+
+
+/* =========================
+   CLEAR FORM
+========================= */
+
+
+function clearForm(){
+
+
+    document
+    .querySelectorAll(
+        "#admin-panel input, #admin-panel textarea"
+    )
+    .forEach(
+    (element)=>{
+
+
+        element.value =
+        "";
+
+
+    });
+
+
+    imagePreview.style.display =
+    "none";
+
+
+    saveButton.innerHTML =
+    "Save Project";
+
+
+    currentEditId =
+    null;
+
+
+}
+
+
+
+/* =========================
+   INITIAL STATE
+========================= */
+
+
+/*
+   처음에는 로그인 화면만 보임.
+   로그인 성공 후 loadProjects() 실행.
+*/
+
+
+</script>
+
 </body>
+
 </html>
