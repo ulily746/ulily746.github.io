@@ -3,229 +3,1507 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Lily Gloges - Florist Atelier</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+
   <style>
-    /* 1. 대문 히어로용 비정형 길쭉한 하트 프레임 (레퍼런스 완벽반영) */
-    .blob-heart-long {
-      border-radius: 50% 50% 35% 65% / 30% 40% 60% 70%;
+
+    /* =========================================================
+       01. BASIC
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
     }
-    
-    /* 기타 비정형 프레임들 */
-    .blob-1 {
-      border-radius: 41% 59% 45% 55% / 57% 40% 60% 43%;
+
+    html {
+      scroll-behavior: smooth;
     }
-    .blob-2 {
-      border-radius: 60% 40% 63% 37% / 43% 53% 47% 57%;
+
+    body {
+      margin: 0;
+      background: #F2F5F0;
+      color: #2C3E35;
+      overflow-x: hidden;
     }
-    .blob-3 {
-      border-radius: 52% 48% 63% 37% / 40% 58% 42% 60%;
+
+    img {
+      display: block;
     }
-    .blob-main {
-      border-radius: 38% 62% 53% 47% / 48% 52% 48% 52%;
+
+
+    /* =========================================================
+       02. ORGANIC PHOTO BASE
+       
+       사진은 모두 이 클래스를 기반으로 사용.
+       각 shape마다 border-radius를 다르게 적용.
+    ========================================================= */
+
+    .organic-photo {
+      position: relative;
+      overflow: hidden;
+      background: #E8EEE9;
+      isolation: isolate;
     }
-    /* 프로그램 세부 사진용 자연스러운 곡선 프레임 */
-    .schedule-blob-sm {
-      border-radius: 45% 55% 40% 60% / 50% 45% 55% 50%;
+
+    .organic-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
     }
-    .schedule-blob-md {
-      border-radius: 38% 62% 55% 45% / 45% 55% 45% 55%;
+
+    .organic-photo:hover img {
+      transform: scale(1.035);
     }
-    .schedule-blob-lg {
-      border-radius: 42% 58% 48% 52% / 52% 42% 58% 48%;
+
+
+    /* =========================================================
+       03. HERO
+       
+       세로로 긴 형태 + 위쪽에 살짝 하트 같은 곡선.
+       완전한 대칭 하트가 아니라 유기적으로 비대칭.
+    ========================================================= */
+
+    .hero-heart {
+      width: 100%;
+      height: 100%;
+
+      border-radius:
+        48% 52% 42% 58%
+        /
+        25% 31% 69% 75%;
+
+      transform: rotate(-1.2deg);
     }
+
+    /*
+      Hero 상단의 하트 느낌을 조금 더 살리기 위한
+      아주 은은한 내부 곡선.
+    */
+
+    .hero-heart::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      top: -3%;
+      left: 18%;
+      width: 64%;
+      height: 18%;
+      border-radius: 50%;
+      background: transparent;
+      pointer-events: none;
+    }
+
+
+    /* =========================================================
+       04. ABOUT ORGANIC SHAPES
+       
+       물웅덩이처럼 불규칙하게 흐르는 형태.
+       사진마다 서로 다른 곡률.
+    ========================================================= */
+
+    .pond-01 {
+      border-radius:
+        57% 43% 61% 39%
+        /
+        43% 58% 42% 57%;
+
+      transform: rotate(-2deg);
+    }
+
+    .pond-02 {
+      border-radius:
+        43% 57% 38% 62%
+        /
+        59% 39% 61% 41%;
+
+      transform: rotate(2deg);
+    }
+
+    .pond-03 {
+      border-radius:
+        61% 39% 52% 48%
+        /
+        36% 63% 37% 64%;
+
+      transform: rotate(-1.5deg);
+    }
+
+
+    /* =========================================================
+       05. LARGE LOCATION POND
+       
+       넓게 퍼진 물웅덩이 느낌.
+    ========================================================= */
+
+    .location-pond {
+      border-radius:
+        32% 68% 57% 43%
+        /
+        54% 42% 58% 46%;
+
+      transform: rotate(-0.8deg);
+    }
+
+
+    /* =========================================================
+       06. MASTER CLASS ORGANIC LABELS
+    ========================================================= */
+
+    .master-pill-01 {
+      border-radius:
+        48% 52% 43% 57%
+        /
+        55% 43% 57% 45%;
+    }
+
+    .master-pill-02 {
+      border-radius:
+        61% 39% 52% 48%
+        /
+        42% 58% 44% 56%;
+    }
+
+    .master-pill-03 {
+      border-radius:
+        39% 61% 45% 55%
+        /
+        58% 42% 63% 37%;
+    }
+
+
+    /* =========================================================
+       07. PROGRAM SECTION
+       
+       5장의 사진을 V자 / 계단식으로 배치.
+       
+       01  ↓
+           02 ↓
+              03
+           04 ↓
+       05  ↓
+       
+       가운데가 가장 크고 양쪽으로 작아짐.
+    ========================================================= */
+
+    .program-stage {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      min-height: 720px;
+      margin: 0 auto;
+    }
+
+    .program-item {
+      position: absolute;
+      text-align: center;
+    }
+
+    .program-item .program-photo {
+      position: relative;
+      overflow: hidden;
+      background: #E8EEE9;
+      margin-top: 10px;
+    }
+
+    .program-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .program-item:hover img {
+      transform: scale(1.04);
+    }
+
+
+    /* PROGRAM 01 */
+
+    .program-01 {
+      left: 2%;
+      top: 120px;
+      width: 170px;
+    }
+
+    .program-shape-01 {
+      aspect-ratio: 3 / 4;
+
+      border-radius:
+        45% 55% 39% 61%
+        /
+        54% 42% 58% 46%;
+
+      transform: rotate(-4deg);
+    }
+
+
+    /* PROGRAM 02 */
+
+    .program-02 {
+      left: 21%;
+      top: 45px;
+      width: 195px;
+    }
+
+    .program-shape-02 {
+      aspect-ratio: 3 / 4;
+
+      border-radius:
+        58% 42% 62% 38%
+        /
+        42% 57% 43% 58%;
+
+      transform: rotate(2deg);
+    }
+
+
+    /* PROGRAM 03
+       CENTER / BIGGEST
+    */
+
+    .program-03 {
+      left: 50%;
+      top: 0;
+      width: 260px;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+
+    .program-shape-03 {
+      aspect-ratio: 3 / 4;
+
+      border-radius:
+        41% 59% 49% 51%
+        /
+        54% 44% 56% 46%;
+
+      transform: rotate(-1deg);
+    }
+
+
+    /* PROGRAM 04 */
+
+    .program-04 {
+      right: 21%;
+      top: 45px;
+      width: 195px;
+    }
+
+    .program-shape-04 {
+      aspect-ratio: 3 / 4;
+
+      border-radius:
+        62% 38% 43% 57%
+        /
+        47% 58% 42% 53%;
+
+      transform: rotate(-2deg);
+    }
+
+
+    /* PROGRAM 05 */
+
+    .program-05 {
+      right: 2%;
+      top: 120px;
+      width: 170px;
+    }
+
+    .program-shape-05 {
+      aspect-ratio: 3 / 4;
+
+      border-radius:
+        52% 48% 61% 39%
+        /
+        42% 63% 37% 58%;
+
+      transform: rotate(4deg);
+    }
+
+
+    /* =========================================================
+       08. PROGRAM TEXT
+    ========================================================= */
+
+    .program-time {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: #6B8573;
+    }
+
+    .program-caption {
+      margin-top: 12px;
+      font-size: 11px;
+      line-height: 1.7;
+      color: #4A5D52;
+    }
+
+
+    /* =========================================================
+       09. DECORATIVE ORGANIC BACKGROUND
+    ========================================================= */
+
+    .soft-blob {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+
+      border-radius:
+        48% 52% 61% 39%
+        /
+        55% 42% 58% 45%;
+
+      filter: blur(35px);
+      opacity: 0.5;
+    }
+
+
+    /* =========================================================
+       10. RESPONSIVE
+       
+       데스크톱의 V자 흐름을 모바일에서도 최대한 유지.
+       화면이 작아지면 크기만 줄이고
+       5장을 일렬로 쌓지 않음.
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .program-stage {
+        min-height: 600px;
+        max-width: 760px;
+      }
+
+      .program-01 {
+        left: 0;
+        top: 120px;
+        width: 130px;
+      }
+
+      .program-02 {
+        left: 18%;
+        top: 55px;
+        width: 150px;
+      }
+
+      .program-03 {
+        width: 200px;
+        top: 0;
+      }
+
+      .program-04 {
+        right: 18%;
+        top: 55px;
+        width: 150px;
+      }
+
+      .program-05 {
+        right: 0;
+        top: 120px;
+        width: 130px;
+      }
+    }
+
+
+    @media (max-width: 640px) {
+
+      .program-stage {
+        min-height: 650px;
+        width: 100%;
+      }
+
+      .program-01 {
+        left: 2%;
+        top: 145px;
+        width: 100px;
+      }
+
+      .program-02 {
+        left: 20%;
+        top: 70px;
+        width: 115px;
+      }
+
+      .program-03 {
+        width: 155px;
+        top: 0;
+      }
+
+      .program-04 {
+        right: 20%;
+        top: 70px;
+        width: 115px;
+      }
+
+      .program-05 {
+        right: 2%;
+        top: 145px;
+        width: 100px;
+      }
+
+      .program-caption {
+        font-size: 9px;
+        line-height: 1.5;
+      }
+
+      .program-time {
+        font-size: 9px;
+      }
+    }
+
+
+    @media (max-width: 420px) {
+
+      .program-stage {
+        min-height: 570px;
+      }
+
+      .program-01 {
+        left: 0;
+        top: 125px;
+        width: 82px;
+      }
+
+      .program-02 {
+        left: 18%;
+        top: 60px;
+        width: 98px;
+      }
+
+      .program-03 {
+        width: 135px;
+      }
+
+      .program-04 {
+        right: 18%;
+        top: 60px;
+        width: 98px;
+      }
+
+      .program-05 {
+        right: 0;
+        top: 125px;
+        width: 82px;
+      }
+
+    }
+
   </style>
 </head>
-<body class="bg-[#F2F5F0] text-[#2C3E35] font-sans antialiased overflow-x-hidden">
 
-  <!-- 전체 컨테이너: 세이지 그린 & 화이트의 보타닉 무드 -->
-  <div class="w-full space-y-24 pb-24">
 
-    <!-- [Hero Section] 레퍼런스(image_898078.png) 완벽 반영 대문 화면 -->
-    <header class="w-full pt-12 pb-20 relative px-4 md:px-8 bg-gradient-to-b from-[#E6EFEA] to-[#F2F5F0]">
+<body class="font-sans antialiased">
+
+
+  <!-- =========================================================
+       전체 상세페이지
+  ========================================================= -->
+
+  <main class="w-full overflow-hidden">
+
+
+    <!-- =======================================================
+         01. HERO
+    ======================================================== -->
+
+    <header
+      class="relative w-full px-4 md:px-8 pt-12 md:pt-20 pb-28 md:pb-36 bg-gradient-to-b from-[#E6EFEA] to-[#F2F5F0]"
+    >
+
       <div class="max-w-4xl mx-auto relative">
-        
-        <!-- 왼쪽으로 치우친 길쭉한 하트 비정형 프레임 -->
-        <div class="w-[85%] md:w-[60%] aspect-[3/4] max-h-[620px] overflow-hidden blob-heart-long border border-[#C2D1C5] shadow-sm bg-white relative mr-auto">
-          <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1200&q=80" alt="Lily Gloges Hero" class="w-full h-full object-cover">
+
+        <!-- HERO PHOTO -->
+
+        <div
+          class="relative w-[82%] sm:w-[68%] md:w-[58%] aspect-[3/4] max-h-[680px] mr-auto"
+        >
+
+          <div
+            class="organic-photo hero-heart absolute inset-0 border border-[#C2D1C5] shadow-sm"
+          >
+
+            <!-- IMAGE 01 : HERO -->
+            <img
+              src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1200&q=85"
+              alt="Lily Gloges Florist"
+            >
+
+          </div>
+
         </div>
 
-        <!-- 우측 하단 스티커(꽃 일러스트/포인트 요소) 배치 -->
-        <div class="absolute right-4 md:right-16 bottom-28 w-28 md:w-36 opacity-90 pointer-events-none transform rotate-12">
-          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80" alt="Flower Sticker" class="w-full h-full object-cover rounded-full shadow-xs filter brightness-105">
+
+        <!-- SMALL FLOWER STICKER -->
+
+        <div
+          class="absolute
+                 right-[2%]
+                 md:right-[8%]
+                 bottom-[18%]
+                 w-24
+                 md:w-36
+                 aspect-square
+                 rounded-full
+                 overflow-hidden
+                 rotate-12
+                 z-10
+                 shadow-sm"
+        >
+
+          <!-- IMAGE 02 : DECORATIVE FLOWER -->
+
+          <img
+            src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=85"
+            alt="Flower detail"
+            class="w-full h-full object-cover"
+          >
+
         </div>
 
-        <!-- 사진에 살짝 걸치며 왼쪽 정렬된 우아한 타이틀 (레퍼런스 구조) -->
-        <div class="mt-6 md:-mt-12 ml-4 md:ml-8 relative z-10 space-y-1">
-          <h1 class="text-4xl md:text-6xl font-serif text-[#2C3E35] tracking-wide font-normal italic">
-            Lily Gloges
+
+        <!-- HERO TITLE -->
+
+        <div
+          class="relative z-20
+                 mt-5
+                 md:-mt-16
+                 ml-[5%]
+                 md:ml-[7%]"
+        >
+
+          <p
+            class="text-[10px]
+                   md:text-xs
+                   tracking-[0.28em]
+                   uppercase
+                   text-[#6B8573]
+                   mb-2"
+          >
+            florist atelier
+          </p>
+
+          <h1
+            class="font-serif
+                   italic
+                   font-normal
+                   text-5xl
+                   sm:text-6xl
+                   md:text-7xl
+                   lg:text-8xl
+                   leading-none
+                   tracking-tight
+                   text-[#2C3E35]"
+          >
+            Lily<br>
+            Gloges
           </h1>
-          <span class="text-sm text-[#6B8573] tracking-[0.2em] uppercase font-serif block pl-1">
-            florist
-          </span>
+
         </div>
 
       </div>
+
     </header>
 
 
-    <!-- [Section 2] 두 번째 사진 레퍼런스 (About Me & 연한 세이지 그린 배경 영역) -->
-    <section class="w-full relative px-4 md:px-8 py-12 bg-[#E6EFEA]/60 backdrop-blur-sm border-y border-[#D4E2D7]">
-      <div class="max-w-4xl mx-auto space-y-16 relative">
-        
-        <!-- 배경 물감 비정형 도형 효과 -->
-        <div class="absolute top-10 -left-12 w-80 h-80 bg-[#D4E2D7] blob-1 opacity-50 -z-10 filter blur-2xl"></div>
 
-        <!-- 상단 소개 타이틀 및 텍스트 -->
-        <div class="text-center space-y-4 max-w-xl mx-auto">
-          <h2 class="text-3xl md:text-4xl font-serif font-normal italic text-[#2C3E35]">About me</h2>
-          <p class="text-xs md:text-sm text-[#4A5D52] leading-relaxed">
-            Привет! Меню зовут Лиля. Моя студия находится в центре Москвы. 자연의 유기적인 곡선과 따스한 감성을 담아내는 플라워 아틀리에입니다.
+    <!-- =======================================================
+         02. ABOUT ME
+    ======================================================== -->
+
+    <section
+      class="relative w-full
+             px-4 md:px-8
+             py-24 md:py-36
+             bg-[#F2F5F0]"
+    >
+
+      <!-- BACKGROUND ORGANIC SHAPE -->
+
+      <div
+        class="soft-blob
+               bg-[#D4E2D7]
+               w-72
+               h-72
+               md:w-[500px]
+               md:h-[500px]
+               -left-32
+               top-20"
+      ></div>
+
+
+      <div
+        class="max-w-5xl mx-auto relative z-10"
+      >
+
+
+        <!-- SECTION TITLE -->
+
+        <div
+          class="max-w-xl
+                 mx-auto
+                 text-center
+                 mb-20
+                 md:mb-32"
+        >
+
+          <p
+            class="text-[10px]
+                   tracking-[0.3em]
+                   uppercase
+                   text-[#6B8573]
+                   mb-4"
+          >
+            about the atelier
           </p>
+
+          <h2
+            class="font-serif
+                   italic
+                   font-normal
+                   text-4xl
+                   md:text-6xl
+                   text-[#2C3E35]
+                   mb-6"
+          >
+            About me
+          </h2>
+
+          <p
+            class="text-xs
+                   md:text-sm
+                   leading-[2]
+                   text-[#4A5D52]"
+          >
+            Привет! Меня зовут Лиля.
+            Моя студия находится в центре Москвы.
+            자연의 유기적인 곡선과 따스한 감성을 담아내는
+            플라워 아틀리에입니다.
+          </p>
+
         </div>
 
-        <!-- 좌우 번갈아 나오는 그리드와 비정형 사진들 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div class="w-full aspect-square blob-2 overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
-            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80" alt="Bouquet 1" class="w-full h-full object-cover">
+
+
+        <!-- STORY 01 -->
+
+        <div
+          class="relative
+                 min-h-[620px]
+                 md:min-h-[720px]"
+        >
+
+          <!-- PHOTO -->
+
+          <div
+            class="absolute
+                   left-[2%]
+                   top-0
+                   w-[68%]
+                   md:w-[47%]
+                   aspect-[4/5]"
+          >
+
+            <div
+              class="organic-photo
+                     pond-01
+                     absolute
+                     inset-0
+                     border
+                     border-[#C2D1C5]
+                     shadow-sm"
+            >
+
+              <!-- IMAGE 03 -->
+
+              <img
+                src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85"
+                alt="Flower arrangement"
+              >
+
+            </div>
+
           </div>
-          <div class="space-y-3 px-2">
-            <span class="text-xs text-[#6B8573] font-serif block">01 / Saturday Class</span>
-            <h3 class="text-lg font-bold font-serif text-[#2C3E35]">무료 마스터클래스</h3>
-            <p class="text-xs md:text-sm text-[#4A5D52] leading-relaxed">
-              매주 토요일 진행되는 소규모 클래스를 통해 꽃과 교감하는 법을 배우고, 우리만의 따스한 일상을 채워나갑니다.
+
+
+          <!-- TEXT -->
+
+          <div
+            class="absolute
+                   right-[0]
+                   top-[32%]
+                   md:top-[25%]
+                   w-[55%]
+                   md:w-[42%]
+                   z-10"
+          >
+
+            <span
+              class="font-serif
+                     text-xs
+                     italic
+                     text-[#6B8573]"
+            >
+              01 / Saturday Class
+            </span>
+
+            <h3
+              class="font-serif
+                     text-2xl
+                     md:text-4xl
+                     mt-3
+                     mb-5
+                     text-[#2C3E35]"
+            >
+              무료<br>
+              마스터클래스
+            </h3>
+
+            <p
+              class="text-[11px]
+                     md:text-sm
+                     leading-[1.9]
+                     text-[#4A5D52]"
+            >
+              매주 토요일 진행되는 소규모 클래스를 통해
+              꽃과 교감하는 법을 배우고,
+              우리만의 따스한 일상을 채워나갑니다.
             </p>
+
           </div>
+
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div class="order-2 md:order-1 space-y-3 px-2 text-left md:text-right">
-            <span class="text-xs text-[#6B8573] font-serif block">02 / Signature Design</span>
-            <h3 class="text-lg font-bold font-serif text-[#2C3E35]">나만의 첫 번째 부케</h3>
-            <p class="text-xs md:text-sm text-[#4A5D52] leading-relaxed">
-              3시간 동안 진행되는 클래스에서 생화의 결을 살려 세상에 단 하나뿐인 온전한 내추럴 부케를 완성합니다.
+
+
+        <!-- STORY 02 -->
+
+        <div
+          class="relative
+                 min-h-[620px]
+                 md:min-h-[720px]
+                 mt-10
+                 md:mt-0"
+        >
+
+          <!-- TEXT -->
+
+          <div
+            class="absolute
+                   left-[0]
+                   top-[25%]
+                   md:top-[28%]
+                   w-[55%]
+                   md:w-[42%]
+                   z-10"
+          >
+
+            <span
+              class="font-serif
+                     text-xs
+                     italic
+                     text-[#6B8573]"
+            >
+              02 / Signature Design
+            </span>
+
+            <h3
+              class="font-serif
+                     text-2xl
+                     md:text-4xl
+                     mt-3
+                     mb-5
+                     text-[#2C3E35]"
+            >
+              나만의 첫 번째<br>
+              부케
+            </h3>
+
+            <p
+              class="text-[11px]
+                     md:text-sm
+                     leading-[1.9]
+                     text-[#4A5D52]"
+            >
+              3시간 동안 진행되는 클래스에서
+              생화의 결을 살려 세상에 단 하나뿐인
+              온전한 내추럴 부케를 완성합니다.
             </p>
+
           </div>
-          <div class="order-1 md:order-2 w-full aspect-square blob-3 overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
-            <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80" alt="Bouquet 2" class="w-full h-full object-cover">
+
+
+          <!-- PHOTO -->
+
+          <div
+            class="absolute
+                   right-[0]
+                   top-[8%]
+                   w-[68%]
+                   md:w-[47%]
+                   aspect-[4/5]"
+          >
+
+            <div
+              class="organic-photo
+                     pond-02
+                     absolute
+                     inset-0
+                     border
+                     border-[#C2D1C5]
+                     shadow-sm"
+            >
+
+              <!-- IMAGE 04 -->
+
+              <img
+                src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=85"
+                alt="Natural bouquet"
+              >
+
+            </div>
+
           </div>
+
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- [Section 3] 네 번째 사진 레퍼런스 (Master class & Location) -->
-    <section class="w-full relative px-4 md:px-8 space-y-16">
-      
-      <!-- 상단 말풍선 느낌의 마스터클래스 안내 영역 -->
-      <div class="max-w-2xl mx-auto text-center space-y-6">
-        <h2 class="text-3xl md:text-4xl font-serif font-normal italic text-[#2C3E35]">Master class</h2>
-        
-        <div class="space-y-3 pt-2">
-          <div class="bg-white/80 border border-[#D4E2D7] py-3 px-6 rounded-full text-xs md:text-sm text-[#4A5D52] shadow-2xs max-w-lg mx-auto">
+
+    <!-- =======================================================
+         03. MASTER CLASS
+    ======================================================== -->
+
+    <section
+      class="relative
+             w-full
+             px-4 md:px-8
+             py-28 md:py-40
+             bg-[#E6EFEA]"
+    >
+
+      <div
+        class="max-w-3xl
+               mx-auto
+               text-center"
+      >
+
+        <p
+          class="text-[10px]
+                 tracking-[0.3em]
+                 uppercase
+                 text-[#6B8573]
+                 mb-4"
+        >
+          a little time for yourself
+        </p>
+
+        <h2
+          class="font-serif
+                 italic
+                 text-4xl
+                 md:text-6xl
+                 font-normal
+                 text-[#2C3E35]
+                 mb-16"
+        >
+          Master class
+        </h2>
+
+
+        <!-- ORGANIC TEXT 01 -->
+
+        <div
+          class="master-pill-01
+                 bg-[#F7F8F4]
+                 border border-[#D4E2D7]
+                 py-6
+                 px-8
+                 md:px-14
+                 max-w-xl
+                 mx-auto
+                 rotate-[-2deg]
+                 shadow-sm"
+        >
+
+          <p
+            class="text-xs
+                   md:text-sm
+                   leading-relaxed
+                   text-[#4A5D52]"
+          >
             для тех, кто хочет с нуля создать свой первый букет.
-          </div>
-          <div class="bg-white/80 border border-[#D4E2D7] py-3 px-6 rounded-full text-xs md:text-sm text-[#4A5D52] shadow-2xs max-w-lg mx-auto">
-            для тех, кто хочет попробовать себя в новом хобби.
-          </div>
-          <div class="bg-[#E6EFEA] border border-[#C2D1C5] py-3 px-6 rounded-full text-xs md:text-sm text-[#2C3E35] font-medium shadow-2xs max-w-xl mx-auto">
-            и просто для тех, кто хочет отвлечься и заняться чем то новым.
-          </div>
-        </div>
-      </div>
-
-      <!-- Location 및 하단 대형 가든 전경 비정형 사진 -->
-      <div class="max-w-4xl mx-auto space-y-8 text-center">
-        <h3 class="text-2xl font-serif font-normal italic text-[#2C3E35]">Location</h3>
-        
-        <div class="w-full aspect-[16/9] md:aspect-[21/10] blob-main overflow-hidden border border-[#C2D1C5] shadow-md bg-white mx-auto">
-          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80" alt="Studio Location" class="w-full h-full object-cover">
-        </div>
-      </div>
-    </section>
-
-
-    <!-- [Section 4] 5개 사진 V자 계단식 레이아웃 (Schedule & Details) -->
-    <section class="w-full px-4 md:px-8 py-16 bg-white/50 border-t border-[#D4E2D7]">
-      <div class="max-w-6xl mx-auto space-y-12">
-        <div class="text-center space-y-2">
-          <h2 class="text-3xl md:text-4xl font-serif font-normal italic text-[#2C3E35]">Программа мастер-класса</h2>
-          <p class="text-xs text-[#6B8573] tracking-widest uppercase font-serif">все материалы включены в стоимость</p>
-        </div>
-
-        <!-- 5개 사진 V자 배치 컨테이너 -->
-        <div class="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-3 pt-6">
-          
-          <div class="w-40 md:w-44 lg:w-48 text-center space-y-2 lg:translate-y-6">
-            <span class="text-xs font-serif font-bold text-[#6B8573]">10:00</span>
-            <div class="w-full aspect-[3/4] schedule-blob-sm overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
-              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=500&q=80" alt="Step 1" class="w-full h-full object-cover">
-            </div>
-            <p class="text-[11px] text-[#4A5D52] px-1">소개 및 재료 탐색</p>
-          </div>
-
-          <div class="w-44 md:w-48 lg:w-52 text-center space-y-2 lg:translate-y-2">
-            <span class="text-xs font-serif font-bold text-[#6B8573]">10:30</span>
-            <div class="w-full aspect-[3/4] schedule-blob-md overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
-              <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Step 2" class="w-full h-full object-cover">
-            </div>
-            <p class="text-[11px] text-[#4A5D52] px-1">기초 폼 및 핸들링</p>
-          </div>
-
-          <div class="w-52 md:w-56 lg:w-64 text-center space-y-2 lg:-translate-y-6 z-10">
-            <span class="text-xs font-serif font-bold text-[#2C3E35]">11:30</span>
-            <div class="w-full aspect-[3/4] schedule-blob-lg overflow-hidden border-2 border-[#C2D1C5] shadow-md bg-white">
-              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Step 3" class="w-full h-full object-cover">
-            </div>
-            <p class="text-xs font-medium text-[#2C3E35] px-1">메인 시연 및 핸드타이드 실습</p>
-          </div>
-
-          <div class="w-44 md:w-48 lg:w-52 text-center space-y-2 lg:translate-y-2">
-            <span class="text-xs font-serif font-bold text-[#6B8573]">12:30</span>
-            <div class="w-full aspect-[3/4] schedule-blob-md overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
-              <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=500&q=80" alt="Step 4" class="w-full h-full object-cover">
-            </div>
-            <p class="text-[11px] text-[#4A5D52] px-1">오지 및 피니시 가공</p>
-          </div>
-
-          <div class="w-40 md:w-44 lg:w-48 text-center space-y-2 lg:translate-y-6">
-            <span class="text-xs font-serif font-bold text-[#6B8573]">13:00</span>
-            <div class="w-full aspect-[3/4] schedule-blob-sm overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
-              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="Step 5" class="w-full h-full object-cover">
-            </div>
-            <p class="text-[11px] text-[#4A5D52] px-1">패키징 및 기념 촬영</p>
-          </div>
-
-        </div>
-
-        <div class="text-center pt-8">
-          <p class="text-xs md:text-sm text-[#4A5D52] font-serif italic">
-            Вы заберёте готовую флористическую работу домой!
           </p>
+
+        </div>
+
+
+        <!-- ORGANIC TEXT 02 -->
+
+        <div
+          class="master-pill-02
+                 bg-white/80
+                 border border-[#D4E2D7]
+                 py-7
+                 px-8
+                 md:px-16
+                 max-w-lg
+                 mx-auto
+                 mt-7
+                 translate-x-4
+                 md:translate-x-16
+                 rotate-[2deg]
+                 shadow-sm"
+        >
+
+          <p
+            class="text-xs
+                   md:text-sm
+                   leading-relaxed
+                   text-[#4A5D52]"
+          >
+            для тех, кто хочет попробовать себя
+            в новом хобби.
+          </p>
+
+        </div>
+
+
+        <!-- ORGANIC TEXT 03 -->
+
+        <div
+          class="master-pill-03
+                 bg-[#D4E2D7]
+                 border border-[#C2D1C5]
+                 py-8
+                 px-8
+                 md:px-16
+                 max-w-2xl
+                 mx-auto
+                 mt-7
+                 -translate-x-3
+                 md:-translate-x-10
+                 rotate-[-1deg]
+                 shadow-sm"
+        >
+
+          <p
+            class="text-xs
+                   md:text-sm
+                   font-medium
+                   leading-relaxed
+                   text-[#2C3E35]"
+          >
+            и просто для тех, кто хочет отвлечься
+            и заняться чем-то новым.
+          </p>
+
         </div>
 
       </div>
+
     </section>
 
-  </div>
 
-  <!-- 푸터 영역 -->
-  <footer class="bg-[#E6EFEA] border-t border-[#C2D1C5] py-16 px-6">
-    <div class="w-full max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-[#4A5D52]">
-      <div class="text-center md:text-left">
-        <p class="font-serif font-bold text-sm text-[#2C3E35]">Lily Gloges Florist Atelier</p>
-        <p class="text-[#6B8573] mt-1">© 2026 LILY GLOGES. ALL RIGHTS RESERVED.</p>
+
+    <!-- =======================================================
+         04. LOCATION
+    ======================================================== -->
+
+    <section
+      class="relative
+             w-full
+             px-4 md:px-8
+             py-28 md:py-40
+             bg-[#F2F5F0]"
+    >
+
+      <div
+        class="max-w-5xl
+               mx-auto"
+      >
+
+        <div
+          class="text-center
+                 mb-16"
+        >
+
+          <p
+            class="text-[10px]
+                   tracking-[0.3em]
+                   uppercase
+                   text-[#6B8573]
+                   mb-4"
+          >
+            find us
+          </p>
+
+          <h2
+            class="font-serif
+                   italic
+                   font-normal
+                   text-4xl
+                   md:text-6xl
+                   text-[#2C3E35]"
+          >
+            Location
+          </h2>
+
+        </div>
+
+
+        <!-- LOCATION PHOTO -->
+
+        <div
+          class="relative
+                 w-full
+                 max-w-4xl
+                 mx-auto
+                 aspect-[16/9]
+                 md:aspect-[21/10]"
+        >
+
+          <div
+            class="organic-photo
+                   location-pond
+                   absolute
+                   inset-0
+                   border
+                   border-[#C2D1C5]
+                   shadow-md"
+          >
+
+            <!-- IMAGE 05 : LOCATION -->
+
+            <img
+              src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=85"
+              alt="Lily Gloges Studio"
+            >
+
+          </div>
+
+        </div>
+
+
+        <p
+          class="max-w-md
+                 mx-auto
+                 text-center
+                 text-xs
+                 md:text-sm
+                 leading-[2]
+                 text-[#4A5D52]
+                 mt-14"
+        >
+          Пространство, где цветы,
+          тишина и немного времени
+          принадлежат только вам.
+        </p>
+
       </div>
+
+    </section>
+
+
+
+    <!-- =======================================================
+         05. PROGRAM
+         ⭐ FIVE PHOTO V-SHAPE
+    ======================================================== -->
+
+    <section
+      class="relative
+             w-full
+             px-4 md:px-8
+             py-28 md:py-40
+             bg-white/50
+             border-t
+             border-[#D4E2D7]"
+    >
+
+      <div
+        class="max-w-6xl
+               mx-auto"
+      >
+
+
+        <!-- PROGRAM HEADER -->
+
+        <div
+          class="text-center
+                 mb-12
+                 md:mb-20"
+        >
+
+          <p
+            class="text-[10px]
+                   tracking-[0.3em]
+                   uppercase
+                   text-[#6B8573]
+                   mb-4"
+          >
+            the day in flowers
+          </p>
+
+          <h2
+            class="font-serif
+                   italic
+                   font-normal
+                   text-3xl
+                   md:text-5xl
+                   text-[#2C3E35]"
+          >
+            Программа мастер-класса
+          </h2>
+
+          <p
+            class="text-[10px]
+                   md:text-xs
+                   tracking-[0.18em]
+                   uppercase
+                   text-[#6B8573]
+                   mt-5"
+          >
+            все материалы включены в стоимость
+          </p>
+
+        </div>
+
+
+
+        <!-- ===================================================
+             5 PHOTO V-SHAPED STAGE
+        ==================================================== -->
+
+        <div class="program-stage">
+
+
+          <!-- 01 -->
+
+          <div class="program-item program-01">
+
+            <div class="program-time">
+              10:00
+            </div>
+
+            <div
+              class="program-photo
+                     program-shape-01
+                     border
+                     border-[#C2D1C5]
+                     shadow-sm"
+            >
+
+              <!-- IMAGE 06 -->
+
+              <img
+                src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=85"
+                alt="Step 1"
+              >
+
+            </div>
+
+            <p class="program-caption">
+              소개 및<br>
+              재료 탐색
+            </p>
+
+          </div>
+
+
+
+          <!-- 02 -->
+
+          <div class="program-item program-02">
+
+            <div class="program-time">
+              10:30
+            </div>
+
+            <div
+              class="program-photo
+                     program-shape-02
+                     border
+                     border-[#C2D1C5]
+                     shadow-sm"
+            >
+
+              <!-- IMAGE 07 -->
+
+              <img
+                src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=85"
+                alt="Step 2"
+              >
+
+            </div>
+
+            <p class="program-caption">
+              기초 폼 및<br>
+              핸들링
+            </p>
+
+          </div>
+
+
+
+          <!-- 03 CENTER -->
+
+          <div class="program-item program-03">
+
+            <div
+              class="program-time
+                     text-[#2C3E35]"
+            >
+              11:30
+            </div>
+
+            <div
+              class="program-photo
+                     program-shape-03
+                     border-2
+                     border-[#C2D1C5]
+                     shadow-md"
+            >
+
+              <!-- IMAGE 08 : CENTER -->
+
+              <img
+                src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=800&q=85"
+                alt="Step 3"
+              >
+
+            </div>
+
+            <p
+              class="program-caption
+                     font-medium
+                     text-[#2C3E35]"
+            >
+              메인 시연 및<br>
+              핸드타이드 실습
+            </p>
+
+          </div>
+
+
+
+          <!-- 04 -->
+
+          <div class="program-item program-04">
+
+            <div class="program-time">
+              12:30
+            </div>
+
+            <div
+              class="program-photo
+                     program-shape-04
+                     border
+                     border-[#C2D1C5]
+                     shadow-sm"
+            >
+
+              <!-- IMAGE 09 -->
+
+              <img
+                src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=85"
+                alt="Step 4"
+              >
+
+            </div>
+
+            <p class="program-caption">
+              오지 및<br>
+              피니시 가공
+            </p>
+
+          </div>
+
+
+
+          <!-- 05 -->
+
+          <div class="program-item program-05">
+
+            <div class="program-time">
+              13:00
+            </div>
+
+            <div
+              class="program-photo
+                     program-shape-05
+                     border
+                     border-[#C2D1C5]
+                     shadow-sm"
+            >
+
+              <!-- IMAGE 10 -->
+
+              <img
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=85"
+                alt="Step 5"
+              >
+
+            </div>
+
+            <p class="program-caption">
+              패키징 및<br>
+              기념 촬영
+            </p>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- PROGRAM ENDING -->
+
+        <div
+          class="text-center
+                 pt-4
+                 md:pt-0"
+        >
+
+          <p
+            class="font-serif
+                   italic
+                   text-xs
+                   md:text-sm
+                   text-[#4A5D52]"
+          >
+            Вы заберёте готовую
+            флористическую работу домой!
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+  </main>
+
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+  <footer
+    class="bg-[#E6EFEA]
+           border-t
+           border-[#C2D1C5]
+           py-16
+           px-6"
+  >
+
+    <div
+      class="w-full
+             max-w-5xl
+             mx-auto
+             flex
+             flex-col
+             md:flex-row
+             justify-between
+             items-center
+             gap-6
+             text-xs
+             text-[#4A5D52]"
+    >
+
+      <div
+        class="text-center
+               md:text-left"
+      >
+
+        <p
+          class="font-serif
+                 font-bold
+                 text-sm
+                 text-[#2C3E35]"
+        >
+          Lily Gloges Florist Atelier
+        </p>
+
+        <p
+          class="text-[#6B8573]
+                 mt-1"
+        >
+          © 2026 LILY GLOGES.
+          ALL RIGHTS RESERVED.
+        </p>
+
+      </div>
+
+
       <div class="flex gap-6">
-        <a href="#" class="text-[#2C3E35] hover:text-[#6B8573] transition flex items-center gap-1.5"><i data-lucide="instagram" class="w-4 h-4"></i> Instagram</a>
-        <a href="#" class="text-[#2C3E35] hover:text-[#6B8573] transition flex items-center gap-1.5"><i data-lucide="message-circle" class="w-4 h-4"></i> Contact</a>
+
+        <a
+          href="#"
+          class="text-[#2C3E35]
+                 hover:text-[#6B8573]
+                 transition
+                 flex
+                 items-center
+                 gap-1.5"
+        >
+          <i
+            data-lucide="instagram"
+            class="w-4 h-4"
+          ></i>
+
+          Instagram
+        </a>
+
+
+        <a
+          href="#"
+          class="text-[#2C3E35]
+                 hover:text-[#6B8573]
+                 transition
+                 flex
+                 items-center
+                 gap-1.5"
+        >
+
+          <i
+            data-lucide="message-circle"
+            class="w-4 h-4"
+          ></i>
+
+          Contact
+
+        </a>
+
       </div>
+
     </div>
+
   </footer>
 
-  <script>lucide.createIcons();</script>
+
+
+  <!-- =========================================================
+       ICON INITIALIZE
+  ========================================================= -->
+
+  <script>
+    lucide.createIcons();
+  </script>
+
+
 </body>
 </html>
