@@ -1,121 +1,459 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ceramic Shop - Le Petit Bonheur</title>
-  <!-- Tailwind CSS 및 Lucide 아이콘 로드 -->
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    /* 1번 요구사항: 위아래가 구름/물결 모양으로 깎인 전면 대문 사진 */
-    .wavy-hero-clip {
-      clip-path: path('M 0 40 Q 25 10 50 40 T 100 40 T 150 40 T 200 40 T 250 40 T 300 40 T 350 40 T 400 40 T 450 40 T 500 40 T 550 40 T 600 40 T 650 40 T 700 40 T 750 40 T 800 40 T 850 40 T 900 40 T 950 40 T 1000 40 T 1050 40 T 1100 40 T 1150 40 T 1200 40 L 1200 460 Q 1175 490 1150 460 T 1100 460 T 1050 460 T 1000 460 T 950 460 T 900 460 T 850 460 T 800 460 T 750 460 T 700 460 T 650 460 T 600 460 T 550 460 T 500 460 T 450 460 T 400 460 T 350 460 T 300 460 T 250 460 T 200 460 T 150 460 T 100 460 T 50 460 T 0 460 Z');
-      /* 브라우저 반응형 대응을 위해 border-radius와 조화로운 부드러운 유기적 clip-path 대체 기법 적용 */
-      border-radius: 80px 80px 80px 80px / 30px 30px 30px 30px;
-    }
-    
-    /* 2번 요구사항: 부드러운 구름 모양 사각형 프레임 */
-    .cloud-square {
-      border-radius: 60px 40px 60px 40px / 40px 60px 40px 60px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofia & Mark Wedding in Positano</title>
+    <!-- Google Fonts: 스크립트 및 세리프 폰트 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #F7F3EE;
+            --posi-blue: #6699CC;
+            --deep-navy: #2C3E50;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            font-family: 'Lora', serif;
+            color: var(--deep-navy);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 모바일 프레임 컨테이너 (실제 웹에서도 모바일 청첩장 느낌을 극대화) */
+        .mobile-container {
+            width: 100%;
+            max-width: 430px;
+            background-color: var(--bg-cream);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+        }
+
+        /* 상단 네비게이션 바 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 24px;
+            color: var(--posi-blue);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            text-transform: lowercase;
+            color: var(--deep-navy);
+        }
+
+        .hamburger {
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* 공통 섹션 스타일 */
+        section {
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* --- 1. 메인 대문 섹션 (image_2.png 기반) --- */
+        .hero-section {
+            padding-top: 10px;
+        }
+
+        .seashell-seal {
+            width: 50px;
+            margin: 0 auto 10px auto;
+        }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 52px;
+            color: var(--posi-blue);
+            line-height: 1.1;
+            margin-bottom: 5px;
+        }
+
+        .couple-names span {
+            font-size: 30px;
+            display: block;
+            margin: -5px 0;
+        }
+
+        .postmark {
+            position: absolute;
+            top: 70px;
+            right: 25px;
+            width: 70px;
+            opacity: 0.7;
+        }
+
+        /* 폴라로이드 사진 프레임 */
+        .polaroid-card {
+            background: var(--white);
+            padding: 12px 12px 35px 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin: 25px auto 15px auto;
+            transform: rotate(-1deg);
+            position: relative;
+            max-width: 320px;
+        }
+
+        .polaroid-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .polaroid-date {
+            margin-top: 15px;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .polaroid-date p {
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .floating-shell {
+            position: absolute;
+            bottom: -15px;
+            left: -15px;
+            width: 50px;
+            z-index: 2;
+        }
+
+        .invitation-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 25px 0 5px 0;
+        }
+
+        .invitation-sub {
+            font-size: 13px;
+            color: #555;
+            padding: 0 30px;
+            margin-bottom: 25px;
+        }
+
+        .story-link {
+            font-family: 'Great Vibes', cursive;
+            font-size: 26px;
+            color: var(--posi-blue);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        /* --- 수채화 파도 푸터 영역 (모든 페이지 하단 공통 감성) --- */
+        .watercolor-wave-bg {
+            background: linear-gradient(to bottom, rgba(102, 153, 204, 0.1), rgba(102, 153, 204, 0.4));
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            padding-top: 40px;
+            padding-bottom: 50px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .the-day-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 40px;
+            color: var(--deep-navy);
+            margin-bottom: 5px;
+        }
+
+        .the-day-date {
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        /* 디데이 카운트다운 */
+        .countdown-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .count-item {
+            text-align: center;
+        }
+
+        .count-num {
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .count-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #555;
+        }
+
+        /* --- 2. 스토리 및 상세 섹션 (image, image_3, image_4 요소 조화) --- */
+        .content-section {
+            background-color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .memo-paper {
+            background: #FFFDF9;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin: 20px auto;
+            max-width: 280px;
+            font-size: 13px;
+            line-height: 1.6;
+            transform: rotate(1deg);
+            border: 1px solid #eee;
+        }
+
+        .section-header-lg {
+            font-family: 'Lora', serif;
+            font-weight: 300;
+            font-size: 32px;
+            color: var(--deep-navy);
+            margin-bottom: 5px;
+        }
+
+        .section-header-script {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            color: var(--posi-blue);
+            margin-bottom: 20px;
+        }
+
+        .btn-positano {
+            display: inline-block;
+            background-color: var(--posi-blue);
+            color: var(--white);
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(102, 153, 204, 0.3);
+        }
+
+        /* 일정 아이콘 그리드 (image.png 참고) */
+        .schedule-icons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .schedule-item img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+        }
+
+        .schedule-item .time {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+
+        .schedule-item .label {
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        /* 장식용 조개/불가사리 아이콘 유틸리티 */
+        .icon-starfish {
+            display: inline-block;
+            width: 30px;
+            margin: 15px auto;
+            opacity: 0.8;
+        }
+    </style>
 </head>
-<body class="bg-[#F9F6F0] text-[#3E2723] font-sans antialiased overflow-x-hidden">
+<body>
 
-  <!-- 전체 컨테이너: 양옆 공백 최소화 -->
-  <div class="w-full space-y-28 pb-24">
-
-    <!-- Section 1. 상단 대문 사진 (위아래 구름/물결선 + 정가운데 제목) -->
-    <header class="w-full relative px-2 md:px-4 pt-4">
-      <!-- 전면 사각형이지만 위아래 테두리가 구름처럼 부드럽게 휜 프레임 -->
-      <div class="w-full h-[60vh] max-h-[500px] overflow-hidden relative border border-[#D7CCC8] bg-[#F5EBE6] shadow-xs rounded-[80px/35px]">
-        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80" alt="Ceramic Atelier Main" class="w-full h-full object-cover brightness-90">
+    <div class="mobile-container">
         
-        <!-- 사진 위 정가운데 배치된 제목 -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-black/10">
-          <span class="text-xs tracking-widest text-white/90 uppercase font-serif mb-2">Handcrafted Ceramic & Dessert</span>
-          <h1 class="text-3xl md:text-5xl font-serif text-white tracking-wide font-bold drop-shadow-xs">Le Petit Bonheur</h1>
-          <div class="w-12 h-[1px] bg-white/70 my-4"></div>
-          <p class="text-xs md:text-sm text-white/90 font-light font-serif italic">The Art of Slow Baking</p>
-        </div>
-      </div>
-    </header>
+        <!-- 상단 네비게이션 -->
+        <header class="navbar">
+            <div class="nav-logo">S / M</div>
+            <nav class="nav-menu">
+                <span>our story</span>
+                <span>details</span>
+                <span>schedule</span>
+                <span>rsvp</span>
+            </nav>
+            <div class="hamburger">☰</div>
+        </header>
 
-    <!-- 약간의 메인 설명 (인트로) -->
-    <section class="max-w-3xl mx-auto text-center px-6">
-      <p class="text-sm md:text-base text-[#5D4037] leading-relaxed">
-        부드러운 흙을 만져 빚어낸 도자기처럼, 르 쁘띠 보뇌르의 디저트 또한 만드는 이의 온기와 정성을 그대로 담아냅니다. 정형화되지 않은 따뜻한 실루엣 속에서 마주하는 달콤한 휴식을 경험해 보세요.
-      </p>
-    </section>
+        <!-- [메인 대문 섹션] - image_2.png 레퍼런스 반영 -->
+        <section class="hero-section">
+            <!-- 왁스 씰 조개 디자인 -->
+            <div class="seashell-seal">
+                <svg viewBox="0 0 100 100" fill="#E6E0D8"><path d="M50 10 C30 10 10 30 10 50 C10 70 30 90 50 90 C70 90 90 70 90 50 C90 30 70 10 50 10 Z" stroke="#C5BCB3" stroke-width="2"/><path d="M50 15 L50 85 M20 40 Q50 50 80 40 M20 60 Q50 50 80 60" stroke="#B0A499" stroke-width="1.5" fill="none"/></svg>
+            </div>
 
+            <div class="couple-names">
+                Sofia <span>&</span> Mark
+            </div>
 
-    <!-- Section 2. 아치 사진 + 구름 사각형 사진 + 설명의 조화로운 배치 -->
-    <main class="w-full max-w-6xl mx-auto px-4 space-y-24">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80" alt="Postcard Stamp" class="postmark">
 
-      <!-- 레이아웃 단락 1: 좌측 아치 사진 + 우측 설명 및 작은 구름 사진 -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-        <!-- 왼쪽: 단정한 세로형 아치 사진 -->
-        <div class="col-span-1 md:col-span-5 aspect-[3/4] rounded-t-full overflow-hidden border border-[#D7CCC8] shadow-xs">
-          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80" alt="Ceramic Arch" class="w-full h-full object-cover">
-        </div>
-        
-        <!-- 오른쪽: 텍스트 설명 및 그 아래 배치된 구름 사각형 사진 -->
-        <div class="col-span-1 md:col-span-7 space-y-8 md:pl-6">
-          <div class="space-y-3">
-            <span class="text-xs text-[#8D6E63] font-serif uppercase tracking-widest block">01 / Earthy Texture</span>
-            <h3 class="text-xl md:text-2xl font-serif font-bold">오븐에서 구워낸 도자기</h3>
-            <p class="text-xs md:text-sm text-[#5D4037] leading-relaxed">
-              가마 속 뜨거운 열기를 견디며 단단하고 아름답게 태어나는 도자기처럼, 르 쁘띠 보뇌르의 구움과자들 역시 가장 알맞은 시간과 온도의 미학을 통과하여 깊은 풍미의 결을 완성합니다.
-            </p>
-          </div>
-          <!-- 텍스트 아래 조화롭게 매칭된 구름 사각형 사진 -->
-          <div class="w-full max-w-md aspect-[16/10] cloud-square overflow-hidden border border-[#D7CCC8] bg-[#F5EBE6]">
-            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Cloud Ceramic 1" class="w-full h-full object-cover">
-          </div>
-        </div>
-      </div>
+            <!-- 폴라로이드 메인 사진 -->
+            <div class="polaroid-card">
+                <!-- 바다와 조개 감성을 담은 메인 커플 사진 -->
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&q=80" alt="Positano Wedding Couple">
+                <!-- 입체 조개 데코레이션 -->
+                <svg class="floating-shell" viewBox="0 0 100 100"><path d="M50 90 C30 90 10 70 20 40 C30 10 70 10 80 40 C90 70 70 90 50 90 Z" fill="#F0ECE4" stroke="#D3C9BE" stroke-width="3"/><path d="M50 90 L50 40 M50 90 L25 50 M50 90 L75 50 M50 90 L15 65 M50 90 L85 65" stroke="#D3C9BE" stroke-width="2"/></svg>
+                
+                <div class="polaroid-date">
+                    JUNE 21, 2025
+                    <p>POSITANO, ITALY</p>
+                </div>
+            </div>
 
-      <!-- 레이아웃 단락 2: 좌측 구름 사각형 사진 + 우측 아치 사진 (중앙에 설명 배치로 밸런스 유지) -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center pt-8">
-        <!-- 왼쪽: 큼직한 구름 사각형 사진 -->
-        <div class="col-span-1 md:col-span-4 aspect-square cloud-square overflow-hidden border border-[#D7CCC8] order-1">
-          <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Cloud Ceramic 2" class="w-full h-full object-cover">
-        </div>
-        
-        <!-- 중앙: 제품 설명 -->
-        <div class="col-span-1 md:col-span-4 space-y-3 text-center px-4 order-3 md:order-2">
-          <span class="text-xs text-[#8D6E63] font-serif uppercase tracking-widest block">02 / Cozy Object</span>
-          <h3 class="text-lg font-serif font-bold">따뜻한 일상의 오브제</h3>
-          <p class="text-xs text-[#5D4037] leading-relaxed">
-            마음을 편안하게 채워주는 베이지 톤 테이블 웨어와 단정하게 담긴 디저트의 실루엣. 시각과 미각 모두에 차분한 영감을 주는 순간들을 엮었습니다.
-          </p>
-        </div>
+            <div class="invitation-text">we're getting married!</div>
+            <div class="invitation-sub">We can't wait to celebrate this special day with our favorite people in the most beautiful place.</div>
+            
+            <a href="#story" class="story-link">our story</a>
 
-        <!-- 오른쪽: 좁고 긴 아치 사진 -->
-        <div class="col-span-1 md:col-span-4 aspect-[2/3] rounded-t-full overflow-hidden border border-[#D7CCC8] shadow-xs order-2 md:order-3">
-          <img src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80" alt="Ceramic Arch 2" class="w-full h-full object-cover">
-        </div>
-      </div>
+            <!-- 수채화 파도 및 디데이 영역 (image_2.png 하단 반영) -->
+            <div class="watercolor-wave-bg">
+                <div class="the-day-title">the day</div>
+                <div class="the-day-date">06 . 21 . 25</div>
+                
+                <div class="countdown-grid">
+                    <div class="count-item">
+                        <div class="count-num" id="days">128</div>
+                        <div class="count-label">days</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num" id="hours">07</div>
+                        <div class="count-label">hours</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num" id="mins">36</div>
+                        <div class="count-label">minutes</div>
+                    </div>
+                    <div class="count-item">
+                        <div class="count-num" id="secs">12</div>
+                        <div class="count-label">seconds</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    </main>
+        <!-- [스토리 및 상세 정보 섹션] - image_3, image_4 레퍼런스 요소 종합 -->
+        <section class="content-section" id="story">
+            <div class="section-header-lg">our love</div>
+            <div class="section-header-script">story ♥</div>
 
-  </div>
+            <!-- 편지 메모지 조각 -->
+            <div class="memo-paper">
+                "From the moment we met, we knew our story would be our favorite one."
+            </div>
 
-  <!-- 하단 세라믹 아틀리에 톤 푸터 -->
-  <footer class="bg-[#F5EBE6] border-t border-[#D7CCC8] py-16 px-6">
-    <div class="w-full max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs">
-      <div class="text-center md:text-left">
-        <p class="font-serif font-bold text-sm">Le Petit Bonheur</p>
-        <p class="text-[#8D6E63] mt-1">© 2026 CERAMIC SHOP ATELIER. ALL RIGHTS RESERVED.</p>
-      </div>
-      <div class="flex gap-6">
-        <a href="#" class="text-[#3E2723] hover:text-[#8D6E63] transition font-serif">Instagram</a>
-        <a href="#" class="text-[#3E2723] hover:text-[#8D6E63] transition font-serif">Shop Journal</a>
-      </div>
+            <div style="margin: 30px 0;">
+                <div style="font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--posi-blue);">join us in</div>
+                <div style="font-family: 'Lora', serif; font-size: 28px; margin: 5px 0 10px 0;">Positano</div>
+                <p style="font-size: 12px; color: #666; padding: 0 20px; line-height: 1.5;">for a weekend of sun, sea and unforgettable memories.</p>
+                <a href="#" class="btn-positano">explore the details</a>
+            </div>
+
+            <!-- 불가사리 아이콘 포인트 -->
+            <svg class="icon-starfish" viewBox="0 0 100 100" fill="none" stroke="#6699CC" stroke-width="3">
+                <path d="M50 10 L61 38 L91 40 L67 60 L75 89 L50 72 L25 89 L33 60 L9 40 L39 38 Z"/>
+            </svg>
+
+            <!-- [예식 일정 아이콘 섹션] - image.png 하단부 반영 -->
+            <div style="margin-top: 20px;">
+                <div style="font-family: 'Great Vibes', cursive; font-size: 32px; color: var(--posi-blue); margin-bottom: 15px;">the celebration</div>
+                
+                <div class="schedule-icons">
+                    <div class="schedule-item">
+                        <div style="font-size: 20px;">💍</div>
+                        <div class="time">16:00</div>
+                        <div class="label">Ceremony</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div style="font-size: 20px;">🍸</div>
+                        <div class="time">17:00</div>
+                        <div class="label">Cocktails</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div style="font-size: 20px;">🍽️</div>
+                        <div class="time">19:00</div>
+                        <div class="label">Dinner</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div style="font-size: 20px;">✨</div>
+                        <div class="time">21:00</div>
+                        <div class="label">Dancing</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 35px;">
+                    <a href="#" class="btn-positano" style="background-color: transparent; border: 1px solid var(--posi-blue); color: var(--posi-blue);">RSVP NOW</a>
+                </div>
+            </div>
+        </section>
+
     </div>
-  </footer>
 
-  <script>lucide.createIcons();</script>
+    <script>
+        // 간단한 디데이 실시간 카운트다운 타이머 구동 로직
+        const weddingDate = new Date("June 21, 2025 16:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = String(days).padStart(3, '0');
+                document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+                document.getElementById("mins").innerText = String(mins).padStart(2, '0');
+                document.getElementById("secs").innerText = String(secs).padStart(2, '0');
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
