@@ -297,7 +297,9 @@ ADD NEWS
     justify-content:flex-end;
     padding:0 8%;
     margin-top:-80px;
-    margin-bottom:80px;
+    margin-bottom:40px;
+    position:relative;
+    z-index:10;
 }
 
 .news-admin-link a{
@@ -322,6 +324,9 @@ ADD NEWS
     text-transform:uppercase;
 
     transition:all .3s ease;
+
+    position:relative;
+    z-index:11;
 }
 
 .news-admin-link a:hover{
