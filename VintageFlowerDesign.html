@@ -292,7 +292,7 @@ body{
 
 /* Slightly imperfect second line */
 
-.::after{
+.hand-photo::after{
 
     content:"";
 
@@ -316,7 +316,133 @@ body{
 
 }
 
+/* ========================================
+   VERTICAL OVAL PHOTO
+   CHAPTER 01 / 02
+======================================== */
 
+.vertical-oval-frame{
+
+    position:relative;
+
+    width:320px;
+
+    height:520px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* 뒤쪽 손으로 그린 듯한 타원 */
+
+.vertical-oval-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border:1px solid #B8A85F;
+
+    border-radius:50%;
+
+    transform:rotate(-3deg) translate(-8px, 5px);
+
+    pointer-events:none;
+
+}
+
+
+/* 두 번째 타원 라인 */
+
+.vertical-oval-frame::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:3px -5px -4px 5px;
+
+    border:1px dashed #C8BB79;
+
+    border-radius:50%;
+
+    transform:rotate(2deg);
+
+    pointer-events:none;
+
+}
+
+
+/* 실제 사진 */
+
+.vertical-oval-photo{
+
+    position:relative;
+
+    width:290px;
+
+    height:490px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    border:1px solid rgba(105,116,75,.45);
+
+    background:#F5F2E6;
+
+    box-shadow:
+
+        3px 4px 0 rgba(105,116,75,.08),
+
+        -2px -2px 0 rgba(190,175,95,.06);
+
+    z-index:2;
+
+}
+
+
+.vertical-oval-photo img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+
+/* 모바일 */
+
+@media(max-width:768px){
+
+    .vertical-oval-frame{
+
+        width:280px;
+
+        height:460px;
+
+    }
+
+    .vertical-oval-photo{
+
+        width:252px;
+
+        height:432px;
+
+    }
+
+}
 /* ========================================
    HERO
 ======================================== */
@@ -877,35 +1003,18 @@ md:justify-end
 
 <div class="photo-frame">
 
+    <div class="vertical-oval-frame">
 
-<div class="vertical-oval-frame">
+        <div class="vertical-oval-photo">
 
-    <div class="vertical-oval-photo">
+            <img
+            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
+            alt="Vintage Jewelry and Dried Flower"
+            >
 
-        <img
-
-        src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
-
-        alt="Vintage Jewelry and Dried Flower"
-
-        >
+        </div>
 
     </div>
-
-</div>
-
-
-<img
-
-src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
-
-alt="Vintage Travel Memory"
-
-class="
-w-full
-h-full
-object-cover
-">
 
 </div>
 
@@ -1013,38 +1122,20 @@ md:justify-start
 
 <div class="photo-frame">
 
+    <div class="vertical-oval-frame">
 
-<div class="vertical-oval-frame">
+        <div class="vertical-oval-photo">
 
-    <div class="vertical-oval-photo">
+            <img
+            src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80"
+            alt="Vintage Travel Collection"
+            >
 
-        <img
-
-        src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80"
-
-        alt="Vintage Travel Collection"
-
-        >
+        </div>
 
     </div>
 
 </div>
-
-
-<img
-
-src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80"
-
-alt="Travel Collection"
-
-class="
-w-full
-h-full
-object-cover
-">
-
-</div>
-
 
 </div>
 
