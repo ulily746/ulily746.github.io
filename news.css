@@ -659,27 +659,18 @@ LARGE VERTICAL ARCH BACKGROUND
 ===================================== */
 
 .large-arch-bg {
+    position: relative;
+    width: 100%;
+    min-height: 1050px;
 
-position: relative;
+    background: #F2F2DF;
 
-width: 100%;
+    border-radius: 50vw 50vw 0 0;
 
-background: #F2F2DF;
+    padding: 150px 7% 130px;
 
-/*
-가로로 넓은 반원 대신
-세로로 길게 올라오는 아치형 상단
-*/
-
-border-radius: 50vw 50vw 0 0;
-
-padding: 110px 7% 100px;
-
-overflow: hidden;
-
-
+    overflow: hidden;
 }
-
 /* =====================================
 MAIN TITLE
 ===================================== */
