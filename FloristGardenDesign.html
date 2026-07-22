@@ -8,10 +8,12 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* 세이지 그린 & 보타닉 감성을 위한 비정형(Blob) 프레임 스타일 */
-    .blob-hero {
-      border-radius: 45% 55% 42% 58% / 55% 40% 60% 45%;
+    /* 1. 대문 히어로용 비정형 길쭉한 하트 프레임 (레퍼런스 완벽반영) */
+    .blob-heart-long {
+      border-radius: 50% 50% 35% 65% / 30% 40% 60% 70%;
     }
+    
+    /* 기타 비정형 프레임들 */
     .blob-1 {
       border-radius: 41% 59% 45% 55% / 57% 40% 60% 43%;
     }
@@ -24,6 +26,16 @@
     .blob-main {
       border-radius: 38% 62% 53% 47% / 48% 52% 48% 52%;
     }
+    /* 프로그램 세부 사진용 자연스러운 곡선 프레임 */
+    .schedule-blob-sm {
+      border-radius: 45% 55% 40% 60% / 50% 45% 55% 50%;
+    }
+    .schedule-blob-md {
+      border-radius: 38% 62% 55% 45% / 45% 55% 45% 55%;
+    }
+    .schedule-blob-lg {
+      border-radius: 42% 58% 48% 52% / 52% 42% 58% 48%;
+    }
   </style>
 </head>
 <body class="bg-[#F2F5F0] text-[#2C3E35] font-sans antialiased overflow-x-hidden">
@@ -31,22 +43,27 @@
   <!-- 전체 컨테이너: 세이지 그린 & 화이트의 보타닉 무드 -->
   <div class="w-full space-y-24 pb-24">
 
-    <!-- [Hero Section] 세 번째 사진 레퍼런스 (대문 화면) -->
-    <header class="w-full pt-10 pb-16 relative px-4 md:px-8 bg-gradient-to-b from-[#E6EFEA] to-[#F2F5F0]">
-      <div class="max-w-4xl mx-auto relative flex flex-col items-center">
+    <!-- [Hero Section] 레퍼런스(image_898078.png) 완벽 반영 대문 화면 -->
+    <header class="w-full pt-12 pb-20 relative px-4 md:px-8 bg-gradient-to-b from-[#E6EFEA] to-[#F2F5F0]">
+      <div class="max-w-4xl mx-auto relative">
         
-        <!-- 대형 비정형 프레임 (꽃을든 인물 / 메인 감성 컷) -->
-        <div class="w-[85%] md:w-[65%] aspect-[3/4] max-h-[600px] overflow-hidden blob-hero border border-[#C2D1C5] shadow-sm bg-white relative">
+        <!-- 왼쪽으로 치우친 길쭉한 하트 비정형 프레임 -->
+        <div class="w-[85%] md:w-[60%] aspect-[3/4] max-h-[620px] overflow-hidden blob-heart-long border border-[#C2D1C5] shadow-sm bg-white relative mr-auto">
           <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1200&q=80" alt="Lily Gloges Hero" class="w-full h-full object-cover">
         </div>
 
-        <!-- 하단에 걸치는 우아한 타이틀 (image_3 스타일) -->
-        <div class="mt-8 text-center z-10 space-y-2">
+        <!-- 우측 하단 스티커(꽃 일러스트/포인트 요소) 배치 -->
+        <div class="absolute right-4 md:right-16 bottom-28 w-28 md:w-36 opacity-90 pointer-events-none transform rotate-12">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80" alt="Flower Sticker" class="w-full h-full object-cover rounded-full shadow-xs filter brightness-105">
+        </div>
+
+        <!-- 사진에 살짝 걸치며 왼쪽 정렬된 우아한 타이틀 (레퍼런스 구조) -->
+        <div class="mt-6 md:-mt-12 ml-4 md:ml-8 relative z-10 space-y-1">
           <h1 class="text-4xl md:text-6xl font-serif text-[#2C3E35] tracking-wide font-normal italic">
             Lily Gloges
           </h1>
-          <span class="text-sm text-[#6B8573] tracking-[0.3em] uppercase font-serif block">
-            florist atelier
+          <span class="text-sm text-[#6B8573] tracking-[0.2em] uppercase font-serif block pl-1">
+            florist
           </span>
         </div>
 
@@ -69,13 +86,11 @@
           </p>
         </div>
 
-        <!-- 좌우 번갈아 나오는 그리드와 비정형 사진들 (image_2 구조 동일반영) -->
+        <!-- 좌우 번갈아 나오는 그리드와 비정형 사진들 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <!-- 왼쪽: 비정형 사진 1 -->
           <div class="w-full aspect-square blob-2 overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
             <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80" alt="Bouquet 1" class="w-full h-full object-cover">
           </div>
-          <!-- 오른쪽: 설명 텍스트 -->
           <div class="space-y-3 px-2">
             <span class="text-xs text-[#6B8573] font-serif block">01 / Saturday Class</span>
             <h3 class="text-lg font-bold font-serif text-[#2C3E35]">무료 마스터클래스</h3>
@@ -86,7 +101,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <!-- 왼쪽: 설명 텍스트 -->
           <div class="order-2 md:order-1 space-y-3 px-2 text-left md:text-right">
             <span class="text-xs text-[#6B8573] font-serif block">02 / Signature Design</span>
             <h3 class="text-lg font-bold font-serif text-[#2C3E35]">나만의 첫 번째 부케</h3>
@@ -94,7 +108,6 @@
               3시간 동안 진행되는 클래스에서 생화의 결을 살려 세상에 단 하나뿐인 온전한 내추럴 부케를 완성합니다.
             </p>
           </div>
-          <!-- 오른쪽: 비정형 사진 2 -->
           <div class="order-1 md:order-2 w-full aspect-square blob-3 overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
             <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80" alt="Bouquet 2" class="w-full h-full object-cover">
           </div>
@@ -107,7 +120,7 @@
     <!-- [Section 3] 네 번째 사진 레퍼런스 (Master class & Location) -->
     <section class="w-full relative px-4 md:px-8 space-y-16">
       
-      <!-- 상단 말풍선 느낌의 마스터클래스 안내 영역 (image_4 레퍼런스) -->
+      <!-- 상단 말풍선 느낌의 마스터클래스 안내 영역 -->
       <div class="max-w-2xl mx-auto text-center space-y-6">
         <h2 class="text-3xl md:text-4xl font-serif font-normal italic text-[#2C3E35]">Master class</h2>
         
@@ -135,47 +148,63 @@
     </section>
 
 
-    <!-- [Section 4] 첫 번째 사진 레퍼런스 (Program / 세부 타임라인 그리드 감성) -->
-    <section class="w-full px-4 md:px-8 py-12 bg-white/50 border-t border-[#D4E2D7]">
-      <div class="max-w-5xl mx-auto space-y-12">
-        <div class="text-center">
-          <span class="text-xs text-[#6B8573] tracking-widest uppercase font-serif block mb-1">Schedule & Details</span>
-          <h2 class="text-2xl md:text-3xl font-serif font-normal italic text-[#2C3E35]">Программа мастер-класса</h2>
+    <!-- [Section 4] 5개 사진 V자 계단식 레이아웃 (Schedule & Details) -->
+    <section class="w-full px-4 md:px-8 py-16 bg-white/50 border-t border-[#D4E2D7]">
+      <div class="max-w-6xl mx-auto space-y-12">
+        <div class="text-center space-y-2">
+          <h2 class="text-3xl md:text-4xl font-serif font-normal italic text-[#2C3E35]">Программа мастер-класса</h2>
+          <p class="text-xs text-[#6B8573] tracking-widest uppercase font-serif">все материалы включены в стоимость</p>
         </div>
 
-        <!-- 시간대별/요소별 카드 그리드 (첫 번째 사진의 가로 배열 느낌 반영) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <div class="bg-[#F9FAF8] p-4 rounded-2xl border border-[#E2EBE4] space-y-2 text-center">
+        <!-- 5개 사진 V자 배치 컨테이너 -->
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-3 pt-6">
+          
+          <div class="w-40 md:w-44 lg:w-48 text-center space-y-2 lg:translate-y-6">
             <span class="text-xs font-serif font-bold text-[#6B8573]">10:00</span>
-            <div class="w-full aspect-square rounded-xl overflow-hidden border border-[#D4E2D7]">
+            <div class="w-full aspect-[3/4] schedule-blob-sm overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
               <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=500&q=80" alt="Step 1" class="w-full h-full object-cover">
             </div>
-            <p class="text-[11px] text-[#4A5D52]">소개 및 재료 탐색</p>
+            <p class="text-[11px] text-[#4A5D52] px-1">소개 및 재료 탐색</p>
           </div>
 
-          <div class="bg-[#F9FAF8] p-4 rounded-2xl border border-[#E2EBE4] space-y-2 text-center">
+          <div class="w-44 md:w-48 lg:w-52 text-center space-y-2 lg:translate-y-2">
             <span class="text-xs font-serif font-bold text-[#6B8573]">10:30</span>
-            <div class="w-full aspect-square rounded-xl overflow-hidden border border-[#D4E2D7]">
+            <div class="w-full aspect-[3/4] schedule-blob-md overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
               <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=500&q=80" alt="Step 2" class="w-full h-full object-cover">
             </div>
-            <p class="text-[11px] text-[#4A5D52]">기초 폼 및 핸들링</p>
+            <p class="text-[11px] text-[#4A5D52] px-1">기초 폼 및 핸들링</p>
           </div>
 
-          <div class="bg-[#F9FAF8] p-4 rounded-2xl border border-[#E2EBE4] space-y-2 text-center">
-            <span class="text-xs font-serif font-bold text-[#6B8573]">12:00</span>
-            <div class="w-full aspect-square rounded-xl overflow-hidden border border-[#D4E2D7]">
-              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=500&q=80" alt="Step 3" class="w-full h-full object-cover">
+          <div class="w-52 md:w-56 lg:w-64 text-center space-y-2 lg:-translate-y-6 z-10">
+            <span class="text-xs font-serif font-bold text-[#2C3E35]">11:30</span>
+            <div class="w-full aspect-[3/4] schedule-blob-lg overflow-hidden border-2 border-[#C2D1C5] shadow-md bg-white">
+              <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Step 3" class="w-full h-full object-cover">
             </div>
-            <p class="text-[11px] text-[#4A5D52]">메인 시연 및 실습</p>
+            <p class="text-xs font-medium text-[#2C3E35] px-1">메인 시연 및 핸드타이드 실습</p>
           </div>
 
-          <div class="bg-[#F9FAF8] p-4 rounded-2xl border border-[#E2EBE4] space-y-2 text-center">
+          <div class="w-44 md:w-48 lg:w-52 text-center space-y-2 lg:translate-y-2">
+            <span class="text-xs font-serif font-bold text-[#6B8573]">12:30</span>
+            <div class="w-full aspect-[3/4] schedule-blob-md overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
+              <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=500&q=80" alt="Step 4" class="w-full h-full object-cover">
+            </div>
+            <p class="text-[11px] text-[#4A5D52] px-1">오지 및 피니시 가공</p>
+          </div>
+
+          <div class="w-40 md:w-44 lg:w-48 text-center space-y-2 lg:translate-y-6">
             <span class="text-xs font-serif font-bold text-[#6B8573]">13:00</span>
-            <div class="w-full aspect-square rounded-xl overflow-hidden border border-[#D4E2D7]">
-              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="Step 4" class="w-full h-full object-cover">
+            <div class="w-full aspect-[3/4] schedule-blob-sm overflow-hidden border border-[#C2D1C5] shadow-xs bg-white">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt="Step 5" class="w-full h-full object-cover">
             </div>
-            <p class="text-[11px] text-[#4A5D52]">패키징 및 피니시</p>
+            <p class="text-[11px] text-[#4A5D52] px-1">패키징 및 기념 촬영</p>
           </div>
+
+        </div>
+
+        <div class="text-center pt-8">
+          <p class="text-xs md:text-sm text-[#4A5D52] font-serif italic">
+            Вы заберёте готовую флористическую работу домой!
+          </p>
         </div>
 
       </div>
