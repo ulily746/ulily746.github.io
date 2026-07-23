@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 
 <meta charset="UTF-8">
@@ -12,9 +14,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="
-https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap
-" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+
 
 <!-- ======================================
      FIREBASE
@@ -39,9 +40,9 @@ import {
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-// ======================================
-// FIREBASE CONFIG
-// ======================================
+/* ======================================
+   FIREBASE CONFIG
+====================================== */
 
 const firebaseConfig = {
 
@@ -69,26 +70,25 @@ const firebaseConfig = {
 };
 
 
-
-// ======================================
-// INITIALIZE FIREBASE
-// ======================================
+/* ======================================
+   INITIALIZE FIREBASE
+====================================== */
 
 const app =
     initializeApp(firebaseConfig);
 
 
-// ======================================
-// FIRESTORE
-// ======================================
+/* ======================================
+   FIRESTORE
+====================================== */
 
 const db =
     getFirestore(app);
 
 
-// ======================================
-// MAKE AVAILABLE TO OTHER SCRIPTS
-// ======================================
+/* ======================================
+   GLOBAL FIREBASE ACCESS
+====================================== */
 
 window.firebaseDB = db;
 
@@ -117,13 +117,34 @@ window.firebaseServerTimestamp =
     serverTimestamp;
 
 
+/* ======================================
+   FIREBASE READY
+====================================== */
+
 console.log(
     "Firebase connected successfully."
 );
 
-</script>    
+
+/*
+    Firebase가 연결되면
+    News Admin 데이터 로드
+*/
+
+if(window.loadNews){
+
+    window.loadNews();
+
+}
+
+</script>
+
 
 <style>
+
+/* ======================================
+   RESET
+====================================== */
 
 *{
     box-sizing:border-box;
@@ -433,7 +454,6 @@ body{
     display:grid;
 
     grid-template-columns:
-
         repeat(4,1fr);
 
     gap:18px;
@@ -585,7 +605,6 @@ body{
     display:grid;
 
     grid-template-columns:
-
         90px
         2fr
         120px
@@ -613,7 +632,6 @@ body{
     display:grid;
 
     grid-template-columns:
-
         90px
         2fr
         120px
@@ -632,6 +650,13 @@ body{
 }
 
 
+.news-row:last-child{
+
+    border-bottom:none;
+
+}
+
+
 .news-row:hover{
 
     background:#F5F2EB;
@@ -646,6 +671,8 @@ body{
     height:45px;
 
     object-fit:cover;
+
+    background:#E8E3D9;
 
 }
 
@@ -700,12 +727,16 @@ body{
 
     color:#64755F;
 
+    font-size:10px;
+
 }
 
 
 .status-draft{
 
     color:#AA8B68;
+
+    font-size:10px;
 
 }
 
@@ -737,6 +768,67 @@ body{
 }
 
 
+.action.delete:hover{
+
+    color:#A45D52;
+
+}
+
+
+/* ======================================
+   EMPTY STATE
+====================================== */
+
+.empty-state{
+
+    padding:70px 30px;
+
+    text-align:center;
+
+}
+
+
+.empty-state-title{
+
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:28px;
+
+    color:#5C635D;
+
+}
+
+
+.empty-state-text{
+
+    margin-top:8px;
+
+    font-size:11px;
+
+    color:#999B93;
+
+}
+
+
+/* ======================================
+   LOADING
+====================================== */
+
+.loading-state{
+
+    padding:50px;
+
+    text-align:center;
+
+    color:#92948B;
+
+    font-size:11px;
+
+    letter-spacing:.1em;
+
+}
+
+
 /* ======================================
    DESIGN SELECTOR
 ====================================== */
@@ -764,7 +856,6 @@ body{
     display:grid;
 
     grid-template-columns:
-
         repeat(5,1fr);
 
     gap:15px;
@@ -1028,76 +1119,114 @@ textarea{
 
 }
 
+
 /* ======================================
    DESIGN SPECIFIC FORM
 ====================================== */
 
 .design-fields{
+
     margin-top:30px;
+
     padding-top:30px;
+
     border-top:1px solid #DDD8CF;
+
 }
+
 
 .design-form-title{
+
     font-family:'Cormorant Garamond',serif;
+
     font-size:26px;
+
     font-weight:500;
+
     margin-bottom:30px;
+
     color:#3E4741;
+
 }
 
+
 .form-section-label{
+
     margin-top:30px;
+
     margin-bottom:15px;
+
     padding-bottom:8px;
+
     border-bottom:1px solid #E2DED6;
+
     font-size:10px;
+
     letter-spacing:.18em;
+
     color:#858980;
+
 }
+
 
 .memory-form,
 .film-form{
+
     display:grid;
+
     gap:15px;
+
 }
+
 
 .memory-item,
 .film-item{
+
     padding:20px;
+
     background:#F2EFE8;
+
     border:1px solid #DDD8CF;
+
 }
+
 
 .memory-item strong,
 .film-item strong{
+
     display:block;
+
     margin-bottom:15px;
+
     font-family:'Cormorant Garamond',serif;
+
     font-size:18px;
+
     font-weight:500;
+
     color:#4D594F;
+
 }
+
 
 .memory-item input,
 .memory-item textarea,
 .film-item input,
 .film-item textarea{
+
     margin-bottom:10px;
+
 }
+
 
 .memory-item textarea,
 .film-item textarea{
+
     min-height:90px;
-}
-
-@media(max-width:600px){
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
 
 }
+
+
 .cancel{
 
     padding:12px 20px;
@@ -1105,6 +1234,8 @@ textarea{
     border:1px solid #D5D0C7;
 
     background:none;
+
+    cursor:pointer;
 
 }
 
@@ -1119,6 +1250,15 @@ textarea{
 
     color:white;
 
+    cursor:pointer;
+
+}
+
+
+.save:hover{
+
+    background:#3D493F;
+
 }
 
 
@@ -1131,7 +1271,6 @@ textarea{
     .stats{
 
         grid-template-columns:
-
             repeat(2,1fr);
 
     }
@@ -1140,11 +1279,9 @@ textarea{
     .design-grid{
 
         grid-template-columns:
-
             repeat(3,1fr);
 
     }
-
 
 }
 
@@ -1240,13 +1377,22 @@ textarea{
     .design-grid{
 
         grid-template-columns:
-
             repeat(2,1fr);
 
     }
 
 }
 
+
+@media(max-width:600px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
 
 </style>
 
@@ -1362,7 +1508,6 @@ ARCHIVE
 
 </div>
 
-
 </nav>
 
 
@@ -1415,7 +1560,9 @@ A
 <div class="content">
 
 
-<!-- WELCOME -->
+<!-- ======================================
+     WELCOME
+====================================== -->
 
 <div class="welcome">
 
@@ -1435,7 +1582,9 @@ Good evening, Anya.
 
 
 
-<!-- STATS -->
+<!-- ======================================
+     STATS
+====================================== -->
 
 <div class="stats">
 
@@ -1448,9 +1597,12 @@ TOTAL POSTS
 
 </div>
 
-<div class="stat-number">
+<div
+class="stat-number"
+id="totalPosts"
+>
 
-24
+0
 
 </div>
 
@@ -1471,9 +1623,12 @@ PUBLISHED
 
 </div>
 
-<div class="stat-number">
+<div
+class="stat-number"
+id="publishedPosts"
+>
 
-18
+0
 
 </div>
 
@@ -1494,9 +1649,12 @@ DRAFTS
 
 </div>
 
-<div class="stat-number">
+<div
+class="stat-number"
+id="draftPosts"
+>
 
-6
+0
 
 </div>
 
@@ -1517,9 +1675,12 @@ THIS MONTH
 
 </div>
 
-<div class="stat-number">
+<div
+class="stat-number"
+id="thisMonthPosts"
+>
 
-04
+00
 
 </div>
 
@@ -1536,40 +1697,75 @@ New entries
 
 
 
-<!-- NEWS TOOLBAR -->
+<!-- ======================================
+     NEWS TOOLBAR
+====================================== -->
 
 <div class="toolbar">
 
 
 <div class="filters">
 
-<button class="filter active">
+<button
+class="filter active"
+data-filter="ALL"
+>
 
 ALL
 
 </button>
 
-<button class="filter">
+<button
+class="filter"
+data-filter="Research"
+>
 
 RESEARCH
 
 </button>
 
-<button class="filter">
+<button
+class="filter"
+data-filter="Academic"
+>
 
-Academic
+ACADEMIC
 
 </button>
 
-<button class="filter">
+<button
+class="filter"
+data-filter="Travel"
+>
 
 TRAVEL
 
 </button>
 
-<button class="filter">
+<button
+class="filter"
+data-filter="Life"
+>
 
-Life
+LIFE
+
+</button>
+
+<button
+class="filter"
+data-filter="Published"
+>
+
+PUBLISHED
+
+</button>
+
+<button
+class="filter"
+data-filter="Draft"
+>
+
+DRAFTS
 
 </button>
 
@@ -1578,7 +1774,7 @@ Life
 
 <button
 class="add-button"
-onclick="openModal()"
+onclick="openNewModal()"
 >
 
 + NEW ENTRY
@@ -1590,10 +1786,11 @@ onclick="openModal()"
 
 
 
-<!-- NEWS LIST -->
+<!-- ======================================
+     NEWS LIST
+====================================== -->
 
 <div class="news-list">
-
 
 <div class="news-header">
 
@@ -1612,228 +1809,17 @@ onclick="openModal()"
 </div>
 
 
-
-<!-- ROW 1 -->
-
-<div class="news-row">
-
-
-<img
-class="thumb"
-src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=300&q=80"
+<div
+id="newsList"
 >
 
+<div class="loading-state">
 
-<div>
-
-<div class="news-title">
-
-Metabolic Therapy Research
-
-</div>
-
-<div class="news-meta">
-
-2026.07.20 · Research Archive
+LOADING ARCHIVE...
 
 </div>
 
 </div>
-
-
-<div>
-
-<span class="tag">
-
-RESEARCH
-
-</span>
-
-</div>
-
-
-<div class="design-tag">
-
-DESIGN 5
-
-</div>
-
-
-<div class="status-published">
-
-PUBLISHED
-
-</div>
-
-
-<div class="actions">
-
-<span class="action">
-
-EDIT
-
-</span>
-
-<span class="action">
-
-DELETE
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-<!-- ROW 2 -->
-
-<div class="news-row">
-
-
-<img
-class="thumb"
-src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=300&q=80"
->
-
-
-<div>
-
-<div class="news-title">
-
-A Quiet Afternoon in Paris
-
-</div>
-
-<div class="news-meta">
-
-2026.07.12 · Travel Archive
-
-</div>
-
-</div>
-
-
-<div>
-
-<span class="tag">
-
-TRAVEL
-
-</span>
-
-</div>
-
-
-<div class="design-tag">
-
-DESIGN 4
-
-</div>
-
-
-<div class="status-published">
-
-PUBLISHED
-
-</div>
-
-
-<div class="actions">
-
-<span class="action">
-
-EDIT
-
-</span>
-
-<span class="action">
-
-DELETE
-
-</span>
-
-</div>
-
-
-</div>
-
-
-
-<!-- ROW 3 -->
-
-<div class="news-row">
-
-
-<img
-class="thumb"
-src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=300&q=80"
->
-
-
-<div>
-
-<div class="news-title">
-
-Sweet Little Notes
-
-</div>
-
-<div class="news-meta">
-
-2026.07.10 · Baking Archive
-
-</div>
-
-</div>
-
-
-<div>
-
-<span class="tag">
-
-BAKING
-
-</span>
-
-</div>
-
-
-<div class="design-tag">
-
-DESIGN 3
-
-</div>
-
-
-<div class="status-draft">
-
-DRAFT
-
-</div>
-
-
-<div class="actions">
-
-<span class="action">
-
-EDIT
-
-</span>
-
-<span class="action">
-
-DELETE
-
-</span>
-
-</div>
-
-
-</div>
-
-
 
 </div>
 
@@ -1856,7 +1842,10 @@ Archive Designs
 <div class="design-grid">
 
 
-<div class="design-card">
+<div
+class="design-card"
+onclick="selectDesign('FilmArchiveDesign')"
+>
 
 <div class="design-preview design-1">
 
@@ -1867,20 +1856,27 @@ Design 01
 <div class="design-info">
 
 <div class="design-name">
-    FilmArchiveDesign
+
+FilmArchiveDesign
+
 </div>
 
 <div class="design-type">
-    Film / Memory Archive
-</div>
+
+Film / Memory Archive
 
 </div>
 
 </div>
 
+</div>
 
 
-<div class="design-card">
+
+<div
+class="design-card"
+onclick="selectDesign('Design 02')"
+>
 
 <div class="design-preview design-2">
 
@@ -1908,7 +1904,10 @@ Personal Archive
 
 
 
-<div class="design-card">
+<div
+class="design-card"
+onclick="selectDesign('Design 03')"
+>
 
 <div class="design-preview design-3">
 
@@ -1936,7 +1935,10 @@ Baking / Dessert
 
 
 
-<div class="design-card">
+<div
+class="design-card"
+onclick="selectDesign('Design 04')"
+>
 
 <div class="design-preview design-4">
 
@@ -1964,7 +1966,10 @@ Life / Travel
 
 
 
-<div class="design-card">
+<div
+class="design-card"
+onclick="selectDesign('Design 05')"
+>
 
 <div class="design-preview design-5">
 
@@ -2004,7 +2009,7 @@ Academic / Research
 
 
 <!-- ======================================
-     NEW ENTRY MODAL
+     ENTRY MODAL
 ====================================== -->
 
 <div
@@ -2018,7 +2023,10 @@ id="entryModal"
 
 <div class="modal-header">
 
-<div class="modal-title">
+<div
+class="modal-title"
+id="modalTitle"
+>
 
 New Archive Entry
 
@@ -2037,6 +2045,15 @@ onclick="closeModal()"
 
 
 
+<!-- Hidden Edit ID -->
+
+<input
+type="hidden"
+id="editingEntryId"
+>
+
+
+
 <div class="form-group">
 
 <label class="form-label">
@@ -2046,11 +2063,10 @@ TITLE
 </label>
 
 <input
-    type="text"
-    id="entryTitle"
-    placeholder="Entry title"
+type="text"
+id="entryTitle"
+placeholder="Entry title"
 >
-
 
 </div>
 
@@ -2068,11 +2084,25 @@ CATEGORY
 </label>
 
 <select id="entryCategory">
-    <option>Research</option>
-    <option>Academic</option>
-    <option>Travel</option>
-    <option>Life</option>
+
+<option value="Research">
+Research
+</option>
+
+<option value="Academic">
+Academic
+</option>
+
+<option value="Travel">
+Travel
+</option>
+
+<option value="Life">
+Life
+</option>
+
 </select>
+
 </div>
 
 
@@ -2086,28 +2116,40 @@ DESIGN
 </label>
 
 <select
-    id="entryDesign"
-    onchange="handleDesignChange()"
+id="entryDesign"
+onchange="handleDesignChange()"
 >
-    <option value="FilmArchiveDesign">
-        FilmArchiveDesign
-    </option>
 
-    <option value="Design 02">
-        Design 02
-    </option>
+<option value="FilmArchiveDesign">
 
-    <option value="Design 03">
-        Design 03 — Anya Bakery
-    </option>
+FilmArchiveDesign
 
-    <option value="Design 04">
-        Design 04 — Vintage Flower
-    </option>
+</option>
 
-    <option value="Design 05">
-        Design 05 — Modern Maturity
-    </option>
+<option value="Design 02">
+
+Design 02
+
+</option>
+
+<option value="Design 03">
+
+Design 03 — Anya Bakery
+
+</option>
+
+<option value="Design 04">
+
+Design 04 — Vintage Flower
+
+</option>
+
+<option value="Design 05">
+
+Design 05 — Modern Maturity
+
+</option>
+
 </select>
 
 </div>
@@ -2126,413 +2168,481 @@ SHORT DESCRIPTION
 </label>
 
 <textarea
-    id="entryDescription"
-    placeholder="Write a short description..."
+id="entryDescription"
+placeholder="Write a short description..."
 ></textarea>
 
 </div>
+
+
 
 <!-- ======================================
      FILM ARCHIVE DESIGN FIELDS
 ====================================== -->
 
 <div
-    id="filmArchiveFields"
-    class="design-fields"
-    style="display:none;"
+id="filmArchiveFields"
+class="design-fields"
+style="display:none;"
 >
 
-    <h3 class="design-form-title">
-        Film Archive Content
-    </h3>
 
+<h3 class="design-form-title">
 
-    <!-- HERO -->
+Film Archive Content
 
-    <div class="form-section-label">
-        HERO
-    </div>
+</h3>
 
 
-    <div class="form-grid">
 
-        <div class="form-group">
+<div class="form-section-label">
 
-            <label class="form-label">
-                HERO TITLE TOP
-            </label>
+HERO
 
-            <input
-                type="text"
-                id="heroTitleTop"
-                placeholder="예: OUR"
-            >
+</div>
 
-        </div>
 
 
-        <div class="form-group">
+<div class="form-grid">
 
-            <label class="form-label">
-                HERO TITLE BOTTOM 1
-            </label>
 
-            <input
-                type="text"
-                id="heroTitleBottom1"
-                placeholder="예: FILM"
-            >
+<div class="form-group">
 
-        </div>
+<label class="form-label">
 
-    </div>
+HERO TITLE TOP
 
+</label>
 
-    <div class="form-group">
+<input
+type="text"
+id="heroTitleTop"
+placeholder="예: OUR"
+>
 
-        <label class="form-label">
-            HERO TITLE BOTTOM 2
-        </label>
+</div>
 
-        <input
-            type="text"
-            id="heroTitleBottom2"
-            placeholder="예: MEMORIES"
-        >
 
-    </div>
 
+<div class="form-group">
 
-    <div class="form-group">
+<label class="form-label">
 
-        <label class="form-label">
-            HERO IMAGE URL
-        </label>
+HERO TITLE BOTTOM 1
 
-        <input
-            type="text"
-            id="heroImage"
-            placeholder="https://..."
-        >
+</label>
 
-    </div>
+<input
+type="text"
+id="heroTitleBottom1"
+placeholder="예: FILM"
+>
 
+</div>
 
-    <!-- INTRODUCTION -->
+</div>
 
-    <div class="form-section-label">
-        INTRODUCTION
-    </div>
 
 
-    <div class="form-group">
+<div class="form-group">
 
-        <label class="form-label">
-            INTRO TEXT
-        </label>
+<label class="form-label">
 
-        <textarea
-            id="introText"
-            placeholder="Write introduction..."
-        ></textarea>
+HERO TITLE BOTTOM 2
 
-    </div>
+</label>
 
+<input
+type="text"
+id="heroTitleBottom2"
+placeholder="예: MEMORIES"
+>
 
-    <!-- MEMORY -->
+</div>
 
-    <div class="form-section-label">
-        MEMORY
-    </div>
 
 
-    <div class="memory-form">
+<div class="form-group">
 
+<label class="form-label">
 
-        <div class="memory-item">
+HERO IMAGE URL
 
-            <strong>
-                MEMORY 01
-            </strong>
+</label>
 
-            <input
-                type="text"
-                id="memory1Image"
-                placeholder="Memory 01 image URL"
-            >
+<input
+type="text"
+id="heroImage"
+placeholder="https://..."
+>
 
-            <textarea
-                id="memory1Text"
-                placeholder="Memory 01 text..."
-            ></textarea>
+</div>
 
-        </div>
 
 
-        <div class="memory-item">
+<div class="form-section-label">
 
-            <strong>
-                MEMORY 02
-            </strong>
+INTRODUCTION
 
-            <input
-                type="text"
-                id="memory2Image"
-                placeholder="Memory 02 image URL"
-            >
+</div>
 
-            <textarea
-                id="memory2Text"
-                placeholder="Memory 02 text..."
-            ></textarea>
 
-        </div>
 
+<div class="form-group">
 
-        <div class="memory-item">
+<label class="form-label">
 
-            <strong>
-                MEMORY 03
-            </strong>
+INTRO TEXT
 
-            <input
-                type="text"
-                id="memory3Image"
-                placeholder="Memory 03 image URL"
-            >
+</label>
 
-            <textarea
-                id="memory3Text"
-                placeholder="Memory 03 text..."
-            ></textarea>
+<textarea
+id="introText"
+placeholder="Write introduction..."
+></textarea>
 
-        </div>
+</div>
 
 
-        <div class="memory-item">
 
-            <strong>
-                MEMORY 04
-            </strong>
+<div class="form-section-label">
 
-            <input
-                type="text"
-                id="memory4Image"
-                placeholder="Memory 04 image URL"
-            >
+MEMORY
 
-            <textarea
-                id="memory4Text"
-                placeholder="Memory 04 text..."
-            ></textarea>
+</div>
 
-        </div>
 
 
-    </div>
+<div class="memory-form">
 
 
-    <!-- VIDEO -->
+<div class="memory-item">
 
-    <div class="form-section-label">
-        VIDEO
-    </div>
+<strong>
 
+MEMORY 01
 
-    <div class="form-group">
+</strong>
 
-        <label class="form-label">
-            VIDEO URL
-        </label>
+<input
+type="text"
+id="memory1Image"
+placeholder="Memory 01 image URL"
+>
 
-        <input
-            type="text"
-            id="videoUrl"
-            placeholder="https://..."
-        >
+<textarea
+id="memory1Text"
+placeholder="Memory 01 text..."
+></textarea>
 
-    </div>
+</div>
 
 
-    <div class="form-group">
 
-        <label class="form-label">
-            VIDEO CAPTION
-        </label>
+<div class="memory-item">
 
-        <input
-            type="text"
-            id="videoCaption"
-            placeholder="Video caption..."
-        >
+<strong>
 
-    </div>
+MEMORY 02
 
+</strong>
 
-    <!-- FILM -->
+<input
+type="text"
+id="memory2Image"
+placeholder="Memory 02 image URL"
+>
 
-    <div class="form-section-label">
-        FILM ARCHIVE
-    </div>
+<textarea
+id="memory2Text"
+placeholder="Memory 02 text..."
+></textarea>
 
+</div>
 
-    <div class="film-form">
 
 
-        <div class="film-item">
+<div class="memory-item">
 
-            <strong>
-                FILM 01
-            </strong>
+<strong>
 
-            <input
-                type="text"
-                id="film1Image"
-                placeholder="Film 01 image URL"
-            >
+MEMORY 03
 
-            <input
-                type="text"
-                id="film1Title"
-                placeholder="Film 01 title"
-            >
+</strong>
 
-            <textarea
-                id="film1Text"
-                placeholder="Film 01 description..."
-            ></textarea>
+<input
+type="text"
+id="memory3Image"
+placeholder="Memory 03 image URL"
+>
 
-        </div>
+<textarea
+id="memory3Text"
+placeholder="Memory 03 text..."
+></textarea>
 
+</div>
 
-        <div class="film-item">
 
-            <strong>
-                FILM 02
-            </strong>
 
-            <input
-                type="text"
-                id="film2Image"
-                placeholder="Film 02 image URL"
-            >
+<div class="memory-item">
 
-            <input
-                type="text"
-                id="film2Title"
-                placeholder="Film 02 title"
-            >
+<strong>
 
-            <textarea
-                id="film2Text"
-                placeholder="Film 02 description..."
-            ></textarea>
+MEMORY 04
 
-        </div>
+</strong>
 
+<input
+type="text"
+id="memory4Image"
+placeholder="Memory 04 image URL"
+>
 
-        <div class="film-item">
+<textarea
+id="memory4Text"
+placeholder="Memory 04 text..."
+></textarea>
 
-            <strong>
-                FILM 03
-            </strong>
-
-            <input
-                type="text"
-                id="film3Image"
-                placeholder="Film 03 image URL"
-            >
-
-            <input
-                type="text"
-                id="film3Title"
-                placeholder="Film 03 title"
-            >
-
-            <textarea
-                id="film3Text"
-                placeholder="Film 03 description..."
-            ></textarea>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- TRAVEL -->
-
-    <div class="form-section-label">
-        TRAVEL
-    </div>
-
-
-    <div class="form-grid">
-
-
-        <div class="form-group">
-
-            <label class="form-label">
-                MONTH
-            </label>
-
-            <input
-                type="text"
-                id="travelMonth"
-                placeholder="JULY"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label class="form-label">
-                YEAR
-            </label>
-
-            <input
-                type="text"
-                id="travelYear"
-                placeholder="2026"
-            >
-
-        </div>
-
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label class="form-label">
-            LOCATION
-        </label>
-
-        <input
-            type="text"
-            id="travelLocation"
-            placeholder="Paris, France"
-        >
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label class="form-label">
-            TRAVEL TEXT
-        </label>
-
-        <textarea
-            id="travelText"
-            placeholder="Write travel description..."
-        ></textarea>
-
-    </div>
+</div>
 
 
 </div>
+
+
+
+<div class="form-section-label">
+
+VIDEO
+
+</div>
+
+
+
+<div class="form-group">
+
+<label class="form-label">
+
+VIDEO URL
+
+</label>
+
+<input
+type="text"
+id="videoUrl"
+placeholder="https://..."
+>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label class="form-label">
+
+VIDEO CAPTION
+
+</label>
+
+<input
+type="text"
+id="videoCaption"
+placeholder="Video caption..."
+>
+
+</div>
+
+
+
+<div class="form-section-label">
+
+FILM ARCHIVE
+
+</div>
+
+
+
+<div class="film-form">
+
+
+<div class="film-item">
+
+<strong>
+
+FILM 01
+
+</strong>
+
+<input
+type="text"
+id="film1Image"
+placeholder="Film 01 image URL"
+>
+
+<input
+type="text"
+id="film1Title"
+placeholder="Film 01 title"
+>
+
+<textarea
+id="film1Text"
+placeholder="Film 01 description..."
+></textarea>
+
+</div>
+
+
+
+<div class="film-item">
+
+<strong>
+
+FILM 02
+
+</strong>
+
+<input
+type="text"
+id="film2Image"
+placeholder="Film 02 image URL"
+>
+
+<input
+type="text"
+id="film2Title"
+placeholder="Film 02 title"
+>
+
+<textarea
+id="film2Text"
+placeholder="Film 02 description..."
+></textarea>
+
+</div>
+
+
+
+<div class="film-item">
+
+<strong>
+
+FILM 03
+
+</strong>
+
+<input
+type="text"
+id="film3Image"
+placeholder="Film 03 image URL"
+>
+
+<input
+type="text"
+id="film3Title"
+placeholder="Film 03 title"
+>
+
+<textarea
+id="film3Text"
+placeholder="Film 03 description..."
+></textarea>
+
+</div>
+
+
+</div>
+
+
+
+<div class="form-section-label">
+
+TRAVEL
+
+</div>
+
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label class="form-label">
+
+MONTH
+
+</label>
+
+<input
+type="text"
+id="travelMonth"
+placeholder="JULY"
+>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label class="form-label">
+
+YEAR
+
+</label>
+
+<input
+type="text"
+id="travelYear"
+placeholder="2026"
+>
+
+</div>
+
+
+</div>
+
+
+
+<div class="form-group">
+
+<label class="form-label">
+
+LOCATION
+
+</label>
+
+<input
+type="text"
+id="travelLocation"
+placeholder="Paris, France"
+>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label class="form-label">
+
+TRAVEL TEXT
+
+</label>
+
+<textarea
+id="travelText"
+placeholder="Write travel description..."
+></textarea>
+
+</div>
+
+
+</div>
+
+
 
 <div class="form-grid">
 
@@ -2546,8 +2656,8 @@ DATE
 </label>
 
 <input
-    type="date"
-    id="entryDate"
+type="date"
+id="entryDate"
 >
 
 </div>
@@ -2563,8 +2673,19 @@ STATUS
 </label>
 
 <select id="entryStatus">
-    <option value="Published">Published</option>
-    <option value="Draft">Draft</option>
+
+<option value="Published">
+
+Published
+
+</option>
+
+<option value="Draft">
+
+Draft
+
+</option>
+
 </select>
 
 </div>
@@ -2583,28 +2704,39 @@ IMAGE URL
 </label>
 
 <input
-    type="text"
-    id="entryImage"
-    placeholder="images/example.jpg"
+type="text"
+id="entryImage"
+placeholder="images/example.jpg"
 >
 
 </div>
 
+
+
 <div class="form-actions">
 
-<button
-    class="cancel"
-    onclick="closeModal()"
->
-    Cancel
-</button>
 
 <button
-    class="save"
-    onclick="saveEntry()"
+class="cancel"
+onclick="closeModal()"
 >
-    Save Entry
+
+Cancel
+
 </button>
+
+
+
+<button
+class="save"
+id="saveButton"
+onclick="saveEntry()"
+>
+
+Save Entry
+
+</button>
+
 
 </div>
 
@@ -2617,6 +2749,46 @@ IMAGE URL
 
 <script>
 
+/* ======================================
+   GLOBAL STATE
+====================================== */
+
+let allNews = [];
+
+let currentFilter = 'ALL';
+
+
+/* ======================================
+   OPEN NEW MODAL
+====================================== */
+
+function openNewModal(){
+
+    resetForm();
+
+    document
+    .getElementById('modalTitle')
+    .textContent =
+    'New Archive Entry';
+
+    document
+    .getElementById('saveButton')
+    .textContent =
+    'Save Entry';
+
+    document
+    .getElementById('editingEntryId')
+    .value =
+    '';
+
+    openModal();
+
+}
+
+
+/* ======================================
+   OPEN MODAL
+====================================== */
 
 function openModal(){
 
@@ -2628,6 +2800,10 @@ function openModal(){
 }
 
 
+/* ======================================
+   CLOSE MODAL
+====================================== */
+
 function closeModal(){
 
     document
@@ -2637,6 +2813,10 @@ function closeModal(){
 
 }
 
+
+/* ======================================
+   CLICK OUTSIDE MODAL
+====================================== */
 
 document
 .getElementById('entryModal')
@@ -2654,28 +2834,739 @@ document
 );
 
 
-/* FILTER */
+/* ======================================
+   FIREBASE LOAD NEWS
+====================================== */
 
-const filters =
-document.querySelectorAll('.filter');
+async function loadNews(){
+
+    if(!window.firebaseDB){
+
+        console.log(
+            'Firebase not ready. Retrying...'
+        );
+
+        setTimeout(
+            loadNews,
+            500
+        );
+
+        return;
+
+    }
 
 
-filters.forEach(filter => {
+    const newsList =
+        document
+        .getElementById('newsList');
 
-    filter.addEventListener(
-        'click',
-        function(){
 
-            filters.forEach(f =>
-                f.classList.remove('active')
+    newsList.innerHTML = `
+
+        <div class="loading-state">
+
+            LOADING ARCHIVE...
+
+        </div>
+
+    `;
+
+
+    try{
+
+        const snapshot =
+            await window.firebaseGetDocs(
+
+                window.firebaseCollection(
+
+                    window.firebaseDB,
+
+                    'news'
+
+                )
+
             );
 
-            this.classList.add('active');
+
+        allNews = [];
+
+
+        snapshot.forEach(
+
+            documentSnapshot => {
+
+                allNews.push({
+
+                    id:
+                        documentSnapshot.id,
+
+                    ...documentSnapshot.data()
+
+                });
+
+            }
+
+        );
+
+
+        /*
+            날짜 최신순 정렬
+        */
+
+        allNews.sort(
+
+            (a,b) => {
+
+                const dateA =
+                    a.date || '';
+
+                const dateB =
+                    b.date || '';
+
+                return dateB
+                    .localeCompare(dateA);
+
+            }
+
+        );
+
+
+        updateStats();
+
+        renderNews();
+
+
+        console.log(
+
+            'News loaded:',
+
+            allNews
+
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+
+            'Failed to load news:',
+
+            error
+
+        );
+
+
+        newsList.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-state-title">
+
+                    Unable to load archive
+
+                </div>
+
+                <div class="empty-state-text">
+
+                    Please check Firebase configuration and Firestore rules.
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ======================================
+   UPDATE DASHBOARD STATS
+====================================== */
+
+function updateStats(){
+
+    const total =
+        allNews.length;
+
+
+    const published =
+        allNews.filter(
+
+            item =>
+            item.status === 'Published'
+
+        ).length;
+
+
+    const drafts =
+        allNews.filter(
+
+            item =>
+            item.status === 'Draft'
+
+        ).length;
+
+
+    const now =
+        new Date();
+
+
+    const currentYear =
+        now.getFullYear();
+
+
+    const currentMonth =
+        String(
+
+            now.getMonth() + 1
+
+        ).padStart(
+
+            2,
+
+            '0'
+
+        );
+
+
+    const thisMonth =
+        allNews.filter(
+
+            item => {
+
+                if(!item.date){
+
+                    return false;
+
+                }
+
+
+                return (
+
+                    item.date.startsWith(
+
+                        `${currentYear}-${currentMonth}`
+
+                    )
+
+                );
+
+            }
+
+        ).length;
+
+
+
+    document
+    .getElementById('totalPosts')
+    .textContent =
+    total;
+
+
+    document
+    .getElementById('publishedPosts')
+    .textContent =
+    published;
+
+
+    document
+    .getElementById('draftPosts')
+    .textContent =
+    drafts;
+
+
+    document
+    .getElementById('thisMonthPosts')
+    .textContent =
+
+        String(
+
+            thisMonth
+
+        ).padStart(
+
+            2,
+
+            '0'
+
+        );
+
+}
+
+
+/* ======================================
+   RENDER NEWS
+====================================== */
+
+function renderNews(){
+
+    const newsList =
+        document
+        .getElementById('newsList');
+
+
+    let filteredNews =
+        [...allNews];
+
+
+    /*
+        FILTER
+    */
+
+    if(currentFilter !== 'ALL'){
+
+        if(
+
+            currentFilter ===
+            'Published'
+
+        ){
+
+            filteredNews =
+                filteredNews.filter(
+
+                    item =>
+                    item.status ===
+                    'Published'
+
+                );
 
         }
-    );
 
-});
+        else if(
+
+            currentFilter ===
+            'Draft'
+
+        ){
+
+            filteredNews =
+                filteredNews.filter(
+
+                    item =>
+                    item.status ===
+                    'Draft'
+
+                );
+
+        }
+
+        else{
+
+            filteredNews =
+                filteredNews.filter(
+
+                    item =>
+                    item.category ===
+                    currentFilter
+
+                );
+
+        }
+
+    }
+
+
+    /*
+        EMPTY
+    */
+
+    if(filteredNews.length === 0){
+
+        newsList.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-state-title">
+
+                    No archive entries
+
+                </div>
+
+                <div class="empty-state-text">
+
+                    No entries match the current filter.
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /*
+        RENDER
+    */
+
+    newsList.innerHTML =
+
+        filteredNews
+        .map(
+
+            item => {
+
+                const image =
+                    item.image ||
+
+                    item.content
+                    ?.hero
+                    ?.image ||
+
+                    '';
+
+
+                const imageHTML =
+                    image
+
+                    ?
+
+                    `
+
+                    <img
+
+                        class="thumb"
+
+                        src="${escapeHTML(image)}"
+
+                        alt=""
+
+                        onerror="this.style.display='none'"
+
+                    >
+
+                    `
+
+                    :
+
+                    `
+
+                    <div class="thumb"></div>
+
+                    `;
+
+
+
+                const statusClass =
+
+                    item.status ===
+                    'Published'
+
+                    ?
+
+                    'status-published'
+
+                    :
+
+                    'status-draft';
+
+
+
+                return `
+
+                <div class="news-row">
+
+                    <div>
+
+                        ${imageHTML}
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="news-title">
+
+                            ${escapeHTML(
+
+                                item.title ||
+                                'Untitled'
+
+                            )}
+
+                        </div>
+
+                        <div class="news-meta">
+
+                            ${formatDate(
+
+                                item.date
+
+                            )}
+
+                            ·
+
+                            ${escapeHTML(
+
+                                item.category ||
+                                'Archive'
+
+                            )}
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="tag">
+
+                            ${escapeHTML(
+
+                                item.category ||
+                                'OTHER'
+
+                            ).toUpperCase()}
+
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="design-tag">
+
+                            ${escapeHTML(
+
+                                item.design ||
+                                'DEFAULT'
+
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="${statusClass}">
+
+                            ${escapeHTML(
+
+                                item.status ||
+                                'Draft'
+
+                            ).toUpperCase()}
+
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="actions">
+
+                            <span
+
+                                class="action"
+
+                                onclick="editEntry('${item.id}')"
+
+                            >
+
+                                EDIT
+
+                            </span>
+
+
+                            <span
+
+                                class="action delete"
+
+                                onclick="deleteEntry('${item.id}')"
+
+                            >
+
+                                DELETE
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+
+        )
+
+        .join('');
+
+}
+
+
+/* ======================================
+   FORMAT DATE
+====================================== */
+
+function formatDate(date){
+
+    if(!date){
+
+        return 'No date';
+
+    }
+
+
+    const parts =
+        date.split('-');
+
+
+    if(parts.length !== 3){
+
+        return date;
+
+    }
+
+
+    return `${
+
+        parts[0]
+
+    }.${
+
+        parts[1]
+
+    }.${
+
+        parts[2]
+
+    }`;
+
+}
+
+
+/* ======================================
+   ESCAPE HTML
+====================================== */
+
+function escapeHTML(value){
+
+    if(value === null ||
+       value === undefined){
+
+        return '';
+
+    }
+
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            '&amp;'
+        )
+
+        .replace(
+            /</g,
+            '&lt;'
+        )
+
+        .replace(
+            />/g,
+            '&gt;'
+        )
+
+        .replace(
+            /"/g,
+            '&quot;'
+        )
+
+        .replace(
+            /'/g,
+            '&#039;'
+        );
+
+}
+
+
+/* ======================================
+   FILTER BUTTONS
+====================================== */
+
+document
+.querySelectorAll('.filter')
+.forEach(
+
+    filter => {
+
+        filter.addEventListener(
+
+            'click',
+
+            function(){
+
+                document
+                .querySelectorAll('.filter')
+                .forEach(
+
+                    button => {
+
+                        button
+                        .classList
+                        .remove(
+                            'active'
+                        );
+
+                    }
+
+                );
+
+
+                this
+                .classList
+                .add(
+                    'active'
+                );
+
+
+                currentFilter =
+                    this.dataset.filter;
+
+
+                renderNews();
+
+            }
+
+        );
+
+    }
+
+);
+
+
+/* ======================================
+   SELECT DESIGN CARD
+====================================== */
+
+function selectDesign(design){
+
+    document
+    .getElementById('entryDesign')
+    .value =
+    design;
+
+
+    handleDesignChange();
+
+    openNewModal();
+
+}
+
 
 /* ======================================
    DESIGN CHANGE
@@ -2694,16 +3585,15 @@ function handleDesignChange(){
         .getElementById('filmArchiveFields');
 
 
-    /* Hide Film Archive fields */
-
     filmArchiveFields.style.display =
         'none';
 
 
-    /* Show Film Archive fields */
-
     if(
-        design === 'FilmArchiveDesign'
+
+        design ===
+        'FilmArchiveDesign'
+
     ){
 
         filmArchiveFields.style.display =
@@ -2711,17 +3601,677 @@ function handleDesignChange(){
 
     }
 
-}     
+}
+
 
 /* ======================================
-   SAVE NEW ENTRY TO FIREBASE
+   EDIT ENTRY
+====================================== */
+
+async function editEntry(id){
+
+    const entry =
+        allNews.find(
+
+            item =>
+            item.id === id
+
+        );
+
+
+    if(!entry){
+
+        alert(
+            'Entry not found.'
+        );
+
+        return;
+
+    }
+
+
+    resetForm();
+
+
+    document
+    .getElementById('editingEntryId')
+    .value =
+    id;
+
+
+    document
+    .getElementById('modalTitle')
+    .textContent =
+    'Edit Archive Entry';
+
+
+    document
+    .getElementById('saveButton')
+    .textContent =
+    'Update Entry';
+
+
+
+    /*
+        BASIC DATA
+    */
+
+    document
+    .getElementById('entryTitle')
+    .value =
+    entry.title || '';
+
+
+    document
+    .getElementById('entryCategory')
+    .value =
+    entry.category || 'Research';
+
+
+    document
+    .getElementById('entryDesign')
+    .value =
+    entry.design || 'FilmArchiveDesign';
+
+
+    document
+    .getElementById('entryDescription')
+    .value =
+    entry.description || '';
+
+
+    document
+    .getElementById('entryDate')
+    .value =
+    entry.date || '';
+
+
+    document
+    .getElementById('entryStatus')
+    .value =
+    entry.status || 'Draft';
+
+
+    document
+    .getElementById('entryImage')
+    .value =
+    entry.image || '';
+
+
+
+    /*
+        DESIGN CONTENT
+    */
+
+    if(
+
+        entry.design ===
+        'FilmArchiveDesign'
+
+    ){
+
+        fillFilmArchiveForm(
+
+            entry.content || {}
+
+        );
+
+    }
+
+
+    handleDesignChange();
+
+    openModal();
+
+}
+
+
+/* ======================================
+   FILL FILM ARCHIVE FORM
+====================================== */
+
+function fillFilmArchiveForm(content){
+
+    const hero =
+        content.hero || {};
+
+
+    const intro =
+        content.intro || {};
+
+
+    const memories =
+        content.memories || [];
+
+
+    const video =
+        content.video || {};
+
+
+    const films =
+        content.films || [];
+
+
+    const travel =
+        content.travel || {};
+
+
+
+    document
+    .getElementById('heroTitleTop')
+    .value =
+    hero.titleTop || '';
+
+
+    document
+    .getElementById('heroTitleBottom1')
+    .value =
+    hero.titleBottom1 || '';
+
+
+    document
+    .getElementById('heroTitleBottom2')
+    .value =
+    hero.titleBottom2 || '';
+
+
+    document
+    .getElementById('heroImage')
+    .value =
+    hero.image || '';
+
+
+
+    document
+    .getElementById('introText')
+    .value =
+    intro.text || '';
+
+
+
+    for(
+
+        let i = 1;
+
+        i <= 4;
+
+        i++
+
+    ){
+
+        const memory =
+            memories[i - 1] || {};
+
+
+        document
+        .getElementById(
+            `memory${i}Image`
+        )
+        .value =
+        memory.image || '';
+
+
+        document
+        .getElementById(
+            `memory${i}Text`
+        )
+        .value =
+        memory.text || '';
+
+    }
+
+
+
+    document
+    .getElementById('videoUrl')
+    .value =
+    video.url || '';
+
+
+    document
+    .getElementById('videoCaption')
+    .value =
+    video.caption || '';
+
+
+
+    for(
+
+        let i = 1;
+
+        i <= 3;
+
+        i++
+
+    ){
+
+        const film =
+            films[i - 1] || {};
+
+
+        document
+        .getElementById(
+            `film${i}Image`
+        )
+        .value =
+        film.image || '';
+
+
+        document
+        .getElementById(
+            `film${i}Title`
+        )
+        .value =
+        film.title || '';
+
+
+        document
+        .getElementById(
+            `film${i}Text`
+        )
+        .value =
+        film.text || '';
+
+    }
+
+
+
+    document
+    .getElementById('travelMonth')
+    .value =
+    travel.month || '';
+
+
+    document
+    .getElementById('travelYear')
+    .value =
+    travel.year || '';
+
+
+    document
+    .getElementById('travelLocation')
+    .value =
+    travel.location || '';
+
+
+    document
+    .getElementById('travelText')
+    .value =
+    travel.text || '';
+
+}
+
+
+/* ======================================
+   COLLECT DESIGN CONTENT
+====================================== */
+
+function collectDesignContent(){
+
+    const design =
+        document
+        .getElementById('entryDesign')
+        .value;
+
+
+    let designContent = {};
+
+
+    if(
+
+        design ===
+        'FilmArchiveDesign'
+
+    ){
+
+        designContent = {
+
+            hero: {
+
+                titleTop:
+
+                    document
+                    .getElementById(
+                        'heroTitleTop'
+                    )
+                    .value
+                    .trim(),
+
+
+                titleBottom1:
+
+                    document
+                    .getElementById(
+                        'heroTitleBottom1'
+                    )
+                    .value
+                    .trim(),
+
+
+                titleBottom2:
+
+                    document
+                    .getElementById(
+                        'heroTitleBottom2'
+                    )
+                    .value
+                    .trim(),
+
+
+                image:
+
+                    document
+                    .getElementById(
+                        'heroImage'
+                    )
+                    .value
+                    .trim()
+
+            },
+
+
+            intro: {
+
+                text:
+
+                    document
+                    .getElementById(
+                        'introText'
+                    )
+                    .value
+                    .trim()
+
+            },
+
+
+            memories: [
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'memory1Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'memory1Text'
+                        )
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'memory2Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'memory2Text'
+                        )
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'memory3Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'memory3Text'
+                        )
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'memory4Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'memory4Text'
+                        )
+                        .value
+                        .trim()
+
+                }
+
+            ],
+
+
+            video: {
+
+                url:
+
+                    document
+                    .getElementById(
+                        'videoUrl'
+                    )
+                    .value
+                    .trim(),
+
+
+                caption:
+
+                    document
+                    .getElementById(
+                        'videoCaption'
+                    )
+                    .value
+                    .trim()
+
+            },
+
+
+            films: [
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'film1Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    title:
+
+                        document
+                        .getElementById(
+                            'film1Title'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'film1Text'
+                        )
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'film2Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    title:
+
+                        document
+                        .getElementById(
+                            'film2Title'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'film2Text'
+                        )
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+
+                        document
+                        .getElementById(
+                            'film3Image'
+                        )
+                        .value
+                        .trim(),
+
+
+                    title:
+
+                        document
+                        .getElementById(
+                            'film3Title'
+                        )
+                        .value
+                        .trim(),
+
+
+                    text:
+
+                        document
+                        .getElementById(
+                            'film3Text'
+                        )
+                        .value
+                        .trim()
+
+                }
+
+            ],
+
+
+            travel: {
+
+                month:
+
+                    document
+                    .getElementById(
+                        'travelMonth'
+                    )
+                    .value
+                    .trim(),
+
+
+                year:
+
+                    document
+                    .getElementById(
+                        'travelYear'
+                    )
+                    .value
+                    .trim(),
+
+
+                location:
+
+                    document
+                    .getElementById(
+                        'travelLocation'
+                    )
+                    .value
+                    .trim(),
+
+
+                text:
+
+                    document
+                    .getElementById(
+                        'travelText'
+                    )
+                    .value
+                    .trim()
+
+            }
+
+        };
+
+    }
+
+
+    return designContent;
+
+}
+
+
+/* ======================================
+   SAVE / UPDATE ENTRY
 ====================================== */
 
 async function saveEntry(){
-
-    /* ==============================
-       BASIC INFORMATION
-    ============================== */
 
     const title =
         document
@@ -2768,10 +4318,12 @@ async function saveEntry(){
         .trim();
 
 
+    const editingId =
+        document
+        .getElementById('editingEntryId')
+        .value;
 
-    /* ==============================
-       REQUIRED TITLE CHECK
-    ============================== */
+
 
     if(!title){
 
@@ -2784,19 +4336,10 @@ async function saveEntry(){
     }
 
 
-
-    /* ==============================
-       FIREBASE CHECK
-    ============================== */
-
     if(!window.firebaseDB){
 
         alert(
             'Firebase is not connected.'
-        );
-
-        console.error(
-            'Firebase DB is not available.'
         );
 
         return;
@@ -2805,344 +4348,72 @@ async function saveEntry(){
 
 
 
-    /* ==============================
-       DESIGN SPECIFIC CONTENT
-    ============================== */
+    const designContent =
+        collectDesignContent();
 
-    let designContent = {};
 
 
+    const entryData = {
 
-    /* ======================================
-       FILM ARCHIVE DESIGN
-    ====================================== */
+        title:
+            title,
 
-    if(
-        design === 'FilmArchiveDesign'
-    ){
+        category:
+            category,
 
-        designContent = {
+        design:
+            design,
 
-            /* ==============================
-               HERO
-            ============================== */
+        description:
+            description,
 
-            hero: {
+        date:
+            date,
 
-                titleTop:
-                    document
-                    .getElementById('heroTitleTop')
-                    .value
-                    .trim(),
+        status:
+            status,
 
-                titleBottom1:
-                    document
-                    .getElementById('heroTitleBottom1')
-                    .value
-                    .trim(),
+        image:
+            image,
 
-                titleBottom2:
-                    document
-                    .getElementById('heroTitleBottom2')
-                    .value
-                    .trim(),
+        content:
+            designContent
 
-                image:
-                    document
-                    .getElementById('heroImage')
-                    .value
-                    .trim()
+    };
 
-            },
 
-
-            /* ==============================
-               INTRODUCTION
-            ============================== */
-
-            intro: {
-
-                text:
-                    document
-                    .getElementById('introText')
-                    .value
-                    .trim()
-
-            },
-
-
-            /* ==============================
-               MEMORIES
-            ============================== */
-
-            memories: [
-
-                {
-
-                    image:
-                        document
-                        .getElementById('memory1Image')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('memory1Text')
-                        .value
-                        .trim()
-
-                },
-
-
-                {
-
-                    image:
-                        document
-                        .getElementById('memory2Image')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('memory2Text')
-                        .value
-                        .trim()
-
-                },
-
-
-                {
-
-                    image:
-                        document
-                        .getElementById('memory3Image')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('memory3Text')
-                        .value
-                        .trim()
-
-                },
-
-
-                {
-
-                    image:
-                        document
-                        .getElementById('memory4Image')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('memory4Text')
-                        .value
-                        .trim()
-
-                }
-
-            ],
-
-
-
-            /* ==============================
-               VIDEO
-            ============================== */
-
-            video: {
-
-                url:
-                    document
-                    .getElementById('videoUrl')
-                    .value
-                    .trim(),
-
-                caption:
-                    document
-                    .getElementById('videoCaption')
-                    .value
-                    .trim()
-
-            },
-
-
-
-            /* ==============================
-               FILM ARCHIVE
-            ============================== */
-
-            films: [
-
-                {
-
-                    image:
-                        document
-                        .getElementById('film1Image')
-                        .value
-                        .trim(),
-
-                    title:
-                        document
-                        .getElementById('film1Title')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('film1Text')
-                        .value
-                        .trim()
-
-                },
-
-
-                {
-
-                    image:
-                        document
-                        .getElementById('film2Image')
-                        .value
-                        .trim(),
-
-                    title:
-                        document
-                        .getElementById('film2Title')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('film2Text')
-                        .value
-                        .trim()
-
-                },
-
-
-                {
-
-                    image:
-                        document
-                        .getElementById('film3Image')
-                        .value
-                        .trim(),
-
-                    title:
-                        document
-                        .getElementById('film3Title')
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById('film3Text')
-                        .value
-                        .trim()
-
-                }
-
-            ],
-
-
-
-            /* ==============================
-               TRAVEL
-            ============================== */
-
-            travel: {
-
-                month:
-                    document
-                    .getElementById('travelMonth')
-                    .value
-                    .trim(),
-
-                year:
-                    document
-                    .getElementById('travelYear')
-                    .value
-                    .trim(),
-
-                location:
-                    document
-                    .getElementById('travelLocation')
-                    .value
-                    .trim(),
-
-                text:
-                    document
-                    .getElementById('travelText')
-                    .value
-                    .trim()
-
-            }
-
-        };
-
-    }
-
-
-
-    /* ==============================
-       SAVE TO FIRESTORE
-    ============================== */
 
     try{
 
-        const docRef =
-            await window.firebaseAddDoc(
 
-                window.firebaseCollection(
+        /*
+            EDIT
+        */
+
+        if(editingId){
+
+            const entryRef =
+                window.firebaseDoc(
+
                     window.firebaseDB,
-                    'news'
-                ),
+
+                    'news',
+
+                    editingId
+
+                );
+
+
+            await window.firebaseUpdateDoc(
+
+                entryRef,
 
                 {
 
-                    /* ==============================
-                       BASIC NEWS DATA
-                    ============================== */
+                    ...entryData,
 
-                    title:
-                        title,
+                    updatedAt:
 
-                    category:
-                        category,
-
-                    design:
-                        design,
-
-                    description:
-                        description,
-
-                    date:
-                        date,
-
-                    status:
-                        status,
-
-                    image:
-                        image,
-
-
-
-                    /* ==============================
-                       DESIGN SPECIFIC CONTENT
-                    ============================== */
-
-                    content:
-                        designContent,
-
-
-
-                    /* ==============================
-                       TIMESTAMP
-                    ============================== */
-
-                    createdAt:
                         window.firebaseServerTimestamp()
 
                 }
@@ -3150,228 +4421,59 @@ async function saveEntry(){
             );
 
 
+            alert(
 
-        /* ==============================
-           SUCCESS
-        ============================== */
+                'Entry updated successfully!'
 
-        console.log(
-            'Entry saved successfully:',
-            docRef.id
-        );
+            );
+
+        }
 
 
-        console.log(
-            'Saved data:',
-            {
+        /*
+            NEW
+        */
 
-                title,
-                category,
-                design,
-                description,
-                date,
-                status,
-                image,
-                content: designContent
+        else{
 
-            }
-        );
+            await window.firebaseAddDoc(
+
+                window.firebaseCollection(
+
+                    window.firebaseDB,
+
+                    'news'
+
+                ),
+
+                {
+
+                    ...entryData,
+
+                    createdAt:
+
+                        window.firebaseServerTimestamp()
+
+                }
+
+            );
 
 
-        alert(
-            'Entry saved successfully!'
-        );
+            alert(
+
+                'Entry saved successfully!'
+
+            );
+
+        }
 
 
-
-        /* ==============================
-           CLOSE MODAL
-        ============================== */
 
         closeModal();
 
+        resetForm();
 
-
-        /* ==============================
-           RESET BASIC FORM
-        ============================== */
-
-        document
-        .getElementById('entryTitle')
-        .value = '';
-
-
-        document
-        .getElementById('entryDescription')
-        .value = '';
-
-
-        document
-        .getElementById('entryDate')
-        .value = '';
-
-
-        document
-        .getElementById('entryImage')
-        .value = '';
-
-
-        document
-        .getElementById('entryCategory')
-        .value = 'Research';
-
-
-        document
-        .getElementById('entryDesign')
-        .value = 'FilmArchiveDesign';
-
-
-        document
-        .getElementById('entryStatus')
-        .value = 'Published';
-
-
-
-        /* ==============================
-           RESET FILM ARCHIVE FORM
-        ============================== */
-
-        document
-        .getElementById('heroTitleTop')
-        .value = '';
-
-
-        document
-        .getElementById('heroTitleBottom1')
-        .value = '';
-
-
-        document
-        .getElementById('heroTitleBottom2')
-        .value = '';
-
-
-        document
-        .getElementById('heroImage')
-        .value = '';
-
-
-        document
-        .getElementById('introText')
-        .value = '';
-
-
-
-        /* ==============================
-           RESET MEMORIES
-        ============================== */
-
-        for(
-            let i = 1;
-            i <= 4;
-            i++
-        ){
-
-            document
-            .getElementById(
-                `memory${i}Image`
-            )
-            .value = '';
-
-
-            document
-            .getElementById(
-                `memory${i}Text`
-            )
-            .value = '';
-
-        }
-
-
-
-        /* ==============================
-           RESET VIDEO
-        ============================== */
-
-        document
-        .getElementById('videoUrl')
-        .value = '';
-
-
-        document
-        .getElementById('videoCaption')
-        .value = '';
-
-
-
-        /* ==============================
-           RESET FILMS
-        ============================== */
-
-        for(
-            let i = 1;
-            i <= 3;
-            i++
-        ){
-
-            document
-            .getElementById(
-                `film${i}Image`
-            )
-            .value = '';
-
-
-            document
-            .getElementById(
-                `film${i}Title`
-            )
-            .value = '';
-
-
-            document
-            .getElementById(
-                `film${i}Text`
-            )
-            .value = '';
-
-        }
-
-
-
-        /* ==============================
-           RESET TRAVEL
-        ============================== */
-
-        document
-        .getElementById('travelMonth')
-        .value = '';
-
-
-        document
-        .getElementById('travelYear')
-        .value = '';
-
-
-        document
-        .getElementById('travelLocation')
-        .value = '';
-
-
-        document
-        .getElementById('travelText')
-        .value = '';
-
-
-
-        /* ==============================
-           RESET DESIGN FIELD VISIBILITY
-        ============================== */
-
-        document
-        .getElementById('filmArchiveFields')
-        .style
-        .display = 'none';
-
+        await loadNews();
 
 
     }
@@ -3379,18 +4481,328 @@ async function saveEntry(){
     catch(error){
 
         console.error(
+
             'Firebase save error:',
+
             error
+
         );
 
 
         alert(
+
             'Failed to save entry. Please check the browser console.'
+
         );
 
     }
 
 }
+
+
+/* ======================================
+   DELETE ENTRY
+====================================== */
+
+async function deleteEntry(id){
+
+    const entry =
+        allNews.find(
+
+            item =>
+            item.id === id
+
+        );
+
+
+    if(!entry){
+
+        alert(
+            'Entry not found.'
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            `Delete "${entry.title}"?`
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    try{
+
+        const entryRef =
+            window.firebaseDoc(
+
+                window.firebaseDB,
+
+                'news',
+
+                id
+
+            );
+
+
+        await window.firebaseDeleteDoc(
+
+            entryRef
+
+        );
+
+
+        alert(
+
+            'Entry deleted successfully!'
+
+        );
+
+
+        await loadNews();
+
+    }
+
+    catch(error){
+
+        console.error(
+
+            'Delete error:',
+
+            error
+
+        );
+
+
+        alert(
+
+            'Failed to delete entry.'
+
+        );
+
+    }
+
+}
+
+
+/* ======================================
+   RESET FORM
+====================================== */
+
+function resetForm(){
+
+    document
+    .getElementById('editingEntryId')
+    .value =
+    '';
+
+
+    document
+    .getElementById('entryTitle')
+    .value =
+    '';
+
+
+    document
+    .getElementById('entryDescription')
+    .value =
+    '';
+
+
+    document
+    .getElementById('entryDate')
+    .value =
+    '';
+
+
+    document
+    .getElementById('entryImage')
+    .value =
+    '';
+
+
+    document
+    .getElementById('entryCategory')
+    .value =
+    'Research';
+
+
+    document
+    .getElementById('entryDesign')
+    .value =
+    'FilmArchiveDesign';
+
+
+    document
+    .getElementById('entryStatus')
+    .value =
+    'Published';
+
+
+
+    /*
+        Film Archive
+    */
+
+    document
+    .getElementById('heroTitleTop')
+    .value =
+    '';
+
+
+    document
+    .getElementById('heroTitleBottom1')
+    .value =
+    '';
+
+
+    document
+    .getElementById('heroTitleBottom2')
+    .value =
+    '';
+
+
+    document
+    .getElementById('heroImage')
+    .value =
+    '';
+
+
+    document
+    .getElementById('introText')
+    .value =
+    '';
+
+
+
+    for(
+
+        let i = 1;
+
+        i <= 4;
+
+        i++
+
+    ){
+
+        document
+        .getElementById(
+            `memory${i}Image`
+        )
+        .value =
+        '';
+
+
+        document
+        .getElementById(
+            `memory${i}Text`
+        )
+        .value =
+        '';
+
+    }
+
+
+
+    document
+    .getElementById('videoUrl')
+    .value =
+    '';
+
+
+    document
+    .getElementById('videoCaption')
+    .value =
+    '';
+
+
+
+    for(
+
+        let i = 1;
+
+        i <= 3;
+
+        i++
+
+    ){
+
+        document
+        .getElementById(
+            `film${i}Image`
+        )
+        .value =
+        '';
+
+
+        document
+        .getElementById(
+            `film${i}Title`
+        )
+        .value =
+        '';
+
+
+        document
+        .getElementById(
+            `film${i}Text`
+        )
+        .value =
+        '';
+
+    }
+
+
+
+    document
+    .getElementById('travelMonth')
+    .value =
+    '';
+
+
+    document
+    .getElementById('travelYear')
+    .value =
+    '';
+
+
+    document
+    .getElementById('travelLocation')
+    .value =
+    '';
+
+
+    document
+    .getElementById('travelText')
+    .value =
+    '';
+
+
+
+    document
+    .getElementById('filmArchiveFields')
+    .style
+    .display =
+    'none';
+
+}
+
+
+/* ======================================
+   INITIAL DESIGN STATE
+====================================== */
+
+handleDesignChange();
 
 
 </script>
@@ -3399,3 +4811,4 @@ async function saveEntry(){
 </body>
 
 </html>
+
