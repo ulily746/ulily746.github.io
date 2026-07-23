@@ -238,61 +238,133 @@ ARCH SVG TEXT FLOW
     paint-order:stroke;
 }
 /* =====================================
-   CATEGORY NAVIGATION
+   CATEGORY NAV
 ===================================== */
 
 .category-nav{
+    position:relative;
+
     width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:28px 8%;
-    border-top:1px solid #D8D0C4;
-    border-bottom:1px solid #D8D0C4;
+
+    padding:28px 7vw;
+
+    border-top:1px solid #D9D3C8;
+    border-bottom:1px solid #D9D3C8;
+
+    background:#F7F4EC;
 }
+
+
+/* CATEGORY LINKS */
 
 .category-links{
     display:flex;
+
+    justify-content:center;
     align-items:center;
-    gap:45px;
+
+    gap:50px;
 }
+
 
 .category-links a{
+    position:relative;
+
+    font-family:'Inter', sans-serif;
+
+    font-size:10px;
+    font-weight:500;
+
+    letter-spacing:.15em;
+    text-transform:uppercase;
+
+    color:#686A64;
+
     text-decoration:none;
-    color:#5F625D;
-    font-family:'Inter',sans-serif;
-    font-size:11px;
-    font-weight:400;
-    letter-spacing:.08em;
-    transition:.3s ease;
+
+    transition:.3s;
 }
+
+
+.category-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-8px;
+
+    width:0;
+    height:1px;
+
+    background:#8B6B4F;
+
+    transform:translateX(-50%);
+
+    transition:.3s;
+
+}
+
 
 .category-links a:hover{
-    color:#9B765D;
+    color:#8B6B4F;
 }
 
 
-/* =====================================
-   ADD NEWS ADMIN BUTTON
-===================================== */
+.category-links a:hover::after{
+    width:100%;
+}
+
+
+/* ADD NEWS */
+
+.news-admin-link{
+
+    position:absolute;
+
+    right:7vw;
+    top:50%;
+
+    transform:translateY(-50%);
+}
+
 
 .news-admin-link a{
-    display:inline-block;
-    padding:9px 17px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:10px 17px;
+
     border:1px solid #B9AA95;
-    color:#7D6D5E;
-    background:transparent;
-    text-decoration:none;
-    font-family:'Inter',sans-serif;
+
+    font-family:'Inter', sans-serif;
+
     font-size:9px;
+
+    font-weight:500;
+
     letter-spacing:.15em;
-    transition:.3s ease;
+
+    color:#71695F;
+
+    text-decoration:none;
+
+    transition:.3s;
+
 }
 
+
 .news-admin-link a:hover{
-    background:#7D6D5E;
-    color:#FFFFFF;
-    border-color:#7D6D5E;
+
+    background:#8B6B4F;
+
+    border-color:#8B6B4F;
+
+    color:#fff;
+
 }
 
 /* =====================================
