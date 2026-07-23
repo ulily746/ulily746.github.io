@@ -237,6 +237,7 @@ ARCH SVG TEXT FLOW
     stroke-width:6px;
     paint-order:stroke;
 }
+
 /* =====================================
    CATEGORY NAV
 ===================================== */
@@ -244,9 +245,18 @@ ARCH SVG TEXT FLOW
 .category-nav{
     position:relative;
 
+
     width:100%;
 
-    padding:28px 7vw;
+    min-height:70px;
+
+    padding:0 7vw;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     border-top:1px solid #D9D3C8;
     border-bottom:1px solid #D9D3C8;
@@ -255,27 +265,44 @@ ARCH SVG TEXT FLOW
 }
 
 
-/* CATEGORY LINKS */
+/* =====================================
+   CATEGORY LINKS
+===================================== */
 
 .category-links{
+
     display:flex;
 
+    flex-direction:row;
+
+    flex-wrap:nowrap;
+
     justify-content:center;
+
     align-items:center;
 
     gap:50px;
+
+    white-space:nowrap;
 }
 
 
 .category-links a{
+
     position:relative;
+
+    display:inline-block;
+
+    flex-shrink:0;
 
     font-family:'Inter', sans-serif;
 
     font-size:10px;
+
     font-weight:500;
 
     letter-spacing:.15em;
+
     text-transform:uppercase;
 
     color:#686A64;
@@ -283,6 +310,7 @@ ARCH SVG TEXT FLOW
     text-decoration:none;
 
     transition:.3s;
+
 }
 
 
@@ -293,9 +321,11 @@ ARCH SVG TEXT FLOW
     position:absolute;
 
     left:50%;
+
     bottom:-8px;
 
     width:0;
+
     height:1px;
 
     background:#8B6B4F;
@@ -308,25 +338,33 @@ ARCH SVG TEXT FLOW
 
 
 .category-links a:hover{
+
     color:#8B6B4F;
+
 }
 
 
 .category-links a:hover::after{
+
     width:100%;
+
 }
 
 
-/* ADD NEWS */
+/* =====================================
+   ADD NEWS
+===================================== */
 
 .news-admin-link{
 
     position:absolute;
 
     right:7vw;
+
     top:50%;
 
     transform:translateY(-50%);
+
 }
 
 
@@ -336,9 +374,13 @@ ARCH SVG TEXT FLOW
 
     align-items:center;
 
+    justify-content:center;
+
     padding:10px 17px;
 
     border:1px solid #B9AA95;
+
+    background:transparent;
 
     font-family:'Inter', sans-serif;
 
@@ -351,6 +393,8 @@ ARCH SVG TEXT FLOW
     color:#71695F;
 
     text-decoration:none;
+
+    white-space:nowrap;
 
     transition:.3s;
 
@@ -366,6 +410,72 @@ ARCH SVG TEXT FLOW
     color:#fff;
 
 }
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media(max-width:800px){
+
+    .category-nav{
+
+        padding:20px 30px;
+
+        min-height:auto;
+
+    }
+
+
+    .category-links{
+
+        gap:25px;
+
+    }
+
+
+    .news-admin-link{
+
+        right:30px;
+
+    }
+
+
+}
+
+
+@media(max-width:600px){
+
+    .category-nav{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        padding:25px 20px;
+
+    }
+
+
+    .category-links{
+
+        flex-wrap:wrap;
+
+        gap:20px 25px;
+
+    }
+
+
+    .news-admin-link{
+
+        position:static;
+
+        transform:none;
+
+    }
+
+}
+
 
 /* =====================================
 COMMON TITLE
@@ -1330,51 +1440,4 @@ RESPONSIVE
     .section-title h2, .travel-header h2, .life-header h2{ font-size:50px; }
     .academic-grid{ grid-template-columns:1fr; }
 }
-/* =====================================
-ADD NEWS BUTTON
-===================================== */
 
-.news-admin-link{
-    width:100%;
-    height:70px;
-
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-
-    padding:0 8%;
-
-    background:#F2F2DF;
-
-    position:relative;
-    z-index:100;
-}
-
-.news-admin-link a{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:11px 22px;
-
-    border:1px solid #8B6B4F;
-
-    background:#F2F2DF;
-
-    color:#8B6B4F;
-
-    font-size:11px;
-    font-weight:500;
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    transition:all .3s ease;
-
-    cursor:pointer;
-}
-
-.news-admin-link a:hover{
-    background:#8B6B4F;
-    color:#FFFFFF;
-}
