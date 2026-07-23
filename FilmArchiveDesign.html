@@ -25,6 +25,34 @@ crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Manrope:wght@300;400;500&display=swap"
 rel="stylesheet">
 
+ <!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import {
+        getFirestore,
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "여기에_기존_API_KEY",
+        authDomain: "여기에_기존_AUTH_DOMAIN",
+        projectId: "여기에_기존_PROJECT_ID",
+        storageBucket: "여기에_기존_STORAGE_BUCKET",
+        messagingSenderId: "여기에_기존_MESSAGING_SENDER_ID",
+        appId: "여기에_기존_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.firebaseDB = db;
+    window.firebaseDoc = doc;
+    window.firebaseGetDoc = getDoc;
+</script>
 
 <style>
 
@@ -2234,7 +2262,7 @@ body{
     }
 
 
-    .memory-heading{
+    .memory-ing{
 
         margin-bottom:60px;
 
@@ -2769,16 +2797,16 @@ body{
 
         <div class="hero-top">
 
-            <h1>CHILDHOOD</h1>
-
+            <h1 id="heroTitleTop">CHILDHOOD</h1>
         </div>
 
 
         <div class="hero-image">
 
-            <img
-            src="images/hero.jpg"
-            alt="Childhood countryside">
+           <img
+           id="heroImage"
+           src="images/hero.jpg"
+           alt="Childhood countryside">
 
         </div>
 
@@ -2787,9 +2815,9 @@ body{
 
             <div class="hero-title">
 
-                <h2>IN THE</h2>
+                <h2 id="heroTitleBottom1">IN THE</h2>
 
-                <h2>COUNTRYSIDE</h2>
+                <h2 id="heroTitleBottom2">COUNTRYSIDE</h2>
 
             </div>
 
@@ -2833,11 +2861,11 @@ body{
 
         <div class="intro-text">
 
-            <p>
-                The countryside always smelled like warm grass,
-                fresh bread,
-                and quiet summer afternoons.
-            </p>
+            <p id="introText">
+    The countryside always smelled like warm grass,
+    fresh bread,
+    and quiet summer afternoons.
+           </p>
 
         </div>
 
@@ -2894,6 +2922,7 @@ body{
             <div class="memory-photo">
 
                 <img
+                id="memory1Image"
                 src="images/photo1.jpg"
                 alt="Memory 1">
 
@@ -2902,14 +2931,15 @@ body{
 
             <div class="memory-note">
 
-                <small>MEMORY 01</small>
+              <small>MEMORY 01</small>
 
-                Every morning
-                smelled like
-                fresh grass.
+             <span id="memory1Text">
+               Every morning
+               smelled like
+              fresh grass.
+              </span>
 
             </div>
-
         </div>
 
 
@@ -2942,9 +2972,11 @@ viewBox="0 0 310 190">
 
                 <small>MEMORY 02</small>
 
-                Linen dancing
-                softly
+                <span id="memory2Text">
+                 Linen dancing
+                 softly
                 in the wind.
+          </span>
 
             </div>
 
@@ -2952,8 +2984,9 @@ viewBox="0 0 310 190">
             <div class="memory-photo">
 
                 <img
-                src="images/photo2.jpg"
-                alt="Memory 2">
+               id="memory2Image"
+              src="images/photo2.jpg"
+              alt="Memory 2">
 
             </div>
 
@@ -2987,8 +3020,9 @@ viewBox="0 0 350 230">
             <div class="memory-photo">
 
                 <img
-                src="images/photo3.jpg"
-                alt="Memory 3">
+               id="memory3Image"
+               src="images/photo3.jpg"
+               alt="Memory 3">
 
             </div>
 
@@ -2997,9 +3031,11 @@ viewBox="0 0 350 230">
 
                 <small>MEMORY 03</small>
 
-                Warm afternoon
-                sunshine
-                on the table.
+               <span id="memory3Text">
+                 Warm afternoon
+                 sunshine
+                 on the table.
+                </span>
 
             </div>
 
@@ -3034,18 +3070,21 @@ viewBox="0 0 430 245">
 
                 <small>MEMORY 04</small>
 
+                <span id="memory4Text">
                 And somehow,
                 the afternoon
                 always stayed.
+          </span>
 
             </div>
 
 
             <div class="memory-photo">
 
-                <img
-                src="images/photo4.jpg"
-                alt="Memory 4">
+               <img
+               id="memory4Image"
+               src="images/photo4.jpg"
+               alt="Memory 4">
 
             </div>
 
@@ -3105,25 +3144,27 @@ viewBox="0 0 390 280">
     <div class="video-wrapper">
 
         <video
-            class="memory-video"
-            controls
-            poster="images/video-poster.jpg"
-            preload="metadata">
+    id="memoryVideo"
+    class="memory-video"
+    controls
+    poster="images/video-poster.jpg"
+    preload="metadata">
 
-            <source
-                src="videos/memory-video.mp4"
-                type="video/mp4">
+    <source
+        id="memoryVideoSource"
+        src="videos/memory-video.mp4"
+        type="video/mp4">
 
-            Your browser does not support the video tag.
+    Your browser does not support the video tag.
 
-        </video>
+</video>
 
 
         <div class="video-caption">
 
-            <span>
-                A summer afternoon.
-            </span>
+           <span id="videoCaption">
+    A summer afternoon.
+</span>
 
             <small>
                 MOVING MEMORY · 001
@@ -3163,8 +3204,9 @@ viewBox="0 0 390 280">
         <div class="film-frame vertical">
 
             <img
-            src="images/film1.jpg"
-            alt="Film memory 1">
+id="film1Image"
+src="images/film1.jpg"
+alt="Film memory 1">
 
         </div>
 
@@ -3176,17 +3218,17 @@ viewBox="0 0 390 280">
             </div>
 
 
-            <h3>
-                Walking through
-                lavender fields.
-            </h3>
+            <h3 id="film1Title">
+    Walking through
+    lavender fields.
+</h3>
 
 
-            <p>
-                A quiet afternoon,
-                somewhere between
-                summer and a dream.
-            </p>
+           <p id="film1Text">
+    A quiet afternoon,
+    somewhere between
+    summer and a dream.
+</p>
 
         </div>
 
@@ -3201,9 +3243,10 @@ viewBox="0 0 390 280">
 
         <div class="film-frame horizontal">
 
-            <img
-            src="images/film2.jpg"
-            alt="Film memory 2">
+          <img
+id="film2Image"
+src="images/film2.jpg"
+alt="Film memory 2">
 
         </div>
 
@@ -3223,17 +3266,17 @@ viewBox="0 0 390 280">
             </div>
 
 
-            <h3>
-                Summer
-                never ended.
-            </h3>
+            <h3 id="film3Title">
+    Summer
+    never ended.
+</h3>
 
 
-            <p>
-                Some memories
-                stay warm,
-                even after years.
-            </p>
+            <p id="film3Text">
+    Some memories
+    stay warm,
+    even after years.
+</p>
 
         </div>
 
@@ -3241,8 +3284,9 @@ viewBox="0 0 390 280">
         <div class="film-frame vertical">
 
             <img
-            src="images/film3.jpg"
-            alt="Film memory 3">
+id="film3Image"
+src="images/film3.jpg"
+alt="Film memory 3">
 
         </div>
 
@@ -3290,9 +3334,11 @@ viewBox="0 0 390 280">
                 MEMORY CALENDAR
             </span>
 
-            <h3 class="calendar-month">
-                JUNE 2012
-            </h3>
+            <h3
+    class="calendar-month"
+    id="travelMonth">
+    JUNE 2012
+</h3>
 
 
             <div class="calendar-weekdays">
@@ -3367,9 +3413,11 @@ viewBox="0 0 390 280">
 
                 <div class="location-pin"></div>
 
-                <div class="location-name">
-                    countryside
-                </div>
+                <div
+    class="location-name"
+    id="travelLocationMap">
+    countryside
+</div>
 
             </div>
 
@@ -3383,18 +3431,20 @@ viewBox="0 0 390 280">
                         LOCATION
                     </div>
 
-                    <h3>
-                        Somewhere<br>
-                        Between the Fields
-                    </h3>
+                    <h3 id="travelLocation">
+    Somewhere<br>
+    Between the Fields
+</h3>
 
                 </div>
 
 
-                <div class="location-date">
-                    summer<br>
-                    2012
-                </div>
+                <div
+    class="location-date"
+    id="travelYear">
+    summer<br>
+    2012
+</div>
 
 
             </div>
@@ -3411,11 +3461,11 @@ viewBox="0 0 390 280">
 
     <div class="travel-memory-note">
 
-        <p>
-            There was always another path to follow,
-            another field beyond the trees,
-            and nowhere we really needed to be.
-        </p>
+        <p id="travelText">
+    There was always another path to follow,
+    another field beyond the trees,
+    and nowhere we really needed to be.
+</p>
 
         <small>
             A PLACE I STILL REMEMBER · 001
@@ -3445,6 +3495,406 @@ viewBox="0 0 390 280">
 
 
 </div>
+
+
+<!-- =========================================================
+     FIREBASE DATA LOADER
+========================================================= -->
+
+<script type="module">
+
+const params = new URLSearchParams(window.location.search);
+
+const newsId = params.get("id");
+
+
+async function loadNewsData(){
+
+    if(!newsId){
+
+        console.warn("News document ID is missing.");
+
+        return;
+
+    }
+
+
+    try{
+
+        const newsRef =
+            window.firebaseDoc(
+                window.firebaseDB,
+                "news",
+                newsId
+            );
+
+
+        const snapshot =
+            await window.firebaseGetDoc(newsRef);
+
+
+        if(!snapshot.exists()){
+
+            console.error(
+                "News document not found:",
+                newsId
+            );
+
+            return;
+
+        }
+
+
+        const data = snapshot.data();
+
+/* =========================================
+   HERO
+========================================= */
+
+if(data.heroTitleTop){
+
+    document
+        .getElementById("heroTitleTop")
+        .textContent =
+            data.heroTitleTop;
+
+}
+
+
+if(data.heroTitleBottom1){
+
+    document
+        .getElementById("heroTitleBottom1")
+        .textContent =
+            data.heroTitleBottom1;
+
+}
+
+
+if(data.heroTitleBottom2){
+
+    document
+        .getElementById("heroTitleBottom2")
+        .textContent =
+            data.heroTitleBottom2;
+
+}
+
+
+if(data.heroImage){
+
+    document
+        .getElementById("heroImage")
+        .src =
+            data.heroImage;
+
+}
+       
+
+
+        /* =========================================
+           INTRO
+        ========================================= */
+
+        if(data.introText){
+
+            document
+                .getElementById("introText")
+                .textContent =
+                    data.introText;
+
+        }
+
+
+        /* =========================================
+           MEMORY 1
+        ========================================= */
+
+        if(data.memory1Image){
+
+            document
+                .getElementById("memory1Image")
+                .src =
+                    data.memory1Image;
+
+        }
+
+
+        if(data.memory1Text){
+
+            document
+                .getElementById("memory1Text")
+                .textContent =
+                    data.memory1Text;
+
+        }
+
+
+        /* =========================================
+           MEMORY 2
+        ========================================= */
+
+        if(data.memory2Image){
+
+            document
+                .getElementById("memory2Image")
+                .src =
+                    data.memory2Image;
+
+        }
+
+
+        if(data.memory2Text){
+
+            document
+                .getElementById("memory2Text")
+                .textContent =
+                    data.memory2Text;
+
+        }
+
+
+        /* =========================================
+           MEMORY 3
+        ========================================= */
+
+        if(data.memory3Image){
+
+            document
+                .getElementById("memory3Image")
+                .src =
+                    data.memory3Image;
+
+        }
+
+
+        if(data.memory3Text){
+
+            document
+                .getElementById("memory3Text")
+                .textContent =
+                    data.memory3Text;
+
+        }
+
+
+        /* =========================================
+           MEMORY 4
+        ========================================= */
+
+        if(data.memory4Image){
+
+            document
+                .getElementById("memory4Image")
+                .src =
+                    data.memory4Image;
+
+        }
+
+
+        if(data.memory4Text){
+
+            document
+                .getElementById("memory4Text")
+                .textContent =
+                    data.memory4Text;
+
+        }
+
+
+        /* =========================================
+   VIDEO
+========================================= */
+
+if(data.videoUrl){
+
+    const video =
+        document
+        .getElementById("memoryVideo");
+
+
+    const source =
+        document
+        .getElementById("memoryVideoSource");
+
+
+    source.src =
+        data.videoUrl;
+
+
+    video.load();
+
+}
+
+
+if(data.videoCaption){
+
+    document
+        .getElementById("videoCaption")
+        .textContent =
+            data.videoCaption;
+
+}
+
+        /* =========================================
+           FILM 1
+        ========================================= */
+
+        if(data.film1Image){
+
+            document
+                .getElementById("film1Image")
+                .src =
+                    data.film1Image;
+
+        }
+
+
+        if(data.film1Title){
+
+            document
+                .getElementById("film1Title")
+                .textContent =
+                    data.film1Title;
+
+        }
+
+
+        if(data.film1Text){
+
+            document
+                .getElementById("film1Text")
+                .textContent =
+                    data.film1Text;
+
+        }
+
+
+        /* =========================================
+           FILM 2
+        ========================================= */
+
+        if(data.film2Image){
+
+            document
+                .getElementById("film2Image")
+                .src =
+                    data.film2Image;
+
+        }
+
+
+        /* =========================================
+           FILM 3
+        ========================================= */
+
+        if(data.film3Image){
+
+            document
+                .getElementById("film3Image")
+                .src =
+                    data.film3Image;
+
+        }
+
+
+        if(data.film3Title){
+
+            document
+                .getElementById("film3Title")
+                .textContent =
+                    data.film3Title;
+
+        }
+
+
+        if(data.film3Text){
+
+            document
+                .getElementById("film3Text")
+                .textContent =
+                    data.film3Text;
+
+        }
+
+
+        /* =========================================
+           TRAVEL
+        ========================================= */
+
+        if(data.travelYear || data.travelMonth){
+
+    const month =
+        data.travelMonth || "";
+
+    const year =
+        data.travelYear || "";
+
+    document
+        .getElementById("travelYear")
+        .innerHTML =
+            `${month}<br>${year}`;
+
+}
+
+
+        if(data.travelLocation){
+
+    document
+        .getElementById("travelLocation")
+        .textContent =
+            data.travelLocation;
+
+    document
+        .getElementById("travelLocationMap")
+        .textContent =
+            data.travelLocation;
+
+}
+
+
+        if(data.travelYear){
+
+    document
+        .getElementById("travelYear")
+        .innerHTML =
+            `summer<br>${data.travelYear}`;
+
+}
+
+
+        if(data.travelText){
+
+            document
+                .getElementById("travelText")
+                .textContent =
+                    data.travelText;
+
+        }
+
+
+        console.log(
+            "FilmArchiveDesign loaded:",
+            data
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Failed to load news:",
+            error
+        );
+
+    }
+
+}
+
+
+loadNewsData();
+
+</script>
 
 
 </body>
