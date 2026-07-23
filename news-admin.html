@@ -1195,7 +1195,7 @@ textarea{
 
 <div class="logo">
 
-Anya
+Yuri
 
 </div>
 
@@ -1271,7 +1271,7 @@ ARCHIVE
 
 <div class="nav-icon"></div>
 
-<span>Life</span>
+<span>Academic</span>
 
 </div>
 
@@ -1289,7 +1289,7 @@ ARCHIVE
 
 <div class="nav-icon"></div>
 
-<span>Baking</span>
+<span>Life</span>
 
 </div>
 
@@ -1488,7 +1488,7 @@ RESEARCH
 
 <button class="filter">
 
-LIFE
+Academic
 
 </button>
 
@@ -1500,7 +1500,7 @@ TRAVEL
 
 <button class="filter">
 
-BAKING
+Life
 
 </button>
 
@@ -1977,8 +1977,9 @@ TITLE
 </label>
 
 <input
-type="text"
-placeholder="Entry title"
+    type="text"
+    id="entryTitle"
+    placeholder="Entry title"
 >
 
 
@@ -1997,18 +1998,12 @@ CATEGORY
 
 </label>
 
-<select>
-
-<option>Research</option>
-
-<option>Life</option>
-
-<option>Travel</option>
-
-<option>Baking</option>
-
+<select id="entryCategory">
+    <option>Research</option>
+    <option>Academic</option>
+    <option>Travel</option>
+    <option>Life</option>
 </select>
-
 </div>
 
 
@@ -2021,18 +2016,12 @@ DESIGN
 
 </label>
 
-<select>
-
-<option>Design 01</option>
-
-<option>Design 02</option>
-
-<option>Design 03 — Anya Bakery</option>
-
-<option>Design 04 — Vintage Flower</option>
-
-<option>Design 05 — Modern Maturity</option>
-
+<select id="entryDesign">
+    <option value="FilmArchiveDesign">FilmArchiveDesign</option>
+    <option value="Design 02">Design 02</option>
+    <option value="Design 03">Design 03 — Anya Bakery</option>
+    <option value="Design 04">Design 04 — Vintage Flower</option>
+    <option value="Design 05">Design 05 — Modern Maturity</option>
 </select>
 
 </div>
@@ -2051,7 +2040,8 @@ SHORT DESCRIPTION
 </label>
 
 <textarea
-placeholder="Write a short description..."
+    id="entryDescription"
+    placeholder="Write a short description..."
 ></textarea>
 
 </div>
@@ -2070,7 +2060,8 @@ DATE
 </label>
 
 <input
-type="date"
+    type="date"
+    id="entryDate"
 >
 
 </div>
@@ -2085,12 +2076,9 @@ STATUS
 
 </label>
 
-<select>
-
-<option>Published</option>
-
-<option>Draft</option>
-
+<select id="entryStatus">
+    <option value="Published">Published</option>
+    <option value="Draft">Draft</option>
 </select>
 
 </div>
@@ -2109,30 +2097,27 @@ IMAGE URL
 </label>
 
 <input
-type="text"
-placeholder="images/example.jpg"
+    type="text"
+    id="entryImage"
+    placeholder="images/example.jpg"
 >
 
 </div>
 
-
-
 <div class="form-actions">
 
 <button
-class="cancel"
-onclick="closeModal()"
+    class="cancel"
+    onclick="closeModal()"
 >
-
-Cancel
-
+    Cancel
 </button>
 
-
-<button class="save">
-
-Save Entry
-
+<button
+    class="save"
+    onclick="saveEntry()"
+>
+    Save Entry
 </button>
 
 </div>
@@ -2206,7 +2191,217 @@ filters.forEach(filter => {
 
 });
 
+/* ======================================
+   SAVE NEW ENTRY TO FIREBASE
+====================================== */
 
+async function saveEntry(){
+
+    const title =
+        document
+        .getElementById('entryTitle')
+        .value
+        .trim();
+
+
+    const category =
+        document
+        .getElementById('entryCategory')
+        .value;
+
+
+    const design =
+        document
+        .getElementById('entryDesign')
+        .value;
+
+
+    const description =
+        document
+        .getElementById('entryDescription')
+        .value
+        .trim();
+
+
+    const date =
+        document
+        .getElementById('entryDate')
+        .value;
+
+
+    const status =
+        document
+        .getElementById('entryStatus')
+        .value;
+
+
+    const image =
+        document
+        .getElementById('entryImage')
+        .value
+        .trim();
+
+
+
+    /* ==============================
+       REQUIRED TITLE CHECK
+    ============================== */
+
+    if(!title){
+
+        alert(
+            'Please enter a title.'
+        );
+
+        return;
+
+    }
+
+
+
+    /* ==============================
+       FIREBASE CHECK
+    ============================== */
+
+    if(!window.firebaseDB){
+
+        alert(
+            'Firebase is not connected.'
+        );
+
+        console.error(
+            'Firebase DB is not available.'
+        );
+
+        return;
+
+    }
+
+
+
+    /* ==============================
+       SAVE TO FIRESTORE
+    ============================== */
+
+    try{
+
+        const docRef =
+            await window.firebaseAddDoc(
+
+                window.firebaseCollection(
+                    window.firebaseDB,
+                    'news'
+                ),
+
+                {
+
+                    title:
+                        title,
+
+                    category:
+                        category,
+
+                    design:
+                        design,
+
+                    description:
+                        description,
+
+                    date:
+                        date,
+
+                    status:
+                        status,
+
+                    image:
+                        image,
+
+                    createdAt:
+                        window.firebaseServerTimestamp()
+
+                }
+
+            );
+
+
+
+        console.log(
+            'Entry saved:',
+            docRef.id
+        );
+
+
+        alert(
+            'Entry saved successfully!'
+        );
+
+
+
+        /* ==============================
+           CLOSE MODAL
+        ============================== */
+
+        closeModal();
+
+
+
+        /* ==============================
+           RESET FORM
+        ============================== */
+
+        document
+        .getElementById('entryTitle')
+        .value = '';
+
+
+        document
+        .getElementById('entryDescription')
+        .value = '';
+
+
+        document
+        .getElementById('entryDate')
+        .value = '';
+
+
+        document
+        .getElementById('entryImage')
+        .value = '';
+
+
+        document
+        .getElementById('entryCategory')
+        .value = 'Research';
+
+
+        document
+        .getElementById('entryDesign')
+        .value = 'FilmArchiveDesign';
+
+
+        document
+        .getElementById('entryStatus')
+        .value = 'Published';
+
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            'Firebase save error:',
+            error
+        );
+
+
+        alert(
+            'Failed to save entry. Please check the browser console.'
+        );
+
+    }
+
+}
 </script>
 
 
