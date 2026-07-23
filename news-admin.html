@@ -1028,7 +1028,76 @@ textarea{
 
 }
 
+/* ======================================
+   DESIGN SPECIFIC FORM
+====================================== */
 
+.design-fields{
+    margin-top:30px;
+    padding-top:30px;
+    border-top:1px solid #DDD8CF;
+}
+
+.design-form-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+    font-weight:500;
+    margin-bottom:30px;
+    color:#3E4741;
+}
+
+.form-section-label{
+    margin-top:30px;
+    margin-bottom:15px;
+    padding-bottom:8px;
+    border-bottom:1px solid #E2DED6;
+    font-size:10px;
+    letter-spacing:.18em;
+    color:#858980;
+}
+
+.memory-form,
+.film-form{
+    display:grid;
+    gap:15px;
+}
+
+.memory-item,
+.film-item{
+    padding:20px;
+    background:#F2EFE8;
+    border:1px solid #DDD8CF;
+}
+
+.memory-item strong,
+.film-item strong{
+    display:block;
+    margin-bottom:15px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px;
+    font-weight:500;
+    color:#4D594F;
+}
+
+.memory-item input,
+.memory-item textarea,
+.film-item input,
+.film-item textarea{
+    margin-bottom:10px;
+}
+
+.memory-item textarea,
+.film-item textarea{
+    min-height:90px;
+}
+
+@media(max-width:600px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+}
 .cancel{
 
     padding:12px 20px;
@@ -2016,12 +2085,29 @@ DESIGN
 
 </label>
 
-<select id="entryDesign">
-    <option value="FilmArchiveDesign">FilmArchiveDesign</option>
-    <option value="Design 02">Design 02</option>
-    <option value="Design 03">Design 03 — Anya Bakery</option>
-    <option value="Design 04">Design 04 — Vintage Flower</option>
-    <option value="Design 05">Design 05 — Modern Maturity</option>
+<select
+    id="entryDesign"
+    onchange="handleDesignChange()"
+>
+    <option value="FilmArchiveDesign">
+        FilmArchiveDesign
+    </option>
+
+    <option value="Design 02">
+        Design 02
+    </option>
+
+    <option value="Design 03">
+        Design 03 — Anya Bakery
+    </option>
+
+    <option value="Design 04">
+        Design 04 — Vintage Flower
+    </option>
+
+    <option value="Design 05">
+        Design 05 — Modern Maturity
+    </option>
 </select>
 
 </div>
@@ -2046,7 +2132,407 @@ SHORT DESCRIPTION
 
 </div>
 
+<!-- ======================================
+     FILM ARCHIVE DESIGN FIELDS
+====================================== -->
 
+<div
+    id="filmArchiveFields"
+    class="design-fields"
+    style="display:none;"
+>
+
+    <h3 class="design-form-title">
+        Film Archive Content
+    </h3>
+
+
+    <!-- HERO -->
+
+    <div class="form-section-label">
+        HERO
+    </div>
+
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label class="form-label">
+                HERO TITLE TOP
+            </label>
+
+            <input
+                type="text"
+                id="heroTitleTop"
+                placeholder="예: OUR"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                HERO TITLE BOTTOM 1
+            </label>
+
+            <input
+                type="text"
+                id="heroTitleBottom1"
+                placeholder="예: FILM"
+            >
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            HERO TITLE BOTTOM 2
+        </label>
+
+        <input
+            type="text"
+            id="heroTitleBottom2"
+            placeholder="예: MEMORIES"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            HERO IMAGE URL
+        </label>
+
+        <input
+            type="text"
+            id="heroImage"
+            placeholder="https://..."
+        >
+
+    </div>
+
+
+    <!-- INTRODUCTION -->
+
+    <div class="form-section-label">
+        INTRODUCTION
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            INTRO TEXT
+        </label>
+
+        <textarea
+            id="introText"
+            placeholder="Write introduction..."
+        ></textarea>
+
+    </div>
+
+
+    <!-- MEMORY -->
+
+    <div class="form-section-label">
+        MEMORY
+    </div>
+
+
+    <div class="memory-form">
+
+
+        <div class="memory-item">
+
+            <strong>
+                MEMORY 01
+            </strong>
+
+            <input
+                type="text"
+                id="memory1Image"
+                placeholder="Memory 01 image URL"
+            >
+
+            <textarea
+                id="memory1Text"
+                placeholder="Memory 01 text..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <strong>
+                MEMORY 02
+            </strong>
+
+            <input
+                type="text"
+                id="memory2Image"
+                placeholder="Memory 02 image URL"
+            >
+
+            <textarea
+                id="memory2Text"
+                placeholder="Memory 02 text..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <strong>
+                MEMORY 03
+            </strong>
+
+            <input
+                type="text"
+                id="memory3Image"
+                placeholder="Memory 03 image URL"
+            >
+
+            <textarea
+                id="memory3Text"
+                placeholder="Memory 03 text..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <strong>
+                MEMORY 04
+            </strong>
+
+            <input
+                type="text"
+                id="memory4Image"
+                placeholder="Memory 04 image URL"
+            >
+
+            <textarea
+                id="memory4Text"
+                placeholder="Memory 04 text..."
+            ></textarea>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- VIDEO -->
+
+    <div class="form-section-label">
+        VIDEO
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            VIDEO URL
+        </label>
+
+        <input
+            type="text"
+            id="videoUrl"
+            placeholder="https://..."
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            VIDEO CAPTION
+        </label>
+
+        <input
+            type="text"
+            id="videoCaption"
+            placeholder="Video caption..."
+        >
+
+    </div>
+
+
+    <!-- FILM -->
+
+    <div class="form-section-label">
+        FILM ARCHIVE
+    </div>
+
+
+    <div class="film-form">
+
+
+        <div class="film-item">
+
+            <strong>
+                FILM 01
+            </strong>
+
+            <input
+                type="text"
+                id="film1Image"
+                placeholder="Film 01 image URL"
+            >
+
+            <input
+                type="text"
+                id="film1Title"
+                placeholder="Film 01 title"
+            >
+
+            <textarea
+                id="film1Text"
+                placeholder="Film 01 description..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="film-item">
+
+            <strong>
+                FILM 02
+            </strong>
+
+            <input
+                type="text"
+                id="film2Image"
+                placeholder="Film 02 image URL"
+            >
+
+            <input
+                type="text"
+                id="film2Title"
+                placeholder="Film 02 title"
+            >
+
+            <textarea
+                id="film2Text"
+                placeholder="Film 02 description..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="film-item">
+
+            <strong>
+                FILM 03
+            </strong>
+
+            <input
+                type="text"
+                id="film3Image"
+                placeholder="Film 03 image URL"
+            >
+
+            <input
+                type="text"
+                id="film3Title"
+                placeholder="Film 03 title"
+            >
+
+            <textarea
+                id="film3Text"
+                placeholder="Film 03 description..."
+            ></textarea>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- TRAVEL -->
+
+    <div class="form-section-label">
+        TRAVEL
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                MONTH
+            </label>
+
+            <input
+                type="text"
+                id="travelMonth"
+                placeholder="JULY"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                YEAR
+            </label>
+
+            <input
+                type="text"
+                id="travelYear"
+                placeholder="2026"
+            >
+
+        </div>
+
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            LOCATION
+        </label>
+
+        <input
+            type="text"
+            id="travelLocation"
+            placeholder="Paris, France"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            TRAVEL TEXT
+        </label>
+
+        <textarea
+            id="travelText"
+            placeholder="Write travel description..."
+        ></textarea>
+
+    </div>
+
+
+</div>
 
 <div class="form-grid">
 
@@ -2192,10 +2678,50 @@ filters.forEach(filter => {
 });
 
 /* ======================================
+   DESIGN CHANGE
+====================================== */
+
+function handleDesignChange(){
+
+    const design =
+        document
+        .getElementById('entryDesign')
+        .value;
+
+
+    const filmArchiveFields =
+        document
+        .getElementById('filmArchiveFields');
+
+
+    /* Hide Film Archive fields */
+
+    filmArchiveFields.style.display =
+        'none';
+
+
+    /* Show Film Archive fields */
+
+    if(
+        design === 'FilmArchiveDesign'
+    ){
+
+        filmArchiveFields.style.display =
+            'block';
+
+    }
+
+}     
+
+/* ======================================
    SAVE NEW ENTRY TO FIREBASE
 ====================================== */
 
 async function saveEntry(){
+
+    /* ==============================
+       BASIC INFORMATION
+    ============================== */
 
     const title =
         document
@@ -2280,6 +2806,287 @@ async function saveEntry(){
 
 
     /* ==============================
+       DESIGN SPECIFIC CONTENT
+    ============================== */
+
+    let designContent = {};
+
+
+
+    /* ======================================
+       FILM ARCHIVE DESIGN
+    ====================================== */
+
+    if(
+        design === 'FilmArchiveDesign'
+    ){
+
+        designContent = {
+
+            /* ==============================
+               HERO
+            ============================== */
+
+            hero: {
+
+                titleTop:
+                    document
+                    .getElementById('heroTitleTop')
+                    .value
+                    .trim(),
+
+                titleBottom1:
+                    document
+                    .getElementById('heroTitleBottom1')
+                    .value
+                    .trim(),
+
+                titleBottom2:
+                    document
+                    .getElementById('heroTitleBottom2')
+                    .value
+                    .trim(),
+
+                image:
+                    document
+                    .getElementById('heroImage')
+                    .value
+                    .trim()
+
+            },
+
+
+            /* ==============================
+               INTRODUCTION
+            ============================== */
+
+            intro: {
+
+                text:
+                    document
+                    .getElementById('introText')
+                    .value
+                    .trim()
+
+            },
+
+
+            /* ==============================
+               MEMORIES
+            ============================== */
+
+            memories: [
+
+                {
+
+                    image:
+                        document
+                        .getElementById('memory1Image')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('memory1Text')
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+                        document
+                        .getElementById('memory2Image')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('memory2Text')
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+                        document
+                        .getElementById('memory3Image')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('memory3Text')
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+                        document
+                        .getElementById('memory4Image')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('memory4Text')
+                        .value
+                        .trim()
+
+                }
+
+            ],
+
+
+
+            /* ==============================
+               VIDEO
+            ============================== */
+
+            video: {
+
+                url:
+                    document
+                    .getElementById('videoUrl')
+                    .value
+                    .trim(),
+
+                caption:
+                    document
+                    .getElementById('videoCaption')
+                    .value
+                    .trim()
+
+            },
+
+
+
+            /* ==============================
+               FILM ARCHIVE
+            ============================== */
+
+            films: [
+
+                {
+
+                    image:
+                        document
+                        .getElementById('film1Image')
+                        .value
+                        .trim(),
+
+                    title:
+                        document
+                        .getElementById('film1Title')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('film1Text')
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+                        document
+                        .getElementById('film2Image')
+                        .value
+                        .trim(),
+
+                    title:
+                        document
+                        .getElementById('film2Title')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('film2Text')
+                        .value
+                        .trim()
+
+                },
+
+
+                {
+
+                    image:
+                        document
+                        .getElementById('film3Image')
+                        .value
+                        .trim(),
+
+                    title:
+                        document
+                        .getElementById('film3Title')
+                        .value
+                        .trim(),
+
+                    text:
+                        document
+                        .getElementById('film3Text')
+                        .value
+                        .trim()
+
+                }
+
+            ],
+
+
+
+            /* ==============================
+               TRAVEL
+            ============================== */
+
+            travel: {
+
+                month:
+                    document
+                    .getElementById('travelMonth')
+                    .value
+                    .trim(),
+
+                year:
+                    document
+                    .getElementById('travelYear')
+                    .value
+                    .trim(),
+
+                location:
+                    document
+                    .getElementById('travelLocation')
+                    .value
+                    .trim(),
+
+                text:
+                    document
+                    .getElementById('travelText')
+                    .value
+                    .trim()
+
+            }
+
+        };
+
+    }
+
+
+
+    /* ==============================
        SAVE TO FIRESTORE
     ============================== */
 
@@ -2294,6 +3101,10 @@ async function saveEntry(){
                 ),
 
                 {
+
+                    /* ==============================
+                       BASIC NEWS DATA
+                    ============================== */
 
                     title:
                         title,
@@ -2316,6 +3127,21 @@ async function saveEntry(){
                     image:
                         image,
 
+
+
+                    /* ==============================
+                       DESIGN SPECIFIC CONTENT
+                    ============================== */
+
+                    content:
+                        designContent,
+
+
+
+                    /* ==============================
+                       TIMESTAMP
+                    ============================== */
+
                     createdAt:
                         window.firebaseServerTimestamp()
 
@@ -2325,9 +3151,30 @@ async function saveEntry(){
 
 
 
+        /* ==============================
+           SUCCESS
+        ============================== */
+
         console.log(
-            'Entry saved:',
+            'Entry saved successfully:',
             docRef.id
+        );
+
+
+        console.log(
+            'Saved data:',
+            {
+
+                title,
+                category,
+                design,
+                description,
+                date,
+                status,
+                image,
+                content: designContent
+
+            }
         );
 
 
@@ -2346,7 +3193,7 @@ async function saveEntry(){
 
 
         /* ==============================
-           RESET FORM
+           RESET BASIC FORM
         ============================== */
 
         document
@@ -2385,6 +3232,148 @@ async function saveEntry(){
 
 
 
+        /* ==============================
+           RESET FILM ARCHIVE FORM
+        ============================== */
+
+        document
+        .getElementById('heroTitleTop')
+        .value = '';
+
+
+        document
+        .getElementById('heroTitleBottom1')
+        .value = '';
+
+
+        document
+        .getElementById('heroTitleBottom2')
+        .value = '';
+
+
+        document
+        .getElementById('heroImage')
+        .value = '';
+
+
+        document
+        .getElementById('introText')
+        .value = '';
+
+
+
+        /* ==============================
+           RESET MEMORIES
+        ============================== */
+
+        for(
+            let i = 1;
+            i <= 4;
+            i++
+        ){
+
+            document
+            .getElementById(
+                `memory${i}Image`
+            )
+            .value = '';
+
+
+            document
+            .getElementById(
+                `memory${i}Text`
+            )
+            .value = '';
+
+        }
+
+
+
+        /* ==============================
+           RESET VIDEO
+        ============================== */
+
+        document
+        .getElementById('videoUrl')
+        .value = '';
+
+
+        document
+        .getElementById('videoCaption')
+        .value = '';
+
+
+
+        /* ==============================
+           RESET FILMS
+        ============================== */
+
+        for(
+            let i = 1;
+            i <= 3;
+            i++
+        ){
+
+            document
+            .getElementById(
+                `film${i}Image`
+            )
+            .value = '';
+
+
+            document
+            .getElementById(
+                `film${i}Title`
+            )
+            .value = '';
+
+
+            document
+            .getElementById(
+                `film${i}Text`
+            )
+            .value = '';
+
+        }
+
+
+
+        /* ==============================
+           RESET TRAVEL
+        ============================== */
+
+        document
+        .getElementById('travelMonth')
+        .value = '';
+
+
+        document
+        .getElementById('travelYear')
+        .value = '';
+
+
+        document
+        .getElementById('travelLocation')
+        .value = '';
+
+
+        document
+        .getElementById('travelText')
+        .value = '';
+
+
+
+        /* ==============================
+           RESET DESIGN FIELD VISIBILITY
+        ============================== */
+
+        document
+        .getElementById('filmArchiveFields')
+        .style
+        .display = 'none';
+
+
+
     }
 
     catch(error){
@@ -2402,6 +3391,8 @@ async function saveEntry(){
     }
 
 }
+
+
 </script>
 
 
