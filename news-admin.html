@@ -16,6 +16,102 @@
 https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap
 " rel="stylesheet">
 
+<!-- ======================================
+     FIREBASE
+====================================== -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    getDoc,
+    doc,
+    updateDoc,
+    deleteDoc,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+// ======================================
+// FIREBASE CONFIG
+// ======================================
+
+const firebaseConfig = {
+
+    apiKey: "여기에 기존 Firebase API KEY",
+
+    authDomain: "여기에 기존 Firebase AUTH DOMAIN",
+
+    projectId: "여기에 기존 Firebase PROJECT ID",
+
+    storageBucket: "여기에 기존 Firebase STORAGE BUCKET",
+
+    messagingSenderId: "여기에 기존 Firebase MESSAGING SENDER ID",
+
+    appId: "여기에 기존 Firebase APP ID"
+
+};
+
+
+// ======================================
+// INITIALIZE FIREBASE
+// ======================================
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+// ======================================
+// FIRESTORE
+// ======================================
+
+const db =
+    getFirestore(app);
+
+
+// ======================================
+// MAKE AVAILABLE TO OTHER SCRIPTS
+// ======================================
+
+window.firebaseDB = db;
+
+window.firebaseCollection =
+    collection;
+
+window.firebaseAddDoc =
+    addDoc;
+
+window.firebaseGetDocs =
+    getDocs;
+
+window.firebaseGetDoc =
+    getDoc;
+
+window.firebaseDoc =
+    doc;
+
+window.firebaseUpdateDoc =
+    updateDoc;
+
+window.firebaseDeleteDoc =
+    deleteDoc;
+
+window.firebaseServerTimestamp =
+    serverTimestamp;
+
+
+console.log(
+    "Firebase connected successfully."
+);
+
+</script>    
 
 <style>
 
