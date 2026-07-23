@@ -238,32 +238,6 @@ ARCH SVG TEXT FLOW
     paint-order:stroke;
 }
 
-/* =====================================
-   CATEGORY NAV
-===================================== */
-
-.category-nav{
-    position:relative;
-
-
-    width:100%;
-
-    min-height:70px;
-
-    padding:0 7vw;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-top:1px solid #D9D3C8;
-    border-bottom:1px solid #D9D3C8;
-
-    background:#F7F4EC;
-}
-
 
 /* =====================================
    CATEGORY NAV
