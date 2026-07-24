@@ -1172,7 +1172,7 @@ function renderResearch(
                         </p>
 
 
-                        <a href="${designPage}">
+                        <a href="${designPage}?id=${encodeURIComponent(item.id)}">
 
                             <button>
                                 View Story →
@@ -1298,7 +1298,7 @@ function renderAcademic(
                     </p>
 
 
-                    <a href="${designPage}">
+                    <a href="${designPage}?id=${encodeURIComponent(item.id)}">
 
                         <button>
                             View Story →
@@ -1429,9 +1429,9 @@ function renderTravel(
 
                 <div class="travel-hover">
 
-                    <a href="${designPage}">
+                    <a href="${designPage}?id=${encodeURIComponent(item.id)}">
 
-                        View Gallery
+                        View Story
 
                     </a>
 
@@ -1561,7 +1561,7 @@ function renderLife(
 
 
             card.href =
-                designPage;
+                `${designPage}?id=${encodeURIComponent(item.id)}`;
 
 
 
