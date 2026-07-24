@@ -127,20 +127,23 @@ function getTemplatePath(data) {
     }
 
 
-    /* ---------------------------------------------
-       디자인 2
-       실제 파일명에 맞게 수정
-    --------------------------------------------- */
+   /* =============================================
+       DESIGN 02
+       Vintage Flower
+    ============================================= */
 
     if (
         template === "design2" ||
-        template === "design02"
+        template === "design02" ||
+        template === "vintageflowerdesign" ||
+        template === "vintageflowerdesign.html" ||
+        template === "vintage flower" ||
+        template === "vintage flower design"
     ) {
 
-        return "design02.html";
+        return "VintageFlowerDesign.html";
 
     }
-
 
     /* ---------------------------------------------
        디자인 3
