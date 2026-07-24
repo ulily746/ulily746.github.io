@@ -134,7 +134,7 @@ function getTemplatePath(data) {
         template === "design01"
     ) {
 
-        return "childhood.html";
+        return "FilmArchiveDesign.html";
 
     }
 
