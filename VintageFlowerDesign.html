@@ -27,9 +27,29 @@ https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jak
 
     // Firebase 설정값
     const firebaseConfig = {
-        // 기존에 사용하던 Firebase Config를 여기에 넣기
-    };
 
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
+
+    projectId:
+    "yuri-research-portfolio",
+
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
+
+    messagingSenderId:
+    "231317507996",
+
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
+
+    measurementId:
+    "G-57VHW2454E"
+
+};
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
@@ -38,7 +58,7 @@ https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jak
         try {
 
             // Firebase Firestore 문서
-            const docRef = doc(db, "vintageflowedesign", "vintageflowedesign");
+            const docRef = doc(db, "news", "VintageFloweDesign");
             const docSnap = await getDoc(docRef);
 
             if (!docSnap.exists()) {
@@ -1287,9 +1307,8 @@ px-6
 
 <div class="section-heading">
 
-<span
-data-field="videoTitle"
-class="archive-label">
+<span class="archive-label">
+MOVING MEMORIES
 </span>
 
 </div>
