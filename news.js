@@ -101,18 +101,6 @@ const newsContainer =
 
 function getTemplatePath(data) {
 
-    /*
-       Admin에서 저장하는 필드명이
-       template이라고 가정
-
-       예:
-       template: "childhood"
-
-       또는
-
-       template: "childhood.html"
-    */
-
 
     const template =
         String(
