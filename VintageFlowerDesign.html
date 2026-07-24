@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="ko">
+
 <head>
 
 <meta charset="UTF-8">
@@ -27,7 +28,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap"
+rel="stylesheet"
+>
 
 <!-- =========================================================
      FIREBASE
@@ -80,17 +84,23 @@ const firebaseConfig = {
    FIREBASE INITIALIZE
 ========================================================= */
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+    getFirestore(app);
 
 
 /* =========================================================
    URL에서 NEWS ID 가져오기
+   예:
+   news.html?id=abc123
 ========================================================= */
 
 const params =
-    new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 const newsId =
     params.get("id");
@@ -108,7 +118,7 @@ console.log(
 
 
 /* =========================================================
-   ELEMENT HELPERS
+   ELEMENT HELPER
 ========================================================= */
 
 function getElement(id){
@@ -124,56 +134,106 @@ function getElement(id){
 
 function setText(id, value){
 
-    const element = document.getElementById(id);
+    const element =
+        getElement(id);
+
 
     if(!element){
-        console.warn(`⚠️ HTML element not found: #${id}`);
+
+        console.warn(
+            `HTML element not found: #${id}`
+        );
+
         return;
+
     }
 
-    if(value === undefined || value === null){
-        console.warn(`⚠️ Firebase field is empty or missing: ${id}`);
+
+    /*
+    Firebase 값이 없으면
+    기존 HTML 내용을 유지
+    */
+
+    if(
+        value === undefined ||
+        value === null ||
+        value === ""
+    ){
+
         return;
+
     }
 
-    let finalValue = value;
+
+    let finalValue =
+        value;
+
+
+    /*
+    Firestore Timestamp 처리
+    */
 
     if(
         typeof value === "object" &&
         value !== null
     ){
 
-        if(typeof value.toDate === "function"){
+        if(
+            typeof value.toDate === "function"
+        ){
 
-            finalValue = value
+            finalValue =
+                value
                 .toDate()
                 .toLocaleDateString(
                     "en-US",
                     {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric"
+                        year:
+                        "numeric",
+
+                        month:
+                        "long",
+
+                        day:
+                        "numeric"
                     }
                 );
 
-        }else{
+        }
 
-            finalValue = JSON.stringify(value);
+        else{
+
+            finalValue =
+                JSON.stringify(value);
 
         }
 
     }
 
-    const text = String(finalValue).trim();
 
-    element.textContent = text;
+    const text =
+        String(finalValue)
+        .trim();
+
+
+    if(!text){
+
+        return;
+
+    }
+
+
+    element.textContent =
+        text;
+
 
     console.log(
-        `✏️ Applied text → #${id}:`,
+        `Applied text → #${id}:`,
         text
     );
 
 }
+
 
 /* =========================================================
    IMAGE SETTER
@@ -185,9 +245,26 @@ function setImage(id, value){
         getElement(id);
 
 
+    if(!element){
+
+        console.warn(
+            `Image element not found: #${id}`
+        );
+
+        return;
+
+    }
+
+
+    /*
+    이미지가 없으면
+    기존 src가 있다면 유지
+    */
+
     if(
-        !element ||
-        !value
+        value === undefined ||
+        value === null ||
+        value === ""
     ){
 
         return;
@@ -196,7 +273,8 @@ function setImage(id, value){
 
 
     const imageUrl =
-        String(value).trim();
+        String(value)
+        .trim();
 
 
     if(
@@ -214,9 +292,13 @@ function setImage(id, value){
         imageUrl;
 
 
+    /*
+    이미지 로딩 실패 처리
+    */
+
     element.addEventListener(
         "error",
-        () => {
+        function(){
 
             console.warn(
                 "Image failed to load:",
@@ -241,18 +323,27 @@ function setImage(id, value){
 
 function setVideo(value){
 
+    const video =
+        getElement("mainVideo");
+
     const source =
         getElement("videoUrl");
 
 
-    const video =
-        getElement("mainVideo");
+    if(
+        !video ||
+        !source
+    ){
+
+        return false;
+
+    }
 
 
     if(
-        !source ||
-        !video ||
-        !value
+        value === undefined ||
+        value === null ||
+        value === ""
     ){
 
         return false;
@@ -261,7 +352,8 @@ function setVideo(value){
 
 
     const videoUrl =
-        String(value).trim();
+        String(value)
+        .trim();
 
 
     if(
@@ -280,6 +372,33 @@ function setVideo(value){
 
 
     video.load();
+
+
+    /*
+    자동재생 시도
+    */
+
+    const playPromise =
+        video.play();
+
+
+    if(
+        playPromise &&
+        typeof playPromise.catch === "function"
+    ){
+
+        playPromise.catch(
+            function(error){
+
+                console.warn(
+                    "Video autoplay was blocked:",
+                    error
+                );
+
+            }
+        );
+
+    }
 
 
     return true;
@@ -308,23 +427,75 @@ function hideElement(id){
 
 
 /* =========================================================
-   LOAD FIREBASE NEWS
+   SHOW ERROR
+========================================================= */
+
+function showError(message){
+
+    const loadingScreen =
+        getElement("loadingScreen");
+
+    const errorScreen =
+        getElement("errorScreen");
+
+    const errorMessage =
+        getElement("errorMessage");
+
+
+    /*
+    Loading 숨기기
+    */
+
+    if(loadingScreen){
+
+        loadingScreen.style.display =
+            "none";
+
+    }
+
+
+    /*
+    Error 화면 표시
+    */
+
+    if(errorScreen){
+
+        errorScreen.style.display =
+            "flex";
+
+    }
+
+
+    /*
+    Error 메시지
+    */
+
+    if(errorMessage){
+
+        errorMessage.textContent =
+            message;
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD LIFE & TRAVEL
 ========================================================= */
 
 async function loadLifeTravel(){
 
-
-    /* =====================================================
-       ID CHECK
-    ===================================================== */
+    /*
+    1.
+    URL ID 확인
+    */
 
     if(!newsId){
 
         console.error(
-            "❌ News ID is missing from URL."
+            "News ID is missing from URL."
         );
-
-        hideElement("loadingScreen");
 
         showError(
             "This archive page requires a news ID."
@@ -339,14 +510,15 @@ async function loadLifeTravel(){
 
 
         console.log(
-            "🔍 Loading Firebase document:",
+            "Loading Firebase document:",
             newsId
         );
 
 
-        /* =================================================
-           FIRESTORE DOCUMENT
-        ================================================= */
+        /*
+        2.
+        Firestore document reference
+        */
 
         const docRef =
             doc(
@@ -356,24 +528,30 @@ async function loadLifeTravel(){
             );
 
 
+        /*
+        3.
+        Firestore document 가져오기
+        */
+
         const docSnap =
             await getDoc(
                 docRef
             );
 
 
-        /* =================================================
-           DOCUMENT NOT FOUND
-        ================================================= */
+        /*
+        4.
+        문서가 없을 경우
+        */
 
-        if(!docSnap.exists()){
+        if(
+            !docSnap.exists()
+        ){
 
             console.error(
-                "❌ Firebase document not found:",
+                "Firebase document not found:",
                 newsId
             );
-
-            hideElement("loadingScreen");
 
             showError(
                 "Archive entry not found."
@@ -383,468 +561,467 @@ async function loadLifeTravel(){
 
         }
 
-/* =================================================
-   FULL DATA
-================================================= */
 
-const data =
-    docSnap.data();
+        /*
+        5.
+        Firebase 데이터
+        */
 
+        const data =
+            docSnap.data();
 
-console.log(
-    "✅ Full Firebase data:",
-    data
-);
 
-console.log(
-    "🔑 Firebase field names:",
-    Object.keys(data)
-);
+        console.log(
+            "Firebase data:",
+            data
+        );
 
-console.table(
-    Object.entries(data).map(
-        ([key, value]) => ({
-            field: key,
-            value: value
-        })
-    )
-);
-/* =================================================
-   LIFE & TRAVEL DATA
-   Firebase 필드명을 그대로 사용
-================================================= */
 
+        console.log(
+            "Firebase field names:",
+            Object.keys(data)
+        );
 
-/* =================================================
-   HERO
-================================================= */
 
-setText(
-    "heroEyebrow",
-    data.heroEyebrow
-);
+        /*
+        6.
+        HERO
+        */
 
+        setText(
+            "heroEyebrow",
+            data.heroEyebrow
+        );
 
-setText(
-    "heroTitle",
-    data.heroTitle ||
-    data.title
-);
 
-
-setText(
-    "heroDescription",
-    data.heroDescription ||
-    data.description
-);
-
-
-setImage(
-    "heroImage",
-    data.heroImage ||
-    data.image
-);
-
-
-/* =================================================
-   CHAPTER 01
-================================================= */
-
-setText(
-    "chapter01Label",
-    data.chapter01Label
-);
-
-
-setText(
-    "chapter01Title",
-    data.chapter01Title
-);
-
-
-setText(
-    "chapter01Description",
-    data.chapter01Description
-);
-
-
-setImage(
-    "chapter01Image",
-    data.chapter01Image
-);
-
-
-/* =================================================
-   RIBBON
-================================================= */
-
-setImage(
-    "ribbonImage",
-    data.ribbonImage
-);
-
-
-setText(
-    "ribbonCaption",
-    data.ribbonCaption
-);
-
-
-/* =================================================
-   CHAPTER 02
-================================================= */
-
-setText(
-    "chapter02Label",
-    data.chapter02Label
-);
-
-
-setText(
-    "chapter02Title",
-    data.chapter02Title
-);
-
-
-setText(
-    "chapter02Description",
-    data.chapter02Description
-);
-
-
-setText(
-    "chapter02SideLabel",
-    data.chapter02SideLabel
-);
-
-
-setText(
-    "chapter02Date",
-    data.chapter02Date
-);
-
-
-setImage(
-    "chapter02Image",
-    data.chapter02Image
-);
-
-
-/* =================================================
-   VIDEO
-================================================= */
-
-setText(
-    "videoLabel",
-    data.videoLabel
-);
-
-
-setText(
-    "videoTitle",
-    data.videoTitle
-);
-
-
-setText(
-    "videoDescription",
-    data.videoDescription
-);
-
-
-setText(
-    "videoSubLabel",
-    data.videoSubLabel
-);
-
-
-const videoLoaded =
-    setVideo(
-        data.videoUrl
-    );
-
-
-if(!videoLoaded){
-
-    hideElement(
-        "videoSection"
-    );
-
-}
-
-
-/* =================================================
-   PAGE 01
-================================================= */
-
-setImage(
-    "page01Image",
-    data.page01Image
-);
-
-
-setText(
-    "page01Label",
-    data.page01Label
-);
-
-
-setText(
-    "page01Title",
-    data.page01Title
-);
-
-
-setText(
-    "page01Description",
-    data.page01Description
-);
-
-
-/* =================================================
-   PAGE 02
-================================================= */
-
-setImage(
-    "page02Image",
-    data.page02Image
-);
-
-
-setText(
-    "page02Label",
-    data.page02Label
-);
-
-
-setText(
-    "page02Title",
-    data.page02Title
-);
-
-
-setText(
-    "page02Description",
-    data.page02Description
-);
-
-
-/* =================================================
-   PAGE 03
-================================================= */
-
-setImage(
-    "page03Image",
-    data.page03Image
-);
-
-
-setText(
-    "page03Label",
-    data.page03Label
-);
-
-
-setText(
-    "page03Title",
-    data.page03Title
-);
-
-
-setText(
-    "page03Description",
-    data.page03Description
-);
-
-
-/* =================================================
-   MEMORY A
-================================================= */
-
-setImage(
-    "memoryAImage",
-    data.memoryAImage
-);
-
-
-setText(
-    "memoryALabel",
-    data.memoryALabel
-);
-
-
-setText(
-    "memoryATitle",
-    data.memoryATitle
-);
-
-
-setText(
-    "memoryADescription",
-    data.memoryADescription
-);
-
-
-setText(
-    "memoryANote",
-    data.memoryANote
-);
-
-
-/* =================================================
-   MEMORY B
-================================================= */
-
-setImage(
-    "memoryBImage",
-    data.memoryBImage
-);
-
-
-setText(
-    "memoryBLabel",
-    data.memoryBLabel
-);
-
-
-setText(
-    "memoryBTitle",
-    data.memoryBTitle
-);
-
-
-setText(
-    "memoryBDescription",
-    data.memoryBDescription
-);
-
-
-setText(
-    "memoryBNote",
-    data.memoryBNote
-);
-
-
-/* =================================================
-   MEMORY C
-================================================= */
-
-setImage(
-    "memoryCImage",
-    data.memoryCImage
-);
-
-
-setText(
-    "memoryCLabel",
-    data.memoryCLabel
-);
-
-
-setText(
-    "memoryCTitle",
-    data.memoryCTitle
-);
-
-
-setText(
-    "memoryCDescription",
-    data.memoryCDescription
-);
-
-
-setText(
-    "memoryCNote",
-    data.memoryCNote
-);
-
-
-/* =================================================
-   FOOTER DATE
-================================================= */
-
-if(data.createdAt){
-
-    setText(
-        "footerDate",
-        data.createdAt
-    );
-
-}
-
-
-/* =================================================
-   PAGE TITLE
-================================================= */
-
-if(
-    data.heroTitle ||
-    data.title
-){
-
-    document.title =
-        String(
+        setText(
+            "heroTitle",
             data.heroTitle ||
             data.title
-        ) +
-        " — Life & Travel Archive";
-
-}
+        );
 
 
-/* =================================================
-   REMOVE LOADING
-================================================= */
-
-hideElement(
-    "loadingScreen"
-);
+        setText(
+            "heroDescription",
+            data.heroDescription ||
+            data.description
+        );
 
 
-/* =================================================
-   SUCCESS
-================================================= */
+        setImage(
+            "heroImage",
+            data.heroImage ||
+            data.image
+        );
 
-console.log(
-    "🎉 Life & Travel Archive loaded successfully!",
-    {
-        id:newsId,
-        data:data
+
+        /*
+        7.
+        CHAPTER 01
+        */
+
+        setText(
+            "chapter01Label",
+            data.chapter01Label
+        );
+
+
+        setText(
+            "chapter01Title",
+            data.chapter01Title
+        );
+
+
+        setText(
+            "chapter01Description",
+            data.chapter01Description
+        );
+
+
+        setImage(
+            "chapter01Image",
+            data.chapter01Image
+        );
+
+
+        /*
+        8.
+        RIBBON
+        */
+
+        setImage(
+            "ribbonImage",
+            data.ribbonImage
+        );
+
+
+        setText(
+            "ribbonCaption",
+            data.ribbonCaption
+        );
+
+
+        /*
+        9.
+        CHAPTER 02
+        */
+
+        setText(
+            "chapter02Label",
+            data.chapter02Label
+        );
+
+
+        setText(
+            "chapter02Title",
+            data.chapter02Title
+        );
+
+
+        setText(
+            "chapter02Description",
+            data.chapter02Description
+        );
+
+
+        setText(
+            "chapter02SideLabel",
+            data.chapter02SideLabel
+        );
+
+
+        setText(
+            "chapter02Date",
+            data.chapter02Date
+        );
+
+
+        setImage(
+            "chapter02Image",
+            data.chapter02Image
+        );
+
+
+        /*
+        10.
+        VIDEO
+        */
+
+        setText(
+            "videoLabel",
+            data.videoLabel
+        );
+
+
+        setText(
+            "videoTitle",
+            data.videoTitle
+        );
+
+
+        setText(
+            "videoDescription",
+            data.videoDescription
+        );
+
+
+        setText(
+            "videoSubLabel",
+            data.videoSubLabel
+        );
+
+
+        const videoLoaded =
+            setVideo(
+                data.videoUrl
+            );
+
+
+        /*
+        영상이 없으면
+        전체 VIDEO SECTION 숨김
+        */
+
+        if(!videoLoaded){
+
+            hideElement(
+                "videoSection"
+            );
+
+        }
+
+
+        /*
+        11.
+        PAGE 01
+        */
+
+        setImage(
+            "page01Image",
+            data.page01Image
+        );
+
+
+        setText(
+            "page01Label",
+            data.page01Label
+        );
+
+
+        setText(
+            "page01Title",
+            data.page01Title
+        );
+
+
+        setText(
+            "page01Description",
+            data.page01Description
+        );
+
+
+        /*
+        12.
+        PAGE 02
+        */
+
+        setImage(
+            "page02Image",
+            data.page02Image
+        );
+
+
+        setText(
+            "page02Label",
+            data.page02Label
+        );
+
+
+        setText(
+            "page02Title",
+            data.page02Title
+        );
+
+
+        setText(
+            "page02Description",
+            data.page02Description
+        );
+
+
+        /*
+        13.
+        PAGE 03
+        */
+
+        setImage(
+            "page03Image",
+            data.page03Image
+        );
+
+
+        setText(
+            "page03Label",
+            data.page03Label
+        );
+
+
+        setText(
+            "page03Title",
+            data.page03Title
+        );
+
+
+        setText(
+            "page03Description",
+            data.page03Description
+        );
+
+
+        /*
+        14.
+        MEMORY A
+        */
+
+        setImage(
+            "memoryAImage",
+            data.memoryAImage
+        );
+
+
+        setText(
+            "memoryALabel",
+            data.memoryALabel
+        );
+
+
+        setText(
+            "memoryATitle",
+            data.memoryATitle
+        );
+
+
+        setText(
+            "memoryADescription",
+            data.memoryADescription
+        );
+
+
+        setText(
+            "memoryANote",
+            data.memoryANote
+        );
+
+
+        /*
+        15.
+        MEMORY B
+        */
+
+        setImage(
+            "memoryBImage",
+            data.memoryBImage
+        );
+
+
+        setText(
+            "memoryBLabel",
+            data.memoryBLabel
+        );
+
+
+        setText(
+            "memoryBTitle",
+            data.memoryBTitle
+        );
+
+
+        setText(
+            "memoryBDescription",
+            data.memoryBDescription
+        );
+
+
+        setText(
+            "memoryBNote",
+            data.memoryBNote
+        );
+
+
+        /*
+        16.
+        MEMORY C
+        */
+
+        setImage(
+            "memoryCImage",
+            data.memoryCImage
+        );
+
+
+        setText(
+            "memoryCLabel",
+            data.memoryCLabel
+        );
+
+
+        setText(
+            "memoryCTitle",
+            data.memoryCTitle
+        );
+
+
+        setText(
+            "memoryCDescription",
+            data.memoryCDescription
+        );
+
+
+        setText(
+            "memoryCNote",
+            data.memoryCNote
+        );
+
+
+        /*
+        17.
+        FOOTER DATE
+        */
+
+        if(data.createdAt){
+
+            setText(
+                "footerDate",
+                data.createdAt
+            );
+
+        }
+
+
+        /*
+        18.
+        DOCUMENT TITLE
+        */
+
+        const pageTitle =
+            data.heroTitle ||
+            data.title;
+
+
+        if(pageTitle){
+
+            document.title =
+                String(pageTitle) +
+                " — Life & Travel Archive";
+
+        }
+
+
+        /*
+        19.
+        LOADING SCREEN 제거
+        */
+
+        hideElement(
+            "loadingScreen"
+        );
+
+
+        /*
+        20.
+        SUCCESS LOG
+        */
+
+        console.log(
+            "Life & Travel Archive loaded successfully!",
+            {
+                id:
+                newsId,
+
+                data:
+                data
+            }
+        );
+
+
     }
-);
-       
 
-    }
-
-}
+    catch(error){
 
 
-/* =========================================================
-   ERROR MESSAGE
-========================================================= */
+        /*
+        Firebase 오류
+        */
 
-function showError(message){
-
-    const errorBox =
-        getElement("errorScreen");
-
-
-    const errorText =
-        getElement("errorMessage");
+        console.error(
+            "Failed to load Life & Travel Archive:",
+            error
+        );
 
 
-    if(errorBox){
-
-        errorBox.style.display =
-            "flex";
-
-    }
-
-
-    if(errorText){
-
-        errorText.textContent =
-            message;
+        showError(
+            "Unable to load this archive. Please try again."
+        );
 
     }
 
@@ -985,11 +1162,9 @@ img{
 
     gap:15px;
 
-    background:
-        #F3F1E8;
+    background:#F3F1E8;
 
-    color:
-        #5E6958;
+    color:#5E6958;
 
 }
 
@@ -1044,11 +1219,9 @@ img{
 
     padding:30px;
 
-    background:
-        #F3F1E8;
+    background:#F3F1E8;
 
-    color:
-        #5E6958;
+    color:#5E6958;
 
 }
 
@@ -1250,8 +1423,7 @@ img{
         1px solid
         rgba(108,120,102,.55);
 
-    background:
-        #F9F8F2;
+    background:#F9F8F2;
 
     box-shadow:
 
@@ -1389,8 +1561,7 @@ img{
         1px solid
         rgba(105,116,75,.45);
 
-    background:
-        #F5F2E6;
+    background:#F5F2E6;
 
     box-shadow:
 
@@ -1512,8 +1683,7 @@ img{
 
     position:relative;
 
-    background:
-        #F7F6EF;
+    background:#F7F6EF;
 
     border:
         1px solid
@@ -1555,8 +1725,7 @@ img{
 
     overflow:hidden;
 
-    background:
-        #D9DDD2;
+    background:#D9DDD2;
 
 }
 
@@ -2023,9 +2192,7 @@ font-light
 </p>
 
 <div class="botanical-divider pt-4">
-
 ✦
-
 </div>
 
 </div>
@@ -2380,9 +2547,7 @@ px-6
 <div class="section-heading">
 
 <span class="archive-label">
-
 A FEW QUIET MOMENTS
-
 </span>
 
 </div>
@@ -2636,7 +2801,7 @@ mt-2
 </section>
 
 <!-- =========================================================
-     MEMORY A
+     MEMORY A / B / C
 ========================================================= -->
 
 <section
@@ -2644,6 +2809,8 @@ class="
 section-life-memory
 w-full
 ">
+
+<!-- MEMORY A -->
 
 <div
 class="
@@ -2653,8 +2820,7 @@ grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-"
->
+">
 
 <div class="photo-frame w-full">
 
@@ -2690,8 +2856,7 @@ p-8
 md:p-16
 space-y-3
 text-left
-"
->
+">
 
 <span
 id="memoryALabel"
@@ -2724,9 +2889,7 @@ class="sparkle-line pt-2">
 
 </div>
 
-<!-- =========================================================
-     MEMORY B
-========================================================= -->
+<!-- MEMORY B -->
 
 <div
 class="
@@ -2736,8 +2899,7 @@ grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-"
->
+">
 
 <div
 class="
@@ -2748,8 +2910,7 @@ text-left
 md:text-right
 order-2
 md:order-1
-"
->
+">
 
 <span
 id="memoryBLabel"
@@ -2788,8 +2949,7 @@ md:justify-end
 class="
 order-1
 md:order-2
-"
->
+">
 
 <div class="photo-frame w-full">
 
@@ -2823,9 +2983,7 @@ object-cover
 
 </div>
 
-<!-- =========================================================
-     MEMORY C
-========================================================= -->
+<!-- MEMORY C -->
 
 <div
 class="
@@ -2834,8 +2992,7 @@ grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-"
->
+">
 
 <div class="photo-frame w-full">
 
@@ -2871,8 +3028,7 @@ p-8
 md:p-16
 space-y-3
 text-left
-"
->
+">
 
 <span
 id="memoryCLabel"
@@ -2948,8 +3104,7 @@ class="
 font-serif-title
 tracking-widest
 text-sm
-"
->
+">
 
 LIFE & TRAVEL
 
@@ -2961,8 +3116,7 @@ text-xs
 mt-3
 opacity-70
 leading-relaxed
-"
->
+">
 
 A quiet archive of
 places, flowers and memories.
@@ -2981,8 +3135,7 @@ text-[10px]
 tracking-[0.3em]
 mb-5
 opacity-60
-"
->
+">
 
 EXPLORE THE ARCHIVE
 
@@ -3069,8 +3222,7 @@ class="
 text-[10px]
 opacity-60
 mt-2
-"
->
+">
 
 First page written · 2026
 
@@ -3081,8 +3233,7 @@ class="
 text-[10px]
 opacity-60
 mt-1
-"
->
+">
 
 © 2026 MY VINTAGE ATELIER
 
@@ -3099,7 +3250,7 @@ mt-1
 </main>
 
 <!-- =========================================================
-     LUCIDE
+     LUCIDE INITIALIZE
 ========================================================= -->
 
 <script>
@@ -3123,4 +3274,5 @@ document.addEventListener(
 </script>
 
 </body>
+
 </html>
