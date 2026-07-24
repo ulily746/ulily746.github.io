@@ -3517,19 +3517,99 @@ alt="Film memory 3">
 <!-- =========================================================
      FIREBASE DATA LOADER
 ========================================================= -->
-
 <script type="module">
 
-const params = new URLSearchParams(window.location.search);
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-const newsId = params.get("id");
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
+
+    projectId:
+    "yuri-research-portfolio",
+
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
+
+    messagingSenderId:
+    "231317507996",
+
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
+
+    measurementId:
+    "G-57VHW2454"
+
+};
+
+
+/* =========================================================
+   FIREBASE INIT
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   GET NEWS ID FROM URL
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const newsId =
+    params.get("id");
+
+
+console.log(
+    "Current URL:",
+    window.location.href
+);
+
+console.log(
+    "News ID:",
+    newsId
+);
+
+
+/* =========================================================
+   LOAD NEWS DATA
+========================================================= */
 
 async function loadNewsData(){
 
+    /* ---------------------------------------------
+       ID CHECK
+    --------------------------------------------- */
+
     if(!newsId){
 
-        console.warn("News document ID is missing.");
+        console.error(
+            "❌ News ID is missing from URL."
+        );
 
         return;
 
@@ -3538,22 +3618,36 @@ async function loadNewsData(){
 
     try{
 
+        console.log(
+            "🔍 Loading Firebase document:",
+            newsId
+        );
+
+
+        /* ---------------------------------------------
+           GET DOCUMENT
+        --------------------------------------------- */
+
         const newsRef =
-            window.firebaseDoc(
-                window.firebaseDB,
+            doc(
+                db,
                 "news",
                 newsId
             );
 
 
         const snapshot =
-            await window.firebaseGetDoc(newsRef);
+            await getDoc(newsRef);
 
+
+        /* ---------------------------------------------
+           DOCUMENT CHECK
+        --------------------------------------------- */
 
         if(!snapshot.exists()){
 
             console.error(
-                "News document not found:",
+                "❌ Firebase document not found:",
                 newsId
             );
 
@@ -3562,346 +3656,485 @@ async function loadNewsData(){
         }
 
 
-        const data = snapshot.data();
-         const designData = data.content || {};
-
-/* =========================================
-   HERO
-========================================= */
-
-if(designData.heroTitleTop){
-
-    document
-        .getElementById("heroTitleTop")
-        .textContent =
-            designData.heroTitleTop;
-
-}
-
-
-if(data.heroTitleBottom1){
-
-    document
-        .getElementById("heroTitleBottom1")
-        .textContent =
-            data.heroTitleBottom1;
-
-}
-
-
-if(data.heroTitleBottom2){
-
-    document
-        .getElementById("heroTitleBottom2")
-        .textContent =
-            data.heroTitleBottom2;
-
-}
-
-
-if(data.heroImage){
-
-    document
-        .getElementById("heroImage")
-        .src =
-            data.heroImage;
-
-}
-       
-
-
-        /* =========================================
-           INTRO
-        ========================================= */
-
-        if(data.introText){
-
-            document
-                .getElementById("introText")
-                .textContent =
-                    data.introText;
-
-        }
-
-
-        /* =========================================
-           MEMORY 1
-        ========================================= */
-
-        if(data.memory1Image){
-
-            document
-                .getElementById("memory1Image")
-                .src =
-                    data.memory1Image;
-
-        }
-
-
-        if(data.memory1Text){
-
-            document
-                .getElementById("memory1Text")
-                .textContent =
-                    data.memory1Text;
-
-        }
-
-
-        /* =========================================
-           MEMORY 2
-        ========================================= */
-
-        if(data.memory2Image){
-
-            document
-                .getElementById("memory2Image")
-                .src =
-                    data.memory2Image;
-
-        }
-
-
-        if(data.memory2Text){
-
-            document
-                .getElementById("memory2Text")
-                .textContent =
-                    data.memory2Text;
-
-        }
-
-
-        /* =========================================
-           MEMORY 3
-        ========================================= */
-
-        if(data.memory3Image){
-
-            document
-                .getElementById("memory3Image")
-                .src =
-                    data.memory3Image;
-
-        }
-
-
-        if(data.memory3Text){
-
-            document
-                .getElementById("memory3Text")
-                .textContent =
-                    data.memory3Text;
-
-        }
-
-
-        /* =========================================
-           MEMORY 4
-        ========================================= */
-
-        if(data.memory4Image){
-
-            document
-                .getElementById("memory4Image")
-                .src =
-                    data.memory4Image;
-
-        }
-
-
-        if(data.memory4Text){
-
-            document
-                .getElementById("memory4Text")
-                .textContent =
-                    data.memory4Text;
-
-        }
-
-
-        /* =========================================
-   VIDEO
-========================================= */
-
-if(data.videoUrl){
-
-    const video =
-        document
-        .getElementById("memoryVideo");
-
-
-    const source =
-        document
-        .getElementById("memoryVideoSource");
-
-
-    source.src =
-        data.videoUrl;
-
-
-    video.load();
-
-}
-
-
-if(data.videoCaption){
-
-    document
-        .getElementById("videoCaption")
-        .textContent =
-            data.videoCaption;
-
-}
-
-        /* =========================================
-           FILM 1
-        ========================================= */
-
-        if(data.film1Image){
-
-            document
-                .getElementById("film1Image")
-                .src =
-                    data.film1Image;
-
-        }
-
-
-        if(data.film1Title){
-
-            document
-                .getElementById("film1Title")
-                .textContent =
-                    data.film1Title;
-
-        }
-
-
-        if(data.film1Text){
-
-            document
-                .getElementById("film1Text")
-                .textContent =
-                    data.film1Text;
-
-        }
-
-
-        /* =========================================
-           FILM 2
-        ========================================= */
-
-        if(data.film2Image){
-
-            document
-                .getElementById("film2Image")
-                .src =
-                    data.film2Image;
-
-        }
-
-
-        /* =========================================
-           FILM 3
-        ========================================= */
-
-        if(data.film3Image){
-
-            document
-                .getElementById("film3Image")
-                .src =
-                    data.film3Image;
-
-        }
-
-
-        if(data.film3Title){
-
-            document
-                .getElementById("film3Title")
-                .textContent =
-                    data.film3Title;
-
-        }
-
-
-        if(data.film3Text){
-
-            document
-                .getElementById("film3Text")
-                .textContent =
-                    data.film3Text;
-
-        }
-
-
-        /* =========================================
-           TRAVEL
-        ========================================= */
-
-      if(data.travelMonth || data.travelYear){
-
-    const month =
-        data.travelMonth || "";
-
-    const year =
-        data.travelYear || "";
-
-    document
-        .getElementById("travelMonth")
-        .textContent =
-            `${month} ${year}`;
-
-}
-
-
-        if(data.travelLocation){
-
-    document
-        .getElementById("travelLocation")
-        .textContent =
-            data.travelLocation;
-
-    document
-        .getElementById("travelLocationMap")
-        .textContent =
-            data.travelLocation;
-
-}
-
-
-        if(data.travelYear){
-
-    document
-        .getElementById("travelYear")
-        .innerHTML =
-            `summer<br>${data.travelYear}`;
-
-}
-
-
-        if(data.travelText){
-
-            document
-                .getElementById("travelText")
-                .textContent =
-                    data.travelText;
-
-        }
+        /* ---------------------------------------------
+           GET FIREBASE DATA
+        --------------------------------------------- */
+
+        const data =
+            snapshot.data();
 
 
         console.log(
-            "FilmArchiveDesign loaded:",
+            "✅ Full Firebase data:",
             data
+        );
+
+
+        /* ---------------------------------------------
+           GET DESIGN CONTENT
+           
+           Admin에서 저장한 실제 구조:
+           
+           content: {
+               hero: {...},
+               intro: {...},
+               memories: [...],
+               video: {...},
+               films: [...],
+               travel: {...}
+           }
+        --------------------------------------------- */
+
+        const content =
+            data.content || {};
+
+
+        console.log(
+            "🎨 Design content:",
+            content
+        );
+
+
+
+        /* =================================================
+           HERO
+        ================================================= */
+
+        if(
+            content.hero &&
+            content.hero.titleTop
+        ){
+
+            document
+                .getElementById(
+                    "heroTitleTop"
+                )
+                .textContent =
+                    content.hero.titleTop;
+
+        }
+
+
+        if(
+            content.hero &&
+            content.hero.titleBottom1
+        ){
+
+            document
+                .getElementById(
+                    "heroTitleBottom1"
+                )
+                .textContent =
+                    content.hero.titleBottom1;
+
+        }
+
+
+        if(
+            content.hero &&
+            content.hero.titleBottom2
+        ){
+
+            document
+                .getElementById(
+                    "heroTitleBottom2"
+                )
+                .textContent =
+                    content.hero.titleBottom2;
+
+        }
+
+
+        if(
+            content.hero &&
+            content.hero.image
+        ){
+
+            document
+                .getElementById(
+                    "heroImage"
+                )
+                .src =
+                    content.hero.image;
+
+        }
+
+
+
+        /* =================================================
+           INTRO
+        ================================================= */
+
+        if(
+            content.intro &&
+            content.intro.text
+        ){
+
+            document
+                .getElementById(
+                    "introText"
+                )
+                .textContent =
+                    content.intro.text;
+
+        }
+
+
+
+        /* =================================================
+           MEMORIES
+           
+           memories[0] = Memory 1
+           memories[1] = Memory 2
+           memories[2] = Memory 3
+           memories[3] = Memory 4
+        ================================================= */
+
+        if(
+            Array.isArray(
+                content.memories
+            )
+        ){
+
+            content.memories.forEach(
+                (memory, index) => {
+
+                    const number =
+                        index + 1;
+
+
+                    /* -------------------------
+                       MEMORY IMAGE
+                    ------------------------- */
+
+                    if(
+                        memory &&
+                        memory.image
+                    ){
+
+                        const imageElement =
+                            document.getElementById(
+                                `memory${number}Image`
+                            );
+
+
+                        if(imageElement){
+
+                            imageElement.src =
+                                memory.image;
+
+                        }
+
+                    }
+
+
+                    /* -------------------------
+                       MEMORY TEXT
+                    ------------------------- */
+
+                    if(
+                        memory &&
+                        memory.text
+                    ){
+
+                        const textElement =
+                            document.getElementById(
+                                `memory${number}Text`
+                            );
+
+
+                        if(textElement){
+
+                            textElement.textContent =
+                                memory.text;
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           VIDEO
+        ================================================= */
+
+        if(
+            content.video &&
+            content.video.url
+        ){
+
+            const video =
+                document.getElementById(
+                    "memoryVideo"
+                );
+
+
+            const source =
+                document.getElementById(
+                    "memoryVideoSource"
+                );
+
+
+            if(
+                video &&
+                source
+            ){
+
+                source.src =
+                    content.video.url;
+
+
+                video.load();
+
+            }
+
+        }
+
+
+        if(
+            content.video &&
+            content.video.caption
+        ){
+
+            document
+                .getElementById(
+                    "videoCaption"
+                )
+                .textContent =
+                    content.video.caption;
+
+        }
+
+
+
+        /* =================================================
+           FILMS
+           
+           films[0] = Film 1
+           films[1] = Film 2
+           films[2] = Film 3
+        ================================================= */
+
+        if(
+            Array.isArray(
+                content.films
+            )
+        ){
+
+            content.films.forEach(
+                (film, index) => {
+
+                    const number =
+                        index + 1;
+
+
+                    if(
+                        !film
+                    ){
+
+                        return;
+
+                    }
+
+
+                    /* -------------------------
+                       FILM IMAGE
+                    ------------------------- */
+
+                    if(
+                        film.image
+                    ){
+
+                        const imageElement =
+                            document.getElementById(
+                                `film${number}Image`
+                            );
+
+
+                        if(imageElement){
+
+                            imageElement.src =
+                                film.image;
+
+                        }
+
+                    }
+
+
+                    /* -------------------------
+                       FILM TITLE
+                    ------------------------- */
+
+                    if(
+                        film.title
+                    ){
+
+                        const titleElement =
+                            document.getElementById(
+                                `film${number}Title`
+                            );
+
+
+                        if(titleElement){
+
+                            titleElement.textContent =
+                                film.title;
+
+                        }
+
+                    }
+
+
+                    /* -------------------------
+                       FILM TEXT
+                    ------------------------- */
+
+                    if(
+                        film.text
+                    ){
+
+                        const textElement =
+                            document.getElementById(
+                                `film${number}Text`
+                            );
+
+
+                        if(textElement){
+
+                            textElement.textContent =
+                                film.text;
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           TRAVEL
+        ================================================= */
+
+        if(
+            content.travel &&
+            (
+                content.travel.month ||
+                content.travel.year
+            )
+        ){
+
+            const month =
+                content.travel.month || "";
+
+
+            const year =
+                content.travel.year || "";
+
+
+            document
+                .getElementById(
+                    "travelMonth"
+                )
+                .textContent =
+                    `${month} ${year}`;
+
+        }
+
+
+        /* ---------------------------------------------
+           TRAVEL LOCATION
+        --------------------------------------------- */
+
+        if(
+            content.travel &&
+            content.travel.location
+        ){
+
+            document
+                .getElementById(
+                    "travelLocation"
+                )
+                .textContent =
+                    content.travel.location;
+
+
+            document
+                .getElementById(
+                    "travelLocationMap"
+                )
+                .textContent =
+                    content.travel.location;
+
+        }
+
+
+        /* ---------------------------------------------
+           TRAVEL YEAR
+        --------------------------------------------- */
+
+        if(
+            content.travel &&
+            content.travel.year
+        ){
+
+            document
+                .getElementById(
+                    "travelYear"
+                )
+                .innerHTML =
+                    `summer<br>${content.travel.year}`;
+
+        }
+
+
+        /* ---------------------------------------------
+           TRAVEL TEXT
+        --------------------------------------------- */
+
+        if(
+            content.travel &&
+            content.travel.text
+        ){
+
+            document
+                .getElementById(
+                    "travelText"
+                )
+                .textContent =
+                    content.travel.text;
+
+        }
+
+
+
+        /* =================================================
+           SUCCESS
+        ================================================= */
+
+        console.log(
+            "🎉 FilmArchiveDesign loaded successfully!",
+            {
+                id: newsId,
+                content: content
+            }
         );
 
     }
 
+
     catch(error){
 
         console.error(
-            "Failed to load news:",
+            "❌ Failed to load Firebase data:",
             error
         );
 
@@ -3910,10 +4143,13 @@ if(data.videoCaption){
 }
 
 
+/* =========================================================
+   START
+========================================================= */
+
 loadNewsData();
 
 </script>
-
 
 </body>
 
