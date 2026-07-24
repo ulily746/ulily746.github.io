@@ -3563,17 +3563,18 @@ async function loadNewsData(){
 
 
         const data = snapshot.data();
+         const designData = data.content || {};
 
 /* =========================================
    HERO
 ========================================= */
 
-if(data.heroTitleTop){
+if(designData.heroTitleTop){
 
     document
         .getElementById("heroTitleTop")
         .textContent =
-            data.heroTitleTop;
+            designData.heroTitleTop;
 
 }
 
