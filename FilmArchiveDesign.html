@@ -3839,7 +3839,7 @@ if(data.videoCaption){
            TRAVEL
         ========================================= */
 
-        if(data.travelYear || data.travelMonth){
+      if(data.travelMonth || data.travelYear){
 
     const month =
         data.travelMonth || "";
@@ -3848,9 +3848,9 @@ if(data.videoCaption){
         data.travelYear || "";
 
     document
-        .getElementById("travelYear")
-        .innerHTML =
-            `${month}<br>${year}`;
+        .getElementById("travelMonth")
+        .textContent =
+            `${month} ${year}`;
 
 }
 
