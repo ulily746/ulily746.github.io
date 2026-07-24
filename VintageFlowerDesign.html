@@ -124,69 +124,56 @@ function getElement(id){
 
 function setText(id, value){
 
-    const element =
-        getElement(id);
+    const element = document.getElementById(id);
 
-    if(
-        !element ||
-        value === undefined ||
-        value === null
-    ){
-
+    if(!element){
+        console.warn(`⚠️ HTML element not found: #${id}`);
         return;
-
     }
 
+    if(value === undefined || value === null){
+        console.warn(`⚠️ Firebase field is empty or missing: ${id}`);
+        return;
+    }
 
     let finalValue = value;
-
-
-    /*
-       Firebase Timestamp 또는 객체 대응
-    */
 
     if(
         typeof value === "object" &&
         value !== null
     ){
 
-        if(
-            typeof value.toDate === "function"
-        ){
+        if(typeof value.toDate === "function"){
 
-            finalValue =
-                value.toDate().toLocaleDateString(
+            finalValue = value
+                .toDate()
+                .toLocaleDateString(
                     "en-US",
                     {
-                        year:"numeric",
-                        month:"long",
-                        day:"numeric"
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric"
                     }
                 );
 
         }else{
 
-            finalValue =
-                String(value);
+            finalValue = JSON.stringify(value);
 
         }
 
     }
 
+    const text = String(finalValue).trim();
 
-    const text =
-        String(finalValue).trim();
+    element.textContent = text;
 
-
-    if(text !== ""){
-
-        element.textContent =
-            text;
-
-    }
+    console.log(
+        `✏️ Applied text → #${id}:`,
+        text
+    );
 
 }
-
 
 /* =========================================================
    IMAGE SETTER
@@ -409,7 +396,19 @@ console.log(
     data
 );
 
+console.log(
+    "🔑 Firebase field names:",
+    Object.keys(data)
+);
 
+console.table(
+    Object.entries(data).map(
+        ([key, value]) => ({
+            field: key,
+            value: value
+        })
+    )
+);
 /* =================================================
    LIFE & TRAVEL DATA
    Firebase 필드명을 그대로 사용
