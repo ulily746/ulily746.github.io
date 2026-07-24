@@ -1,32 +1,56 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Life & Travel Archive - Botanical Diary</title>
+<title>Life & Travel Archive</title>
+
+<!-- =========================================================
+     TAILWIND
+========================================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<!-- =========================================================
+     LUCIDE
+========================================================= -->
+
 <script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- =========================================================
+     GOOGLE FONTS
+========================================================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="
-https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap
-" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-        getFirestore,
-        doc,
-        getDoc
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // Firebase 설정값
-    const firebaseConfig = {
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
 
     apiKey:
     "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
@@ -47,94 +71,926 @@ https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jak
     "1:231317507996:web:9773282c138706d886c259",
 
     measurementId:
-    "G-57VHW2454E"
+    "G-57VHW2454"
 
 };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
 
-    async function loadVintageFlower() {
 
-        try {
+/* =========================================================
+   FIREBASE INITIALIZE
+========================================================= */
 
-            // Firebase Firestore 문서
-            const docRef = doc(db, "news", "VintageFloweDesign");
-            const docSnap = await getDoc(docRef);
+const app = initializeApp(firebaseConfig);
 
-            if (!docSnap.exists()) {
-                console.error("vintageflowedesign 문서를 찾을 수 없습니다.");
-                return;
-            }
+const db = getFirestore(app);
 
-            const data = docSnap.data();
 
-            // 모든 data-field 요소에 Firebase 값 적용
-            document.querySelectorAll("[data-field]").forEach(element => {
+/* =========================================================
+   URL에서 NEWS ID 가져오기
+========================================================= */
 
-                const field = element.dataset.field;
-                const value = data[field];
+const params =
+    new URLSearchParams(window.location.search);
 
-                if (value === undefined || value === null) return;
+const newsId =
+    params.get("id");
 
-                const cleanValue = String(value).trim();
 
-                if (element.tagName === "IMG") {
+console.log(
+    "Current URL:",
+    window.location.href
+);
 
-                    element.src = cleanValue;
+console.log(
+    "News ID:",
+    newsId
+);
 
-                } else if (element.tagName === "VIDEO") {
 
-                    element.src = cleanValue;
+/* =========================================================
+   ELEMENT HELPERS
+========================================================= */
 
-                } else if (element.tagName === "SOURCE") {
+function getElement(id){
 
-                    element.src = cleanValue;
+    return document.getElementById(id);
 
-                } else {
+}
 
-                    element.textContent = cleanValue;
 
-                }
+/* =========================================================
+   TEXT SETTER
+========================================================= */
 
-            });
+function setText(id, value){
 
-        } catch (error) {
+    const element =
+        getElement(id);
 
-            console.error(
-                "Firebase 데이터를 불러오는 중 오류가 발생했습니다:",
-                error
-            );
+    if(
+        !element ||
+        value === undefined ||
+        value === null
+    ){
+
+        return;
+
+    }
+
+
+    let finalValue = value;
+
+
+    /*
+       Firebase Timestamp 또는 객체 대응
+    */
+
+    if(
+        typeof value === "object" &&
+        value !== null
+    ){
+
+        if(
+            typeof value.toDate === "function"
+        ){
+
+            finalValue =
+                value.toDate().toLocaleDateString(
+                    "en-US",
+                    {
+                        year:"numeric",
+                        month:"long",
+                        day:"numeric"
+                    }
+                );
+
+        }else{
+
+            finalValue =
+                String(value);
 
         }
 
     }
 
-    loadVintageFlower();
+
+    const text =
+        String(finalValue).trim();
+
+
+    if(text !== ""){
+
+        element.textContent =
+            text;
+
+    }
+
+}
+
+
+/* =========================================================
+   IMAGE SETTER
+========================================================= */
+
+function setImage(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(
+        !element ||
+        !value
+    ){
+
+        return;
+
+    }
+
+
+    const imageUrl =
+        String(value).trim();
+
+
+    if(
+        !imageUrl ||
+        imageUrl === "undefined" ||
+        imageUrl === "null"
+    ){
+
+        return;
+
+    }
+
+
+    element.src =
+        imageUrl;
+
+
+    element.addEventListener(
+        "error",
+        () => {
+
+            console.warn(
+                "Image failed to load:",
+                imageUrl
+            );
+
+            element.style.display =
+                "none";
+
+        },
+        {
+            once:true
+        }
+    );
+
+}
+
+
+/* =========================================================
+   VIDEO SETTER
+========================================================= */
+
+function setVideo(value){
+
+    const source =
+        getElement("videoUrl");
+
+
+    const video =
+        getElement("mainVideo");
+
+
+    if(
+        !source ||
+        !video ||
+        !value
+    ){
+
+        return false;
+
+    }
+
+
+    const videoUrl =
+        String(value).trim();
+
+
+    if(
+        !videoUrl ||
+        videoUrl === "undefined" ||
+        videoUrl === "null"
+    ){
+
+        return false;
+
+    }
+
+
+    source.src =
+        videoUrl;
+
+
+    video.load();
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   HIDE ELEMENT
+========================================================= */
+
+function hideElement(id){
+
+    const element =
+        getElement(id);
+
+
+    if(element){
+
+        element.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD FIREBASE NEWS
+========================================================= */
+
+async function loadLifeTravel(){
+
+
+    /* =====================================================
+       ID CHECK
+    ===================================================== */
+
+    if(!newsId){
+
+        console.error(
+            "❌ News ID is missing from URL."
+        );
+
+        hideElement("loadingScreen");
+
+        showError(
+            "This archive page requires a news ID."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+
+        console.log(
+            "🔍 Loading Firebase document:",
+            newsId
+        );
+
+
+        /* =================================================
+           FIRESTORE DOCUMENT
+        ================================================= */
+
+        const docRef =
+            doc(
+                db,
+                "news",
+                newsId
+            );
+
+
+        const docSnap =
+            await getDoc(
+                docRef
+            );
+
+
+        /* =================================================
+           DOCUMENT NOT FOUND
+        ================================================= */
+
+        if(!docSnap.exists()){
+
+            console.error(
+                "❌ Firebase document not found:",
+                newsId
+            );
+
+            hideElement("loadingScreen");
+
+            showError(
+                "Archive entry not found."
+            );
+
+            return;
+
+        }
+
+
+        /* =================================================
+           FULL DATA
+        ================================================= */
+
+        const data =
+            docSnap.data();
+
+
+        console.log(
+            "✅ Full Firebase data:",
+            data
+        );
+
+
+        /* =================================================
+           CONTENT
+        ================================================= */
+
+        /*
+           대부분의 News Admin 데이터는
+
+           news
+             └── content
+                   ├── hero
+                   ├── chapter01
+                   ├── ribbon
+                   ├── chapter02
+                   ├── video
+                   ├── page01
+                   ├── page02
+                   ├── page03
+                   ├── memoryA
+                   ├── memoryB
+                   └── memoryC
+
+           구조를 사용함.
+        */
+
+
+        const content =
+            data.content || data;
+
+
+        console.log(
+            "🎨 Life & Travel content:",
+            content
+        );
+
+
+        console.log(
+            "🎨 Design:",
+            data.design
+        );
+
+
+        /* =================================================
+           HERO
+        ================================================= */
+
+        const hero =
+            content.hero || {};
+
+
+        setText(
+            "heroEyebrow",
+            hero.eyebrow
+        );
+
+
+        setText(
+            "heroTitle",
+            hero.title ||
+            data.title
+        );
+
+
+        setText(
+            "heroDescription",
+            hero.description ||
+            data.description
+        );
+
+
+        setImage(
+            "heroImage",
+            hero.image ||
+            data.image
+        );
+
+
+        /* =================================================
+           CHAPTER 01
+        ================================================= */
+
+        const chapter01 =
+            content.chapter01 || {};
+
+
+        setText(
+            "chapter01Label",
+            chapter01.label
+        );
+
+
+        setText(
+            "chapter01Title",
+            chapter01.title
+        );
+
+
+        setText(
+            "chapter01Description",
+            chapter01.description
+        );
+
+
+        setImage(
+            "chapter01Image",
+            chapter01.image
+        );
+
+
+        /* =================================================
+           RIBBON
+        ================================================= */
+
+        const ribbon =
+            content.ribbon || {};
+
+
+        setImage(
+            "ribbonImage",
+            ribbon.image
+        );
+
+
+        setText(
+            "ribbonCaption",
+            ribbon.caption
+        );
+
+
+        /* =================================================
+           CHAPTER 02
+        ================================================= */
+
+        const chapter02 =
+            content.chapter02 || {};
+
+
+        setText(
+            "chapter02Label",
+            chapter02.label
+        );
+
+
+        setText(
+            "chapter02Title",
+            chapter02.title
+        );
+
+
+        setText(
+            "chapter02Description",
+            chapter02.description
+        );
+
+
+        setText(
+            "chapter02SideLabel",
+            chapter02.sideLabel
+        );
+
+
+        setText(
+            "chapter02Date",
+            chapter02.date
+        );
+
+
+        setImage(
+            "chapter02Image",
+            chapter02.image
+        );
+
+
+        /* =================================================
+           VIDEO
+        ================================================= */
+
+        const video =
+            content.video || {};
+
+
+        setText(
+            "videoLabel",
+            video.label
+        );
+
+
+        setText(
+            "videoTitle",
+            video.title
+        );
+
+
+        setText(
+            "videoDescription",
+            video.description
+        );
+
+
+        setText(
+            "videoSubLabel",
+            video.subLabel
+        );
+
+
+        const videoLoaded =
+            setVideo(
+                video.url
+            );
+
+
+        if(!videoLoaded){
+
+            hideElement(
+                "videoSection"
+            );
+
+        }
+
+
+        /* =================================================
+           PAGE 01
+        ================================================= */
+
+        const page01 =
+            content.page01 || {};
+
+
+        setImage(
+            "page01Image",
+            page01.image
+        );
+
+
+        setText(
+            "page01Label",
+            page01.label
+        );
+
+
+        setText(
+            "page01Title",
+            page01.title
+        );
+
+
+        setText(
+            "page01Description",
+            page01.description
+        );
+
+
+        /* =================================================
+           PAGE 02
+        ================================================= */
+
+        const page02 =
+            content.page02 || {};
+
+
+        setImage(
+            "page02Image",
+            page02.image
+        );
+
+
+        setText(
+            "page02Label",
+            page02.label
+        );
+
+
+        setText(
+            "page02Title",
+            page02.title
+        );
+
+
+        setText(
+            "page02Description",
+            page02.description
+        );
+
+
+        /* =================================================
+           PAGE 03
+        ================================================= */
+
+        const page03 =
+            content.page03 || {};
+
+
+        setImage(
+            "page03Image",
+            page03.image
+        );
+
+
+        setText(
+            "page03Label",
+            page03.label
+        );
+
+
+        setText(
+            "page03Title",
+            page03.title
+        );
+
+
+        setText(
+            "page03Description",
+            page03.description
+        );
+
+
+        /* =================================================
+           MEMORY A
+        ================================================= */
+
+        const memoryA =
+            content.memoryA || {};
+
+
+        setImage(
+            "memoryAImage",
+            memoryA.image
+        );
+
+
+        setText(
+            "memoryALabel",
+            memoryA.label
+        );
+
+
+        setText(
+            "memoryATitle",
+            memoryA.title
+        );
+
+
+        setText(
+            "memoryADescription",
+            memoryA.description
+        );
+
+
+        setText(
+            "memoryANote",
+            memoryA.note
+        );
+
+
+        /* =================================================
+           MEMORY B
+        ================================================= */
+
+        const memoryB =
+            content.memoryB || {};
+
+
+        setImage(
+            "memoryBImage",
+            memoryB.image
+        );
+
+
+        setText(
+            "memoryBLabel",
+            memoryB.label
+        );
+
+
+        setText(
+            "memoryBTitle",
+            memoryB.title
+        );
+
+
+        setText(
+            "memoryBDescription",
+            memoryB.description
+        );
+
+
+        setText(
+            "memoryBNote",
+            memoryB.note
+        );
+
+
+        /* =================================================
+           MEMORY C
+        ================================================= */
+
+        const memoryC =
+            content.memoryC || {};
+
+
+        setImage(
+            "memoryCImage",
+            memoryC.image
+        );
+
+
+        setText(
+            "memoryCLabel",
+            memoryC.label
+        );
+
+
+        setText(
+            "memoryCTitle",
+            memoryC.title
+        );
+
+
+        setText(
+            "memoryCDescription",
+            memoryC.description
+        );
+
+
+        setText(
+            "memoryCNote",
+            memoryC.note
+        );
+
+
+        /* =================================================
+           FOOTER DATE
+        ================================================= */
+
+        if(data.createdAt){
+
+            setText(
+                "footerDate",
+                data.createdAt
+            );
+
+        }
+
+
+        /* =================================================
+           PAGE TITLE
+        ================================================= */
+
+        if(
+            hero.title ||
+            data.title
+        ){
+
+            document.title =
+                String(
+                    hero.title ||
+                    data.title
+                ) +
+                " — Life & Travel Archive";
+
+        }
+
+
+        /* =================================================
+           REMOVE LOADING
+        ================================================= */
+
+        hideElement(
+            "loadingScreen"
+        );
+
+
+        /* =================================================
+           SUCCESS
+        ================================================= */
+
+        console.log(
+            "🎉 Life & Travel Archive loaded successfully!",
+            {
+                id:newsId,
+                content:content
+            }
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "❌ Failed to load Firebase data:",
+            error
+        );
+
+
+        hideElement(
+            "loadingScreen"
+        );
+
+
+        showError(
+            "Unable to load this archive."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+function showError(message){
+
+    const errorBox =
+        getElement("errorScreen");
+
+
+    const errorText =
+        getElement("errorMessage");
+
+
+    if(errorBox){
+
+        errorBox.style.display =
+            "flex";
+
+    }
+
+
+    if(errorText){
+
+        errorText.textContent =
+            message;
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadLifeTravel();
 
 </script>
+
+<!-- =========================================================
+     CSS
+========================================================= -->
+
 <style>
 
-/* ========================================
+/* =========================================================
    BASE
-======================================== */
+========================================================= */
 
 :root{
 
     --paper:#F3F1E8;
+
     --paper-light:#F8F7F1;
 
     --sage-bg:#E7EDE3;
+
     --sage-light:#EEF2EA;
 
     --moss:#5E6958;
+
     --deep-moss:#3F4B40;
 
     --sage:#899681;
 
     --line:#B8B9A8;
+
     --soft-line:#D4D5C7;
 
     --text:#3F473D;
+
     --subtext:#6F766A;
 
     --warm:#EDE7DB;
@@ -142,8 +998,17 @@ https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jak
 }
 
 
+*{
+
+    box-sizing:border-box;
+
+}
+
+
 html{
+
     scroll-behavior:smooth;
+
 }
 
 
@@ -151,22 +1016,41 @@ body{
 
     margin:0;
 
-    font-family:'Plus Jakarta Sans', sans-serif;
+    font-family:
+        'Plus Jakarta Sans',
+        sans-serif;
 
-    background:var(--paper);
+    background:
+        var(--paper);
 
-    color:var(--text);
+    color:
+        var(--text);
+
+}
+
+
+img{
+
+    max-width:100%;
 
 }
 
 
 .font-serif-title{
-    font-family:'Cinzel', serif;
+
+    font-family:
+        'Cinzel',
+        serif;
+
 }
 
 
 .font-hand{
-    font-family:'Caveat', cursive;
+
+    font-family:
+        'Caveat',
+        cursive;
+
 }
 
 
@@ -179,9 +1063,121 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
+   LOADING
+========================================================= */
+
+#loadingScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    background:
+        #F3F1E8;
+
+    color:
+        #5E6958;
+
+}
+
+
+.loading-symbol{
+
+    font-family:
+        'Cinzel',
+        serif;
+
+    font-size:22px;
+
+    letter-spacing:.2em;
+
+}
+
+
+.loading-text{
+
+    font-size:10px;
+
+    letter-spacing:.3em;
+
+    text-transform:uppercase;
+
+    opacity:.6;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+#errorScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9998;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-direction:column;
+
+    text-align:center;
+
+    padding:30px;
+
+    background:
+        #F3F1E8;
+
+    color:
+        #5E6958;
+
+}
+
+
+#errorScreen h1{
+
+    font-family:
+        'Cinzel',
+        serif;
+
+    font-size:24px;
+
+    margin-bottom:15px;
+
+}
+
+
+#errorMessage{
+
+    font-size:12px;
+
+    opacity:.7;
+
+}
+
+
+/* =========================================================
    SECTION BACKGROUNDS
-======================================== */
+========================================================= */
 
 .section-paper{
 
@@ -213,7 +1209,8 @@ body{
 
 .section-light{
 
-    background:#F8F7F1;
+    background:
+        #F8F7F1;
 
 }
 
@@ -221,20 +1218,36 @@ body{
 .section-warm{
 
     background:
-        linear-gradient(
-            180deg,
-            #EEF2EA 0%,
-            #E7EDE3 100%
-        );
+
+    linear-gradient(
+        180deg,
+        #EEF2EA 0%,
+        #E7EDE3 100%
+    );
 
 }
 
 
-/* ========================================
+.section-life-memory{
+
+    background:
+
+    linear-gradient(
+        180deg,
+        #F3F1E8 0%,
+        #EEF0E7 100%
+    );
+
+}
+
+
+/* =========================================================
    ARCHIVE LABEL
-======================================== */
+========================================================= */
 
 .archive-label{
+
+    display:inline-block;
 
     font-size:10px;
 
@@ -245,9 +1258,9 @@ body{
 }
 
 
-/* ========================================
-   SMALL DECORATIVE MARK
-======================================== */
+/* =========================================================
+   BOTANICAL DIVIDER
+========================================================= */
 
 .botanical-divider{
 
@@ -284,20 +1297,9 @@ body{
 }
 
 
-/* ========================================
-   SMALL SPARKLE
-======================================== */
-
-.sparkle{
-
-    color:#84917C;
-
-    font-size:13px;
-
-    opacity:.65;
-
-}
-
+/* =========================================================
+   SPARKLE LINE
+========================================================= */
 
 .sparkle-line{
 
@@ -322,12 +1324,14 @@ body{
 
     background:#B8C0B1;
 
+    flex-shrink:0;
+
 }
 
 
-/* ========================================
-   HAND DRAWN PHOTO FRAME
-======================================== */
+/* =========================================================
+   PHOTO FRAME
+========================================================= */
 
 .photo-frame{
 
@@ -338,30 +1342,27 @@ body{
 }
 
 
-/* Main frame */
-
 .hand-photo{
 
     position:relative;
 
     border:
-
         1px solid
-
         rgba(108,120,102,.55);
 
-    background:#F9F8F2;
+    background:
+        #F9F8F2;
 
     box-shadow:
 
-        3px 3px 0 rgba(105,116,99,.07),
+        3px 3px 0
+        rgba(105,116,99,.07),
 
-        -2px -2px 0 rgba(150,157,139,.05);
+        -2px -2px 0
+        rgba(150,157,139,.05);
 
 }
 
-
-/* Hand drawn outer line */
 
 .hand-photo::before{
 
@@ -372,9 +1373,7 @@ body{
     inset:-5px;
 
     border:
-
         1px solid
-
         rgba(104,116,99,.38);
 
     pointer-events:none;
@@ -383,8 +1382,6 @@ body{
 
 }
 
-
-/* Slightly imperfect second line */
 
 .hand-photo::after{
 
@@ -395,14 +1392,13 @@ body{
     inset:-8px -6px -5px -7px;
 
     border:
-
         1px solid
-
         rgba(142,151,133,.18);
 
     border-radius:4px;
 
-    transform:rotate(-.35deg);
+    transform:
+        rotate(-.35deg);
 
     pointer-events:none;
 
@@ -410,10 +1406,10 @@ body{
 
 }
 
-/* ========================================
-   VERTICAL OVAL PHOTO
-   CHAPTER 01 / 02
-======================================== */
+
+/* =========================================================
+   VERTICAL OVAL FRAME
+========================================================= */
 
 .vertical-oval-frame{
 
@@ -432,8 +1428,6 @@ body{
 }
 
 
-/* 뒤쪽 손으로 그린 듯한 타원 */
-
 .vertical-oval-frame::before{
 
     content:"";
@@ -442,18 +1436,20 @@ body{
 
     inset:0;
 
-    border:1px solid #B8A85F;
+    border:
+        1px solid
+        #B8A85F;
 
     border-radius:50%;
 
-    transform:rotate(-3deg) translate(-8px, 5px);
+    transform:
+        rotate(-3deg)
+        translate(-8px,5px);
 
     pointer-events:none;
 
 }
 
-
-/* 두 번째 타원 라인 */
 
 .vertical-oval-frame::after{
 
@@ -463,18 +1459,19 @@ body{
 
     inset:3px -5px -4px 5px;
 
-    border:1px dashed #C8BB79;
+    border:
+        1px dashed
+        #C8BB79;
 
     border-radius:50%;
 
-    transform:rotate(2deg);
+    transform:
+        rotate(2deg);
 
     pointer-events:none;
 
 }
 
-
-/* 실제 사진 */
 
 .vertical-oval-photo{
 
@@ -488,15 +1485,20 @@ body{
 
     overflow:hidden;
 
-    border:1px solid rgba(105,116,75,.45);
+    border:
+        1px solid
+        rgba(105,116,75,.45);
 
-    background:#F5F2E6;
+    background:
+        #F5F2E6;
 
     box-shadow:
 
-        3px 4px 0 rgba(105,116,75,.08),
+        3px 4px 0
+        rgba(105,116,75,.08),
 
-        -2px -2px 0 rgba(190,175,95,.06);
+        -2px -2px 0
+        rgba(190,175,95,.06);
 
     z-index:2;
 
@@ -516,45 +1518,30 @@ body{
 }
 
 
-/* 모바일 */
-
-@media(max-width:768px){
-
-    .vertical-oval-frame{
-
-        width:280px;
-
-        height:460px;
-
-    }
-
-    .vertical-oval-photo{
-
-        width:252px;
-
-        height:432px;
-
-    }
-
-}
-/* ========================================
+/* =========================================================
    HERO
-======================================== */
+========================================================= */
 
 .hero-border{
 
     border-bottom:
-
         1px solid
-
         rgba(201,205,192,.8);
 
 }
 
 
-/* ========================================
+.hero-image{
+
+    transition:
+        opacity .5s ease;
+
+}
+
+
+/* =========================================================
    RIBBON
-======================================== */
+========================================================= */
 
 .ribbon-section{
 
@@ -577,7 +1564,8 @@ body{
 
     height:1px;
 
-    background:rgba(203,209,196,.8);
+    background:
+        rgba(203,209,196,.8);
 
     z-index:0;
 
@@ -592,17 +1580,22 @@ body{
 
     left:50%;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     z-index:3;
 
     white-space:nowrap;
 
-    background:rgba(243,241,232,.88);
+    background:
+        rgba(243,241,232,.88);
 
-    padding:5px 16px;
+    padding:
+        5px 16px;
 
-    font-family:'Caveat', cursive;
+    font-family:
+        'Caveat',
+        cursive;
 
     font-size:18px;
 
@@ -611,20 +1604,19 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    VIDEO
-======================================== */
+========================================================= */
 
 .video-frame{
 
     position:relative;
 
-    background:#F7F6EF;
+    background:
+        #F7F6EF;
 
     border:
-
         1px solid
-
         #C3C8BB;
 
     padding:10px;
@@ -641,12 +1633,11 @@ body{
     inset:-5px;
 
     border:
-
         1px solid
-
         rgba(104,116,99,.25);
 
-    transform:rotate(.25deg);
+    transform:
+        rotate(.25deg);
 
     pointer-events:none;
 
@@ -659,11 +1650,13 @@ body{
 
     width:100%;
 
-    aspect-ratio:16/7;
+    aspect-ratio:
+        16/7;
 
     overflow:hidden;
 
-    background:#D9DDD2;
+    background:
+        #D9DDD2;
 
 }
 
@@ -703,9 +1696,7 @@ body{
     height:58px;
 
     border:
-
         1px solid
-
         rgba(255,255,255,.85);
 
     border-radius:50%;
@@ -718,16 +1709,18 @@ body{
 
     color:white;
 
-    background:rgba(55,65,55,.2);
+    background:
+        rgba(55,65,55,.2);
 
-    backdrop-filter:blur(3px);
+    backdrop-filter:
+        blur(3px);
 
 }
 
 
-/* ========================================
-   ARCHIVE SECTION TITLE
-======================================== */
+/* =========================================================
+   SECTION HEADING
+========================================================= */
 
 .section-heading{
 
@@ -758,30 +1751,30 @@ body{
 }
 
 
-/* ========================================
+/* =========================================================
    MEMORY DIVIDER
-======================================== */
+========================================================= */
 
 .memory-divider{
 
     border-bottom:
-
         1px solid
-
         rgba(160,169,151,.35);
 
 }
 
 
-/* ========================================
+/* =========================================================
    FOOTER
-======================================== */
+========================================================= */
 
 .archive-footer{
 
-    background:#526052;
+    background:
+        #526052;
 
-    color:#EEF0E7;
+    color:
+        #EEF0E7;
 
 }
 
@@ -790,7 +1783,8 @@ body{
 
     position:relative;
 
-    transition:opacity .3s ease;
+    transition:
+        opacity .3s ease;
 
 }
 
@@ -809,9 +1803,11 @@ body{
 
     height:1px;
 
-    background:#DCE2D5;
+    background:
+        #DCE2D5;
 
-    transition:width .3s ease;
+    transition:
+        width .3s ease;
 
 }
 
@@ -830,17 +1826,14 @@ body{
 }
 
 
-/* ========================================
-   FOOTER DIVIDER
-======================================== */
-
 .footer-botanical{
 
     width:100%;
 
     height:1px;
 
-    background:rgba(230,235,223,.3);
+    background:
+        rgba(230,235,223,.3);
 
     position:relative;
 
@@ -857,26 +1850,71 @@ body{
 
     top:50%;
 
-    transform:translate(-50%,-50%);
+    transform:
+        translate(-50%,-50%);
 
-    background:#526052;
+    background:
+        #526052;
 
-    padding:0 15px;
+    padding:
+        0 15px;
 
-    color:#DDE4D7;
+    color:
+        #DDE4D7;
 
 }
 
 
-/* ========================================
+/* =========================================================
    RESPONSIVE
-======================================== */
+========================================================= */
 
 @media(max-width:768px){
+
+    .vertical-oval-frame{
+
+        width:280px;
+
+        height:460px;
+
+    }
+
+
+    .vertical-oval-photo{
+
+        width:252px;
+
+        height:432px;
+
+    }
+
 
     .ribbon-caption{
 
         font-size:15px;
+
+        max-width:
+            85%;
+
+        overflow:hidden;
+
+        text-overflow:
+            ellipsis;
+
+    }
+
+
+    .section-heading{
+
+        margin-bottom:35px;
+
+    }
+
+
+    .section-heading::before,
+    .section-heading::after{
+
+        width:25px;
 
     }
 
@@ -886,40 +1924,85 @@ body{
 
 </head>
 
-
 <body class="antialiased overflow-x-hidden">
 
+<!-- =========================================================
+     LOADING SCREEN
+========================================================= -->
 
-<div class="w-full">
+<div id="loadingScreen">
 
+```
+<div class="loading-symbol">
+    ✦
+</div>
 
-<!-- ========================================
+<div class="loading-text">
+    Opening the archive
+</div>
+```
+
+</div>
+
+<!-- =========================================================
+     ERROR SCREEN
+========================================================= -->
+
+<div id="errorScreen">
+
+```
+<h1>
+    Archive Not Found
+</h1>
+
+<p id="errorMessage">
+    Unable to load this archive.
+</p>
+```
+
+</div>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="w-full">
+
+<!-- =========================================================
      HERO
-======================================== -->
+========================================================= -->
 
-<header class="w-full section-paper hero-border">
+<header
+class="
+w-full
+section-paper
+hero-border
+">
 
-<div class="
+<div
+class="
 relative
 w-full
 aspect-[16/7]
 overflow-hidden
 ">
 
-
 <img
-data-field="heroImage"
+id="heroImage"
 src=""
-alt="Vintage Flower Travel Journal"
+alt="Life and Travel Archive"
 class="
+hero-image
 w-full
 h-full
 object-cover
 brightness-[0.70]
-">
+"
 
+>
 
-<div class="
+<div
+class="
 absolute
 inset-0
 bg-black/20
@@ -931,9 +2014,8 @@ text-center
 p-6
 ">
 
-
 <span
-data-field="heroEyebrow"
+id="heroEyebrow"
 class="
 text-[10px]
 md:text-xs
@@ -941,12 +2023,10 @@ tracking-[0.4em]
 text-[#E8ECE2]
 uppercase
 mb-3
-">
-</span>
-
+"> </span>
 
 <h1
-data-field="heroTitle"
+id="heroTitle"
 class="
 text-4xl
 md:text-6xl
@@ -956,8 +2036,8 @@ text-white
 ">
 </h1>
 
-
-<div class="
+<div
+class="
 w-16
 h-[1px]
 bg-white/50
@@ -965,9 +2045,8 @@ my-5
 ">
 </div>
 
-
 <p
-data-field="heroDescription"
+id="heroDescription"
 class="
 text-xs
 text-white/90
@@ -977,38 +2056,34 @@ max-w-xl
 ">
 </p>
 
-
 </div>
 
 </div>
 
 </header>
 
-
-
-
-
-<!-- ========================================
+<!-- =========================================================
      CHAPTER 01
-======================================== -->
+========================================================= -->
 
-<section class="
+<section
+class="
 section-paper
 w-full
 py-28
 md:py-36
 ">
 
-
-<div class="
+<div
+class="
 w-full
 max-w-5xl
 mx-auto
 px-6
 ">
 
-
-<div class="
+<div
+class="
 grid
 grid-cols-1
 md:grid-cols-12
@@ -1016,23 +2091,18 @@ gap-8
 items-center
 ">
 
-
-<!-- TEXT -->
-
-<div class="
+<div
+class="
 md:col-span-6
 space-y-4
 ">
 
-
 <span
-data-field="chapter01Label"
-class="archive-label">
-</span>
-
+id="chapter01Label"
+class="archive-label"> </span>
 
 <h3
-data-field="chapter01Title"
+id="chapter01Title"
 class="
 text-xl
 md:text-2xl
@@ -1041,9 +2111,8 @@ tracking-wide
 ">
 </h3>
 
-
 <p
-data-field="chapter01Description"
+id="chapter01Description"
 class="
 text-xs
 md:text-sm
@@ -1053,74 +2122,61 @@ font-light
 ">
 </p>
 
-
 <div class="botanical-divider pt-4">
 
 ✦
 
 </div>
 
-
 </div>
 
-
-
-
-
-<!-- IMAGE -->
-
-<div class="
+<div
+class="
 md:col-span-6
 flex
 justify-center
 md:justify-end
 ">
 
-
 <div class="photo-frame">
 
-    <div class="vertical-oval-frame">
+<div class="vertical-oval-frame">
 
-        <div class="vertical-oval-photo">
+<div class="vertical-oval-photo">
 
-            <img
-data-field="chapter01Image"
+<img
+id="chapter01Image"
 src=""
-alt="Vintage Jewelry and Dried Flower"
+alt="Chapter 01"
+
 >
 
-        </div>
-
-    </div>
+</div>
 
 </div>
 
+</div>
 
 </div>
 
-
 </div>
-
-
-</div>
-
 
 </div>
 
 </section>
 
+<!-- =========================================================
+     RIBBON
+========================================================= -->
 
+<section
+class="
+w-full
+section-light
+">
 
-
-
-<!-- ========================================
-     SLIM IMAGE RIBBON
-======================================== -->
-
-<section class="w-full section-light">
-
-
-<div class="
+<div
+class="
 ribbon-section
 w-full
 h-24
@@ -1128,54 +2184,50 @@ md:h-36
 overflow-hidden
 ">
 
-
 <img
-data-field="ribbonImage"
+id="ribbonImage"
 src=""
 alt="Travel Journal Detail"
-
-
 class="
 w-full
 h-full
 object-cover
 brightness-[0.85]
-">
+"
 
+>
 
 <div
-data-field="ribbonCaption"
+id="ribbonCaption"
 class="ribbon-caption">
 </div>
-
 
 </div>
 
 </section>
 
-
-
-
-
-<!-- ========================================
+<!-- =========================================================
      CHAPTER 02
-======================================== -->
+========================================================= -->
 
-<section class="
+<section
+class="
 section-paper
 w-full
 py-28
 md:py-36
 ">
 
-<div class="
+<div
+class="
 w-full
 max-w-5xl
 mx-auto
 px-6
 ">
 
-<div class="
+<div
+class="
 grid
 grid-cols-1
 md:grid-cols-12
@@ -1183,9 +2235,8 @@ gap-8
 items-center
 ">
 
-<!-- IMAGE : LEFT -->
-
-<div class="
+<div
+class="
 md:col-span-6
 flex
 justify-center
@@ -1194,40 +2245,37 @@ md:justify-start
 
 <div class="photo-frame">
 
-    <div class="vertical-oval-frame">
+<div class="vertical-oval-frame">
 
-        <div class="vertical-oval-photo">
+<div class="vertical-oval-photo">
 
-           <img
-data-field="chapter02Image"
+<img
+id="chapter02Image"
 src=""
-alt="Vintage Travel Collection"
+alt="Chapter 02"
+
 >
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </div>
 
 </div>
 
-
-<!-- TEXT : RIGHT -->
-
-<div class="
+<div
+class="
 md:col-span-6
 space-y-4
 ">
 
 <span
-data-field="chapter02Label"
-class="archive-label">
-</span>
-
+id="chapter02Label"
+class="archive-label"> </span>
 
 <h3
-data-field="chapter02Title"
+id="chapter02Title"
 class="
 text-xl
 md:text-2xl
@@ -1236,9 +2284,8 @@ tracking-wide
 ">
 </h3>
 
-
 <p
-data-field="chapter02Description"
+id="chapter02Description"
 class="
 text-xs
 md:text-sm
@@ -1248,8 +2295,8 @@ font-light
 ">
 </p>
 
-
-<div class="
+<div
+class="
 border-l
 border-[#8D9A86]
 pl-4
@@ -1257,7 +2304,7 @@ mt-4
 ">
 
 <p
-data-field="chapter02SideLabel"
+id="chapter02SideLabel"
 class="
 text-[10px]
 tracking-widest
@@ -1265,9 +2312,8 @@ text-[#71806D]
 ">
 </p>
 
-
 <p
-data-field="chapter02Date"
+id="chapter02Date"
 class="
 text-xs
 text-[#6F766A]
@@ -1279,31 +2325,32 @@ mt-1
 
 </div>
 
-
 </div>
 
 </div>
 
 </section>
-<!-- ========================================
-     VIDEO MEMORY
-======================================== -->
 
-<section class="
+<!-- =========================================================
+     VIDEO MEMORY
+========================================================= -->
+
+<section
+id="videoSection"
+class="
 section-light
 w-full
 py-28
 md:py-36
 ">
 
-
-<div class="
+<div
+class="
 w-full
 max-w-6xl
 mx-auto
 px-6
 ">
-
 
 <div class="section-heading">
 
@@ -1313,8 +2360,8 @@ MOVING MEMORIES
 
 </div>
 
-
-<div class="
+<div
+class="
 grid
 grid-cols-1
 md:grid-cols-12
@@ -1322,78 +2369,64 @@ gap-10
 items-center
 ">
 
-
-<!-- VIDEO -->
-
-<div class="
+<div
+class="
 md:col-span-8
 ">
 
-
 <div class="video-frame">
-
 
 <div class="video-inner">
 
-
 <video
+id="mainVideo"
 autoplay
 muted
 loop
 playsinline
+
 >
 
-
 <source
-data-field="videoUrl"
+id="videoUrl"
 src=""
-type="video/mp4">
+type="video/mp4"
 
+>
 
 </video>
 
-
 <div class="video-play">
-
 
 <span>
 
-<i data-lucide="play" size="20"></i>
+<i
+data-lucide="play"
+width="20"
+height="20"> </i>
 
 </span>
 
+</div>
 
 </div>
 
+</div>
 
 </div>
 
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- VIDEO TEXT -->
-
-<div class="
+<div
+class="
 md:col-span-4
 space-y-4
 ">
 
-
 <span
-data-field="videoLabel"
-class="archive-label">
-</span>
-
+id="videoLabel"
+class="archive-label"> </span>
 
 <h3
-data-field="videoTitle"
+id="videoTitle"
 class="
 text-xl
 font-serif-title
@@ -1402,7 +2435,7 @@ tracking-wide
 </h3>
 
 <p
-data-field="videoDescription"
+id="videoDescription"
 class="
 text-xs
 text-[#6F766A]
@@ -1411,47 +2444,38 @@ font-light
 ">
 </p>
 
-
 <div
-data-field="videoSubLabel"
+id="videoSubLabel"
 class="sparkle-line pt-2">
 </div>
 
-
 </div>
 
-
 </div>
-
 
 </div>
 
 </section>
 
-
-
-
-
-<!-- ========================================
+<!-- =========================================================
      THREE ARCH WINDOWS
-     BOTANICAL GREEN SECTION
-======================================== -->
+========================================================= -->
 
-<section class="
+<section
+class="
 section-sage
 w-full
 py-28
 md:py-36
 ">
 
-
-<div class="
+<div
+class="
 w-full
 max-w-6xl
 mx-auto
 px-6
 ">
-
 
 <div class="section-heading">
 
@@ -1463,19 +2487,18 @@ A FEW QUIET MOMENTS
 
 </div>
 
-
-<div class="
+<div
+class="
 grid
 grid-cols-1
 md:grid-cols-3
 gap-10
 ">
 
+<!-- PAGE 01 -->
 
-
-<!-- ARCH 01 -->
-
-<div class="
+<div
+class="
 space-y-5
 flex
 flex-col
@@ -1483,98 +2506,10 @@ items-center
 text-center
 ">
 
-
 <div class="photo-frame w-full">
 
-
-<div class="
-
-w-full
-aspect-[2/3]
-rounded-t-full
-overflow-hidden
-">
-
-
-<img
-data-field="page01Image"
-src=""
-alt="Morning Market"
+<div
 class="
-w-full
-h-full
-object-cover
-">
-
-</div>
-
-</div>
-
-
-<div class="w-full pt-5">
-
-    <div class="botanical-divider mb-5">
-        ✦
-    </div>
-
-   <h4
-data-field="page01Label"
-class="
-text-sm
-font-semibold
-tracking-wide
-">
-</h4>
-
-
-<p
-data-field="page01Title"
-class="
-font-hand
-text-xl
-text-[#66745F]
-mt-1
-">
-</p>
-
-
-
-<p
-data-field="page01Description"
-class="
-text-xs
-text-[#6F766A]
-leading-relaxed
-px-2
-mt-2
-">
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- ARCH 02 -->
-
-<div class="
-space-y-5
-flex
-flex-col
-items-center
-text-center
-">
-
-
-<div class="photo-frame w-full">
-
-
-<div class="
 hand-photo
 w-full
 aspect-[2/3]
@@ -1582,30 +2517,30 @@ rounded-t-full
 overflow-hidden
 ">
 
-
 <img
-data-field="page02Image"
+id="page01Image"
 src=""
-alt="Quiet Afternoon"
+alt="Page 01"
 class="
 w-full
 h-full
 object-cover
-">
+"
+
+>
 
 </div>
 
 </div>
-
 
 <div class="w-full pt-5">
 
-    <div class="botanical-divider mb-5">
-        ✦
-    </div>
+<div class="botanical-divider mb-5">
+✦
+</div>
 
-    <h4
-data-field="page02Label"
+<h4
+id="page01Label"
 class="
 text-sm
 font-semibold
@@ -1614,7 +2549,7 @@ tracking-wide
 </h4>
 
 <p
-data-field="page02Title"
+id="page01Title"
 class="
 font-hand
 text-xl
@@ -1624,7 +2559,7 @@ mt-1
 </p>
 
 <p
-data-field="page02Description"
+id="page01Description"
 class="
 text-xs
 text-[#6F766A]
@@ -1636,16 +2571,12 @@ mt-2
 
 </div>
 
-
 </div>
 
+<!-- PAGE 02 -->
 
-
-
-
-<!-- ARCH 03 -->
-
-<div class="
+<div
+class="
 space-y-5
 flex
 flex-col
@@ -1653,11 +2584,10 @@ items-center
 text-center
 ">
 
-
 <div class="photo-frame w-full">
 
-
-<div class="
+<div
+class="
 hand-photo
 w-full
 aspect-[2/3]
@@ -1665,30 +2595,30 @@ rounded-t-full
 overflow-hidden
 ">
 
-
 <img
-data-field="page03Image"
+id="page02Image"
 src=""
-alt="Cafe Memory"
+alt="Page 02"
 class="
 w-full
 h-full
 object-cover
-">
+"
+
+>
 
 </div>
 
 </div>
-
 
 <div class="w-full pt-5">
 
-    <div class="botanical-divider mb-5">
-        ✦
-    </div>
+<div class="botanical-divider mb-5">
+✦
+</div>
 
-    <h4
-data-field="page03Label"
+<h4
+id="page02Label"
 class="
 text-sm
 font-semibold
@@ -1697,7 +2627,7 @@ tracking-wide
 </h4>
 
 <p
-data-field="page03Title"
+id="page02Title"
 class="
 font-hand
 text-xl
@@ -1706,10 +2636,8 @@ mt-1
 ">
 </p>
 
-
-
 <p
-data-field="page03Description"
+id="page02Description"
 class="
 text-xs
 text-[#6F766A]
@@ -1719,56 +2647,119 @@ mt-2
 ">
 </p>
 
+</div>
 
 </div>
 
+<!-- PAGE 03 -->
+
+<div
+class="
+space-y-5
+flex
+flex-col
+items-center
+text-center
+">
+
+<div class="photo-frame w-full">
+
+<div
+class="
+hand-photo
+w-full
+aspect-[2/3]
+rounded-t-full
+overflow-hidden
+">
+
+<img
+id="page03Image"
+src=""
+alt="Page 03"
+class="
+w-full
+h-full
+object-cover
+"
+
+>
 
 </div>
 
+</div>
+
+<div class="w-full pt-5">
+
+<div class="botanical-divider mb-5">
+✦
+</div>
+
+<h4
+id="page03Label"
+class="
+text-sm
+font-semibold
+tracking-wide
+">
+</h4>
+
+<p
+id="page03Title"
+class="
+font-hand
+text-xl
+text-[#66745F]
+mt-1
+">
+</p>
+
+<p
+id="page03Description"
+class="
+text-xs
+text-[#6F766A]
+leading-relaxed
+px-2
+mt-2
+">
+</p>
 
 </div>
 
+</div>
+
+</div>
 
 </div>
 
 </section>
 
+<!-- =========================================================
+     MEMORY A
+========================================================= -->
 
-
-
-
-<!-- ========================================
-     HORIZONTAL ARCH MEMORY
-======================================== -->
-
-<section class="
+<section
+class="
 section-life-memory
 w-full
 ">
 
-
-<div class="w-full flex flex-col">
-
-
-
-<!-- MEMORY A -->
-
-<div class="
+<div
+class="
 memory-divider
 grid
 grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-py-10
-md:py-0
-">
+"
+>
 
+<div class="photo-frame w-full">
 
-<div class="photo-frame">
-
-
-<div class="
+<div
+class="
 hand-photo
 w-full
 aspect-[16/8]
@@ -1777,51 +2768,45 @@ overflow-hidden
 rounded-r-full
 ">
 
-
 <img
-data-field="memoryAImage"
+id="memoryAImage"
 src=""
 alt="Memory A"
 class="
 w-full
 h-full
 object-cover
-">
+"
+
+>
 
 </div>
 
-
 </div>
 
-
-
-
-
-<div class="
+<div
+class="
 p-8
 md:p-16
 space-y-3
 text-left
-">
-
+"
+>
 
 <span
-data-field="memoryALabel"
-class="archive-label">
-</span>
-
+id="memoryALabel"
+class="archive-label"> </span>
 
 <h4
-data-field="memoryATitle"
+id="memoryATitle"
 class="
 text-base
 font-semibold
 ">
 </h4>
 
-
 <p
-data-field="memoryADescription"
+id="memoryADescription"
 class="
 text-xs
 text-[#6F766A]
@@ -1830,36 +2815,32 @@ font-light
 ">
 </p>
 
-
 <div
-data-field="memoryANote"
+id="memoryANote"
 class="sparkle-line pt-2">
 </div>
 
 </div>
 
-
 </div>
 
+<!-- =========================================================
+     MEMORY B
+========================================================= -->
 
-
-
-
-<!-- MEMORY B -->
-
-<div class="
+<div
+class="
 memory-divider
 grid
 grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-py-10
-md:py-0
-">
+"
+>
 
-
-<div class="
+<div
+class="
 p-8
 md:p-16
 space-y-3
@@ -1867,26 +2848,23 @@ text-left
 md:text-right
 order-2
 md:order-1
-">
-
+"
+>
 
 <span
-data-field="memoryBLabel"
-class="archive-label">
-</span>
-
+id="memoryBLabel"
+class="archive-label"> </span>
 
 <h4
-data-field="memoryBTitle"
+id="memoryBTitle"
 class="
 text-base
 font-semibold
 ">
 </h4>
 
-
 <p
-data-field="memoryBDescription"
+id="memoryBDescription"
 class="
 text-xs
 text-[#6F766A]
@@ -1895,10 +2873,8 @@ font-light
 ">
 </p>
 
-
-
 <div
-data-field="memoryBNote"
+id="memoryBNote"
 class="
 sparkle-line
 pt-2
@@ -1906,23 +2882,19 @@ md:justify-end
 ">
 </div>
 
-
 </div>
 
-
-
-
-
-<div class="
+<div
+class="
 order-1
 md:order-2
-">
+"
+>
 
+<div class="photo-frame w-full">
 
-<div class="photo-frame">
-
-
-<div class="
+<div
+class="
 hand-photo
 w-full
 aspect-[16/8]
@@ -1931,48 +2903,44 @@ overflow-hidden
 rounded-l-full
 ">
 
-
 <img
-data-field="memoryBImage"
+id="memoryBImage"
 src=""
 alt="Memory B"
 class="
 w-full
 h-full
 object-cover
-">
-</div>
+"
 
-
-</div>
-
+>
 
 </div>
 
+</div>
 
 </div>
 
+</div>
 
+<!-- =========================================================
+     MEMORY C
+========================================================= -->
 
-
-
-<!-- MEMORY C -->
-
-<div class="
+<div
+class="
 grid
 grid-cols-1
 md:grid-cols-2
 w-full
 items-center
-py-10
-md:py-0
-">
+"
+>
 
+<div class="photo-frame w-full">
 
-<div class="photo-frame">
-
-
-<div class="
+<div
+class="
 hand-photo
 w-full
 aspect-[16/8]
@@ -1981,42 +2949,37 @@ overflow-hidden
 rounded-r-full
 ">
 
-
 <img
-data-field="memoryCImage"
+id="memoryCImage"
 src=""
 alt="Memory C"
 class="
 w-full
 h-full
 object-cover
-">
+"
+
+>
 
 </div>
 
-
 </div>
 
-
-
-
-
-<div class="
+<div
+class="
 p-8
 md:p-16
 space-y-3
 text-left
-">
-
+"
+>
 
 <span
-data-field="memoryCLabel"
-class="archive-label">
-</span>
-
+id="memoryCLabel"
+class="archive-label"> </span>
 
 <h4
-data-field="memoryCTitle"
+id="memoryCTitle"
 class="
 text-base
 font-semibold
@@ -2024,7 +2987,7 @@ font-semibold
 </h4>
 
 <p
-data-field="memoryCDescription"
+id="memoryCDescription"
 class="
 text-xs
 text-[#6F766A]
@@ -2034,44 +2997,41 @@ font-light
 </p>
 
 <div
-data-field="memoryCNote"
+id="memoryCNote"
 class="sparkle-line pt-2">
 </div>
 
-
 </div>
-
-
-</div>
-
 
 </div>
 
 </section>
 
-
-
-
-
-<!-- ========================================
+<!-- =========================================================
      FOOTER
-======================================== -->
+========================================================= -->
 
-<footer class="archive-footer">
+<footer
+class="archive-footer"
+>
 
-
-<div class="
+<div
+class="
 max-w-7xl
 mx-auto
 px-6
 py-14
 ">
 
+<div
+class="
+footer-botanical
+mb-12
+">
+</div>
 
-<div class="footer-botanical mb-12"></div>
-
-
-<div class="
+<div
+class="
 grid
 grid-cols-1
 md:grid-cols-3
@@ -2079,60 +3039,57 @@ gap-10
 items-start
 ">
 
-
 <!-- TITLE -->
 
 <div>
 
-
-<p class="
+<p
+class="
 font-serif-title
 tracking-widest
 text-sm
-">
+"
+>
 
 LIFE & TRAVEL
 
 </p>
 
-
-<p class="
-font-xs
+<p
+class="
+text-xs
 mt-3
 opacity-70
 leading-relaxed
-">
+"
+>
 
 A quiet archive of
 places, flowers and memories.
 
 </p>
 
-
 </div>
-
-
-
-
 
 <!-- NAVIGATION -->
 
 <div>
 
-
-<p class="
+<p
+class="
 text-[10px]
 tracking-[0.3em]
 mb-5
 opacity-60
-">
+"
+>
 
 EXPLORE THE ARCHIVE
 
 </p>
 
-
-<div class="
+<div
+class="
 flex
 flex-wrap
 gap-x-7
@@ -2140,55 +3097,65 @@ gap-y-4
 text-xs
 ">
 
+<a
+href="#"
+class="footer-link"
 
-<a href="#" class="footer-link">
+>
 
 LIFE
 
 </a>
 
+<a
+href="#"
+class="footer-link"
 
-<a href="#" class="footer-link">
+>
 
 TRAVEL
 
 </a>
 
+<a
+href="#"
+class="footer-link"
 
-<a href="#" class="footer-link">
+>
 
 PLACES
 
 </a>
 
+<a
+href="#"
+class="footer-link"
 
-<a href="#" class="footer-link">
+>
 
 JOURNAL
 
 </a>
 
+<a
+href="#"
+class="footer-link"
 
-<a href="#" class="footer-link">
+>
 
 MEMORIES
 
 </a>
 
-
 </div>
 
-
 </div>
-
-
-
-
 
 <!-- INFO -->
 
-<div class="md:text-right">
-
+<div
+class="md:text-right"
+>
 
 <p class="text-xs">
 
@@ -2196,51 +3163,64 @@ Vintage Flower Archive
 
 </p>
 
-
-<p class="
+<p
+id="footerDate"
+class="
 text-[10px]
 opacity-60
 mt-2
-">
+"
+>
 
-First page written · 2026.07.12
+First page written · 2026
 
 </p>
 
-
-<p class="
+<p
+class="
 text-[10px]
 opacity-60
 mt-1
-">
+"
+>
 
 © 2026 MY VINTAGE ATELIER
 
 </p>
 
+</div>
 
 </div>
 
-
 </div>
-
-
-</div>
-
 
 </footer>
 
+</main>
 
-</div>
-
+<!-- =========================================================
+     LUCIDE
+========================================================= -->
 
 <script>
 
-lucide.createIcons();
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        if(
+            window.lucide &&
+            typeof lucide.createIcons === "function"
+        ){
+
+            lucide.createIcons();
+
+        }
+
+    }
+);
 
 </script>
 
-
 </body>
 </html>
-
