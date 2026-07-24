@@ -1,10 +1,14 @@
-```javascript
 /* =========================================================
    NEWS.JS
    ---------------------------------------------------------
    news.html과 같은 폴더에 위치
-   Firebase Firestore의 "news" 컬렉션을 불러와
-   News 목록 카드 생성 및 상세페이지 연결
+
+   역할
+   1. Firebase news 컬렉션 불러오기
+   2. 최신 News 카드 표시
+   3. 최대 표시 개수 유지
+   4. 선택한 디자인 템플릿으로 상세페이지 연결
+   5. Firebase 문서 ID를 상세페이지에 전달
 ========================================================= */
 
 
@@ -19,16 +23,12 @@ import {
 import {
     getFirestore,
     collection,
-    getDocs,
-    query,
-    orderBy
+    getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 /* =========================================================
    2. FIREBASE CONFIG
-   ---------------------------------------------------------
-   기존 상세페이지에서 사용하던 Firebase Config와 동일
 ========================================================= */
 
 const firebaseConfig = {
@@ -69,14 +69,21 @@ const db =
 
 
 /* =========================================================
-   4. NEWS 목록을 표시할 영역 찾기
-   ---------------------------------------------------------
-   news.html에 아래와 같은 요소가 있어야 합니다.
+   4. SETTINGS
+========================================================= */
 
-   <div id="newsContainer"></div>
+/*
+   News 페이지에 표시할 최대 카드 개수
 
-   만약 현재 news.html의 카드 영역 ID가 다르면
-   아래 "newsContainer"만 실제 ID로 변경하세요.
+   예:
+   6개만 유지하고 싶으면 6
+*/
+
+const MAX_NEWS_COUNT = 6;
+
+
+/* =========================================================
+   5. NEWS CONTAINER
 ========================================================= */
 
 const newsContainer =
@@ -86,7 +93,121 @@ const newsContainer =
 
 
 /* =========================================================
-   5. NEWS DATA LOAD
+   6. DESIGN TEMPLATE ROUTER
+   ---------------------------------------------------------
+   Firebase에 저장된 디자인 값을 기준으로
+   해당 상세페이지 HTML 파일을 선택
+========================================================= */
+
+function getTemplatePath(data) {
+
+    /*
+       Admin에서 저장하는 필드명이
+       template이라고 가정
+
+       예:
+       template: "childhood"
+
+       또는
+
+       template: "childhood.html"
+    */
+
+
+    const template =
+        String(
+            data.template ||
+            data.design ||
+            data.templateName ||
+            ""
+        ).toLowerCase();
+
+
+    /* ---------------------------------------------
+       Childhood 디자인
+    --------------------------------------------- */
+
+    if (
+        template === "childhood" ||
+        template === "childhood.html" ||
+        template === "design1" ||
+        template === "design01"
+    ) {
+
+        return "childhood.html";
+
+    }
+
+
+    /* ---------------------------------------------
+       디자인 2
+       실제 파일명에 맞게 수정
+    --------------------------------------------- */
+
+    if (
+        template === "design2" ||
+        template === "design02"
+    ) {
+
+        return "design02.html";
+
+    }
+
+
+    /* ---------------------------------------------
+       디자인 3
+    --------------------------------------------- */
+
+    if (
+        template === "design3" ||
+        template === "design03"
+    ) {
+
+        return "design03.html";
+
+    }
+
+
+    /* ---------------------------------------------
+       디자인 4
+    --------------------------------------------- */
+
+    if (
+        template === "design4" ||
+        template === "design04"
+    ) {
+
+        return "design04.html";
+
+    }
+
+
+    /* ---------------------------------------------
+       디자인 5
+    --------------------------------------------- */
+
+    if (
+        template === "design5" ||
+        template === "design05"
+    ) {
+
+        return "design05.html";
+
+    }
+
+
+    /*
+       디자인 정보가 없을 경우
+       기본 상세페이지
+    */
+
+    return "news-detail.html";
+
+}
+
+
+/* =========================================================
+   7. NEWS LOAD
 ========================================================= */
 
 async function loadNews() {
@@ -107,7 +228,7 @@ async function loadNews() {
 
 
         /* ---------------------------------------------
-           News Container 확인
+           Container 확인
         --------------------------------------------- */
 
         if (!newsContainer) {
@@ -122,7 +243,7 @@ async function loadNews() {
 
 
         /* ---------------------------------------------
-           news 컬렉션 참조
+           Firebase Collection
         --------------------------------------------- */
 
         const newsRef =
@@ -133,7 +254,7 @@ async function loadNews() {
 
 
         /* ---------------------------------------------
-           Firebase 데이터 가져오기
+           데이터 가져오기
         --------------------------------------------- */
 
         const snapshot =
@@ -143,28 +264,100 @@ async function loadNews() {
 
 
         console.log(
-            "Firebase 문서 개수:",
+            "Firebase 전체 문서 개수:",
             snapshot.size
         );
 
 
         /* ---------------------------------------------
-           기존 카드 비우기
+           데이터를 배열로 변환
+        --------------------------------------------- */
+
+        let newsList =
+            snapshot.docs.map(
+                (docSnapshot) => {
+
+                    return {
+
+                        id:
+                            docSnapshot.id,
+
+                        data:
+                            docSnapshot.data()
+
+                    };
+
+                }
+            );
+
+
+        /* ---------------------------------------------
+           최신순 정렬
+
+           createdAt이 있으면
+           createdAt 기준
+
+           없으면 date 기준
+        --------------------------------------------- */
+
+        newsList.sort(
+            (a, b) => {
+
+                const dateA =
+                    getDateValue(
+                        a.data
+                    );
+
+                const dateB =
+                    getDateValue(
+                        b.data
+                    );
+
+
+                return dateB - dateA;
+
+            }
+        );
+
+
+        /* ---------------------------------------------
+           최신 N개만 표시
+        --------------------------------------------- */
+
+        newsList =
+            newsList.slice(
+                0,
+                MAX_NEWS_COUNT
+            );
+
+
+        console.log(
+            "현재 표시할 News 개수:",
+            newsList.length
+        );
+
+
+        /* ---------------------------------------------
+           기존 카드 제거
         --------------------------------------------- */
 
         newsContainer.innerHTML = "";
 
 
         /* ---------------------------------------------
-           데이터가 없는 경우
+           데이터 없음
         --------------------------------------------- */
 
-        if (snapshot.empty) {
+        if (
+            newsList.length === 0
+        ) {
 
             newsContainer.innerHTML = `
+
                 <p class="no-news">
                     No news yet.
                 </p>
+
             `;
 
             return;
@@ -172,41 +365,22 @@ async function loadNews() {
         }
 
 
-        /* ---------------------------------------------
-           각 News 문서 생성
-        --------------------------------------------- */
+        /* =================================================
+           카드 생성
+        ================================================= */
 
-        snapshot.forEach(
-            (docSnapshot) => {
+        newsList.forEach(
+            (newsItem) => {
 
                 const data =
-                    docSnapshot.data();
+                    newsItem.data;
 
                 const newsId =
-                    docSnapshot.id;
-
-
-                console.log(
-                    "------------------------------------"
-                );
-
-                console.log(
-                    "문서 ID:",
-                    newsId
-                );
-
-                console.log(
-                    "문서 데이터:",
-                    data
-                );
-
-                console.log(
-                    "------------------------------------"
-                );
+                    newsItem.id;
 
 
                 /* -----------------------------------------
-                   Firebase 필드값
+                   기본 데이터
                 ----------------------------------------- */
 
                 const title =
@@ -238,6 +412,36 @@ async function loadNews() {
 
 
                 /* -----------------------------------------
+                   상세페이지 템플릿 결정
+                ----------------------------------------- */
+
+                const templatePath =
+                    getTemplatePath(
+                        data
+                    );
+
+
+                /* -----------------------------------------
+                   상세페이지 URL
+                ----------------------------------------- */
+
+                const detailURL =
+                    `${templatePath}?id=${encodeURIComponent(newsId)}`;
+
+
+                console.log(
+                    "News 카드 연결:",
+                    {
+                        newsId,
+                        template:
+                            data.template,
+                        templatePath,
+                        detailURL
+                    }
+                );
+
+
+                /* -----------------------------------------
                    카드 생성
                 ----------------------------------------- */
 
@@ -258,7 +462,7 @@ async function loadNews() {
                 card.innerHTML = `
 
                     <a
-                        href="news-detail.html?id=${encodeURIComponent(newsId)}"
+                        href="${escapeHTML(detailURL)}"
                         class="news-card-link"
                     >
 
@@ -334,7 +538,9 @@ async function loadNews() {
         );
 
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "❌ Firebase News Load Error:",
@@ -360,10 +566,87 @@ async function loadNews() {
 
 
 /* =========================================================
-   6. HTML 특수문자 처리
-   ---------------------------------------------------------
-   Firebase에서 가져온 텍스트가 HTML 구조를 깨뜨리지
-   않도록 처리
+   8. DATE VALUE
+========================================================= */
+
+function getDateValue(data) {
+
+    /*
+       Firebase Timestamp
+    */
+
+    if (
+        data.createdAt &&
+        typeof data.createdAt.toMillis === "function"
+    ) {
+
+        return data.createdAt.toMillis();
+
+    }
+
+
+    /*
+       일반 Date 문자열
+    */
+
+    if (
+        data.date
+    ) {
+
+        const parsed =
+            new Date(
+                data.date
+            ).getTime();
+
+
+        if (
+            !isNaN(parsed)
+        ) {
+
+            return parsed;
+
+        }
+
+    }
+
+
+    /*
+       createdAt 문자열
+    */
+
+    if (
+        data.createdAt
+    ) {
+
+        const parsed =
+            new Date(
+                data.createdAt
+            ).getTime();
+
+
+        if (
+            !isNaN(parsed)
+        ) {
+
+            return parsed;
+
+        }
+
+    }
+
+
+    /*
+       날짜가 없으면
+       가장 오래된 것으로 처리
+    */
+
+    return 0;
+
+}
+
+
+/* =========================================================
+   9. HTML ESCAPE
 ========================================================= */
 
 function escapeHTML(value) {
@@ -409,8 +692,7 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   7. 실행
+   10. 실행
 ========================================================= */
 
 loadNews();
-```
