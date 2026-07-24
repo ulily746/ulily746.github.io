@@ -1574,7 +1574,7 @@ PERSONAL ARCHIVE / CONTENT MANAGEMENT
 
 <h1>
 
-Good evening, Anya.
+Good evening, Yuri.
 
 </h1>
 
@@ -2640,13 +2640,6 @@ placeholder="Write travel description..."
 
 
 
-<div class="form-grid">
-
-
-<div class="form-group">
-
-
-
 <!-- ======================================
      VINTAGE FLOWER DESIGN FIELDS
 ====================================== -->
@@ -2964,6 +2957,10 @@ style="display:none;"
 
 
 
+<!-- ======================================
+     COMMON ENTRY INFORMATION
+====================================== -->
+
 <div class="form-group">
 
     <label class="form-label">
@@ -2971,8 +2968,8 @@ style="display:none;"
     </label>
 
     <input
-    type="date"
-    id="entryDate"
+        type="date"
+        id="entryDate"
     >
 
 </div>
@@ -2998,55 +2995,42 @@ style="display:none;"
 
 </div>
 
-</div>
-
-
 
 <div class="form-group">
 
-<label class="form-label">
+    <label class="form-label">
+        IMAGE URL
+    </label>
 
-IMAGE URL
-
-</label>
-
-<input
-type="text"
-id="entryImage"
-placeholder="images/example.jpg"
->
+    <input
+        type="text"
+        id="entryImage"
+        placeholder="images/example.jpg"
+    >
 
 </div>
 
 
+<!-- BUTTON -->
 
 <div class="form-actions">
 
+    <button
+        class="cancel"
+        onclick="closeModal()"
+    >
+        Cancel
+    </button>
 
-<button
-class="cancel"
-onclick="closeModal()"
->
-
-Cancel
-
-</button>
-
-
-
-<button
-class="save"
-id="saveButton"
-onclick="saveEntry()"
->
-
-Save Entry
-
-</button>
-
+    <button
+        class="save"
+        id="saveButton"
+        onclick="saveEntry()"
+    >
+        Save Entry
+    </button>
 
 </div>
-
 
 </div>
 
