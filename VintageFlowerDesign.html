@@ -396,523 +396,424 @@ async function loadLifeTravel(){
 
         }
 
+/* =================================================
+   FULL DATA
+================================================= */
 
-        /* =================================================
-           FULL DATA
-        ================================================= */
-
-        const data =
-            docSnap.data();
-
-
-        console.log(
-            "✅ Full Firebase data:",
-            data
-        );
+const data =
+    docSnap.data();
 
 
-        /* =================================================
-           CONTENT
-        ================================================= */
-
-        /*
-           대부분의 News Admin 데이터는
-
-           news
-             └── content
-                   ├── hero
-                   ├── chapter01
-                   ├── ribbon
-                   ├── chapter02
-                   ├── video
-                   ├── page01
-                   ├── page02
-                   ├── page03
-                   ├── memoryA
-                   ├── memoryB
-                   └── memoryC
-
-           구조를 사용함.
-        */
+console.log(
+    "✅ Full Firebase data:",
+    data
+);
 
 
-        const content =
-            data.content || data;
+/* =================================================
+   LIFE & TRAVEL DATA
+   Firebase 필드명을 그대로 사용
+================================================= */
 
 
-        console.log(
-            "🎨 Life & Travel content:",
-            content
-        );
+/* =================================================
+   HERO
+================================================= */
+
+setText(
+    "heroEyebrow",
+    data.heroEyebrow
+);
 
 
-        console.log(
-            "🎨 Design:",
-            data.design
-        );
+setText(
+    "heroTitle",
+    data.heroTitle ||
+    data.title
+);
 
 
-        /* =================================================
-           HERO
-        ================================================= */
-
-        const hero =
-            content.hero || {};
-
-
-        setText(
-            "heroEyebrow",
-            hero.eyebrow
-        );
+setText(
+    "heroDescription",
+    data.heroDescription ||
+    data.description
+);
 
 
-        setText(
-            "heroTitle",
-            hero.title ||
+setImage(
+    "heroImage",
+    data.heroImage ||
+    data.image
+);
+
+
+/* =================================================
+   CHAPTER 01
+================================================= */
+
+setText(
+    "chapter01Label",
+    data.chapter01Label
+);
+
+
+setText(
+    "chapter01Title",
+    data.chapter01Title
+);
+
+
+setText(
+    "chapter01Description",
+    data.chapter01Description
+);
+
+
+setImage(
+    "chapter01Image",
+    data.chapter01Image
+);
+
+
+/* =================================================
+   RIBBON
+================================================= */
+
+setImage(
+    "ribbonImage",
+    data.ribbonImage
+);
+
+
+setText(
+    "ribbonCaption",
+    data.ribbonCaption
+);
+
+
+/* =================================================
+   CHAPTER 02
+================================================= */
+
+setText(
+    "chapter02Label",
+    data.chapter02Label
+);
+
+
+setText(
+    "chapter02Title",
+    data.chapter02Title
+);
+
+
+setText(
+    "chapter02Description",
+    data.chapter02Description
+);
+
+
+setText(
+    "chapter02SideLabel",
+    data.chapter02SideLabel
+);
+
+
+setText(
+    "chapter02Date",
+    data.chapter02Date
+);
+
+
+setImage(
+    "chapter02Image",
+    data.chapter02Image
+);
+
+
+/* =================================================
+   VIDEO
+================================================= */
+
+setText(
+    "videoLabel",
+    data.videoLabel
+);
+
+
+setText(
+    "videoTitle",
+    data.videoTitle
+);
+
+
+setText(
+    "videoDescription",
+    data.videoDescription
+);
+
+
+setText(
+    "videoSubLabel",
+    data.videoSubLabel
+);
+
+
+const videoLoaded =
+    setVideo(
+        data.videoUrl
+    );
+
+
+if(!videoLoaded){
+
+    hideElement(
+        "videoSection"
+    );
+
+}
+
+
+/* =================================================
+   PAGE 01
+================================================= */
+
+setImage(
+    "page01Image",
+    data.page01Image
+);
+
+
+setText(
+    "page01Label",
+    data.page01Label
+);
+
+
+setText(
+    "page01Title",
+    data.page01Title
+);
+
+
+setText(
+    "page01Description",
+    data.page01Description
+);
+
+
+/* =================================================
+   PAGE 02
+================================================= */
+
+setImage(
+    "page02Image",
+    data.page02Image
+);
+
+
+setText(
+    "page02Label",
+    data.page02Label
+);
+
+
+setText(
+    "page02Title",
+    data.page02Title
+);
+
+
+setText(
+    "page02Description",
+    data.page02Description
+);
+
+
+/* =================================================
+   PAGE 03
+================================================= */
+
+setImage(
+    "page03Image",
+    data.page03Image
+);
+
+
+setText(
+    "page03Label",
+    data.page03Label
+);
+
+
+setText(
+    "page03Title",
+    data.page03Title
+);
+
+
+setText(
+    "page03Description",
+    data.page03Description
+);
+
+
+/* =================================================
+   MEMORY A
+================================================= */
+
+setImage(
+    "memoryAImage",
+    data.memoryAImage
+);
+
+
+setText(
+    "memoryALabel",
+    data.memoryALabel
+);
+
+
+setText(
+    "memoryATitle",
+    data.memoryATitle
+);
+
+
+setText(
+    "memoryADescription",
+    data.memoryADescription
+);
+
+
+setText(
+    "memoryANote",
+    data.memoryANote
+);
+
+
+/* =================================================
+   MEMORY B
+================================================= */
+
+setImage(
+    "memoryBImage",
+    data.memoryBImage
+);
+
+
+setText(
+    "memoryBLabel",
+    data.memoryBLabel
+);
+
+
+setText(
+    "memoryBTitle",
+    data.memoryBTitle
+);
+
+
+setText(
+    "memoryBDescription",
+    data.memoryBDescription
+);
+
+
+setText(
+    "memoryBNote",
+    data.memoryBNote
+);
+
+
+/* =================================================
+   MEMORY C
+================================================= */
+
+setImage(
+    "memoryCImage",
+    data.memoryCImage
+);
+
+
+setText(
+    "memoryCLabel",
+    data.memoryCLabel
+);
+
+
+setText(
+    "memoryCTitle",
+    data.memoryCTitle
+);
+
+
+setText(
+    "memoryCDescription",
+    data.memoryCDescription
+);
+
+
+setText(
+    "memoryCNote",
+    data.memoryCNote
+);
+
+
+/* =================================================
+   FOOTER DATE
+================================================= */
+
+if(data.createdAt){
+
+    setText(
+        "footerDate",
+        data.createdAt
+    );
+
+}
+
+
+/* =================================================
+   PAGE TITLE
+================================================= */
+
+if(
+    data.heroTitle ||
+    data.title
+){
+
+    document.title =
+        String(
+            data.heroTitle ||
             data.title
-        );
+        ) +
+        " — Life & Travel Archive";
 
+}
 
-        setText(
-            "heroDescription",
-            hero.description ||
-            data.description
-        );
 
+/* =================================================
+   REMOVE LOADING
+================================================= */
 
-        setImage(
-            "heroImage",
-            hero.image ||
-            data.image
-        );
+hideElement(
+    "loadingScreen"
+);
 
 
-        /* =================================================
-           CHAPTER 01
-        ================================================= */
+/* =================================================
+   SUCCESS
+================================================= */
 
-        const chapter01 =
-            content.chapter01 || {};
-
-
-        setText(
-            "chapter01Label",
-            chapter01.label
-        );
-
-
-        setText(
-            "chapter01Title",
-            chapter01.title
-        );
-
-
-        setText(
-            "chapter01Description",
-            chapter01.description
-        );
-
-
-        setImage(
-            "chapter01Image",
-            chapter01.image
-        );
-
-
-        /* =================================================
-           RIBBON
-        ================================================= */
-
-        const ribbon =
-            content.ribbon || {};
-
-
-        setImage(
-            "ribbonImage",
-            ribbon.image
-        );
-
-
-        setText(
-            "ribbonCaption",
-            ribbon.caption
-        );
-
-
-        /* =================================================
-           CHAPTER 02
-        ================================================= */
-
-        const chapter02 =
-            content.chapter02 || {};
-
-
-        setText(
-            "chapter02Label",
-            chapter02.label
-        );
-
-
-        setText(
-            "chapter02Title",
-            chapter02.title
-        );
-
-
-        setText(
-            "chapter02Description",
-            chapter02.description
-        );
-
-
-        setText(
-            "chapter02SideLabel",
-            chapter02.sideLabel
-        );
-
-
-        setText(
-            "chapter02Date",
-            chapter02.date
-        );
-
-
-        setImage(
-            "chapter02Image",
-            chapter02.image
-        );
-
-
-        /* =================================================
-           VIDEO
-        ================================================= */
-
-        const video =
-            content.video || {};
-
-
-        setText(
-            "videoLabel",
-            video.label
-        );
-
-
-        setText(
-            "videoTitle",
-            video.title
-        );
-
-
-        setText(
-            "videoDescription",
-            video.description
-        );
-
-
-        setText(
-            "videoSubLabel",
-            video.subLabel
-        );
-
-
-        const videoLoaded =
-            setVideo(
-                video.url
-            );
-
-
-        if(!videoLoaded){
-
-            hideElement(
-                "videoSection"
-            );
-
-        }
-
-
-        /* =================================================
-           PAGE 01
-        ================================================= */
-
-        const page01 =
-            content.page01 || {};
-
-
-        setImage(
-            "page01Image",
-            page01.image
-        );
-
-
-        setText(
-            "page01Label",
-            page01.label
-        );
-
-
-        setText(
-            "page01Title",
-            page01.title
-        );
-
-
-        setText(
-            "page01Description",
-            page01.description
-        );
-
-
-        /* =================================================
-           PAGE 02
-        ================================================= */
-
-        const page02 =
-            content.page02 || {};
-
-
-        setImage(
-            "page02Image",
-            page02.image
-        );
-
-
-        setText(
-            "page02Label",
-            page02.label
-        );
-
-
-        setText(
-            "page02Title",
-            page02.title
-        );
-
-
-        setText(
-            "page02Description",
-            page02.description
-        );
-
-
-        /* =================================================
-           PAGE 03
-        ================================================= */
-
-        const page03 =
-            content.page03 || {};
-
-
-        setImage(
-            "page03Image",
-            page03.image
-        );
-
-
-        setText(
-            "page03Label",
-            page03.label
-        );
-
-
-        setText(
-            "page03Title",
-            page03.title
-        );
-
-
-        setText(
-            "page03Description",
-            page03.description
-        );
-
-
-        /* =================================================
-           MEMORY A
-        ================================================= */
-
-        const memoryA =
-            content.memoryA || {};
-
-
-        setImage(
-            "memoryAImage",
-            memoryA.image
-        );
-
-
-        setText(
-            "memoryALabel",
-            memoryA.label
-        );
-
-
-        setText(
-            "memoryATitle",
-            memoryA.title
-        );
-
-
-        setText(
-            "memoryADescription",
-            memoryA.description
-        );
-
-
-        setText(
-            "memoryANote",
-            memoryA.note
-        );
-
-
-        /* =================================================
-           MEMORY B
-        ================================================= */
-
-        const memoryB =
-            content.memoryB || {};
-
-
-        setImage(
-            "memoryBImage",
-            memoryB.image
-        );
-
-
-        setText(
-            "memoryBLabel",
-            memoryB.label
-        );
-
-
-        setText(
-            "memoryBTitle",
-            memoryB.title
-        );
-
-
-        setText(
-            "memoryBDescription",
-            memoryB.description
-        );
-
-
-        setText(
-            "memoryBNote",
-            memoryB.note
-        );
-
-
-        /* =================================================
-           MEMORY C
-        ================================================= */
-
-        const memoryC =
-            content.memoryC || {};
-
-
-        setImage(
-            "memoryCImage",
-            memoryC.image
-        );
-
-
-        setText(
-            "memoryCLabel",
-            memoryC.label
-        );
-
-
-        setText(
-            "memoryCTitle",
-            memoryC.title
-        );
-
-
-        setText(
-            "memoryCDescription",
-            memoryC.description
-        );
-
-
-        setText(
-            "memoryCNote",
-            memoryC.note
-        );
-
-
-        /* =================================================
-           FOOTER DATE
-        ================================================= */
-
-        if(data.createdAt){
-
-            setText(
-                "footerDate",
-                data.createdAt
-            );
-
-        }
-
-
-        /* =================================================
-           PAGE TITLE
-        ================================================= */
-
-        if(
-            hero.title ||
-            data.title
-        ){
-
-            document.title =
-                String(
-                    hero.title ||
-                    data.title
-                ) +
-                " — Life & Travel Archive";
-
-        }
-
-
-        /* =================================================
-           REMOVE LOADING
-        ================================================= */
-
-        hideElement(
-            "loadingScreen"
-        );
-
-
-        /* =================================================
-           SUCCESS
-        ================================================= */
-
-        console.log(
-            "🎉 Life & Travel Archive loaded successfully!",
-            {
-                id:newsId,
-                content:content
-            }
-        );
-
-
+console.log(
+    "🎉 Life & Travel Archive loaded successfully!",
+    {
+        id:newsId,
+        data:data
     }
-
-    catch(error){
-
-        console.error(
-            "❌ Failed to load Firebase data:",
-            error
-        );
-
-
-        hideElement(
-            "loadingScreen"
-        );
-
-
-        showError(
-            "Unable to load this archive."
-        );
+);
+       
 
     }
 
