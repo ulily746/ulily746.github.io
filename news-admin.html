@@ -3980,20 +3980,36 @@ async function editEntry(id){
         DESIGN CONTENT
     */
 
-    if(
+   if(
 
-        entry.design ===
-        'FilmArchiveDesign'
+    entry.design ===
+    'FilmArchiveDesign'
 
-    ){
+){
 
-        fillFilmArchiveForm(
+    fillFilmArchiveForm(
 
-            entry.content || {}
+        entry.content || {}
 
-        );
+    );
 
-    }
+}
+
+
+else if(
+
+    entry.design ===
+    'VintageFlowerDesign'
+
+){
+
+    fillVintageFlowerForm(
+
+        entry
+
+    );
+
+}
 
 
     handleDesignChange();
@@ -4178,9 +4194,215 @@ function fillFilmArchiveForm(content){
 
 }
 
+/* ======================================
+   FILL VINTAGE FLOWER FORM
+   Firebase TOP-LEVEL FIELDS
+====================================== */
 
+function fillVintageFlowerForm(entry){
+
+    /* ==============================
+       HERO
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageHeroImage'
+    )
+    .value =
+    entry.heroImage || '';
+
+
+    document
+    .getElementById(
+        'vintageHeroTitle'
+    )
+    .value =
+    entry.heroTitle || '';
+
+
+    document
+    .getElementById(
+        'vintageHeroSubtitle'
+    )
+    .value =
+    entry.heroEyebrow || '';
+
+
+    /* ==============================
+       INTRO
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageIntroTitle'
+    )
+    .value =
+    entry.chapter01Title || '';
+
+
+    document
+    .getElementById(
+        'vintageIntroText'
+    )
+    .value =
+    entry.chapter01Description || '';
+
+
+    /* ==============================
+       FLOWER 01
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageFlower1Image'
+    )
+    .value =
+    entry.page01Image ||
+    entry.chapter01Image ||
+    '';
+
+
+    document
+    .getElementById(
+        'vintageFlower1Title'
+    )
+    .value =
+    entry.page01Title || '';
+
+
+    document
+    .getElementById(
+        'vintageFlower1Text'
+    )
+    .value =
+    entry.page01Description || '';
+
+
+    /* ==============================
+       FLOWER 02
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageFlower2Image'
+    )
+    .value =
+    entry.page02Image ||
+    entry.chapter02Image ||
+    '';
+
+
+    document
+    .getElementById(
+        'vintageFlower2Title'
+    )
+    .value =
+    entry.page02Title ||
+    entry.chapter02Title ||
+    '';
+
+
+    document
+    .getElementById(
+        'vintageFlower2Text'
+    )
+    .value =
+    entry.page02Description ||
+    entry.chapter02Description ||
+    '';
+
+
+    /* ==============================
+       FLOWER 03
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageFlower3Image'
+    )
+    .value =
+    entry.page03Image || '';
+
+
+    document
+    .getElementById(
+        'vintageFlower3Title'
+    )
+    .value =
+    entry.page03Title || '';
+
+
+    document
+    .getElementById(
+        'vintageFlower3Text'
+    )
+    .value =
+    entry.page03Description || '';
+
+
+    /* ==============================
+       JOURNAL
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageJournalTitle'
+    )
+    .value =
+    entry.videoTitle || '';
+
+
+    document
+    .getElementById(
+        'vintageJournalText'
+    )
+    .value =
+    entry.videoDescription || '';
+
+
+    /* ==============================
+       GALLERY
+    ============================== */
+
+    document
+    .getElementById(
+        'vintageGallery1Image'
+    )
+    .value =
+    entry.memoryAImage ||
+    entry.ribbonImage ||
+    '';
+
+
+    document
+    .getElementById(
+        'vintageGallery2Image'
+    )
+    .value =
+    entry.memoryBImage || '';
+
+
+    document
+    .getElementById(
+        'vintageGallery3Image'
+    )
+    .value =
+    entry.memoryCImage || '';
+
+
+    document
+    .getElementById(
+        'vintageGallery4Image'
+    )
+    .value =
+    '';
+
+}     
 /* ======================================
    COLLECT DESIGN CONTENT
+   VINTAGE FLOWER DESIGN
+   Firebase field names matched
 ====================================== */
 
 function collectDesignContent(){
@@ -4194,11 +4416,13 @@ function collectDesignContent(){
     let designContent = {};
 
 
-    if(
+    /* ==================================
+       FILM ARCHIVE
+    ================================== */
 
+    if(
         design ===
         'FilmArchiveDesign'
-
     ){
 
         designContent = {
@@ -4206,41 +4430,26 @@ function collectDesignContent(){
             hero: {
 
                 titleTop:
-
                     document
-                    .getElementById(
-                        'heroTitleTop'
-                    )
+                    .getElementById('heroTitleTop')
                     .value
                     .trim(),
-
 
                 titleBottom1:
-
                     document
-                    .getElementById(
-                        'heroTitleBottom1'
-                    )
+                    .getElementById('heroTitleBottom1')
                     .value
                     .trim(),
-
 
                 titleBottom2:
-
                     document
-                    .getElementById(
-                        'heroTitleBottom2'
-                    )
+                    .getElementById('heroTitleBottom2')
                     .value
                     .trim(),
 
-
                 image:
-
                     document
-                    .getElementById(
-                        'heroImage'
-                    )
+                    .getElementById('heroImage')
                     .value
                     .trim()
 
@@ -4250,11 +4459,8 @@ function collectDesignContent(){
             intro: {
 
                 text:
-
                     document
-                    .getElementById(
-                        'introText'
-                    )
+                    .getElementById('introText')
                     .value
                     .trim()
 
@@ -4264,98 +4470,59 @@ function collectDesignContent(){
             memories: [
 
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'memory1Image'
-                        )
+                        .getElementById('memory1Image')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'memory1Text'
-                        )
+                        .getElementById('memory1Text')
                         .value
                         .trim()
-
                 },
 
-
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'memory2Image'
-                        )
+                        .getElementById('memory2Image')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'memory2Text'
-                        )
+                        .getElementById('memory2Text')
                         .value
                         .trim()
-
                 },
 
-
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'memory3Image'
-                        )
+                        .getElementById('memory3Image')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'memory3Text'
-                        )
+                        .getElementById('memory3Text')
                         .value
                         .trim()
-
                 },
 
-
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'memory4Image'
-                        )
+                        .getElementById('memory4Image')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'memory4Text'
-                        )
+                        .getElementById('memory4Text')
                         .value
                         .trim()
-
                 }
 
             ],
@@ -4364,21 +4531,14 @@ function collectDesignContent(){
             video: {
 
                 url:
-
                     document
-                    .getElementById(
-                        'videoUrl'
-                    )
+                    .getElementById('videoUrl')
                     .value
                     .trim(),
 
-
                 caption:
-
                     document
-                    .getElementById(
-                        'videoCaption'
-                    )
+                    .getElementById('videoCaption')
                     .value
                     .trim()
 
@@ -4388,104 +4548,63 @@ function collectDesignContent(){
             films: [
 
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'film1Image'
-                        )
+                        .getElementById('film1Image')
                         .value
                         .trim(),
-
 
                     title:
-
                         document
-                        .getElementById(
-                            'film1Title'
-                        )
+                        .getElementById('film1Title')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'film1Text'
-                        )
+                        .getElementById('film1Text')
                         .value
                         .trim()
-
                 },
 
-
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'film2Image'
-                        )
+                        .getElementById('film2Image')
                         .value
                         .trim(),
-
 
                     title:
-
                         document
-                        .getElementById(
-                            'film2Title'
-                        )
+                        .getElementById('film2Title')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'film2Text'
-                        )
+                        .getElementById('film2Text')
                         .value
                         .trim()
-
                 },
 
-
                 {
-
                     image:
-
                         document
-                        .getElementById(
-                            'film3Image'
-                        )
+                        .getElementById('film3Image')
                         .value
                         .trim(),
-
 
                     title:
-
                         document
-                        .getElementById(
-                            'film3Title'
-                        )
+                        .getElementById('film3Title')
                         .value
                         .trim(),
 
-
                     text:
-
                         document
-                        .getElementById(
-                            'film3Text'
-                        )
+                        .getElementById('film3Text')
                         .value
                         .trim()
-
                 }
 
             ],
@@ -4494,45 +4613,494 @@ function collectDesignContent(){
             travel: {
 
                 month:
-
                     document
-                    .getElementById(
-                        'travelMonth'
-                    )
+                    .getElementById('travelMonth')
                     .value
                     .trim(),
-
 
                 year:
-
                     document
-                    .getElementById(
-                        'travelYear'
-                    )
+                    .getElementById('travelYear')
                     .value
                     .trim(),
-
 
                 location:
-
                     document
-                    .getElementById(
-                        'travelLocation'
-                    )
+                    .getElementById('travelLocation')
                     .value
                     .trim(),
 
-
                 text:
-
                     document
-                    .getElementById(
-                        'travelText'
-                    )
+                    .getElementById('travelText')
                     .value
                     .trim()
 
             }
+
+        };
+
+    }
+
+
+    /* ==================================
+       VINTAGE FLOWER DESIGN
+       SAVE AS TOP-LEVEL FIREBASE FIELDS
+    ================================== */
+
+    else if(
+        design ===
+        'VintageFlowerDesign'
+    ){
+
+        designContent = {
+
+            /* ==========================
+               HERO
+            ========================== */
+
+            heroEyebrow:
+
+                document
+                .getElementById(
+                    'vintageHeroSubtitle'
+                )
+                .value
+                .trim(),
+
+
+            heroTitle:
+
+                document
+                .getElementById(
+                    'vintageHeroTitle'
+                )
+                .value
+                .trim(),
+
+
+            heroDescription:
+
+                document
+                .getElementById(
+                    'vintageIntroText'
+                )
+                .value
+                .trim(),
+
+
+            heroImage:
+
+                document
+                .getElementById(
+                    'vintageHeroImage'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               CHAPTER 01
+            ========================== */
+
+            chapter01Label:
+
+                'CHAPTER. 01',
+
+
+            chapter01Title:
+
+                document
+                .getElementById(
+                    'vintageIntroTitle'
+                )
+                .value
+                .trim(),
+
+
+            chapter01Description:
+
+                document
+                .getElementById(
+                    'vintageIntroText'
+                )
+                .value
+                .trim(),
+
+
+            chapter01Image:
+
+                document
+                .getElementById(
+                    'vintageFlower1Image'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               RIBBON
+            ========================== */
+
+            ribbonImage:
+
+                document
+                .getElementById(
+                    'vintageGallery1Image'
+                )
+                .value
+                .trim(),
+
+
+            ribbonCaption:
+
+                document
+                .getElementById(
+                    'vintageJournalTitle'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               CHAPTER 02
+            ========================== */
+
+            chapter02Label:
+
+                'CHAPTER. 02',
+
+
+            chapter02Title:
+
+                document
+                .getElementById(
+                    'vintageFlower2Title'
+                )
+                .value
+                .trim(),
+
+
+            chapter02Description:
+
+                document
+                .getElementById(
+                    'vintageFlower2Text'
+                )
+                .value
+                .trim(),
+
+
+            chapter02SideLabel:
+
+                'EUROPE MEMORY ARCHIVE',
+
+
+            chapter02Date:
+
+                document
+                .getElementById(
+                    'entryDate'
+                )
+                .value,
+
+
+            chapter02Image:
+
+                document
+                .getElementById(
+                    'vintageFlower2Image'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               VIDEO / JOURNAL
+            ========================== */
+
+            videoLabel:
+
+                'A DAY IN BETWEEN',
+
+
+            videoTitle:
+
+                document
+                .getElementById(
+                    'vintageJournalTitle'
+                )
+                .value
+                .trim(),
+
+
+            videoDescription:
+
+                document
+                .getElementById(
+                    'vintageJournalText'
+                )
+                .value
+                .trim(),
+
+
+            videoSubLabel:
+
+                'LIFE / TRAVEL / 2026',
+
+
+            videoUrl:
+
+                '',
+
+
+            /* ==========================
+               PAGE 01
+            ========================== */
+
+            page01Label:
+
+                'PAGE .01',
+
+
+            page01Title:
+
+                document
+                .getElementById(
+                    'vintageFlower1Title'
+                )
+                .value
+                .trim(),
+
+
+            page01Description:
+
+                document
+                .getElementById(
+                    'vintageFlower1Text'
+                )
+                .value
+                .trim(),
+
+
+            page01Image:
+
+                document
+                .getElementById(
+                    'vintageFlower1Image'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               PAGE 02
+            ========================== */
+
+            page02Label:
+
+                'PAGE .02',
+
+
+            page02Title:
+
+                document
+                .getElementById(
+                    'vintageFlower2Title'
+                )
+                .value
+                .trim(),
+
+
+            page02Description:
+
+                document
+                .getElementById(
+                    'vintageFlower2Text'
+                )
+                .value
+                .trim(),
+
+
+            page02Image:
+
+                document
+                .getElementById(
+                    'vintageFlower2Image'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               PAGE 03
+            ========================== */
+
+            page03Label:
+
+                'PAGE .03',
+
+
+            page03Title:
+
+                document
+                .getElementById(
+                    'vintageFlower3Title'
+                )
+                .value
+                .trim(),
+
+
+            page03Description:
+
+                document
+                .getElementById(
+                    'vintageFlower3Text'
+                )
+                .value
+                .trim(),
+
+
+            page03Image:
+
+                document
+                .getElementById(
+                    'vintageFlower3Image'
+                )
+                .value
+                .trim(),
+
+
+            /* ==========================
+               MEMORY A
+            ========================== */
+
+            memoryALabel:
+
+                'MEMORIES. A',
+
+
+            memoryATitle:
+
+                document
+                .getElementById(
+                    'vintageFlower1Title'
+                )
+                .value
+                .trim(),
+
+
+            memoryADescription:
+
+                document
+                .getElementById(
+                    'vintageFlower1Text'
+                )
+                .value
+                .trim(),
+
+
+            memoryAImage:
+
+                document
+                .getElementById(
+                    'vintageGallery1Image'
+                )
+                .value
+                .trim(),
+
+
+            memoryANote:
+
+                'PARIS · 10:30 AM',
+
+
+            /* ==========================
+               MEMORY B
+            ========================== */
+
+            memoryBLabel:
+
+                'MEMORIES. B',
+
+
+            memoryBTitle:
+
+                document
+                .getElementById(
+                    'vintageFlower2Title'
+                )
+                .value
+                .trim(),
+
+
+            memoryBDescription:
+
+                document
+                .getElementById(
+                    'vintageFlower2Text'
+                )
+                .value
+                .trim(),
+
+
+            memoryBImage:
+
+                document
+                .getElementById(
+                    'vintageGallery2Image'
+                )
+                .value
+                .trim(),
+
+
+            memoryBNote:
+
+                'FOUND IN OLD STREET',
+
+
+            /* ==========================
+               MEMORY C
+            ========================== */
+
+            memoryCLabel:
+
+                'MEMORIES. C',
+
+
+            memoryCTitle:
+
+                document
+                .getElementById(
+                    'vintageFlower3Title'
+                )
+                .value
+                .trim(),
+
+
+            memoryCDescription:
+
+                document
+                .getElementById(
+                    'vintageFlower3Text'
+                )
+                .value
+                .trim(),
+
+
+            memoryCImage:
+
+                document
+                .getElementById(
+                    'vintageGallery3Image'
+                )
+                .value
+                .trim(),
+
+
+            memoryCNote:
+
+                'TO BE CONTINUED'
 
         };
 
@@ -4630,34 +5198,65 @@ async function saveEntry(){
 
 
 
-    const entryData = {
+   const entryData = {
 
-        title:
-            title,
+    title:
+        title,
 
-        category:
-            category,
+    category:
+        category,
 
-        design:
-            design,
+    design:
+        design,
 
-        description:
-            description,
+    description:
+        description,
 
-        date:
-            date,
+    date:
+        date,
 
-        status:
-            status,
+    status:
+        status,
 
-        image:
-            image,
+    image:
+        image
 
-        content:
-            designContent
+};
 
-    };
 
+/* ======================================
+   VINTAGE FLOWER
+   Firebase 기존 구조와 동일하게
+   TOP-LEVEL FIELD로 저장
+====================================== */
+
+if(
+    design ===
+    'VintageFlowerDesign'
+){
+
+    Object.assign(
+
+        entryData,
+
+        designContent
+
+    );
+
+}
+
+
+/* ======================================
+   FILM ARCHIVE
+   기존 content 구조 유지
+====================================== */
+
+else{
+
+    entryData.content =
+        designContent;
+
+}
 
 
     try{
@@ -5071,6 +5670,120 @@ function resetForm(){
     .style
     .display =
     'none';
+
+     /* ======================================
+   VINTAGE FLOWER RESET
+====================================== */
+
+document
+.getElementById('vintageHeroImage')
+.value =
+'';
+
+
+document
+.getElementById('vintageHeroTitle')
+.value =
+'';
+
+
+document
+.getElementById('vintageHeroSubtitle')
+.value =
+'';
+
+
+document
+.getElementById('vintageIntroTitle')
+.value =
+'';
+
+
+document
+.getElementById('vintageIntroText')
+.value =
+'';
+
+
+for(
+
+    let i = 1;
+
+    i <= 3;
+
+    i++
+
+){
+
+    document
+    .getElementById(
+        `vintageFlower${i}Image`
+    )
+    .value =
+    '';
+
+
+    document
+    .getElementById(
+        `vintageFlower${i}Title`
+    )
+    .value =
+    '';
+
+
+    document
+    .getElementById(
+        `vintageFlower${i}Text`
+    )
+    .value =
+    '';
+
+}
+
+
+document
+.getElementById(
+    'vintageJournalTitle'
+)
+.value =
+'';
+
+
+document
+.getElementById(
+    'vintageJournalText'
+)
+.value =
+'';
+
+
+for(
+
+    let i = 1;
+
+    i <= 4;
+
+    i++
+
+){
+
+    document
+    .getElementById(
+        `vintageGallery${i}Image`
+    )
+    .value =
+    '';
+
+}
+
+
+document
+.getElementById(
+    'vintageFlowerFields'
+)
+.style
+.display =
+'none';
 
 }
 
