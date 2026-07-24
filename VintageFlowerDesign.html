@@ -17,7 +17,81 @@
 https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&display=swap
 " rel="stylesheet">
 
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+        getFirestore,
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+    // Firebase 설정값
+    const firebaseConfig = {
+        // 기존에 사용하던 Firebase Config를 여기에 넣기
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadVintageFlower() {
+
+        try {
+
+            // Firebase Firestore 문서
+            const docRef = doc(db, "vintageflowedesign", "vintageflowedesign");
+            const docSnap = await getDoc(docRef);
+
+            if (!docSnap.exists()) {
+                console.error("vintageflowedesign 문서를 찾을 수 없습니다.");
+                return;
+            }
+
+            const data = docSnap.data();
+
+            // 모든 data-field 요소에 Firebase 값 적용
+            document.querySelectorAll("[data-field]").forEach(element => {
+
+                const field = element.dataset.field;
+                const value = data[field];
+
+                if (value === undefined || value === null) return;
+
+                const cleanValue = String(value).trim();
+
+                if (element.tagName === "IMG") {
+
+                    element.src = cleanValue;
+
+                } else if (element.tagName === "VIDEO") {
+
+                    element.src = cleanValue;
+
+                } else if (element.tagName === "SOURCE") {
+
+                    element.src = cleanValue;
+
+                } else {
+
+                    element.textContent = cleanValue;
+
+                }
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "Firebase 데이터를 불러오는 중 오류가 발생했습니다:",
+                error
+            );
+
+        }
+
+    }
+
+    loadVintageFlower();
+
+</script>
 <style>
 
 /* ========================================
@@ -814,11 +888,9 @@ overflow-hidden
 
 
 <img
-
-src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1800&q=80"
-
+data-field="heroImage"
+src=""
 alt="Vintage Flower Travel Journal"
-
 class="
 w-full
 h-full
@@ -840,7 +912,9 @@ p-6
 ">
 
 
-<span class="
+<span
+data-field="heroEyebrow"
+class="
 text-[10px]
 md:text-xs
 tracking-[0.4em]
@@ -848,22 +922,18 @@ text-[#E8ECE2]
 uppercase
 mb-3
 ">
-
-Wanderlust & Collectibles
-
 </span>
 
 
-<h1 class="
+<h1
+data-field="heroTitle"
+class="
 text-4xl
 md:text-6xl
 font-serif-title
 tracking-widest
 text-white
 ">
-
-VINTAGE FLOWER
-
 </h1>
 
 
@@ -876,21 +946,15 @@ my-5
 </div>
 
 
-<p class="
+<p
+data-field="heroDescription"
+class="
 text-xs
 text-white/90
 leading-relaxed
 font-light
 max-w-xl
 ">
-
-낯선 유럽의 골목길,
-오래된 서점의 책장 사이에서 발견한
-말린 꽃잎과 여행의 기록.
-
-일상과 여행이 교차하는 순간을
-한 페이지씩 조용히 엮어둡니다.
-
 </p>
 
 
@@ -941,40 +1005,32 @@ space-y-4
 ">
 
 
-<span class="archive-label">
-
-CHAPTER. 01
-
+<span
+data-field="chapter01Label"
+class="archive-label">
 </span>
 
 
-<h3 class="
+<h3
+data-field="chapter01Title"
+class="
 text-xl
 md:text-2xl
 font-serif-title
 tracking-wide
 ">
-
-시간을 머금은 펜던트
-
 </h3>
 
 
-<p class="
+<p
+data-field="chapter01Description"
+class="
 text-xs
 md:text-sm
 text-[#6F766A]
 leading-relaxed
 font-light
 ">
-
-둥글고 투박한 형태를 벗어나,
-오래된 주얼리 펜던트처럼 떨어지는
-길고 유려한 타원 프레임.
-
-여행지에서 모은 작은 기억들을
-하나의 보석처럼 보존합니다.
-
 </p>
 
 
@@ -1008,9 +1064,10 @@ md:justify-end
         <div class="vertical-oval-photo">
 
             <img
-            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80"
-            alt="Vintage Jewelry and Dried Flower"
-            >
+data-field="chapter01Image"
+src=""
+alt="Vintage Jewelry and Dried Flower"
+>
 
         </div>
 
@@ -1053,10 +1110,10 @@ overflow-hidden
 
 
 <img
-
-src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80"
-
+data-field="ribbonImage"
+src=""
 alt="Travel Journal Detail"
+
 
 class="
 w-full
@@ -1066,10 +1123,9 @@ brightness-[0.85]
 ">
 
 
-<div class="ribbon-caption">
-
-little things I remember
-
+<div
+data-field="ribbonCaption"
+class="ribbon-caption">
 </div>
 
 
@@ -1122,10 +1178,11 @@ md:justify-start
 
         <div class="vertical-oval-photo">
 
-            <img
-            src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80"
-            alt="Vintage Travel Collection"
-            >
+           <img
+data-field="chapter02Image"
+src=""
+alt="Vintage Travel Collection"
+>
 
         </div>
 
@@ -1143,39 +1200,32 @@ md:col-span-6
 space-y-4
 ">
 
-<span class="archive-label">
-
-CHAPTER. 02
-
+<span
+data-field="chapter02Label"
+class="archive-label">
 </span>
 
 
-<h3 class="
+<h3
+data-field="chapter02Title"
+class="
 text-xl
 md:text-2xl
 font-serif-title
 tracking-wide
 ">
-
-조각난 여정의 수집
-
 </h3>
 
 
-<p class="
+<p
+data-field="chapter02Description"
+class="
 text-xs
 md:text-sm
 text-[#6F766A]
 leading-relaxed
 font-light
 ">
-
-여행지에서 마주친 작은 오브제,
-빛바랜 편지와 오래된 꽃잎.
-
-사라질 것 같은 순간들을
-한 페이지씩 모아 기록합니다.
-
 </p>
 
 
@@ -1186,25 +1236,23 @@ pl-4
 mt-4
 ">
 
-<p class="
+<p
+data-field="chapter02SideLabel"
+class="
 text-[10px]
 tracking-widest
 text-[#71806D]
 ">
-
-EUROPE MEMORY ARCHIVE
-
 </p>
 
 
-<p class="
+<p
+data-field="chapter02Date"
+class="
 text-xs
 text-[#6F766A]
 mt-1
 ">
-
-2026. 07. 12
-
 </p>
 
 </div>
@@ -1239,10 +1287,9 @@ px-6
 
 <div class="section-heading">
 
-<span class="archive-label">
-
-MOVING MEMORIES
-
+<span
+data-field="videoTitle"
+class="archive-label">
 </span>
 
 </div>
@@ -1279,9 +1326,9 @@ playsinline
 
 
 <source
-src="video/travel-memory.mp4"
-type="video/mp4"
->
+data-field="videoUrl"
+src=""
+type="video/mp4">
 
 
 </video>
@@ -1320,45 +1367,35 @@ space-y-4
 ">
 
 
-<span class="archive-label">
-
-A DAY IN BETWEEN
-
+<span
+data-field="videoLabel"
+class="archive-label">
 </span>
 
 
-<h3 class="
+<h3
+data-field="videoTitle"
+class="
 text-xl
 font-serif-title
 tracking-wide
 ">
-
-Moving Memories
-
 </h3>
 
-
-<p class="
+<p
+data-field="videoDescription"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 font-light
 ">
-
-사진으로는 남길 수 없었던
-빛과 움직임을 짧은 영상으로 기록합니다.
-
-낯선 도시의 거리,
-창문 너머로 지나가는 풍경,
-그리고 그날의 작은 순간들.
-
 </p>
 
 
-<div class="sparkle-line pt-2">
-
-LIFE / TRAVEL / 2026
-
+<div
+data-field="videoSubLabel"
+class="sparkle-line pt-2">
 </div>
 
 
@@ -1441,11 +1478,9 @@ overflow-hidden
 
 
 <img
-
-src="https://images.unsplash.com/photo-1511018556340-d16986a1c194?auto=format&fit=crop&w=600&q=80"
-
+data-field="page01Image"
+src=""
 alt="Morning Market"
-
 class="
 w-full
 h-full
@@ -1463,41 +1498,37 @@ object-cover
         ✦
     </div>
 
-    <h4 class="
-    text-sm
-    font-semibold
-    tracking-wide
-    ">
+   <h4
+data-field="page01Label"
+class="
+text-sm
+font-semibold
+tracking-wide
+">
+</h4>
 
-    PAGE .01
 
-    </h4>
-
-
-<p class="
+<p
+data-field="page01Title"
+class="
 font-hand
 text-xl
 text-[#66745F]
 mt-1
 ">
-
-Morning Market
-
 </p>
 
 
-<p class="
+
+<p
+data-field="page01Description"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 px-2
 mt-2
 ">
-
-로컬 마켓에서 발견한
-작은 빈티지 오브제와
-말린 꽃의 기록.
-
 </p>
 
 
@@ -1534,11 +1565,9 @@ overflow-hidden
 
 
 <img
-
-src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80"
-
+data-field="page02Image"
+src=""
 alt="Quiet Afternoon"
-
 class="
 w-full
 h-full
@@ -1556,42 +1585,35 @@ object-cover
         ✦
     </div>
 
-    <h4 class="
-    text-sm
-    font-semibold
-    tracking-wide
-    ">
+    <h4
+data-field="page02Label"
+class="
+text-sm
+font-semibold
+tracking-wide
+">
+</h4>
 
-    PAGE .02
-
-    </h4>
-
-
-<p class="
+<p
+data-field="page02Title"
+class="
 font-hand
 text-xl
 text-[#66745F]
 mt-1
 ">
-
-Quiet Afternoon
-
 </p>
 
-
-<p class="
+<p
+data-field="page02Description"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 px-2
 mt-2
 ">
-
-햇살이 머무는 창가,
-여행 노트와 드로잉 잉크.
-
 </p>
-
 
 </div>
 
@@ -1626,11 +1648,9 @@ overflow-hidden
 
 
 <img
-
-src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
-
+data-field="page03Image"
+src=""
 alt="Cafe Memory"
-
 class="
 w-full
 h-full
@@ -1648,39 +1668,36 @@ object-cover
         ✦
     </div>
 
-    <h4 class="
-    text-sm
-    font-semibold
-    tracking-wide
-    ">
+    <h4
+data-field="page03Label"
+class="
+text-sm
+font-semibold
+tracking-wide
+">
+</h4>
 
-    PAGE .03
-
-    </h4>
-
-<p class="
+<p
+data-field="page03Title"
+class="
 font-hand
 text-xl
 text-[#66745F]
 mt-1
 ">
-
-Cafe Memory
-
 </p>
 
 
-<p class="
+
+<p
+data-field="page03Description"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 px-2
 mt-2
 ">
-
-작은 카페테라스에서
-머문 오후의 기록.
-
 </p>
 
 
@@ -1743,11 +1760,9 @@ rounded-r-full
 
 
 <img
-
-src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80"
-
+data-field="memoryAImage"
+src=""
 alt="Memory A"
-
 class="
 w-full
 h-full
@@ -1771,45 +1786,36 @@ text-left
 ">
 
 
-<span class="archive-label">
-
-MEMORIES. A
-
+<span
+data-field="memoryALabel"
+class="archive-label">
 </span>
 
 
-<h4 class="
+<h4
+data-field="memoryATitle"
+class="
 text-base
 font-semibold
 ">
-
-영원의 기억과 드라이플라워
-
 </h4>
 
 
-<p class="
+<p
+data-field="memoryADescription"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 font-light
 ">
-
-화면 끝에서 부드럽게 이어지는
-반원 형태의 여행 기록.
-
-바스러질 듯 작은 꽃잎 하나에도
-그날의 공기와 시간이 남아있습니다.
-
 </p>
 
 
-<div class="sparkle-line pt-2">
-
-PARIS · 10:30 AM
-
+<div
+data-field="memoryANote"
+class="sparkle-line pt-2">
 </div>
-
 
 </div>
 
@@ -1845,47 +1851,40 @@ md:order-1
 ">
 
 
-<span class="archive-label">
-
-MEMORIES. B
-
+<span
+data-field="memoryBLabel"
+class="archive-label">
 </span>
 
 
-<h4 class="
+<h4
+data-field="memoryBTitle"
+class="
 text-base
 font-semibold
 ">
-
-골목길 플리마켓의 수집
-
 </h4>
 
 
-<p class="
+<p
+data-field="memoryBDescription"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 font-light
 ">
-
-오래된 거리에서 발견한
-빛바랜 엽서와 작은 소품들.
-
-여행 가방 깊숙이 넣어온
-시간의 조각을 기록합니다.
-
 </p>
 
 
-<div class="
+
+<div
+data-field="memoryBNote"
+class="
 sparkle-line
 pt-2
 md:justify-end
 ">
-
-FOUND IN OLD STREET
-
 </div>
 
 
@@ -1915,17 +1914,14 @@ rounded-l-full
 
 
 <img
-
-src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80"
-
+data-field="memoryBImage"
+src=""
 alt="Memory B"
-
 class="
 w-full
 h-full
 object-cover
 ">
-
 </div>
 
 
@@ -1968,11 +1964,9 @@ rounded-r-full
 
 
 <img
-
-src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1000&q=80"
-
+data-field="memoryCImage"
+src=""
 alt="Memory C"
-
 class="
 w-full
 h-full
@@ -1996,43 +1990,33 @@ text-left
 ">
 
 
-<span class="archive-label">
-
-MEMORIES. C
-
+<span
+data-field="memoryCLabel"
+class="archive-label">
 </span>
 
 
-<h4 class="
+<h4
+data-field="memoryCTitle"
+class="
 text-base
 font-semibold
 ">
-
-다시 이어질 여정의 여운
-
 </h4>
 
-
-<p class="
+<p
+data-field="memoryCDescription"
+class="
 text-xs
 text-[#6F766A]
 leading-relaxed
 font-light
 ">
-
-마지막 페이지를 장식하는
-열린 아치 윈도우.
-
-끝이 아닌 새로운 여행의 시작을
-기록합니다.
-
 </p>
 
-
-<div class="sparkle-line pt-2">
-
-TO BE CONTINUED
-
+<div
+data-field="memoryCNote"
+class="sparkle-line pt-2">
 </div>
 
 
