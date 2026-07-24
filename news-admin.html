@@ -1875,7 +1875,7 @@ Film / Memory Archive
 
 <div
 class="design-card"
-onclick="selectDesign('Design 02')"
+onclick="selectDesign('VintageFlowerDesign')"
 >
 
 <div class="design-preview design-2">
@@ -1887,15 +1887,11 @@ Design 02
 <div class="design-info">
 
 <div class="design-name">
-
-Archive Journal
-
+    Vintage Flower
 </div>
 
 <div class="design-type">
-
-Personal Archive
-
+    Vintage Flower Archive
 </div>
 
 </div>
@@ -2122,13 +2118,13 @@ onchange="handleDesignChange()"
 
 <option value="FilmArchiveDesign">
 
-FilmArchiveDesign
+FilmArchive
 
 </option>
 
-<option value="Design 02">
+<option value="VintageFlowerDesign">
 
-Design 02
+Vintage Flower
 
 </option>
 
@@ -2654,6 +2650,320 @@ placeholder="Write travel description..."
 DATE
 
 </label>
+
+<!-- ======================================
+     VINTAGE FLOWER DESIGN FIELDS
+====================================== -->
+
+<div
+id="vintageFlowerFields"
+class="design-fields"
+style="display:none;"
+>
+
+    <h3 class="design-form-title">
+        Vintage Flower Content
+    </h3>
+
+
+    <!-- HERO -->
+
+    <div class="form-section-label">
+        HERO
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            HERO IMAGE URL
+        </label>
+
+        <input
+        type="text"
+        id="vintageHeroImage"
+        placeholder="https://..."
+        >
+
+    </div>
+
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label class="form-label">
+                HERO TITLE
+            </label>
+
+            <input
+            type="text"
+            id="vintageHeroTitle"
+            placeholder="Vintage Flower"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label class="form-label">
+                HERO SUBTITLE
+            </label>
+
+            <input
+            type="text"
+            id="vintageHeroSubtitle"
+            placeholder="A story of flowers"
+            >
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INTRO -->
+
+    <div class="form-section-label">
+        INTRODUCTION
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            INTRO TITLE
+        </label>
+
+        <input
+        type="text"
+        id="vintageIntroTitle"
+        placeholder="Introduction title"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            INTRO TEXT
+        </label>
+
+        <textarea
+        id="vintageIntroText"
+        placeholder="Write introduction..."
+        ></textarea>
+
+    </div>
+
+
+
+    <!-- FLOWER STORY -->
+
+    <div class="form-section-label">
+        FLOWER STORY
+    </div>
+
+
+    <div class="memory-form">
+
+
+        <div class="memory-item">
+
+            <strong>
+                FLOWER 01
+            </strong>
+
+            <input
+            type="text"
+            id="vintageFlower1Image"
+            placeholder="Flower 01 image URL"
+            >
+
+            <input
+            type="text"
+            id="vintageFlower1Title"
+            placeholder="Flower 01 title"
+            >
+
+            <textarea
+            id="vintageFlower1Text"
+            placeholder="Flower 01 description..."
+            ></textarea>
+
+        </div>
+
+
+
+        <div class="memory-item">
+
+            <strong>
+                FLOWER 02
+            </strong>
+
+            <input
+            type="text"
+            id="vintageFlower2Image"
+            placeholder="Flower 02 image URL"
+            >
+
+            <input
+            type="text"
+            id="vintageFlower2Title"
+            placeholder="Flower 02 title"
+            >
+
+            <textarea
+            id="vintageFlower2Text"
+            placeholder="Flower 02 description..."
+            ></textarea>
+
+        </div>
+
+
+
+        <div class="memory-item">
+
+            <strong>
+                FLOWER 03
+            </strong>
+
+            <input
+            type="text"
+            id="vintageFlower3Image"
+            placeholder="Flower 03 image URL"
+            >
+
+            <input
+            type="text"
+            id="vintageFlower3Title"
+            placeholder="Flower 03 title"
+            >
+
+            <textarea
+            id="vintageFlower3Text"
+            placeholder="Flower 03 description..."
+            ></textarea>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- JOURNAL -->
+
+    <div class="form-section-label">
+        JOURNAL
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            JOURNAL TITLE
+        </label>
+
+        <input
+        type="text"
+        id="vintageJournalTitle"
+        placeholder="Journal title"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label class="form-label">
+            JOURNAL TEXT
+        </label>
+
+        <textarea
+        id="vintageJournalText"
+        placeholder="Write journal content..."
+        ></textarea>
+
+    </div>
+
+
+
+    <!-- GALLERY -->
+
+    <div class="form-section-label">
+        GALLERY
+    </div>
+
+
+    <div class="memory-form">
+
+
+        <div class="memory-item">
+
+            <strong>
+                GALLERY 01
+            </strong>
+
+            <input
+            type="text"
+            id="vintageGallery1Image"
+            placeholder="Gallery 01 image URL"
+            >
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <strong>
+                GALLERY 02
+            </strong>
+
+            <input
+            type="text"
+            id="vintageGallery2Image"
+            placeholder="Gallery 02 image URL"
+            >
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <strong>
+                GALLERY 03
+            </strong>
+
+            <input
+            type="text"
+            id="vintageGallery3Image"
+            placeholder="Gallery 03 image URL"
+            >
+
+        </div>
+
+
+        <div class="memory-item">
+
+            <strong>
+                GALLERY 04
+            </strong>
+
+            <input
+            type="text"
+            id="vintageGallery4Image"
+            placeholder="Gallery 04 image URL"
+            >
+
+        </div>
+
+
+    </div>
+
+</div>     
 
 <input
 type="date"
@@ -3571,7 +3881,6 @@ function selectDesign(design){
 /* ======================================
    DESIGN CHANGE
 ====================================== */
-
 function handleDesignChange(){
 
     const design =
@@ -3585,9 +3894,23 @@ function handleDesignChange(){
         .getElementById('filmArchiveFields');
 
 
+    const vintageFlowerFields =
+        document
+        .getElementById('vintageFlowerFields');
+
+
+    /* 모든 디자인 필드 숨기기 */
+
     filmArchiveFields.style.display =
         'none';
 
+
+    vintageFlowerFields.style.display =
+        'none';
+
+
+
+    /* Design 01 */
 
     if(
 
@@ -3597,6 +3920,22 @@ function handleDesignChange(){
     ){
 
         filmArchiveFields.style.display =
+            'block';
+
+    }
+
+
+
+    /* Design 02 */
+
+    if(
+
+        design ===
+        'VintageFlowerDesign'
+
+    ){
+
+        vintageFlowerFields.style.display =
             'block';
 
     }
