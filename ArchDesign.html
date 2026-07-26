@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 
 <meta charset="UTF-8">
@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
   rel="stylesheet"
 >
 
@@ -23,7 +23,7 @@
 <style>
 
 /* =========================================================
-   01. RESET
+   RESET
 ========================================================= */
 
 * {
@@ -40,11 +40,13 @@ body {
 
   min-width: 320px;
 
+  margin: 0;
+
   overflow-x: hidden;
 
-  background: #DED7C8;
+  background: #D9D0BD;
 
-  color: #6F6759;
+  color: #7C715F;
 
   font-family:
     "Cormorant Garamond",
@@ -56,12 +58,8 @@ body {
 
 
 /* =========================================================
-   02. HERO OUTER
-
-   종이 뒤에 깔리는 전체 영역
-
-   사진이 화면 전체에 깔리고
-   그 위에 큰 종이 페이지가 올라감
+   HERO OUTER
+   화면 전체
 ========================================================= */
 
 .hero-section {
@@ -70,12 +68,7 @@ body {
 
   width: 100%;
 
-  min-height: 1050px;
-
-  padding:
-    70px
-    7vw
-    120px;
+  min-height: 1100px;
 
   display: flex;
 
@@ -83,23 +76,28 @@ body {
 
   align-items: center;
 
+  padding:
+    55px
+    3.5vw
+    80px;
+
   overflow: hidden;
+
+  background: #DDD4C3;
 
 }
 
 
 /* =========================================================
-   03. BACKGROUND IMAGE
-
-   아치 사진과 동일한 사진을
-   뒤쪽 전체에 크게 깔아줌
+   BACKGROUND IMAGE
+   종이 뒤에 크게 깔리는 동일한 사진
 ========================================================= */
 
 .hero-background {
 
   position: absolute;
 
-  inset: -60px;
+  inset: -50px;
 
   z-index: 0;
 
@@ -118,49 +116,49 @@ body {
 
   object-position: center;
 
-  transform: scale(1.12);
+  transform: scale(1.08);
 
   filter:
-    blur(5px)
-    saturate(0.45)
-    brightness(1.15);
+
+    blur(3px)
+
+    saturate(0.48)
+
+    brightness(1.08)
+
+    contrast(0.92);
 
 }
 
 
 /* =========================================================
-   04. BACKGROUND SOFT VEIL
+   BACKGROUND SOFT PAPER VEIL
 
-   배경을 뽀얗고 종이처럼
-   불투명하게 만들어줌
+   사진 위에 크림색을 덮어서
+   불투명하고 빈티지한 느낌
 ========================================================= */
 
-.hero-background::after {
-
-  content: "";
+.hero-background-overlay {
 
   position: absolute;
 
   inset: 0;
 
+  z-index: 1;
+
   background:
 
     linear-gradient(
-      rgba(244, 239, 226, 0.78),
-      rgba(238, 232, 216, 0.84)
+      rgba(244, 239, 225, 0.78),
+      rgba(235, 228, 211, 0.84)
     );
 
 }
 
 
 /* =========================================================
-   05. MAIN PAPER
-
-   Film 디자인처럼
-   충분히 크고 넓은 종이 페이지
-
-   중앙의 아치와 텍스트가
-   이 안에 들어감
+   MAIN PAPER
+   화면 양옆 여백을 최소화한 큰 종이
 ========================================================= */
 
 .hero-paper {
@@ -169,34 +167,42 @@ body {
 
   z-index: 5;
 
-  width: min(900px, 88vw);
+  width: min(
+    1360px,
+    calc(100vw - 7vw)
+  );
 
-  min-height: 900px;
+  min-height: 970px;
 
   padding:
-    90px
-    80px
+
+    95px
+
+    clamp(50px, 8vw, 150px)
+
     100px;
 
-  background: #F4EFE2;
+  background:
 
-  border-radius: 5px;
+    rgba(248, 244, 233, 0.97);
+
+  border-radius: 8px;
 
   box-shadow:
 
-    0 35px 90px
-    rgba(73, 61, 45, 0.20),
+    0 30px 90px
+    rgba(74, 62, 45, 0.17),
 
-    0 8px 25px
-    rgba(73, 61, 45, 0.10);
+    0 5px 18px
+    rgba(74, 62, 45, 0.08);
+
+  overflow: hidden;
 
 }
 
 
 /* =========================================================
-   06. PAPER TEXTURE
-
-   아주 약한 종이 질감
+   PAPER TEXTURE
 ========================================================= */
 
 .hero-paper::before {
@@ -207,6 +213,8 @@ body {
 
   inset: 0;
 
+  z-index: 0;
+
   pointer-events: none;
 
   opacity: 0.42;
@@ -214,7 +222,7 @@ body {
   background-image:
 
     radial-gradient(
-      rgba(112, 96, 72, 0.055) 0.7px,
+      rgba(116, 101, 76, 0.07) 0.7px,
       transparent 0.7px
     );
 
@@ -224,9 +232,7 @@ body {
 
 
 /* =========================================================
-   07. PAPER INNER
-
-   실제 콘텐츠 레이어
+   PAPER INNER CONTENT
 ========================================================= */
 
 .hero-paper-inner {
@@ -237,49 +243,46 @@ body {
 
   width: 100%;
 
-  height: 100%;
+  max-width: 1080px;
 
-  display: flex;
+  margin: 0 auto;
 
-  flex-direction: column;
-
-  align-items: center;
+  text-align: center;
 
 }
 
 
 /* =========================================================
-   08. SMALL DECORATIVE SYMBOL
-
-   상단 중앙 작은 장식
+   SMALL TOP DECORATION
 ========================================================= */
 
-.hero-symbol {
+.hero-star {
 
-  font-family: Georgia, serif;
+  position: relative;
 
-  font-size: 24px;
+  z-index: 5;
+
+  margin-bottom: 5px;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 28px;
 
   line-height: 1;
 
-  color: #8A806D;
+  color: #938671;
 
-  opacity: 0.62;
-
-  margin-bottom: 8px;
+  opacity: 0.65;
 
 }
 
 
 /* =========================================================
-   09. CIRCULAR TITLE
+   CIRCULAR TITLE AREA
 
-   핵심 디자인
-
-   아치 사진 위쪽에 붙어있는
-   둥근 곡선형 타이틀
-
-   이전보다 아치에 훨씬 가까움
+   아치 사진을 감싸는 큰 원형 문구
 ========================================================= */
 
 .hero-circle-title {
@@ -288,20 +291,24 @@ body {
 
   z-index: 5;
 
-  width: min(520px, 72%);
+  width: 100%;
 
-  height: 145px;
+  height: 235px;
 
-  margin-bottom: -68px;
+  margin: 0 auto -105px;
 
   overflow: visible;
 
 }
 
 
-/* SVG */
+/* =========================================================
+   SVG
+========================================================= */
 
 .hero-circle-title svg {
+
+  display: block;
 
   width: 100%;
 
@@ -312,33 +319,36 @@ body {
 }
 
 
-/* 둥근 글씨 */
+/* =========================================================
+   CIRCULAR TEXT
+========================================================= */
 
 .hero-circle-title text {
 
   font-family:
+
     "Cormorant Garamond",
+
     Georgia,
+
     serif;
 
-  font-size: 27px;
+  font-size: 42px;
 
   font-weight: 400;
 
   letter-spacing: 0.075em;
 
-  fill: #817562;
+  fill: #827663;
 
 }
 
 
 /* =========================================================
-   10. ARCH PHOTO
+   ARCH PHOTO
 
-   중앙의 메인 사진
-
-   길고 세로로 내려오는
-   큰 아치 형태
+   크게 확대
+   원형 글자가 아치 상단을 감싸도록
 ========================================================= */
 
 .hero-arch {
@@ -347,31 +357,39 @@ body {
 
   z-index: 3;
 
-  width: min(430px, 58%);
+  width: min(
+    500px,
+    52vw
+  );
 
   aspect-ratio: 0.68;
 
+  margin: 0 auto;
+
   overflow: hidden;
 
-  background: #D8D0BE;
+  background: #D7CDB9;
 
   border-radius:
 
-    220px
-    220px
+    260px
+
+    260px
+
     0
+
     0;
 
   box-shadow:
 
-    0 12px 30px
-    rgba(79, 67, 49, 0.10);
+    0 5px 18px
+    rgba(90, 76, 56, 0.08);
 
 }
 
 
 /* =========================================================
-   11. ARCH IMAGE
+   ARCH IMAGE
 ========================================================= */
 
 .hero-arch img {
@@ -380,17 +398,22 @@ body {
 
   height: 100%;
 
+  display: block;
+
   object-fit: cover;
 
   object-position: center;
 
   filter:
 
-    saturate(0.68)
-    brightness(1.04)
+    saturate(0.72)
+
+    brightness(1.03)
+
     contrast(0.94);
 
   transition:
+
     transform 1s ease;
 
 }
@@ -398,65 +421,84 @@ body {
 
 .hero-arch:hover img {
 
-  transform: scale(1.035);
+  transform: scale(1.025);
 
 }
 
 
 /* =========================================================
-   12. NAME
-
-   아치 아래 작은 타이틀
+   NAME
 ========================================================= */
 
 .hero-name {
 
-  margin-top: 28px;
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: 32px;
+
+  text-align: center;
 
   font-family:
+
     "Cormorant Garamond",
+
     Georgia,
+
+    serif;
+
+  font-size: 21px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.34em;
+
+  color: #847866;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.hero-description {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: min(
+    430px,
+    90%
+  );
+
+  margin:
+
+    28px
+
+    auto
+
+    0;
+
+  text-align: center;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
     serif;
 
   font-size: 17px;
 
   font-weight: 400;
 
-  letter-spacing: 0.32em;
+  line-height: 1.8;
 
-  color: #817766;
-
-  text-align: center;
-
-}
-
-
-/* =========================================================
-   13. DESCRIPTION
-
-   아치 아래 설명
-========================================================= */
-
-.hero-description {
-
-  max-width: 400px;
-
-  margin-top: 24px;
-
-  text-align: center;
-
-  font-family:
-    "Cormorant Garamond",
-    Georgia,
-    serif;
-
-  font-size: 15px;
-
-  font-weight: 400;
-
-  line-height: 1.85;
-
-  letter-spacing: 0.025em;
+  letter-spacing: 0.035em;
 
   color: #817766;
 
@@ -464,44 +506,43 @@ body {
 
 
 /* =========================================================
-   14. PAPER BOTTOM HANDLE
-
-   종이 내부 가장 아래
+   BOTTOM HANDLE
 ========================================================= */
 
 .hero-handle {
 
   position: absolute;
 
-  bottom: 38px;
+  z-index: 5;
 
   left: 0;
+
+  bottom: 38px;
 
   width: 100%;
 
   text-align: center;
 
   font-family:
+
     "Cormorant Garamond",
+
     Georgia,
+
     serif;
 
-  font-size: 11px;
+  font-size: 13px;
 
-  letter-spacing: 0.12em;
+  letter-spacing: 0.13em;
 
-  color: #978B76;
+  color: #958873;
 
 }
 
 
 /* =========================================================
-   15. OUTER BOTTOM CAPTION
-
-   종이 바깥쪽 아래
-
-   Film 디자인처럼
-   종이에서 살짝 떨어져 보이게 배치
+   BOTTOM OUTSIDE CAPTION
+   종이 바깥 배경 위
 ========================================================= */
 
 .hero-bottom-caption {
@@ -512,77 +553,93 @@ body {
 
   left: 50%;
 
-  bottom: 42px;
+  bottom: 28px;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   display: flex;
 
   align-items: center;
 
-  justify-content: center;
-
-  gap: 16px;
+  gap: 18px;
 
   white-space: nowrap;
 
-  color: #746C5D;
-
   font-family:
+
     "Cormorant Garamond",
+
     Georgia,
+
     serif;
 
-  font-size: 14px;
+  font-size: 15px;
 
   font-style: italic;
 
   letter-spacing: 0.03em;
 
+  color: #F6F1E5;
+
+  opacity: 0.92;
+
 }
 
 
-/* 양쪽 선 */
-
 .caption-line {
 
-  width: 75px;
+  display: block;
+
+  width: 85px;
 
   height: 1px;
 
   background:
-    rgba(116, 108, 93, 0.55);
+
+    rgba(
+      246,
+      241,
+      229,
+      0.85
+    );
 
 }
 
 
 /* =========================================================
-   16. TABLET
+   LARGE TABLET
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
 
   .hero-section {
 
-    min-height: 950px;
+    min-height: 1000px;
 
     padding:
-      55px
-      30px
-      110px;
+
+      45px
+
+      3vw
+
+      80px;
 
   }
 
 
   .hero-paper {
 
-    width: min(760px, 90vw);
+    width: 94vw;
 
-    min-height: 850px;
+    min-height: 900px;
 
     padding:
+
       75px
-      60px
+
+      7vw
+
       90px;
 
   }
@@ -590,34 +647,26 @@ body {
 
   .hero-circle-title {
 
-    width: 70%;
+    height: 215px;
 
-    height: 130px;
-
-    margin-bottom: -60px;
+    margin-bottom: -95px;
 
   }
 
 
   .hero-circle-title text {
 
-    font-size: 24px;
+    font-size: 37px;
 
   }
 
 
   .hero-arch {
 
-    width: 54%;
-
-    max-width: 380px;
-
-  }
-
-
-  .hero-bottom-caption {
-
-    bottom: 38px;
+    width: min(
+      460px,
+      52vw
+    );
 
   }
 
@@ -625,80 +674,206 @@ body {
 
 
 /* =========================================================
-   17. MOBILE
+   TABLET
 ========================================================= */
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
 
   .hero-section {
 
-    min-height: 850px;
+    min-height: 900px;
 
     padding:
+
       35px
-      18px
-      90px;
 
-  }
+      2.5vw
 
-
-  .hero-paper {
-
-    width: 92vw;
-
-    min-height: 760px;
-
-    padding:
-      55px
-      25px
       70px;
 
   }
 
 
-  .hero-symbol {
+  .hero-paper {
 
-    font-size: 19px;
+    width: 95vw;
 
-    margin-bottom: 4px;
+    min-height: 820px;
+
+    padding:
+
+      65px
+
+      6vw
+
+      80px;
+
+  }
+
+
+  .hero-star {
+
+    font-size: 23px;
 
   }
 
 
   .hero-circle-title {
 
-    width: 100%;
+    height: 190px;
 
-    height: 120px;
-
-    margin-bottom: -54px;
+    margin-bottom: -80px;
 
   }
 
 
   .hero-circle-title text {
 
-    font-size: 21px;
+    font-size: 32px;
 
-    letter-spacing: 0.055em;
+    letter-spacing: 0.06em;
 
   }
 
 
   .hero-arch {
 
-    width: 66%;
-
-    max-width: 290px;
+    width: min(
+      410px,
+      58vw
+    );
 
   }
 
 
   .hero-name {
 
-    margin-top: 20px;
+    font-size: 18px;
+
+    margin-top: 27px;
+
+  }
+
+
+  .hero-description {
+
+    font-size: 15px;
+
+    margin-top: 23px;
+
+  }
+
+
+  .hero-bottom-caption {
 
     font-size: 13px;
+
+    gap: 12px;
+
+  }
+
+
+  .caption-line {
+
+    width: 60px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 560px) {
+
+  .hero-section {
+
+    min-height: 790px;
+
+    padding:
+
+      25px
+
+      12px
+
+      65px;
+
+  }
+
+
+  .hero-paper {
+
+    width: 96vw;
+
+    min-height: 720px;
+
+    padding:
+
+      50px
+
+      20px
+
+      70px;
+
+    border-radius: 6px;
+
+  }
+
+
+  .hero-star {
+
+    font-size: 19px;
+
+    margin-bottom: 0;
+
+  }
+
+
+  .hero-circle-title {
+
+    height: 155px;
+
+    margin-bottom: -65px;
+
+  }
+
+
+  .hero-circle-title text {
+
+    font-size: 25px;
+
+    letter-spacing: 0.045em;
+
+  }
+
+
+  .hero-arch {
+
+    width: min(
+      330px,
+      68vw
+    );
+
+    border-radius:
+
+      180px
+
+      180px
+
+      0
+
+      0;
+
+  }
+
+
+  .hero-name {
+
+    margin-top: 22px;
+
+    font-size: 15px;
 
     letter-spacing: 0.25em;
 
@@ -707,11 +882,11 @@ body {
 
   .hero-description {
 
-    max-width: 260px;
+    width: 90%;
 
     margin-top: 18px;
 
-    font-size: 12px;
+    font-size: 13px;
 
     line-height: 1.75;
 
@@ -722,25 +897,25 @@ body {
 
     bottom: 25px;
 
-    font-size: 9px;
+    font-size: 10px;
 
   }
 
 
   .hero-bottom-caption {
 
-    bottom: 23px;
-
-    gap: 9px;
+    bottom: 20px;
 
     font-size: 11px;
+
+    gap: 8px;
 
   }
 
 
   .caption-line {
 
-    width: 35px;
+    width: 32px;
 
   }
 
@@ -748,63 +923,60 @@ body {
 
 
 /* =========================================================
-   18. SMALL MOBILE
+   SMALL MOBILE
 ========================================================= */
 
-@media (max-width: 420px) {
+@media (max-width: 380px) {
 
   .hero-section {
 
-    min-height: 790px;
+    min-height: 730px;
 
   }
 
 
   .hero-paper {
 
-    min-height: 700px;
+    min-height: 665px;
 
-    padding:
-      48px
-      20px
-      65px;
+    padding-top: 42px;
 
   }
 
 
   .hero-circle-title {
 
-    height: 105px;
+    height: 140px;
 
-    margin-bottom: -48px;
+    margin-bottom: -58px;
 
   }
 
 
   .hero-circle-title text {
 
-    font-size: 18px;
+    font-size: 22px;
 
   }
 
 
   .hero-arch {
 
-    width: 68%;
+    width: 70vw;
 
   }
 
 
   .hero-name {
 
-    font-size: 12px;
+    font-size: 13px;
 
   }
 
 
   .hero-description {
 
-    font-size: 11px;
+    font-size: 12px;
 
   }
 
@@ -827,15 +999,12 @@ body {
 
   <!-- =======================================================
        BACKGROUND
-
-       아치 사진과 같은 사진을
-       페이지 전체 뒤에 흐릿하게 배치
   ======================================================== -->
 
   <div class="hero-background">
 
     <img
-      src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1800&q=90"
+      src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=2000&q=90"
       alt=""
     >
 
@@ -843,7 +1012,14 @@ body {
 
 
   <!-- =======================================================
-       MAIN PAPER
+       BACKGROUND OVERLAY
+  ======================================================== -->
+
+  <div class="hero-background-overlay"></div>
+
+
+  <!-- =======================================================
+       LARGE PAPER
   ======================================================== -->
 
   <div class="hero-paper">
@@ -852,25 +1028,26 @@ body {
     <div class="hero-paper-inner">
 
 
-      <!-- ===================================================
-           SMALL SYMBOL
-      ==================================================== -->
+      <!-- =====================================================
+           DECORATIVE STAR
+      ====================================================== -->
 
-      <div class="hero-symbol">
+      <div class="hero-star">
         ✳
       </div>
 
 
-      <!-- ===================================================
-           CURVED TITLE
+      <!-- =====================================================
+           CIRCULAR TITLE
 
-           아치 사진과 최대한 가까운 위치
-      ==================================================== -->
+           아치 위를 크게 감싸는 글자
+      ====================================================== -->
 
       <div class="hero-circle-title">
 
         <svg
-          viewBox="0 0 500 250"
+          viewBox="0 0 800 360"
+          preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
         >
 
@@ -879,8 +1056,8 @@ body {
             <path
               id="hero-title-arc"
               d="
-                M 45 220
-                A 205 205 0 0 1 455 220
+                M 100 315
+                A 300 300 0 0 1 700 315
               "
             />
 
@@ -894,7 +1071,9 @@ body {
               startOffset="50%"
               text-anchor="middle"
             >
+
               LILY GLOGES · FLORIST ATELIER ·
+
             </textPath>
 
           </text>
@@ -904,23 +1083,23 @@ body {
       </div>
 
 
-      <!-- ===================================================
-           MAIN ARCH PHOTO
-      ==================================================== -->
+      <!-- =====================================================
+           ARCH PHOTO
+      ====================================================== -->
 
       <div class="hero-arch">
 
         <img
-          src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=90"
-          alt="Lily Gloges Florist"
+          src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1200&q=90"
+          alt="Lily Gloges Florist Atelier"
         >
 
       </div>
 
 
-      <!-- ===================================================
+      <!-- =====================================================
            NAME
-      ==================================================== -->
+      ====================================================== -->
 
       <div class="hero-name">
 
@@ -929,9 +1108,9 @@ body {
       </div>
 
 
-      <!-- ===================================================
+      <!-- =====================================================
            DESCRIPTION
-      ==================================================== -->
+      ====================================================== -->
 
       <p class="hero-description">
 
@@ -946,26 +1125,25 @@ body {
       </p>
 
 
-      <!-- ===================================================
-           HANDLE
-      ==================================================== -->
+    </div>
 
-      <div class="hero-handle">
 
-        @lilygloges
+    <!-- =====================================================
+         HANDLE
+    ====================================================== -->
 
-      </div>
+    <div class="hero-handle">
 
+      @lilygloges
 
     </div>
+
 
   </div>
 
 
   <!-- =======================================================
        OUTER BOTTOM CAPTION
-
-       종이 아래 바깥쪽에 위치
   ======================================================== -->
 
   <div class="hero-bottom-caption">
@@ -985,4 +1163,5 @@ body {
 
 
 </body>
+
 </html>
