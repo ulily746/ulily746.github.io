@@ -219,65 +219,52 @@ function setImage(id, value){
 
 function setVideo(id, value){
 
-    const element =
-        getElement(id);
+    const element = getElement(id);
 
-
-    if(
-        !element ||
-        !value
-    ){
-
+    if(!element || !value){
         return;
-
     }
 
-
-    const videoUrl =
-        String(value).trim();
-
+    const videoUrl = String(value).trim();
 
     if(!videoUrl){
-
         return;
-
     }
 
+    element.src = videoUrl;
 
-    element.src =
-        videoUrl;
+    const video = element.closest("video");
 
-
-    element.parentElement.load();
-
+    if(video){
+        video.load();
+        video.play().catch(() => {});
+    }
 
     console.log(
         `Video applied: #${id}`,
         videoUrl
     );
-
 }
-
 
 /* =========================================================
    LOAD LIFE & TRAVEL DESIGN
 ========================================================= */
 
-async function loadLifortfolio(){
+async function loadMInimalPortfolio(){
 
     try{
 
         /* =================================================
            FIREBASE DOCUMENT
            
-           news / fortfolio
+           news / MInimalPortfolio
         ================================================= */
 
         const designRef =
             doc(
                 db,
                 "news",
-                "fortfolio"
+                "MInimalPortfolio"
             );
 
 
@@ -290,7 +277,7 @@ async function loadLifortfolio(){
         if(!designSnap.exists()){
 
             console.error(
-                "fortfolio document not found."
+                "MInimalPortfolio document not found."
             );
 
             return;
@@ -303,7 +290,7 @@ async function loadLifortfolio(){
 
 
         console.log(
-            "fortfolio data:",
+            "MInimalPortfolio data:",
             designData
         );
 
@@ -554,34 +541,7 @@ async function loadLifortfolio(){
         );
 
 
-        /* =================================================
-           FOOTER
-        ================================================= */
-
-        setText(
-            "footerIdentity",
-            designData.footerIdentity
-        );
-
-
-        setText(
-            "footerSubtitle",
-            designData.footerSubtitle
-        );
-
-
-        setText(
-            "footerPhrase",
-            designData.footerPhrase
-        );
-
-
-        setText(
-            "footerCopyright",
-            designData.footerCopyright
-        );
-
-
+       
         /* =================================================
            PAGE TITLE
         ================================================= */
@@ -607,7 +567,7 @@ async function loadLifortfolio(){
         ================================================= */
 
         console.log(
-            "portfolio loaded successfully!"
+            "MInimalPortfolio loaded successfully!"
         );
 
 
@@ -627,7 +587,7 @@ async function loadLifortfolio(){
    START
 ========================================================= */
 
-loadPortfolio();
+loadMInimalPortfolio();
 
 </script>  
 <style>
@@ -1498,25 +1458,15 @@ shadow-sm
 ">
 
 <video
-class="
-w-full
-h-full
-object-cover
-archive-video
-"
+id="movingVideo"
+class="w-full h-full object-cover archive-video"
 autoplay
 muted
 loop
 playsinline
 >
-
-<source
-id="movingVideo"
-src="video.mp4"
-type="video/mp4"
->
-
 </video>
+
   
 </div>
 
