@@ -1739,7 +1739,850 @@ body {
   }
 
 }
+/* =========================================================
+   FLORAL POSTER SECTION
+========================================================= */
 
+.floral-poster-section {
+
+  position: relative;
+
+  width: min(
+    1360px,
+    calc(100vw - 7vw)
+  );
+
+  margin: 0 auto;
+
+  padding:
+
+    100px
+
+    clamp(45px, 7vw, 130px)
+
+    110px;
+
+  background: #F8F4E9;
+
+  overflow: hidden;
+
+}
+
+
+/* =========================================================
+   PAPER TEXTURE
+========================================================= */
+
+.floral-poster-section::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.38;
+
+  background-image:
+
+    radial-gradient(
+      rgba(116, 101, 76, 0.07) 0.7px,
+      transparent 0.7px
+    );
+
+  background-size: 7px 7px;
+
+}
+
+
+/* =========================================================
+   POSTER
+========================================================= */
+
+.floral-poster {
+
+  position: relative;
+
+  width: 100%;
+
+  min-height: 850px;
+
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  color: #6E5145;
+
+}
+
+
+/* =========================================================
+   TOP META
+========================================================= */
+
+.floral-meta {
+
+  position: relative;
+
+  z-index: 5;
+
+  display: grid;
+
+  grid-template-columns:
+
+    1fr
+
+    auto
+
+    1fr;
+
+  align-items: center;
+
+  padding-bottom: 18px;
+
+  border-bottom:
+
+    1px solid
+    rgba(110, 81, 69, 0.35);
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 14px;
+
+  letter-spacing: 0.12em;
+
+  color: #8B7064;
+
+}
+
+
+.floral-meta span:nth-child(2) {
+
+  font-size: 22px;
+
+  letter-spacing: 0.08em;
+
+}
+
+
+.floral-meta span:last-child {
+
+  text-align: right;
+
+}
+
+
+/* =========================================================
+   LEFT VERTICAL TITLE
+========================================================= */
+
+.floral-vertical-title {
+
+  position: absolute;
+
+  z-index: 4;
+
+  left: -15px;
+
+  top: 150px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size:
+
+    clamp(65px, 7vw, 105px);
+
+  font-weight: 500;
+
+  line-height: 0.72;
+
+  letter-spacing: -0.08em;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+
+    1.5px
+    #B97C72;
+
+  text-transform: uppercase;
+
+}
+
+
+.floral-vertical-title span {
+
+  display: block;
+
+}
+
+
+/* =========================================================
+   MAIN PHOTO
+========================================================= */
+
+.floral-main-photo {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: min(
+    450px,
+    45%
+  );
+
+  height: 650px;
+
+  margin:
+
+    80px
+
+    auto
+
+    0;
+
+  overflow: hidden;
+
+  background: #D9CDBB;
+
+  border-radius:
+
+    230px
+
+    230px
+
+    0
+
+    0;
+
+  box-shadow:
+
+    0 15px 45px
+    rgba(89, 67, 53, 0.12);
+
+}
+
+
+/* =========================================================
+   PHOTO IMAGE
+========================================================= */
+
+.floral-main-photo img {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  filter:
+
+    saturate(0.68)
+
+    brightness(1.04)
+
+    contrast(0.94);
+
+  transition:
+
+    transform 0.8s ease;
+
+}
+
+
+.floral-main-photo:hover img {
+
+  transform: scale(1.035);
+
+}
+
+
+/* =========================================================
+   RIGHT FLOWER DECORATION
+========================================================= */
+
+.floral-flower-decoration {
+
+  position: absolute;
+
+  z-index: 6;
+
+  top: 180px;
+
+  right: 18%;
+
+  width: 145px;
+
+  height: 145px;
+
+  color: #B97C72;
+
+  transform:
+
+    rotate(-8deg);
+
+}
+
+
+.floral-flower-decoration svg {
+
+  width: 100%;
+
+  height: 100%;
+
+}
+
+
+/* =========================================================
+   RIGHT COPY
+========================================================= */
+
+.floral-copy {
+
+  position: absolute;
+
+  z-index: 5;
+
+  top: 335px;
+
+  right: 2%;
+
+  width: 260px;
+
+}
+
+
+.floral-copy-line {
+
+  width: 70px;
+
+  height: 1px;
+
+  margin-bottom: 14px;
+
+  background: #9A786B;
+
+}
+
+
+.floral-copy-small {
+
+  display: block;
+
+  margin-bottom: 22px;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 13px;
+
+  letter-spacing: 0.14em;
+
+  color: #92786D;
+
+}
+
+
+.floral-copy h2 {
+
+  margin: 0;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 48px;
+
+  font-weight: 400;
+
+  line-height: 0.92;
+
+  letter-spacing: -0.02em;
+
+  color: #674D43;
+
+}
+
+
+.floral-copy p {
+
+  margin:
+
+    25px
+
+    0
+
+    28px;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 16px;
+
+  line-height: 1.65;
+
+  color: #806C62;
+
+}
+
+
+.floral-copy-number {
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 12px;
+
+  letter-spacing: 0.1em;
+
+  color: #9A786B;
+
+}
+
+
+/* =========================================================
+   BOTTOM LABEL
+========================================================= */
+
+.floral-bottom-label {
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 55px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 13px;
+
+  letter-spacing: 0.14em;
+
+  color: #8B7064;
+
+}
+
+
+.floral-bottom-dot {
+
+  opacity: 0.5;
+
+}
+
+
+/* =========================================================
+   BOTTOM DESCRIPTION
+========================================================= */
+
+.floral-bottom-description {
+
+  position: absolute;
+
+  right: 0;
+
+  bottom: 45px;
+
+  width: 260px;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+
+  font-style: italic;
+
+  color: #806C62;
+
+}
+
+
+/* =========================================================
+   SMALL FLOWER
+========================================================= */
+
+.floral-small-flower {
+
+  position: absolute;
+
+  right: 4%;
+
+  bottom: 130px;
+
+  font-size: 45px;
+
+  color: #B97C72;
+
+  opacity: 0.85;
+
+  transform:
+
+    rotate(-15deg);
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .floral-poster-section {
+
+    width: 94vw;
+
+    padding:
+
+      75px
+
+      5vw
+
+      90px;
+
+  }
+
+
+  .floral-poster {
+
+    min-height: 800px;
+
+  }
+
+
+  .floral-main-photo {
+
+    width: 48%;
+
+    height: 590px;
+
+  }
+
+
+  .floral-vertical-title {
+
+    left: -5px;
+
+    top: 135px;
+
+    font-size: 75px;
+
+  }
+
+
+  .floral-flower-decoration {
+
+    right: 17%;
+
+    width: 115px;
+
+    height: 115px;
+
+  }
+
+
+  .floral-copy {
+
+    right: 0;
+
+    width: 220px;
+
+  }
+
+
+  .floral-copy h2 {
+
+    font-size: 40px;
+
+  }
+
+
+  .floral-copy p {
+
+    font-size: 14px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .floral-poster-section {
+
+    width: 96vw;
+
+    padding:
+
+      60px
+
+      20px
+
+      75px;
+
+  }
+
+
+  .floral-poster {
+
+    min-height: auto;
+
+    padding-bottom: 40px;
+
+  }
+
+
+  .floral-meta {
+
+    font-size: 9px;
+
+    letter-spacing: 0.08em;
+
+  }
+
+
+  .floral-meta span:nth-child(2) {
+
+    font-size: 16px;
+
+  }
+
+
+  .floral-vertical-title {
+
+    left: -5px;
+
+    top: 145px;
+
+    font-size: 55px;
+
+    line-height: 0.75;
+
+  }
+
+
+  .floral-main-photo {
+
+    width: 72%;
+
+    height: 500px;
+
+    margin:
+
+      75px
+
+      auto
+
+      0;
+
+  }
+
+
+  .floral-flower-decoration {
+
+    top: 180px;
+
+    right: 3%;
+
+    width: 85px;
+
+    height: 85px;
+
+  }
+
+
+  .floral-copy {
+
+    position: relative;
+
+    top: auto;
+
+    right: auto;
+
+    width: 72%;
+
+    margin:
+
+      45px
+
+      0
+
+      0
+
+      auto;
+
+  }
+
+
+  .floral-copy h2 {
+
+    font-size: 42px;
+
+  }
+
+
+  .floral-copy p {
+
+    font-size: 14px;
+
+  }
+
+
+  .floral-small-flower {
+
+    right: 4%;
+
+    bottom: 120px;
+
+    font-size: 35px;
+
+  }
+
+
+  .floral-bottom-label {
+
+    position: relative;
+
+    left: auto;
+
+    bottom: auto;
+
+    margin-top: 60px;
+
+    font-size: 10px;
+
+  }
+
+
+  .floral-bottom-description {
+
+    position: relative;
+
+    right: auto;
+
+    bottom: auto;
+
+    width: 70%;
+
+    margin:
+
+      18px
+
+      0
+
+      0
+
+      auto;
+
+    font-size: 13px;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .floral-main-photo {
+
+    width: 75%;
+
+    height: 450px;
+
+  }
+
+
+  .floral-vertical-title {
+
+    font-size: 48px;
+
+  }
+
+
+  .floral-copy {
+
+    width: 75%;
+
+  }
+
+
+  .floral-copy h2 {
+
+    font-size: 37px;
+
+  }
+
+}
 </style>
 
 </head>
@@ -2151,6 +2994,239 @@ body {
   </div>
 
 </section>
+  <!-- =========================================================
+     FLORAL POSTER SECTION
+     HERO 아래 첫 번째 콘텐츠
+========================================================= -->
+
+<section class="floral-poster-section">
+
+  <div class="floral-poster">
+
+
+    <!-- =====================================================
+         TOP META
+    ====================================================== -->
+
+    <div class="floral-meta">
+
+      <span>
+        LILY GLOGES
+      </span>
+
+      <span>
+        01 / 26
+      </span>
+
+      <span>
+        FLOWER STORIES
+      </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         LEFT VERTICAL TYPOGRAPHY
+    ====================================================== -->
+
+    <div class="floral-vertical-title">
+
+      <span>F</span>
+      <span>L</span>
+      <span>O</span>
+      <span>R</span>
+      <span>A</span>
+      <span>L</span>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN PHOTO
+    ====================================================== -->
+
+    <div class="floral-main-photo">
+
+      <img
+        src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=90"
+        alt="Lily Gloges flower collection"
+      >
+
+    </div>
+
+
+    <!-- =====================================================
+         TOP RIGHT DECORATION
+    ====================================================== -->
+
+    <div class="floral-flower-decoration">
+
+      <svg
+        viewBox="0 0 120 120"
+        aria-hidden="true"
+      >
+
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+
+          <ellipse
+            cx="60"
+            cy="25"
+            rx="12"
+            ry="30"
+          />
+
+          <ellipse
+            cx="60"
+            cy="95"
+            rx="12"
+            ry="30"
+          />
+
+          <ellipse
+            cx="25"
+            cy="60"
+            rx="30"
+            ry="12"
+          />
+
+          <ellipse
+            cx="95"
+            cy="60"
+            rx="30"
+            ry="12"
+          />
+
+          <ellipse
+            cx="35"
+            cy="35"
+            rx="12"
+            ry="28"
+            transform="rotate(-45 35 35)"
+          />
+
+          <ellipse
+            cx="85"
+            cy="35"
+            rx="12"
+            ry="28"
+            transform="rotate(45 85 35)"
+          />
+
+          <ellipse
+            cx="35"
+            cy="85"
+            rx="12"
+            ry="28"
+            transform="rotate(45 35 85)"
+          />
+
+          <ellipse
+            cx="85"
+            cy="85"
+            rx="12"
+            ry="28"
+            transform="rotate(-45 85 85)"
+          />
+
+        </g>
+
+
+        <circle
+          cx="60"
+          cy="60"
+          r="6"
+          fill="currentColor"
+        />
+
+      </svg>
+
+    </div>
+
+
+    <!-- =====================================================
+         RIGHT TEXT
+    ====================================================== -->
+
+    <div class="floral-copy">
+
+      <div class="floral-copy-line"></div>
+
+      <span class="floral-copy-small">
+        A QUIET COLLECTION
+      </span>
+
+      <h2>
+        Flowers<br>
+        in Bloom
+      </h2>
+
+      <p>
+
+        A collection of soft colors,
+        delicate petals and little
+        moments gathered together.
+
+      </p>
+
+      <span class="floral-copy-number">
+        COLLECTION No. 01
+      </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM LABEL
+    ====================================================== -->
+
+    <div class="floral-bottom-label">
+
+      <span>
+        LILY GLOGES
+      </span>
+
+      <span class="floral-bottom-dot">
+        ·
+      </span>
+
+      <span>
+        FLORIST ATELIER
+      </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM DESCRIPTION
+    ====================================================== -->
+
+    <div class="floral-bottom-description">
+
+      where flowers,
+      light and everyday moments
+      become something to remember.
+
+    </div>
+
+
+    <!-- =====================================================
+         DECORATIVE FLOWER
+    ====================================================== -->
+
+    <div class="floral-small-flower">
+
+      ✿
+
+    </div>
+
+
+  </div>
+
+</section>   
 </body>
 
 </html>
