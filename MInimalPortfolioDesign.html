@@ -18,6 +18,618 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
+
+    projectId:
+    "yuri-research-portfolio",
+
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
+
+    messagingSenderId:
+    "231317507996",
+
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
+
+    measurementId:
+    "G-57VHW2454"
+
+};
+
+
+/* =========================================================
+   FIREBASE INITIALIZE
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   ELEMENT HELPER
+========================================================= */
+
+function getElement(id){
+
+    return document.getElementById(id);
+
+}
+
+
+/* =========================================================
+   TEXT SETTER
+========================================================= */
+
+function setText(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(!element){
+
+        console.warn(
+            `HTML element not found: #${id}`
+        );
+
+        return;
+
+    }
+
+
+    if(
+        value === undefined ||
+        value === null
+    ){
+
+        console.warn(
+            `Firebase field is empty: ${id}`
+        );
+
+        return;
+
+    }
+
+
+    element.textContent =
+        String(value);
+
+}
+
+
+/* =========================================================
+   HTML SETTER
+   heroTitle처럼 <br>이 필요한 경우 사용
+========================================================= */
+
+function setHTML(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(!element){
+
+        console.warn(
+            `HTML element not found: #${id}`
+        );
+
+        return;
+
+    }
+
+
+    if(
+        value === undefined ||
+        value === null
+    ){
+
+        console.warn(
+            `Firebase field is empty: ${id}`
+        );
+
+        return;
+
+    }
+
+
+    element.innerHTML =
+        String(value);
+
+}
+
+
+/* =========================================================
+   IMAGE SETTER
+========================================================= */
+
+function setImage(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(
+        !element ||
+        !value
+    ){
+
+        return;
+
+    }
+
+
+    const imageUrl =
+        String(value).trim();
+
+
+    if(!imageUrl){
+
+        return;
+
+    }
+
+
+    element.src =
+        imageUrl;
+
+
+    console.log(
+        `Image applied: #${id}`,
+        imageUrl
+    );
+
+}
+
+
+/* =========================================================
+   VIDEO SETTER
+========================================================= */
+
+function setVideo(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(
+        !element ||
+        !value
+    ){
+
+        return;
+
+    }
+
+
+    const videoUrl =
+        String(value).trim();
+
+
+    if(!videoUrl){
+
+        return;
+
+    }
+
+
+    element.src =
+        videoUrl;
+
+
+    element.parentElement.load();
+
+
+    console.log(
+        `Video applied: #${id}`,
+        videoUrl
+    );
+
+}
+
+
+/* =========================================================
+   LOAD LIFE & TRAVEL DESIGN
+========================================================= */
+
+async function loadLifortfolio(){
+
+    try{
+
+        /* =================================================
+           FIREBASE DOCUMENT
+           
+           news / fortfolio
+        ================================================= */
+
+        const designRef =
+            doc(
+                db,
+                "news",
+                "fortfolio"
+            );
+
+
+        const designSnap =
+            await getDoc(
+                designRef
+            );
+
+
+        if(!designSnap.exists()){
+
+            console.error(
+                "fortfolio document not found."
+            );
+
+            return;
+
+        }
+
+
+        const designData =
+            designSnap.data();
+
+
+        console.log(
+            "fortfolio data:",
+            designData
+        );
+
+
+        /* =================================================
+           HERO
+        ================================================= */
+
+        setText(
+            "heroEyebrow",
+            designData.heroEyebrow
+        );
+
+
+        setHTML(
+            "heroTitle",
+            designData.heroTitle
+        );
+
+
+        setText(
+            "heroDescription",
+            designData.heroDescription
+        );
+
+
+        setImage(
+            "heroImage",
+            designData.heroImage
+        );
+
+
+        /* =================================================
+           PLACE 01
+        ================================================= */
+
+        setText(
+            "place01Label",
+            designData.place01Label
+        );
+
+
+        setText(
+            "place01Title",
+            designData.place01Title
+        );
+
+
+        setText(
+            "place01Description",
+            designData.place01Description
+        );
+
+
+        setImage(
+            "place01Image",
+            designData.place01Image
+        );
+
+
+        /* =================================================
+           STATEMENT
+        ================================================= */
+
+        setText(
+            "statementEyebrow",
+            designData.statementEyebrow
+        );
+
+
+        setText(
+            "statementTitle",
+            designData.statementTitle
+        );
+
+
+        setText(
+            "statementDescription",
+            designData.statementDescription
+        );
+
+
+        /* =================================================
+           PLACE 02
+        ================================================= */
+
+        setText(
+            "place02Label",
+            designData.place02Label
+        );
+
+
+        setText(
+            "place02Title",
+            designData.place02Title
+        );
+
+
+        setText(
+            "place02Description",
+            designData.place02Description
+        );
+
+
+        setImage(
+            "place02Image",
+            designData.place02Image
+        );
+
+
+        /* =================================================
+           GALLERY TITLE
+        ================================================= */
+
+        setText(
+            "galleryEyebrow",
+            designData.galleryEyebrow
+        );
+
+
+        setText(
+            "galleryTitle",
+            designData.galleryTitle
+        );
+
+
+        setText(
+            "galleryDescription",
+            designData.galleryDescription
+        );
+
+
+        /* =================================================
+           GALLERY IMAGES
+        ================================================= */
+
+        setImage(
+            "gallery01Image",
+            designData.gallery01Image
+        );
+
+
+        setImage(
+            "gallery02Image",
+            designData.gallery02Image
+        );
+
+
+        setImage(
+            "gallery03Image",
+            designData.gallery03Image
+        );
+
+
+        setImage(
+            "gallery04Image",
+            designData.gallery04Image
+        );
+
+
+        setImage(
+            "gallery05Image",
+            designData.gallery05Image
+        );
+
+
+        setImage(
+            "gallery06Image",
+            designData.gallery06Image
+        );
+
+
+        /* =================================================
+           MOVING MEMORIES
+        ================================================= */
+
+        setText(
+            "movingEyebrow",
+            designData.movingEyebrow
+        );
+
+
+        setText(
+            "movingTitle",
+            designData.movingTitle
+        );
+
+
+        setText(
+            "movingDescription",
+            designData.movingDescription
+        );
+
+
+        setVideo(
+            "movingVideo",
+            designData.movingVideo
+        );
+
+
+        setText(
+            "movingCaption",
+            designData.movingCaption
+        );
+
+
+        /* =================================================
+           FINAL CHAPTER
+        ================================================= */
+
+        setText(
+            "finalEyebrow",
+            designData.finalEyebrow
+        );
+
+
+        setText(
+            "finalTitle",
+            designData.finalTitle
+        );
+
+
+        setText(
+            "finalDescription",
+            designData.finalDescription
+        );
+
+
+        /* =================================================
+           ENDING
+        ================================================= */
+
+        setImage(
+            "endingImage",
+            designData.endingImage
+        );
+
+
+        setText(
+            "endingEyebrow",
+            designData.endingEyebrow
+        );
+
+
+        setText(
+            "endingDescription",
+            designData.endingDescription
+        );
+
+
+        /* =================================================
+           FOOTER
+        ================================================= */
+
+        setText(
+            "footerIdentity",
+            designData.footerIdentity
+        );
+
+
+        setText(
+            "footerSubtitle",
+            designData.footerSubtitle
+        );
+
+
+        setText(
+            "footerPhrase",
+            designData.footerPhrase
+        );
+
+
+        setText(
+            "footerCopyright",
+            designData.footerCopyright
+        );
+
+
+        /* =================================================
+           PAGE TITLE
+        ================================================= */
+
+        if(
+            designData.heroTitle
+        ){
+
+            document.title =
+                String(
+                    designData.heroTitle
+                )
+                .replace(
+                    /<br\s*\/?>/gi,
+                    " "
+                );
+
+        }
+
+
+        /* =================================================
+           SUCCESS
+        ================================================= */
+
+        console.log(
+            "portfolio loaded successfully!"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Firebase loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadPortfolio();
+
+</script>  
 <style>
 
 /* ================================= */
@@ -237,7 +849,9 @@ md:order-1
 z-10
 ">
 
-<span class="
+<span
+id="heroEyebrow"
+class="
 text-xs
 tracking-[0.25em]
 text-[#8B986D]
@@ -250,7 +864,9 @@ Life & Travel Archive
 
 </span>
 
-<h1 class="
+<h1
+id="heroTitle"
+class="
 text-4xl
 md:text-6xl
 font-serif-title
@@ -274,7 +890,9 @@ my-6
 
 </div>
 
-<p class="
+<p
+id="heroDescription"
+class="
 text-xs
 md:text-sm
 text-[#747B65]
@@ -287,7 +905,6 @@ font-light
 공간과 자연, 그리고 일상의 작은 아름다움을 하나의 아카이브로 기록합니다.
 
 </p>
-
 </div>
 
 <!-- RIGHT ARCH IMAGE -->
@@ -314,20 +931,15 @@ bg-[#E9E8C5]
 ">
 
 <img
-
+id="heroImage"
 src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80"
-
-alt="Minimal Travel Arch"
-
+alt=" Travel Arch"
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
-
+">
 </div>
 
 </div>
@@ -387,19 +999,15 @@ shadow-sm
 ">
 
 <img
-
+id="place01Image"
 src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80"
-
 alt="Travel Object 01"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
 
@@ -412,7 +1020,9 @@ space-y-3
 md:pl-8
 ">
 
-<span class="
+<span
+id="place01Label"
+class="
 text-xs
 tracking-widest
 text-[#8B986D]
@@ -424,7 +1034,9 @@ PLACE 01
 
 </span>
 
-<h3 class="
+<h3
+id="place01Title"
+class="
 text-xl
 md:text-2xl
 font-serif-title
@@ -435,7 +1047,9 @@ Hidden Corners
 
 </h3>
 
-<p class="
+<p
+id="place01Description"
+class="
 text-xs
 md:text-sm
 text-[#747B65]
@@ -448,7 +1062,6 @@ max-w-xl
 천천히 머무르며 발견하는 장소의 이야기를 기록합니다.
 
 </p>
-
 </div>
 
 </div>
@@ -467,7 +1080,9 @@ border-[#D9DDB2]
 text-center
 ">
 
-<span class="
+<span
+id="statementEyebrow"
+class="
 text-[10px]
 tracking-[0.35em]
 text-[#8B986D]
@@ -477,7 +1092,9 @@ COLLECTED MOMENTS
 
 </span>
 
-<h2 class="
+<h2
+id="statementTitle"
+class="
 text-2xl
 md:text-4xl
 font-serif-title
@@ -491,8 +1108,10 @@ mt-4
 The Beauty Of Slow Living
 
 </h2>
-
-<p class="
+  
+<p
+id="statementDescription"
+class="
 text-[10px]
 md:text-xs
 text-[#747B65]
@@ -531,7 +1150,8 @@ order-2
 md:order-1
 ">
 
-<span class="
+<span id="place02Label"
+class="
 text-xs
 tracking-widest
 text-[#8B986D]
@@ -543,7 +1163,8 @@ PLACE 02
 
 </span>
 
-<h3 class="
+<h3 id="place02Title"
+class="
 text-xl
 md:text-2xl
 font-serif-title
@@ -554,7 +1175,8 @@ Light & Memory
 
 </h3>
 
-<p class="
+<p id="place02Description"
+class="
 text-xs
 md:text-sm
 text-[#747B65]
@@ -594,7 +1216,7 @@ shadow-sm
 ">
 
 <img
-
+id="place02Image"
 src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80"
 
 alt="Travel Object 02"
@@ -604,9 +1226,7 @@ w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
 
@@ -630,7 +1250,8 @@ text-center
 mb-12
 ">
 
-<span class="
+<span id="galleryEyebrow"
+class="
 text-xs
 tracking-[0.35em]
 text-[#8B986D]
@@ -640,7 +1261,8 @@ COLLECTION
 
 </span>
 
-<h2 class="
+<h2 id="galleryTitle"
+class="
 text-2xl
 md:text-4xl
 font-serif-title
@@ -652,7 +1274,8 @@ Moments Along The Way
 
 </h2>
 
-<p class="
+<p id="galleryDescription"
+class="
 text-xs
 text-[#747B65]
 mt-3
@@ -675,147 +1298,134 @@ items-start
 
 <!-- IMAGE 01 -->
 
-<div class="
+<div
+class="
 aspect-square
 overflow-hidden
 ">
 
 <img
-
+id="gallery01Image"
 src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=600&q=80"
-
 alt="Gallery Image 01"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
+
 
 <!-- IMAGE 02 -->
 
-<div class="
+<div
+class="
 aspect-square
 overflow-hidden
 mt-8
 ">
 
 <img
-
+id="gallery02Image"
 src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
-
 alt="Gallery Image 02"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
+
 
 <!-- IMAGE 03 -->
 
-<div class="
+<div
+class="
 aspect-square
 overflow-hidden
 ">
 
 <img
-
+id="gallery03Image"
 src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80"
-
 alt="Gallery Image 03"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
+
 
 <!-- IMAGE 04 -->
 
-<div class="
+<div
+class="
 aspect-square
 overflow-hidden
 ">
 
 <img
-
+id="gallery04Image"
 src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80"
-
 alt="Gallery Image 04"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
 
+
 <!-- IMAGE 05 -->
 
-<div class="
+<div
+class="
 aspect-square
 overflow-hidden
 mt-8
 ">
 
 <img
-
+id="gallery05Image"
 src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80"
-
 alt="Gallery Image 05"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
 
+
 <!-- IMAGE 06 -->
 
-<div class="
+<div
+class="
 aspect-square
 overflow-hidden
 ">
 
 <img
-
+id="gallery06Image"
 src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"
-
 alt="Gallery Image 06"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
 
@@ -839,7 +1449,8 @@ text-center
 mb-10
 ">
 
-<span class="
+<span  id="movingEyebrow"
+class="
 text-xs
 tracking-[0.35em]
 text-[#8B986D]
@@ -849,7 +1460,8 @@ MOVING MEMORIES
 
 </span>
 
-<h2 class="
+<h2 id="movingTitle"
+class="
 text-2xl
 md:text-4xl
 font-serif-title
@@ -861,7 +1473,8 @@ A Moment In Motion
 
 </h2>
 
-<p class="
+<p id="movingDescription"
+class="
 text-xs
 text-[#747B65]
 mt-3
@@ -885,28 +1498,31 @@ shadow-sm
 ">
 
 <video
-
 class="
 w-full
 h-full
 object-cover
 archive-video
 "
-
 autoplay
 muted
 loop
 playsinline
-
 >
 
-<source src="video.mp4" type="video/mp4">
+<source
+id="movingVideo"
+src="video.mp4"
+type="video/mp4"
+>
 
 </video>
-
+  
 </div>
 
-<p class="
+<p
+id="movingCaption"
+class="
 text-[10px]
 text-[#8B986D]
 tracking-[0.25em]
@@ -932,7 +1548,8 @@ pt-16
 mb-12
 ">
 
-<span class="
+<span id="finalEyebrow"
+class="
 text-xs
 tracking-[0.35em]
 text-[#8B986D]
@@ -942,7 +1559,8 @@ FINAL CHAPTER
 
 </span>
 
-<h2 class="
+<h2 id="finalTitle"
+class="
 text-2xl
 md:text-4xl
 font-serif-title
@@ -954,7 +1572,8 @@ A Place To Remember
 
 </h2>
 
-<p class="
+<p id="finalDescription"
+class="
 text-xs
 text-[#747B65]
 mt-3
@@ -990,19 +1609,15 @@ shadow-sm
 ">
 
 <img
-
+id="endingImage"
 src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80"
-
 alt="Travel Archive Ending"
-
 class="
 w-full
 h-full
 object-cover
 archive-image
-"
-
-/>
+">
 
 </div>
 
@@ -1018,7 +1633,8 @@ pt-10
 pb-24
 ">
 
-<span class="
+<span id="endingEyebrow"
+class="
 text-[10px]
 tracking-[0.35em]
 text-[#8B986D]
@@ -1030,7 +1646,8 @@ A NOTE FROM THE JOURNEY
 
 </span>
 
-<p class="
+<p id="endingDescription"
+class="
 text-sm
 md:text-base
 text-[#747B65]
