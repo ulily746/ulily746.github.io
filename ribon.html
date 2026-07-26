@@ -64,11 +64,7 @@ a {
     min-height: 100vh;
     margin: 35px auto;
     background: var(--ivory);
-    overflow: hidden;
-    box-shadow:
-        0 20px 60px rgba(35, 52, 75, 0.25),
-        0 5px 15px rgba(35, 52, 75, 0.12);
-}
+    overflow: visible;
 
 /* ==================================================
    DECORATIVE LACE
@@ -104,7 +100,6 @@ a {
     align-items: center;
     justify-content: center;
 
-    /* BACKGROUND PHOTO */
     background-image:
         linear-gradient(
             rgba(235, 240, 242, 0.15),
@@ -116,9 +111,8 @@ a {
     background-position: center;
     background-attachment: fixed;
 
-    overflow: hidden;
+    overflow: visible;
 }
-
 
 /* 사진 위에 부드러운 안개 효과 */
 .hero::before {
@@ -187,29 +181,28 @@ a {
     pointer-events: none;
 }
 
-
-/* ==================================================
-   BLUE SATIN RIBBON
-================================================== */
-
 .hero-ribbon {
     position: absolute;
-
-    width: 300px;
+    
+    width: 280px;
     height: auto;
-
-    top: -90px;
+    
+    top: -75px;
     left: 50%;
-
+    
     transform: translateX(-50%);
-
-    z-index: 20;
-
-    filter:
-        drop-shadow(0 8px 10px rgba(50, 70, 90, 0.18));
-
+    
+    display: block;
+    
+    z-index: 100;
+    
+    filter: drop-shadow(
+        0 8px 12px rgba(40, 55, 70, 0.25)
+    );
+    
     pointer-events: none;
 }
+
 
 /* ==================================================
    HERO TEXT
@@ -674,7 +667,7 @@ footer small {
 
         <!-- 실제 파란 새틴 리본 -->
        <img 
-    src="images/ribon.png"
+    src="ribon.png"
     class="hero-ribbon"
     alt=""
 >
