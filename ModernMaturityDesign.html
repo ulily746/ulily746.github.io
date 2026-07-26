@@ -10,6 +10,372 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
+
+    projectId:
+    "yuri-research-portfolio",
+
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
+
+    messagingSenderId:
+    "231317507996",
+
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
+
+    measurementId:
+    "G-57VHW2454"
+
+};
+
+
+/* =========================================================
+   FIREBASE INITIALIZE
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   ELEMENT HELPER
+========================================================= */
+
+function getElement(id){
+
+    return document.getElementById(id);
+
+}
+
+
+/* =========================================================
+   TEXT SETTER
+========================================================= */
+
+function setText(id, value){
+
+    const element =
+        getElement(id);
+
+    if(!element){
+
+        console.warn(
+            `HTML element not found: #${id}`
+        );
+
+        return;
+
+    }
+
+    if(
+        value === undefined ||
+        value === null
+    ){
+
+        console.warn(
+            `Firebase field is empty: ${id}`
+        );
+
+        return;
+
+    }
+
+    element.textContent =
+        String(value);
+
+}
+
+
+/* =========================================================
+   IMAGE SETTER
+========================================================= */
+
+function setImage(id, value){
+
+    const element =
+        getElement(id);
+
+    if(
+        !element ||
+        !value
+    ){
+
+        return;
+
+    }
+
+    const imageUrl =
+        String(value).trim();
+
+    if(!imageUrl){
+
+        return;
+
+    }
+
+    element.src =
+        imageUrl;
+
+    console.log(
+        `Image applied: #${id}`,
+        imageUrl
+    );
+
+}
+
+
+/* =========================================================
+   LOAD MODERN MATURITY DESIGN
+========================================================= */
+
+async function loadModernMaturityDesign(){
+
+    try{
+
+        /* =================================================
+           FIREBASE DOCUMENT
+
+           news / ModernMaturityDesign
+        ================================================= */
+
+        const designRef =
+            doc(
+                db,
+                "news",
+                "ModernMaturityDesign"
+            );
+
+
+        const designSnap =
+            await getDoc(
+                designRef
+            );
+
+
+        if(!designSnap.exists()){
+
+            console.error(
+                "ModernMaturityDesign document not found."
+            );
+
+            return;
+
+        }
+
+
+        const designData =
+            designSnap.data();
+
+
+        console.log(
+            "ModernMaturityDesign data:",
+            designData
+        );
+
+
+        /* =================================================
+           HERO
+        ================================================= */
+
+        setText(
+            "heroEyebrow",
+            designData.heroEyebrow
+        );
+
+        setText(
+            "heroTitle",
+            designData.heroTitle
+        );
+
+        setImage(
+            "heroImage",
+            designData.heroImage
+        );
+
+        setText(
+            "heroQuote",
+            designData.heroQuote
+        );
+
+        setText(
+            "heroDescription",
+            designData.heroDescription
+        );
+
+
+        /* =================================================
+           SECTION 01
+        ================================================= */
+
+        setImage(
+            "section01Image",
+            designData.section01Image
+        );
+
+        setImage(
+            "section01SubImage",
+            designData.section01SubImage
+        );
+
+        setText(
+            "section01Title",
+            designData.section01Title
+        );
+
+        setText(
+            "section01Description",
+            designData.section01Description
+        );
+
+
+        /* =================================================
+           SECTION 02
+        ================================================= */
+
+        setImage(
+            "section02Image01",
+            designData.section02Image01
+        );
+
+        setImage(
+            "section02Image02",
+            designData.section02Image02
+        );
+
+        setText(
+            "section02Title",
+            designData.section02Title
+        );
+
+        setText(
+            "section02Description",
+            designData.section02Description
+        );
+
+
+        /* =================================================
+           SECTION 03
+        ================================================= */
+
+        setImage(
+            "section03Image",
+            designData.section03Image
+        );
+
+        setText(
+            "section03Title",
+            designData.section03Title
+        );
+
+        setText(
+            "section03Description",
+            designData.section03Description
+        );
+
+
+        /* =================================================
+           SECTION 04
+        ================================================= */
+
+        setImage(
+            "section04Image",
+            designData.section04Image
+        );
+
+        setImage(
+            "section04SubImage",
+            designData.section04SubImage
+        );
+
+        setText(
+            "section04Title",
+            designData.section04Title
+        );
+
+        setText(
+            "section04Description",
+            designData.section04Description
+        );
+
+
+      
+
+        /* =================================================
+           PAGE TITLE
+        ================================================= */
+
+        if(
+            designData.heroTitle
+        ){
+
+            document.title =
+                String(
+                    designData.heroTitle
+                );
+
+        }
+
+
+        /* =================================================
+           SUCCESS
+        ================================================= */
+
+        console.log(
+            "ModernMaturityDesign loaded successfully!"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Firebase loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadModernMaturityDesign();
+
+</script>
+  
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .font-script { font-family: 'Playfair Display', serif; font-style: italic; }
@@ -24,19 +390,45 @@
     <!-- 1. 맨위 제목 + 아래 사각형 사진 + 그 아래 필기체 문구와 설명 -->
     <header class="w-full pt-16 flex flex-col items-center">
       <div class="text-center mb-10 tracking-widest uppercase">
-        <span class="text-xs text-[#7A6953] block mb-2">Research Monograph Vol. 04</span>
-        <h1 class="text-3xl md:text-5xl font-light tracking-tight text-[#1A2636]">MODERN MATURITY</h1>
+        
+        <span
+id="heroEyebrow"
+class="text-xs text-[#7A6953] block mb-2"
+>
+Research Monograph Vol. 04
+</span>
+
+<h1
+id="heroTitle"
+class="text-3xl md:text-5xl font-light tracking-tight text-[#1A2636]"
+>
+MODERN MATURITY
+</h1>
       </div>
       
       <div class="w-[96%] max-w-7xl aspect-[16/9] overflow-hidden border border-[#D1C7BD] shadow-xs">
-        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1600&q=80" alt="Academic Archive Main" class="w-full h-full object-cover">
+        <img
+id="heroImage"
+src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1600&q=80"
+alt="Academic Archive Main"
+class="w-full h-full object-cover"
+>
       </div>
 
       <div class="mt-8 max-w-2xl text-center px-6 space-y-3">
-        <p class="font-script text-2xl md:text-3xl text-[#7A6953] tracking-wide">"Veritas et Scientia"</p>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          지식의 파편들을 정교하게 조립하여 하나의 체계를 세우는 과정. 본 아카이브는 현상 너머에 존재하는 구조적 본질을 규명하고, 세대를 거쳐 축적된 학문적 성숙을 현대적인 레이아웃으로 시각화합니다.
-        </p>
+        <p
+id="heroQuote"
+class="font-script text-2xl md:text-3xl text-[#7A6953] tracking-wide"
+>
+"Veritas et Scientia"
+</p>
+
+<p
+id="heroDescription"
+class="text-xs md:text-sm text-gray-600 leading-relaxed font-light"
+>
+지식의 파편들을 정교하게 조립하여 하나의 체계를 세우는 과정. 본 아카이브는 현상 너머에 존재하는 구조적 본질을 규명하고, 세대를 거쳐 축적된 학문적 성숙을 현대적인 레이아웃으로 시각화합니다.
+</p>
       </div>
     </header>
 
@@ -45,19 +437,37 @@
     <section class="w-full max-w-5xl mx-auto px-4">
       <div class="relative w-[85%] md:w-[75%] aspect-[4/3]">
         <div class="w-full h-full overflow-hidden border border-[#D1C7BD] shadow-xs">
-          <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80" alt="Research 1" class="w-full h-full object-cover">
+          <img
+id="section01Image"
+src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=1000&q=80"
+alt="Research 1"
+class="w-full h-full object-cover"
+>
         </div>
         <!-- 확실히 작아진 서브 사진이 위로 투박하게 겹쳐진 연출 -->
         <div class="absolute -bottom-10 -right-10 md:-right-12 w-[28%] aspect-[2/3] overflow-hidden border-4 border-[#F4F3EF] shadow-2xl z-10">
-          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="Research Sub 1" class="w-full h-full object-cover">
+          <img
+id="section01SubImage"
+src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80"
+alt="Research Sub 1"
+class="w-full h-full object-cover"
+>
         </div>
       </div>
 
       <div class="mt-20 max-w-xl text-left pl-2">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">01 / Methodological Layer</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          관찰과 기록의 거리를 좁히는 다층적 접근. 가설을 검증하기 위한 정량적 데이터 필드 위로 정성적인 해석의 단면을 레이어드하여 배치함으로써, 탐구 과정의 입체성을 추구합니다.
-        </p>
+        <h3
+id="section01Title"
+class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2"
+>
+01 / Methodological Layer
+</h3>
+        <p
+id="section01Description"
+class="text-xs md:text-sm text-gray-600 leading-relaxed font-light"
+>
+관찰과 기록의 거리를 좁히는 다층적 접근. 가설을 검증하기 위한 정량적 데이터 필드 위로 정성적인 해석의 단면을 레이어드하여 배치함으로써, 탐구 과정의 입체성을 추구합니다.
+</p>
       </div>
     </section>
 
@@ -67,19 +477,37 @@
       <div class="relative w-full max-w-3xl aspect-[16/11] my-4">
         <!-- 왼쪽 위 정사각형 사진 -->
         <div class="absolute top-0 left-0 w-[55%] aspect-square overflow-hidden border border-[#D1C7BD] shadow-sm">
-          <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=80" alt="Research Diagonal 1" class="w-full h-full object-cover">
+          <img
+id="section02Image01"
+src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=80"
+alt="Research Diagonal 1"
+class="w-full h-full object-cover"
+>
         </div>
         <!-- 오른쪽 아래 정사각형 사진 (오프셋을 크게 주어 슬쩍만 겹치도록 세팅) -->
         <div class="absolute bottom-0 right-0 w-[55%] aspect-square overflow-hidden border-4 border-[#F4F3EF] shadow-2xl z-10">
-          <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=700&q=80" alt="Research Diagonal 2" class="w-full h-full object-cover">
+          <img
+id="section02Image02"
+src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=700&q=80"
+alt="Research Diagonal 2"
+class="w-full h-full object-cover"
+>
         </div>
       </div>
 
       <div class="mt-16 max-w-xl text-center px-4">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">02 / Hypothesis & Synthesis</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          이론과 실제 연구가 마주하는 대칭적 궤적. 정교하게 설계된 두 개의 스냅 컷은 가설 수립(Hypothesis)과 종합(Synthesis)의 상호작용을 구조적으로 상징합니다.
-        </p>
+        <h3
+id="section02Title"
+class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2"
+>
+02 / Hypothesis & Synthesis
+</h3>
+        <p
+id="section02Description"
+class="text-xs md:text-sm text-gray-600 leading-relaxed font-light"
+>
+이론과 실제 연구가 마주하는 대칭적 궤적. 정교하게 설계된 두 개의 스냅 컷은 가설 수립(Hypothesis)과 종합(Synthesis)의 상호작용을 구조적으로 상징합니다.
+</p>
       </div>
     </section>
 
@@ -87,14 +515,27 @@
     <!-- 4. 다시 큰사진 하나 아래 설명 -->
     <section class="w-full">
       <div class="w-[96%] max-w-7xl mx-auto aspect-[21/9] overflow-hidden border border-[#D1C7BD]">
-        <img src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1600&q=80" alt="Wide Academic View" class="w-full h-full object-cover">
+      <img
+id="section03Image"
+src="https://images.unsplash.com/photo-1447069387593-a5de0862481e?auto=format&fit=crop&w=1600&q=80"
+alt="Wide Academic View"
+class="w-full h-full object-cover"
+>
       </div>
 
       <div class="mt-8 max-w-2xl mx-auto text-center px-6">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">03 / The Archive Panorama</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          끝없이 확장되는 연구의 지평을 표현한 수평 구도입니다. 축적된 문헌들의 파노라마를 통해 긴 시간 동안 변하지 않는 지식 아카이브 고유의 깊고 고요한 여백을 전달하고자 합니다.
-        </p>
+       <h3
+id="section03Title"
+class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2"
+>
+03 / The Archive Panorama
+</h3>
+        <p
+id="section03Description"
+class="text-xs md:text-sm text-gray-600 leading-relaxed font-light"
+>
+끝없이 확장되는 연구의 지평을 표현한 수평 구도입니다. 축적된 문헌들의 파노라마를 통해 긴 시간 동안 변하지 않는 지식 아카이브 고유의 깊고 고요한 여백을 전달하고자 합니다.
+</p>
       </div>
     </section>
 
@@ -103,19 +544,37 @@
     <section class="w-full max-w-5xl mx-auto px-4">
       <div class="relative w-[85%] md:w-[75%] aspect-[4/3] ml-auto">
         <div class="w-full h-full overflow-hidden border border-[#D1C7BD]">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80" alt="Research 2" class="w-full h-full object-cover">
+         <img
+id="section04Image"
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1000&q=80"
+alt="Research 2"
+class="w-full h-full object-cover"
+>
         </div>
         <!-- 오른쪽 위 방향으로 작게 배치되어 일부만 스치듯 겹친 서브 사진 -->
         <div class="absolute -top-10 -left-10 md:-left-12 w-[28%] aspect-square overflow-hidden border-4 border-[#F4F3EF] shadow-2xl z-10">
-          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80" alt="Research Sub 2" class="w-full h-full object-cover">
+          <img
+id="section04SubImage"
+src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=600&q=80"
+alt="Research Sub 2"
+class="w-full h-full object-cover"
+>
         </div>
       </div>
 
       <div class="mt-16 max-w-xl text-right ml-auto pr-2">
-        <h3 class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2">04 / Epilogue: The Continuous Query</h3>
-        <p class="text-xs md:text-sm text-gray-600 leading-relaxed font-light">
-          하나의 결론은 언제나 새로운 질문의 시작점이 됩니다. 정형화된 틀을 비껴 배치한 구조는 멈추지 않는 탐구의 연속성과 집요한 학문적 사유의 발자취를 온전히 반영합니다.
-        </p>
+        <h3
+id="section04Title"
+class="text-lg font-semibold tracking-tight uppercase text-[#1A2636] mb-2"
+>
+04 / Epilogue: The Continuous Query
+</h3>
+       <p
+id="section04Description"
+class="text-xs md:text-sm text-gray-600 leading-relaxed font-light"
+>
+하나의 결론은 언제나 새로운 질문의 시작점이 됩니다. 정형화된 틀을 비껴 배치한 구조는 멈추지 않는 탐구의 연속성과 집요한 학문적 사유의 발자취를 온전히 반영합니다.
+</p>
       </div>
     </section>
 
