@@ -25,7 +25,7 @@ html {
 }
 
 body {
-    background: #f7f3e8;
+    background: #58739a;
     color: #3e526b;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 300;
@@ -59,9 +59,15 @@ a {
    PAGE CONTAINER
 ================================================== */
 .wedding-page {
-    width: 100%;
+    width: calc(100% - 70px);
+    max-width: 1500px;
     min-height: 100vh;
+    margin: 35px auto;
+    background: var(--ivory);
     overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(35, 52, 75, 0.25),
+        0 5px 15px rgba(35, 52, 75, 0.12);
 }
 
 /* ==================================================
@@ -594,6 +600,11 @@ footer small {
     .schedule-event { padding: 0; text-align: left; }
     .schedule-item::before { left: 20px; }
     .rsvp { padding: 100px 25px; }
+    .wedding-page {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+    }
 }
 </style>
 </head>
