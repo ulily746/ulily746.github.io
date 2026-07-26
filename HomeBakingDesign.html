@@ -13,6 +13,508 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Manrope:wght@300;400;500&family=Caveat:wght@400;500;600;700&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
+
+    projectId:
+    "yuri-research-portfolio",
+
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
+
+    messagingSenderId:
+    "231317507996",
+
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
+
+    measurementId:
+    "G-57VHW2454"
+
+};
+
+
+/* =========================================================
+   FIREBASE INITIALIZE
+========================================================= */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+/* =========================================================
+   URL에서 NEWS ID 가져오기
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const newsId =
+    params.get("id");
+
+
+console.log(
+    "Current URL:",
+    window.location.href
+);
+
+console.log(
+    "News ID:",
+    newsId
+);
+
+
+/* =========================================================
+   ELEMENT HELPER
+========================================================= */
+
+function getElement(id){
+
+    return document.getElementById(id);
+
+}
+
+
+/* =========================================================
+   TEXT SETTER
+========================================================= */
+
+function setText(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(!element){
+
+        console.warn(
+            `HTML element not found: #${id}`
+        );
+
+        return;
+
+    }
+
+
+    if(
+        value === undefined ||
+        value === null
+    ){
+
+        console.warn(
+            `Firebase field is empty: ${id}`
+        );
+
+        return;
+
+    }
+
+
+    element.textContent =
+        String(value);
+
+}
+
+
+/* =========================================================
+   IMAGE SETTER
+========================================================= */
+
+function setImage(id, value){
+
+    const element =
+        getElement(id);
+
+
+    if(
+        !element ||
+        !value
+    ){
+
+        return;
+
+    }
+
+
+    const imageUrl =
+        String(value).trim();
+
+
+    if(!imageUrl){
+
+        return;
+
+    }
+
+
+    element.src =
+        imageUrl;
+
+
+    console.log(
+        `Image applied: #${id}`,
+        imageUrl
+    );
+
+}
+
+
+/* =========================================================
+   LOAD NEWS + DESIGN
+========================================================= */
+
+async function loadHomeBakingDesign(){
+
+    /* =====================================================
+       1. ID CHECK
+    ===================================================== */
+
+    if(!newsId){
+
+        console.error(
+            "News ID is missing."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        /* =================================================
+           2. NEWS DOCUMENT
+        ================================================= */
+
+        const newsRef =
+            doc(
+                db,
+                "news",
+                newsId
+            );
+
+
+        const newsSnap =
+            await getDoc(
+                newsRef
+            );
+
+
+        if(!newsSnap.exists()){
+
+            console.error(
+                "News document not found:",
+                newsId
+            );
+
+            return;
+
+        }
+
+
+        const newsData =
+            newsSnap.data();
+
+
+        console.log(
+            "News data:",
+            newsData
+        );
+
+
+        /* =================================================
+           3. HOME BAKING DESIGN DOCUMENT
+        ================================================= */
+
+        const designRef =
+            doc(
+                db,
+                "news",
+                "HomeBakingDesign"
+            );
+
+
+        const designSnap =
+            await getDoc(
+                designRef
+            );
+
+
+        if(!designSnap.exists()){
+
+            console.error(
+                "HomeBakingDesign document not found."
+            );
+
+            return;
+
+        }
+
+
+        const designData =
+            designSnap.data();
+
+
+        console.log(
+            "HomeBakingDesign data:",
+            designData
+        );
+
+
+        /* =================================================
+           4. HERO
+        ================================================= */
+
+        setImage(
+            "heroImage",
+            designData.heroImage
+        );
+
+
+        setText(
+            "heroTitle",
+            designData.heroTitle
+        );
+
+
+        setText(
+            "heroDescription",
+            designData.heroDescription
+        );
+
+
+        /* =================================================
+           5. SECTION TITLE
+        ================================================= */
+
+        setText(
+            "sectionTitle",
+            designData.sectionTitle
+        );
+
+
+        setText(
+            "sectionDescription",
+            designData.sectionDescription
+        );
+
+
+        /* =================================================
+           6. POLAROID 01
+        ================================================= */
+
+        setImage(
+            "polaroid01Image",
+            designData.polaroid01Image
+        );
+
+
+        setText(
+            "polaroid01Title",
+            designData.polaroid01Title
+        );
+
+
+        setText(
+            "polaroid01Description",
+            designData.polaroid01Description
+        );
+
+
+        /* =================================================
+           7. POLAROID 02
+        ================================================= */
+
+        setImage(
+            "polaroid02Image",
+            designData.polaroid02Image
+        );
+
+
+        setText(
+            "polaroid02Title",
+            designData.polaroid02Title
+        );
+
+
+        setText(
+            "polaroid02Description",
+            designData.polaroid02Description
+        );
+
+
+        /* =================================================
+           8. POLAROID 03
+        ================================================= */
+
+        setImage(
+            "polaroid03Image",
+            designData.polaroid03Image
+        );
+
+
+        setText(
+            "polaroid03Title",
+            designData.polaroid03Title
+        );
+
+
+        setText(
+            "polaroid03Description",
+            designData.polaroid03Description
+        );
+
+
+        /* =================================================
+           9. GALLERY
+        ================================================= */
+
+        setImage(
+            "gallery01Image",
+            designData.gallery01Image
+        );
+
+
+        setImage(
+            "gallery02Image",
+            designData.gallery02Image
+        );
+
+
+        setImage(
+            "gallery03Image",
+            designData.gallery03Image
+        );
+
+
+        /* =================================================
+           10. ABOUT
+        ================================================= */
+
+        setImage(
+            "aboutImage",
+            designData.aboutImage
+        );
+
+
+        setText(
+            "aboutEyebrow",
+            designData.aboutEyebrow
+        );
+
+
+        setText(
+            "aboutTitle",
+            designData.aboutTitle
+        );
+
+
+        setText(
+            "aboutDescription",
+            designData.aboutDescription
+        );
+
+
+        /* =================================================
+           11. FOOTER
+        ================================================= */
+
+        setText(
+            "footerNote",
+            designData.footerNote
+        );
+
+
+        setText(
+            "footerTitle",
+            designData.footerTitle
+        );
+
+
+        setText(
+            "footerCopyright",
+            designData.footerCopyright
+        );
+
+
+        /* =================================================
+           12. PAGE TITLE
+        ================================================= */
+
+        if(
+            designData.heroTitle
+        ){
+
+            document.title =
+                designData.heroTitle;
+
+        }
+
+
+        /* =================================================
+           SUCCESS
+        ================================================= */
+
+        console.log(
+            "HomeBakingDesign loaded successfully!",
+            {
+                newsId,
+                newsData,
+                designData
+            }
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Firebase loading error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadHomeBakingDesign();
+
+</script>   
 <style>
 
 /* =========================================================
@@ -1183,6 +1685,7 @@ footer h2 {
 <div class="hero-oval">
 
 <img
+id="heroImage"
 src="images/hero.jpg"
 alt="Anya Bakery"
 >
@@ -1194,9 +1697,11 @@ alt="Anya Bakery"
 
 <div class="hero-intro">
 
-<h1>Anya Bakery</h1>
+<h1 id="heroTitle">
+Anya Bakery
+</h1>
 
-<p>
+<p id="heroDescription">
 A little diary of homemade sweets,
 <br>
 slow mornings, and sweet memories.
@@ -1220,10 +1725,13 @@ slow mornings, and sweet memories.
 
 <div class="oval-title">
 
-<h2>Sweet Little Notes</h2>
+<h2 id="sectionTitle">
+Sweet Little Notes
+</h2>
 
-<p>handmade desserts & baking memories</p>
-
+<p id="sectionDescription">
+handmade desserts & baking memories
+</p>
 </div>
 
 </div>
@@ -1234,7 +1742,7 @@ slow mornings, and sweet memories.
 
 
 <!-- =====================================================
-     ITEM 1
+     Polaroid 1
 ===================================================== -->
 
 <article class="scrap-item item1">
@@ -1243,6 +1751,7 @@ slow mornings, and sweet memories.
 <div class="polaroid rotate-left">
 
 <img
+id="polaroid01Image"
 src="images/macaron.jpg"
 alt="Macaron"
 >
@@ -1254,16 +1763,16 @@ alt="Macaron"
 
 <span class="mini-star">✦</span>
 
-<h3>Macarons</h3>
+<h3 id="polaroid01Title">
+Macarons
+</h3>
 
-<p>
-
+<p id="polaroid01Description">
 A little box of colorful sweets,
 <br>
 made for slow afternoons
 <br>
 and tiny celebrations.
-
 </p>
 
 </div>
@@ -1274,7 +1783,7 @@ and tiny celebrations.
 
 
 <!-- =====================================================
-     ITEM 2
+     Polaroid 2
 ===================================================== -->
 
 <article class="scrap-item item2">
@@ -1283,6 +1792,7 @@ and tiny celebrations.
 <div class="polaroid rotate-right">
 
 <img
+id="polaroid02Image"
 src="images/bento.jpg"
 alt="Bento Cake"
 >
@@ -1294,16 +1804,16 @@ alt="Bento Cake"
 
 <span class="mini-star">✧</span>
 
-<h3>Bento Cake</h3>
+<h3 id="polaroid02Title">
+Bento Cake
+</h3>
 
-<p>
-
+<p id="polaroid02Description">
 Small cakes for
 <br>
 big little moments.
 <br>
 Soft, sweet, and personal.
-
 </p>
 
 </div>
@@ -1314,7 +1824,7 @@ Soft, sweet, and personal.
 
 
 <!-- =====================================================
-     ITEM 3
+     Polaroid 3
 ===================================================== -->
 
 <article class="scrap-item item3">
@@ -1322,7 +1832,9 @@ Soft, sweet, and personal.
 
 <div class="polaroid rotate-left-small">
 
+
 <img
+id="polaroid03Image"
 src="images/cake.jpg"
 alt="Cake"
 >
@@ -1334,18 +1846,17 @@ alt="Cake"
 
 <span class="mini-star">✦</span>
 
-<h3>Celebration Cake</h3>
+<h3 id="polaroid03Title">
+Celebration Cake
+</h3>
 
-<p>
-
+<p id="polaroid03Description">
 Handmade for birthdays,
 <br>
 special days,
 <br>
 and everything worth remembering.
-
 </p>
-
 </div>
 
 
@@ -1381,6 +1892,7 @@ and everything worth remembering.
 <div class="gallery-card">
 
 <img
+id="gallery01Image"
 src="images/gallery1.jpg"
 alt="Dessert"
 >
@@ -1391,6 +1903,7 @@ alt="Dessert"
 <div class="gallery-card">
 
 <img
+id="gallery02Image"
 src="images/gallery2.jpg"
 alt="Cake"
 >
@@ -1401,6 +1914,7 @@ alt="Cake"
 <div class="gallery-card">
 
 <img
+id="gallery03Image"
 src="images/gallery3.jpg"
 alt="Cookie"
 >
@@ -1427,6 +1941,7 @@ alt="Cookie"
 <div class="about-image">
 
 <img
+id="aboutImage"
 src="images/about.jpg"
 alt="About Anya Bakery"
 >
@@ -1436,12 +1951,14 @@ alt="About Anya Bakery"
 
 <div class="about-text">
 
-<span class="small-title">
+<span
+id="aboutEyebrow"
+class="small-title"
+>
 a little about me
 </span>
 
-
-<h2>
+<h2 id="aboutTitle">
 
 Homemade desserts
 <br>
@@ -1450,7 +1967,7 @@ with love.
 </h2>
 
 
-<p>
+<p id="aboutDescription">
 
 Every dessert is handcrafted
 using carefully selected ingredients.
@@ -1483,21 +2000,27 @@ make beautiful memories.
         <span>✧</span>
     </div>
 
-    <p class="footer-note">
-        a little sweetness, made just for you
-    </p>
+    <p
+id="footerNote"
+class="footer-note"
+>
+a little sweetness, made just for you
+</p>
 
-    <h2>
-        Let's make your day sweeter ♡
-    </h2>
+<h2 id="footerTitle">
+Let's make your day sweeter ♡
+</h2>
 
 
 
     <div class="footer-line"></div>
 
-    <p class="copyright">
-        with love, Anya Bakery · 2026
-    </p>
+   <p
+id="footerCopyright"
+class="copyright"
+>
+with love, Anya Bakery · 2026
+</p>
 
 </footer>
 </body>
