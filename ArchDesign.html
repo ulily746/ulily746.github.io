@@ -1,955 +1,1238 @@
-/* =========================================================
-   HERO
-   VINTAGE EDITORIAL / PHOTOBOOK COVER
-========================================================= */
+<!DOCTYPE html>
+<html lang="ko">
 
+<head>
 
-/* =========================================================
-   HERO OUTER
-========================================================= */
+  <meta charset="UTF-8">
 
-.hero-section {
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  position: relative;
+  <title>Lily Gloges — Florist Atelier</title>
 
-  width: 100%;
-
-  min-height: 1000px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  padding:
-    70px
-    40px
-    110px;
-
-  overflow: hidden;
-
-  background: #E8E1D2;
-
-}
-
-
-/* =========================================================
-   BACKGROUND IMAGE
-   같은 사진을 뒤에도 깔아줌
-========================================================= */
-
-.hero-background {
-
-  position: absolute;
-
-  inset: -30px;
-
-  z-index: 0;
-
-  overflow: hidden;
-
-}
-
-
-.hero-background img {
-
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-
-  object-position: center;
-
-  transform: scale(1.08);
-
-  filter:
-    blur(2px)
-    saturate(0.55)
-    brightness(1.08);
-
-}
-
-
-/* =========================================================
-   BACKGROUND OVERLAY
-   배경을 뽀얗고 불투명하게
-========================================================= */
-
-.hero-background-overlay {
-
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 1;
-
-  background:
-
-    linear-gradient(
-      rgba(248, 244, 232, 0.76),
-      rgba(242, 237, 222, 0.84)
-    );
-
-}
-
-
-/* =========================================================
-   MAIN PAPER
-========================================================= */
-
-.hero-paper {
-
-  position: relative;
-
-  z-index: 5;
-
-  width: min(540px, 88vw);
-
-  min-height: 850px;
-
-  padding:
-    0
-    55px
-    55px;
-
-  background: #F7F2E6;
-
-  border-radius: 12px;
-
-  box-shadow:
-
-    0 20px 60px
-    rgba(78, 65, 48, 0.16),
-
-    0 4px 12px
-    rgba(78, 65, 48, 0.08);
-
-}
-
-
-/* =========================================================
-   PAPER TEXTURE
-========================================================= */
-
-.hero-paper::before {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: inherit;
-
-  pointer-events: none;
-
-  opacity: 0.38;
-
-  background-image:
-
-    radial-gradient(
-      rgba(116, 101, 76, 0.07) 0.7px,
-      transparent 0.7px
-    );
-
-  background-size: 6px 6px;
-
-}
-
-
-/* =========================================================
-   TOP NAV
-========================================================= */
-
-.hero-paper-nav {
-
-  position: relative;
-
-  z-index: 2;
-
-  width: calc(100% + 110px);
-
-  margin-left: -55px;
-
-  height: 62px;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 15px;
-
-  border-bottom:
-    1px solid
-    rgba(123, 110, 88, 0.25);
-
-  font-family:
-    "Cormorant Garamond",
-    Georgia,
-    serif;
-
-  font-size: 11px;
-
-  letter-spacing: 0.06em;
-
-  color: #938875;
-
-}
-
-
-.nav-dot {
-
-  opacity: 0.45;
-
-}
-
-
-/* =========================================================
-   STAR
-========================================================= */
-
-.hero-star {
-
-  position: relative;
-
-  z-index: 3;
-
-  text-align: center;
-
-  margin-top: 18px;
-
-  font-size: 22px;
-
-  line-height: 1;
-
-  color: #8B806B;
-
-  opacity: 0.7;
-
-}
-
-
-/* =========================================================
-   CIRCULAR TITLE
-========================================================= */
-
-.hero-circle-title {
-
-  position: relative;
-
-  z-index: 3;
-
-  width: 100%;
-
-  height: 170px;
-
-  margin-top: 12px;
-
-  overflow: visible;
-
-}
-
-
-.hero-circle-title svg {
-
-  width: 100%;
-
-  height: 100%;
-
-  overflow: visible;
-
-}
-
-
-.hero-circle-title text {
-
-  font-family:
-
-    "Cormorant Garamond",
-
-    Georgia,
-
-    serif;
-
-  font-size: 28px;
-
-  letter-spacing: 0.06em;
-
-  fill: #817562;
-
-}
-
-
-/* =========================================================
-   ARCH PHOTO
-========================================================= */
-
-.hero-arch {
-
-  position: relative;
-
-  z-index: 2;
-
-  width: 72%;
-
-  max-width: 340px;
-
-  aspect-ratio: 0.68;
-
-  margin:
-
-    -45px
-
-    auto
-
-    0;
-
-  overflow: hidden;
-
-  border-radius:
-
-    180px
-
-    180px
-
-    0
-
-    0;
-
-  background: #D9D0BD;
-
-}
-
-
-/* =========================================================
-   ARCH IMAGE
-========================================================= */
-
-.hero-arch img {
-
-  width: 100%;
-
-  height: 100%;
-
-  object-fit: cover;
-
-  object-position: center;
-
-  filter:
-
-    saturate(0.72)
-
-    brightness(1.04)
-
-    contrast(0.94);
-
-  transition:
-
-    transform 0.8s ease;
-
-}
-
-
-.hero-arch:hover img {
-
-  transform: scale(1.035);
-
-}
-
-
-/* =========================================================
-   NAME
-========================================================= */
-
-.hero-name {
-
-  position: relative;
-
-  z-index: 3;
-
-  margin-top: 24px;
-
-  text-align: center;
-
-  font-family:
-
-    "Cormorant Garamond",
-
-    Georgia,
-
-    serif;
-
-  font-size: 15px;
-
-  letter-spacing: 0.28em;
-
-  color: #8A7E6A;
-
-}
-
-
-/* =========================================================
-   DESCRIPTION
-========================================================= */
-
-.hero-description {
-
-  position: relative;
-
-  z-index: 3;
-
-  max-width: 300px;
-
-  margin:
-
-    28px
-
-    auto
-
-    0;
-
-  text-align: center;
-
-  font-family:
-
-    "Cormorant Garamond",
-
-    Georgia,
-
-    serif;
-
-  font-size: 14px;
-
-  line-height: 1.8;
-
-  letter-spacing: 0.025em;
-
-  color: #817766;
-
-}
-
-
-/* =========================================================
-   HANDLE
-========================================================= */
-
-.hero-handle {
-
-  position: absolute;
-
-  z-index: 3;
-
-  bottom: 35px;
-
-  left: 0;
-
-  width: 100%;
-
-  text-align: center;
-
-  font-family:
-
-    "Cormorant Garamond",
-
-    Georgia,
-
-    serif;
-
-  font-size: 11px;
-
-  letter-spacing: 0.1em;
-
-  color: #978B76;
-
-}
-
-
-/* =========================================================
-   BOTTOM CAPTION
-========================================================= */
-
-.hero-bottom-caption {
-
-  position: absolute;
-
-  z-index: 6;
-
-  bottom: 45px;
-
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 14px;
-
-  white-space: nowrap;
-
-  font-family:
-
-    "Cormorant Garamond",
-
-    Georgia,
-
-    serif;
-
-  font-size: 13px;
-
-  font-style: italic;
-
-  color: #F7F2E6;
-
-  opacity: 0.9;
-
-}
-
-
-.caption-line {
-
-  display: block;
-
-  width: 70px;
-
-  height: 1px;
-
-  background: rgba(247, 242, 230, 0.8);
-
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 900px) {
-
-  .hero-section {
-
-    min-height: 900px;
-
-    padding:
-
-      50px
-
-      25px
-
-      100px;
-
-  }
-
-  .hero-paper {
-
-    width: min(500px, 88vw);
-
-    min-height: 800px;
-
-    padding-left: 45px;
-
-    padding-right: 45px;
-
-  }
-
-  .hero-paper-nav {
-
-    width: calc(100% + 90px);
-
-    margin-left: -45px;
-
-  }
-
-  .hero-circle-title text {
-
-    font-size: 25px;
-
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 640px) {
-
-  .hero-section {
-
-    min-height: 820px;
-
-    padding:
-
-      35px
-
-      18px
-
-      90px;
-
-  }
-
-
-  .hero-paper {
-
-    width: 88vw;
-
-    min-height: 730px;
-
-    padding:
-
-      0
-
-      28px
-
-      45px;
-
-    border-radius: 10px;
-
-  }
-
-
-  .hero-paper-nav {
-
-    width: calc(100% + 56px);
-
-    margin-left: -28px;
-
-    height: 50px;
-
-    gap: 8px;
-
-    font-size: 8px;
-
-  }
-
-
-  .hero-star {
-
-    margin-top: 13px;
-
-    font-size: 17px;
-
-  }
-
-
-  .hero-circle-title {
-
-    height: 135px;
-
-    margin-top: 5px;
-
-  }
-
-
-  .hero-circle-title text {
-
-    font-size: 22px;
-
-    letter-spacing: 0.045em;
-
-  }
-
-
-  .hero-arch {
-
-    width: 72%;
-
-    max-width: 280px;
-
-    margin-top: -38px;
-
-  }
-
-
-  .hero-name {
-
-    margin-top: 18px;
-
-    font-size: 12px;
-
-  }
-
-
-  .hero-description {
-
-    max-width: 250px;
-
-    margin-top: 20px;
-
-    font-size: 12px;
-
-    line-height: 1.75;
-
-  }
-
-
-  .hero-handle {
-
-    bottom: 24px;
-
-    font-size: 9px;
-
-  }
-
-
-  .hero-bottom-caption {
-
-    bottom: 25px;
-
-    font-size: 11px;
-
-    gap: 8px;
-
-  }
-
-
-  .caption-line {
-
-    width: 35px;
-
-  }
-
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 420px) {
-
-  .hero-section {
-
-    min-height: 760px;
-
-  }
-
-
-  .hero-paper {
-
-    min-height: 680px;
-
-  }
-
-
-  .hero-circle-title {
-
-    height: 120px;
-
-  }
-
-
-  .hero-circle-title text {
-
-    font-size: 19px;
-
-  }
-
-
-  .hero-arch {
-
-    width: 70%;
-
-  }
-
-
-  .hero-description {
-
-    font-size: 11px;
-
-  }
-
-}
-<!-- =========================================================
-     HERO
-     VINTAGE EDITORIAL ARCHIVE COVER
-========================================================= -->
-
-<header class="hero-section">
 
   <!-- =====================================================
+       GOOGLE FONT
+  ====================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
+
+  <style>
+
+
+    /* =====================================================
+       BASIC RESET
+    ====================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      min-width: 320px;
+
+      margin: 0;
+
+      background: #E8E1D2;
+
+      color: #817562;
+
+      overflow-x: hidden;
+
+      font-family:
+        "Cormorant Garamond",
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    }
+
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+
+
+    /* =====================================================
+       HERO
+       VINTAGE EDITORIAL PHOTOBOOK COVER
+    ====================================================== */
+
+    .hero-section {
+
+      position: relative;
+
+      width: 100%;
+
+      min-height: 100vh;
+      min-height: 1000px;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding:
+        70px
+        40px
+        110px;
+
+      overflow: hidden;
+
+      background: #E8E1D2;
+
+    }
+
+
+
+    /* =====================================================
        BACKGROUND IMAGE
-       중앙 종이 뒤에 깔리는 흐릿한 배경
-  ====================================================== -->
 
-  <div class="hero-background">
+       중앙 종이와 같은 사진을
+       화면 전체 배경으로 크게 사용
+    ====================================================== */
 
-    <img
-      src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1800&q=90"
-      alt=""
-    >
+    .hero-background {
 
-  </div>
+      position: absolute;
+
+      inset: -40px;
+
+      z-index: 0;
+
+      overflow: hidden;
+
+    }
+
+
+    .hero-background img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      object-position: center;
+
+      transform: scale(1.08);
+
+      filter:
+        blur(3px)
+        saturate(0.45)
+        brightness(1.08);
+
+    }
+
+
+
+    /* =====================================================
+       BACKGROUND OVERLAY
+
+       뒤쪽 사진을 뽀얗고
+       불투명한 빈티지 사진처럼 보이게 함
+    ====================================================== */
+
+    .hero-background-overlay {
+
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 1;
+
+      background:
+        rgba(247, 242, 228, 0.72);
+
+      backdrop-filter:
+        blur(1px);
+
+    }
+
+
+
+    /* =====================================================
+       MAIN PAPER
+
+       레퍼런스 이미지의
+       중앙에 떠 있는 종이
+    ====================================================== */
+
+    .hero-paper {
+
+      position: relative;
+
+      z-index: 5;
+
+      width: min(540px, 88vw);
+
+      min-height: 850px;
+
+      padding:
+        0
+        55px
+        55px;
+
+      background:
+        #F7F2E6;
+
+      border-radius:
+        12px;
+
+      box-shadow:
+
+        0 25px 70px
+        rgba(75, 60, 42, 0.18),
+
+        0 5px 18px
+        rgba(75, 60, 42, 0.08);
+
+      overflow: hidden;
+
+    }
+
+
+
+    /* =====================================================
+       PAPER TEXTURE
+    ====================================================== */
+
+    .hero-paper::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.32;
+
+      background-image:
+
+        radial-gradient(
+          rgba(120, 105, 80, 0.08) 0.7px,
+          transparent 0.7px
+        );
+
+      background-size:
+        7px
+        7px;
+
+      z-index: 20;
+
+    }
+
+
+
+    /* =====================================================
+       TOP NAVIGATION
+    ====================================================== */
+
+    .hero-paper-nav {
+
+      position: relative;
+
+      z-index: 10;
+
+      width:
+        calc(100% + 110px);
+
+      margin-left:
+        -55px;
+
+      height:
+        62px;
+
+      display:
+
+        flex;
+
+      align-items:
+
+        center;
+
+      justify-content:
+
+        center;
+
+      gap:
+        15px;
+
+      border-bottom:
+
+        1px solid
+        rgba(125, 110, 85, 0.22);
+
+      font-family:
+
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      font-size:
+        11px;
+
+      letter-spacing:
+        0.08em;
+
+      color:
+        #918673;
+
+    }
+
+
+    .nav-dot {
+
+      opacity:
+        0.45;
+
+    }
+
+
+
+    /* =====================================================
+       DECORATIVE STAR
+    ====================================================== */
+
+    .hero-star {
+
+      position:
+        relative;
+
+      z-index:
+        10;
+
+      margin-top:
+        18px;
+
+      text-align:
+        center;
+
+      font-family:
+        Georgia,
+        serif;
+
+      font-size:
+        23px;
+
+      line-height:
+        1;
+
+      color:
+        #8D806A;
+
+      opacity:
+        0.72;
+
+    }
+
+
+
+    /* =====================================================
+       CIRCULAR TITLE
+
+       아치 사진 위쪽을 따라
+       둥글게 배치되는 텍스트
+    ====================================================== */
+
+    .hero-circle-title {
+
+      position:
+        relative;
+
+      z-index:
+        10;
+
+      width:
+        100%;
+
+      height:
+        175px;
+
+      margin-top:
+        4px;
+
+      overflow:
+        visible;
+
+    }
+
+
+    .hero-circle-title svg {
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      overflow:
+        visible;
+
+    }
+
+
+    .hero-circle-title text {
+
+      font-family:
+
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      font-size:
+        28px;
+
+      letter-spacing:
+        0.055em;
+
+      fill:
+        #817461;
+
+    }
+
+
+
+    /* =====================================================
+       ARCH PHOTO
+
+       중앙 핵심 사진
+       위쪽만 둥근 아치 형태
+    ====================================================== */
+
+    .hero-arch {
+
+      position:
+        relative;
+
+      z-index:
+        8;
+
+      width:
+        72%;
+
+      max-width:
+        340px;
+
+      aspect-ratio:
+        0.68;
+
+      margin:
+        -52px
+        auto
+        0;
+
+      overflow:
+        hidden;
+
+      background:
+        #D8CEBA;
+
+      border-radius:
+
+        180px
+        180px
+        0
+        0;
+
+      box-shadow:
+
+        0 8px 22px
+        rgba(80, 65, 45, 0.08);
+
+    }
+
+
+    .hero-arch img {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      object-position:
+        center;
+
+      filter:
+
+        saturate(0.68)
+        brightness(1.05)
+        contrast(0.94);
+
+      transition:
+        transform 0.8s ease;
+
+    }
+
+
+    .hero-arch:hover img {
+
+      transform:
+        scale(1.035);
+
+    }
+
+
+
+    /* =====================================================
+       NAME
+    ====================================================== */
+
+    .hero-name {
+
+      position:
+        relative;
+
+      z-index:
+        10;
+
+      margin-top:
+        24px;
+
+      text-align:
+        center;
+
+      font-family:
+
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      font-size:
+        15px;
+
+      letter-spacing:
+        0.28em;
+
+      color:
+        #887B66;
+
+    }
+
+
+
+    /* =====================================================
+       DESCRIPTION
+    ====================================================== */
+
+    .hero-description {
+
+      position:
+        relative;
+
+      z-index:
+        10;
+
+      max-width:
+        310px;
+
+      margin:
+        27px
+        auto
+        0;
+
+      text-align:
+        center;
+
+      font-family:
+
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      font-size:
+        14px;
+
+      line-height:
+        1.85;
+
+      letter-spacing:
+        0.02em;
+
+      color:
+        #817562;
+
+    }
+
+
+
+    /* =====================================================
+       HANDLE
+    ====================================================== */
+
+    .hero-handle {
+
+      position:
+        absolute;
+
+      z-index:
+        10;
+
+      left:
+        0;
+
+      bottom:
+        34px;
+
+      width:
+        100%;
+
+      text-align:
+        center;
+
+      font-family:
+
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      font-size:
+        11px;
+
+      letter-spacing:
+        0.12em;
+
+      color:
+        #958873;
+
+    }
+
+
+
+    /* =====================================================
+       BOTTOM CAPTION
+
+       종이 바깥쪽 아래에
+       살짝 걸쳐 보이는 문구
+    ====================================================== */
+
+    .hero-bottom-caption {
+
+      position:
+        absolute;
+
+      z-index:
+        10;
+
+      left:
+        50%;
+
+      bottom:
+        45px;
+
+      transform:
+        translateX(-50%);
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        14px;
+
+      white-space:
+        nowrap;
+
+      font-family:
+
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+      font-size:
+        13px;
+
+      font-style:
+        italic;
+
+      color:
+        #F7F2E6;
+
+      opacity:
+        0.92;
+
+    }
+
+
+    .caption-line {
+
+      display:
+        block;
+
+      width:
+        70px;
+
+      height:
+        1px;
+
+      background:
+        rgba(247, 242, 230, 0.82);
+
+    }
+
+
+
+    /* =====================================================
+       TABLET
+    ====================================================== */
+
+    @media (max-width: 900px) {
+
+
+      .hero-section {
+
+        min-height:
+          900px;
+
+        padding:
+
+          50px
+          25px
+          100px;
+
+      }
+
+
+      .hero-paper {
+
+        width:
+          min(500px, 88vw);
+
+        min-height:
+          800px;
+
+        padding-left:
+          45px;
+
+        padding-right:
+          45px;
+
+      }
+
+
+      .hero-paper-nav {
+
+        width:
+          calc(100% + 90px);
+
+        margin-left:
+          -45px;
+
+      }
+
+
+      .hero-circle-title text {
+
+        font-size:
+          25px;
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (max-width: 640px) {
+
+
+      .hero-section {
+
+        min-height:
+          820px;
+
+        padding:
+
+          35px
+          18px
+          90px;
+
+      }
+
+
+      .hero-paper {
+
+        width:
+          88vw;
+
+        min-height:
+          730px;
+
+        padding:
+
+          0
+          28px
+          45px;
+
+        border-radius:
+          10px;
+
+      }
+
+
+      .hero-paper-nav {
+
+        width:
+          calc(100% + 56px);
+
+        margin-left:
+          -28px;
+
+        height:
+          50px;
+
+        gap:
+          8px;
+
+        font-size:
+          8px;
+
+      }
+
+
+      .hero-star {
+
+        margin-top:
+          13px;
+
+        font-size:
+          17px;
+
+      }
+
+
+      .hero-circle-title {
+
+        height:
+          135px;
+
+        margin-top:
+          5px;
+
+      }
+
+
+      .hero-circle-title text {
+
+        font-size:
+          22px;
+
+        letter-spacing:
+          0.045em;
+
+      }
+
+
+      .hero-arch {
+
+        width:
+          72%;
+
+        max-width:
+          280px;
+
+        margin-top:
+          -38px;
+
+      }
+
+
+      .hero-name {
+
+        margin-top:
+          18px;
+
+        font-size:
+          12px;
+
+      }
+
+
+      .hero-description {
+
+        max-width:
+          250px;
+
+        margin-top:
+          20px;
+
+        font-size:
+          12px;
+
+        line-height:
+          1.75;
+
+      }
+
+
+      .hero-handle {
+
+        bottom:
+          24px;
+
+        font-size:
+          9px;
+
+      }
+
+
+      .hero-bottom-caption {
+
+        bottom:
+          25px;
+
+        font-size:
+          11px;
+
+        gap:
+          8px;
+
+      }
+
+
+      .caption-line {
+
+        width:
+          35px;
+
+      }
+
+    }
+
+
+
+    /* =====================================================
+       SMALL MOBILE
+    ====================================================== */
+
+    @media (max-width: 420px) {
+
+
+      .hero-section {
+
+        min-height:
+          760px;
+
+      }
+
+
+      .hero-paper {
+
+        min-height:
+          680px;
+
+      }
+
+
+      .hero-circle-title {
+
+        height:
+          120px;
+
+      }
+
+
+      .hero-circle-title text {
+
+        font-size:
+          19px;
+
+      }
+
+
+      .hero-arch {
+
+        width:
+          70%;
+
+      }
+
+
+      .hero-description {
+
+        font-size:
+          11px;
+
+      }
+
+    }
+
+
+  </style>
+
+</head>
+
+
+
+<body>
 
 
   <!-- =====================================================
-       SOFT OVERLAY
-       배경을 불투명하고 빈티지하게
+       HERO
+       VINTAGE EDITORIAL PHOTOBOOK COVER
   ====================================================== -->
 
-  <div class="hero-background-overlay"></div>
-
-
-  <!-- =====================================================
-       MAIN PAPER CARD
-  ====================================================== -->
-
-  <div class="hero-paper">
+  <header class="hero-section">
 
 
     <!-- ===================================================
-         TOP NAVIGATION
+         BACKGROUND IMAGE
+
+         중앙 아치 사진과 동일한 이미지
+         화면 전체에 흐릿하게 표시
     ==================================================== -->
 
-    <div class="hero-paper-nav">
-
-      <span>atelier</span>
-
-      <span class="nav-dot">·</span>
-
-      <span>gallery</span>
-
-      <span class="nav-dot">·</span>
-
-      <span>flowers</span>
-
-      <span class="nav-dot">·</span>
-
-      <span>stories</span>
-
-      <span class="nav-dot">·</span>
-
-      <span>contact</span>
-
-    </div>
-
-
-    <!-- ===================================================
-         SMALL DECORATIVE STAR
-    ==================================================== -->
-
-    <div class="hero-star">
-      ✳
-    </div>
-
-
-    <!-- ===================================================
-         CIRCULAR TITLE
-         아치 사진 위에서 둥글게 돌아가는 글자
-    ==================================================== -->
-
-    <div class="hero-circle-title">
-
-      <svg
-        viewBox="0 0 500 250"
-        aria-hidden="true"
-      >
-
-        <defs>
-
-          <path
-            id="hero-title-arc"
-            d="
-              M 55 210
-              A 195 195 0 0 1 445 210
-            "
-          />
-
-        </defs>
-
-
-        <text>
-
-          <textPath
-            href="#hero-title-arc"
-            startOffset="50%"
-            text-anchor="middle"
-          >
-            LILY GLOGES · FLORIST ATELIER ·
-          </textPath>
-
-        </text>
-
-      </svg>
-
-    </div>
-
-
-    <!-- ===================================================
-         ARCH PHOTO
-    ==================================================== -->
-
-    <div class="hero-arch">
+    <div class="hero-background">
 
       <img
-        src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=90"
-        alt="Lily Gloges Florist"
+        src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1800&q=90"
+        alt=""
       >
 
     </div>
 
 
+
     <!-- ===================================================
-         NAME
+         BACKGROUND OVERLAY
+
+         배경 사진을 뽀얗고
+         반투명한 빈티지 느낌으로
     ==================================================== -->
 
-    <div class="hero-name">
+    <div class="hero-background-overlay"></div>
 
-      LILY GLOGES
+
+
+    <!-- ===================================================
+         MAIN PAPER
+    ==================================================== -->
+
+    <div class="hero-paper">
+
+
+      <!-- =================================================
+           TOP NAVIGATION
+      ================================================== -->
+
+      <div class="hero-paper-nav">
+
+        <span>
+          atelier
+        </span>
+
+        <span class="nav-dot">
+          ·
+        </span>
+
+        <span>
+          gallery
+        </span>
+
+        <span class="nav-dot">
+          ·
+        </span>
+
+        <span>
+          flowers
+        </span>
+
+        <span class="nav-dot">
+          ·
+        </span>
+
+        <span>
+          stories
+        </span>
+
+        <span class="nav-dot">
+          ·
+        </span>
+
+        <span>
+          contact
+        </span>
+
+      </div>
+
+
+
+      <!-- =================================================
+           DECORATIVE STAR
+      ================================================== -->
+
+      <div class="hero-star">
+        ✳
+      </div>
+
+
+
+      <!-- =================================================
+           CIRCULAR TITLE
+      ================================================== -->
+
+      <div class="hero-circle-title">
+
+        <svg
+          viewBox="0 0 500 250"
+          aria-hidden="true"
+        >
+
+          <defs>
+
+            <path
+              id="hero-title-arc"
+              d="
+                M 55 210
+                A 195 195 0 0 1 445 210
+              "
+            />
+
+          </defs>
+
+
+          <text>
+
+            <textPath
+              href="#hero-title-arc"
+              startOffset="50%"
+              text-anchor="middle"
+            >
+              LILY GLOGES · FLORIST ATELIER ·
+            </textPath>
+
+          </text>
+
+        </svg>
+
+      </div>
+
+
+
+      <!-- =================================================
+           ARCH PHOTO
+      ================================================== -->
+
+      <div class="hero-arch">
+
+        <img
+          src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=90"
+          alt="Lily Gloges Florist"
+        >
+
+      </div>
+
+
+
+      <!-- =================================================
+           NAME
+      ================================================== -->
+
+      <div class="hero-name">
+
+        LILY GLOGES
+
+      </div>
+
+
+
+      <!-- =================================================
+           DESCRIPTION
+      ================================================== -->
+
+      <p class="hero-description">
+
+        A quiet space where flowers,
+        <br>
+
+        light and everyday moments
+        <br>
+
+        become something to remember.
+
+      </p>
+
+
+
+      <!-- =================================================
+           HANDLE
+      ================================================== -->
+
+      <div class="hero-handle">
+
+        @lilygloges
+
+      </div>
+
 
     </div>
 
 
-    <!-- ===================================================
-         DESCRIPTION
-    ==================================================== -->
-
-    <p class="hero-description">
-
-      A quiet space where flowers,
-      <br>
-      light and everyday moments
-      <br>
-      become something to remember.
-
-    </p>
-
 
     <!-- ===================================================
-         BOTTOM HANDLE
+         OUTSIDE BOTTOM CAPTION
     ==================================================== -->
 
-    <div class="hero-handle">
+    <div class="hero-bottom-caption">
 
-      @lilygloges
+      <span class="caption-line"></span>
+
+      <span>
+        a little story about flowers
+      </span>
+
+      <span class="caption-line"></span>
 
     </div>
 
 
-  </div>
+  </header>
 
 
-  <!-- =====================================================
-       BOTTOM DECORATIVE LINE
-       종이 카드 아래로 살짝 보이는 문구
-  ====================================================== -->
+</body>
 
-  <div class="hero-bottom-caption">
-
-    <span class="caption-line"></span>
-
-    <span>
-      a little story about flowers
-    </span>
-
-    <span class="caption-line"></span>
-
-  </div>
-
-
-</header>
+</html>
