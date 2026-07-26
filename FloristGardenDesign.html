@@ -9,6 +9,15 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+  <!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+  rel="stylesheet"
+>
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -104,53 +113,361 @@
       transform: scale(1.035);
     }
 
+/* =========================================================
+   HERO — Lily Gloges Editorial Cover
+   대문만 수정
+========================================================= */
 
-    /* =========================================================
-       03. HERO
-       
-       세로로 긴 형태 + 위쪽에 살짝 하트 같은 곡선.
-       완전한 대칭 하트가 아니라 유기적으로 비대칭.
-    ========================================================= */
+.hero-section {
+  position: relative;
+  width: 100%;
+  background: #F7F5EF;
+  overflow: hidden;
+}
 
-    .hero-heart {
-     width: 100%;
-     height: 100%;
+/* Hero 내부 전체 */
 
-     border-radius:
-     48% 52% 45% 55%
-     /
-     30% 30% 70% 70%;
+.hero-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  min-height: 900px;
+  margin: 0 auto;
+  padding: 70px 7% 110px;
+}
 
-     transform: rotate(-1deg);
+/* =========================================================
+   HERO PHOTO
+========================================================= */
 
-     position: relative;
-   }
+.hero-photo-wrap {
+  position: relative;
+  width: 52%;
+  max-width: 560px;
+  height: 760px;
+  z-index: 2;
+}
 
-    /*
-      Hero 상단의 하트 느낌을 조금 더 살리기 위한
-      아주 은은한 내부 곡선.
-    */
+/* 사진 자체 */
 
-   .hero-heart::before {
-    content: "";
-    position: absolute;
-    z-index: 3;
+.hero-heart {
+  position: absolute;
+  inset: 0;
 
-    top: -5%;
-    left: 50%;
+  overflow: hidden;
 
-    width: 32%;
-    height: 18%;
+  background: #F1F0EA;
 
-    background: #E9E4D5;
+  border: 2px solid #9CA98A;
 
-    border-radius: 50%;
+  border-radius:
+    48% 52% 45% 55%
+    /
+    12% 13% 87% 88%;
 
-    transform: translateX(-50%);
+  transform: rotate(-1.2deg);
+}
 
-    pointer-events: none;
+/* 사진 */
+
+.hero-heart img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transform: scale(1.02);
+}
+
+/* =========================================================
+   HERO TITLE AREA
+========================================================= */
+
+.hero-title {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 48%;
+  top: 31%;
+
+  width: 50%;
+
+  color: #777777;
+}
+
+/* Lily */
+
+.hero-title-main {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(80px, 9vw, 145px);
+
+  font-weight: 400;
+
+  line-height: 0.72;
+
+  letter-spacing: -0.075em;
+
+  margin: 0;
+
+  color: #777777;
+}
+
+/* Gloges */
+
+.hero-title-sub {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(78px, 8.8vw, 140px);
+
+  font-weight: 400;
+
+  line-height: 0.82;
+
+  letter-spacing: -0.085em;
+
+  margin: 20px 0 0 -10px;
+
+  color: #777777;
+}
+
+/* florist */
+
+.hero-florist {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(30px, 3vw, 48px);
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  margin-top: 18px;
+
+  margin-left: 43%;
+
+  color: #777777;
+}
+
+/* =========================================================
+   PINK FLOWER DECORATION
+========================================================= */
+
+.hero-flower {
+  position: absolute;
+
+  z-index: 6;
+
+  right: 2%;
+  bottom: 8%;
+
+  width: clamp(110px, 13vw, 190px);
+  aspect-ratio: 1;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  transform: rotate(7deg);
+}
+
+.hero-flower img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+/* =========================================================
+   HERO DECORATIVE LINE
+   florist 옆에서 흐르는 가느다란 곡선
+========================================================= */
+
+.hero-line {
+  position: absolute;
+
+  width: 180px;
+  height: 130px;
+
+  right: 7%;
+  bottom: 12%;
+
+  border-bottom: 1px solid #858B7A;
+  border-right: 1px solid #858B7A;
+
+  border-radius: 0 0 70% 50%;
+
+  transform: rotate(-12deg);
+
+  opacity: 0.8;
+
+  z-index: 4;
+}
+
+/* =========================================================
+   HERO MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .hero-inner {
+    min-height: 760px;
+
+    padding:
+      50px
+      5%
+      90px;
   }
 
+  .hero-photo-wrap {
+    width: 58%;
+    height: 610px;
+  }
+
+  .hero-title {
+    left: 48%;
+    top: 29%;
+    width: 55%;
+  }
+
+  .hero-title-main {
+    font-size: clamp(62px, 10vw, 100px);
+  }
+
+  .hero-title-sub {
+    font-size: clamp(58px, 9.5vw, 95px);
+  }
+
+  .hero-florist {
+    font-size: 30px;
+    margin-left: 38%;
+  }
+
+  .hero-flower {
+    width: 120px;
+    right: 1%;
+    bottom: 7%;
+  }
+
+}
+
+
+@media (max-width: 640px) {
+
+  .hero-inner {
+    min-height: 820px;
+
+    padding:
+      30px
+      20px
+      70px;
+  }
+
+  /* 사진을 더 세로로 길게 */
+
+  .hero-photo-wrap {
+    width: 76%;
+    height: 610px;
+  }
+
+  /* 제목을 사진 오른쪽 위에 겹쳐 배치 */
+
+  .hero-title {
+    left: 42%;
+    top: 34%;
+    width: 58%;
+  }
+
+  .hero-title-main {
+    font-size: 64px;
+    line-height: 0.72;
+  }
+
+  .hero-title-sub {
+    font-size: 59px;
+    line-height: 0.78;
+
+    margin-left: -5px;
+  }
+
+  .hero-florist {
+    font-size: 25px;
+
+    margin-top: 12px;
+    margin-left: 38%;
+  }
+
+  .hero-flower {
+    width: 105px;
+
+    right: 1%;
+    bottom: 8%;
+  }
+
+  .hero-line {
+    width: 100px;
+    height: 90px;
+
+    right: 7%;
+    bottom: 13%;
+  }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .hero-inner {
+    min-height: 760px;
+
+    padding:
+      25px
+      15px
+      60px;
+  }
+
+  .hero-photo-wrap {
+    width: 78%;
+    height: 560px;
+  }
+
+  .hero-title {
+    left: 40%;
+    top: 34%;
+  }
+
+  .hero-title-main {
+    font-size: 53px;
+  }
+
+  .hero-title-sub {
+    font-size: 49px;
+  }
+
+  .hero-florist {
+    font-size: 21px;
+  }
+
+  .hero-flower {
+    width: 88px;
+  }
+
+}
+   
 
     /* =========================================================
        04. ABOUT ORGANIC SHAPES
@@ -570,110 +887,79 @@
   <main class="paper overflow-hidden">
 
 
-    <!-- =======================================================
-         01. HERO
-    ======================================================== -->
+  <!-- =======================================================
+     01. HERO
+     ONLY HERO MODIFIED
+======================================================== -->
 
-   <header
-  class="relative w-full px-4 md:px-8 pt-12 md:pt-20 pb-28 md:pb-36 bg-[#E9E4D5]"
->
+<header class="hero-section">
 
-      <div class="max-w-4xl mx-auto relative">
+  <div class="hero-inner">
 
-        <!-- HERO PHOTO -->
+    <!-- =================================================
+         HERO PHOTO
+    ================================================== -->
 
-        <div
-          class="relative w-[82%] sm:w-[68%] md:w-[58%] aspect-[3/4] max-h-[680px] mr-auto"
+    <div class="hero-photo-wrap">
+
+      <div class="hero-heart">
+
+        <!-- HERO IMAGE -->
+        <img
+          src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1200&q=90"
+          alt="Lily Gloges Florist"
         >
-
-          <div
-            class="organic-photo hero-heart absolute inset-0 border border-[#C2D1C5] shadow-sm"
-          >
-
-            <!-- IMAGE 01 : HERO -->
-            <img
-              src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1200&q=85"
-              alt="Lily Gloges Florist"
-            >
-
-          </div>
-
-        </div>
-
-
-        <!-- SMALL FLOWER STICKER -->
-
-        <div
-          class="absolute
-                 right-[2%]
-                 md:right-[8%]
-                 bottom-[18%]
-                 w-24
-                 md:w-36
-                 aspect-square
-                 rounded-full
-                 overflow-hidden
-                 rotate-12
-                 z-10
-                 shadow-sm"
-        >
-
-          <!-- IMAGE 02 : DECORATIVE FLOWER -->
-
-          <img
-            src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=85"
-            alt="Flower detail"
-            class="w-full h-full object-cover"
-          >
-
-        </div>
-
-
-        <!-- HERO TITLE -->
-
-        <div
-          class="relative z-20
-                 mt-5
-                 md:-mt-16
-                 ml-[5%]
-                 md:ml-[7%]"
-        >
-
-          <p
-            class="text-[10px]
-                   md:text-xs
-                   tracking-[0.28em]
-                   uppercase
-                   text-[#6B8573]
-                   mb-2"
-          >
-            florist atelier
-          </p>
-
-          <h1
-            class="font-serif
-                   italic
-                   font-normal
-                   text-5xl
-                   sm:text-6xl
-                   md:text-7xl
-                   lg:text-8xl
-                   leading-none
-                   tracking-tight
-                   text-[#2C3E35]"
-          >
-            Lily<br>
-            Gloges
-          </h1>
-
-        </div>
 
       </div>
 
-    </header>
+    </div>
 
 
+    <!-- =================================================
+         HERO TITLE
+    ================================================== -->
 
+    <div class="hero-title">
+
+      <h1 class="hero-title-main">
+        Lily
+      </h1>
+
+      <div class="hero-title-sub">
+        Gloges
+      </div>
+
+      <div class="hero-florist">
+        florist
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PINK FLOWER
+    ================================================== -->
+
+    <div class="hero-flower">
+
+      <img
+        src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=500&q=90"
+        alt="Pink flower"
+      >
+
+    </div>
+
+
+    <!-- =================================================
+         DECORATIVE CURVE
+    ================================================== -->
+
+    <div class="hero-line"></div>
+
+
+  </div>
+
+</header>
     <!-- =======================================================
          02. ABOUT ME
     ======================================================== -->
