@@ -981,6 +981,764 @@ body {
   }
 
 }
+/* =========================================================
+   PROGRAM / PHOTO TIMELINE
+   HERO 아래에 이어지는 5 PHOTO SECTION
+========================================================= */
+
+.program-section {
+
+  position: relative;
+
+  width: min(
+    1360px,
+    calc(100vw - 7vw)
+  );
+
+  margin: 0 auto;
+
+  padding:
+
+    95px
+
+    clamp(45px, 7vw, 130px)
+
+    110px;
+
+  background:
+
+    rgba(248, 244, 233, 0.97);
+
+  overflow: hidden;
+
+}
+
+
+/* =========================================================
+   PAPER TEXTURE
+========================================================= */
+
+.program-section::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.42;
+
+  background-image:
+
+    radial-gradient(
+      rgba(116, 101, 76, 0.07) 0.7px,
+      transparent 0.7px
+    );
+
+  background-size: 7px 7px;
+
+}
+
+
+/* =========================================================
+   PROGRAM INNER
+========================================================= */
+
+.program-inner {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1120px;
+
+  margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.program-title {
+
+  position: relative;
+
+  margin-bottom: 65px;
+
+  text-align: center;
+
+  font-family:
+
+    "Caveat",
+
+    "Segoe Print",
+
+    cursive;
+
+  font-size:
+
+    clamp(45px, 5.5vw, 82px);
+
+  font-weight: 400;
+
+  line-height: 0.9;
+
+  letter-spacing: -0.02em;
+
+  color: #594B3B;
+
+}
+
+
+/* =========================================================
+   TITLE UNDERLINE
+========================================================= */
+
+.program-title::after {
+
+  content: "";
+
+  display: block;
+
+  width: 100%;
+
+  height: 1px;
+
+  margin-top: 12px;
+
+  background:
+
+    rgba(
+      89,
+      75,
+      59,
+      0.6
+    );
+
+}
+
+
+/* =========================================================
+   TOP NOTE
+========================================================= */
+
+.program-note {
+
+  position: absolute;
+
+  top: 125px;
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  width: 300px;
+
+  text-align: center;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 15px;
+
+  line-height: 1.25;
+
+  letter-spacing: 0.03em;
+
+  color: #817563;
+
+}
+
+
+/* 작은 선 */
+
+.program-note::before {
+
+  content: "";
+
+  display: block;
+
+  width: 130px;
+
+  height: 1px;
+
+  margin:
+
+    0
+
+    auto
+
+    10px;
+
+  background:
+
+    rgba(
+      129,
+      117,
+      99,
+      0.5
+    );
+
+}
+
+
+/* =========================================================
+   PHOTO TIMELINE
+========================================================= */
+
+.program-timeline {
+
+  display: grid;
+
+  grid-template-columns:
+
+    1.05fr
+
+    0.88fr
+
+    1.35fr
+
+    0.88fr
+
+    1.05fr;
+
+  align-items: start;
+
+  column-gap: 24px;
+
+}
+
+
+/* =========================================================
+   PHOTO ITEM
+========================================================= */
+
+.program-item {
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+
+/* =========================================================
+   TIME
+========================================================= */
+
+.program-time {
+
+  position: relative;
+
+  z-index: 5;
+
+  margin-bottom: 10px;
+
+  font-family:
+
+    "Caveat",
+
+    "Segoe Print",
+
+    cursive;
+
+  font-size:
+
+    clamp(25px, 2.4vw, 38px);
+
+  line-height: 1;
+
+  color: #594B3B;
+
+}
+
+
+/* =========================================================
+   PHOTO FRAME
+========================================================= */
+
+.program-photo {
+
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #D9D0BD;
+
+  border-radius: 9px;
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.program-photo img {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  filter:
+
+    saturate(0.72)
+
+    brightness(1.03)
+
+    contrast(0.95);
+
+  transition:
+
+    transform 0.8s ease;
+
+}
+
+
+.program-item:hover
+.program-photo img {
+
+  transform: scale(1.035);
+
+}
+
+
+/* =========================================================
+   PHOTO 1
+========================================================= */
+
+.program-item:nth-child(1) {
+
+  margin-top: 0;
+
+}
+
+
+.program-item:nth-child(1)
+.program-photo {
+
+  aspect-ratio: 0.72;
+
+}
+
+
+/* =========================================================
+   PHOTO 2
+========================================================= */
+
+.program-item:nth-child(2) {
+
+  margin-top: 105px;
+
+}
+
+
+.program-item:nth-child(2)
+.program-photo {
+
+  aspect-ratio: 0.72;
+
+}
+
+
+/* =========================================================
+   PHOTO 3
+   중앙 가장 큰 사진
+========================================================= */
+
+.program-item:nth-child(3) {
+
+  margin-top: 30px;
+
+}
+
+
+.program-item:nth-child(3)
+.program-photo {
+
+  aspect-ratio: 0.72;
+
+}
+
+
+/* =========================================================
+   PHOTO 4
+========================================================= */
+
+.program-item:nth-child(4) {
+
+  margin-top: 105px;
+
+}
+
+
+.program-item:nth-child(4)
+.program-photo {
+
+  aspect-ratio: 0.72;
+
+}
+
+
+/* =========================================================
+   PHOTO 5
+========================================================= */
+
+.program-item:nth-child(5) {
+
+  margin-top: 0;
+
+}
+
+
+.program-item:nth-child(5)
+.program-photo {
+
+  aspect-ratio: 0.72;
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.program-description {
+
+  margin-top: 14px;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size: 14px;
+
+  line-height: 1.35;
+
+  letter-spacing: 0.015em;
+
+  color: #817563;
+
+}
+
+
+/* =========================================================
+   CENTER BOTTOM MESSAGE
+========================================================= */
+
+.program-bottom-message {
+
+  margin-top: 55px;
+
+  text-align: center;
+
+  font-family:
+
+    "Cormorant Garamond",
+
+    Georgia,
+
+    serif;
+
+  font-size:
+
+    clamp(18px, 2vw, 27px);
+
+  line-height: 1.2;
+
+  letter-spacing: 0.025em;
+
+  color: #716451;
+
+}
+
+
+/* =========================================================
+   DECORATIVE LINE
+========================================================= */
+
+.program-bottom-message::before {
+
+  content: "";
+
+  display: block;
+
+  width: 95px;
+
+  height: 1px;
+
+  margin:
+
+    0
+
+    auto
+
+    15px;
+
+  background:
+
+    rgba(
+      113,
+      100,
+      81,
+      0.45
+    );
+
+}
+
+
+/* =========================================================
+   BOTTOM SMALL TEXT
+========================================================= */
+
+.program-footer-note {
+
+  margin-top: 15px;
+
+  text-align: center;
+
+  font-family:
+
+    "Caveat",
+
+    "Segoe Print",
+
+    cursive;
+
+  font-size: 24px;
+
+  color: #806E59;
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .program-section {
+
+    width: 94vw;
+
+    padding:
+
+      75px
+
+      5vw
+
+      90px;
+
+  }
+
+
+  .program-title {
+
+    margin-bottom: 55px;
+
+  }
+
+
+  .program-note {
+
+    top: 105px;
+
+    font-size: 13px;
+
+  }
+
+
+  .program-timeline {
+
+    column-gap: 15px;
+
+  }
+
+
+  .program-item:nth-child(2),
+  .program-item:nth-child(4) {
+
+    margin-top: 75px;
+
+  }
+
+
+  .program-description {
+
+    font-size: 12px;
+
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .program-section {
+
+    width: 96vw;
+
+    padding:
+
+      65px
+
+      22px
+
+      80px;
+
+  }
+
+
+  .program-title {
+
+    margin-bottom: 90px;
+
+    font-size: 48px;
+
+  }
+
+
+  .program-note {
+
+    top: 145px;
+
+    width: 230px;
+
+    font-size: 12px;
+
+  }
+
+
+  .program-note::before {
+
+    width: 80px;
+
+  }
+
+
+  .program-timeline {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 50px;
+
+  }
+
+
+  .program-item {
+
+    width: 72%;
+
+    margin-top: 0 !important;
+
+  }
+
+
+  .program-item:nth-child(3) {
+
+    width: 86%;
+
+  }
+
+
+  .program-time {
+
+    margin-bottom: 8px;
+
+    font-size: 27px;
+
+  }
+
+
+  .program-description {
+
+    margin-top: 10px;
+
+    font-size: 13px;
+
+  }
+
+
+  .program-bottom-message {
+
+    margin-top: 55px;
+
+    font-size: 19px;
+
+  }
+
+
+  .program-footer-note {
+
+    font-size: 21px;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .program-section {
+
+    padding-left: 17px;
+
+    padding-right: 17px;
+
+  }
+
+
+  .program-item {
+
+    width: 78%;
+
+  }
+
+
+  .program-item:nth-child(3) {
+
+    width: 90%;
+
+  }
+
+}
 
 </style>
 
@@ -1161,7 +1919,238 @@ body {
 
 </header>
 
+<!-- =========================================================
+     PROGRAM / PHOTO TIMELINE
+     HERO 바로 아래
+========================================================= -->
 
+<section class="program-section">
+
+  <div class="program-inner">
+
+
+    <!-- =====================================================
+         SECTION TITLE
+    ====================================================== -->
+
+    <h2 class="program-title">
+
+      Florist Master Class
+
+    </h2>
+
+
+    <!-- =====================================================
+         TOP CENTER NOTE
+    ====================================================== -->
+
+    <div class="program-note">
+
+      ALL MATERIALS INCLUDED
+      <br>
+      IN THE PRICE
+
+    </div>
+
+
+    <!-- =====================================================
+         FIVE PHOTO TIMELINE
+    ====================================================== -->
+
+    <div class="program-timeline">
+
+
+      <!-- ===================================================
+           PHOTO 01
+      ==================================================== -->
+
+      <article class="program-item">
+
+        <div class="program-time">
+          10:00
+        </div>
+
+        <div class="program-photo">
+
+          <img
+            src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=90"
+            alt="Flowers and vase"
+          >
+
+        </div>
+
+        <p class="program-description">
+
+          Getting to know
+          <br>
+          the participants
+          <br>
+          and materials
+
+        </p>
+
+      </article>
+
+
+      <!-- ===================================================
+           PHOTO 02
+      ==================================================== -->
+
+      <article class="program-item">
+
+        <div class="program-time">
+          10:30
+        </div>
+
+        <div class="program-photo">
+
+          <img
+            src="https://images.unsplash.com/photo-1523691509543-c55fb32e5cee?auto=format&fit=crop&w=900&q=90"
+            alt="Florist arrangement"
+          >
+
+        </div>
+
+        <p class="program-description">
+
+          Introduction to
+          <br>
+          basic flower forms,
+          <br>
+          textures and techniques
+
+        </p>
+
+      </article>
+
+
+      <!-- ===================================================
+           PHOTO 03
+           CENTER / LARGEST
+      ==================================================== -->
+
+      <article class="program-item">
+
+        <div class="program-time">
+          11:30
+        </div>
+
+        <div class="program-photo">
+
+          <img
+            src="https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=1000&q=90"
+            alt="Florist workshop"
+          >
+
+        </div>
+
+        <p class="program-description">
+
+          Hands-on practice
+          <br>
+          and creation
+          <br>
+          of your own piece
+
+        </p>
+
+      </article>
+
+
+      <!-- ===================================================
+           PHOTO 04
+      ==================================================== -->
+
+      <article class="program-item">
+
+        <div class="program-time">
+          12:00
+        </div>
+
+        <div class="program-photo">
+
+          <img
+            src="https://images.unsplash.com/photo-1455582916367-25f75bfc6710?auto=format&fit=crop&w=900&q=90"
+            alt="Flower arrangement"
+          >
+
+        </div>
+
+        <p class="program-description">
+
+          Practice and
+          <br>
+          finishing
+          <br>
+          your own arrangement
+
+        </p>
+
+      </article>
+
+
+      <!-- ===================================================
+           PHOTO 05
+      ==================================================== -->
+
+      <article class="program-item">
+
+        <div class="program-time">
+          13:00
+        </div>
+
+        <div class="program-photo">
+
+          <img
+            src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=90"
+            alt="Finished flower arrangement"
+          >
+
+        </div>
+
+        <p class="program-description">
+
+          Finishing touches
+          <br>
+          and taking home
+          <br>
+          your creation
+
+        </p>
+
+      </article>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM MESSAGE
+    ====================================================== -->
+
+    <div class="program-bottom-message">
+
+      You will take your own
+      <br>
+      finished creation home.
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM HANDWRITTEN NOTE
+    ====================================================== -->
+
+    <div class="program-footer-note">
+
+      made with flowers & love
+
+    </div>
+
+
+  </div>
+
+</section>
 </body>
 
 </html>
