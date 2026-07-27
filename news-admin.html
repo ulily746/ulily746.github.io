@@ -6408,164 +6408,135 @@ async function saveEntry(){
    TOP-LEVEL FIELD로 저장
 ====================================== */
 
-if(
+if (
 
-design==="VintageFlowerDesign" ||
+    design === "VintageFlowerDesign" ||
 
-design==="HomeBakingDesign" ||
+    design === "HomeBakingDesign" ||
 
-design==="MinimalPortfolioDesign" ||
+    design === "MinimalPortfolioDesign" ||
 
-design==="ModernMaturityDesign"
+    design === "ModernMaturityDesign"
 
-){
+) {
 
-Object.assign(
-
-entryData,
-
-designContent
-
-);
+    Object.assign(
+        entryData,
+        designContent
+    );
 
 }
-
-else{
-
-entryData.content=designContent;
-
-}
-
 
 /* ======================================
    FILM ARCHIVE
    기존 content 구조 유지
 ====================================== */
 
-else{
+else {
 
-    entryData.content =
-        designContent;
+    entryData.content = designContent;
 
 }
 
 
-    try{
+/* ======================================
+   SAVE TO FIREBASE
+====================================== */
 
+try {
 
-        /*
-            EDIT
-        */
+    /*
+        EDIT
+    */
 
-        if(editingId){
+    if (editingId) {
 
-            const entryRef =
-                window.firebaseDoc(
+        const entryRef =
+            window.firebaseDoc(
 
-                    window.firebaseDB,
+                window.firebaseDB,
 
-                    'news',
+                "news",
 
-                    editingId
-
-                );
-
-
-            await window.firebaseUpdateDoc(
-
-                entryRef,
-
-                {
-
-                    ...entryData,
-
-                    updatedAt:
-
-                        window.firebaseServerTimestamp()
-
-                }
+                editingId
 
             );
 
+        await window.firebaseUpdateDoc(
 
-            alert(
+            entryRef,
 
-                'Entry updated successfully!'
+            {
 
-            );
+                ...entryData,
 
-        }
+                updatedAt:
+                    window.firebaseServerTimestamp()
 
-
-        /*
-            NEW
-        */
-
-        else{
-
-            await window.firebaseAddDoc(
-
-                window.firebaseCollection(
-
-                    window.firebaseDB,
-
-                    'news'
-
-                ),
-
-                {
-
-                    ...entryData,
-
-                    createdAt:
-
-                        window.firebaseServerTimestamp()
-
-                }
-
-            );
-
-
-            alert(
-
-                'Entry saved successfully!'
-
-            );
-
-        }
-
-
-
-        closeModal();
-
-        resetForm();
-
-        await loadNews();
-
-
-    }
-
-    catch(error){
-
-        console.error(
-
-            'Firebase save error:',
-
-            error
+            }
 
         );
-
 
         alert(
-
-            'Failed to save entry. Please check the browser console.'
-
+            "Entry updated successfully!"
         );
 
     }
 
+    /*
+        NEW
+    */
+
+    else {
+
+        await window.firebaseAddDoc(
+
+            window.firebaseCollection(
+
+                window.firebaseDB,
+
+                "news"
+
+            ),
+
+            {
+
+                ...entryData,
+
+                createdAt:
+                    window.firebaseServerTimestamp()
+
+            }
+
+        );
+
+        alert(
+            "Entry saved successfully!"
+        );
+
+    }
+
+
+    closeModal();
+
+    resetForm();
+
+    await loadNews();
+
 }
 
+catch (error) {
+
+    console.error(
+        "Firebase save error:",
+        error
+    );
+
+    alert(
+        "Failed to save entry. Please check the browser console."
+    );
+
+}
 
 /* ======================================
    DELETE ENTRY
