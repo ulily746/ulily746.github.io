@@ -56,10 +56,11 @@ INITIALIZE ADMIN
 
 function initializeAdmin() {
 
-    console.log(
-        "Firebase DB ready:",
-        !!db
-    );
+    console.log("================================");
+    console.log("NEW NEWS-ADMIN.JS IS RUNNING");
+    console.log("DB OBJECT:", db);
+    console.log("DB EXISTS:", !!db);
+    console.log("================================");
 
     if (!db) {
 
@@ -77,15 +78,10 @@ function initializeAdmin() {
     }
 
     setupFilters();
-
     setupDesignSelector();
-
     setupModalEvents();
-
     setupNewEntryButtons();
-
     setupSaveButton();
-
     setupCloseButtons();
 
     loadNewsEntries();
@@ -93,7 +89,6 @@ function initializeAdmin() {
     console.log(
         "News Admin initialized successfully."
     );
-
 }
 /* =========================================================
 FIREBASE ERROR
