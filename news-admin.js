@@ -25,72 +25,16 @@ let allEntries = [];
 let currentFilter = "ALL";
 let selectedDesign = "FilmArchiveDesign";
 let isEditing = false;
-let firebaseReady = false;
 
-/* =========================================================
-WAIT FOR FIREBASE
-========================================================= */
-
-function waitForFirebase() {
-return new Promise((resolve, reject) => {
-let attempts = 0;
-const maxAttempts = 100;
-
-
-    function check() {
-        if (window.firebaseDB) {
-            db = window.firebaseDB;
-            firebaseReady = true;
-            resolve(db);
-            return;
-        }
-
-        attempts++;
-
-        if (attempts >= maxAttempts) {
-            reject(
-                new Error(
-                    "Firebase Database could not be initialized."
-                )
-            );
-            return;
-        }
-
-        setTimeout(check, 100);
-    }
-
-    check();
-});
-
-
-}
 
 /* =========================================================
 DOM READY
 ========================================================= */
-
-document.addEventListener("DOMContentLoaded", async () => {
-console.log("News Admin initializing...");
-
-try {
-    await waitForFirebase();
-
-    console.log("Firebase database ready.");
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("News Admin initializing...");
 
     initializeAdmin();
-
-} catch (error) {
-    console.error(
-        "Firebase initialization error:",
-        error
-    );
-
-    showFirebaseError(error);
-}
-
-
 });
-
 /* =========================================================
 INITIALIZE ADMIN
 ========================================================= */
