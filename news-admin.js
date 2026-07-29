@@ -31,8 +31,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// window.db 의존성을 없애기 위해 아래처럼 강제로 박아둘 수도 있습니다.
-window.db = db;
+
 /* =========================================================
 GLOBAL STATE
 ========================================================= */
@@ -57,15 +56,21 @@ INITIALIZE ADMIN
 
 function initializeAdmin() {
 
-    // 1. 앞서 설정한 window.db와 정확히 일치하도록 수정
-    db = window.db || null;
-
-    // 2. 만약 db가 아직 없다면 경고를 띄우되, 강제로 return 시키지 않고 대기하거나 안전하게 처리
     if (!db) {
-        console.warn("Database is loading or not ready yet, but proceeding...");
+
+        console.error(
+            "Firebase Firestore could not be initialized."
+        );
+
+        showFirebaseError(
+            new Error(
+                "Firestore database is not available."
+            )
+        );
+
+        return;
     }
 
-    // 3. 정상적으로 나머지 초기화 함수들이 실행되도록 수정
     setupFilters();
 
     setupDesignSelector();
