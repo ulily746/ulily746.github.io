@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="ko">
 
 <head>
@@ -9,136 +9,23 @@
 
 <title>News Admin — Personal Archive</title>
 
+<!-- ======================================
+     TAILWIND
+====================================== -->
+
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ======================================
+     GOOGLE FONTS
+====================================== -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
-
-
-<!-- ======================================
-     FIREBASE
-====================================== -->
-
-<script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    getDoc,
-    doc,
-    updateDoc,
-    deleteDoc,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-/* ======================================
-   FIREBASE CONFIG
-====================================== */
-
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
-
-    authDomain:
-    "yuri-research-portfolio.firebaseapp.com",
-
-    projectId:
-    "yuri-research-portfolio",
-
-    storageBucket:
-    "yuri-research-portfolio.firebasestorage.app",
-
-    messagingSenderId:
-    "231317507996",
-
-    appId:
-    "1:231317507996:web:9773282c138706d886c259",
-
-    measurementId:
-    "G-57VHW2454E"
-
-};
-
-
-/* ======================================
-   INITIALIZE FIREBASE
-====================================== */
-
-const app =
-    initializeApp(firebaseConfig);
-
-
-/* ======================================
-   FIRESTORE
-====================================== */
-
-const db =
-    getFirestore(app);
-
-
-/* ======================================
-   GLOBAL FIREBASE ACCESS
-====================================== */
-
-window.firebaseDB = db;
-
-window.firebaseCollection =
-    collection;
-
-window.firebaseAddDoc =
-    addDoc;
-
-window.firebaseGetDocs =
-    getDocs;
-
-window.firebaseGetDoc =
-    getDoc;
-
-window.firebaseDoc =
-    doc;
-
-window.firebaseUpdateDoc =
-    updateDoc;
-
-window.firebaseDeleteDoc =
-    deleteDoc;
-
-window.firebaseServerTimestamp =
-    serverTimestamp;
-
-
-/* ======================================
-   FIREBASE READY
-====================================== */
-
-console.log(
-    "Firebase connected successfully."
-);
-
-
-/*
-    Firebase가 연결되면
-    News Admin 데이터 로드
-*/
-
-if(window.loadNews){
-
-    window.loadNews();
-
-}
-
-</script>
-
+<link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap"
+    rel="stylesheet"
+>
 
 <style>
 
@@ -148,6 +35,10 @@ if(window.loadNews){
 
 *{
     box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -163,12 +54,15 @@ body{
 }
 
 
+/* ======================================
+   FONT
+====================================== */
+
 .font-serif{
 
     font-family:'Cormorant Garamond',serif;
 
 }
-
 
 .font-hand{
 
@@ -196,6 +90,8 @@ body{
     border-right:1px solid #D9D3C8;
 
     padding:35px 25px;
+
+    z-index:50;
 
 }
 
@@ -453,8 +349,7 @@ body{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
 
     gap:18px;
 
@@ -549,6 +444,15 @@ body{
 
     cursor:pointer;
 
+    transition:.2s;
+
+}
+
+
+.filter:hover{
+
+    background:#EDE9E1;
+
 }
 
 
@@ -577,6 +481,8 @@ body{
 
     cursor:pointer;
 
+    transition:.2s;
+
 }
 
 
@@ -597,6 +503,8 @@ body{
 
     border:1px solid #DDD8CF;
 
+    overflow:hidden;
+
 }
 
 
@@ -606,9 +514,9 @@ body{
 
     grid-template-columns:
         90px
-        2fr
+        minmax(180px,2fr)
         120px
-        120px
+        140px
         100px
         100px;
 
@@ -633,9 +541,9 @@ body{
 
     grid-template-columns:
         90px
-        2fr
+        minmax(180px,2fr)
         120px
-        120px
+        140px
         100px
         100px;
 
@@ -673,6 +581,8 @@ body{
     object-fit:cover;
 
     background:#E8E3D9;
+
+    display:block;
 
 }
 
@@ -757,6 +667,8 @@ body{
     cursor:pointer;
 
     color:#7E837C;
+
+    transition:.2s;
 
 }
 
@@ -855,8 +767,7 @@ body{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(5,1fr);
+    grid-template-columns:repeat(5,1fr);
 
     gap:15px;
 
@@ -879,6 +790,8 @@ body{
 .design-card:hover{
 
     transform:translateY(-4px);
+
+    border-color:#C7C1B6;
 
 }
 
@@ -992,6 +905,8 @@ body{
 
     justify-content:center;
 
+    padding:20px;
+
 }
 
 
@@ -1004,15 +919,17 @@ body{
 
 .modal-box{
 
-    width:min(700px,90vw);
+    width:min(760px,95vw);
 
-    max-height:90vh;
+    max-height:92vh;
 
-    overflow:auto;
+    overflow-y:auto;
 
     background:#F9F7F2;
 
     padding:40px;
+
+    box-shadow:0 20px 60px rgba(30,35,30,.15);
 
 }
 
@@ -1022,6 +939,8 @@ body{
     display:flex;
 
     justify-content:space-between;
+
+    align-items:flex-start;
 
     margin-bottom:30px;
 
@@ -1041,10 +960,25 @@ body{
 
     cursor:pointer;
 
-    font-size:20px;
+    font-size:24px;
+
+    line-height:1;
+
+    color:#777D76;
 
 }
 
+
+.close:hover{
+
+    color:#303830;
+
+}
+
+
+/* ======================================
+   FORM
+====================================== */
 
 .form-group{
 
@@ -1084,6 +1018,23 @@ select{
 
     font-size:12px;
 
+    color:#353B38;
+
+    outline:none;
+
+    transition:.2s;
+
+}
+
+
+input:focus,
+textarea:focus,
+select:focus{
+
+    border-color:#9AA394;
+
+    box-shadow:0 0 0 2px rgba(154,163,148,.12);
+
 }
 
 
@@ -1117,6 +1068,52 @@ textarea{
 
     margin-top:30px;
 
+    padding-top:25px;
+
+    border-top:1px solid #DDD8CF;
+
+}
+
+
+.cancel{
+
+    padding:12px 20px;
+
+    border:1px solid #D5D0C7;
+
+    background:none;
+
+    cursor:pointer;
+
+}
+
+
+.cancel:hover{
+
+    background:#EFEBE3;
+
+}
+
+
+.save{
+
+    padding:12px 25px;
+
+    border:none;
+
+    background:#4D594F;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+.save:hover{
+
+    background:#3D493F;
+
 }
 
 
@@ -1125,6 +1122,8 @@ textarea{
 ====================================== */
 
 .design-fields{
+
+    display:none;
 
     margin-top:30px;
 
@@ -1211,8 +1210,10 @@ textarea{
 
 .memory-item input,
 .memory-item textarea,
+.memory-item select,
 .film-item input,
-.film-item textarea{
+.film-item textarea,
+.film-item select{
 
     margin-bottom:10px;
 
@@ -1227,59 +1228,44 @@ textarea{
 }
 
 
-.cancel{
-
-    padding:12px 20px;
-
-    border:1px solid #D5D0C7;
-
-    background:none;
-
-    cursor:pointer;
-
-}
-
-
-.save{
-
-    padding:12px 25px;
-
-    border:none;
-
-    background:#4D594F;
-
-    color:white;
-
-    cursor:pointer;
-
-}
-
-
-.save:hover{
-
-    background:#3D493F;
-
-}
-
-
 /* ======================================
    RESPONSIVE
 ====================================== */
+
+@media(max-width:1100px){
+
+    .design-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
 
 @media(max-width:1000px){
 
     .stats{
 
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
 
     }
 
+}
 
-    .design-grid{
 
-        grid-template-columns:
-            repeat(3,1fr);
+@media(max-width:850px){
+
+    .news-list{
+
+        overflow-x:auto;
+
+    }
+
+    .news-header,
+    .news-row{
+
+        min-width:760px;
 
     }
 
@@ -1360,6 +1346,8 @@ textarea{
 
     .news-row{
 
+        min-width:0;
+
         grid-template-columns:70px 1fr;
 
         gap:15px;
@@ -1376,8 +1364,21 @@ textarea{
 
     .design-grid{
 
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+
+    .modal{
+
+        padding:10px;
+
+    }
+
+
+    .modal-box{
+
+        padding:25px 20px;
 
     }
 
@@ -1392,15 +1393,27 @@ textarea{
 
     }
 
+
+    .design-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .topbar-right .status{
+
+        display:none;
+
+    }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <!-- ======================================
      SIDEBAR
@@ -1408,118 +1421,84 @@ textarea{
 
 <aside class="sidebar">
 
+
 <div class="logo">
-
-Yuri
-
+    Yuri
 </div>
 
 <div class="logo-sub">
-
-PERSONAL ARCHIVE
-
+    PERSONAL ARCHIVE
 </div>
 
 
 <nav class="nav">
 
-<div class="nav-label">
-
-CONTENT
-
-</div>
+    <div class="nav-label">
+        CONTENT
+    </div>
 
 
-<div class="nav-item active">
-
-<div class="nav-icon"></div>
-
-<span>Dashboard</span>
-
-</div>
+    <div class="nav-item active">
+        <div class="nav-icon"></div>
+        <span>Dashboard</span>
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>All News</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>All News</span>
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Published</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>Published</span>
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Drafts</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>Drafts</span>
+    </div>
 
 
-<div class="nav-label mt-10">
-
-ARCHIVE
-
-</div>
+    <div class="nav-label mt-10">
+        ARCHIVE
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Research</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>Research</span>
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Academic</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>Academic</span>
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Travel</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>Travel</span>
+    </div>
 
 
-<div class="nav-item">
-
-<div class="nav-icon"></div>
-
-<span>Life</span>
-
-</div>
+    <div class="nav-item">
+        <div class="nav-icon"></div>
+        <span>Life</span>
+    </div>
 
 </nav>
 
 
 <div class="admin-footer">
-
-Archive Admin · 2026
-
+    Archive Admin · 2026
 </div>
 
+
 </aside>
-
-
 
 <!-- ======================================
      MAIN
@@ -1527,38 +1506,30 @@ Archive Admin · 2026
 
 <main class="main">
 
-
 <header class="topbar">
 
+
 <div class="page-title">
-
-News Admin
-
+    News Admin
 </div>
 
 
 <div class="topbar-right">
 
-<div class="status">
+    <div class="status">
+        ● SYSTEM ONLINE
+    </div>
 
-● SYSTEM ONLINE
-
-</div>
-
-<div class="avatar">
-
-A
+    <div class="avatar">
+        A
+    </div>
 
 </div>
 
-</div>
 
 </header>
 
-
-
 <div class="content">
-
 
 <!-- ======================================
      WELCOME
@@ -1566,21 +1537,17 @@ A
 
 <div class="welcome">
 
+
 <small>
-
-PERSONAL ARCHIVE / CONTENT MANAGEMENT
-
+    PERSONAL ARCHIVE / CONTENT MANAGEMENT
 </small>
 
 <h1>
-
-Good evening, Yuri.
-
+    Good evening, Yuri.
 </h1>
 
+
 </div>
-
-
 
 <!-- ======================================
      STATS
@@ -1588,114 +1555,91 @@ Good evening, Yuri.
 
 <div class="stats">
 
-
 <div class="stat">
 
+
 <div class="stat-label">
-
-TOTAL POSTS
-
+    TOTAL POSTS
 </div>
 
 <div
-class="stat-number"
-id="totalPosts"
+    class="stat-number"
+    id="totalPosts"
 >
-
-0
-
+    0
 </div>
 
 <div class="stat-description">
-
-All archive entries
-
+    All archive entries
 </div>
 
-</div>
 
+</div>
 
 <div class="stat">
 
+
 <div class="stat-label">
-
-PUBLISHED
-
+    PUBLISHED
 </div>
 
 <div
-class="stat-number"
-id="publishedPosts"
+    class="stat-number"
+    id="publishedPosts"
 >
-
-0
-
+    0
 </div>
 
 <div class="stat-description">
-
-Currently visible
-
+    Currently visible
 </div>
 
-</div>
 
+</div>
 
 <div class="stat">
 
+
 <div class="stat-label">
-
-DRAFTS
-
+    DRAFTS
 </div>
 
 <div
-class="stat-number"
-id="draftPosts"
+    class="stat-number"
+    id="draftPosts"
 >
-
-0
-
+    0
 </div>
 
 <div class="stat-description">
-
-Waiting for publication
-
+    Waiting for publication
 </div>
 
-</div>
 
+</div>
 
 <div class="stat">
 
+
 <div class="stat-label">
-
-THIS MONTH
-
+    THIS MONTH
 </div>
 
 <div
-class="stat-number"
-id="thisMonthPosts"
+    class="stat-number"
+    id="thisMonthPosts"
 >
-
-00
-
+    00
 </div>
 
 <div class="stat-description">
-
-New entries
-
-</div>
-
+    New entries
 </div>
 
 
 </div>
 
-
+</div>
 
 <!-- ======================================
      NEWS TOOLBAR
@@ -1703,88 +1647,107 @@ New entries
 
 <div class="toolbar">
 
-
 <div class="filters">
 
 <button
 class="filter active"
 data-filter="ALL"
+
 >
 
+
 ALL
+
 
 </button>
 
 <button
 class="filter"
 data-filter="Research"
+
 >
 
+
 RESEARCH
+
 
 </button>
 
 <button
 class="filter"
 data-filter="Academic"
+
 >
 
+
 ACADEMIC
+
 
 </button>
 
 <button
 class="filter"
 data-filter="Travel"
+
 >
 
+
 TRAVEL
+
 
 </button>
 
 <button
 class="filter"
 data-filter="Life"
+
 >
 
+
 LIFE
+
 
 </button>
 
 <button
 class="filter"
 data-filter="Published"
+
 >
 
+
 PUBLISHED
+
 
 </button>
 
 <button
 class="filter"
 data-filter="Draft"
+
 >
 
+
 DRAFTS
+
 
 </button>
 
 </div>
-
 
 <button
 class="add-button"
 onclick="openNewModal()"
+
 >
+
 
 + NEW ENTRY
 
+
 </button>
 
-
 </div>
-
-
 
 <!-- ======================================
      NEWS LIST
@@ -1793,6 +1756,7 @@ onclick="openNewModal()"
 <div class="news-list">
 
 <div class="news-header">
+
 
 <div>IMAGE</div>
 
@@ -1806,24 +1770,19 @@ onclick="openNewModal()"
 
 <div>ACTION</div>
 
+
 </div>
 
+<div id="newsList">
 
-<div
-id="newsList"
->
 
 <div class="loading-state">
-
-LOADING ARCHIVE...
-
+    LOADING ARCHIVE...
 </div>
 
 </div>
 
 </div>
-
-
 
 <!-- ======================================
      DESIGN SELECTOR
@@ -1832,1383 +1791,737 @@ LOADING ARCHIVE...
 <section class="design-panel">
 
 <h2 class="section-title">
-Archive Designs
+    Archive Designs
 </h2>
 
 <div class="design-grid">
 
-    <!-- Design 01 -->
-    <div
+<!-- DESIGN 01 -->
+
+<div
     class="design-card"
     onclick="selectDesign('FilmArchiveDesign')"
-    >
+>
 
-        <div class="design-preview design-1">
-            Design 01
-        </div>
 
-        <div class="design-info">
+<div class="design-preview design-1">
+    Design 01
+</div>
 
-            <div class="design-name">
-                Film Archive
-            </div>
+<div class="design-info">
 
-            <div class="design-type">
-                Film / Memory Archive
-            </div>
-
-        </div>
-
+    <div class="design-name">
+        Film Archive
     </div>
 
-
-    <!-- Design 02 -->
-    <div
-    class="design-card"
-    onclick="selectDesign('VintageFlowerDesign')"
-    >
-
-        <div class="design-preview design-2">
-            Design 02
-        </div>
-
-        <div class="design-info">
-
-            <div class="design-name">
-                Vintage Flower
-            </div>
-
-            <div class="design-type">
-                Vintage Flower Archive
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Design 03 -->
-    <div
-    class="design-card"
-    onclick="selectDesign('HomeBakingDesign')"
-    >
-
-        <div class="design-preview design-3">
-            Design 03
-        </div>
-
-        <div class="design-info">
-
-            <div class="design-name">
-                Home Baking
-            </div>
-
-            <div class="design-type">
-                Baking / Dessert
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Design 04 -->
-    <div
-    class="design-card"
-    onclick="selectDesign('MInimalPortfolio')"
-    >
-
-        <div class="design-preview design-4">
-            Design 04
-        </div>
-
-        <div class="design-info">
-
-            <div class="design-name">
-                Minimal Portfolio
-            </div>
-
-            <div class="design-type">
-                Life / Travel
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Design 05 -->
-    <div
-    class="design-card"
-    onclick="selectDesign('ModernMaturityDesign')"
-    >
-
-        <div class="design-preview design-5">
-            Design 05
-        </div>
-
-        <div class="design-info">
-
-            <div class="design-name">
-                Modern Maturity
-            </div>
-
-            <div class="design-type">
-                Academic / Research
-            </div>
-
-        </div>
-
+    <div class="design-type">
+        Film / Memory Archive
     </div>
 
 </div>
 
-</section>
 
+</div>
+
+<!-- DESIGN 02 -->
+
+<div
+    class="design-card"
+    onclick="selectDesign('VintageFlowerDesign')"
+>
+
+
+<div class="design-preview design-2">
+    Design 02
+</div>
+
+<div class="design-info">
+
+    <div class="design-name">
+        Vintage Flower
+    </div>
+
+    <div class="design-type">
+        Vintage Flower Archive
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- DESIGN 03 -->
+
+<div
+    class="design-card"
+    onclick="selectDesign('HomeBakingDesign')"
+>
+
+
+<div class="design-preview design-3">
+    Design 03
+</div>
+
+<div class="design-info">
+
+    <div class="design-name">
+        Home Baking
+    </div>
+
+    <div class="design-type">
+        Baking / Dessert
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- DESIGN 04 -->
+
+<div
+    class="design-card"
+    onclick="selectDesign('MInimalPortfolio')"
+>
+
+
+<div class="design-preview design-4">
+    Design 04
+</div>
+
+<div class="design-info">
+
+    <div class="design-name">
+        Minimal Portfolio
+    </div>
+
+    <div class="design-type">
+        Life / Travel
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- DESIGN 05 -->
+
+<div
+    class="design-card"
+    onclick="selectDesign('ModernMaturityDesign')"
+>
+
+
+<div class="design-preview design-5">
+    Design 05
+</div>
+
+<div class="design-info">
+
+    <div class="design-name">
+        Modern Maturity
+    </div>
+
+    <div class="design-type">
+        Academic / Research
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
 
 <!-- ======================================
      ENTRY MODAL
 ====================================== -->
 
 <div
-class="modal"
-id="entryModal"
+    class="modal"
+    id="entryModal"
 >
-
 
 <div class="modal-box">
 
+<!-- MODAL HEADER -->
 
 <div class="modal-header">
 
-<div
-class="modal-title"
-id="modalTitle"
->
-
-New Archive Entry
-
-</div>
 
 <div
-class="close"
-onclick="closeModal()"
+    class="modal-title"
+    id="modalTitle"
 >
+    New Archive Entry
+</div>
 
-×
+<div
+    class="close"
+    onclick="closeModal()"
+>
+    ×
+</div>
+
 
 </div>
 
-</div>
-
-
-
-<!-- Hidden Edit ID -->
+<!-- HIDDEN EDIT ID -->
 
 <input
 type="hidden"
 id="editingEntryId"
+
 >
 
+<!-- ======================================
+     COMMON ENTRY INFORMATION
+====================================== -->
 
+<div class="form-section-label">
+    ENTRY INFORMATION
+</div>
 
 <div class="form-group">
 
 <label class="form-label">
-
-TITLE
-
+    TITLE
 </label>
 
 <input
 type="text"
 id="entryTitle"
 placeholder="Entry title"
+
 >
 
 </div>
 
-
-
 <div class="form-grid">
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-CATEGORY
-
+    CATEGORY
 </label>
 
 <select id="entryCategory">
 
 <option value="Research">
-Research
+    Research
 </option>
 
 <option value="Academic">
-Academic
+    Academic
 </option>
 
 <option value="Travel">
-Travel
+    Travel
 </option>
 
 <option value="Life">
-Life
+    Life
 </option>
 
 </select>
 
 </div>
 
-
-
 <div class="form-group">
 
 <label class="form-label">
-
-DESIGN
-
+    DESIGN
 </label>
 
 <select
 id="entryDesign"
 onchange="handleDesignChange()"
+
 >
 
 <option value="FilmArchiveDesign">
-
-FilmArchive
-
+    Film Archive
 </option>
 
 <option value="VintageFlowerDesign">
-
-Vintage Flower
-
+    Vintage Flower
 </option>
 
 <option value="HomeBakingDesign">
-Home Baking
+    Home Baking
 </option>
 
 <option value="MInimalPortfolio">
-MInimal Portfolio
+    Minimal Portfolio
 </option>
 
 <option value="ModernMaturityDesign">
-Modern Maturity
+    Modern Maturity
 </option>
 
 </select>
 
 </div>
 
-
 </div>
-
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-SHORT DESCRIPTION
-
+    SHORT DESCRIPTION
 </label>
 
 <textarea
-id="entryDescription"
-placeholder="Write a short description..."
+    id="entryDescription"
+    placeholder="Write a short description..."
 ></textarea>
 
 </div>
-
-
-
-<!-- ======================================
-     FILM ARCHIVE DESIGN FIELDS
-====================================== -->
-
-<div
-id="filmArchiveFields"
-class="design-fields"
-style="display:none;"
->
-
-
-<h3 class="design-form-title">
-
-Film Archive Content
-
-</h3>
-
-
-
-<div class="form-section-label">
-
-HERO
-
-</div>
-
-
 
 <div class="form-grid">
 
-
 <div class="form-group">
 
 <label class="form-label">
-
-HERO TITLE TOP
-
+    DATE
 </label>
 
 <input
-type="text"
-id="heroTitleTop"
-placeholder="예: OUR"
+type="date"
+id="entryDate"
+
 >
 
 </div>
 
-
-
 <div class="form-group">
 
 <label class="form-label">
-
-HERO TITLE BOTTOM 1
-
+    STATUS
 </label>
 
-<input
-type="text"
-id="heroTitleBottom1"
-placeholder="예: FILM"
->
+<select id="entryStatus">
+
+<option value="Published">
+    Published
+</option>
+
+<option value="Draft">
+    Draft
+</option>
+
+</select>
 
 </div>
 
 </div>
 
-
-
 <div class="form-group">
 
 <label class="form-label">
-
-HERO TITLE BOTTOM 2
-
+    IMAGE URL
 </label>
 
 <input
 type="text"
-id="heroTitleBottom2"
-placeholder="예: MEMORIES"
->
-
-</div>
-
-
-
-<div class="form-group">
-
-<label class="form-label">
-
-HERO IMAGE URL
-
-</label>
-
-<input
-type="text"
-id="heroImage"
+id="entryImage"
 placeholder="https://..."
+
 >
 
 </div>
 
+<!-- ======================================
+     FILM ARCHIVE DESIGN
+====================================== -->
 
+<div
+    id="filmArchiveFields"
+    class="design-fields"
+>
+
+<h3 class="design-form-title">
+    Film Archive Content
+</h3>
 
 <div class="form-section-label">
-
-INTRODUCTION
-
+    HERO
 </div>
 
-
+<div class="form-grid">
 
 <div class="form-group">
 
 <label class="form-label">
+    HERO TITLE TOP
+</label>
 
-INTRO TEXT
+<input
+type="text"
+id="filmHeroTitleTop"
+placeholder="예: OUR"
 
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO TITLE BOTTOM 1
+</label>
+
+<input
+type="text"
+id="filmHeroTitleBottom1"
+placeholder="예: FILM"
+
+>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO TITLE BOTTOM 2
+</label>
+
+<input
+type="text"
+id="filmHeroTitleBottom2"
+placeholder="예: MEMORIES"
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO IMAGE URL
+</label>
+
+<input
+type="text"
+id="filmHeroImage"
+placeholder="https://..."
+
+>
+
+</div>
+
+<div class="form-section-label">
+    INTRODUCTION
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    INTRO TEXT
 </label>
 
 <textarea
-id="introText"
-placeholder="Write introduction..."
+    id="filmIntroText"
+    placeholder="Write introduction..."
 ></textarea>
 
 </div>
 
-
-
 <div class="form-section-label">
-
-MEMORY
-
+    MEMORY
 </div>
-
-
 
 <div class="memory-form">
 
-
 <div class="memory-item">
 
 <strong>
-
-MEMORY 01
-
+    MEMORY 01
 </strong>
 
 <input
 type="text"
-id="memory1Image"
+id="filmMemory1Image"
 placeholder="Memory 01 image URL"
+
 >
 
 <textarea
-id="memory1Text"
-placeholder="Memory 01 text..."
+    id="filmMemory1Text"
+    placeholder="Memory 01 text..."
 ></textarea>
 
 </div>
 
-
-
 <div class="memory-item">
 
 <strong>
-
-MEMORY 02
-
+    MEMORY 02
 </strong>
 
 <input
 type="text"
-id="memory2Image"
+id="filmMemory2Image"
 placeholder="Memory 02 image URL"
+
 >
 
 <textarea
-id="memory2Text"
-placeholder="Memory 02 text..."
+    id="filmMemory2Text"
+    placeholder="Memory 02 text..."
 ></textarea>
 
 </div>
 
-
-
 <div class="memory-item">
 
 <strong>
-
-MEMORY 03
-
+    MEMORY 03
 </strong>
 
 <input
 type="text"
-id="memory3Image"
+id="filmMemory3Image"
 placeholder="Memory 03 image URL"
+
 >
 
 <textarea
-id="memory3Text"
-placeholder="Memory 03 text..."
+    id="filmMemory3Text"
+    placeholder="Memory 03 text..."
 ></textarea>
 
 </div>
-
-
 
 <div class="memory-item">
 
 <strong>
-
-MEMORY 04
-
+    MEMORY 04
 </strong>
 
 <input
 type="text"
-id="memory4Image"
+id="filmMemory4Image"
 placeholder="Memory 04 image URL"
+
 >
 
 <textarea
-id="memory4Text"
-placeholder="Memory 04 text..."
+    id="filmMemory4Text"
+    placeholder="Memory 04 text..."
 ></textarea>
 
 </div>
 
-
 </div>
-
-
 
 <div class="form-section-label">
-
-VIDEO
-
+    VIDEO
 </div>
-
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-VIDEO URL
-
+    VIDEO URL
 </label>
 
 <input
 type="text"
-id="videoUrl"
+id="filmVideoUrl"
 placeholder="https://..."
+
 >
 
 </div>
-
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-VIDEO CAPTION
-
+    VIDEO CAPTION
 </label>
 
 <input
 type="text"
-id="videoCaption"
+id="filmVideoCaption"
 placeholder="Video caption..."
+
 >
 
 </div>
 
-
-
 <div class="form-section-label">
-
-FILM ARCHIVE
-
+    FILM ARCHIVE
 </div>
-
-
 
 <div class="film-form">
-
 
 <div class="film-item">
 
 <strong>
-
-FILM 01
-
+    FILM 01
 </strong>
 
 <input
 type="text"
 id="film1Image"
 placeholder="Film 01 image URL"
+
 >
 
 <input
 type="text"
 id="film1Title"
 placeholder="Film 01 title"
+
 >
 
 <textarea
-id="film1Text"
-placeholder="Film 01 description..."
+    id="film1Text"
+    placeholder="Film 01 description..."
 ></textarea>
 
 </div>
 
-
-
 <div class="film-item">
 
 <strong>
-
-FILM 02
-
+    FILM 02
 </strong>
 
 <input
 type="text"
 id="film2Image"
 placeholder="Film 02 image URL"
+
 >
 
 <input
 type="text"
 id="film2Title"
 placeholder="Film 02 title"
+
 >
 
 <textarea
-id="film2Text"
-placeholder="Film 02 description..."
+    id="film2Text"
+    placeholder="Film 02 description..."
 ></textarea>
 
 </div>
 
-
-
 <div class="film-item">
 
 <strong>
-
-FILM 03
-
+    FILM 03
 </strong>
 
 <input
 type="text"
 id="film3Image"
 placeholder="Film 03 image URL"
+
 >
 
 <input
 type="text"
 id="film3Title"
 placeholder="Film 03 title"
+
 >
 
 <textarea
-id="film3Text"
-placeholder="Film 03 description..."
+    id="film3Text"
+    placeholder="Film 03 description..."
 ></textarea>
 
 </div>
 
-
 </div>
-
-
 
 <div class="form-section-label">
-
-TRAVEL
-
+    TRAVEL
 </div>
 
-
-
 <div class="form-grid">
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-MONTH
-
+    MONTH
 </label>
 
 <input
 type="text"
-id="travelMonth"
+id="filmTravelMonth"
 placeholder="JULY"
+
 >
 
 </div>
 
-
-
 <div class="form-group">
 
 <label class="form-label">
-
-YEAR
-
+    YEAR
 </label>
 
 <input
 type="text"
-id="travelYear"
+id="filmTravelYear"
 placeholder="2026"
+
 >
 
 </div>
 
-
 </div>
-
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-LOCATION
-
+    LOCATION
 </label>
 
 <input
 type="text"
-id="travelLocation"
+id="filmTravelLocation"
 placeholder="Paris, France"
+
 >
 
 </div>
-
-
 
 <div class="form-group">
 
 <label class="form-label">
-
-TRAVEL TEXT
-
+    TRAVEL TEXT
 </label>
 
 <textarea
-id="travelText"
-placeholder="Write travel description..."
+    id="filmTravelText"
+    placeholder="Write travel description..."
 ></textarea>
 
 </div>
 
-
-</div>
-
-
-
-<!-- ======================================
-     VINTAGE FLOWER DESIGN FIELDS
-====================================== -->
-
-<div
-id="vintageFlowerFields"
-class="design-fields"
-style="display:none;"
->
-
-    <h3 class="design-form-title">
-        Vintage Flower Content
-    </h3>
-
-    <!-- HERO -->
-    <div class="form-section-label">
-        HERO
-    </div>
-
-    <div class="form-group">
-
-        <label class="form-label">
-            HERO IMAGE URL
-        </label>
-
-        <input
-        type="text"
-        id="vintageHeroImage"
-        placeholder="https://..."
-        >
-
-    </div>
-
-    <div class="form-grid">
-
-        <div class="form-group">
-
-            <label class="form-label">
-                HERO TITLE
-            </label>
-
-            <input
-            type="text"
-            id="vintageHeroTitle"
-            placeholder="Vintage Flower"
-            >
-
-        </div>
-
-        <div class="form-group">
-
-            <label class="form-label">
-                HERO SUBTITLE
-            </label>
-
-            <input
-            type="text"
-            id="vintageHeroSubtitle"
-            placeholder="A story of flowers"
-            >
-
-        </div>
-
-    </div>
-
-
-    <!-- INTRO -->
-    <div class="form-section-label">
-        INTRODUCTION
-    </div>
-
-    <div class="form-group">
-
-        <label class="form-label">
-            INTRO TITLE
-        </label>
-
-        <input
-        type="text"
-        id="vintageIntroTitle"
-        placeholder="Introduction title"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label class="form-label">
-            INTRO TEXT
-        </label>
-
-        <textarea
-        id="vintageIntroText"
-        placeholder="Write introduction..."
-        ></textarea>
-
-    </div>
-
-
-    <!-- FLOWER STORY -->
-    <div class="form-section-label">
-        FLOWER STORY
-    </div>
-
-    <div class="memory-form">
-
-        <!-- FLOWER 01 -->
-        <div class="memory-item">
-
-            <strong>FLOWER 01</strong>
-
-            <input
-            type="text"
-            id="vintageFlower1Image"
-            placeholder="Flower 01 image URL"
-            >
-
-            <input
-            type="text"
-            id="vintageFlower1Title"
-            placeholder="Flower 01 title"
-            >
-
-            <textarea
-            id="vintageFlower1Text"
-            placeholder="Flower 01 description..."
-            ></textarea>
-
-        </div>
-
-        <!-- FLOWER 02 -->
-        <div class="memory-item">
-
-            <strong>FLOWER 02</strong>
-
-            <input
-            type="text"
-            id="vintageFlower2Image"
-            placeholder="Flower 02 image URL"
-            >
-
-            <input
-            type="text"
-            id="vintageFlower2Title"
-            placeholder="Flower 02 title"
-            >
-
-            <textarea
-            id="vintageFlower2Text"
-            placeholder="Flower 02 description..."
-            ></textarea>
-
-        </div>
-
-        <!-- FLOWER 03 -->
-        <div class="memory-item">
-
-            <strong>FLOWER 03</strong>
-
-            <input
-            type="text"
-            id="vintageFlower3Image"
-            placeholder="Flower 03 image URL"
-            >
-
-            <input
-            type="text"
-            id="vintageFlower3Title"
-            placeholder="Flower 03 title"
-            >
-
-            <textarea
-            id="vintageFlower3Text"
-            placeholder="Flower 03 description..."
-            ></textarea>
-
-        </div>
-
-    </div>
-
-
-    <!-- JOURNAL -->
-    <div class="form-section-label">
-        JOURNAL
-    </div>
-
-    <div class="form-group">
-
-        <label class="form-label">
-            JOURNAL TITLE
-        </label>
-
-        <input
-        type="text"
-        id="vintageJournalTitle"
-        placeholder="Journal title"
-        >
-
-    </div>
-
-    <div class="form-group">
-
-        <label class="form-label">
-            JOURNAL TEXT
-        </label>
-
-        <textarea
-        id="vintageJournalText"
-        placeholder="Write journal content..."
-        ></textarea>
-
-    </div>
-
-
-    <!-- GALLERY -->
-    <div class="form-section-label">
-        GALLERY
-    </div>
-
-    <div class="memory-form">
-
-        <div class="memory-item">
-
-            <strong>GALLERY 01</strong>
-
-            <input
-            type="text"
-            id="vintageGallery1Image"
-            placeholder="Gallery 01 image URL"
-            >
-
-        </div>
-
-        <div class="memory-item">
-
-            <strong>GALLERY 02</strong>
-
-            <input
-            type="text"
-            id="vintageGallery2Image"
-            placeholder="Gallery 02 image URL"
-            >
-
-        </div>
-
-        <div class="memory-item">
-
-            <strong>GALLERY 03</strong>
-
-            <input
-            type="text"
-            id="vintageGallery3Image"
-            placeholder="Gallery 03 image URL"
-            >
-
-        </div>
-
-        <div class="memory-item">
-
-            <strong>GALLERY 04</strong>
-
-            <input
-            type="text"
-            id="vintageGallery4Image"
-            placeholder="Gallery 04 image URL"
-            >
-
-        </div>
-
-    </div>
-
-</div>
-<!-- COMMON ENTRY INFORMATION -->
-
-<div class="form-grid">
-
-    <div class="form-group">
-
-        <label class="form-label">
-            DATE
-        </label>
-
-        <input
-        type="date"
-        id="entryDate"
-        >
-
-    </div>
-
-
-    <div class="form-group">
-
-        <label class="form-label">
-            STATUS
-        </label>
-
-        <select id="entryStatus">
-
-            <option value="Published">
-                Published
-            </option>
-
-            <option value="Draft">
-                Draft
-            </option>
-
-        </select>
-
-    </div>
-
-</div>
-
-
-<div class="form-group">
-
-    <label class="form-label">
-        IMAGE URL
-    </label>
-
-    <input
-    type="text"
-    id="entryImage"
-    placeholder="images/example.jpg"
-    >
-
-</div>
-
-
-<!-- BUTTON -->
-
-<div class="form-actions">
-
-    <button
-        class="cancel"
-        onclick="closeModal()"
-    >
-        Cancel
-    </button>
-
-    <button
-        class="save"
-        id="saveButton"
-        onclick="saveEntry()"
-    >
-        Save Entry
-    </button>
-
-</div>
-
 </div>
 
 <!-- ======================================
-     HOME BAKING DESIGN FIELDS
+     VINTAGE FLOWER DESIGN
 ====================================== -->
 
 <div
-id="homeBakingFields"
-class="design-fields"
-style="display:none;"
+    id="vintageFlowerFields"
+    class="design-fields"
 >
 
 <h3 class="design-form-title">
-Home Baking Content
+    Vintage Flower Content
 </h3>
-
-<!-- HERO -->
-
-<div class="form-section-label">
-HERO
-</div>
-
-<div class="form-group">
-
-<label class="form-label">
-Hero Image
-</label>
-
-<input
-type="text"
-id="heroImage"
-placeholder="https://..."
->
-
-</div>
-
-<div class="form-group">
-
-<label class="form-label">
-Hero Title
-</label>
-
-<input
-type="text"
-id="heroTitle"
-placeholder="Anya Bakery"
->
-
-</div>
-
-<div class="form-group">
-
-<label class="form-label">
-Hero Description
-</label>
-
-<textarea
-id="heroDescription"
-placeholder="Hero Description"
-></textarea>
-
-</div>
-
-
-<!-- SECTION -->
-
-<div class="form-section-label">
-SECTION
-</div>
-
-<div class="form-group">
-
-<label class="form-label">
-Section Title
-</label>
-
-<input
-type="text"
-id="sectionTitle"
-placeholder="Sweet Little Notes"
->
-
-</div>
-
-<div class="form-group">
-
-<label class="form-label">
-Section Description
-</label>
-
-<textarea
-id="sectionDescription"
-placeholder="Section Description"
-></textarea>
-
-</div>
-
-
-<!-- POLAROID -->
-
-<div class="form-section-label">
-POLAROID 01
-</div>
-
-<input
-type="text"
-id="polaroid01Image"
-placeholder="Image URL"
->
-
-<input
-type="text"
-id="polaroid01Title"
-placeholder="Title"
->
-
-<textarea
-id="polaroid01Description"
-placeholder="Description"
-></textarea>
-
-
-<div class="form-section-label">
-POLAROID 02
-</div>
-
-<input
-type="text"
-id="polaroid02Image"
-placeholder="Image URL"
->
-
-<input
-type="text"
-id="polaroid02Title"
-placeholder="Title"
->
-
-<textarea
-id="homePolaroid02Description"
-placeholder="Description"
-></textarea>
-
-
-<div class="form-section-label">
-POLAROID 03
-</div>
-
-<input
-type="text"
-id="polaroid03Image"
-placeholder="Image URL"
->
-
-<input
-type="text"
-id="polaroid03Title"
-placeholder="Title"
->
-
-<textarea
-id="polaroid03Description"
-placeholder="Description"
-></textarea>
-
-
-<!-- GALLERY -->
-
-<div class="form-section-label">
-GALLERY
-</div>
-
-<input
-type="text"
-id="gallery01Image"
-placeholder="Gallery 01 Image"
->
-
-<input
-type="text"
-id="gallery02Image"
-placeholder="Gallery 02 Image"
->
-
-<input
-type="text"
-id="gallery03Image"
-placeholder="Gallery 03 Image"
->
-
-
-<!-- ABOUT -->
-
-<div class="form-section-label">
-ABOUT
-</div>
-
-<input
-type="text"
-id="aboutImage"
-placeholder="About Image"
->
-
-<input
-type="text"
-id="aboutEyebrow"
-placeholder="Eyebrow"
->
-
-<input
-type="text"
-id="aboutTitle"
-placeholder="Title"
->
-
-<textarea
-id="aboutDescription"
-placeholder="Description"
-></textarea>
-
-     <!-- FOOTER -->
-
-<div class="form-section-label">
-FOOTER
-</div>
-
-<input
-type="text"
-id="footerNote"
-placeholder="Footer Note"
->
-
-<input
-type="text"
-id="footerTitle"
-placeholder="Footer Title"
->
-
-<input
-type="text"
-id="footerCopyright"
-placeholder="Copyright"
->
-
-
-</div>     
-
-</div>
-
-<!-- ======================================
-     MINIMAL PORTFOLIO DESIGN FIELDS
-====================================== -->
-
-<div
-id="minimalPortfolioFields"
-class="design-fields"
-style="display:none;"
->
-
-<h3 class="design-form-title">
-    Minimal Portfolio Content
-</h3>
-
-<!-- HERO -->
 
 <div class="form-section-label">
     HERO
@@ -3217,13 +2530,31 @@ style="display:none;"
 <div class="form-group">
 
 <label class="form-label">
-Hero Image
+    HERO IMAGE URL
 </label>
 
 <input
 type="text"
-id="heroImage"
+id="vintageHeroImage"
 placeholder="https://..."
+
+>
+
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO TITLE
+</label>
+
+<input
+type="text"
+id="vintageHeroTitle"
+placeholder="Vintage Flower"
+
 >
 
 </div>
@@ -3231,13 +2562,35 @@ placeholder="https://..."
 <div class="form-group">
 
 <label class="form-label">
-Hero Eyebrow
+    HERO SUBTITLE
 </label>
 
 <input
 type="text"
-id="heroEyebrow"
-placeholder="Life & Travel Archive"
+id="vintageHeroSubtitle"
+placeholder="A story of flowers"
+
+>
+
+</div>
+
+</div>
+
+<div class="form-section-label">
+    INTRODUCTION
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    INTRO TITLE
+</label>
+
+<input
+type="text"
+id="vintageIntroTitle"
+placeholder="Introduction title"
+
 >
 
 </div>
@@ -3245,292 +2598,788 @@ placeholder="Life & Travel Archive"
 <div class="form-group">
 
 <label class="form-label">
-Hero Title
+    INTRO TEXT
 </label>
 
 <textarea
-id="heroTitle"
-placeholder="Quiet Journeys"
+    id="vintageIntroText"
+    placeholder="Write introduction..."
 ></textarea>
 
 </div>
-
-<div class="form-group">
-
-<label class="form-label">
-Hero Description
-</label>
-
-<textarea
-id="heroDescription"
-></textarea>
-
-</div>
-
-
-
-<!-- PLACE 01 -->
 
 <div class="form-section-label">
-PLACE 01
-</div>
-
-<div class="form-group">
-
-<input
-type="text"
-id="place01Image"
-placeholder="Image URL"
->
-
-<input
-type="text"
-id="place01Label"
-placeholder="PLACE 01"
->
-
-<input
-type="text"
-id="place01Title"
-placeholder="Title"
->
-
-<textarea
-id="place01Description"
-></textarea>
-
-</div>
-
-
-
-<!-- STATEMENT -->
-
-<div class="form-section-label">
-Statement
-</div>
-
-<div class="form-group">
-
-<input
-type="text"
-id="statementEyebrow"
-placeholder="Collected Moments"
->
-
-<input
-type="text"
-id="statementTitle"
-placeholder="Title"
->
-
-<textarea
-id="statementDescription"
-></textarea>
-
-</div>
-
-
-
-<!-- PLACE 02 -->
-
-<div class="form-section-label">
-PLACE 02
-</div>
-
-<div class="form-group">
-
-<input
-type="text"
-id="place02Image"
-placeholder="Image URL"
->
-
-<input
-type="text"
-id="place02Label"
-placeholder="PLACE 02"
->
-
-<input
-type="text"
-id="place02Title"
-placeholder="Title"
->
-
-<textarea
-id="place02Description"
-></textarea>
-
-</div>
-
-
-
-<!-- GALLERY -->
-
-<div class="form-section-label">
-Gallery
+    FLOWER STORY
 </div>
 
 <div class="memory-form">
 
 <div class="memory-item">
 
-<strong>Gallery Title</strong>
+<strong>
+    FLOWER 01
+</strong>
 
 <input
 type="text"
-id="galleryEyebrow"
-placeholder="COLLECTION"
+id="vintageFlower1Image"
+placeholder="Flower 01 image URL"
+
 >
 
 <input
 type="text"
-id="galleryTitle"
-placeholder="Title"
+id="vintageFlower1Title"
+placeholder="Flower 01 title"
+
 >
 
 <textarea
-id="galleryDescription"
+    id="vintageFlower1Text"
+    placeholder="Flower 01 description..."
 ></textarea>
 
 </div>
 
 <div class="memory-item">
 
-<strong>Images</strong>
+<strong>
+    FLOWER 02
+</strong>
 
 <input
 type="text"
-id="gallery01Image"
+id="vintageFlower2Image"
+placeholder="Flower 02 image URL"
+
+>
+
+<input
+type="text"
+id="vintageFlower2Title"
+placeholder="Flower 02 title"
+
+>
+
+<textarea
+    id="vintageFlower2Text"
+    placeholder="Flower 02 description..."
+></textarea>
+
+</div>
+
+<div class="memory-item">
+
+<strong>
+    FLOWER 03
+</strong>
+
+<input
+type="text"
+id="vintageFlower3Image"
+placeholder="Flower 03 image URL"
+
+>
+
+<input
+type="text"
+id="vintageFlower3Title"
+placeholder="Flower 03 title"
+
+>
+
+<textarea
+    id="vintageFlower3Text"
+    placeholder="Flower 03 description..."
+></textarea>
+
+</div>
+
+</div>
+
+<div class="form-section-label">
+    JOURNAL
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    JOURNAL TITLE
+</label>
+
+<input
+type="text"
+id="vintageJournalTitle"
+placeholder="Journal title"
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    JOURNAL TEXT
+</label>
+
+<textarea
+    id="vintageJournalText"
+    placeholder="Write journal content..."
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    GALLERY
+</div>
+
+<div class="memory-form">
+
+<div class="memory-item">
+
+<strong>
+    GALLERY 01
+</strong>
+
+<input
+type="text"
+id="vintageGallery1Image"
+placeholder="Gallery 01 image URL"
+
+>
+
+</div>
+
+<div class="memory-item">
+
+<strong>
+    GALLERY 02
+</strong>
+
+<input
+type="text"
+id="vintageGallery2Image"
+placeholder="Gallery 02 image URL"
+
+>
+
+</div>
+
+<div class="memory-item">
+
+<strong>
+    GALLERY 03
+</strong>
+
+<input
+type="text"
+id="vintageGallery3Image"
+placeholder="Gallery 03 image URL"
+
+>
+
+</div>
+
+<div class="memory-item">
+
+<strong>
+    GALLERY 04
+</strong>
+
+<input
+type="text"
+id="vintageGallery4Image"
+placeholder="Gallery 04 image URL"
+
+>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================
+     HOME BAKING DESIGN
+====================================== -->
+
+<div
+    id="homeBakingFields"
+    class="design-fields"
+>
+
+<h3 class="design-form-title">
+    Home Baking Content
+</h3>
+
+<div class="form-section-label">
+    HERO
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO IMAGE
+</label>
+
+<input
+type="text"
+id="bakingHeroImage"
+placeholder="https://..."
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO TITLE
+</label>
+
+<input
+type="text"
+id="bakingHeroTitle"
+placeholder="Anya Bakery"
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO DESCRIPTION
+</label>
+
+<textarea
+    id="bakingHeroDescription"
+    placeholder="Hero Description"
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    SECTION
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    SECTION TITLE
+</label>
+
+<input
+type="text"
+id="bakingSectionTitle"
+placeholder="Sweet Little Notes"
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    SECTION DESCRIPTION
+</label>
+
+<textarea
+    id="bakingSectionDescription"
+    placeholder="Section Description"
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    POLAROID 01
+</div>
+
+<input
+type="text"
+id="bakingPolaroid01Image"
+placeholder="Image URL"
+
+>
+
+<input
+type="text"
+id="bakingPolaroid01Title"
+placeholder="Title"
+
+>
+
+<textarea
+    id="bakingPolaroid01Description"
+    placeholder="Description"
+></textarea>
+
+<div class="form-section-label">
+    POLAROID 02
+</div>
+
+<input
+type="text"
+id="bakingPolaroid02Image"
+placeholder="Image URL"
+
+>
+
+<input
+type="text"
+id="bakingPolaroid02Title"
+placeholder="Title"
+
+>
+
+<textarea
+    id="bakingPolaroid02Description"
+    placeholder="Description"
+></textarea>
+
+<div class="form-section-label">
+    POLAROID 03
+</div>
+
+<input
+type="text"
+id="bakingPolaroid03Image"
+placeholder="Image URL"
+
+>
+
+<input
+type="text"
+id="bakingPolaroid03Title"
+placeholder="Title"
+
+>
+
+<textarea
+    id="bakingPolaroid03Description"
+    placeholder="Description"
+></textarea>
+
+<div class="form-section-label">
+    GALLERY
+</div>
+
+<input
+type="text"
+id="bakingGallery01Image"
+placeholder="Gallery 01 Image"
+
+>
+
+<input
+type="text"
+id="bakingGallery02Image"
+placeholder="Gallery 02 Image"
+
+>
+
+<input
+type="text"
+id="bakingGallery03Image"
+placeholder="Gallery 03 Image"
+
+>
+
+<div class="form-section-label">
+    ABOUT
+</div>
+
+<input
+type="text"
+id="bakingAboutImage"
+placeholder="About Image"
+
+>
+
+<input
+type="text"
+id="bakingAboutEyebrow"
+placeholder="Eyebrow"
+
+>
+
+<input
+type="text"
+id="bakingAboutTitle"
+placeholder="Title"
+
+>
+
+<textarea
+    id="bakingAboutDescription"
+    placeholder="Description"
+></textarea>
+
+<div class="form-section-label">
+    FOOTER
+</div>
+
+<input
+type="text"
+id="bakingFooterNote"
+placeholder="Footer Note"
+
+>
+
+<input
+type="text"
+id="bakingFooterTitle"
+placeholder="Footer Title"
+
+>
+
+<input
+type="text"
+id="bakingFooterCopyright"
+placeholder="Copyright"
+
+>
+
+</div>
+
+<!-- ======================================
+     MINIMAL PORTFOLIO DESIGN
+     IMPORTANT:
+     Firebase Design ID = MInimalPortfolio
+====================================== -->
+
+<div
+    id="minimalPortfolioFields"
+    class="design-fields"
+>
+
+<h3 class="design-form-title">
+    Minimal Portfolio Content
+</h3>
+
+<div class="form-section-label">
+    HERO
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO IMAGE
+</label>
+
+<input
+type="text"
+id="minimalHeroImage"
+placeholder="https://..."
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO EYEBROW
+</label>
+
+<input
+type="text"
+id="minimalHeroEyebrow"
+placeholder="Life & Travel Archive"
+
+>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO TITLE
+</label>
+
+<textarea
+    id="minimalHeroTitle"
+    placeholder="Quiet Journeys"
+></textarea>
+
+</div>
+
+<div class="form-group">
+
+<label class="form-label">
+    HERO DESCRIPTION
+</label>
+
+<textarea
+    id="minimalHeroDescription"
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    PLACE 01
+</div>
+
+<div class="form-group">
+
+<input
+type="text"
+id="minimalPlace01Image"
+placeholder="Image URL"
+
+>
+
+<input
+type="text"
+id="minimalPlace01Label"
+placeholder="PLACE 01"
+
+>
+
+<input
+type="text"
+id="minimalPlace01Title"
+placeholder="Title"
+
+>
+
+<textarea
+    id="minimalPlace01Description"
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    STATEMENT
+</div>
+
+<div class="form-group">
+
+<input
+type="text"
+id="minimalStatementEyebrow"
+placeholder="Collected Moments"
+
+>
+
+<input
+type="text"
+id="minimalStatementTitle"
+placeholder="Title"
+
+>
+
+<textarea
+    id="minimalStatementDescription"
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    PLACE 02
+</div>
+
+<div class="form-group">
+
+<input
+type="text"
+id="minimalPlace02Image"
+placeholder="Image URL"
+
+>
+
+<input
+type="text"
+id="minimalPlace02Label"
+placeholder="PLACE 02"
+
+>
+
+<input
+type="text"
+id="minimalPlace02Title"
+placeholder="Title"
+
+>
+
+<textarea
+    id="minimalPlace02Description"
+></textarea>
+
+</div>
+
+<div class="form-section-label">
+    GALLERY
+</div>
+
+<div class="memory-form">
+
+<div class="memory-item">
+
+<strong>
+    GALLERY TITLE
+</strong>
+
+<input
+type="text"
+id="minimalGalleryEyebrow"
+placeholder="COLLECTION"
+
+>
+
+<input
+type="text"
+id="minimalGalleryTitle"
+placeholder="Title"
+
+>
+
+<textarea
+    id="minimalGalleryDescription"
+></textarea>
+
+</div>
+
+<div class="memory-item">
+
+<strong>
+    GALLERY IMAGES
+</strong>
+
+<input
+type="text"
+id="minimalGallery01Image"
 placeholder="Gallery 01"
+
 >
 
 <input
 type="text"
-id="gallery02Image"
+id="minimalGallery02Image"
 placeholder="Gallery 02"
+
 >
 
 <input
 type="text"
-id="gallery03Image"
+id="minimalGallery03Image"
 placeholder="Gallery 03"
+
 >
 
 <input
 type="text"
-id="gallery04Image"
+id="minimalGallery04Image"
 placeholder="Gallery 04"
+
 >
 
 <input
 type="text"
-id="gallery05Image"
+id="minimalGallery05Image"
 placeholder="Gallery 05"
+
 >
 
 <input
 type="text"
-id="gallery06Image"
+id="minimalGallery06Image"
 placeholder="Gallery 06"
+
 >
 
 </div>
 
 </div>
 
-
-
-<!-- MOVING MEMORIES -->
-
 <div class="form-section-label">
-Moving Memories
+    MOVING MEMORIES
 </div>
 
 <div class="form-group">
 
 <input
 type="text"
-id="movingEyebrow"
+id="minimalMovingEyebrow"
 placeholder="MOVING MEMORIES"
+
 >
 
 <input
 type="text"
-id="movingTitle"
+id="minimalMovingTitle"
 placeholder="Title"
+
 >
 
 <textarea
-id="movingDescription"
+    id="minimalMovingDescription"
 ></textarea>
 
 <input
 type="text"
-id="movingVideo"
+id="minimalMovingVideo"
 placeholder="Video URL"
+
 >
 
 <input
 type="text"
-id="movingCaption"
+id="minimalMovingCaption"
 placeholder="FRAME 01"
+
 >
 
 </div>
 
-
-
-<!-- FINAL -->
-
 <div class="form-section-label">
-Final Chapter
+    FINAL CHAPTER
 </div>
 
 <div class="form-group">
 
 <input
 type="text"
-id="finalEyebrow"
+id="minimalFinalEyebrow"
 placeholder="FINAL CHAPTER"
+
 >
 
 <input
 type="text"
-id="finalTitle"
+id="minimalFinalTitle"
 placeholder="Title"
+
 >
 
 <textarea
-id="finalDescription"
+    id="minimalFinalDescription"
 ></textarea>
 
 </div>
 
-
-
-<!-- ENDING -->
-
 <div class="form-section-label">
-Ending
+    ENDING
 </div>
 
 <div class="form-group">
 
 <input
 type="text"
-id="endingImage"
+id="minimalEndingImage"
 placeholder="Ending Image"
+
 >
 
 <input
 type="text"
-id="endingEyebrow"
+id="minimalEndingEyebrow"
 placeholder="A NOTE FROM THE JOURNEY"
+
 >
 
 <textarea
-id="endingDescription"
+    id="minimalEndingDescription"
 ></textarea>
 
 </div>
@@ -3538,35 +3387,33 @@ id="endingDescription"
 </div>
 
 <!-- ======================================
-     MODERN MATURITY DESIGN FIELDS
+     MODERN MATURITY DESIGN
 ====================================== -->
 
 <div
-id="modernMaturityFields"
-class="design-fields"
-style="display:none;"
+    id="modernMaturityFields"
+    class="design-fields"
 >
 
 <h3 class="design-form-title">
-Modern Maturity Content
+    Modern Maturity Content
 </h3>
 
-<!-- HERO -->
-
 <div class="form-section-label">
-HERO
+    HERO
 </div>
 
 <div class="form-group">
 
 <label class="form-label">
-Hero Eyebrow
+    HERO EYEBROW
 </label>
 
 <input
 type="text"
-id="heroEyebrow"
+id="modernHeroEyebrow"
 placeholder="Research Monograph Vol.04"
+
 >
 
 </div>
@@ -3574,13 +3421,14 @@ placeholder="Research Monograph Vol.04"
 <div class="form-group">
 
 <label class="form-label">
-Hero Title
+    HERO TITLE
 </label>
 
 <input
 type="text"
-id="heroTitle"
+id="modernHeroTitle"
 placeholder="MODERN MATURITY"
+
 >
 
 </div>
@@ -3588,13 +3436,14 @@ placeholder="MODERN MATURITY"
 <div class="form-group">
 
 <label class="form-label">
-Hero Image URL
+    HERO IMAGE URL
 </label>
 
 <input
 type="text"
-id="heroImage"
+id="modernHeroImage"
 placeholder="https://..."
+
 >
 
 </div>
@@ -3602,13 +3451,14 @@ placeholder="https://..."
 <div class="form-group">
 
 <label class="form-label">
-Hero Quote
+    HERO QUOTE
 </label>
 
 <input
 type="text"
-id="heroQuote"
+id="modernHeroQuote"
 placeholder="Veritas et Scientia"
+
 >
 
 </div>
@@ -3616,210 +3466,287 @@ placeholder="Veritas et Scientia"
 <div class="form-group">
 
 <label class="form-label">
-Hero Description
+    HERO DESCRIPTION
 </label>
 
 <textarea
-id="heroDescription"
-placeholder="Description..."
+    id="modernHeroDescription"
+    placeholder="Description..."
 ></textarea>
 
 </div>
 
-
-
-<!-- SECTION 01 -->
-
 <div class="form-section-label">
-SECTION 01
+    SECTION 01
 </div>
 
 <div class="form-group">
 
-<label>Image</label>
+<label class="form-label">
+    IMAGE
+</label>
 
 <input
 type="text"
-id="section01Image"
+id="modernSection01Image"
 placeholder="Image URL"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Small Image</label>
+<label class="form-label">
+    SMALL IMAGE
+</label>
 
 <input
 type="text"
-id="section01SubImage"
+id="modernSection01SubImage"
 placeholder="Image URL"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Title</label>
+<label class="form-label">
+    TITLE
+</label>
 
 <input
 type="text"
-id="section01Title"
+id="modernSection01Title"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Description</label>
+<label class="form-label">
+    DESCRIPTION
+</label>
 
 <textarea
-id="section01Description"
+    id="modernSection01Description"
 ></textarea>
 
 </div>
-
-
-
-<!-- SECTION 02 -->
 
 <div class="form-section-label">
-SECTION 02
+    SECTION 02
 </div>
 
 <div class="form-group">
 
-<label>Image 01</label>
+<label class="form-label">
+    IMAGE 01
+</label>
 
 <input
 type="text"
-id="section02Image01"
+id="modernSection02Image01"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Image 02</label>
+<label class="form-label">
+    IMAGE 02
+</label>
 
 <input
 type="text"
-id="section02Image02"
+id="modernSection02Image02"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Title</label>
+<label class="form-label">
+    TITLE
+</label>
 
 <input
 type="text"
-id="section02Title"
+id="modernSection02Title"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Description</label>
+<label class="form-label">
+    DESCRIPTION
+</label>
 
 <textarea
-id="section02Description"
+    id="modernSection02Description"
 ></textarea>
 
 </div>
-
-
-
-<!-- SECTION 03 -->
 
 <div class="form-section-label">
-SECTION 03
+    SECTION 03
 </div>
 
 <div class="form-group">
 
-<label>Image</label>
+<label class="form-label">
+    IMAGE
+</label>
 
 <input
 type="text"
-id="section03Image"
+id="modernSection03Image"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Title</label>
+<label class="form-label">
+    TITLE
+</label>
 
 <input
 type="text"
-id="section03Title"
+id="modernSection03Title"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Description</label>
+<label class="form-label">
+    DESCRIPTION
+</label>
 
 <textarea
-id="section03Description"
+    id="modernSection03Description"
 ></textarea>
 
 </div>
-
-
-
-<!-- SECTION 04 -->
 
 <div class="form-section-label">
-SECTION 04
+    SECTION 04
 </div>
 
 <div class="form-group">
 
-<label>Image</label>
+<label class="form-label">
+    IMAGE
+</label>
 
 <input
 type="text"
-id="section04Image"
+id="modernSection04Image"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Small Image</label>
+<label class="form-label">
+    SMALL IMAGE
+</label>
 
 <input
 type="text"
-id="section04SubImage"
+id="modernSection04SubImage"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Title</label>
+<label class="form-label">
+    TITLE
+</label>
 
 <input
 type="text"
-id="section04Title"
+id="modernSection04Title"
+
 >
 
 </div>
 
 <div class="form-group">
 
-<label>Description</label>
+<label class="form-label">
+    DESCRIPTION
+</label>
 
 <textarea
-id="section04Description"
+    id="modernSection04Description"
 ></textarea>
 
 </div>
 
-</div>     
-<script>
+</div>
+
+<!-- ======================================
+     FORM ACTIONS
+====================================== -->
+
+<div class="form-actions">
+
+<button
+type="button"
+class="cancel"
+onclick="closeModal()"
+
+>
+
+Cancel
+
+
+</button>
+
+<button
+type="button"
+class="save"
+id="saveButton"
+onclick="saveEntry()"
+
+>
+
+
+Save Entry
+
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ======================================
+     NEWS ADMIN JS
+====================================== -->
+
+<script
+    type="module"
+    src="news-admin.js"
+></script>
+
+</body>
+
+</html>
