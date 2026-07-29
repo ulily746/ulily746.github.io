@@ -4106,3 +4106,52 @@ DEBUG
 console.log(
 "News Admin JS loaded successfully."
 );
+
+/* =========================================================
+   EXPOSE FUNCTIONS TO HTML INLINE EVENTS
+========================================================= */
+
+window.openNewModal = openNewModal;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.selectDesign = selectDesign;
+window.handleDesignChange = handleDesignChange;
+window.editEntry = editEntry;
+window.deleteEntry = deleteEntry;
+window.saveEntry = saveEntry;
+
+/* =========================================================
+   EXPOSE FUNCTIONS TO HTML INLINE EVENTS
+   HTML onclick에서 사용할 수 있도록 전역 등록
+========================================================= */
+
+window.openNewModal =
+    openNewModal;
+
+
+window.openModal =
+    openModal;
+
+
+window.closeModal =
+    closeModal;
+
+
+window.selectDesign =
+    selectDesign;
+
+
+window.handleDesignChange =
+    handleDesignChange;
+
+
+window.editEntry =
+    editEntry;
+
+
+window.deleteEntry =
+    deleteEntry;
+
+
+window.saveEntry =
+    saveEntry;
