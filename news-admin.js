@@ -821,59 +821,79 @@ DESIGN SELECTOR
 
 function setupDesignSelector() {
 
-document
-    .querySelectorAll(
-        ".design-card"
-    )
-    .forEach(
-        card => {
+    document
+        .querySelectorAll(".design-card")
+        .forEach(card => {
 
-            card.addEventListener(
+            const newCard =
+                card.cloneNode(true);
+
+            card.parentNode.replaceChild(
+                newCard,
+                card
+            );
+
+            newCard.addEventListener(
                 "click",
                 event => {
 
                     event.preventDefault();
+                    event.stopPropagation();
 
                     const designId =
-                        card.dataset.design ||
-                        card.dataset.designId ||
+                        newCard.dataset.design ||
+                        newCard.dataset.designId ||
                         getDesignFromOnClick(
-                            card
+                            newCard
                         );
 
                     if (!designId) {
+
+                        console.warn(
+                            "Design ID not found:",
+                            newCard
+                        );
+
                         return;
                     }
+
+                    console.log(
+                        "Opening design:",
+                        designId
+                    );
 
                     openNewModal(
                         designId
                     );
+
                 }
             );
-        }
-    );
 
-const select =
-    document.getElementById(
-        "entryDesign"
-    );
+        });
 
-if (select) {
+    const select =
+        document.getElementById(
+            "entryDesign"
+        );
 
-    select.addEventListener(
-        "change",
-        () => {
+    if (select) {
 
-            selectDesign(
-                select.value
-            );
-        }
-    );
+        select.addEventListener(
+            "change",
+            () => {
+
+                selectDesign(
+                    select.value
+                );
+
+            }
+        );
+
+    }
+
 }
 
-
-}
-
+          
 function getDesignFromOnClick(card) {
 
 const value =
@@ -923,12 +943,59 @@ SELECT DESIGN
 ========================================================= */
 
 function selectDesign(
-designId
+    designId
 ) {
 
-selectedDesign =
-    designId ||
-    "FilmArchiveDesign";
+    const validDesigns = [
+        "FilmArchiveDesign",
+        "VintageFlowerDesign",
+        "HomeBakingDesign",
+        "MInimalPortfolio",
+        "ModernMaturityDesign"
+    ];
+
+    if (
+        !validDesigns.includes(
+            designId
+        )
+    ) {
+
+        console.warn(
+            "Invalid design ID:",
+            designId
+        );
+
+        designId =
+            "FilmArchiveDesign";
+    }
+
+    selectedDesign =
+        designId;
+
+    const select =
+        document.getElementById(
+            "entryDesign"
+        );
+
+    if (select) {
+
+        select.value =
+            selectedDesign;
+
+    }
+
+    hideAllDesignFields();
+
+    showDesignFields(
+        selectedDesign
+    );
+
+    console.log(
+        "Selected design:",
+        selectedDesign
+    );
+
+}
 
 const select =
     document.getElementById(
@@ -1034,54 +1101,61 @@ OPEN NEW MODAL
 ========================================================= */
 
 function openNewModal(
-designId = null
+    designId = null
 ) {
 
-isEditing =
-    false;
+    isEditing =
+        false;
 
-selectedDesign =
-    designId ||
-    "FilmArchiveDesign";
+    // 먼저 전체 폼 초기화
+    clearForm();
 
-clearForm();
+    // 초기화 후 선택한 디자인 설정
+    selectedDesign =
+        designId ||
+        "FilmArchiveDesign";
 
-const editingId =
-    document.getElementById(
-        "editingEntryId"
+    // 수정 중인 Entry ID 초기화
+    setFieldValue(
+        "editingEntryId",
+        ""
     );
 
-if (editingId) {
-    editingId.value = "";
-}
-
-const modalTitle =
-    document.getElementById(
-        "modalTitle"
+    // 선택한 디자인 반영
+    setFieldValue(
+        "entryDesign",
+        selectedDesign
     );
 
-if (modalTitle) {
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
 
-    modalTitle.textContent =
-        "New Archive Entry";
-}
+    if (modalTitle) {
 
-const saveButton =
-    document.getElementById(
-        "saveButton"
+        modalTitle.textContent =
+            "New Archive Entry";
+    }
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+    if (saveButton) {
+
+        saveButton.textContent =
+            "Save Entry";
+    }
+
+    // 선택한 디자인의 필드만 표시
+    selectDesign(
+        selectedDesign
     );
 
-if (saveButton) {
-
-    saveButton.textContent =
-        "Save Entry";
-}
-
-selectDesign(
-    selectedDesign
-);
-
-openModal();
+    // 모달 열기
+    openModal();
 
 }
 
@@ -2623,50 +2697,54 @@ SAVE ENTRY
 
 async function saveEntry() {
 
-if (!db) {
+    if (!db) {
+        alert(
+            "Firebase is not ready yet."
+        );
+        return;
+    }
 
-    alert(
-        "Firebase is not ready yet."
-    );
-
-    return;
-}
-
-const saveButton =
+   const saveButton =
     document.getElementById(
         "saveButton"
     );
 
-if (saveButton) {
+const editingId =
+    getFieldValue(
+        "editingEntryId"
+    ).trim();
 
-    saveButton.disabled =
-        true;
+const wasEditing =
+    Boolean(
+        editingId
+    );
+  
+    if (saveButton) {
 
-    saveButton.textContent =
-        "Saving...";
-}
+        saveButton.disabled =
+            true;
 
-try {
-
-    const editingId =
-        getFieldValue(
-            "editingEntryId"
-        );
-
-    const title =
-        getFieldValue(
-            "entryTitle"
-        ).trim();
-
-    if (!title) {
-
-        alert(
-            "Please enter a title."
-        );
-
-        return;
+        saveButton.textContent =
+            "Saving...";
     }
 
+    try {
+
+        const title =
+            getFieldValue(
+                "entryTitle"
+            ).trim();
+
+        if (!title) {
+
+            alert(
+                "Please enter a title."
+            );
+
+            return;
+        }
+
+       
     const category =
         getFieldValue(
             "entryCategory"
@@ -2794,9 +2872,9 @@ try {
             false;
 
         saveButton.textContent =
-            isEditing
-                ? "Update Entry"
-                : "Save Entry";
+    wasEditing
+        ? "Update Entry"
+        : "Save Entry";
     }
 }
 
