@@ -1,35 +1,6 @@
 /* =========================================================
 NEWS ADMIN.JS
 Personal Archive — News Admin
-=============================
-
-FIREBASE STRUCTURE
-
-news
-├── 2026-news-001
-├── 2026-news-002
-├── ...
-└── design
-├── FilmArchiveDesign
-├── VintageFlowerDesign
-├── HomeBakingDesign
-├── MInimalPortfolio
-└── ModernMaturityDesign
-
-## IMPORTANT
-
-Firebase App / Firestore는 HTML에서 초기화됩니다.
-
-HTML에서:
-window.firebaseDB
-
-를 사용합니다.
-
-이 JS에서는 Firebase App을 다시 초기화하지 않습니다.
-========================================================= */
-
-/* =========================================================
-FIREBASE FIRESTORE IMPORTS
 ========================================================= */
 
 import {
@@ -49,70 +20,48 @@ serverTimestamp
 GLOBAL STATE
 ========================================================= */
 
-let allEntries = [];
-
-let currentFilter = "ALL";
-
-let selectedDesign = "FilmArchiveDesign";
-
-let isEditing = false;
-
-/* =========================================================
-FIREBASE DATABASE
-========================================================= */
-
 let db = null;
+let allEntries = [];
+let currentFilter = "ALL";
+let selectedDesign = "FilmArchiveDesign";
+let isEditing = false;
+let firebaseReady = false;
 
 /* =========================================================
 WAIT FOR FIREBASE
 ========================================================= */
 
 function waitForFirebase() {
-
-```
 return new Promise((resolve, reject) => {
+let attempts = 0;
+const maxAttempts = 100;
 
-    let attempts = 0;
 
-    const maxAttempts = 100;
-
-    const checkFirebase = () => {
-
+    function check() {
         if (window.firebaseDB) {
-
             db = window.firebaseDB;
-
+            firebaseReady = true;
             resolve(db);
-
             return;
-
         }
 
         attempts++;
 
         if (attempts >= maxAttempts) {
-
             reject(
                 new Error(
                     "Firebase Database could not be initialized."
                 )
             );
-
             return;
-
         }
 
-        setTimeout(
-            checkFirebase,
-            100
-        );
+        setTimeout(check, 100);
+    }
 
-    };
-
-    checkFirebase();
-
+    check();
 });
-```
+
 
 }
 
@@ -120,42 +69,27 @@ return new Promise((resolve, reject) => {
 DOM READY
 ========================================================= */
 
-document.addEventListener(
-"DOMContentLoaded",
-async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+console.log("News Admin initializing...");
 
-```
-    console.log(
-        "News Admin initializing..."
+try {
+    await waitForFirebase();
+
+    console.log("Firebase database ready.");
+
+    initializeAdmin();
+
+} catch (error) {
+    console.error(
+        "Firebase initialization error:",
+        error
     );
 
-    try {
-
-        await waitForFirebase();
-
-        console.log(
-            "Firebase database ready."
-        );
-
-        initializeAdmin();
-
-    } catch (error) {
-
-        console.error(
-            "Firebase initialization error:",
-            error
-        );
-
-        showFirebaseError(
-            error
-        );
-
-    }
-
+    showFirebaseError(error);
 }
-```
 
-);
+
+});
 
 /* =========================================================
 INITIALIZE ADMIN
@@ -163,15 +97,23 @@ INITIALIZE ADMIN
 
 function initializeAdmin() {
 
-```
 setupFilters();
 
 setupDesignSelector();
 
 setupModalEvents();
 
+setupNewEntryButtons();
+
+setupSaveButton();
+
+setupCloseButtons();
+
 loadNewsEntries();
-```
+
+console.log(
+    "News Admin initialized successfully."
+);
 
 }
 
@@ -179,24 +121,17 @@ loadNewsEntries();
 FIREBASE ERROR
 ========================================================= */
 
-function showFirebaseError(
-error
-) {
+function showFirebaseError(error) {
 
-```
 const list =
-    document.getElementById(
-        "newsList"
-    );
+    document.getElementById("newsList");
 
 if (!list) {
     return;
 }
 
 list.innerHTML = `
-
     <div class="empty-state">
-
         <div class="empty-state-title">
             Firebase Connection Error
         </div>
@@ -207,36 +142,33 @@ list.innerHTML = `
                 "Unable to connect to Firebase."
             )}
         </div>
-
     </div>
-
 `;
-```
 
 }
 
 /* =========================================================
-LOAD ALL NEWS ENTRIES
+LOAD NEWS ENTRIES
 ========================================================= */
 
 async function loadNewsEntries() {
 
-```
 const list =
-    document.getElementById(
-        "newsList"
-    );
+    document.getElementById("newsList");
 
 if (list) {
-
     list.innerHTML = `
-
         <div class="loading-state">
             LOADING ARCHIVE...
         </div>
-
     `;
+}
 
+if (!db) {
+    showFirebaseError(
+        new Error("Firebase is not ready.")
+    );
+    return;
 }
 
 try {
@@ -265,74 +197,54 @@ try {
                 orderedQuery
             );
 
-    } catch (orderError) {
+    } catch (error) {
 
         console.warn(
-            "Ordered query failed. Loading without orderBy.",
-            orderError
+            "orderBy failed. Loading without sorting.",
+            error
         );
 
         snapshot =
             await getDocs(
                 newsRef
             );
-
     }
 
     allEntries = [];
 
     snapshot.forEach(
-        (documentSnapshot) => {
+        documentSnapshot => {
+
+            if (
+                documentSnapshot.id ===
+                "design"
+            ) {
+                return;
+            }
 
             const data =
                 documentSnapshot.data();
 
-            /*
-             * news/design is the design template document.
-             * It should NOT appear as a real news entry.
-             */
-
-            if (
-                documentSnapshot.id === "design"
-            ) {
-
-                return;
-
-            }
-
             allEntries.push({
-
                 id:
                     documentSnapshot.id,
-
                 ...data
-
             });
-
         }
     );
-
-
-    /*
-     * Client-side date sorting
-     * protects against mixed date formats.
-     */
 
     allEntries.sort(
         sortEntriesByDate
     );
 
-
     updateStatistics();
 
     renderNewsList();
-
 
     console.log(
         "News entries loaded:",
         allEntries.length
     );
-
 
 } catch (error) {
 
@@ -344,9 +256,7 @@ try {
     if (list) {
 
         list.innerHTML = `
-
             <div class="empty-state">
-
                 <div class="empty-state-title">
                     Unable to Load Archive
                 </div>
@@ -357,126 +267,82 @@ try {
                         "Please check Firebase configuration."
                     )}
                 </div>
-
             </div>
-
         `;
-
     }
-
 }
-```
 
 }
 
 /* =========================================================
-SORT ENTRIES
+SORT
 ========================================================= */
 
-function sortEntriesByDate(
-a,
-b
-) {
+function sortEntriesByDate(a, b) {
 
-```
-const dateA =
-    getEntryDateValue(
-        a
-    );
-
-const dateB =
-    getEntryDateValue(
-        b
-    );
-
-return dateB - dateA;
-```
+return (
+    getEntryDateValue(b) -
+    getEntryDateValue(a)
+);
 
 }
 
-/* =========================================================
-DATE VALUE
-========================================================= */
+function getEntryDateValue(entry) {
 
-function getEntryDateValue(
-entry
-) {
-
-```
 if (!entry) {
     return 0;
 }
 
-const date =
+const value =
     entry.date ||
     entry.createdAt ||
     entry.updatedAt;
 
-
 if (
-    date &&
-    typeof date.toDate === "function"
+    value &&
+    typeof value.toDate ===
+    "function"
 ) {
-
-    return date
+    return value
         .toDate()
         .getTime();
-
 }
 
-
 if (
-    date instanceof Date
+    value instanceof Date
 ) {
-
-    return date.getTime();
-
+    return value.getTime();
 }
 
-
 if (
-    typeof date === "string"
+    typeof value === "string"
 ) {
-
-    const timestamp =
+    const time =
         new Date(
-            date
+            value
         ).getTime();
 
-    if (
-        !Number.isNaN(
-            timestamp
-        )
-    ) {
-
-        return timestamp;
-
-    }
-
+    return Number.isNaN(time)
+        ? 0
+        : time;
 }
-
 
 if (
-    typeof date === "number"
+    typeof value === "number"
 ) {
-
-    return date;
-
+    return value;
 }
 
-
 return 0;
-```
 
 }
 
 /* =========================================================
-RENDER NEWS LIST
+RENDER LIST
 ========================================================= */
 
 function renderNewsList() {
 
-```
 const list =
     document.getElementById(
         "newsList"
@@ -486,21 +352,17 @@ if (!list) {
     return;
 }
 
-
 const filteredEntries =
     filterEntries(
         allEntries
     );
-
 
 if (
     filteredEntries.length === 0
 ) {
 
     list.innerHTML = `
-
         <div class="empty-state">
-
             <div class="empty-state-title">
                 No Archive Entries
             </div>
@@ -508,123 +370,100 @@ if (
             <div class="empty-state-text">
                 No entries match the current filter.
             </div>
-
         </div>
-
     `;
 
     return;
-
 }
-
 
 list.innerHTML =
     filteredEntries
         .map(
             createNewsRow
         )
-        .join(
-            ""
-        );
-
+        .join("");
 
 attachRowEvents();
-```
 
 }
 
 /* =========================================================
-FILTER ENTRIES
+FILTER
 ========================================================= */
 
-function filterEntries(
-entries
-) {
+function filterEntries(entries) {
 
-```
 if (
-    currentFilter === "ALL"
+    currentFilter ===
+    "ALL"
 ) {
-
     return entries;
-
 }
 
-
 if (
-    currentFilter === "Published"
+    currentFilter ===
+    "Published"
 ) {
-
     return entries.filter(
         entry =>
             normalizeStatus(
                 entry.status
-            ) === "Published"
+            ) ===
+            "Published"
     );
-
 }
 
-
 if (
-    currentFilter === "Draft"
+    currentFilter ===
+    "Draft"
 ) {
-
     return entries.filter(
         entry =>
             normalizeStatus(
                 entry.status
-            ) === "Draft"
+            ) ===
+            "Draft"
     );
-
 }
-
 
 return entries.filter(
     entry =>
         normalizeCategory(
             entry.category
-        ) === currentFilter
+        ) ===
+        currentFilter
 );
-```
-
 }
 
 /* =========================================================
 CREATE NEWS ROW
 ========================================================= */
 
-function createNewsRow(
-entry
-) {
+function createNewsRow(entry) {
 
-```
 const id =
-    entry.id || "";
-
+    entry.id ||
+    "";
 
 const title =
     entry.title ||
     entry.name ||
     "Untitled Entry";
 
-
 const category =
     normalizeCategory(
         entry.category
     );
-
 
 const design =
     entry.design ||
     entry.designId ||
     "Unknown Design";
 
-
 const status =
     normalizeStatus(
         entry.status
     );
-
 
 const image =
     entry.image ||
@@ -634,93 +473,83 @@ const image =
         entry,
         "heroImage"
     ) ||
+    getContentValue(
+        entry,
+        "minimalHeroImage"
+    ) ||
+    getContentValue(
+        entry,
+        "vintageHeroImage"
+    ) ||
+    getContentValue(
+        entry,
+        "bakingHeroImage"
+    ) ||
+    getContentValue(
+        entry,
+        "filmHeroImage"
+    ) ||
+    getContentValue(
+        entry,
+        "modernHeroImage"
+    ) ||
     "";
-
 
 const description =
     entry.description ||
     entry.shortDescription ||
     "";
 
-
 const date =
     formatDate(
         entry.date
     );
 
-
 const statusClass =
-    status === "Published"
+    status ===
+    "Published"
         ? "status-published"
         : "status-draft";
-
 
 const safeId =
     escapeHTML(
         id
     );
 
-
 return `
-
     <div
         class="news-row"
         data-entry-id="${safeId}"
     >
 
         <div>
-
             ${
                 image
-
-                ?
-
-                `
-                <img
-                    class="thumb"
-                    src="${escapeHTML(
-                        image
-                    )}"
-                    alt="${escapeHTML(
-                        title
-                    )}"
-                    onerror="
-                        this.style.display='none';
-                    "
-                >
-                `
-
-                :
-
-                `
-                <div
-                    class="thumb"
-                ></div>
-                `
-
+                    ? `
+                        <img
+                            class="thumb"
+                            src="${escapeHTML(image)}"
+                            alt="${escapeHTML(title)}"
+                            onerror="this.style.display='none';"
+                        >
+                    `
+                    : `
+                        <div class="thumb"></div>
+                    `
             }
-
         </div>
-
 
         <div>
 
             <div class="news-title">
-
-                ${escapeHTML(
-                    title
-                )}
-
+                ${escapeHTML(title)}
             </div>
-
 
             <div class="news-meta">
 
                 ${
                     date
-                        ? escapeHTML(
-                            date
-                        )
+                        ? escapeHTML(date)
                         : ""
                 }
 
@@ -740,53 +569,29 @@ return `
 
         </div>
 
-
         <div>
-
             <span class="tag">
-
-                ${escapeHTML(
-                    category
-                )}
-
+                ${escapeHTML(category)}
             </span>
-
         </div>
 
-
         <div>
-
             <span class="design-tag">
-
                 ${escapeHTML(
                     getDesignDisplayName(
                         design
                     )
                 )}
-
             </span>
-
         </div>
 
-
         <div>
-
-            <span
-                class="${statusClass}"
-            >
-
-                ●
-                ${escapeHTML(
-                    status
-                )}
-
+            <span class="${statusClass}">
+                ● ${escapeHTML(status)}
             </span>
-
         </div>
 
-
         <div>
-
             <div class="actions">
 
                 <span
@@ -796,7 +601,6 @@ return `
                     EDIT
                 </span>
 
-
                 <span
                     class="action delete delete-action"
                     data-id="${safeId}"
@@ -805,23 +609,20 @@ return `
                 </span>
 
             </div>
-
         </div>
 
     </div>
-
 `;
-```
+
 
 }
 
 /* =========================================================
-ATTACH ROW EVENTS
+ROW EVENTS
 ========================================================= */
 
 function attachRowEvents() {
 
-```
 document
     .querySelectorAll(
         ".edit-action"
@@ -831,21 +632,19 @@ document
 
             button.addEventListener(
                 "click",
-                () => {
+                event => {
 
-                    const id =
-                        button.dataset.id;
+                    event.preventDefault();
+
+                    event.stopPropagation();
 
                     editEntry(
-                        id
+                        button.dataset.id
                     );
-
                 }
             );
-
         }
     );
-
 
 document
     .querySelectorAll(
@@ -856,21 +655,19 @@ document
 
             button.addEventListener(
                 "click",
-                () => {
+                event => {
 
-                    const id =
-                        button.dataset.id;
+                    event.preventDefault();
+
+                    event.stopPropagation();
 
                     deleteEntry(
-                        id
+                        button.dataset.id
                     );
-
                 }
             );
-
         }
     );
-```
 
 }
 
@@ -880,7 +677,6 @@ FILTER SETUP
 
 function setupFilters() {
 
-```
 document
     .querySelectorAll(
         ".filter"
@@ -890,7 +686,9 @@ document
 
             button.addEventListener(
                 "click",
-                () => {
+                event => {
+
+                    event.preventDefault();
 
                     document
                         .querySelectorAll(
@@ -903,25 +701,111 @@ document
                                 )
                         );
 
-
                     button.classList.add(
                         "active"
                     );
-
 
                     currentFilter =
                         button.dataset.filter ||
                         "ALL";
 
-
                     renderNewsList();
-
                 }
             );
-
         }
     );
-```
+
+
+}
+
+/* =========================================================
+NEW ENTRY BUTTONS
+========================================================= */
+
+function setupNewEntryButtons() {
+
+const selectors = [
+    "#newEntryButton",
+    "#newEntryBtn",
+    ".new-entry-button",
+    ".new-entry-btn",
+    "[data-action='new-entry']"
+];
+
+const buttons =
+    document.querySelectorAll(
+        selectors.join(",")
+    );
+
+buttons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                openNewModal();
+            }
+        );
+    }
+);
+
+}
+
+/* =========================================================
+SAVE BUTTON
+========================================================= */
+
+function setupSaveButton() {
+
+const button =
+    document.getElementById(
+        "saveButton"
+    );
+
+if (!button) {
+    return;
+}
+
+button.addEventListener(
+    "click",
+    event => {
+
+        event.preventDefault();
+
+        saveEntry();
+    }
+);
+
+
+}
+
+/* =========================================================
+CLOSE BUTTONS
+========================================================= */
+
+function setupCloseButtons() {
+
+document
+    .querySelectorAll(
+        "[data-close-modal], .modal-close, .close-modal"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+                    closeModal();
+                }
+            );
+        }
+    );
 
 }
 
@@ -931,7 +815,6 @@ DESIGN SELECTOR
 
 function setupDesignSelector() {
 
-```
 document
     .querySelectorAll(
         ".design-card"
@@ -941,45 +824,70 @@ document
 
             card.addEventListener(
                 "click",
-                () => {
+                event => {
 
-                    const onclickValue =
-                        card.getAttribute(
-                            "onclick"
+                    event.preventDefault();
+
+                    const designId =
+                        card.dataset.design ||
+                        card.dataset.designId ||
+                        getDesignFromOnClick(
+                            card
                         );
 
-
-                    if (
-                        onclickValue
-                    ) {
-
-                        const match =
-                            onclickValue.match(
-                                /selectDesign\(['"]([^'"]+)['"]\)/
-                            );
-
-
-                        if (
-                            match &&
-                            match[1]
-                        ) {
-
-                            selectDesign(
-                                match[1]
-                            );
-
-                            openNewModal();
-
-                        }
-
+                    if (!designId) {
+                        return;
                     }
 
+                    openNewModal(
+                        designId
+                    );
                 }
             );
-
         }
     );
-```
+
+const select =
+    document.getElementById(
+        "entryDesign"
+    );
+
+if (select) {
+
+    select.addEventListener(
+        "change",
+        () => {
+
+            selectDesign(
+                select.value
+            );
+        }
+    );
+}
+
+
+}
+
+function getDesignFromOnClick(card) {
+
+const value =
+    card.getAttribute(
+        "onclick"
+    );
+
+if (!value) {
+    return "";
+}
+
+const match =
+    value.match(
+        /selectDesign\(['"]([^'"]+)['"]\)/
+    );
+
+return match
+    ? match[1]
+    : "";
+
 
 }
 
@@ -987,76 +895,64 @@ document
 DESIGN CHANGE
 ========================================================= */
 
-window.handleDesignChange =
-function() {
+function handleDesignChange() {
 
-```
-    const select =
-        document.getElementById(
-            "entryDesign"
-        );
-
-
-    if (!select) {
-        return;
-    }
-
-
-    selectDesign(
-        select.value
+const select =
+    document.getElementById(
+        "entryDesign"
     );
 
-};
-```
+if (!select) {
+    return;
+}
+
+selectDesign(
+    select.value
+);
+
+}
 
 /* =========================================================
 SELECT DESIGN
 ========================================================= */
 
-window.selectDesign =
-function(
+function selectDesign(
 designId
 ) {
 
-```
-    selectedDesign =
-        designId ||
-        "FilmArchiveDesign";
+selectedDesign =
+    designId ||
+    "FilmArchiveDesign";
 
-
-    const select =
-        document.getElementById(
-            "entryDesign"
-        );
-
-
-    if (
-        select &&
-        select.value !== selectedDesign
-    ) {
-
-        select.value =
-            selectedDesign;
-
-    }
-
-
-    hideAllDesignFields();
-
-    showDesignFields(
-        selectedDesign
+const select =
+    document.getElementById(
+        "entryDesign"
     );
 
-};
-```
+if (
+    select &&
+    select.value !==
+    selectedDesign
+) {
+    select.value =
+        selectedDesign;
+}
+
+hideAllDesignFields();
+
+showDesignFields(
+    selectedDesign
+);
+
+}
 
 /* =========================================================
-HIDE ALL DESIGN FIELDS
+HIDE DESIGN FIELDS
 ========================================================= */
 
 function hideAllDesignFields() {
 
-```
+
 document
     .querySelectorAll(
         ".design-fields"
@@ -1066,10 +962,8 @@ document
 
             field.style.display =
                 "none";
-
         }
     );
-```
 
 }
 
@@ -1081,7 +975,7 @@ function showDesignFields(
 designId
 ) {
 
-```
+
 const fieldMap = {
 
     FilmArchiveDesign:
@@ -1098,15 +992,12 @@ const fieldMap = {
 
     ModernMaturityDesign:
         "modernMaturityFields"
-
 };
-
 
 const fieldId =
     fieldMap[
         designId
     ];
-
 
 if (!fieldId) {
 
@@ -1116,23 +1007,19 @@ if (!fieldId) {
     );
 
     return;
-
 }
-
 
 const field =
     document.getElementById(
         fieldId
     );
 
-
 if (field) {
 
     field.style.display =
         "block";
-
 }
-```
+
 
 }
 
@@ -1140,75 +1027,57 @@ if (field) {
 OPEN NEW MODAL
 ========================================================= */
 
-window.openNewModal =
-function(
+function openNewModal(
 designId = null
 ) {
 
-```
-    isEditing =
-        false;
+isEditing =
+    false;
 
+selectedDesign =
+    designId ||
+    "FilmArchiveDesign";
 
-    selectedDesign =
-        designId ||
-        "FilmArchiveDesign";
+clearForm();
 
-
-    clearForm();
-
-
-    const modalTitle =
-        document.getElementById(
-            "modalTitle"
-        );
-
-
-    const saveButton =
-        document.getElementById(
-            "saveButton"
-        );
-
-
-    if (modalTitle) {
-
-        modalTitle.textContent =
-            "New Archive Entry";
-
-    }
-
-
-    if (saveButton) {
-
-        saveButton.textContent =
-            "Save Entry";
-
-    }
-
-
-    const designSelect =
-        document.getElementById(
-            "entryDesign"
-        );
-
-
-    if (designSelect) {
-
-        designSelect.value =
-            selectedDesign;
-
-    }
-
-
-    selectDesign(
-        selectedDesign
+const editingId =
+    document.getElementById(
+        "editingEntryId"
     );
 
+if (editingId) {
+    editingId.value = "";
+}
 
-    openModal();
+const modalTitle =
+    document.getElementById(
+        "modalTitle"
+    );
 
-};
-```
+if (modalTitle) {
+
+    modalTitle.textContent =
+        "New Archive Entry";
+}
+
+const saveButton =
+    document.getElementById(
+        "saveButton"
+    );
+
+if (saveButton) {
+
+    saveButton.textContent =
+        "Save Entry";
+}
+
+selectDesign(
+    selectedDesign
+);
+
+openModal();
+
+}
 
 /* =========================================================
 OPEN MODAL
@@ -1216,24 +1085,29 @@ OPEN MODAL
 
 function openModal() {
 
-```
 const modal =
     document.getElementById(
         "entryModal"
     );
 
+if (!modal) {
 
-if (modal) {
-
-    modal.classList.add(
-        "active"
+    console.warn(
+        "entryModal not found."
     );
 
-    document.body.style.overflow =
-        "hidden";
-
+    return;
 }
-```
+
+modal.classList.add(
+    "active"
+);
+
+modal.style.display =
+    "flex";
+
+document.body.style.overflow =
+    "hidden";
 
 }
 
@@ -1241,34 +1115,29 @@ if (modal) {
 CLOSE MODAL
 ========================================================= */
 
-window.closeModal =
-function() {
+function closeModal() {
 
-```
-    const modal =
-        document.getElementById(
-            "entryModal"
-        );
+const modal =
+    document.getElementById(
+        "entryModal"
+    );
 
+if (modal) {
 
-    if (modal) {
+    modal.classList.remove(
+        "active"
+    );
 
-        modal.classList.remove(
-            "active"
-        );
-
-    }
-
-
-    document.body.style.overflow =
+    modal.style.display =
         "";
+}
 
+document.body.style.overflow =
+    "";
 
-    isEditing =
-        false;
-
-};
-```
+isEditing =
+    false;
+}
 
 /* =========================================================
 MODAL EVENTS
@@ -1276,52 +1145,45 @@ MODAL EVENTS
 
 function setupModalEvents() {
 
-```
 const modal =
     document.getElementById(
         "entryModal"
     );
 
-
 if (!modal) {
     return;
 }
-
 
 modal.addEventListener(
     "click",
     event => {
 
         if (
-            event.target === modal
+            event.target ===
+            modal
         ) {
 
             closeModal();
-
         }
-
     }
 );
-
 
 document.addEventListener(
     "keydown",
     event => {
 
         if (
-            event.key === "Escape" &&
+            event.key ===
+            "Escape" &&
             modal.classList.contains(
                 "active"
             )
         ) {
 
             closeModal();
-
         }
-
     }
 );
-```
 
 }
 
@@ -1333,11 +1195,18 @@ async function editEntry(
 entryId
 ) {
 
-```
 if (!entryId) {
     return;
 }
 
+if (!db) {
+
+    alert(
+        "Firebase is not ready yet."
+    );
+
+    return;
+}
 
 try {
 
@@ -1348,12 +1217,10 @@ try {
             entryId
         );
 
-
     const snapshot =
         await getDoc(
             entryRef
         );
-
 
     if (
         !snapshot.exists()
@@ -1366,40 +1233,25 @@ try {
         await loadNewsEntries();
 
         return;
-
     }
-
 
     const entry =
         snapshot.data();
 
-
     isEditing =
         true;
-
 
     selectedDesign =
         entry.design ||
         entry.designId ||
         "FilmArchiveDesign";
 
-
     clearForm();
 
-
-    const editingId =
-        document.getElementById(
-            "editingEntryId"
-        );
-
-
-    if (editingId) {
-
-        editingId.value =
-            entryId;
-
-    }
-
+    setFieldValue(
+        "editingEntryId",
+        entryId
+    );
 
     setFieldValue(
         "entryTitle",
@@ -1407,19 +1259,11 @@ try {
         ""
     );
 
-
     setFieldValue(
         "entryCategory",
         entry.category ||
         "Research"
     );
-
-
-    setFieldValue(
-        "entryDesign",
-        selectedDesign
-    );
-
 
     setFieldValue(
         "entryDescription",
@@ -1428,7 +1272,6 @@ try {
         ""
     );
 
-
     setFieldValue(
         "entryDate",
         normalizeDateForInput(
@@ -1436,14 +1279,12 @@ try {
         )
     );
 
-
     setFieldValue(
         "entryStatus",
         normalizeStatus(
             entry.status
         )
     );
-
 
     setFieldValue(
         "entryImage",
@@ -1453,54 +1294,15 @@ try {
         ""
     );
 
-
-    const modalTitle =
-        document.getElementById(
-            "modalTitle"
-        );
-
-
-    const saveButton =
-        document.getElementById(
-            "saveButton"
-        );
-
-
-    if (modalTitle) {
-
-        modalTitle.textContent =
-            "Edit Archive Entry";
-
-    }
-
-
-    if (saveButton) {
-
-        saveButton.textContent =
-            "Update Entry";
-
-    }
-
-
-    /*
-     * IMPORTANT
-     * -------------------------------------------------
-     * All design-specific content is restored here.
-     *
-     * The content may be stored as:
-     *
-     * 1. entry.content
-     * 2. entry.data
-     * 3. directly on the document
-     *
-     * getDesignContent() handles all three.
-     */
+    setFieldValue(
+        "entryDesign",
+        selectedDesign
+    );
 
     const content =
         getDesignContent(
             entry
         );
-
 
     populateDesignFields(
         selectedDesign,
@@ -1508,21 +1310,38 @@ try {
         entry
     );
 
-
     selectDesign(
         selectedDesign
     );
 
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+    if (modalTitle) {
+
+        modalTitle.textContent =
+            "Edit Archive Entry";
+    }
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+    if (saveButton) {
+
+        saveButton.textContent =
+            "Update Entry";
+    }
 
     openModal();
 
-
     console.log(
         "Entry loaded for editing:",
-        entryId,
-        entry
+        entryId
     );
-
 
 } catch (error) {
 
@@ -1531,14 +1350,12 @@ try {
         error
     );
 
-
     alert(
         "Failed to load this entry.\n\n" +
         error.message
     );
-
 }
-```
+
 
 }
 
@@ -1550,37 +1367,25 @@ function getDesignContent(
 entry
 ) {
 
-```
 if (
     entry &&
     entry.content &&
-    typeof entry.content === "object"
+    typeof entry.content ===
+    "object"
 ) {
-
     return entry.content;
-
 }
-
 
 if (
     entry &&
     entry.data &&
-    typeof entry.data === "object"
+    typeof entry.data ===
+    "object"
 ) {
-
     return entry.data;
-
 }
 
-
-/*
- * If older entries saved design fields
- * directly at document root,
- * use the entire entry.
- */
-
 return entry || {};
-```
 
 }
 
@@ -1594,95 +1399,68 @@ content,
 entry
 ) {
 
-```
 const data = {
-
     ...entry,
-
     ...content
-
 };
-
-
-/*
- * This function uses the actual HTML IDs.
- * Each Firebase field is restored to its
- * matching input / textarea.
- */
-
 
 if (
     designId ===
     "FilmArchiveDesign"
 ) {
-
     populateFilmArchive(
         data
     );
-
 }
-
 
 else if (
     designId ===
     "VintageFlowerDesign"
 ) {
-
     populateVintageFlower(
         data
     );
-
 }
-
 
 else if (
     designId ===
     "HomeBakingDesign"
 ) {
-
     populateHomeBaking(
         data
     );
-
 }
-
 
 else if (
     designId ===
     "MInimalPortfolio"
 ) {
-
     populateMinimalPortfolio(
         data
     );
-
 }
-
 
 else if (
     designId ===
     "ModernMaturityDesign"
 ) {
-
     populateModernMaturity(
         data
     );
-
 }
-```
 
 }
 
 /* =========================================================
-FILM ARCHIVE — POPULATE
+FILM ARCHIVE
 ========================================================= */
 
 function populateFilmArchive(
 data
 ) {
 
-```
-const fields = {
+
+populateFields({
 
     filmHeroTitleTop:
         getValue(
@@ -1855,27 +1633,20 @@ const fields = {
             data,
             "filmTravelText"
         )
+});
 
-};
-
-
-populateFields(
-    fields
-);
-```
 
 }
 
 /* =========================================================
-VINTAGE FLOWER — POPULATE
+VINTAGE FLOWER
 ========================================================= */
 
 function populateVintageFlower(
 data
 ) {
 
-```
-const fields = {
+populateFields({
 
     vintageHeroImage:
         getValue(
@@ -2001,27 +1772,21 @@ const fields = {
             data,
             "vintageGallery4Image"
         )
+});
 
-};
-
-
-populateFields(
-    fields
-);
-```
 
 }
 
 /* =========================================================
-HOME BAKING — POPULATE
+HOME BAKING
 ========================================================= */
 
 function populateHomeBaking(
 data
 ) {
 
-```
-const fields = {
+
+populateFields({
 
     bakingHeroImage:
         getValue(
@@ -2169,29 +1934,22 @@ const fields = {
             data,
             "bakingFooterCopyright"
         )
+});
 
-};
-
-
-populateFields(
-    fields
-);
-```
 
 }
 
 /* =========================================================
-MINIMAL PORTFOLIO — POPULATE
-IMPORTANT:
-Firebase Design ID = MInimalPortfolio
+MINIMAL PORTFOLIO
+Firebase ID = MInimalPortfolio
 ========================================================= */
 
 function populateMinimalPortfolio(
 data
 ) {
 
-```
-const fields = {
+
+populateFields({
 
     minimalHeroImage:
         getValue(
@@ -2406,27 +2164,20 @@ const fields = {
             data,
             "minimalEndingDescription"
         )
+});
 
-};
-
-
-populateFields(
-    fields
-);
-```
 
 }
 
 /* =========================================================
-MODERN MATURITY — POPULATE
+MODERN MATURITY
 ========================================================= */
 
 function populateModernMaturity(
 data
 ) {
 
-```
-const fields = {
+populateFields({
 
     modernHeroEyebrow:
         getValue(
@@ -2548,26 +2299,18 @@ const fields = {
             data,
             "modernSection04Description"
         )
-
-};
-
-
-populateFields(
-    fields
-);
-```
+});
 
 }
 
 /* =========================================================
-GENERIC POPULATE FIELDS
+GENERIC POPULATE
 ========================================================= */
 
 function populateFields(
 fields
 ) {
 
-```
 Object.entries(
     fields
 ).forEach(
@@ -2582,11 +2325,8 @@ Object.entries(
             fieldId,
             value
         );
-
     }
 );
-```
-
 }
 
 /* =========================================================
@@ -2598,7 +2338,6 @@ data,
 ...keys
 ) {
 
-```
 for (
     const key of keys
 ) {
@@ -2610,13 +2349,11 @@ for (
     ) {
 
         return data[key];
-
     }
-
 }
 
 return "";
-```
+
 
 }
 
@@ -2629,17 +2366,14 @@ fieldId,
 value
 ) {
 
-```
 const field =
     document.getElementById(
         fieldId
     );
 
-
 if (!field) {
     return;
 }
-
 
 if (
     value === null ||
@@ -2650,12 +2384,12 @@ if (
         "";
 
     return;
-
 }
 
-
 if (
-    typeof value.toDate === "function"
+    value &&
+    typeof value.toDate ===
+    "function"
 ) {
 
     field.value =
@@ -2664,15 +2398,13 @@ if (
         );
 
     return;
-
 }
-
 
 field.value =
     String(
         value
     );
-```
+
 
 }
 
@@ -2682,17 +2414,12 @@ CLEAR FORM
 
 function clearForm() {
 
-```
 const formIds = [
 
     "editingEntryId",
-
     "entryTitle",
-
     "entryDescription",
-
     "entryDate",
-
     "entryImage",
 
     "filmHeroTitleTop",
@@ -2849,9 +2576,7 @@ const formIds = [
     "modernSection04SubImage",
     "modernSection04Title",
     "modernSection04Description"
-
 ];
-
 
 formIds.forEach(
     id => {
@@ -2860,35 +2585,29 @@ formIds.forEach(
             id,
             ""
         );
-
     }
 );
-
 
 setFieldValue(
     "entryCategory",
     "Research"
 );
 
-
 setFieldValue(
     "entryDesign",
     "FilmArchiveDesign"
 );
-
 
 setFieldValue(
     "entryStatus",
     "Published"
 );
 
-
 selectedDesign =
     "FilmArchiveDesign";
 
-
 hideAllDesignFields();
-```
+
 
 }
 
@@ -2896,242 +2615,186 @@ hideAllDesignFields();
 SAVE ENTRY
 ========================================================= */
 
-window.saveEntry =
-async function() {
+async function saveEntry() {
 
-```
-    if (!db) {
+if (!db) {
+
+    alert(
+        "Firebase is not ready yet."
+    );
+
+    return;
+}
+
+const saveButton =
+    document.getElementById(
+        "saveButton"
+    );
+
+if (saveButton) {
+
+    saveButton.disabled =
+        true;
+
+    saveButton.textContent =
+        "Saving...";
+}
+
+try {
+
+    const editingId =
+        getFieldValue(
+            "editingEntryId"
+        );
+
+    const title =
+        getFieldValue(
+            "entryTitle"
+        ).trim();
+
+    if (!title) {
 
         alert(
-            "Firebase is not ready yet."
+            "Please enter a title."
         );
 
         return;
-
     }
 
-
-    const saveButton =
-        document.getElementById(
-            "saveButton"
+    const category =
+        getFieldValue(
+            "entryCategory"
         );
 
+    const design =
+        getFieldValue(
+            "entryDesign"
+        ) ||
+        selectedDesign;
+
+    const description =
+        getFieldValue(
+            "entryDescription"
+        );
+
+    const date =
+        getFieldValue(
+            "entryDate"
+        );
+
+    const status =
+        getFieldValue(
+            "entryStatus"
+        );
+
+    const image =
+        getFieldValue(
+            "entryImage"
+        );
+
+    const content =
+        collectDesignFields(
+            design
+        );
+
+    const entryData = {
+
+        title,
+
+        category,
+
+        design,
+
+        description,
+
+        date,
+
+        status,
+
+        image,
+
+        content,
+
+        updatedAt:
+            serverTimestamp()
+    };
+
+    if (editingId) {
+
+        const entryRef =
+            doc(
+                db,
+                "news",
+                editingId
+            );
+
+        await updateDoc(
+            entryRef,
+            entryData
+        );
+
+        alert(
+            "Entry updated successfully."
+        );
+
+    } else {
+
+        entryData.createdAt =
+            serverTimestamp();
+
+        const newsRef =
+            collection(
+                db,
+                "news"
+            );
+
+        const newDocument =
+            await addDoc(
+                newsRef,
+                entryData
+            );
+
+        console.log(
+            "New entry created:",
+            newDocument.id
+        );
+
+        alert(
+            "New entry created successfully."
+        );
+    }
+
+    closeModal();
+
+    await loadNewsEntries();
+
+} catch (error) {
+
+    console.error(
+        "Save error:",
+        error
+    );
+
+    alert(
+        "Failed to save entry.\n\n" +
+        error.message
+    );
+
+} finally {
 
     if (saveButton) {
 
         saveButton.disabled =
-            true;
+            false;
 
         saveButton.textContent =
-            "Saving...";
-
+            isEditing
+                ? "Update Entry"
+                : "Save Entry";
     }
+}
 
-
-    try {
-
-        const editingId =
-            getFieldValue(
-                "editingEntryId"
-            );
-
-
-        const title =
-            getFieldValue(
-                "entryTitle"
-            ).trim();
-
-
-        if (!title) {
-
-            alert(
-                "Please enter a title."
-            );
-
-            return;
-
-        }
-
-
-        const category =
-            getFieldValue(
-                "entryCategory"
-            );
-
-
-        const design =
-            getFieldValue(
-                "entryDesign"
-            );
-
-
-        const description =
-            getFieldValue(
-                "entryDescription"
-            );
-
-
-        const date =
-            getFieldValue(
-                "entryDate"
-            );
-
-
-        const status =
-            getFieldValue(
-                "entryStatus"
-            );
-
-
-        const image =
-            getFieldValue(
-                "entryImage"
-            );
-
-
-        /*
-         * Collect ALL design-specific fields.
-         */
-
-        const content =
-            collectDesignFields(
-                design
-            );
-
-
-        /*
-         * Main document.
-         *
-         * content is stored as a map.
-         * This allows the edit modal to restore
-         * every design field later.
-         */
-
-        const entryData = {
-
-            title,
-
-            category,
-
-            design,
-
-            description,
-
-            date,
-
-            status,
-
-            image,
-
-            content,
-
-            updatedAt:
-                serverTimestamp()
-
-        };
-
-
-        if (
-            editingId
-        ) {
-
-            /*
-             * UPDATE EXISTING ENTRY
-             */
-
-            const entryRef =
-                doc(
-                    db,
-                    "news",
-                    editingId
-                );
-
-
-            await updateDoc(
-                entryRef,
-                entryData
-            );
-
-
-            alert(
-                "Entry updated successfully."
-            );
-
-
-        } else {
-
-            /*
-             * CREATE NEW ENTRY
-             */
-
-            entryData.createdAt =
-                serverTimestamp();
-
-
-            const newsRef =
-                collection(
-                    db,
-                    "news"
-                );
-
-
-            const newDocument =
-                await addDoc(
-                    newsRef,
-                    entryData
-                );
-
-
-            console.log(
-                "New entry created:",
-                newDocument.id
-            );
-
-
-            alert(
-                "New entry created successfully."
-            );
-
-        }
-
-
-        closeModal();
-
-        await loadNewsEntries();
-
-
-    } catch (error) {
-
-        console.error(
-            "Save error:",
-            error
-        );
-
-
-        alert(
-            "Failed to save entry.\n\n" +
-            error.message
-        );
-
-
-    } finally {
-
-        if (saveButton) {
-
-            saveButton.disabled =
-                false;
-
-            saveButton.textContent =
-                isEditing
-                    ? "Update Entry"
-                    : "Save Entry";
-
-        }
-
-    }
-
-};
-```
+}
 
 /* =========================================================
 COLLECT DESIGN FIELDS
@@ -3141,7 +2804,6 @@ function collectDesignFields(
 designId
 ) {
 
-```
 const fieldMap = {
 
     FilmArchiveDesign: [
@@ -3178,9 +2840,7 @@ const fieldMap = {
         "filmTravelYear",
         "filmTravelLocation",
         "filmTravelText"
-
     ],
-
 
     VintageFlowerDesign: [
 
@@ -3210,9 +2870,7 @@ const fieldMap = {
         "vintageGallery2Image",
         "vintageGallery3Image",
         "vintageGallery4Image"
-
     ],
-
 
     HomeBakingDesign: [
 
@@ -3247,9 +2905,7 @@ const fieldMap = {
         "bakingFooterNote",
         "bakingFooterTitle",
         "bakingFooterCopyright"
-
     ],
-
 
     MInimalPortfolio: [
 
@@ -3296,9 +2952,7 @@ const fieldMap = {
         "minimalEndingImage",
         "minimalEndingEyebrow",
         "minimalEndingDescription"
-
     ],
-
 
     ModernMaturityDesign: [
 
@@ -3326,20 +2980,15 @@ const fieldMap = {
         "modernSection04SubImage",
         "modernSection04Title",
         "modernSection04Description"
-
     ]
-
 };
-
 
 const fieldIds =
     fieldMap[
         designId
     ] || [];
 
-
 const content = {};
-
 
 fieldIds.forEach(
     fieldId => {
@@ -3350,13 +2999,10 @@ fieldIds.forEach(
             getFieldValue(
                 fieldId
             );
-
     }
 );
 
-
 return content;
-```
 
 }
 
@@ -3368,59 +3014,61 @@ function getFieldValue(
 fieldId
 ) {
 
-```
 const field =
     document.getElementById(
         fieldId
     );
 
-
 if (!field) {
     return "";
 }
 
+return field.value ||
+    "";
 
-return field.value || "";
-```
 
 }
 
 /* =========================================================
-DELETE ENTRY
+DELETE
 ========================================================= */
 
 async function deleteEntry(
 entryId
 ) {
 
-```
 if (!entryId) {
     return;
 }
 
+if (!db) {
+
+    alert(
+        "Firebase is not ready yet."
+    );
+
+    return;
+}
 
 const entry =
     allEntries.find(
         item =>
-            item.id === entryId
+            item.id ===
+            entryId
     );
-
 
 const title =
     entry?.title ||
     "this entry";
-
 
 const confirmed =
     confirm(
         `Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
     );
 
-
 if (!confirmed) {
     return;
 }
-
 
 try {
 
@@ -3431,19 +3079,15 @@ try {
             entryId
         );
 
-
     await deleteDoc(
         entryRef
     );
-
 
     alert(
         "Entry deleted successfully."
     );
 
-
     await loadNewsEntries();
-
 
 } catch (error) {
 
@@ -3452,57 +3096,50 @@ try {
         error
     );
 
-
     alert(
         "Failed to delete entry.\n\n" +
         error.message
     );
-
 }
-```
+
 
 }
 
 /* =========================================================
-UPDATE STATISTICS
+STATISTICS
 ========================================================= */
 
 function updateStatistics() {
 
-```
 const total =
     allEntries.length;
-
 
 const published =
     allEntries.filter(
         entry =>
             normalizeStatus(
                 entry.status
-            ) === "Published"
+            ) ===
+            "Published"
     ).length;
-
 
 const drafts =
     allEntries.filter(
         entry =>
             normalizeStatus(
                 entry.status
-            ) === "Draft"
+            ) ===
+            "Draft"
     ).length;
-
 
 const now =
     new Date();
 
-
 const currentYear =
     now.getFullYear();
 
-
 const currentMonth =
     now.getMonth();
-
 
 const thisMonth =
     allEntries.filter(
@@ -3513,51 +3150,38 @@ const thisMonth =
                     entry
                 );
 
-
             if (!dateValue) {
                 return false;
             }
-
 
             const date =
                 new Date(
                     dateValue
                 );
 
-
             return (
-
                 date.getFullYear() ===
-                currentYear
-
-                &&
-
+                currentYear &&
                 date.getMonth() ===
                 currentMonth
-
             );
-
         }
     ).length;
-
 
 setText(
     "totalPosts",
     total
 );
 
-
 setText(
     "publishedPosts",
     published
 );
 
-
 setText(
     "draftPosts",
     drafts
 );
-
 
 setText(
     "thisMonthPosts",
@@ -3568,7 +3192,7 @@ setText(
         "0"
     )
 );
-```
+
 
 }
 
@@ -3580,34 +3204,30 @@ function normalizeStatus(
 status
 ) {
 
-```
+
 if (!status) {
-
     return "Draft";
-
 }
-
 
 const value =
     String(
         status
-    ).trim()
-    .toLowerCase();
-
+    )
+        .trim()
+        .toLowerCase();
 
 if (
-    value === "published" ||
-    value === "publish" ||
-    value === "public"
+    value ===
+    "published" ||
+    value ===
+    "publish" ||
+    value ===
+    "public"
 ) {
-
     return "Published";
-
 }
 
-
 return "Draft";
-```
 
 }
 
@@ -3618,21 +3238,16 @@ NORMALIZE CATEGORY
 function normalizeCategory(
 category
 ) {
-
-```
 if (!category) {
-
     return "Research";
-
 }
-
 
 const value =
     String(
         category
-    ).trim()
-    .toLowerCase();
-
+    )
+        .trim()
+        .toLowerCase();
 
 const categories = {
 
@@ -3647,9 +3262,7 @@ const categories = {
 
     life:
         "Life"
-
 };
-
 
 return (
     categories[
@@ -3657,7 +3270,7 @@ return (
     ] ||
     category
 );
-```
+
 
 }
 
@@ -3669,16 +3282,14 @@ function formatDate(
 value
 ) {
 
-```
 if (!value) {
     return "";
 }
 
-
 let date;
 
-
 if (
+    value &&
     typeof value.toDate ===
     "function"
 ) {
@@ -3686,26 +3297,20 @@ if (
     date =
         value.toDate();
 
-}
-
-else if (
+} else if (
     value instanceof Date
 ) {
 
     date =
         value;
 
-}
-
-else {
+} else {
 
     date =
         new Date(
             value
         );
-
 }
-
 
 if (
     Number.isNaN(
@@ -3716,9 +3321,7 @@ if (
     return String(
         value
     );
-
 }
-
 
 return date.toLocaleDateString(
     "en-US",
@@ -3733,28 +3336,27 @@ return date.toLocaleDateString(
             "numeric"
     }
 );
-```
+
 
 }
 
 /* =========================================================
-NORMALIZE DATE FOR INPUT
+NORMALIZE DATE
 ========================================================= */
 
 function normalizeDateForInput(
 value
 ) {
 
-```
+
 if (!value) {
     return "";
 }
 
-
 let date;
 
-
 if (
+    value &&
     typeof value.toDate ===
     "function"
 ) {
@@ -3762,28 +3364,19 @@ if (
     date =
         value.toDate();
 
-}
-
-else if (
+} else if (
     value instanceof Date
 ) {
 
     date =
         value;
 
-}
-
-else {
+} else {
 
     const stringValue =
         String(
             value
         );
-
-
-    /*
-     * Already YYYY-MM-DD
-     */
 
     if (
         /^\d{4}-\d{2}-\d{2}$/
@@ -3793,17 +3386,13 @@ else {
     ) {
 
         return stringValue;
-
     }
-
 
     date =
         new Date(
             stringValue
         );
-
 }
-
 
 if (
     Number.isNaN(
@@ -3812,19 +3401,15 @@ if (
 ) {
 
     return "";
-
 }
 
-
 const year =
-    date
-        .getFullYear()
-        .toString()
-        .padStart(
-            4,
-            "0"
-        );
-
+    String(
+        date.getFullYear()
+    ).padStart(
+        4,
+        "0"
+    );
 
 const month =
     String(
@@ -3834,7 +3419,6 @@ const month =
         "0"
     );
 
-
 const day =
     String(
         date.getDate()
@@ -3843,9 +3427,10 @@ const day =
         "0"
     );
 
+return (
+    `${year}-${month}-${day}`
+);
 
-return `${year}-${month}-${day}`;
-```
 
 }
 
@@ -3857,7 +3442,7 @@ function getDesignDisplayName(
 design
 ) {
 
-```
+
 const names = {
 
     FilmArchiveDesign:
@@ -3874,9 +3459,7 @@ const names = {
 
     ModernMaturityDesign:
         "Modern Maturity"
-
 };
-
 
 return (
     names[
@@ -3885,7 +3468,7 @@ return (
     design ||
     "Unknown"
 );
-```
+
 
 }
 
@@ -3898,43 +3481,39 @@ entry,
 key
 ) {
 
-```
+
 if (!entry) {
     return "";
 }
 
-
 if (
     entry.content &&
-    entry.content[key] !== undefined
+    entry.content[key] !==
+    undefined
 ) {
 
     return entry.content[key];
-
 }
-
 
 if (
     entry.data &&
-    entry.data[key] !== undefined
+    entry.data[key] !==
+    undefined
 ) {
 
     return entry.data[key];
-
 }
 
-
 if (
-    entry[key] !== undefined
+    entry[key] !==
+    undefined
 ) {
 
     return entry[key];
-
 }
 
-
 return "";
-```
+
 
 }
 
@@ -3947,12 +3526,11 @@ elementId,
 value
 ) {
 
-```
+
 const element =
     document.getElementById(
         elementId
     );
-
 
 if (element) {
 
@@ -3960,14 +3538,13 @@ if (element) {
         String(
             value
         );
-
 }
-```
+
 
 }
 
 /* =========================================================
-TRUNCATE TEXT
+TRUNCATE
 ========================================================= */
 
 function truncateText(
@@ -3975,13 +3552,12 @@ text,
 maxLength
 ) {
 
-```
+
 const value =
     String(
         text ||
         ""
     );
-
 
 if (
     value.length <=
@@ -3989,9 +3565,7 @@ if (
 ) {
 
     return value;
-
 }
-
 
 return (
     value.substring(
@@ -4000,7 +3574,7 @@ return (
     ) +
     "..."
 );
-```
+
 
 }
 
@@ -4012,16 +3586,14 @@ function escapeHTML(
 value
 ) {
 
-```
+
 if (
     value === null ||
     value === undefined
 ) {
 
     return "";
-
 }
-
 
 return String(
     value
@@ -4046,112 +3618,47 @@ return String(
         /'/g,
         "&#039;"
     );
-```
+
 
 }
 
 /* =========================================================
-GLOBAL REFRESH FUNCTION
-Useful if another page needs to refresh admin list.
+GLOBAL FUNCTIONS
 ========================================================= */
 
 window.refreshNewsAdmin =
 function() {
 
-```
-    loadNewsEntries();
+
+    return loadNewsEntries();
 
 };
-```
 
-/* =========================================================
-GLOBAL EDIT FUNCTION
-Useful for inline onclick calls.
-========================================================= */
+
+window.openNewModal =
+openNewModal;
+
+window.openModal =
+openModal;
+
+window.closeModal =
+closeModal;
+
+window.selectDesign =
+selectDesign;
+
+window.handleDesignChange =
+handleDesignChange;
 
 window.editEntry =
-function(
-entryId
-) {
-
-```
-    return editEntry(
-        entryId
-    );
-
-};
-```
-
-/* =========================================================
-GLOBAL DELETE FUNCTION
-========================================================= */
+editEntry;
 
 window.deleteEntry =
-function(
-entryId
-) {
+deleteEntry;
 
-```
-    return deleteEntry(
-        entryId
-    );
-
-};
-```
-
-/* =========================================================
-DEBUG
-========================================================= */
+window.saveEntry =
+saveEntry;
 
 console.log(
 "News Admin JS loaded successfully."
 );
-
-/* =========================================================
-   EXPOSE FUNCTIONS TO HTML INLINE EVENTS
-========================================================= */
-
-window.openNewModal = openNewModal;
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.selectDesign = selectDesign;
-window.handleDesignChange = handleDesignChange;
-window.editEntry = editEntry;
-window.deleteEntry = deleteEntry;
-window.saveEntry = saveEntry;
-
-/* =========================================================
-   EXPOSE FUNCTIONS TO HTML INLINE EVENTS
-   HTML onclick에서 사용할 수 있도록 전역 등록
-========================================================= */
-
-window.openNewModal =
-    openNewModal;
-
-
-window.openModal =
-    openModal;
-
-
-window.closeModal =
-    closeModal;
-
-
-window.selectDesign =
-    selectDesign;
-
-
-window.handleDesignChange =
-    handleDesignChange;
-
-
-window.editEntry =
-    editEntry;
-
-
-window.deleteEntry =
-    deleteEntry;
-
-
-window.saveEntry =
-    saveEntry;
