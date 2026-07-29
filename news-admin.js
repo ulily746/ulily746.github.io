@@ -41,23 +41,34 @@ INITIALIZE ADMIN
 
 function initializeAdmin() {
 
-setupFilters();
+    // 기존 Firebase 초기화에서 생성된 Firestore 인스턴스 연결
+    db = window.firebaseDB || null;
 
-setupDesignSelector();
+    if (!db) {
+        console.error(
+            "Firebase Database could not be initialized."
+        );
 
-setupModalEvents();
+        return;
+    }
 
-setupNewEntryButtons();
+    setupFilters();
 
-setupSaveButton();
+    setupDesignSelector();
 
-setupCloseButtons();
+    setupModalEvents();
 
-loadNewsEntries();
+    setupNewEntryButtons();
 
-console.log(
-    "News Admin initialized successfully."
-);
+    setupSaveButton();
+
+    setupCloseButtons();
+
+    loadNewsEntries();
+
+    console.log(
+        "News Admin initialized successfully."
+    );
 
 }
 
