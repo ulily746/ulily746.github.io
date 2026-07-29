@@ -56,15 +56,20 @@ INITIALIZE ADMIN
 
 function initializeAdmin() {
 
+    console.log(
+        "Firebase DB ready:",
+        !!db
+    );
+
     if (!db) {
 
         console.error(
-            "Firebase Firestore could not be initialized."
+            "Firebase Database could not be initialized."
         );
 
         showFirebaseError(
             new Error(
-                "Firestore database is not available."
+                "Firebase Database is not available."
             )
         );
 
