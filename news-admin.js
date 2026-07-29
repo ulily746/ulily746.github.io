@@ -729,29 +729,62 @@ buttons.forEach(
 
 /* =========================================================
 SAVE BUTTON
+Prevent duplicate event listeners
 ========================================================= */
 
 function setupSaveButton() {
 
-const button =
-    document.getElementById(
-        "saveButton"
+    const button =
+        document.getElementById("saveButton");
+
+    if (!button) {
+        console.warn(
+            "saveButton not found."
+        );
+        return;
+    }
+
+    // 기존 이벤트 제거를 위한 clone
+    const newButton =
+        button.cloneNode(true);
+
+    button.parentNode.replaceChild(
+        newButton,
+        button
     );
 
-if (!button) {
-    return;
-}
+    newButton.addEventListener(
+        "click",
+        async event => {
 
-button.addEventListener(
-    "click",
-    event => {
+            event.preventDefault();
+            event.stopPropagation();
 
-        event.preventDefault();
+            // 이미 저장 중이면 무시
+            if (newButton.dataset.saving === "true") {
+                console.warn(
+                    "Save already in progress."
+                );
+                return;
+            }
 
-        saveEntry();
-    }
-);
+            newButton.dataset.saving = "true";
 
+            try {
+
+                await saveEntry();
+
+            } finally {
+
+                newButton.dataset.saving = "false";
+
+            }
+
+        },
+        {
+            once: false
+        }
+    );
 
 }
 
