@@ -1,60 +1,43 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-// 본인의 Firebase 콘솔 설정값
-const firebaseConfig = {
-   const firebaseConfig = {
-
-        apiKey:
-        "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
-
-        authDomain:
-        "yuri-research-portfolio.firebaseapp.com",
-
-        projectId:
-        "yuri-research-portfolio",
-
-        storageBucket:
-        "yuri-research-portfolio.firebasestorage.app",
-
-        messagingSenderId:
-        "231317507996",
-
-        appId:
-        "1:231317507996:web:9773282c138706d886c259",
-
-        measurementId:
-        "G-57VHW2454"
-
-    };
-
-// 초기화 및 전역 등록
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window.db = db; // 전역 등록 완료
 /* =========================================================
 NEWS ADMIN.JS
 Personal Archive — News Admin
 ========================================================= */
 
-import {
-collection,
-getDocs,
-addDoc,
-updateDoc,
-deleteDoc,
-doc,
-getDoc,
-query,
-orderBy,
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { 
+  getFirestore, 
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  getDoc,
+  query,
+  orderBy,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// 1. Firebase 설정값
+const firebaseConfig = {
+    apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+    authDomain: "yuri-research-portfolio.firebaseapp.com",
+    projectId: "yuri-research-portfolio",
+    storageBucket: "yuri-research-portfolio.firebasestorage.app",
+    messagingSenderId: "231317507996",
+    appId: "1:231317507996:web:9773282c138706d886c259",
+    measurementId: "G-57VHW2454"
+};
+
+// 2. 초기화 및 전역 등록
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+window.db = db; // 전역 등록 완료
 
 /* =========================================================
 GLOBAL STATE
 ========================================================= */
 
-let db = null;
 let allEntries = [];
 let currentFilter = "ALL";
 let selectedDesign = "FilmArchiveDesign";
