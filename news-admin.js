@@ -1,2332 +1,361 @@
 /* =========================================================
-   GLOBAL STATE
+NEWS ADMIN.JS
+Personal Archive — News Admin
+=============================
+
+FIREBASE STRUCTURE
+
+news
+├── 2026-news-001
+├── 2026-news-002
+├── ...
+└── design
+├── FilmArchiveDesign
+├── VintageFlowerDesign
+├── HomeBakingDesign
+├── MInimalPortfolio
+└── ModernMaturityDesign
+
+## IMPORTANT
+
+Firebase App / Firestore는 HTML에서 초기화됩니다.
+
+HTML에서:
+window.firebaseDB
+
+를 사용합니다.
+
+이 JS에서는 Firebase App을 다시 초기화하지 않습니다.
 ========================================================= */
-
-let allNews = [];
-
-let currentFilter = 'ALL';
-
 
 /* =========================================================
-   DESIGN FIELD IDS
-   모든 디자인 입력 영역을 한 곳에서 관리
+FIREBASE FIRESTORE IMPORTS
 ========================================================= */
 
-const DESIGN_FIELD_IDS = [
-
-    'filmArchiveFields',
-
-    'vintageFlowerFields',
-
-    'homeBakingFields',
-
-    'minimalPortfolioFields',
-
-    'modernMaturityFields'
-
-];
-
+import {
+collection,
+getDocs,
+addDoc,
+updateDoc,
+deleteDoc,
+doc,
+getDoc,
+query,
+orderBy,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 /* =========================================================
-   DESIGN FIELD ELEMENT HELPER
+GLOBAL STATE
 ========================================================= */
 
-function getDesignField(id){
+let allEntries = [];
 
-    return document.getElementById(id);
+let currentFilter = "ALL";
 
-}
+let selectedDesign = "FilmArchiveDesign";
 
+let isEditing = false;
 
 /* =========================================================
-   HIDE ALL DESIGN FORMS
+FIREBASE DATABASE
 ========================================================= */
 
-function hideAllDesignFields(){
+let db = null;
 
-    DESIGN_FIELD_IDS.forEach(
+/* =========================================================
+WAIT FOR FIREBASE
+========================================================= */
 
-        id => {
+function waitForFirebase() {
 
-            const element =
-                getDesignField(id);
+```
+return new Promise((resolve, reject) => {
 
+    let attempts = 0;
 
-            if(element){
+    const maxAttempts = 100;
 
-                element.style.display =
-                    'none';
+    const checkFirebase = () => {
 
-            }
+        if (window.firebaseDB) {
+
+            db = window.firebaseDB;
+
+            resolve(db);
+
+            return;
 
         }
 
-    );
+        attempts++;
 
-}
+        if (attempts >= maxAttempts) {
 
+            reject(
+                new Error(
+                    "Firebase Database could not be initialized."
+                )
+            );
 
-/* =========================================================
-   SHOW SELECTED DESIGN FORM
-========================================================= */
+            return;
 
-function handleDesignChange(){
+        }
 
-    const design =
-        document
-        .getElementById('entryDesign')
-        .value;
-
-
-    hideAllDesignFields();
-
-
-    const designMap = {
-
-        FilmArchiveDesign:
-            'filmArchiveFields',
-
-        VintageFlowerDesign:
-            'vintageFlowerFields',
-
-        HomeBakingDesign:
-            'homeBakingFields',
-
-        MinimalPortfolioDesign:
-            'minimalPortfolioFields',
-
-        ModernMaturityDesign:
-            'modernMaturityFields'
+        setTimeout(
+            checkFirebase,
+            100
+        );
 
     };
 
+    checkFirebase();
 
-    const targetId =
-        designMap[design];
+});
+```
 
+}
 
-    if(!targetId){
+/* =========================================================
+DOM READY
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+async () => {
+
+```
+    console.log(
+        "News Admin initializing..."
+    );
+
+    try {
+
+        await waitForFirebase();
+
+        console.log(
+            "Firebase database ready."
+        );
+
+        initializeAdmin();
+
+    } catch (error) {
+
+        console.error(
+            "Firebase initialization error:",
+            error
+        );
+
+        showFirebaseError(
+            error
+        );
+
+    }
+
+}
+```
+
+);
+
+/* =========================================================
+INITIALIZE ADMIN
+========================================================= */
+
+function initializeAdmin() {
+
+```
+setupFilters();
+
+setupDesignSelector();
+
+setupModalEvents();
+
+loadNewsEntries();
+```
+
+}
+
+/* =========================================================
+FIREBASE ERROR
+========================================================= */
+
+function showFirebaseError(
+error
+) {
+
+```
+const list =
+    document.getElementById(
+        "newsList"
+    );
+
+if (!list) {
+    return;
+}
+
+list.innerHTML = `
+
+    <div class="empty-state">
+
+        <div class="empty-state-title">
+            Firebase Connection Error
+        </div>
+
+        <div class="empty-state-text">
+            ${escapeHTML(
+                error?.message ||
+                "Unable to connect to Firebase."
+            )}
+        </div>
+
+    </div>
+
+`;
+```
+
+}
+
+/* =========================================================
+LOAD ALL NEWS ENTRIES
+========================================================= */
+
+async function loadNewsEntries() {
+
+```
+const list =
+    document.getElementById(
+        "newsList"
+    );
+
+if (list) {
+
+    list.innerHTML = `
+
+        <div class="loading-state">
+            LOADING ARCHIVE...
+        </div>
+
+    `;
+
+}
+
+try {
+
+    const newsRef =
+        collection(
+            db,
+            "news"
+        );
+
+    let snapshot;
+
+    try {
+
+        const orderedQuery =
+            query(
+                newsRef,
+                orderBy(
+                    "date",
+                    "desc"
+                )
+            );
+
+        snapshot =
+            await getDocs(
+                orderedQuery
+            );
+
+    } catch (orderError) {
 
         console.warn(
-            'Unknown design:',
-            design
+            "Ordered query failed. Loading without orderBy.",
+            orderError
         );
 
-        return;
-
-    }
-
-
-    const target =
-        document
-        .getElementById(targetId);
-
-
-    if(!target){
-
-        console.error(
-            'Design form not found:',
-            targetId
-        );
-
-        return;
-
-    }
-
-
-    target.style.display =
-        'block';
-
-}
-
-
-/* =========================================================
-   SELECT DESIGN CARD
-   핵심 수정:
-   디자인을 먼저 지정한 후 모달을 연다.
-========================================================= */
-
-function selectDesign(design){
-
-    resetForm();
-
-
-    document
-    .getElementById('entryDesign')
-    .value =
-    design;
-
-
-    document
-    .getElementById('modalTitle')
-    .textContent =
-    'New Archive Entry';
-
-
-    document
-    .getElementById('saveButton')
-    .textContent =
-    'Save Entry';
-
-
-    document
-    .getElementById('editingEntryId')
-    .value =
-    '';
-
-
-    handleDesignChange();
-
-
-    openModal();
-
-}
-
-
-/* =========================================================
-   OPEN NEW MODAL
-========================================================= */
-
-function openNewModal(){
-
-    resetForm();
-
-
-    document
-    .getElementById('modalTitle')
-    .textContent =
-    'New Archive Entry';
-
-
-    document
-    .getElementById('saveButton')
-    .textContent =
-    'Save Entry';
-
-
-    document
-    .getElementById('editingEntryId')
-    .value =
-    '';
-
-
-    /*
-        일반적으로 NEW ENTRY 버튼을 누르면
-        Film Archive를 기본 디자인으로 표시
-    */
-
-    document
-    .getElementById('entryDesign')
-    .value =
-    'FilmArchiveDesign';
-
-
-    handleDesignChange();
-
-
-    openModal();
-
-}
-
-
-/* =========================================================
-   OPEN MODAL
-========================================================= */
-
-function openModal(){
-
-    const modal =
-        document
-        .getElementById('entryModal');
-
-
-    if(!modal){
-
-        console.error(
-            '#entryModal not found.'
-        );
-
-        return;
-
-    }
-
-
-    modal
-    .classList
-    .add('active');
-
-}
-
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
-
-function closeModal(){
-
-    const modal =
-        document
-        .getElementById('entryModal');
-
-
-    if(!modal){
-
-        return;
-
-    }
-
-
-    modal
-    .classList
-    .remove('active');
-
-}
-
-
-/* =========================================================
-   CLICK OUTSIDE MODAL
-========================================================= */
-
-const entryModal =
-    document
-    .getElementById('entryModal');
-
-
-if(entryModal){
-
-    entryModal.addEventListener(
-
-        'click',
-
-        function(event){
-
-            if(
-                event.target ===
-                entryModal
-            ){
-
-                closeModal();
-
-            }
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   EDIT ENTRY
-========================================================= */
-
-async function editEntry(id){
-
-    const entry =
-        allNews.find(
-
-            item =>
-            item.id === id
-
-        );
-
-
-    if(!entry){
-
-        alert(
-            'Entry not found.'
-        );
-
-        return;
-
-    }
-
-
-    /*
-        먼저 모든 폼 초기화
-    */
-
-    resetForm();
-
-
-    /*
-        기본 정보
-    */
-
-    document
-    .getElementById('editingEntryId')
-    .value =
-    id;
-
-
-    document
-    .getElementById('entryTitle')
-    .value =
-    entry.title || '';
-
-
-    document
-    .getElementById('entryCategory')
-    .value =
-    entry.category || 'Research';
-
-
-    document
-    .getElementById('entryDesign')
-    .value =
-    entry.design || 'FilmArchiveDesign';
-
-
-    document
-    .getElementById('entryDescription')
-    .value =
-    entry.description || '';
-
-
-    document
-    .getElementById('entryDate')
-    .value =
-    entry.date || '';
-
-
-    document
-    .getElementById('entryStatus')
-    .value =
-    entry.status || 'Draft';
-
-
-    document
-    .getElementById('entryImage')
-    .value =
-    entry.image || '';
-
-
-    /*
-        디자인 폼 표시
-    */
-
-    handleDesignChange();
-
-
-    /*
-        디자인별 데이터 복원
-    */
-
-    switch(entry.design){
-
-        case 'FilmArchiveDesign':
-
-            fillFilmArchiveForm(
-                entry.content || {}
-            );
-
-            break;
-
-
-        case 'VintageFlowerDesign':
-
-            fillVintageFlowerForm(
-                entry
-            );
-
-            break;
-
-
-        case 'HomeBakingDesign':
-
-            fillHomeBakingForm(
-                entry
-            );
-
-            break;
-
-
-        case 'MinimalPortfolioDesign':
-
-            fillMinimalPortfolioForm(
-                entry
-            );
-
-            break;
-
-
-        case 'ModernMaturityDesign':
-
-            fillModernMaturityForm(
-                entry
-            );
-
-            break;
-
-
-        default:
-
-            console.warn(
-                'Unknown design:',
-                entry.design
+        snapshot =
+            await getDocs(
+                newsRef
             );
 
     }
 
+    allEntries = [];
 
-    /*
-        모달 제목
-    */
+    snapshot.forEach(
+        (documentSnapshot) => {
 
-    document
-    .getElementById('modalTitle')
-    .textContent =
-    'Edit Archive Entry';
+            const data =
+                documentSnapshot.data();
 
+            /*
+             * news/design is the design template document.
+             * It should NOT appear as a real news entry.
+             */
 
-    document
-    .getElementById('saveButton')
-    .textContent =
-    'Update Entry';
-
-
-    openModal();
-
-}
-
-
-/* =========================================================
-   FILL FILM ARCHIVE FORM
-========================================================= */
-
-function fillFilmArchiveForm(content){
-
-    const hero =
-        content.hero || {};
-
-    const intro =
-        content.intro || {};
-
-    const memories =
-        content.memories || [];
-
-    const video =
-        content.video || {};
-
-    const films =
-        content.films || [];
-
-    const travel =
-        content.travel || {};
-
-
-    document
-    .getElementById('heroTitleTop')
-    .value =
-    hero.titleTop || '';
-
-
-    document
-    .getElementById('heroTitleBottom1')
-    .value =
-    hero.titleBottom1 || '';
-
-
-    document
-    .getElementById('heroTitleBottom2')
-    .value =
-    hero.titleBottom2 || '';
-
-
-    document
-    .getElementById('heroImage')
-    .value =
-    hero.image || '';
-
-
-    document
-    .getElementById('introText')
-    .value =
-    intro.text || '';
-
-
-    for(let i = 1; i <= 4; i++){
-
-        const memory =
-            memories[i - 1] || {};
-
-
-        document
-        .getElementById(
-            `memory${i}Image`
-        )
-        .value =
-        memory.image || '';
-
-
-        document
-        .getElementById(
-            `memory${i}Text`
-        )
-        .value =
-        memory.text || '';
-
-    }
-
-
-    document
-    .getElementById('videoUrl')
-    .value =
-    video.url || '';
-
-
-    document
-    .getElementById('videoCaption')
-    .value =
-    video.caption || '';
-
-
-    for(let i = 1; i <= 3; i++){
-
-        const film =
-            films[i - 1] || {};
-
-
-        document
-        .getElementById(
-            `film${i}Image`
-        )
-        .value =
-        film.image || '';
-
-
-        document
-        .getElementById(
-            `film${i}Title`
-        )
-        .value =
-        film.title || '';
-
-
-        document
-        .getElementById(
-            `film${i}Text`
-        )
-        .value =
-        film.text || '';
-
-    }
-
-
-    document
-    .getElementById('travelMonth')
-    .value =
-    travel.month || '';
-
-
-    document
-    .getElementById('travelYear')
-    .value =
-    travel.year || '';
-
-
-    document
-    .getElementById('travelLocation')
-    .value =
-    travel.location || '';
-
-
-    document
-    .getElementById('travelText')
-    .value =
-    travel.text || '';
-
-}
-
-
-/* =========================================================
-   FILL VINTAGE FLOWER FORM
-========================================================= */
-
-function fillVintageFlowerForm(entry){
-
-    document
-    .getElementById('vintageHeroImage')
-    .value =
-    entry.heroImage || '';
-
-
-    document
-    .getElementById('vintageHeroTitle')
-    .value =
-    entry.heroTitle || '';
-
-
-    document
-    .getElementById('vintageHeroSubtitle')
-    .value =
-    entry.heroEyebrow || '';
-
-
-    document
-    .getElementById('vintageIntroTitle')
-    .value =
-    entry.chapter01Title || '';
-
-
-    document
-    .getElementById('vintageIntroText')
-    .value =
-    entry.chapter01Description || '';
-
-
-    document
-    .getElementById('vintageFlower1Image')
-    .value =
-    entry.page01Image ||
-    entry.chapter01Image ||
-    '';
-
-
-    document
-    .getElementById('vintageFlower1Title')
-    .value =
-    entry.page01Title || '';
-
-
-    document
-    .getElementById('vintageFlower1Text')
-    .value =
-    entry.page01Description || '';
-
-
-    document
-    .getElementById('vintageFlower2Image')
-    .value =
-    entry.page02Image ||
-    entry.chapter02Image ||
-    '';
-
-
-    document
-    .getElementById('vintageFlower2Title')
-    .value =
-    entry.page02Title ||
-    entry.chapter02Title ||
-    '';
-
-
-    document
-    .getElementById('vintageFlower2Text')
-    .value =
-    entry.page02Description ||
-    entry.chapter02Description ||
-    '';
-
-
-    document
-    .getElementById('vintageFlower3Image')
-    .value =
-    entry.page03Image || '';
-
-
-    document
-    .getElementById('vintageFlower3Title')
-    .value =
-    entry.page03Title || '';
-
-
-    document
-    .getElementById('vintageFlower3Text')
-    .value =
-    entry.page03Description || '';
-
-
-    document
-    .getElementById('vintageJournalTitle')
-    .value =
-    entry.videoTitle || '';
-
-
-    document
-    .getElementById('vintageJournalText')
-    .value =
-    entry.videoDescription || '';
-
-
-    document
-    .getElementById('vintageGallery1Image')
-    .value =
-    entry.memoryAImage ||
-    entry.ribbonImage ||
-    '';
-
-
-    document
-    .getElementById('vintageGallery2Image')
-    .value =
-    entry.memoryBImage || '';
-
-
-    document
-    .getElementById('vintageGallery3Image')
-    .value =
-    entry.memoryCImage || '';
-
-
-    document
-    .getElementById('vintageGallery4Image')
-    .value =
-    entry.memoryDImage || '';
-
-}
-
-
-/* =========================================================
-   FILL HOME BAKING FORM
-   반드시 home 접두사 ID 사용
-========================================================= */
-
-function fillHomeBakingForm(entry){
-
-    const fields = {
-
-        homeHeroImage:
-            entry.homeHeroImage,
-
-        homeHeroTitle:
-            entry.homeHeroTitle,
-
-        homeHeroDescription:
-            entry.homeHeroDescription,
-
-        homeSectionTitle:
-            entry.homeSectionTitle,
-
-        homeSectionDescription:
-            entry.homeSectionDescription,
-
-        homePolaroid01Image:
-            entry.homePolaroid01Image,
-
-        homePolaroid01Title:
-            entry.homePolaroid01Title,
-
-        homePolaroid01Description:
-            entry.homePolaroid01Description,
-
-        homePolaroid02Image:
-            entry.homePolaroid02Image,
-
-        homePolaroid02Title:
-            entry.homePolaroid02Title,
-
-        homePolaroid02Description:
-            entry.homePolaroid02Description,
-
-        homePolaroid03Image:
-            entry.homePolaroid03Image,
-
-        homePolaroid03Title:
-            entry.homePolaroid03Title,
-
-        homePolaroid03Description:
-            entry.homePolaroid03Description,
-
-        homeGallery01Image:
-            entry.homeGallery01Image,
-
-        homeGallery02Image:
-            entry.homeGallery02Image,
-
-        homeGallery03Image:
-            entry.homeGallery03Image,
-
-        homeAboutImage:
-            entry.homeAboutImage,
-
-        homeAboutEyebrow:
-            entry.homeAboutEyebrow,
-
-        homeAboutTitle:
-            entry.homeAboutTitle,
-
-        homeAboutDescription:
-            entry.homeAboutDescription
-
-    };
-
-
-    Object
-    .entries(fields)
-    .forEach(
-
-        ([id, value]) => {
-
-            const element =
-                document
-                .getElementById(id);
-
-
-            if(element){
-
-                element.value =
-                    value || '';
-
-            }
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   FILL MINIMAL PORTFOLIO FORM
-========================================================= */
-
-function fillMinimalPortfolioForm(entry){
-
-    const fields = {
-
-        minimalHeroImage:
-            entry.minimalHeroImage,
-
-        minimalHeroEyebrow:
-            entry.minimalHeroEyebrow,
-
-        minimalHeroTitle:
-            entry.minimalHeroTitle,
-
-        minimalHeroDescription:
-            entry.minimalHeroDescription,
-
-
-        minimalPlace01Image:
-            entry.minimalPlace01Image,
-
-        minimalPlace01Label:
-            entry.minimalPlace01Label,
-
-        minimalPlace01Title:
-            entry.minimalPlace01Title,
-
-        minimalPlace01Description:
-            entry.minimalPlace01Description,
-
-
-        minimalStatementEyebrow:
-            entry.minimalStatementEyebrow,
-
-        minimalStatementTitle:
-            entry.minimalStatementTitle,
-
-        minimalStatementDescription:
-            entry.minimalStatementDescription,
-
-
-        minimalPlace02Image:
-            entry.minimalPlace02Image,
-
-        minimalPlace02Label:
-            entry.minimalPlace02Label,
-
-        minimalPlace02Title:
-            entry.minimalPlace02Title,
-
-        minimalPlace02Description:
-            entry.minimalPlace02Description,
-
-
-        minimalGalleryEyebrow:
-            entry.minimalGalleryEyebrow,
-
-        minimalGalleryTitle:
-            entry.minimalGalleryTitle,
-
-        minimalGalleryDescription:
-            entry.minimalGalleryDescription,
-
-
-        minimalGallery01Image:
-            entry.minimalGallery01Image,
-
-        minimalGallery02Image:
-            entry.minimalGallery02Image,
-
-        minimalGallery03Image:
-            entry.minimalGallery03Image,
-
-        minimalGallery04Image:
-            entry.minimalGallery04Image,
-
-        minimalGallery05Image:
-            entry.minimalGallery05Image,
-
-        minimalGallery06Image:
-            entry.minimalGallery06Image,
-
-
-        minimalMovingEyebrow:
-            entry.minimalMovingEyebrow,
-
-        minimalMovingTitle:
-            entry.minimalMovingTitle,
-
-        minimalMovingDescription:
-            entry.minimalMovingDescription,
-
-        minimalMovingVideo:
-            entry.minimalMovingVideo,
-
-        minimalMovingCaption:
-            entry.minimalMovingCaption,
-
-
-        minimalFinalEyebrow:
-            entry.minimalFinalEyebrow,
-
-        minimalFinalTitle:
-            entry.minimalFinalTitle,
-
-        minimalFinalDescription:
-            entry.minimalFinalDescription,
-
-
-        minimalEndingImage:
-            entry.minimalEndingImage,
-
-        minimalEndingEyebrow:
-            entry.minimalEndingEyebrow,
-
-        minimalEndingDescription:
-            entry.minimalEndingDescription
-
-    };
-
-
-    Object
-    .entries(fields)
-    .forEach(
-
-        ([id, value]) => {
-
-            const element =
-                document
-                .getElementById(id);
-
-
-            if(element){
-
-                element.value =
-                    value || '';
-
-            }
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   FILL MODERN MATURITY FORM
-========================================================= */
-
-function fillModernMaturityForm(entry){
-
-    const fields = {
-
-        modernHeroEyebrow:
-            entry.modernHeroEyebrow,
-
-        modernHeroTitle:
-            entry.modernHeroTitle,
-
-        modernHeroImage:
-            entry.modernHeroImage,
-
-        modernHeroQuote:
-            entry.modernHeroQuote,
-
-        modernHeroDescription:
-            entry.modernHeroDescription,
-
-
-        modernSection01Image:
-            entry.modernSection01Image,
-
-        modernSection01SubImage:
-            entry.modernSection01SubImage,
-
-        modernSection01Title:
-            entry.modernSection01Title,
-
-        modernSection01Description:
-            entry.modernSection01Description,
-
-
-        modernSection02Image01:
-            entry.modernSection02Image01,
-
-        modernSection02Image02:
-            entry.modernSection02Image02,
-
-        modernSection02Title:
-            entry.modernSection02Title,
-
-        modernSection02Description:
-            entry.modernSection02Description,
-
-
-        modernSection03Image:
-            entry.modernSection03Image,
-
-        modernSection03Title:
-            entry.modernSection03Title,
-
-        modernSection03Description:
-            entry.modernSection03Description,
-
-
-        modernSection04Image:
-            entry.modernSection04Image,
-
-        modernSection04SubImage:
-            entry.modernSection04SubImage,
-
-        modernSection04Title:
-            entry.modernSection04Title,
-
-        modernSection04Description:
-            entry.modernSection04Description
-
-    };
-
-
-    Object
-    .entries(fields)
-    .forEach(
-
-        ([id, value]) => {
-
-            const element =
-                document
-                .getElementById(id);
-
-
-            if(element){
-
-                element.value =
-                    value || '';
-
-            }
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   COLLECT DESIGN CONTENT
-========================================================= */
-
-function collectDesignContent(){
-
-    const design =
-        document
-        .getElementById('entryDesign')
-        .value;
-
-
-    let designContent = {};
-
-
-    /* =====================================================
-       FILM ARCHIVE
-    ===================================================== */
-
-    if(
-        design ===
-        'FilmArchiveDesign'
-    ){
-
-        designContent = {
-
-            hero: {
-
-                titleTop:
-                    document
-                    .getElementById('heroTitleTop')
-                    .value
-                    .trim(),
-
-                titleBottom1:
-                    document
-                    .getElementById('heroTitleBottom1')
-                    .value
-                    .trim(),
-
-                titleBottom2:
-                    document
-                    .getElementById('heroTitleBottom2')
-                    .value
-                    .trim(),
-
-                image:
-                    document
-                    .getElementById('heroImage')
-                    .value
-                    .trim()
-
-            },
-
-
-            intro: {
-
-                text:
-                    document
-                    .getElementById('introText')
-                    .value
-                    .trim()
-
-            },
-
-
-            memories: [
-
-                1,2,3,4
-
-            ].map(
-
-                i => ({
-
-                    image:
-                        document
-                        .getElementById(
-                            `memory${i}Image`
-                        )
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById(
-                            `memory${i}Text`
-                        )
-                        .value
-                        .trim()
-
-                })
-
-            ),
-
-
-            video: {
-
-                url:
-                    document
-                    .getElementById('videoUrl')
-                    .value
-                    .trim(),
-
-                caption:
-                    document
-                    .getElementById('videoCaption')
-                    .value
-                    .trim()
-
-            },
-
-
-            films: [
-
-                1,2,3
-
-            ].map(
-
-                i => ({
-
-                    image:
-                        document
-                        .getElementById(
-                            `film${i}Image`
-                        )
-                        .value
-                        .trim(),
-
-                    title:
-                        document
-                        .getElementById(
-                            `film${i}Title`
-                        )
-                        .value
-                        .trim(),
-
-                    text:
-                        document
-                        .getElementById(
-                            `film${i}Text`
-                        )
-                        .value
-                        .trim()
-
-                })
-
-            ),
-
-
-            travel: {
-
-                month:
-                    document
-                    .getElementById('travelMonth')
-                    .value
-                    .trim(),
-
-                year:
-                    document
-                    .getElementById('travelYear')
-                    .value
-                    .trim(),
-
-                location:
-                    document
-                    .getElementById('travelLocation')
-                    .value
-                    .trim(),
-
-                text:
-                    document
-                    .getElementById('travelText')
-                    .value
-                    .trim()
-
-            }
-
-        };
-
-    }
-
-
-    /* =====================================================
-       VINTAGE FLOWER
-    ===================================================== */
-
-    else if(
-        design ===
-        'VintageFlowerDesign'
-    ){
-
-        designContent = {
-
-            heroEyebrow:
-                document
-                .getElementById('vintageHeroSubtitle')
-                .value
-                .trim(),
-
-            heroTitle:
-                document
-                .getElementById('vintageHeroTitle')
-                .value
-                .trim(),
-
-            heroImage:
-                document
-                .getElementById('vintageHeroImage')
-                .value
-                .trim(),
-
-
-            chapter01Title:
-                document
-                .getElementById('vintageIntroTitle')
-                .value
-                .trim(),
-
-            chapter01Description:
-                document
-                .getElementById('vintageIntroText')
-                .value
-                .trim(),
-
-
-            page01Label:
-                'PAGE .01',
-
-            page01Title:
-                document
-                .getElementById('vintageFlower1Title')
-                .value
-                .trim(),
-
-            page01Description:
-                document
-                .getElementById('vintageFlower1Text')
-                .value
-                .trim(),
-
-            page01Image:
-                document
-                .getElementById('vintageFlower1Image')
-                .value
-                .trim(),
-
-
-            page02Label:
-                'PAGE .02',
-
-            page02Title:
-                document
-                .getElementById('vintageFlower2Title')
-                .value
-                .trim(),
-
-            page02Description:
-                document
-                .getElementById('vintageFlower2Text')
-                .value
-                .trim(),
-
-            page02Image:
-                document
-                .getElementById('vintageFlower2Image')
-                .value
-                .trim(),
-
-
-            page03Label:
-                'PAGE .03',
-
-            page03Title:
-                document
-                .getElementById('vintageFlower3Title')
-                .value
-                .trim(),
-
-            page03Description:
-                document
-                .getElementById('vintageFlower3Text')
-                .value
-                .trim(),
-
-            page03Image:
-                document
-                .getElementById('vintageFlower3Image')
-                .value
-                .trim(),
-
-
-            videoTitle:
-                document
-                .getElementById('vintageJournalTitle')
-                .value
-                .trim(),
-
-            videoDescription:
-                document
-                .getElementById('vintageJournalText')
-                .value
-                .trim(),
-
-
-            memoryAImage:
-                document
-                .getElementById('vintageGallery1Image')
-                .value
-                .trim(),
-
-            memoryBImage:
-                document
-                .getElementById('vintageGallery2Image')
-                .value
-                .trim(),
-
-            memoryCImage:
-                document
-                .getElementById('vintageGallery3Image')
-                .value
-                .trim(),
-
-            memoryDImage:
-                document
-                .getElementById('vintageGallery4Image')
-                .value
-                .trim()
-
-        };
-
-    }
-
-
-    /* =====================================================
-       HOME BAKING
-    ===================================================== */
-
-    else if(
-        design ===
-        'HomeBakingDesign'
-    ){
-
-        designContent = {
-
-            homeHeroImage:
-                document
-                .getElementById('homeHeroImage')
-                .value
-                .trim(),
-
-            homeHeroTitle:
-                document
-                .getElementById('homeHeroTitle')
-                .value
-                .trim(),
-
-            homeHeroDescription:
-                document
-                .getElementById('homeHeroDescription')
-                .value
-                .trim(),
-
-
-            homeSectionTitle:
-                document
-                .getElementById('homeSectionTitle')
-                .value
-                .trim(),
-
-            homeSectionDescription:
-                document
-                .getElementById('homeSectionDescription')
-                .value
-                .trim(),
-
-
-            homePolaroid01Image:
-                document
-                .getElementById('homePolaroid01Image')
-                .value
-                .trim(),
-
-            homePolaroid01Title:
-                document
-                .getElementById('homePolaroid01Title')
-                .value
-                .trim(),
-
-            homePolaroid01Description:
-                document
-                .getElementById('homePolaroid01Description')
-                .value
-                .trim(),
-
-
-            homePolaroid02Image:
-                document
-                .getElementById('homePolaroid02Image')
-                .value
-                .trim(),
-
-            homePolaroid02Title:
-                document
-                .getElementById('homePolaroid02Title')
-                .value
-                .trim(),
-
-            homePolaroid02Description:
-                document
-                .getElementById('homePolaroid02Description')
-                .value
-                .trim(),
-
-
-            homePolaroid03Image:
-                document
-                .getElementById('homePolaroid03Image')
-                .value
-                .trim(),
-
-            homePolaroid03Title:
-                document
-                .getElementById('homePolaroid03Title')
-                .value
-                .trim(),
-
-            homePolaroid03Description:
-                document
-                .getElementById('homePolaroid03Description')
-                .value
-                .trim(),
-
-
-            homeGallery01Image:
-                document
-                .getElementById('homeGallery01Image')
-                .value
-                .trim(),
-
-            homeGallery02Image:
-                document
-                .getElementById('homeGallery02Image')
-                .value
-                .trim(),
-
-            homeGallery03Image:
-                document
-                .getElementById('homeGallery03Image')
-                .value
-                .trim(),
-
-
-            homeAboutImage:
-                document
-                .getElementById('homeAboutImage')
-                .value
-                .trim(),
-
-            homeAboutEyebrow:
-                document
-                .getElementById('homeAboutEyebrow')
-                .value
-                .trim(),
-
-            homeAboutTitle:
-                document
-                .getElementById('homeAboutTitle')
-                .value
-                .trim(),
-
-            homeAboutDescription:
-                document
-                .getElementById('homeAboutDescription')
-                .value
-                .trim()
-
-        };
-
-    }
-
-
-    /* =====================================================
-       MINIMAL PORTFOLIO
-    ===================================================== */
-
-    else if(
-        design ===
-        'MinimalPortfolioDesign'
-    ){
-
-        const ids = [
-
-            'minimalHeroImage',
-            'minimalHeroEyebrow',
-            'minimalHeroTitle',
-            'minimalHeroDescription',
-
-            'minimalPlace01Image',
-            'minimalPlace01Label',
-            'minimalPlace01Title',
-            'minimalPlace01Description',
-
-            'minimalStatementEyebrow',
-            'minimalStatementTitle',
-            'minimalStatementDescription',
-
-            'minimalPlace02Image',
-            'minimalPlace02Label',
-            'minimalPlace02Title',
-            'minimalPlace02Description',
-
-            'minimalGalleryEyebrow',
-            'minimalGalleryTitle',
-            'minimalGalleryDescription',
-
-            'minimalGallery01Image',
-            'minimalGallery02Image',
-            'minimalGallery03Image',
-            'minimalGallery04Image',
-            'minimalGallery05Image',
-            'minimalGallery06Image',
-
-            'minimalMovingEyebrow',
-            'minimalMovingTitle',
-            'minimalMovingDescription',
-            'minimalMovingVideo',
-            'minimalMovingCaption',
-
-            'minimalFinalEyebrow',
-            'minimalFinalTitle',
-            'minimalFinalDescription',
-
-            'minimalEndingImage',
-            'minimalEndingEyebrow',
-            'minimalEndingDescription'
-
-        ];
-
-
-        ids.forEach(
-
-            id => {
-
-                designContent[id] =
-
-                    document
-                    .getElementById(id)
-                    .value
-                    .trim();
-
-            }
-
-        );
-
-    }
-
-
-    /* =====================================================
-       MODERN MATURITY
-    ===================================================== */
-
-    else if(
-        design ===
-        'ModernMaturityDesign'
-    ){
-
-        const ids = [
-
-            'modernHeroEyebrow',
-            'modernHeroTitle',
-            'modernHeroImage',
-            'modernHeroQuote',
-            'modernHeroDescription',
-
-            'modernSection01Image',
-            'modernSection01SubImage',
-            'modernSection01Title',
-            'modernSection01Description',
-
-            'modernSection02Image01',
-            'modernSection02Image02',
-            'modernSection02Title',
-            'modernSection02Description',
-
-            'modernSection03Image',
-            'modernSection03Title',
-            'modernSection03Description',
-
-            'modernSection04Image',
-            'modernSection04SubImage',
-            'modernSection04Title',
-            'modernSection04Description'
-
-        ];
-
-
-        ids.forEach(
-
-            id => {
-
-                designContent[id] =
-
-                    document
-                    .getElementById(id)
-                    .value
-                    .trim();
-
-            }
-
-        );
-
-    }
-
-
-    return designContent;
-
-}
-
-
-/* =========================================================
-   SAVE / UPDATE ENTRY
-========================================================= */
-
-async function saveEntry(){
-
-    const title =
-        document
-        .getElementById('entryTitle')
-        .value
-        .trim();
-
-
-    const category =
-        document
-        .getElementById('entryCategory')
-        .value;
-
-
-    const design =
-        document
-        .getElementById('entryDesign')
-        .value;
-
-
-    const description =
-        document
-        .getElementById('entryDescription')
-        .value
-        .trim();
-
-
-    const date =
-        document
-        .getElementById('entryDate')
-        .value;
-
-
-    const status =
-        document
-        .getElementById('entryStatus')
-        .value;
-
-
-    const image =
-        document
-        .getElementById('entryImage')
-        .value
-        .trim();
-
-
-    const editingId =
-        document
-        .getElementById('editingEntryId')
-        .value;
-
-
-    if(!title){
-
-        alert(
-            'Please enter a title.'
-        );
-
-        return;
-
-    }
-
-
-    if(!window.firebaseDB){
-
-        alert(
-            'Firebase is not connected.'
-        );
-
-        return;
-
-    }
-
-
-    const designContent =
-        collectDesignContent();
-
-
-    const entryData = {
-
-        title,
-
-        category,
-
-        design,
-
-        description,
-
-        date,
-
-        status,
-
-        image
-
-    };
-
-
-    /*
-        Film Archive만 content 내부 저장
-
-        나머지 4개 디자인은
-        Firebase TOP-LEVEL 저장
-    */
-
-    if(
-        design ===
-        'FilmArchiveDesign'
-    ){
-
-        entryData.content =
-            designContent;
-
-    }
-
-    else{
-
-        Object.assign(
-
-            entryData,
-
-            designContent
-
-        );
-
-    }
-
-
-    try{
-
-        /*
-            EDIT
-        */
-
-        if(editingId){
-
-            const entryRef =
-                window.firebaseDoc(
-
-                    window.firebaseDB,
-
-                    'news',
-
-                    editingId
-
-                );
-
-
-            await window.firebaseUpdateDoc(
-
-                entryRef,
-
-                {
-
-                    ...entryData,
-
-                    updatedAt:
-                        window.firebaseServerTimestamp()
-
-                }
-
-            );
-
-
-            alert(
-                'Entry updated successfully!'
-            );
-
-        }
-
-
-        /*
-            NEW
-        */
-
-        else{
-
-            await window.firebaseAddDoc(
-
-                window.firebaseCollection(
-
-                    window.firebaseDB,
-
-                    'news'
-
-                ),
-
-                {
-
-                    ...entryData,
-
-                    createdAt:
-                        window.firebaseServerTimestamp()
-
-                }
-
-            );
-
-
-            alert(
-                'Entry saved successfully!'
-            );
-
-        }
-
-
-        closeModal();
-
-
-        resetForm();
-
-
-        await loadNews();
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            'Firebase save error:',
-            error
-        );
-
-
-        alert(
-            'Failed to save entry. Please check the browser console.'
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   DELETE ENTRY
-========================================================= */
-
-async function deleteEntry(id){
-
-    const entry =
-        allNews.find(
-
-            item =>
-            item.id === id
-
-        );
-
-
-    if(!entry){
-
-        alert(
-            'Entry not found.'
-        );
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm(
-            `Delete "${entry.title}"?`
-        );
-
-
-    if(!confirmed){
-
-        return;
-
-    }
-
-
-    try{
-
-        const entryRef =
-            window.firebaseDoc(
-
-                window.firebaseDB,
-
-                'news',
-
-                id
-
-            );
-
-
-        await window.firebaseDeleteDoc(
-
-            entryRef
-
-        );
-
-
-        alert(
-            'Entry deleted successfully!'
-        );
-
-
-        await loadNews();
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            'Delete error:',
-            error
-        );
-
-
-        alert(
-            'Failed to delete entry.'
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   RESET FORM
-========================================================= */
-
-function resetForm(){
-
-    /*
-        기본 필드
-    */
-
-    const basicFields = [
-
-        'editingEntryId',
-
-        'entryTitle',
-
-        'entryDescription',
-
-        'entryDate',
-
-        'entryImage'
-
-    ];
-
-
-    basicFields.forEach(
-
-        id => {
-
-            const element =
-                document
-                .getElementById(id);
-
-
-            if(element){
-
-                element.value =
-                    '';
-
-            }
-
-        }
-
-    );
-
-
-    document
-    .getElementById('entryCategory')
-    .value =
-    'Research';
-
-
-    document
-    .getElementById('entryDesign')
-    .value =
-    'FilmArchiveDesign';
-
-
-    document
-    .getElementById('entryStatus')
-    .value =
-    'Published';
-
-
-    /*
-        모든 디자인 폼의 input / textarea 초기화
-    */
-
-    DESIGN_FIELD_IDS.forEach(
-
-        fieldId => {
-
-            const container =
-                document
-                .getElementById(fieldId);
-
-
-            if(!container){
+            if (
+                documentSnapshot.id === "design"
+            ) {
 
                 return;
 
             }
 
+            allEntries.push({
 
-            container
-            .querySelectorAll(
-                'input, textarea, select'
-            )
-            .forEach(
+                id:
+                    documentSnapshot.id,
 
-                element => {
+                ...data
 
-                    element.value =
-                        '';
-
-                }
-
-            );
+            });
 
         }
-
     );
 
 
     /*
-        모든 디자인 폼 숨기기
-    */
+     * Client-side date sorting
+     * protects against mixed date formats.
+     */
 
-    hideAllDesignFields();
+    allEntries.sort(
+        sortEntriesByDate
+    );
 
-}
 
+    updateStatistics();
 
-/* =========================================================
-   FIREBASE LOAD NEWS
-========================================================= */
+    renderNewsList();
 
-async function loadNews(){
 
-    if(!window.firebaseDB){
+    console.log(
+        "News entries loaded:",
+        allEntries.length
+    );
 
-        console.log(
-            'Firebase not ready. Retrying...'
-        );
 
+} catch (error) {
 
-        setTimeout(
+    console.error(
+        "Failed to load news:",
+        error
+    );
 
-            loadNews,
+    if (list) {
 
-            500
-
-        );
-
-
-        return;
-
-    }
-
-
-    const newsList =
-        document
-        .getElementById('newsList');
-
-
-    if(!newsList){
-
-        return;
-
-    }
-
-
-    newsList.innerHTML = `
-
-        <div class="loading-state">
-
-            LOADING ARCHIVE...
-
-        </div>
-
-    `;
-
-
-    try{
-
-        const snapshot =
-            await window.firebaseGetDocs(
-
-                window.firebaseCollection(
-
-                    window.firebaseDB,
-
-                    'news'
-
-                )
-
-            );
-
-
-        allNews = [];
-
-
-        snapshot.forEach(
-
-            documentSnapshot => {
-
-                allNews.push({
-
-                    id:
-                        documentSnapshot.id,
-
-                    ...documentSnapshot.data()
-
-                });
-
-            }
-
-        );
-
-
-        allNews.sort(
-
-            (a,b) => {
-
-                const dateA =
-                    a.date || '';
-
-                const dateB =
-                    b.date || '';
-
-
-                return dateB
-                    .localeCompare(
-                        dateA
-                    );
-
-            }
-
-        );
-
-
-        updateStats();
-
-
-        renderNews();
-
-
-        console.log(
-            'News loaded:',
-            allNews
-        );
-
-    }
-
-
-    catch(error){
-
-        console.error(
-            'Failed to load news:',
-            error
-        );
-
-
-        newsList.innerHTML = `
+        list.innerHTML = `
 
             <div class="empty-state">
 
                 <div class="empty-state-title">
-
-                    Unable to load archive
-
+                    Unable to Load Archive
                 </div>
 
                 <div class="empty-state-text">
-
-                    Please check Firebase configuration and Firestore rules.
-
+                    ${escapeHTML(
+                        error?.message ||
+                        "Please check Firebase configuration."
+                    )}
                 </div>
 
             </div>
@@ -2336,37 +365,3744 @@ async function loadNews(){
     }
 
 }
+```
 
-
-/* =========================================================
-   INITIAL DESIGN STATE
-========================================================= */
-
-document.addEventListener(
-
-    'DOMContentLoaded',
-
-    function(){
-
-        hideAllDesignFields();
-
-        handleDesignChange();
-
-    }
-
-);
-
+}
 
 /* =========================================================
-   FIREBASE READY CHECK
+SORT ENTRIES
 ========================================================= */
 
-if(window.firebaseDB){
+function sortEntriesByDate(
+a,
+b
+) {
 
-    loadNews();
+```
+const dateA =
+    getEntryDateValue(
+        a
+    );
+
+const dateB =
+    getEntryDateValue(
+        b
+    );
+
+return dateB - dateA;
+```
+
+}
+
+/* =========================================================
+DATE VALUE
+========================================================= */
+
+function getEntryDateValue(
+entry
+) {
+
+```
+if (!entry) {
+    return 0;
+}
+
+const date =
+    entry.date ||
+    entry.createdAt ||
+    entry.updatedAt;
+
+
+if (
+    date &&
+    typeof date.toDate === "function"
+) {
+
+    return date
+        .toDate()
+        .getTime();
 
 }
 
 
+if (
+    date instanceof Date
+) {
+
+    return date.getTime();
+
+}
 
 
+if (
+    typeof date === "string"
+) {
+
+    const timestamp =
+        new Date(
+            date
+        ).getTime();
+
+    if (
+        !Number.isNaN(
+            timestamp
+        )
+    ) {
+
+        return timestamp;
+
+    }
+
+}
+
+
+if (
+    typeof date === "number"
+) {
+
+    return date;
+
+}
+
+
+return 0;
+```
+
+}
+
+/* =========================================================
+RENDER NEWS LIST
+========================================================= */
+
+function renderNewsList() {
+
+```
+const list =
+    document.getElementById(
+        "newsList"
+    );
+
+if (!list) {
+    return;
+}
+
+
+const filteredEntries =
+    filterEntries(
+        allEntries
+    );
+
+
+if (
+    filteredEntries.length === 0
+) {
+
+    list.innerHTML = `
+
+        <div class="empty-state">
+
+            <div class="empty-state-title">
+                No Archive Entries
+            </div>
+
+            <div class="empty-state-text">
+                No entries match the current filter.
+            </div>
+
+        </div>
+
+    `;
+
+    return;
+
+}
+
+
+list.innerHTML =
+    filteredEntries
+        .map(
+            createNewsRow
+        )
+        .join(
+            ""
+        );
+
+
+attachRowEvents();
+```
+
+}
+
+/* =========================================================
+FILTER ENTRIES
+========================================================= */
+
+function filterEntries(
+entries
+) {
+
+```
+if (
+    currentFilter === "ALL"
+) {
+
+    return entries;
+
+}
+
+
+if (
+    currentFilter === "Published"
+) {
+
+    return entries.filter(
+        entry =>
+            normalizeStatus(
+                entry.status
+            ) === "Published"
+    );
+
+}
+
+
+if (
+    currentFilter === "Draft"
+) {
+
+    return entries.filter(
+        entry =>
+            normalizeStatus(
+                entry.status
+            ) === "Draft"
+    );
+
+}
+
+
+return entries.filter(
+    entry =>
+        normalizeCategory(
+            entry.category
+        ) === currentFilter
+);
+```
+
+}
+
+/* =========================================================
+CREATE NEWS ROW
+========================================================= */
+
+function createNewsRow(
+entry
+) {
+
+```
+const id =
+    entry.id || "";
+
+
+const title =
+    entry.title ||
+    entry.name ||
+    "Untitled Entry";
+
+
+const category =
+    normalizeCategory(
+        entry.category
+    );
+
+
+const design =
+    entry.design ||
+    entry.designId ||
+    "Unknown Design";
+
+
+const status =
+    normalizeStatus(
+        entry.status
+    );
+
+
+const image =
+    entry.image ||
+    entry.imageUrl ||
+    entry.heroImage ||
+    getContentValue(
+        entry,
+        "heroImage"
+    ) ||
+    "";
+
+
+const description =
+    entry.description ||
+    entry.shortDescription ||
+    "";
+
+
+const date =
+    formatDate(
+        entry.date
+    );
+
+
+const statusClass =
+    status === "Published"
+        ? "status-published"
+        : "status-draft";
+
+
+const safeId =
+    escapeHTML(
+        id
+    );
+
+
+return `
+
+    <div
+        class="news-row"
+        data-entry-id="${safeId}"
+    >
+
+        <div>
+
+            ${
+                image
+
+                ?
+
+                `
+                <img
+                    class="thumb"
+                    src="${escapeHTML(
+                        image
+                    )}"
+                    alt="${escapeHTML(
+                        title
+                    )}"
+                    onerror="
+                        this.style.display='none';
+                    "
+                >
+                `
+
+                :
+
+                `
+                <div
+                    class="thumb"
+                ></div>
+                `
+
+            }
+
+        </div>
+
+
+        <div>
+
+            <div class="news-title">
+
+                ${escapeHTML(
+                    title
+                )}
+
+            </div>
+
+
+            <div class="news-meta">
+
+                ${
+                    date
+                        ? escapeHTML(
+                            date
+                        )
+                        : ""
+                }
+
+                ${
+                    description
+                        ? " · " +
+                          escapeHTML(
+                              truncateText(
+                                  description,
+                                  70
+                              )
+                          )
+                        : ""
+                }
+
+            </div>
+
+        </div>
+
+
+        <div>
+
+            <span class="tag">
+
+                ${escapeHTML(
+                    category
+                )}
+
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span class="design-tag">
+
+                ${escapeHTML(
+                    getDesignDisplayName(
+                        design
+                    )
+                )}
+
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span
+                class="${statusClass}"
+            >
+
+                ●
+                ${escapeHTML(
+                    status
+                )}
+
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <div class="actions">
+
+                <span
+                    class="action edit-action"
+                    data-id="${safeId}"
+                >
+                    EDIT
+                </span>
+
+
+                <span
+                    class="action delete delete-action"
+                    data-id="${safeId}"
+                >
+                    DELETE
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+`;
+```
+
+}
+
+/* =========================================================
+ATTACH ROW EVENTS
+========================================================= */
+
+function attachRowEvents() {
+
+```
+document
+    .querySelectorAll(
+        ".edit-action"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const id =
+                        button.dataset.id;
+
+                    editEntry(
+                        id
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+document
+    .querySelectorAll(
+        ".delete-action"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const id =
+                        button.dataset.id;
+
+                    deleteEntry(
+                        id
+                    );
+
+                }
+            );
+
+        }
+    );
+```
+
+}
+
+/* =========================================================
+FILTER SETUP
+========================================================= */
+
+function setupFilters() {
+
+```
+document
+    .querySelectorAll(
+        ".filter"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            ".filter"
+                        )
+                        .forEach(
+                            item =>
+                                item.classList.remove(
+                                    "active"
+                                )
+                        );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    currentFilter =
+                        button.dataset.filter ||
+                        "ALL";
+
+
+                    renderNewsList();
+
+                }
+            );
+
+        }
+    );
+```
+
+}
+
+/* =========================================================
+DESIGN SELECTOR
+========================================================= */
+
+function setupDesignSelector() {
+
+```
+document
+    .querySelectorAll(
+        ".design-card"
+    )
+    .forEach(
+        card => {
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    const onclickValue =
+                        card.getAttribute(
+                            "onclick"
+                        );
+
+
+                    if (
+                        onclickValue
+                    ) {
+
+                        const match =
+                            onclickValue.match(
+                                /selectDesign\(['"]([^'"]+)['"]\)/
+                            );
+
+
+                        if (
+                            match &&
+                            match[1]
+                        ) {
+
+                            selectDesign(
+                                match[1]
+                            );
+
+                            openNewModal();
+
+                        }
+
+                    }
+
+                }
+            );
+
+        }
+    );
+```
+
+}
+
+/* =========================================================
+DESIGN CHANGE
+========================================================= */
+
+window.handleDesignChange =
+function() {
+
+```
+    const select =
+        document.getElementById(
+            "entryDesign"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    selectDesign(
+        select.value
+    );
+
+};
+```
+
+/* =========================================================
+SELECT DESIGN
+========================================================= */
+
+window.selectDesign =
+function(
+designId
+) {
+
+```
+    selectedDesign =
+        designId ||
+        "FilmArchiveDesign";
+
+
+    const select =
+        document.getElementById(
+            "entryDesign"
+        );
+
+
+    if (
+        select &&
+        select.value !== selectedDesign
+    ) {
+
+        select.value =
+            selectedDesign;
+
+    }
+
+
+    hideAllDesignFields();
+
+    showDesignFields(
+        selectedDesign
+    );
+
+};
+```
+
+/* =========================================================
+HIDE ALL DESIGN FIELDS
+========================================================= */
+
+function hideAllDesignFields() {
+
+```
+document
+    .querySelectorAll(
+        ".design-fields"
+    )
+    .forEach(
+        field => {
+
+            field.style.display =
+                "none";
+
+        }
+    );
+```
+
+}
+
+/* =========================================================
+SHOW DESIGN FIELDS
+========================================================= */
+
+function showDesignFields(
+designId
+) {
+
+```
+const fieldMap = {
+
+    FilmArchiveDesign:
+        "filmArchiveFields",
+
+    VintageFlowerDesign:
+        "vintageFlowerFields",
+
+    HomeBakingDesign:
+        "homeBakingFields",
+
+    MInimalPortfolio:
+        "minimalPortfolioFields",
+
+    ModernMaturityDesign:
+        "modernMaturityFields"
+
+};
+
+
+const fieldId =
+    fieldMap[
+        designId
+    ];
+
+
+if (!fieldId) {
+
+    console.warn(
+        "Unknown design:",
+        designId
+    );
+
+    return;
+
+}
+
+
+const field =
+    document.getElementById(
+        fieldId
+    );
+
+
+if (field) {
+
+    field.style.display =
+        "block";
+
+}
+```
+
+}
+
+/* =========================================================
+OPEN NEW MODAL
+========================================================= */
+
+window.openNewModal =
+function(
+designId = null
+) {
+
+```
+    isEditing =
+        false;
+
+
+    selectedDesign =
+        designId ||
+        "FilmArchiveDesign";
+
+
+    clearForm();
+
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    if (modalTitle) {
+
+        modalTitle.textContent =
+            "New Archive Entry";
+
+    }
+
+
+    if (saveButton) {
+
+        saveButton.textContent =
+            "Save Entry";
+
+    }
+
+
+    const designSelect =
+        document.getElementById(
+            "entryDesign"
+        );
+
+
+    if (designSelect) {
+
+        designSelect.value =
+            selectedDesign;
+
+    }
+
+
+    selectDesign(
+        selectedDesign
+    );
+
+
+    openModal();
+
+};
+```
+
+/* =========================================================
+OPEN MODAL
+========================================================= */
+
+function openModal() {
+
+```
+const modal =
+    document.getElementById(
+        "entryModal"
+    );
+
+
+if (modal) {
+
+    modal.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+```
+
+}
+
+/* =========================================================
+CLOSE MODAL
+========================================================= */
+
+window.closeModal =
+function() {
+
+```
+    const modal =
+        document.getElementById(
+            "entryModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    document.body.style.overflow =
+        "";
+
+
+    isEditing =
+        false;
+
+};
+```
+
+/* =========================================================
+MODAL EVENTS
+========================================================= */
+
+function setupModalEvents() {
+
+```
+const modal =
+    document.getElementById(
+        "entryModal"
+    );
+
+
+if (!modal) {
+    return;
+}
+
+
+modal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target === modal
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            modal.classList.contains(
+                "active"
+            )
+        ) {
+
+            closeModal();
+
+        }
+
+    }
+);
+```
+
+}
+
+/* =========================================================
+EDIT ENTRY
+========================================================= */
+
+async function editEntry(
+entryId
+) {
+
+```
+if (!entryId) {
+    return;
+}
+
+
+try {
+
+    const entryRef =
+        doc(
+            db,
+            "news",
+            entryId
+        );
+
+
+    const snapshot =
+        await getDoc(
+            entryRef
+        );
+
+
+    if (
+        !snapshot.exists()
+    ) {
+
+        alert(
+            "This entry no longer exists."
+        );
+
+        await loadNewsEntries();
+
+        return;
+
+    }
+
+
+    const entry =
+        snapshot.data();
+
+
+    isEditing =
+        true;
+
+
+    selectedDesign =
+        entry.design ||
+        entry.designId ||
+        "FilmArchiveDesign";
+
+
+    clearForm();
+
+
+    const editingId =
+        document.getElementById(
+            "editingEntryId"
+        );
+
+
+    if (editingId) {
+
+        editingId.value =
+            entryId;
+
+    }
+
+
+    setFieldValue(
+        "entryTitle",
+        entry.title ||
+        ""
+    );
+
+
+    setFieldValue(
+        "entryCategory",
+        entry.category ||
+        "Research"
+    );
+
+
+    setFieldValue(
+        "entryDesign",
+        selectedDesign
+    );
+
+
+    setFieldValue(
+        "entryDescription",
+        entry.description ||
+        entry.shortDescription ||
+        ""
+    );
+
+
+    setFieldValue(
+        "entryDate",
+        normalizeDateForInput(
+            entry.date
+        )
+    );
+
+
+    setFieldValue(
+        "entryStatus",
+        normalizeStatus(
+            entry.status
+        )
+    );
+
+
+    setFieldValue(
+        "entryImage",
+        entry.image ||
+        entry.imageUrl ||
+        entry.heroImage ||
+        ""
+    );
+
+
+    const modalTitle =
+        document.getElementById(
+            "modalTitle"
+        );
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    if (modalTitle) {
+
+        modalTitle.textContent =
+            "Edit Archive Entry";
+
+    }
+
+
+    if (saveButton) {
+
+        saveButton.textContent =
+            "Update Entry";
+
+    }
+
+
+    /*
+     * IMPORTANT
+     * -------------------------------------------------
+     * All design-specific content is restored here.
+     *
+     * The content may be stored as:
+     *
+     * 1. entry.content
+     * 2. entry.data
+     * 3. directly on the document
+     *
+     * getDesignContent() handles all three.
+     */
+
+    const content =
+        getDesignContent(
+            entry
+        );
+
+
+    populateDesignFields(
+        selectedDesign,
+        content,
+        entry
+    );
+
+
+    selectDesign(
+        selectedDesign
+    );
+
+
+    openModal();
+
+
+    console.log(
+        "Entry loaded for editing:",
+        entryId,
+        entry
+    );
+
+
+} catch (error) {
+
+    console.error(
+        "Failed to edit entry:",
+        error
+    );
+
+
+    alert(
+        "Failed to load this entry.\n\n" +
+        error.message
+    );
+
+}
+```
+
+}
+
+/* =========================================================
+GET DESIGN CONTENT
+========================================================= */
+
+function getDesignContent(
+entry
+) {
+
+```
+if (
+    entry &&
+    entry.content &&
+    typeof entry.content === "object"
+) {
+
+    return entry.content;
+
+}
+
+
+if (
+    entry &&
+    entry.data &&
+    typeof entry.data === "object"
+) {
+
+    return entry.data;
+
+}
+
+
+/*
+ * If older entries saved design fields
+ * directly at document root,
+ * use the entire entry.
+ */
+
+return entry || {};
+```
+
+}
+
+/* =========================================================
+POPULATE DESIGN FIELDS
+========================================================= */
+
+function populateDesignFields(
+designId,
+content,
+entry
+) {
+
+```
+const data = {
+
+    ...entry,
+
+    ...content
+
+};
+
+
+/*
+ * This function uses the actual HTML IDs.
+ * Each Firebase field is restored to its
+ * matching input / textarea.
+ */
+
+
+if (
+    designId ===
+    "FilmArchiveDesign"
+) {
+
+    populateFilmArchive(
+        data
+    );
+
+}
+
+
+else if (
+    designId ===
+    "VintageFlowerDesign"
+) {
+
+    populateVintageFlower(
+        data
+    );
+
+}
+
+
+else if (
+    designId ===
+    "HomeBakingDesign"
+) {
+
+    populateHomeBaking(
+        data
+    );
+
+}
+
+
+else if (
+    designId ===
+    "MInimalPortfolio"
+) {
+
+    populateMinimalPortfolio(
+        data
+    );
+
+}
+
+
+else if (
+    designId ===
+    "ModernMaturityDesign"
+) {
+
+    populateModernMaturity(
+        data
+    );
+
+}
+```
+
+}
+
+/* =========================================================
+FILM ARCHIVE — POPULATE
+========================================================= */
+
+function populateFilmArchive(
+data
+) {
+
+```
+const fields = {
+
+    filmHeroTitleTop:
+        getValue(
+            data,
+            "filmHeroTitleTop"
+        ),
+
+    filmHeroTitleBottom1:
+        getValue(
+            data,
+            "filmHeroTitleBottom1"
+        ),
+
+    filmHeroTitleBottom2:
+        getValue(
+            data,
+            "filmHeroTitleBottom2"
+        ),
+
+    filmHeroImage:
+        getValue(
+            data,
+            "filmHeroImage",
+            "heroImage"
+        ),
+
+    filmIntroText:
+        getValue(
+            data,
+            "filmIntroText",
+            "introText"
+        ),
+
+    filmMemory1Image:
+        getValue(
+            data,
+            "filmMemory1Image"
+        ),
+
+    filmMemory1Text:
+        getValue(
+            data,
+            "filmMemory1Text"
+        ),
+
+    filmMemory2Image:
+        getValue(
+            data,
+            "filmMemory2Image"
+        ),
+
+    filmMemory2Text:
+        getValue(
+            data,
+            "filmMemory2Text"
+        ),
+
+    filmMemory3Image:
+        getValue(
+            data,
+            "filmMemory3Image"
+        ),
+
+    filmMemory3Text:
+        getValue(
+            data,
+            "filmMemory3Text"
+        ),
+
+    filmMemory4Image:
+        getValue(
+            data,
+            "filmMemory4Image"
+        ),
+
+    filmMemory4Text:
+        getValue(
+            data,
+            "filmMemory4Text"
+        ),
+
+    filmVideoUrl:
+        getValue(
+            data,
+            "filmVideoUrl",
+            "videoUrl"
+        ),
+
+    filmVideoCaption:
+        getValue(
+            data,
+            "filmVideoCaption",
+            "videoCaption"
+        ),
+
+    film1Image:
+        getValue(
+            data,
+            "film1Image"
+        ),
+
+    film1Title:
+        getValue(
+            data,
+            "film1Title"
+        ),
+
+    film1Text:
+        getValue(
+            data,
+            "film1Text"
+        ),
+
+    film2Image:
+        getValue(
+            data,
+            "film2Image"
+        ),
+
+    film2Title:
+        getValue(
+            data,
+            "film2Title"
+        ),
+
+    film2Text:
+        getValue(
+            data,
+            "film2Text"
+        ),
+
+    film3Image:
+        getValue(
+            data,
+            "film3Image"
+        ),
+
+    film3Title:
+        getValue(
+            data,
+            "film3Title"
+        ),
+
+    film3Text:
+        getValue(
+            data,
+            "film3Text"
+        ),
+
+    filmTravelMonth:
+        getValue(
+            data,
+            "filmTravelMonth"
+        ),
+
+    filmTravelYear:
+        getValue(
+            data,
+            "filmTravelYear"
+        ),
+
+    filmTravelLocation:
+        getValue(
+            data,
+            "filmTravelLocation"
+        ),
+
+    filmTravelText:
+        getValue(
+            data,
+            "filmTravelText"
+        )
+
+};
+
+
+populateFields(
+    fields
+);
+```
+
+}
+
+/* =========================================================
+VINTAGE FLOWER — POPULATE
+========================================================= */
+
+function populateVintageFlower(
+data
+) {
+
+```
+const fields = {
+
+    vintageHeroImage:
+        getValue(
+            data,
+            "vintageHeroImage",
+            "heroImage"
+        ),
+
+    vintageHeroTitle:
+        getValue(
+            data,
+            "vintageHeroTitle",
+            "heroTitle"
+        ),
+
+    vintageHeroSubtitle:
+        getValue(
+            data,
+            "vintageHeroSubtitle",
+            "heroSubtitle"
+        ),
+
+    vintageIntroTitle:
+        getValue(
+            data,
+            "vintageIntroTitle",
+            "introTitle"
+        ),
+
+    vintageIntroText:
+        getValue(
+            data,
+            "vintageIntroText",
+            "introText"
+        ),
+
+    vintageFlower1Image:
+        getValue(
+            data,
+            "vintageFlower1Image"
+        ),
+
+    vintageFlower1Title:
+        getValue(
+            data,
+            "vintageFlower1Title"
+        ),
+
+    vintageFlower1Text:
+        getValue(
+            data,
+            "vintageFlower1Text"
+        ),
+
+    vintageFlower2Image:
+        getValue(
+            data,
+            "vintageFlower2Image"
+        ),
+
+    vintageFlower2Title:
+        getValue(
+            data,
+            "vintageFlower2Title"
+        ),
+
+    vintageFlower2Text:
+        getValue(
+            data,
+            "vintageFlower2Text"
+        ),
+
+    vintageFlower3Image:
+        getValue(
+            data,
+            "vintageFlower3Image"
+        ),
+
+    vintageFlower3Title:
+        getValue(
+            data,
+            "vintageFlower3Title"
+        ),
+
+    vintageFlower3Text:
+        getValue(
+            data,
+            "vintageFlower3Text"
+        ),
+
+    vintageJournalTitle:
+        getValue(
+            data,
+            "vintageJournalTitle"
+        ),
+
+    vintageJournalText:
+        getValue(
+            data,
+            "vintageJournalText"
+        ),
+
+    vintageGallery1Image:
+        getValue(
+            data,
+            "vintageGallery1Image"
+        ),
+
+    vintageGallery2Image:
+        getValue(
+            data,
+            "vintageGallery2Image"
+        ),
+
+    vintageGallery3Image:
+        getValue(
+            data,
+            "vintageGallery3Image"
+        ),
+
+    vintageGallery4Image:
+        getValue(
+            data,
+            "vintageGallery4Image"
+        )
+
+};
+
+
+populateFields(
+    fields
+);
+```
+
+}
+
+/* =========================================================
+HOME BAKING — POPULATE
+========================================================= */
+
+function populateHomeBaking(
+data
+) {
+
+```
+const fields = {
+
+    bakingHeroImage:
+        getValue(
+            data,
+            "bakingHeroImage",
+            "heroImage"
+        ),
+
+    bakingHeroTitle:
+        getValue(
+            data,
+            "bakingHeroTitle",
+            "heroTitle"
+        ),
+
+    bakingHeroDescription:
+        getValue(
+            data,
+            "bakingHeroDescription",
+            "heroDescription"
+        ),
+
+    bakingSectionTitle:
+        getValue(
+            data,
+            "bakingSectionTitle"
+        ),
+
+    bakingSectionDescription:
+        getValue(
+            data,
+            "bakingSectionDescription"
+        ),
+
+    bakingPolaroid01Image:
+        getValue(
+            data,
+            "bakingPolaroid01Image"
+        ),
+
+    bakingPolaroid01Title:
+        getValue(
+            data,
+            "bakingPolaroid01Title"
+        ),
+
+    bakingPolaroid01Description:
+        getValue(
+            data,
+            "bakingPolaroid01Description"
+        ),
+
+    bakingPolaroid02Image:
+        getValue(
+            data,
+            "bakingPolaroid02Image"
+        ),
+
+    bakingPolaroid02Title:
+        getValue(
+            data,
+            "bakingPolaroid02Title"
+        ),
+
+    bakingPolaroid02Description:
+        getValue(
+            data,
+            "bakingPolaroid02Description"
+        ),
+
+    bakingPolaroid03Image:
+        getValue(
+            data,
+            "bakingPolaroid03Image"
+        ),
+
+    bakingPolaroid03Title:
+        getValue(
+            data,
+            "bakingPolaroid03Title"
+        ),
+
+    bakingPolaroid03Description:
+        getValue(
+            data,
+            "bakingPolaroid03Description"
+        ),
+
+    bakingGallery01Image:
+        getValue(
+            data,
+            "bakingGallery01Image"
+        ),
+
+    bakingGallery02Image:
+        getValue(
+            data,
+            "bakingGallery02Image"
+        ),
+
+    bakingGallery03Image:
+        getValue(
+            data,
+            "bakingGallery03Image"
+        ),
+
+    bakingAboutImage:
+        getValue(
+            data,
+            "bakingAboutImage"
+        ),
+
+    bakingAboutEyebrow:
+        getValue(
+            data,
+            "bakingAboutEyebrow"
+        ),
+
+    bakingAboutTitle:
+        getValue(
+            data,
+            "bakingAboutTitle"
+        ),
+
+    bakingAboutDescription:
+        getValue(
+            data,
+            "bakingAboutDescription"
+        ),
+
+    bakingFooterNote:
+        getValue(
+            data,
+            "bakingFooterNote"
+        ),
+
+    bakingFooterTitle:
+        getValue(
+            data,
+            "bakingFooterTitle"
+        ),
+
+    bakingFooterCopyright:
+        getValue(
+            data,
+            "bakingFooterCopyright"
+        )
+
+};
+
+
+populateFields(
+    fields
+);
+```
+
+}
+
+/* =========================================================
+MINIMAL PORTFOLIO — POPULATE
+IMPORTANT:
+Firebase Design ID = MInimalPortfolio
+========================================================= */
+
+function populateMinimalPortfolio(
+data
+) {
+
+```
+const fields = {
+
+    minimalHeroImage:
+        getValue(
+            data,
+            "minimalHeroImage",
+            "heroImage"
+        ),
+
+    minimalHeroEyebrow:
+        getValue(
+            data,
+            "minimalHeroEyebrow",
+            "heroEyebrow"
+        ),
+
+    minimalHeroTitle:
+        getValue(
+            data,
+            "minimalHeroTitle",
+            "heroTitle"
+        ),
+
+    minimalHeroDescription:
+        getValue(
+            data,
+            "minimalHeroDescription",
+            "heroDescription"
+        ),
+
+    minimalPlace01Image:
+        getValue(
+            data,
+            "minimalPlace01Image"
+        ),
+
+    minimalPlace01Label:
+        getValue(
+            data,
+            "minimalPlace01Label"
+        ),
+
+    minimalPlace01Title:
+        getValue(
+            data,
+            "minimalPlace01Title"
+        ),
+
+    minimalPlace01Description:
+        getValue(
+            data,
+            "minimalPlace01Description"
+        ),
+
+    minimalStatementEyebrow:
+        getValue(
+            data,
+            "minimalStatementEyebrow"
+        ),
+
+    minimalStatementTitle:
+        getValue(
+            data,
+            "minimalStatementTitle"
+        ),
+
+    minimalStatementDescription:
+        getValue(
+            data,
+            "minimalStatementDescription"
+        ),
+
+    minimalPlace02Image:
+        getValue(
+            data,
+            "minimalPlace02Image"
+        ),
+
+    minimalPlace02Label:
+        getValue(
+            data,
+            "minimalPlace02Label"
+        ),
+
+    minimalPlace02Title:
+        getValue(
+            data,
+            "minimalPlace02Title"
+        ),
+
+    minimalPlace02Description:
+        getValue(
+            data,
+            "minimalPlace02Description"
+        ),
+
+    minimalGalleryEyebrow:
+        getValue(
+            data,
+            "minimalGalleryEyebrow"
+        ),
+
+    minimalGalleryTitle:
+        getValue(
+            data,
+            "minimalGalleryTitle"
+        ),
+
+    minimalGalleryDescription:
+        getValue(
+            data,
+            "minimalGalleryDescription"
+        ),
+
+    minimalGallery01Image:
+        getValue(
+            data,
+            "minimalGallery01Image"
+        ),
+
+    minimalGallery02Image:
+        getValue(
+            data,
+            "minimalGallery02Image"
+        ),
+
+    minimalGallery03Image:
+        getValue(
+            data,
+            "minimalGallery03Image"
+        ),
+
+    minimalGallery04Image:
+        getValue(
+            data,
+            "minimalGallery04Image"
+        ),
+
+    minimalGallery05Image:
+        getValue(
+            data,
+            "minimalGallery05Image"
+        ),
+
+    minimalGallery06Image:
+        getValue(
+            data,
+            "minimalGallery06Image"
+        ),
+
+    minimalMovingEyebrow:
+        getValue(
+            data,
+            "minimalMovingEyebrow"
+        ),
+
+    minimalMovingTitle:
+        getValue(
+            data,
+            "minimalMovingTitle"
+        ),
+
+    minimalMovingDescription:
+        getValue(
+            data,
+            "minimalMovingDescription"
+        ),
+
+    minimalMovingVideo:
+        getValue(
+            data,
+            "minimalMovingVideo"
+        ),
+
+    minimalMovingCaption:
+        getValue(
+            data,
+            "minimalMovingCaption"
+        ),
+
+    minimalFinalEyebrow:
+        getValue(
+            data,
+            "minimalFinalEyebrow"
+        ),
+
+    minimalFinalTitle:
+        getValue(
+            data,
+            "minimalFinalTitle"
+        ),
+
+    minimalFinalDescription:
+        getValue(
+            data,
+            "minimalFinalDescription"
+        ),
+
+    minimalEndingImage:
+        getValue(
+            data,
+            "minimalEndingImage"
+        ),
+
+    minimalEndingEyebrow:
+        getValue(
+            data,
+            "minimalEndingEyebrow"
+        ),
+
+    minimalEndingDescription:
+        getValue(
+            data,
+            "minimalEndingDescription"
+        )
+
+};
+
+
+populateFields(
+    fields
+);
+```
+
+}
+
+/* =========================================================
+MODERN MATURITY — POPULATE
+========================================================= */
+
+function populateModernMaturity(
+data
+) {
+
+```
+const fields = {
+
+    modernHeroEyebrow:
+        getValue(
+            data,
+            "modernHeroEyebrow"
+        ),
+
+    modernHeroTitle:
+        getValue(
+            data,
+            "modernHeroTitle"
+        ),
+
+    modernHeroImage:
+        getValue(
+            data,
+            "modernHeroImage",
+            "heroImage"
+        ),
+
+    modernHeroQuote:
+        getValue(
+            data,
+            "modernHeroQuote"
+        ),
+
+    modernHeroDescription:
+        getValue(
+            data,
+            "modernHeroDescription"
+        ),
+
+    modernSection01Image:
+        getValue(
+            data,
+            "modernSection01Image"
+        ),
+
+    modernSection01SubImage:
+        getValue(
+            data,
+            "modernSection01SubImage"
+        ),
+
+    modernSection01Title:
+        getValue(
+            data,
+            "modernSection01Title"
+        ),
+
+    modernSection01Description:
+        getValue(
+            data,
+            "modernSection01Description"
+        ),
+
+    modernSection02Image01:
+        getValue(
+            data,
+            "modernSection02Image01"
+        ),
+
+    modernSection02Image02:
+        getValue(
+            data,
+            "modernSection02Image02"
+        ),
+
+    modernSection02Title:
+        getValue(
+            data,
+            "modernSection02Title"
+        ),
+
+    modernSection02Description:
+        getValue(
+            data,
+            "modernSection02Description"
+        ),
+
+    modernSection03Image:
+        getValue(
+            data,
+            "modernSection03Image"
+        ),
+
+    modernSection03Title:
+        getValue(
+            data,
+            "modernSection03Title"
+        ),
+
+    modernSection03Description:
+        getValue(
+            data,
+            "modernSection03Description"
+        ),
+
+    modernSection04Image:
+        getValue(
+            data,
+            "modernSection04Image"
+        ),
+
+    modernSection04SubImage:
+        getValue(
+            data,
+            "modernSection04SubImage"
+        ),
+
+    modernSection04Title:
+        getValue(
+            data,
+            "modernSection04Title"
+        ),
+
+    modernSection04Description:
+        getValue(
+            data,
+            "modernSection04Description"
+        )
+
+};
+
+
+populateFields(
+    fields
+);
+```
+
+}
+
+/* =========================================================
+GENERIC POPULATE FIELDS
+========================================================= */
+
+function populateFields(
+fields
+) {
+
+```
+Object.entries(
+    fields
+).forEach(
+    (
+        [
+            fieldId,
+            value
+        ]
+    ) => {
+
+        setFieldValue(
+            fieldId,
+            value
+        );
+
+    }
+);
+```
+
+}
+
+/* =========================================================
+GET VALUE
+========================================================= */
+
+function getValue(
+data,
+...keys
+) {
+
+```
+for (
+    const key of keys
+) {
+
+    if (
+        data &&
+        data[key] !== undefined &&
+        data[key] !== null
+    ) {
+
+        return data[key];
+
+    }
+
+}
+
+return "";
+```
+
+}
+
+/* =========================================================
+SET FIELD VALUE
+========================================================= */
+
+function setFieldValue(
+fieldId,
+value
+) {
+
+```
+const field =
+    document.getElementById(
+        fieldId
+    );
+
+
+if (!field) {
+    return;
+}
+
+
+if (
+    value === null ||
+    value === undefined
+) {
+
+    field.value =
+        "";
+
+    return;
+
+}
+
+
+if (
+    typeof value.toDate === "function"
+) {
+
+    field.value =
+        normalizeDateForInput(
+            value
+        );
+
+    return;
+
+}
+
+
+field.value =
+    String(
+        value
+    );
+```
+
+}
+
+/* =========================================================
+CLEAR FORM
+========================================================= */
+
+function clearForm() {
+
+```
+const formIds = [
+
+    "editingEntryId",
+
+    "entryTitle",
+
+    "entryDescription",
+
+    "entryDate",
+
+    "entryImage",
+
+    "filmHeroTitleTop",
+    "filmHeroTitleBottom1",
+    "filmHeroTitleBottom2",
+    "filmHeroImage",
+    "filmIntroText",
+
+    "filmMemory1Image",
+    "filmMemory1Text",
+    "filmMemory2Image",
+    "filmMemory2Text",
+    "filmMemory3Image",
+    "filmMemory3Text",
+    "filmMemory4Image",
+    "filmMemory4Text",
+
+    "filmVideoUrl",
+    "filmVideoCaption",
+
+    "film1Image",
+    "film1Title",
+    "film1Text",
+    "film2Image",
+    "film2Title",
+    "film2Text",
+    "film3Image",
+    "film3Title",
+    "film3Text",
+
+    "filmTravelMonth",
+    "filmTravelYear",
+    "filmTravelLocation",
+    "filmTravelText",
+
+    "vintageHeroImage",
+    "vintageHeroTitle",
+    "vintageHeroSubtitle",
+    "vintageIntroTitle",
+    "vintageIntroText",
+
+    "vintageFlower1Image",
+    "vintageFlower1Title",
+    "vintageFlower1Text",
+    "vintageFlower2Image",
+    "vintageFlower2Title",
+    "vintageFlower2Text",
+    "vintageFlower3Image",
+    "vintageFlower3Title",
+    "vintageFlower3Text",
+
+    "vintageJournalTitle",
+    "vintageJournalText",
+
+    "vintageGallery1Image",
+    "vintageGallery2Image",
+    "vintageGallery3Image",
+    "vintageGallery4Image",
+
+    "bakingHeroImage",
+    "bakingHeroTitle",
+    "bakingHeroDescription",
+    "bakingSectionTitle",
+    "bakingSectionDescription",
+
+    "bakingPolaroid01Image",
+    "bakingPolaroid01Title",
+    "bakingPolaroid01Description",
+    "bakingPolaroid02Image",
+    "bakingPolaroid02Title",
+    "bakingPolaroid02Description",
+    "bakingPolaroid03Image",
+    "bakingPolaroid03Title",
+    "bakingPolaroid03Description",
+
+    "bakingGallery01Image",
+    "bakingGallery02Image",
+    "bakingGallery03Image",
+
+    "bakingAboutImage",
+    "bakingAboutEyebrow",
+    "bakingAboutTitle",
+    "bakingAboutDescription",
+
+    "bakingFooterNote",
+    "bakingFooterTitle",
+    "bakingFooterCopyright",
+
+    "minimalHeroImage",
+    "minimalHeroEyebrow",
+    "minimalHeroTitle",
+    "minimalHeroDescription",
+
+    "minimalPlace01Image",
+    "minimalPlace01Label",
+    "minimalPlace01Title",
+    "minimalPlace01Description",
+
+    "minimalStatementEyebrow",
+    "minimalStatementTitle",
+    "minimalStatementDescription",
+
+    "minimalPlace02Image",
+    "minimalPlace02Label",
+    "minimalPlace02Title",
+    "minimalPlace02Description",
+
+    "minimalGalleryEyebrow",
+    "minimalGalleryTitle",
+    "minimalGalleryDescription",
+
+    "minimalGallery01Image",
+    "minimalGallery02Image",
+    "minimalGallery03Image",
+    "minimalGallery04Image",
+    "minimalGallery05Image",
+    "minimalGallery06Image",
+
+    "minimalMovingEyebrow",
+    "minimalMovingTitle",
+    "minimalMovingDescription",
+    "minimalMovingVideo",
+    "minimalMovingCaption",
+
+    "minimalFinalEyebrow",
+    "minimalFinalTitle",
+    "minimalFinalDescription",
+
+    "minimalEndingImage",
+    "minimalEndingEyebrow",
+    "minimalEndingDescription",
+
+    "modernHeroEyebrow",
+    "modernHeroTitle",
+    "modernHeroImage",
+    "modernHeroQuote",
+    "modernHeroDescription",
+
+    "modernSection01Image",
+    "modernSection01SubImage",
+    "modernSection01Title",
+    "modernSection01Description",
+
+    "modernSection02Image01",
+    "modernSection02Image02",
+    "modernSection02Title",
+    "modernSection02Description",
+
+    "modernSection03Image",
+    "modernSection03Title",
+    "modernSection03Description",
+
+    "modernSection04Image",
+    "modernSection04SubImage",
+    "modernSection04Title",
+    "modernSection04Description"
+
+];
+
+
+formIds.forEach(
+    id => {
+
+        setFieldValue(
+            id,
+            ""
+        );
+
+    }
+);
+
+
+setFieldValue(
+    "entryCategory",
+    "Research"
+);
+
+
+setFieldValue(
+    "entryDesign",
+    "FilmArchiveDesign"
+);
+
+
+setFieldValue(
+    "entryStatus",
+    "Published"
+);
+
+
+selectedDesign =
+    "FilmArchiveDesign";
+
+
+hideAllDesignFields();
+```
+
+}
+
+/* =========================================================
+SAVE ENTRY
+========================================================= */
+
+window.saveEntry =
+async function() {
+
+```
+    if (!db) {
+
+        alert(
+            "Firebase is not ready yet."
+        );
+
+        return;
+
+    }
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    if (saveButton) {
+
+        saveButton.disabled =
+            true;
+
+        saveButton.textContent =
+            "Saving...";
+
+    }
+
+
+    try {
+
+        const editingId =
+            getFieldValue(
+                "editingEntryId"
+            );
+
+
+        const title =
+            getFieldValue(
+                "entryTitle"
+            ).trim();
+
+
+        if (!title) {
+
+            alert(
+                "Please enter a title."
+            );
+
+            return;
+
+        }
+
+
+        const category =
+            getFieldValue(
+                "entryCategory"
+            );
+
+
+        const design =
+            getFieldValue(
+                "entryDesign"
+            );
+
+
+        const description =
+            getFieldValue(
+                "entryDescription"
+            );
+
+
+        const date =
+            getFieldValue(
+                "entryDate"
+            );
+
+
+        const status =
+            getFieldValue(
+                "entryStatus"
+            );
+
+
+        const image =
+            getFieldValue(
+                "entryImage"
+            );
+
+
+        /*
+         * Collect ALL design-specific fields.
+         */
+
+        const content =
+            collectDesignFields(
+                design
+            );
+
+
+        /*
+         * Main document.
+         *
+         * content is stored as a map.
+         * This allows the edit modal to restore
+         * every design field later.
+         */
+
+        const entryData = {
+
+            title,
+
+            category,
+
+            design,
+
+            description,
+
+            date,
+
+            status,
+
+            image,
+
+            content,
+
+            updatedAt:
+                serverTimestamp()
+
+        };
+
+
+        if (
+            editingId
+        ) {
+
+            /*
+             * UPDATE EXISTING ENTRY
+             */
+
+            const entryRef =
+                doc(
+                    db,
+                    "news",
+                    editingId
+                );
+
+
+            await updateDoc(
+                entryRef,
+                entryData
+            );
+
+
+            alert(
+                "Entry updated successfully."
+            );
+
+
+        } else {
+
+            /*
+             * CREATE NEW ENTRY
+             */
+
+            entryData.createdAt =
+                serverTimestamp();
+
+
+            const newsRef =
+                collection(
+                    db,
+                    "news"
+                );
+
+
+            const newDocument =
+                await addDoc(
+                    newsRef,
+                    entryData
+                );
+
+
+            console.log(
+                "New entry created:",
+                newDocument.id
+            );
+
+
+            alert(
+                "New entry created successfully."
+            );
+
+        }
+
+
+        closeModal();
+
+        await loadNewsEntries();
+
+
+    } catch (error) {
+
+        console.error(
+            "Save error:",
+            error
+        );
+
+
+        alert(
+            "Failed to save entry.\n\n" +
+            error.message
+        );
+
+
+    } finally {
+
+        if (saveButton) {
+
+            saveButton.disabled =
+                false;
+
+            saveButton.textContent =
+                isEditing
+                    ? "Update Entry"
+                    : "Save Entry";
+
+        }
+
+    }
+
+};
+```
+
+/* =========================================================
+COLLECT DESIGN FIELDS
+========================================================= */
+
+function collectDesignFields(
+designId
+) {
+
+```
+const fieldMap = {
+
+    FilmArchiveDesign: [
+
+        "filmHeroTitleTop",
+        "filmHeroTitleBottom1",
+        "filmHeroTitleBottom2",
+        "filmHeroImage",
+        "filmIntroText",
+
+        "filmMemory1Image",
+        "filmMemory1Text",
+        "filmMemory2Image",
+        "filmMemory2Text",
+        "filmMemory3Image",
+        "filmMemory3Text",
+        "filmMemory4Image",
+        "filmMemory4Text",
+
+        "filmVideoUrl",
+        "filmVideoCaption",
+
+        "film1Image",
+        "film1Title",
+        "film1Text",
+        "film2Image",
+        "film2Title",
+        "film2Text",
+        "film3Image",
+        "film3Title",
+        "film3Text",
+
+        "filmTravelMonth",
+        "filmTravelYear",
+        "filmTravelLocation",
+        "filmTravelText"
+
+    ],
+
+
+    VintageFlowerDesign: [
+
+        "vintageHeroImage",
+        "vintageHeroTitle",
+        "vintageHeroSubtitle",
+
+        "vintageIntroTitle",
+        "vintageIntroText",
+
+        "vintageFlower1Image",
+        "vintageFlower1Title",
+        "vintageFlower1Text",
+
+        "vintageFlower2Image",
+        "vintageFlower2Title",
+        "vintageFlower2Text",
+
+        "vintageFlower3Image",
+        "vintageFlower3Title",
+        "vintageFlower3Text",
+
+        "vintageJournalTitle",
+        "vintageJournalText",
+
+        "vintageGallery1Image",
+        "vintageGallery2Image",
+        "vintageGallery3Image",
+        "vintageGallery4Image"
+
+    ],
+
+
+    HomeBakingDesign: [
+
+        "bakingHeroImage",
+        "bakingHeroTitle",
+        "bakingHeroDescription",
+
+        "bakingSectionTitle",
+        "bakingSectionDescription",
+
+        "bakingPolaroid01Image",
+        "bakingPolaroid01Title",
+        "bakingPolaroid01Description",
+
+        "bakingPolaroid02Image",
+        "bakingPolaroid02Title",
+        "bakingPolaroid02Description",
+
+        "bakingPolaroid03Image",
+        "bakingPolaroid03Title",
+        "bakingPolaroid03Description",
+
+        "bakingGallery01Image",
+        "bakingGallery02Image",
+        "bakingGallery03Image",
+
+        "bakingAboutImage",
+        "bakingAboutEyebrow",
+        "bakingAboutTitle",
+        "bakingAboutDescription",
+
+        "bakingFooterNote",
+        "bakingFooterTitle",
+        "bakingFooterCopyright"
+
+    ],
+
+
+    MInimalPortfolio: [
+
+        "minimalHeroImage",
+        "minimalHeroEyebrow",
+        "minimalHeroTitle",
+        "minimalHeroDescription",
+
+        "minimalPlace01Image",
+        "minimalPlace01Label",
+        "minimalPlace01Title",
+        "minimalPlace01Description",
+
+        "minimalStatementEyebrow",
+        "minimalStatementTitle",
+        "minimalStatementDescription",
+
+        "minimalPlace02Image",
+        "minimalPlace02Label",
+        "minimalPlace02Title",
+        "minimalPlace02Description",
+
+        "minimalGalleryEyebrow",
+        "minimalGalleryTitle",
+        "minimalGalleryDescription",
+
+        "minimalGallery01Image",
+        "minimalGallery02Image",
+        "minimalGallery03Image",
+        "minimalGallery04Image",
+        "minimalGallery05Image",
+        "minimalGallery06Image",
+
+        "minimalMovingEyebrow",
+        "minimalMovingTitle",
+        "minimalMovingDescription",
+        "minimalMovingVideo",
+        "minimalMovingCaption",
+
+        "minimalFinalEyebrow",
+        "minimalFinalTitle",
+        "minimalFinalDescription",
+
+        "minimalEndingImage",
+        "minimalEndingEyebrow",
+        "minimalEndingDescription"
+
+    ],
+
+
+    ModernMaturityDesign: [
+
+        "modernHeroEyebrow",
+        "modernHeroTitle",
+        "modernHeroImage",
+        "modernHeroQuote",
+        "modernHeroDescription",
+
+        "modernSection01Image",
+        "modernSection01SubImage",
+        "modernSection01Title",
+        "modernSection01Description",
+
+        "modernSection02Image01",
+        "modernSection02Image02",
+        "modernSection02Title",
+        "modernSection02Description",
+
+        "modernSection03Image",
+        "modernSection03Title",
+        "modernSection03Description",
+
+        "modernSection04Image",
+        "modernSection04SubImage",
+        "modernSection04Title",
+        "modernSection04Description"
+
+    ]
+
+};
+
+
+const fieldIds =
+    fieldMap[
+        designId
+    ] || [];
+
+
+const content = {};
+
+
+fieldIds.forEach(
+    fieldId => {
+
+        content[
+            fieldId
+        ] =
+            getFieldValue(
+                fieldId
+            );
+
+    }
+);
+
+
+return content;
+```
+
+}
+
+/* =========================================================
+GET FIELD VALUE
+========================================================= */
+
+function getFieldValue(
+fieldId
+) {
+
+```
+const field =
+    document.getElementById(
+        fieldId
+    );
+
+
+if (!field) {
+    return "";
+}
+
+
+return field.value || "";
+```
+
+}
+
+/* =========================================================
+DELETE ENTRY
+========================================================= */
+
+async function deleteEntry(
+entryId
+) {
+
+```
+if (!entryId) {
+    return;
+}
+
+
+const entry =
+    allEntries.find(
+        item =>
+            item.id === entryId
+    );
+
+
+const title =
+    entry?.title ||
+    "this entry";
+
+
+const confirmed =
+    confirm(
+        `Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
+    );
+
+
+if (!confirmed) {
+    return;
+}
+
+
+try {
+
+    const entryRef =
+        doc(
+            db,
+            "news",
+            entryId
+        );
+
+
+    await deleteDoc(
+        entryRef
+    );
+
+
+    alert(
+        "Entry deleted successfully."
+    );
+
+
+    await loadNewsEntries();
+
+
+} catch (error) {
+
+    console.error(
+        "Delete error:",
+        error
+    );
+
+
+    alert(
+        "Failed to delete entry.\n\n" +
+        error.message
+    );
+
+}
+```
+
+}
+
+/* =========================================================
+UPDATE STATISTICS
+========================================================= */
+
+function updateStatistics() {
+
+```
+const total =
+    allEntries.length;
+
+
+const published =
+    allEntries.filter(
+        entry =>
+            normalizeStatus(
+                entry.status
+            ) === "Published"
+    ).length;
+
+
+const drafts =
+    allEntries.filter(
+        entry =>
+            normalizeStatus(
+                entry.status
+            ) === "Draft"
+    ).length;
+
+
+const now =
+    new Date();
+
+
+const currentYear =
+    now.getFullYear();
+
+
+const currentMonth =
+    now.getMonth();
+
+
+const thisMonth =
+    allEntries.filter(
+        entry => {
+
+            const dateValue =
+                getEntryDateValue(
+                    entry
+                );
+
+
+            if (!dateValue) {
+                return false;
+            }
+
+
+            const date =
+                new Date(
+                    dateValue
+                );
+
+
+            return (
+
+                date.getFullYear() ===
+                currentYear
+
+                &&
+
+                date.getMonth() ===
+                currentMonth
+
+            );
+
+        }
+    ).length;
+
+
+setText(
+    "totalPosts",
+    total
+);
+
+
+setText(
+    "publishedPosts",
+    published
+);
+
+
+setText(
+    "draftPosts",
+    drafts
+);
+
+
+setText(
+    "thisMonthPosts",
+    String(
+        thisMonth
+    ).padStart(
+        2,
+        "0"
+    )
+);
+```
+
+}
+
+/* =========================================================
+NORMALIZE STATUS
+========================================================= */
+
+function normalizeStatus(
+status
+) {
+
+```
+if (!status) {
+
+    return "Draft";
+
+}
+
+
+const value =
+    String(
+        status
+    ).trim()
+    .toLowerCase();
+
+
+if (
+    value === "published" ||
+    value === "publish" ||
+    value === "public"
+) {
+
+    return "Published";
+
+}
+
+
+return "Draft";
+```
+
+}
+
+/* =========================================================
+NORMALIZE CATEGORY
+========================================================= */
+
+function normalizeCategory(
+category
+) {
+
+```
+if (!category) {
+
+    return "Research";
+
+}
+
+
+const value =
+    String(
+        category
+    ).trim()
+    .toLowerCase();
+
+
+const categories = {
+
+    research:
+        "Research",
+
+    academic:
+        "Academic",
+
+    travel:
+        "Travel",
+
+    life:
+        "Life"
+
+};
+
+
+return (
+    categories[
+        value
+    ] ||
+    category
+);
+```
+
+}
+
+/* =========================================================
+FORMAT DATE
+========================================================= */
+
+function formatDate(
+value
+) {
+
+```
+if (!value) {
+    return "";
+}
+
+
+let date;
+
+
+if (
+    typeof value.toDate ===
+    "function"
+) {
+
+    date =
+        value.toDate();
+
+}
+
+else if (
+    value instanceof Date
+) {
+
+    date =
+        value;
+
+}
+
+else {
+
+    date =
+        new Date(
+            value
+        );
+
+}
+
+
+if (
+    Number.isNaN(
+        date.getTime()
+    )
+) {
+
+    return String(
+        value
+    );
+
+}
+
+
+return date.toLocaleDateString(
+    "en-US",
+    {
+        year:
+            "numeric",
+
+        month:
+            "short",
+
+        day:
+            "numeric"
+    }
+);
+```
+
+}
+
+/* =========================================================
+NORMALIZE DATE FOR INPUT
+========================================================= */
+
+function normalizeDateForInput(
+value
+) {
+
+```
+if (!value) {
+    return "";
+}
+
+
+let date;
+
+
+if (
+    typeof value.toDate ===
+    "function"
+) {
+
+    date =
+        value.toDate();
+
+}
+
+else if (
+    value instanceof Date
+) {
+
+    date =
+        value;
+
+}
+
+else {
+
+    const stringValue =
+        String(
+            value
+        );
+
+
+    /*
+     * Already YYYY-MM-DD
+     */
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/
+            .test(
+                stringValue
+            )
+    ) {
+
+        return stringValue;
+
+    }
+
+
+    date =
+        new Date(
+            stringValue
+        );
+
+}
+
+
+if (
+    Number.isNaN(
+        date.getTime()
+    )
+) {
+
+    return "";
+
+}
+
+
+const year =
+    date
+        .getFullYear()
+        .toString()
+        .padStart(
+            4,
+            "0"
+        );
+
+
+const month =
+    String(
+        date.getMonth() + 1
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+const day =
+    String(
+        date.getDate()
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+return `${year}-${month}-${day}`;
+```
+
+}
+
+/* =========================================================
+DESIGN DISPLAY NAME
+========================================================= */
+
+function getDesignDisplayName(
+design
+) {
+
+```
+const names = {
+
+    FilmArchiveDesign:
+        "Film Archive",
+
+    VintageFlowerDesign:
+        "Vintage Flower",
+
+    HomeBakingDesign:
+        "Home Baking",
+
+    MInimalPortfolio:
+        "Minimal Portfolio",
+
+    ModernMaturityDesign:
+        "Modern Maturity"
+
+};
+
+
+return (
+    names[
+        design
+    ] ||
+    design ||
+    "Unknown"
+);
+```
+
+}
+
+/* =========================================================
+GET CONTENT VALUE
+========================================================= */
+
+function getContentValue(
+entry,
+key
+) {
+
+```
+if (!entry) {
+    return "";
+}
+
+
+if (
+    entry.content &&
+    entry.content[key] !== undefined
+) {
+
+    return entry.content[key];
+
+}
+
+
+if (
+    entry.data &&
+    entry.data[key] !== undefined
+) {
+
+    return entry.data[key];
+
+}
+
+
+if (
+    entry[key] !== undefined
+) {
+
+    return entry[key];
+
+}
+
+
+return "";
+```
+
+}
+
+/* =========================================================
+SET TEXT
+========================================================= */
+
+function setText(
+elementId,
+value
+) {
+
+```
+const element =
+    document.getElementById(
+        elementId
+    );
+
+
+if (element) {
+
+    element.textContent =
+        String(
+            value
+        );
+
+}
+```
+
+}
+
+/* =========================================================
+TRUNCATE TEXT
+========================================================= */
+
+function truncateText(
+text,
+maxLength
+) {
+
+```
+const value =
+    String(
+        text ||
+        ""
+    );
+
+
+if (
+    value.length <=
+    maxLength
+) {
+
+    return value;
+
+}
+
+
+return (
+    value.substring(
+        0,
+        maxLength
+    ) +
+    "..."
+);
+```
+
+}
+
+/* =========================================================
+ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+value
+) {
+
+```
+if (
+    value === null ||
+    value === undefined
+) {
+
+    return "";
+
+}
+
+
+return String(
+    value
+)
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+```
+
+}
+
+/* =========================================================
+GLOBAL REFRESH FUNCTION
+Useful if another page needs to refresh admin list.
+========================================================= */
+
+window.refreshNewsAdmin =
+function() {
+
+```
+    loadNewsEntries();
+
+};
+```
+
+/* =========================================================
+GLOBAL EDIT FUNCTION
+Useful for inline onclick calls.
+========================================================= */
+
+window.editEntry =
+function(
+entryId
+) {
+
+```
+    return editEntry(
+        entryId
+    );
+
+};
+```
+
+/* =========================================================
+GLOBAL DELETE FUNCTION
+========================================================= */
+
+window.deleteEntry =
+function(
+entryId
+) {
+
+```
+    return deleteEntry(
+        entryId
+    );
+
+};
+```
+
+/* =========================================================
+DEBUG
+========================================================= */
+
+console.log(
+"News Admin JS loaded successfully."
+);
