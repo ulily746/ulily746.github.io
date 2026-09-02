@@ -990,34 +990,9 @@ function selectDesign(
         selectedDesign
     );
 
-    console.log(
-        "Selected design:",
-        selectedDesign
-    );
 
 }
 
-const select =
-    document.getElementById(
-        "entryDesign"
-    );
-
-if (
-    select &&
-    select.value !==
-    selectedDesign
-) {
-    select.value =
-        selectedDesign;
-}
-
-hideAllDesignFields();
-
-showDesignFields(
-    selectedDesign
-);
-
-}
 
 /* =========================================================
 HIDE DESIGN FIELDS
