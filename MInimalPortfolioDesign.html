@@ -75,7 +75,9 @@ const app =
 const db =
     getFirestore(app);
 
-
+const params = new URLSearchParams(window.location.search);
+const newsId = params.get("id");
+console.log("News ID:", newsId);
 /* =========================================================
    ELEMENT HELPER
 ========================================================= */
@@ -252,331 +254,79 @@ function setVideo(id, value){
 
 async function loadMInimalPortfolio(){
 
+    if(!newsId){
+        console.error("News ID is missing.");
+        return;
+    }
+
     try{
 
-        /* =================================================
-           FIREBASE DOCUMENT
-           
-           news / MInimalPortfolio
-        ================================================= */
+        const newsRef = doc(db, "news", newsId);
+        const newsSnap = await getDoc(newsRef);
 
-        const designRef =
-            doc(
-                db,
-                "news",
-                "MInimalPortfolio"
-            );
-
-
-        const designSnap =
-            await getDoc(
-                designRef
-            );
-
-
-        if(!designSnap.exists()){
-
-            console.error(
-                "MInimalPortfolio document not found."
-            );
-
+        if(!newsSnap.exists()){
+            console.error("News document not found:", newsId);
             return;
-
         }
 
-
-        const designData =
-            designSnap.data();
-
-
-        console.log(
-            "MInimalPortfolio data:",
-            designData
-        );
-
-
-        /* =================================================
-           HERO
-        ================================================= */
-
-        setText(
-            "heroEyebrow",
-            designData.heroEyebrow
-        );
-
-
-        setHTML(
-            "heroTitle",
-            designData.heroTitle
-        );
-
-
-        setText(
-            "heroDescription",
-            designData.heroDescription
-        );
-
-
-        setImage(
-            "heroImage",
-            designData.heroImage
-        );
-
-
-        /* =================================================
-           PLACE 01
-        ================================================= */
-
-        setText(
-            "place01Label",
-            designData.place01Label
-        );
-
-
-        setText(
-            "place01Title",
-            designData.place01Title
-        );
-
-
-        setText(
-            "place01Description",
-            designData.place01Description
-        );
-
-
-        setImage(
-            "place01Image",
-            designData.place01Image
-        );
-
-
-        /* =================================================
-           STATEMENT
-        ================================================= */
-
-        setText(
-            "statementEyebrow",
-            designData.statementEyebrow
-        );
-
-
-        setText(
-            "statementTitle",
-            designData.statementTitle
-        );
-
-
-        setText(
-            "statementDescription",
-            designData.statementDescription
-        );
-
-
-        /* =================================================
-           PLACE 02
-        ================================================= */
-
-        setText(
-            "place02Label",
-            designData.place02Label
-        );
-
-
-        setText(
-            "place02Title",
-            designData.place02Title
-        );
-
-
-        setText(
-            "place02Description",
-            designData.place02Description
-        );
-
-
-        setImage(
-            "place02Image",
-            designData.place02Image
-        );
-
-
-        /* =================================================
-           GALLERY TITLE
-        ================================================= */
-
-        setText(
-            "galleryEyebrow",
-            designData.galleryEyebrow
-        );
-
-
-        setText(
-            "galleryTitle",
-            designData.galleryTitle
-        );
-
-
-        setText(
-            "galleryDescription",
-            designData.galleryDescription
-        );
-
-
-        /* =================================================
-           GALLERY IMAGES
-        ================================================= */
-
-        setImage(
-            "gallery01Image",
-            designData.gallery01Image
-        );
-
-
-        setImage(
-            "gallery02Image",
-            designData.gallery02Image
-        );
-
-
-        setImage(
-            "gallery03Image",
-            designData.gallery03Image
-        );
-
-
-        setImage(
-            "gallery04Image",
-            designData.gallery04Image
-        );
-
-
-        setImage(
-            "gallery05Image",
-            designData.gallery05Image
-        );
-
-
-        setImage(
-            "gallery06Image",
-            designData.gallery06Image
-        );
-
-
-        /* =================================================
-           MOVING MEMORIES
-        ================================================= */
-
-        setText(
-            "movingEyebrow",
-            designData.movingEyebrow
-        );
-
-
-        setText(
-            "movingTitle",
-            designData.movingTitle
-        );
-
-
-        setText(
-            "movingDescription",
-            designData.movingDescription
-        );
-
-
-        setVideo(
-            "movingVideo",
-            designData.movingVideo
-        );
-
-
-        setText(
-            "movingCaption",
-            designData.movingCaption
-        );
-
-
-        /* =================================================
-           FINAL CHAPTER
-        ================================================= */
-
-        setText(
-            "finalEyebrow",
-            designData.finalEyebrow
-        );
-
-
-        setText(
-            "finalTitle",
-            designData.finalTitle
-        );
-
-
-        setText(
-            "finalDescription",
-            designData.finalDescription
-        );
-
-
-        /* =================================================
-           ENDING
-        ================================================= */
-
-        setImage(
-            "endingImage",
-            designData.endingImage
-        );
-
-
-        setText(
-            "endingEyebrow",
-            designData.endingEyebrow
-        );
-
-
-        setText(
-            "endingDescription",
-            designData.endingDescription
-        );
-
-
-       
-        /* =================================================
-           PAGE TITLE
-        ================================================= */
-
-        if(
-            designData.heroTitle
-        ){
-
-            document.title =
-                String(
-                    designData.heroTitle
-                )
-                .replace(
-                    /<br\s*\/?>/gi,
-                    " "
-                );
-
+        const newsData = newsSnap.data();
+        const designData = newsData.content || {};
+
+        console.log("MInimalPortfolio content:", designData);
+
+        setText("heroEyebrow", designData.minimalHeroEyebrow);
+        setHTML("heroTitle", designData.minimalHeroTitle);
+        setText("heroDescription", designData.minimalHeroDescription);
+        setImage("heroImage", designData.minimalHeroImage);
+
+        setText("place01Label", designData.minimalPlace01Label);
+        setText("place01Title", designData.minimalPlace01Title);
+        setText("place01Description", designData.minimalPlace01Description);
+        setImage("place01Image", designData.minimalPlace01Image);
+
+        setText("statementEyebrow", designData.minimalStatementEyebrow);
+        setText("statementTitle", designData.minimalStatementTitle);
+        setText("statementDescription", designData.minimalStatementDescription);
+
+        setText("place02Label", designData.minimalPlace02Label);
+        setText("place02Title", designData.minimalPlace02Title);
+        setText("place02Description", designData.minimalPlace02Description);
+        setImage("place02Image", designData.minimalPlace02Image);
+
+        setText("galleryEyebrow", designData.minimalGalleryEyebrow);
+        setText("galleryTitle", designData.minimalGalleryTitle);
+        setText("galleryDescription", designData.minimalGalleryDescription);
+
+        setImage("gallery01Image", designData.minimalGallery01Image);
+        setImage("gallery02Image", designData.minimalGallery02Image);
+        setImage("gallery03Image", designData.minimalGallery03Image);
+        setImage("gallery04Image", designData.minimalGallery04Image);
+        setImage("gallery05Image", designData.minimalGallery05Image);
+        setImage("gallery06Image", designData.minimalGallery06Image);
+
+        setText("movingEyebrow", designData.minimalMovingEyebrow);
+        setText("movingTitle", designData.minimalMovingTitle);
+        setText("movingDescription", designData.minimalMovingDescription);
+        setVideo("movingVideo", designData.minimalMovingVideo);
+        setText("movingCaption", designData.minimalMovingCaption);
+
+        setText("finalEyebrow", designData.minimalFinalEyebrow);
+        setText("finalTitle", designData.minimalFinalTitle);
+        setText("finalDescription", designData.minimalFinalDescription);
+
+        setImage("endingImage", designData.minimalEndingImage);
+        setText("endingEyebrow", designData.minimalEndingEyebrow);
+        setText("endingDescription", designData.minimalEndingDescription);
+
+        if(designData.minimalHeroTitle){
+            document.title = String(designData.minimalHeroTitle).replace(/<br\s*\/?>/gi, " ");
         }
 
-
-        /* =================================================
-           SUCCESS
-        ================================================= */
-
-        console.log(
-            "MInimalPortfolio loaded successfully!"
-        );
-
+        console.log("MInimalPortfolio loaded successfully!");
 
     }catch(error){
 
-        console.error(
-            "Firebase loading error:",
-            error
-        );
+        console.error("Firebase loading error:", error);
 
     }
 
