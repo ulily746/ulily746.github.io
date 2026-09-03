@@ -3711,610 +3711,71 @@ async function loadNewsData(){
         );
 
 
+const content = data.content || {};
 
-        /* =================================================
-           GET DESIGN CONTENT
+console.log("🎨 Design content:", content);
+
+function setText(id, value) {
+    if (!value) return;
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+}
+
+function setSrc(id, value) {
+    if (!value) return;
+    const el = document.getElementById(id);
+    if (el) el.src = value;
+}
+
+// HERO
+setText("heroTitleTop", content.filmHeroTitleTop);
+setText("heroTitleBottom1", content.filmHeroTitleBottom1);
+setText("heroTitleBottom2", content.filmHeroTitleBottom2);
+setSrc("heroImage", content.filmHeroImage);
+
+// INTRO
+setText("introText", content.filmIntroText);
+
+// MEMORIES 1~4
+for (let i = 1; i <= 4; i++) {
+    setSrc(`memory${i}Image`, content[`filmMemory${i}Image`]);
+    setText(`memory${i}Text`, content[`filmMemory${i}Text`]);
+}
+
+// VIDEO
+if (content.filmVideoUrl) {
+    const video = document.getElementById("memoryVideo");
+    const source = document.getElementById("memoryVideoSource");
+    if (video && source) {
+        source.src = content.filmVideoUrl;
+        video.load();
+    }
+}
+setText("videoCaption", content.filmVideoCaption);
+
+// FILMS 1~3
+for (let i = 1; i <= 3; i++) {
+    setSrc(`film${i}Image`, content[`film${i}Image`]);
+    setText(`film${i}Title`, content[`film${i}Title`]);
+    setText(`film${i}Text`, content[`film${i}Text`]);
+}
+
+// TRAVEL
+if (content.filmTravelMonth || content.filmTravelYear) {
+    setText("travelMonth", `${content.filmTravelMonth || ""} ${content.filmTravelYear || ""}`.trim());
+}
+if (content.filmTravelLocation) {
+    setText("travelLocation", content.filmTravelLocation);
+    setText("travelLocationMap", content.filmTravelLocation);
+}
+if (content.filmTravelYear) {
+    const yearEl = document.getElementById("travelYear");
+    if (yearEl) yearEl.innerHTML = `summer<br>${content.filmTravelYear}`;
+}
+setText("travelText", content.filmTravelText);
+
+console.log("🎉 FilmArchiveDesign loaded successfully!", { id: newsId, content });
            
-           Firebase 구조:
-
-           news
-             └── document
-                   └── content
-                         ├── hero
-                         ├── intro
-                         ├── memories
-                         ├── video
-                         ├── films
-                         └── travel
-        ================================================= */
-
-        const content =
-            data.content || {};
-
-
-        console.log(
-            "🎨 Design content:",
-            content
-        );
-
-
-
-        /* =================================================
-           HERO
-        ================================================= */
-
-        if(
-            content.hero
-        ){
-
-
-            /* ---------------------------------------------
-               HERO TITLE TOP
-            --------------------------------------------- */
-
-            if(
-                content.hero.titleTop
-            ){
-
-                const element =
-                    document.getElementById(
-                        "heroTitleTop"
-                    );
-
-
-                if(element){
-
-                    element.textContent =
-                        content.hero.titleTop;
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               HERO TITLE BOTTOM 1
-            --------------------------------------------- */
-
-            if(
-                content.hero.titleBottom1
-            ){
-
-                const element =
-                    document.getElementById(
-                        "heroTitleBottom1"
-                    );
-
-
-                if(element){
-
-                    element.textContent =
-                        content.hero.titleBottom1;
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               HERO TITLE BOTTOM 2
-            --------------------------------------------- */
-
-            if(
-                content.hero.titleBottom2
-            ){
-
-                const element =
-                    document.getElementById(
-                        "heroTitleBottom2"
-                    );
-
-
-                if(element){
-
-                    element.textContent =
-                        content.hero.titleBottom2;
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               HERO IMAGE
-            --------------------------------------------- */
-
-            if(
-                content.hero.image
-            ){
-
-                const element =
-                    document.getElementById(
-                        "heroImage"
-                    );
-
-
-                if(element){
-
-                    element.src =
-                        content.hero.image;
-
-                }
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           INTRO
-        ================================================= */
-
-        if(
-            content.intro &&
-            content.intro.text
-        ){
-
-            const element =
-                document.getElementById(
-                    "introText"
-                );
-
-
-            if(element){
-
-                element.textContent =
-                    content.intro.text;
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           MEMORIES
-           
-           memories[0] → Memory 1
-           memories[1] → Memory 2
-           memories[2] → Memory 3
-           memories[3] → Memory 4
-        ================================================= */
-
-        if(
-            Array.isArray(
-                content.memories
-            )
-        ){
-
-            content.memories.forEach(
-
-                (
-                    memory,
-                    index
-                ) => {
-
-
-                    if(
-                        !memory
-                    ){
-
-                        return;
-
-                    }
-
-
-                    const number =
-                        index + 1;
-
-
-
-                    /* -------------------------------------
-                       MEMORY IMAGE
-                    ------------------------------------- */
-
-                    if(
-                        memory.image
-                    ){
-
-                        const imageElement =
-                            document.getElementById(
-                                `memory${number}Image`
-                            );
-
-
-                        if(
-                            imageElement
-                        ){
-
-                            imageElement.src =
-                                memory.image;
-
-                        }
-
-                    }
-
-
-
-                    /* -------------------------------------
-                       MEMORY TEXT
-                    ------------------------------------- */
-
-                    if(
-                        memory.text
-                    ){
-
-                        const textElement =
-                            document.getElementById(
-                                `memory${number}Text`
-                            );
-
-
-                        if(
-                            textElement
-                        ){
-
-                            textElement.textContent =
-                                memory.text;
-
-                        }
-
-                    }
-
-                }
-
-            );
-
-        }
-
-
-
-        /* =================================================
-           VIDEO
-        ================================================= */
-
-        if(
-            content.video
-        ){
-
-
-            /* ---------------------------------------------
-               VIDEO URL
-            --------------------------------------------- */
-
-            if(
-                content.video.url
-            ){
-
-                const video =
-                    document.getElementById(
-                        "memoryVideo"
-                    );
-
-
-                const source =
-                    document.getElementById(
-                        "memoryVideoSource"
-                    );
-
-
-                if(
-                    video &&
-                    source
-                ){
-
-                    source.src =
-                        content.video.url;
-
-
-                    /*
-                       새로운 source를 적용한 후
-                       video를 다시 로드합니다.
-                    */
-
-                    video.load();
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               VIDEO CAPTION
-            --------------------------------------------- */
-
-            if(
-                content.video.caption
-            ){
-
-                const element =
-                    document.getElementById(
-                        "videoCaption"
-                    );
-
-
-                if(element){
-
-                    element.textContent =
-                        content.video.caption;
-
-                }
-
-            }
-
-        }
-
-
-
-        /* =================================================
-           FILMS
-           
-           films[0] → Film 1
-           films[1] → Film 2
-           films[2] → Film 3
-        ================================================= */
-
-        if(
-            Array.isArray(
-                content.films
-            )
-        ){
-
-            content.films.forEach(
-
-                (
-                    film,
-                    index
-                ) => {
-
-
-                    if(
-                        !film
-                    ){
-
-                        return;
-
-                    }
-
-
-                    const number =
-                        index + 1;
-
-
-
-                    /* -------------------------------------
-                       FILM IMAGE
-                    ------------------------------------- */
-
-                    if(
-                        film.image
-                    ){
-
-                        const imageElement =
-                            document.getElementById(
-                                `film${number}Image`
-                            );
-
-
-                        if(
-                            imageElement
-                        ){
-
-                            imageElement.src =
-                                film.image;
-
-                        }
-
-                    }
-
-
-
-                    /* -------------------------------------
-                       FILM TITLE
-                    ------------------------------------- */
-
-                    if(
-                        film.title
-                    ){
-
-                        const titleElement =
-                            document.getElementById(
-                                `film${number}Title`
-                            );
-
-
-                        if(
-                            titleElement
-                        ){
-
-                            titleElement.textContent =
-                                film.title;
-
-                        }
-
-                    }
-
-
-
-                    /* -------------------------------------
-                       FILM TEXT
-                    ------------------------------------- */
-
-                    if(
-                        film.text
-                    ){
-
-                        const textElement =
-                            document.getElementById(
-                                `film${number}Text`
-                            );
-
-
-                        if(
-                            textElement
-                        ){
-
-                            textElement.textContent =
-                                film.text;
-
-                        }
-
-                    }
-
-                }
-
-            );
-
-        }
-
-
-
-        /* =================================================
-           TRAVEL
-        ================================================= */
-
-        if(
-            content.travel
-        ){
-
-
-            /* ---------------------------------------------
-               TRAVEL MONTH + YEAR
-            --------------------------------------------- */
-
-            if(
-                content.travel.month ||
-                content.travel.year
-            ){
-
-                const month =
-                    content.travel.month || "";
-
-
-                const year =
-                    content.travel.year || "";
-
-
-                const calendarElement =
-                    document.getElementById(
-                        "travelMonth"
-                    );
-
-
-                if(
-                    calendarElement
-                ){
-
-                    calendarElement.textContent =
-                        `${month} ${year}`;
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               TRAVEL LOCATION
-            --------------------------------------------- */
-
-            if(
-                content.travel.location
-            ){
-
-                const locationElement =
-                    document.getElementById(
-                        "travelLocation"
-                    );
-
-
-                const mapElement =
-                    document.getElementById(
-                        "travelLocationMap"
-                    );
-
-
-                if(
-                    locationElement
-                ){
-
-                    locationElement.textContent =
-                        content.travel.location;
-
-                }
-
-
-                if(
-                    mapElement
-                ){
-
-                    mapElement.textContent =
-                        content.travel.location;
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               TRAVEL YEAR
-            --------------------------------------------- */
-
-            if(
-                content.travel.year
-            ){
-
-                const yearElement =
-                    document.getElementById(
-                        "travelYear"
-                    );
-
-
-                if(
-                    yearElement
-                ){
-
-                    yearElement.innerHTML =
-                        `summer<br>${content.travel.year}`;
-
-                }
-
-            }
-
-
-
-            /* ---------------------------------------------
-               TRAVEL TEXT
-            --------------------------------------------- */
-
-            if(
-                content.travel.text
-            ){
-
-                const textElement =
-                    document.getElementById(
-                        "travelText"
-                    );
-
-
-                if(
-                    textElement
-                ){
-
-                    textElement.textContent =
-                        content.travel.text;
-
-                }
-
-            }
-
-        }
 
 
 
