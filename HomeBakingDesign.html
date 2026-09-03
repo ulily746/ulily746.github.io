@@ -193,319 +193,75 @@ function setImage(id, value){
 /* =========================================================
    LOAD NEWS + DESIGN
 ========================================================= */
-
 async function loadHomeBakingDesign(){
 
-    /* =====================================================
-       1. ID CHECK
-    ===================================================== */
-
     if(!newsId){
-
-        console.error(
-            "News ID is missing."
-        );
-
+        console.error("News ID is missing.");
         return;
-
     }
-
 
     try{
 
-        /* =================================================
-           2. NEWS DOCUMENT
-        ================================================= */
-
-        const newsRef =
-            doc(
-                db,
-                "news",
-                newsId
-            );
-
-
-        const newsSnap =
-            await getDoc(
-                newsRef
-            );
-
+        const newsRef = doc(db, "news", newsId);
+        const newsSnap = await getDoc(newsRef);
 
         if(!newsSnap.exists()){
-
-            console.error(
-                "News document not found:",
-                newsId
-            );
-
+            console.error("News document not found:", newsId);
             return;
-
         }
 
+        const newsData = newsSnap.data();
+        console.log("News data:", newsData);
 
-        const newsData =
-            newsSnap.data();
+        const designData = newsData.content || {};
+        console.log("Design content:", designData);
 
+        setImage("heroImage", designData.bakingHeroImage);
+        setText("heroTitle", designData.bakingHeroTitle);
+        setText("heroDescription", designData.bakingHeroDescription);
 
-        console.log(
-            "News data:",
-            newsData
-        );
+        setText("sectionTitle", designData.bakingSectionTitle);
+        setText("sectionDescription", designData.bakingSectionDescription);
 
+        setImage("polaroid01Image", designData.bakingPolaroid01Image);
+        setText("polaroid01Title", designData.bakingPolaroid01Title);
+        setText("polaroid01Description", designData.bakingPolaroid01Description);
 
-        /* =================================================
-           3. HOME BAKING DESIGN DOCUMENT
-        ================================================= */
+        setImage("polaroid02Image", designData.bakingPolaroid02Image);
+        setText("polaroid02Title", designData.bakingPolaroid02Title);
+        setText("polaroid02Description", designData.bakingPolaroid02Description);
 
-        const designRef =
-            doc(
-                db,
-                "news",
-                "HomeBakingDesign"
-            );
+        setImage("polaroid03Image", designData.bakingPolaroid03Image);
+        setText("polaroid03Title", designData.bakingPolaroid03Title);
+        setText("polaroid03Description", designData.bakingPolaroid03Description);
 
+        setImage("gallery01Image", designData.bakingGallery01Image);
+        setImage("gallery02Image", designData.bakingGallery02Image);
+        setImage("gallery03Image", designData.bakingGallery03Image);
 
-        const designSnap =
-            await getDoc(
-                designRef
-            );
+        setImage("aboutImage", designData.bakingAboutImage);
+        setText("aboutEyebrow", designData.bakingAboutEyebrow);
+        setText("aboutTitle", designData.bakingAboutTitle);
+        setText("aboutDescription", designData.bakingAboutDescription);
 
+        setText("footerNote", designData.bakingFooterNote);
+        setText("footerTitle", designData.bakingFooterTitle);
+        setText("footerCopyright", designData.bakingFooterCopyright);
 
-        if(!designSnap.exists()){
-
-            console.error(
-                "HomeBakingDesign document not found."
-            );
-
-            return;
-
+        if(designData.bakingHeroTitle){
+            document.title = designData.bakingHeroTitle;
         }
 
-
-        const designData =
-            designSnap.data();
-
-
-        console.log(
-            "HomeBakingDesign data:",
-            designData
-        );
-
-
-        /* =================================================
-           4. HERO
-        ================================================= */
-
-        setImage(
-            "heroImage",
-            designData.heroImage
-        );
-
-
-        setText(
-            "heroTitle",
-            designData.heroTitle
-        );
-
-
-        setText(
-            "heroDescription",
-            designData.heroDescription
-        );
-
-
-        /* =================================================
-           5. SECTION TITLE
-        ================================================= */
-
-        setText(
-            "sectionTitle",
-            designData.sectionTitle
-        );
-
-
-        setText(
-            "sectionDescription",
-            designData.sectionDescription
-        );
-
-
-        /* =================================================
-           6. POLAROID 01
-        ================================================= */
-
-        setImage(
-            "polaroid01Image",
-            designData.polaroid01Image
-        );
-
-
-        setText(
-            "polaroid01Title",
-            designData.polaroid01Title
-        );
-
-
-        setText(
-            "polaroid01Description",
-            designData.polaroid01Description
-        );
-
-
-        /* =================================================
-           7. POLAROID 02
-        ================================================= */
-
-        setImage(
-            "polaroid02Image",
-            designData.polaroid02Image
-        );
-
-
-        setText(
-            "polaroid02Title",
-            designData.polaroid02Title
-        );
-
-
-        setText(
-            "polaroid02Description",
-            designData.polaroid02Description
-        );
-
-
-        /* =================================================
-           8. POLAROID 03
-        ================================================= */
-
-        setImage(
-            "polaroid03Image",
-            designData.polaroid03Image
-        );
-
-
-        setText(
-            "polaroid03Title",
-            designData.polaroid03Title
-        );
-
-
-        setText(
-            "polaroid03Description",
-            designData.polaroid03Description
-        );
-
-
-        /* =================================================
-           9. GALLERY
-        ================================================= */
-
-        setImage(
-            "gallery01Image",
-            designData.gallery01Image
-        );
-
-
-        setImage(
-            "gallery02Image",
-            designData.gallery02Image
-        );
-
-
-        setImage(
-            "gallery03Image",
-            designData.gallery03Image
-        );
-
-
-        /* =================================================
-           10. ABOUT
-        ================================================= */
-
-        setImage(
-            "aboutImage",
-            designData.aboutImage
-        );
-
-
-        setText(
-            "aboutEyebrow",
-            designData.aboutEyebrow
-        );
-
-
-        setText(
-            "aboutTitle",
-            designData.aboutTitle
-        );
-
-
-        setText(
-            "aboutDescription",
-            designData.aboutDescription
-        );
-
-
-        /* =================================================
-           11. FOOTER
-        ================================================= */
-
-        setText(
-            "footerNote",
-            designData.footerNote
-        );
-
-
-        setText(
-            "footerTitle",
-            designData.footerTitle
-        );
-
-
-        setText(
-            "footerCopyright",
-            designData.footerCopyright
-        );
-
-
-        /* =================================================
-           12. PAGE TITLE
-        ================================================= */
-
-        if(
-            designData.heroTitle
-        ){
-
-            document.title =
-                designData.heroTitle;
-
-        }
-
-
-        /* =================================================
-           SUCCESS
-        ================================================= */
-
-        console.log(
-            "HomeBakingDesign loaded successfully!",
-            {
-                newsId,
-                newsData,
-                designData
-            }
-        );
-
+        console.log("HomeBakingDesign loaded successfully!", { newsId, newsData, designData });
 
     }catch(error){
 
-        console.error(
-            "Firebase loading error:",
-            error
-        );
+        console.error("Firebase loading error:", error);
 
     }
 
 }
+
 
 
 /* =========================================================
