@@ -96,943 +96,144 @@ const db =
    예:
    news.html?id=abc123
 ========================================================= */
+const params = new URLSearchParams(window.location.search);
+const newsId = params.get("id");
 
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const newsId =
-    params.get("id");
-
-
-console.log(
-    "Current URL:",
-    window.location.href
-);
-
-console.log(
-    "News ID:",
-    newsId
-);
-
-
-/* =========================================================
-   ELEMENT HELPER
-========================================================= */
-
-function getElement(id){
-
-    return document.getElementById(id);
-
-}
-
-
-/* =========================================================
-   TEXT SETTER
-========================================================= */
+function getElement(id){ return document.getElementById(id); }
 
 function setText(id, value){
-
-    const element =
-        getElement(id);
-
-
-    if(!element){
-
-        console.warn(
-            `HTML element not found: #${id}`
-        );
-
-        return;
-
-    }
-
-
-    /*
-    Firebase 값이 없으면
-    기존 HTML 내용을 유지
-    */
-
-    if(
-        value === undefined ||
-        value === null ||
-        value === ""
-    ){
-
-        return;
-
-    }
-
-
-    let finalValue =
-        value;
-
-
-    /*
-    Firestore Timestamp 처리
-    */
-
-    if(
-        typeof value === "object" &&
-        value !== null
-    ){
-
-        if(
-            typeof value.toDate === "function"
-        ){
-
-            finalValue =
-                value
-                .toDate()
-                .toLocaleDateString(
-                    "en-US",
-                    {
-                        year:
-                        "numeric",
-
-                        month:
-                        "long",
-
-                        day:
-                        "numeric"
-                    }
-                );
-
-        }
-
-        else{
-
-            finalValue =
-                JSON.stringify(value);
-
-        }
-
-    }
-
-
-    const text =
-        String(finalValue)
-        .trim();
-
-
-    if(!text){
-
-        return;
-
-    }
-
-
-    element.textContent =
-        text;
-
-
-    console.log(
-        `Applied text → #${id}:`,
-        text
-    );
-
+    const el = getElement(id);
+    if(!el || value === undefined || value === null || value === "") return;
+    el.textContent = String(value);
 }
-
-
-/* =========================================================
-   IMAGE SETTER
-========================================================= */
 
 function setImage(id, value){
-
-    const element =
-        getElement(id);
-
-
-    if(!element){
-
-        console.warn(
-            `Image element not found: #${id}`
-        );
-
-        return;
-
-    }
-
-
-    /*
-    이미지가 없으면
-    기존 src가 있다면 유지
-    */
-
-    if(
-        value === undefined ||
-        value === null ||
-        value === ""
-    ){
-
-        return;
-
-    }
-
-
-    const imageUrl =
-        String(value)
-        .trim();
-
-
-    if(
-        !imageUrl ||
-        imageUrl === "undefined" ||
-        imageUrl === "null"
-    ){
-
-        return;
-
-    }
-
-
-    element.src =
-        imageUrl;
-
-
-    /*
-    이미지 로딩 실패 처리
-    */
-
-    element.addEventListener(
-        "error",
-        function(){
-
-            console.warn(
-                "Image failed to load:",
-                imageUrl
-            );
-
-            element.style.display =
-                "none";
-
-        },
-        {
-            once:true
-        }
-    );
-
+    const el = getElement(id);
+    if(!el || !value) return;
+    el.src = String(value).trim();
 }
-
-
-/* =========================================================
-   VIDEO SETTER
-========================================================= */
-
-function setVideo(value){
-
-    const video =
-        getElement("mainVideo");
-
-    const source =
-        getElement("videoUrl");
-
-
-    if(
-        !video ||
-        !source
-    ){
-
-        return false;
-
-    }
-
-
-    if(
-        value === undefined ||
-        value === null ||
-        value === ""
-    ){
-
-        return false;
-
-    }
-
-
-    const videoUrl =
-        String(value)
-        .trim();
-
-
-    if(
-        !videoUrl ||
-        videoUrl === "undefined" ||
-        videoUrl === "null"
-    ){
-
-        return false;
-
-    }
-
-
-    source.src =
-        videoUrl;
-
-
-    video.load();
-
-
-    /*
-    자동재생 시도
-    */
-
-    const playPromise =
-        video.play();
-
-
-    if(
-        playPromise &&
-        typeof playPromise.catch === "function"
-    ){
-
-        playPromise.catch(
-            function(error){
-
-                console.warn(
-                    "Video autoplay was blocked:",
-                    error
-                );
-
-            }
-        );
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   HIDE ELEMENT
-========================================================= */
 
 function hideElement(id){
-
-    const element =
-        getElement(id);
-
-
-    if(element){
-
-        element.style.display =
-            "none";
-
-    }
-
+    const el = getElement(id);
+    if(el) el.style.display = "none";
 }
-
-
-/* =========================================================
-   SHOW ERROR
-========================================================= */
 
 function showError(message){
-
-    const loadingScreen =
-        getElement("loadingScreen");
-
-    const errorScreen =
-        getElement("errorScreen");
-
-    const errorMessage =
-        getElement("errorMessage");
-
-
-    /*
-    Loading 숨기기
-    */
-
-    if(loadingScreen){
-
-        loadingScreen.style.display =
-            "none";
-
-    }
-
-
-    /*
-    Error 화면 표시
-    */
-
-    if(errorScreen){
-
-        errorScreen.style.display =
-            "flex";
-
-    }
-
-
-    /*
-    Error 메시지
-    */
-
-    if(errorMessage){
-
-        errorMessage.textContent =
-            message;
-
-    }
-
+    const loadingScreen = getElement("loadingScreen");
+    const errorScreen = getElement("errorScreen");
+    const errorMessage = getElement("errorMessage");
+    if(loadingScreen) loadingScreen.style.display = "none";
+    if(errorScreen) errorScreen.style.display = "flex";
+    if(errorMessage) errorMessage.textContent = message;
 }
-
-
-/* =========================================================
-   LOAD LIFE & TRAVEL
-========================================================= */
 
 async function loadLifeTravel(){
 
-    /*
-    1.
-    URL ID 확인
-    */
-
     if(!newsId){
-
-        console.error(
-            "News ID is missing from URL."
-        );
-
-        showError(
-            "This archive page requires a news ID."
-        );
-
+        showError("This archive page requires a news ID.");
         return;
-
     }
-
 
     try{
 
+        const docRef = doc(db, "news", newsId);
+        const docSnap = await getDoc(docRef);
 
-        console.log(
-            "Loading Firebase document:",
-            newsId
-        );
-
-
-        /*
-        2.
-        Firestore document reference
-        */
-
-        const docRef =
-            doc(
-                db,
-                "news",
-                newsId
-            );
-
-
-        /*
-        3.
-        Firestore document 가져오기
-        */
-
-        const docSnap =
-            await getDoc(
-                docRef
-            );
-
-
-        /*
-        4.
-        문서가 없을 경우
-        */
-
-        if(
-            !docSnap.exists()
-        ){
-
-            console.error(
-                "Firebase document not found:",
-                newsId
-            );
-
-            showError(
-                "Archive entry not found."
-            );
-
+        if(!docSnap.exists()){
+            showError("Archive entry not found.");
             return;
-
         }
 
-
-        /*
-        5.
-        Firebase 데이터
-        */
-
-        const data =
-            docSnap.data();
-
-
-        console.log(
-            "Firebase data:",
-            data
-        );
-
-
-        console.log(
-            "Firebase field names:",
-            Object.keys(data)
-        );
-
-
-        /*
-        6.
-        HERO
-        */
-
-        setText(
-            "heroEyebrow",
-            data.heroEyebrow
-        );
-
-
-        setText(
-            "heroTitle",
-            data.heroTitle ||
-            data.title
-        );
-
-
-        setText(
-            "heroDescription",
-            data.heroDescription ||
-            data.description
-        );
-
-
-        setImage(
-            "heroImage",
-            data.heroImage ||
-            data.image
-        );
-
-
-        /*
-        7.
-        CHAPTER 01
-        */
-
-        setText(
-            "chapter01Label",
-            data.chapter01Label
-        );
-
-
-        setText(
-            "chapter01Title",
-            data.chapter01Title
-        );
-
-
-        setText(
-            "chapter01Description",
-            data.chapter01Description
-        );
-
-
-        setImage(
-            "chapter01Image",
-            data.chapter01Image
-        );
-
-
-        /*
-        8.
-        RIBBON
-        */
-
-        setImage(
-            "ribbonImage",
-            data.ribbonImage
-        );
-
-
-        setText(
-            "ribbonCaption",
-            data.ribbonCaption
-        );
-
-
-        /*
-        9.
-        CHAPTER 02
-        */
-
-        setText(
-            "chapter02Label",
-            data.chapter02Label
-        );
-
-
-        setText(
-            "chapter02Title",
-            data.chapter02Title
-        );
-
-
-        setText(
-            "chapter02Description",
-            data.chapter02Description
-        );
-
-
-        setText(
-            "chapter02SideLabel",
-            data.chapter02SideLabel
-        );
-
-
-        setText(
-            "chapter02Date",
-            data.chapter02Date
-        );
-
-
-        setImage(
-            "chapter02Image",
-            data.chapter02Image
-        );
-
-
-        /*
-        10.
-        VIDEO
-        */
-
-        setText(
-            "videoLabel",
-            data.videoLabel
-        );
-
-
-        setText(
-            "videoTitle",
-            data.videoTitle
-        );
-
-
-        setText(
-            "videoDescription",
-            data.videoDescription
-        );
-
-
-        setText(
-            "videoSubLabel",
-            data.videoSubLabel
-        );
-
-
-        const videoLoaded =
-            setVideo(
-                data.videoUrl
-            );
-
-
-        /*
-        영상이 없으면
-        전체 VIDEO SECTION 숨김
-        */
-
-        if(!videoLoaded){
-
-            hideElement(
-                "videoSection"
-            );
-
-        }
-
-
-        /*
-        11.
-        PAGE 01
-        */
-
-        setImage(
-            "page01Image",
-            data.page01Image
-        );
-
-
-        setText(
-            "page01Label",
-            data.page01Label
-        );
-
-
-        setText(
-            "page01Title",
-            data.page01Title
-        );
-
-
-        setText(
-            "page01Description",
-            data.page01Description
-        );
-
-
-        /*
-        12.
-        PAGE 02
-        */
-
-        setImage(
-            "page02Image",
-            data.page02Image
-        );
-
-
-        setText(
-            "page02Label",
-            data.page02Label
-        );
-
-
-        setText(
-            "page02Title",
-            data.page02Title
-        );
-
-
-        setText(
-            "page02Description",
-            data.page02Description
-        );
-
-
-        /*
-        13.
-        PAGE 03
-        */
-
-        setImage(
-            "page03Image",
-            data.page03Image
-        );
-
-
-        setText(
-            "page03Label",
-            data.page03Label
-        );
-
-
-        setText(
-            "page03Title",
-            data.page03Title
-        );
-
-
-        setText(
-            "page03Description",
-            data.page03Description
-        );
-
-
-        /*
-        14.
-        MEMORY A
-        */
-
-        setImage(
-            "memoryAImage",
-            data.memoryAImage
-        );
-
-
-        setText(
-            "memoryALabel",
-            data.memoryALabel
-        );
-
-
-        setText(
-            "memoryATitle",
-            data.memoryATitle
-        );
-
-
-        setText(
-            "memoryADescription",
-            data.memoryADescription
-        );
-
-
-        setText(
-            "memoryANote",
-            data.memoryANote
-        );
-
-
-        /*
-        15.
-        MEMORY B
-        */
-
-        setImage(
-            "memoryBImage",
-            data.memoryBImage
-        );
-
-
-        setText(
-            "memoryBLabel",
-            data.memoryBLabel
-        );
-
-
-        setText(
-            "memoryBTitle",
-            data.memoryBTitle
-        );
-
-
-        setText(
-            "memoryBDescription",
-            data.memoryBDescription
-        );
-
-
-        setText(
-            "memoryBNote",
-            data.memoryBNote
-        );
-
-
-        /*
-        16.
-        MEMORY C
-        */
-
-        setImage(
-            "memoryCImage",
-            data.memoryCImage
-        );
-
-
-        setText(
-            "memoryCLabel",
-            data.memoryCLabel
-        );
-
-
-        setText(
-            "memoryCTitle",
-            data.memoryCTitle
-        );
-
-
-        setText(
-            "memoryCDescription",
-            data.memoryCDescription
-        );
-
-
-        setText(
-            "memoryCNote",
-            data.memoryCNote
-        );
-
-
-        /*
-        17.
-        FOOTER DATE
-        */
-
-        if(data.createdAt){
-
-            setText(
-                "footerDate",
-                data.createdAt
-            );
-
-        }
-
-
-        /*
-        18.
-        DOCUMENT TITLE
-        */
-
-        const pageTitle =
-            data.heroTitle ||
-            data.title;
-
-
+        const newsData = docSnap.data();
+        const content = newsData.content || {};
+
+        console.log("VintageFlowerDesign content:", content);
+
+        // HERO
+        setImage("heroImage", content.vintageHeroImage);
+        setText("heroTitle", content.vintageHeroTitle);
+        setText("heroDescription", content.vintageHeroSubtitle);
+        hideElement("heroEyebrow");
+
+        // CHAPTER 01 = INTRO
+        setText("chapter01Label", "INTRODUCTION");
+        setText("chapter01Title", content.vintageIntroTitle);
+        setText("chapter01Description", content.vintageIntroText);
+        setImage("chapter01Image", content.vintageFlower1Image);
+
+        // RIBBON = FLOWER 1
+        setImage("ribbonImage", content.vintageFlower1Image);
+        setText("ribbonCaption", content.vintageFlower1Title);
+
+        // CHAPTER 02 = FLOWER 2
+        setImage("chapter02Image", content.vintageFlower2Image);
+        setText("chapter02Label", "FLOWER STORY");
+        setText("chapter02Title", content.vintageFlower2Title);
+        setText("chapter02Description", content.vintageFlower2Text);
+        hideElement("chapter02SideLabel");
+        hideElement("chapter02Date");
+
+        // VIDEO — Vintage Flower 디자인엔 영상 입력란이 없어서 섹션 숨김
+        hideElement("videoSection");
+
+        // PAGE 01 = FLOWER 3
+        setImage("page01Image", content.vintageFlower3Image);
+        setText("page01Label", "FLOWER STORY");
+        setText("page01Title", content.vintageFlower3Title);
+        setText("page01Description", content.vintageFlower3Text);
+
+        // PAGE 02 / 03 = GALLERY 1 / 2
+        setImage("page02Image", content.vintageGallery1Image);
+        setText("page02Label", "GALLERY");
+        hideElement("page02Title");
+        hideElement("page02Description");
+
+        setImage("page03Image", content.vintageGallery2Image);
+        setText("page03Label", "GALLERY");
+        hideElement("page03Title");
+        hideElement("page03Description");
+
+        // MEMORY A = JOURNAL
+        setImage("memoryAImage", content.vintageGallery3Image);
+        setText("memoryALabel", "JOURNAL");
+        setText("memoryATitle", content.vintageJournalTitle);
+        setText("memoryADescription", content.vintageJournalText);
+        hideElement("memoryANote");
+
+        // MEMORY B = GALLERY 4
+        setImage("memoryBImage", content.vintageGallery4Image);
+        hideElement("memoryBLabel");
+        hideElement("memoryBTitle");
+        hideElement("memoryBDescription");
+        hideElement("memoryBNote");
+
+        // MEMORY C — 남는 데이터 없음
+        const memoryC = document.querySelector('[id="memoryCImage"]')?.closest("section") 
+            || document.querySelector('[id="memoryCImage"]')?.closest("div.grid");
+        hideElement("memoryCImage");
+        hideElement("memoryCLabel");
+        hideElement("memoryCTitle");
+        hideElement("memoryCDescription");
+        hideElement("memoryCNote");
+
+        const pageTitle = content.vintageHeroTitle;
         if(pageTitle){
-
-            document.title =
-                String(pageTitle) +
-                " — Life & Travel Archive";
-
+            document.title = String(pageTitle) + " — Vintage Flower Archive";
         }
 
+        hideElement("loadingScreen");
 
-        /*
-        19.
-        LOADING SCREEN 제거
-        */
+        console.log("VintageFlowerDesign loaded successfully!", { id: newsId, content });
 
-        hideElement(
-            "loadingScreen"
-        );
-
-
-        /*
-        20.
-        SUCCESS LOG
-        */
-
-        console.log(
-            "Life & Travel Archive loaded successfully!",
-            {
-                id:
-                newsId,
-
-                data:
-                data
-            }
-        );
-
-
-    }
-
-    catch(error){
-
-
-        /*
-        Firebase 오류
-        */
-
-        console.error(
-            "Failed to load Life & Travel Archive:",
-            error
-        );
-
-
-        showError(
-            "Unable to load this archive. Please try again."
-        );
-
+    }catch(error){
+        console.error("Failed to load VintageFlowerDesign:", error);
+        showError("Unable to load this archive. Please try again.");
     }
 
 }
 
-
-/* =========================================================
-   START
-========================================================= */
-
 loadLifeTravel();
+
 
 </script>
 
