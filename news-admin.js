@@ -1140,29 +1140,21 @@ OPEN MODAL
 
 function openModal() {
 
-const modal =
-    document.getElementById(
-        "entryModal"
-    );
+const modal = document.getElementById("entryModal");
 
 if (!modal) {
-
-    console.warn(
-        "entryModal not found."
-    );
-
+    console.warn("entryModal not found.");
     return;
 }
 
-modal.classList.add(
-    "active"
-);
+modal.classList.add("active");
+modal.style.display = "flex";
+document.body.style.overflow = "hidden";
 
-modal.style.display =
-    "flex";
-
-document.body.style.overflow =
-    "hidden";
+const modalBox = modal.querySelector(".modal-box");
+if (modalBox) {
+    modalBox.scrollTop = 0;
+}
 
 }
 
