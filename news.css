@@ -410,6 +410,9 @@ COMMON TITLE
 /* =====================================
 RESEARCH
 ===================================== */
+/* =====================================
+RESEARCH
+===================================== */
 .research-section{
     padding:120px 8%;
 }
@@ -421,7 +424,6 @@ RESEARCH
 }
 
 .research-card{
-    background-color:#DDE3DA; 
     height:620px;
     overflow:hidden;
     display:flex;
@@ -431,9 +433,11 @@ RESEARCH
     box-shadow: 0 15px 35px rgba(0,0,0,0.02);
 }
 
-.research-card:nth-child(even){
-    background-color:#E2DCD5; 
-}
+/* 세이지 그린 계열 4단계 */
+.research-card:nth-child(4n+1){ background-color:#DEE3D6; }
+.research-card:nth-child(4n+2){ background-color:#D4DBCC; }
+.research-card:nth-child(4n+3){ background-color:#E4E8DD; }
+.research-card:nth-child(4n+4){ background-color:#CBD4C1; }
 
 .research-card:hover{
     transform:translateY(-8px);
@@ -517,7 +521,7 @@ ACADEMIC
 ===================================== */
 .academic-section{
     padding:120px 8%;
-    background:#D8CBB8;
+    background:#F2F2DF;
 }
 
 /* Academic Title */
@@ -543,26 +547,12 @@ ACADEMIC
     transition:.4s;
 }
 
-/* 고급 세라믹/인테리어 무드의 5가지 톤 다운 배색 */
-.academic-card:nth-child(5n+1){ 
-    background-color:#D5DDD5; 
-}
-
-.academic-card:nth-child(5n+2){ 
-    background-color:#DDD8D0; 
-}
-
-.academic-card:nth-child(5n+3){ 
-    background-color:#D2DDE0; 
-}
-
-.academic-card:nth-child(5n+4){ 
-    background-color:#E2DAD3; 
-}
-
-.academic-card:nth-child(5n+5){ 
-    background-color:#D8DED7; 
-}
+/* Research와 같은 계열, 5단계 */
+.academic-card:nth-child(5n+1){ background-color:#DEE3D6; }
+.academic-card:nth-child(5n+2){ background-color:#D8DED0; }
+.academic-card:nth-child(5n+3){ background-color:#E2E6DA; }
+.academic-card:nth-child(5n+4){ background-color:#D1D9C7; }
+.academic-card:nth-child(5n+5){ background-color:#E8EBE2; }
 
 .academic-card:hover{
     transform:translateY(-8px);
@@ -591,7 +581,7 @@ ACADEMIC
     bottom:0;
     width:100%;
     padding:35px;
-    padding-bottom: 90px; /* 버튼 공간 확보 */
+    padding-bottom: 90px;
 }
 
 .academic-card .card-content span{
@@ -928,17 +918,11 @@ ARCH WINDOW GRID
 ===================================== */
 
 .life-grid {
-
-
-display: grid;
-
-grid-template-columns: repeat(4, 1fr);
-
-gap: 18px;
-
-width: 100%;
-align-items:end; 
-
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    width: 100%;
+    align-items: end;
 }
 
 /* =====================================
@@ -946,19 +930,11 @@ LIFE CARD
 ===================================== */
 
 .life-card {
-
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-position: relative;
-
-text-decoration: none;
-
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
 }
 
 /* =====================================
@@ -972,26 +948,22 @@ TALL ARCH WINDOW
     position:relative;
     background:#DDD;
 }
+
+/* 카드마다 다른 높이 — 갤러리 벽 리듬 */
+.life-card:nth-child(4n+1) .life-arch-img{ height:520px; }
+.life-card:nth-child(4n+2) .life-arch-img{ height:380px; }
+.life-card:nth-child(4n+3) .life-arch-img{ height:460px; }
+.life-card:nth-child(4n+4) .life-arch-img{ height:340px; }
+
 .life-arch-img img {
-
-
-width: 100%;
-
-height: 100%;
-
-object-fit: cover;
-
-transition: transform .6s ease;
-
-
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .6s ease;
 }
 
 .life-card:hover .life-arch-img img {
-
-
-transform: scale(1.06);
-
-
+    transform: scale(1.06);
 }
 
 /* =====================================
@@ -999,23 +971,13 @@ ARCH WINDOW FRAME
 ===================================== */
 
 .life-arch-img::after {
-
-
-content: "";
-
-position: absolute;
-
-inset: 0;
-
-border: 1px solid rgba(139,115,85,.35);
-
-border-radius: 100px 100px 0 0;
-
-pointer-events: none;
-
-
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(139,115,85,.35);
+    border-radius: 120px 120px 0 0;
+    pointer-events: none;
 }
-
 /* =====================================
 HOVER
 ===================================== */
