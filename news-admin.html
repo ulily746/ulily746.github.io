@@ -1414,7 +1414,17 @@ textarea{
 </head>
 
 <body>
+<!-- ====================================== 로그인 ====================================== -->
+<div id="loginBox" style="max-width:400px;margin:160px auto;background:#FAF8F3;padding:40px;border:1px solid #DDD8CF;text-align:center;">
+    <div class="logo" style="justify-content:center;">Yuri</div>
+    <div class="logo-sub" style="margin-bottom:30px;">ADMIN LOGIN</div>
+    <input type="password" id="adminPassword" placeholder="Password" style="width:100%;padding:12px;border:1px solid #D8D3CA;background:#FFFDF8;font-family:'Manrope',sans-serif;font-size:12px;margin-bottom:15px;">
+    <button id="adminLoginButton" style="width:100%;padding:12px;border:none;background:#4D594F;color:white;cursor:pointer;font-size:12px;">Login</button>
+    <p id="loginMessage" style="margin-top:12px;font-size:11px;color:#A45D52;"></p>
+</div>
 
+<!-- ====================================== 기존 SIDEBAR + MAIN 전체를 아래 div로 감싸기 ====================================== -->
+<div id="adminApp" style="display:none;">
 <!-- ======================================
      SIDEBAR
 ====================================== -->
@@ -3745,7 +3755,30 @@ Save Entry
     type="module"
     src="news-admin.js"
 ></script>
+<script>
+const ADMIN_PASSWORD = "ulily36";
 
+const loginBox = document.getElementById("loginBox");
+const adminApp = document.getElementById("adminApp");
+const loginButton = document.getElementById("adminLoginButton");
+const passwordInput = document.getElementById("adminPassword");
+const loginMessage = document.getElementById("loginMessage");
+
+function tryLogin(){
+    if(passwordInput.value.trim() === ADMIN_PASSWORD){
+        loginBox.style.display = "none";
+        adminApp.style.display = "block";
+    } else {
+        loginMessage.textContent = "Wrong password.";
+        passwordInput.value = "";
+    }
+}
+
+loginButton.addEventListener("click", tryLogin);
+passwordInput.addEventListener("keydown", (e) => {
+    if(e.key === "Enter") tryLogin();
+});
+</script>
 </body>
 
 </html>
