@@ -1859,1054 +1859,262 @@ select{
 
 <script>
 
-/* =========================================================
-   CONTENT DATABASE
-========================================================= */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-const archiveData = {
-
-
-/* =========================================================
-   RESEARCH
-========================================================= */
-
-research:{
-
-    label:"Choi Yuri · Research",
-
-    title:"Research",
-
-    subtitle:
-    "A collection of research projects, publications, experiments, and ideas developed throughout my academic journey.",
-
-    filters:[
-        ["all","All"],
-        ["project","Projects"],
-        ["publication","Publications"],
-        ["note","Notes"]
-    ],
-
-    items:[
-
-        {
-            title:"Dual Metabolic Therapy",
-            type:"project",
-            category:"Research Project",
-            year:2026,
-            description:
-            "PLGA-PEG nanoparticle platform for dual metabolic inhibition.",
-            image:"research1.jpg",
-            shape:"thumb-arch",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"Paper Writing",
-            type:"publication",
-            category:"Publication",
-            year:2026,
-            description:
-            "Manuscript preparation and scientific communication.",
-            image:"research2.jpg",
-            shape:"thumb-oval",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"PLGA-PEG Nanoparticle Platform",
-            type:"project",
-            category:"Research Project",
-            year:2025,
-            description:
-            "Development of a nanoparticle-based drug delivery platform.",
-            image:"research3.jpg",
-            shape:"thumb-round",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"Cancer Metabolism",
-            type:"note",
-            category:"Research Note",
-            year:2025,
-            description:
-            "Exploring metabolic vulnerabilities of cancer cells.",
-            image:"research4.jpg",
-            shape:"thumb-rect",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"Metabolic Therapy Notes",
-            type:"note",
-            category:"Research Note",
-            year:2024,
-            description:
-            "Thoughts and observations gathered throughout the research process.",
-            image:"research5.jpg",
-            shape:"thumb-bottom-round",
-            link:"MinimalPortfolioDesign.html"
-        }
-
-    ]
-
-},
-
-
-
-/* =========================================================
-   ACADEMIC
-========================================================= */
-
-academic:{
-
-    label:"Choi Yuri · Academic",
-
-    title:"Academic",
-
-    subtitle:
-    "Conferences, certifications, awards, language learning, and continuous academic growth.",
-
-    filters:[
-        ["all","All"],
-        ["conference","Conference"],
-        ["certificate","Certificates"],
-        ["language","Language"],
-        ["award","Awards"]
-    ],
-
-    items:[
-
-        {
-            title:"ACS Spring 2026",
-            type:"conference",
-            category:"Conference",
-            year:2026,
-            description:
-            "Poster presentation and academic networking.",
-            image:"academic1.jpg",
-            shape:"thumb-arch",
-            link:"ribon.html"
-        },
-
-        {
-            title:"Python Programming",
-            type:"certificate",
-            category:"Certificate",
-            year:2026,
-            description:
-            "Programming and data analysis studies.",
-            image:"academic2.jpg",
-            shape:"thumb-round",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"German Language Study",
-            type:"language",
-            category:"Language",
-            year:2026,
-            description:
-            "German language learning and B1 preparation.",
-            image:"academic3.jpg",
-            shape:"thumb-oval",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"Academic Achievement",
-            type:"award",
-            category:"Award",
-            year:2026,
-            description:
-            "Academic achievement and scholarship.",
-            image:"academic4.jpg",
-            shape:"thumb-bottom-round",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"TOEFL Preparation",
-            type:"language",
-            category:"Language",
-            year:2025,
-            description:
-            "Academic English and communication preparation.",
-            image:"academic5.jpg",
-            shape:"thumb-rect",
-            link:"MinimalPortfolioDesign.html"
-        }
-
-    ]
-
-},
-
-
-
-/* =========================================================
-   TRAVEL
-========================================================= */
-
-travel:{
-
-    label:"Choi Yuri · Travel",
-
-    title:"Travel",
-
-    subtitle:
-    "Places, landscapes, and quiet moments that became part of my personal archive.",
-
-    filters:[
-        ["all","All"],
-        ["journey","Journeys"],
-        ["nature","Nature"],
-        ["city","Cities"]
-    ],
-
-    items:[
-
-        {
-            title:"Switzerland",
-            type:"journey",
-            category:"Travel Journal",
-            year:2026,
-            description:
-            "Alps, mountains, and personal inspiration.",
-            image:"travel1.jpg",
-            shape:"thumb-arch",
-            link:"FilmArchiveDesign.html"
-        },
-
-        {
-            title:"Swiss Alps",
-            type:"nature",
-            category:"Nature",
-            year:2026,
-            description:
-            "A visual diary of the Alps.",
-            image:"travel2.jpg",
-            shape:"thumb-round",
-            link:"FloristGardenDesign.html"
-        },
-
-        {
-            title:"Mountain Journey",
-            type:"journey",
-            category:"Journey",
-            year:2026,
-            description:
-            "Walking through landscapes and quiet places.",
-            image:"travel3.jpg",
-            shape:"thumb-oval",
-            link:"FloristGardenDesign.html"
-        }
-
-    ]
-
-},
-
-
-
-/* =========================================================
-   LIFE
-========================================================= */
-
-life:{
-
-    label:"Choi Yuri · Life & Style",
-
-    title:"Life & Style",
-
-    subtitle:
-    "Small moments of beauty, wellness, creativity, and everyday inspiration.",
-
-    filters:[
-        ["all","All"],
-        ["beauty","Beauty"],
-        ["wellness","Wellness"],
-        ["home","Home"],
-        ["hobby","Hobbies"]
-    ],
-
-    items:[
-
-        {
-            title:"Beauty & Lifestyle",
-            type:"beauty",
-            category:"Beauty",
-            year:2026,
-            description:
-            "Daily inspiration, beauty, and personal aesthetics.",
-            image:"life1.jpg",
-            shape:"thumb-arch",
-            link:"MinimalPortfolioDesign.html"
-        },
-
-        {
-            title:"Sports & Wellness",
-            type:"wellness",
-            category:"Wellness",
-            year:2026,
-            description:
-            "Movement, wellness, and maintaining balance.",
-            image:"life2.jpg",
-            shape:"thumb-round",
-            link:"CeramicShopDesign.html"
-        },
-
-        {
-            title:"Home & Decor",
-            type:"home",
-            category:"Home",
-            year:2026,
-            description:
-            "Spaces, objects, and small details at home.",
-            image:"life3.jpg",
-            shape:"thumb-oval",
-            link:"HomeBakingDesign.html"
-        },
-
-        {
-            title:"Home Baking",
-            type:"hobby",
-            category:"Hobbies",
-            year:2026,
-            description:
-            "Baking, making, and creating something by hand.",
-            image:"life4.jpg",
-            shape:"thumb-bottom-round",
-            link:"HomeBakingDesign.html"
-        },
-
-        {
-            title:"Mind & Balance",
-            type:"wellness",
-            category:"Wellness",
-            year:2025,
-            description:
-            "Thoughts on balance, growth, and everyday life.",
-            image:"life5.jpg",
-            shape:"thumb-rect",
-            link:"ModernMaturity.html"
-        }
-
-    ]
-
-}
-
+const firebaseConfig = {
+    apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+    authDomain: "yuri-research-portfolio.firebaseapp.com",
+    projectId: "yuri-research-portfolio",
+    storageBucket: "yuri-research-portfolio.firebasestorage.app",
+    messagingSenderId: "231317507996",
+    appId: "1:231317507996:web:9773282c138706d886c259",
+    measurementId: "G-57VHW2454"
 };
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
+const DESIGN_ROUTES = {
+    FilmArchiveDesign: "FilmArchiveDesign.html",
+    VintageFlowerDesign: "VintageFlowerDesign.html",
+    HomeBakingDesign: "HomeBakingDesign.html",
+    MInimalPortfolio: "MInimalPortfolioDesign.html",
+    ModernMaturityDesign: "ModernMaturityDesign.html"
+};
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+function getDesignPage(design) {
+    return DESIGN_ROUTES[design] || "FilmArchiveDesign.html";
+}
 
-const archiveTitle =
-document.getElementById("archiveTitle");
+const sectionMeta = {
+    research: {
+        label: "Choi Yuri · Research",
+        title: "Research",
+        subtitle: "A collection of research projects, publications, experiments, and ideas developed throughout my academic journey.",
+        category: "Research"
+    },
+    academic: {
+        label: "Choi Yuri · Academic",
+        title: "Academic",
+        subtitle: "Conferences, certifications, awards, language learning, and continuous academic growth.",
+        category: "Academic"
+    },
+    travel: {
+        label: "Choi Yuri · Travel",
+        title: "Travel",
+        subtitle: "Places, landscapes, and quiet moments that became part of my personal archive.",
+        category: "Travel"
+    },
+    life: {
+        label: "Choi Yuri · Life & Style",
+        title: "Life & Style",
+        subtitle: "Small moments of beauty, wellness, creativity, and everyday inspiration.",
+        category: "Life"
+    }
+};
 
-const archiveSubtitle =
-document.getElementById("archiveSubtitle");
+/* ELEMENTS */
+const archiveTitle = document.getElementById("archiveTitle");
+const archiveSubtitle = document.getElementById("archiveSubtitle");
+const heroLabel = document.getElementById("heroLabel");
+const filterGroup = document.getElementById("filterGroup");
+const archiveList = document.getElementById("archiveList");
+const visibleCount = document.getElementById("visibleCount");
+const noResults = document.getElementById("noResults");
+const loadMore = document.getElementById("loadMore");
+const loadMoreArea = document.getElementById("loadMoreArea");
+const searchButton = document.getElementById("searchButton");
+const searchArea = document.getElementById("searchArea");
+const searchInput = document.getElementById("searchInput");
+const searchClose = document.getElementById("searchClose");
+const sortSelect = document.getElementById("sortSelect");
 
-const heroLabel =
-document.getElementById("heroLabel");
+const featuredCard = document.getElementById("featuredCard");
+const featuredImage = document.getElementById("featuredImage");
+const featuredCategory = document.getElementById("featuredCategory");
+const featuredTitle = document.getElementById("featuredTitle");
+const featuredDescription = document.getElementById("featuredDescription");
+const featuredYear = document.getElementById("featuredYear");
+const featuredSection = document.getElementById("featuredSection");
 
-const filterGroup =
-document.getElementById("filterGroup");
-
-const archiveList =
-document.getElementById("archiveList");
-
-const visibleCount =
-document.getElementById("visibleCount");
-
-const noResults =
-document.getElementById("noResults");
-
-const loadMore =
-document.getElementById("loadMore");
-
-const loadMoreArea =
-document.getElementById("loadMoreArea");
-
-const searchButton =
-document.getElementById("searchButton");
-
-const searchArea =
-document.getElementById("searchArea");
-
-const searchInput =
-document.getElementById("searchInput");
-
-const searchClose =
-document.getElementById("searchClose");
-
-const sortSelect =
-document.getElementById("sortSelect");
-
-
-/* FEATURED ELEMENTS */
-
-const featuredCard =
-document.getElementById("featuredCard");
-
-const featuredImage =
-document.getElementById("featuredImage");
-
-const featuredCategory =
-document.getElementById("featuredCategory");
-
-const featuredTitle =
-document.getElementById("featuredTitle");
-
-const featuredDescription =
-document.getElementById("featuredDescription");
-
-const featuredYear =
-document.getElementById("featuredYear");
-
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
+let allNews = [];
 let currentSection = "research";
-
-let currentFilter = "all";
-
 let currentSearch = "";
-
 let visibleItems = 5;
-
 const itemsPerLoad = 5;
 
-
-
-/* =========================================================
-   GET SECTION FROM URL
-========================================================= */
-
-function getSection(){
-
-    const hash =
-    window.location.hash
-    .replace("#","")
-    .toLowerCase();
-
-    if(archiveData[hash]){
-
-        return hash;
-
-    }
-
-    return "research";
-
+function getSection() {
+    const hash = window.location.hash.replace("#", "").toLowerCase();
+    return sectionMeta[hash] ? hash : "research";
 }
 
-
-
-/* =========================================================
-   RENDER FEATURED
-========================================================= */
-
-function renderFeatured(){
-
-    const data =
-    archiveData[currentSection];
-
-
-    if(
-        !data ||
-        !data.items ||
-        data.items.length === 0
-    ){
-
-        document
-        .getElementById(
-            "featuredSection"
-        )
-        .style.display =
-        "none";
-
-        return;
-
-    }
-
-
-    const featured =
-    data.items[0];
-
-
-    featuredImage.src =
-    featured.image;
-
-
-    featuredImage.alt =
-    featured.title;
-
-
-    featuredCategory.textContent =
-    featured.category;
-
-
-    featuredTitle.textContent =
-    featured.title;
-
-
-    featuredDescription.textContent =
-    featured.description;
-
-
-    featuredYear.textContent =
-    featured.year;
-
-
-    featuredCard.href =
-    featured.link;
-
-
-    document
-    .getElementById(
-        "featuredSection"
-    )
-    .style.display =
-    "block";
-
+function getNewsImage(item) {
+    return item.image || "hero.jpg";
+}
+function getNewsTitle(item) {
+    return item.title || "Untitled";
+}
+function getNewsDescription(item) {
+    return item.description || "";
+}
+function getNewsYear(item) {
+    if (item.date) return String(item.date).substring(0, 4);
+    return "";
+}
+function getCreatedTime(item) {
+    if (item.createdAt?.toMillis) return item.createdAt.toMillis();
+    if (item.date) return new Date(item.date).getTime();
+    return 0;
 }
 
-
-
-/* =========================================================
-   LOAD SECTION
-========================================================= */
-
-function loadSection(){
-
-    currentSection =
-    getSection();
-
-    const data =
-    archiveData[currentSection];
-
-
-    currentFilter =
-    "all";
-
-    currentSearch =
-    "";
-
-    visibleItems =
-    5;
-
-
-    searchInput.value =
-    "";
-
-
-    heroLabel.textContent =
-    data.label;
-
-
-    archiveTitle.innerHTML =
-    `${data.title}<span>Archive</span>`;
-
-
-    archiveSubtitle.textContent =
-    data.subtitle;
-
-
-    createFilters(
-        data.filters
-    );
-
-
-    renderFeatured();
-
-    renderArchive();
-
-}
-
-
-
-/* =========================================================
-   CREATE FILTER BUTTONS
-========================================================= */
-
-function createFilters(filters){
-
-    filterGroup.innerHTML =
-    "";
-
-
-    filters.forEach(
-        filter => {
-
-            const button =
-            document.createElement(
-                "button"
-            );
-
-
-            button.className =
-            "filter-btn";
-
-
-            if(
-                filter[0] === "all"
-            ){
-
-                button.classList.add(
-                    "active"
-                );
-
-            }
-
-
-            button.dataset.filter =
-            filter[0];
-
-
-            button.textContent =
-            filter[1];
-
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    document
-                    .querySelectorAll(
-                        ".filter-btn"
-                    )
-                    .forEach(
-                        btn =>
-                        btn.classList
-                        .remove(
-                            "active"
-                        )
-                    );
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-                    currentFilter =
-                    button.dataset.filter;
-
-
-                    visibleItems =
-                    5;
-
-
-                    renderArchive();
-
-                }
-            );
-
-
-            filterGroup.appendChild(
-                button
-            );
-
+async function loadAllNews() {
+    const snapshot = await getDocs(collection(db, "news"));
+    allNews = [];
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        if (data.status === "Published") {
+            allNews.push({ id: doc.id, ...data });
         }
-    );
-
+    });
 }
 
+function getSectionItems() {
+    const meta = sectionMeta[currentSection];
+    let items = allNews.filter(item => item.category === meta.category);
 
-
-/* =========================================================
-   SORT
-========================================================= */
-
-function getSortedItems(){
-
-    const data =
-    archiveData[currentSection];
-
-
-    let items =
-    [...data.items];
-
-
-    if(
-        currentFilter !== "all"
-    ){
-
-        items =
-        items.filter(
-            item =>
-            item.type ===
-            currentFilter
+    if (currentSearch) {
+        items = items.filter(item =>
+            getNewsTitle(item).toLowerCase().includes(currentSearch) ||
+            getNewsDescription(item).toLowerCase().includes(currentSearch)
         );
-
     }
 
-
-    if(
-        currentSearch
-    ){
-
-        items =
-        items.filter(
-            item =>
-
-            item.title
-            .toLowerCase()
-            .includes(
-                currentSearch
-            )
-
-            ||
-
-            item.description
-            .toLowerCase()
-            .includes(
-                currentSearch
-            )
-
-        );
-
+    if (sortSelect.value === "latest") {
+        items.sort((a, b) => getCreatedTime(b) - getCreatedTime(a));
+    } else if (sortSelect.value === "oldest") {
+        items.sort((a, b) => getCreatedTime(a) - getCreatedTime(b));
+    } else if (sortSelect.value === "az") {
+        items.sort((a, b) => getNewsTitle(a).localeCompare(getNewsTitle(b)));
     }
-
-
-    if(
-        sortSelect.value ===
-        "latest"
-    ){
-
-        items.sort(
-            (a,b) =>
-            b.year - a.year
-        );
-
-    }
-
-
-    if(
-        sortSelect.value ===
-        "oldest"
-    ){
-
-        items.sort(
-            (a,b) =>
-            a.year - b.year
-        );
-
-    }
-
-
-    if(
-        sortSelect.value ===
-        "az"
-    ){
-
-        items.sort(
-            (a,b) =>
-            a.title.localeCompare(
-                b.title
-            )
-        );
-
-    }
-
 
     return items;
-
 }
 
+function renderFeatured() {
+    const items = getSectionItems();
 
-
-/* =========================================================
-   RENDER ARCHIVE
-========================================================= */
-
-function renderArchive(){
-
-    const items =
-    getSortedItems();
-
-
-    archiveList.innerHTML =
-    "";
-
-
-    visibleCount.textContent =
-    String(
-        items.length
-    ).padStart(
-        2,
-        "0"
-    );
-
-
-    if(
-        items.length === 0
-    ){
-
-        noResults.style.display =
-        "block";
-
-        loadMoreArea.style.display =
-        "none";
-
+    if (items.length === 0) {
+        featuredSection.style.display = "none";
         return;
-
     }
 
-
-    noResults.style.display =
-    "none";
-
-
-    const visible =
-    items.slice(
-        0,
-        visibleItems
-    );
-
-
-    visible.forEach(
-        (item,index) => {
-
-
-            const article =
-            document.createElement(
-                "a"
-            );
-
-
-            article.className =
-            "archive-item";
-
-
-            article.href =
-            item.link;
-
-
-            article.innerHTML = `
-
-                <span class="item-number">
-
-                    ${String(
-                        index + 1
-                    ).padStart(
-                        2,
-                        "0"
-                    )}
-
-                </span>
-
-
-                <div class="item-thumb">
-
-                    <img
-                        src="${item.image}"
-                        alt="${item.title}"
-                    >
-
-                </div>
-
-
-                <div class="item-main">
-
-                    <span class="item-category">
-
-                        ${item.category}
-
-                    </span>
-
-
-                    <h2 class="item-title">
-
-                        ${item.title}
-
-                    </h2>
-
-
-                    <p class="item-description">
-
-                        ${item.description}
-
-                    </p>
-
-                </div>
-
-
-                <span class="item-year">
-
-                    ${item.year}
-
-                </span>
-
-
-                <span class="item-view">
-
-                    View Entry →
-
-                </span>
-
-            `;
-
-
-            archiveList.appendChild(
-                article
-            );
-
-        }
-    );
-
-
-    if(
-        visibleItems <
-        items.length
-    ){
-
-        loadMoreArea.style.display =
-        "flex";
-
-    }else{
-
-        loadMoreArea.style.display =
-        "none";
-
-    }
-
+    const featured = items[0];
+    featuredImage.src = getNewsImage(featured);
+    featuredImage.alt = getNewsTitle(featured);
+    featuredCategory.textContent = featured.category || sectionMeta[currentSection].category;
+    featuredTitle.textContent = getNewsTitle(featured);
+    featuredDescription.textContent = getNewsDescription(featured);
+    featuredYear.textContent = getNewsYear(featured);
+    featuredCard.href = `${getDesignPage(featured.design)}?id=${encodeURIComponent(featured.id)}`;
+    featuredSection.style.display = "block";
 }
 
+function renderArchiveList() {
+    const items = getSectionItems();
+    archiveList.innerHTML = "";
+    visibleCount.textContent = String(items.length).padStart(2, "0");
 
-
-/* =========================================================
-   SEARCH OPEN
-========================================================= */
-
-searchButton.addEventListener(
-    "click",
-    () => {
-
-        searchArea.classList.add(
-            "open"
-        );
-
-        searchInput.focus();
-
+    if (items.length === 0) {
+        noResults.style.display = "block";
+        loadMoreArea.style.display = "none";
+        return;
     }
-);
 
+    noResults.style.display = "none";
 
+    const visible = items.slice(0, visibleItems);
 
-/* =========================================================
-   SEARCH CLOSE
-========================================================= */
+    visible.forEach((item, index) => {
+        const article = document.createElement("a");
+        article.className = "archive-item";
+        article.href = `${getDesignPage(item.design)}?id=${encodeURIComponent(item.id)}`;
 
-searchClose.addEventListener(
-    "click",
-    () => {
+        article.innerHTML = `
+            <span class="item-number">${String(index + 1).padStart(2, "0")}</span>
+            <div class="item-thumb">
+                <img src="${getNewsImage(item)}" alt="${getNewsTitle(item)}">
+            </div>
+            <div class="item-main">
+                <span class="item-category">${item.category || ""}</span>
+                <h2 class="item-title">${getNewsTitle(item)}</h2>
+                <p class="item-description">${getNewsDescription(item)}</p>
+            </div>
+            <span class="item-year">${getNewsYear(item)}</span>
+            <span class="item-view">View Entry →</span>
+        `;
 
-        searchInput.value =
-        "";
+        archiveList.appendChild(article);
+    });
 
-        currentSearch =
-        "";
+    loadMoreArea.style.display = visibleItems < items.length ? "flex" : "none";
+}
 
-        searchArea.classList.remove(
-            "open"
-        );
+function loadSection() {
+    currentSection = getSection();
+    const meta = sectionMeta[currentSection];
 
-        renderArchive();
+    currentSearch = "";
+    visibleItems = 5;
+    searchInput.value = "";
 
-    }
-);
+    heroLabel.textContent = meta.label;
+    archiveTitle.innerHTML = `${meta.title}<span>Archive</span>`;
+    archiveSubtitle.textContent = meta.subtitle;
+    filterGroup.innerHTML = "";
 
+    renderFeatured();
+    renderArchiveList();
+}
 
+searchButton.addEventListener("click", () => {
+    searchArea.classList.add("open");
+    searchInput.focus();
+});
 
-/* =========================================================
-   SEARCH
-========================================================= */
+searchClose.addEventListener("click", () => {
+    searchInput.value = "";
+    currentSearch = "";
+    searchArea.classList.remove("open");
+    renderArchiveList();
+});
 
-searchInput.addEventListener(
-    "input",
-    () => {
+searchInput.addEventListener("input", () => {
+    currentSearch = searchInput.value.toLowerCase().trim();
+    visibleItems = 5;
+    renderArchiveList();
+});
 
-        currentSearch =
-        searchInput.value
-        .toLowerCase()
-        .trim();
+sortSelect.addEventListener("change", () => {
+    renderArchiveList();
+});
 
+loadMore.addEventListener("click", () => {
+    visibleItems += itemsPerLoad;
+    renderArchiveList();
+});
 
-        visibleItems =
-        5;
+window.addEventListener("hashchange", () => {
+    loadSection();
+    window.scrollTo(0, 0);
+});
 
+async function init() {
+    await loadAllNews();
+    loadSection();
+}
 
-        renderArchive();
-
-    }
-);
-
-
-
-/* =========================================================
-   SORT
-========================================================= */
-
-sortSelect.addEventListener(
-    "change",
-    () => {
-
-        renderArchive();
-
-    }
-);
-
-
-
-/* =========================================================
-   LOAD MORE
-========================================================= */
-
-loadMore.addEventListener(
-    "click",
-    () => {
-
-        visibleItems +=
-        itemsPerLoad;
-
-        renderArchive();
-
-    }
-);
-
-
-
-/* =========================================================
-   HASH CHANGE
-========================================================= */
-
-window.addEventListener(
-    "hashchange",
-    () => {
-
-        loadSection();
-
-        window.scrollTo(
-            0,
-            0
-        );
-
-    }
-);
-
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-loadSection();
-
+init();
 
 </script>
 
