@@ -242,8 +242,7 @@ ARCH SVG TEXT FLOW
 /* =====================================
    CATEGORY NAV
 ===================================== */
-
-..category-nav{
+.category-nav{
     position:relative;
     width:100%;
     height:70px;
@@ -252,13 +251,12 @@ ARCH SVG TEXT FLOW
     align-items:center;
     justify-content:center;
 
-    background:#F2F2DF;  /* 본문과 동일 배경 */
+    background:#F2F2DF;
 
     border-top:none;
     border-bottom:none;
 }
 
-/* 물결선 (아래쪽) */
 .category-nav::after{
     content:"";
     position:absolute;
@@ -270,119 +268,79 @@ ARCH SVG TEXT FLOW
         radial-gradient(circle at 10px -4px, transparent 12px, #F2F2DF 13px)
         repeat-x;
     background-size:20px 20px;
+    pointer-events:none;
 }
-
-
-/* =====================================
-   CATEGORY LINKS
-===================================== */
 
 .category-links{
     display:flex;
     align-items:center;
     justify-content:center;
-
     gap:50px;
-
     white-space:nowrap;
 }
 
-
 .category-links a{
     position:relative;
-
     display:inline-block;
-
     font-family:'Inter', sans-serif;
     font-size:10px;
     font-weight:500;
-
     letter-spacing:.15em;
     text-transform:uppercase;
-
     color:#686A64;
-
     transition:.3s;
 }
-
 
 .category-links a::after{
     content:"";
-
     position:absolute;
-
     left:50%;
     bottom:-8px;
-
     width:0;
     height:1px;
-
     background:#8B6B4F;
-
     transform:translateX(-50%);
-
     transition:.3s;
 }
-
 
 .category-links a:hover{
     color:#8B6B4F;
 }
 
-
 .category-links a:hover::after{
     width:100%;
 }
 
-
-/* =====================================
-   ADD NEWS BUTTON
-===================================== */
-
 .news-admin-link{
     position:absolute;
-
     top:50%;
     right:7vw;
-
     transform:translateY(-50%);
+    z-index:5;
 }
-
 
 .news-admin-link a{
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
-
     padding:10px 17px;
-
     border:1px solid #B9AA95;
-
     background:transparent;
-
     font-family:'Inter', sans-serif;
-
     font-size:9px;
     font-weight:500;
-
     letter-spacing:.15em;
-
     color:#71695F;
-
     white-space:nowrap;
-
     transition:.3s;
 }
 
-
 .news-admin-link a:hover{
     background:#8B6B4F;
-
     border-color:#8B6B4F;
-
     color:#fff;
 }
+
 /* =====================================
 COMMON TITLE
 ===================================== */
