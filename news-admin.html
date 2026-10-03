@@ -1746,15 +1746,11 @@ DRAFTS
 </div>
 
 <button
-class="add-button"
-onclick="openNewModal()"
-
+    id="newEntryButton"
+    type="button"
+    class="add-button"
 >
-
-
-+ NEW ENTRY
-
-
+    + NEW ENTRY
 </button>
 
 </div>
@@ -1808,10 +1804,7 @@ onclick="openNewModal()"
 
 <!-- DESIGN 01 -->
 
-<div
-    class="design-card"
-    onclick="selectDesign('FilmArchiveDesign')"
->
+<div class="design-card" data-design="FilmArchiveDesign">
 
 
 <div class="design-preview design-1">
@@ -1837,7 +1830,7 @@ onclick="openNewModal()"
 
 <div
     class="design-card"
-    onclick="selectDesign('VintageFlowerDesign')"
+    data-design="VintageFlowerDesign"
 >
 
 
@@ -1862,10 +1855,7 @@ onclick="openNewModal()"
 
 <!-- DESIGN 03 -->
 
-<div
-    class="design-card"
-    onclick="selectDesign('HomeBakingDesign')"
->
+<div class="design-card" data-design="HomeBakingDesign">
 
 
 <div class="design-preview design-3">
@@ -1889,10 +1879,7 @@ onclick="openNewModal()"
 
 <!-- DESIGN 04 -->
 
-<div
-    class="design-card"
-    onclick="selectDesign('MInimalPortfolio')"
->
+<div class="design-card" data-design="MInimalPortfolio">
 
 
 <div class="design-preview design-4">
@@ -1916,10 +1903,7 @@ onclick="openNewModal()"
 
 <!-- DESIGN 05 -->
 
-<div
-    class="design-card"
-    onclick="selectDesign('ModernMaturityDesign')"
->
+<div class="design-card" data-design="ModernMaturityDesign">
 
 
 <div class="design-preview design-5">
