@@ -1,1 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Learning Note — Yuri Choi</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        :root {
+
+            --ivory:
+                #F2F2DF;
+
+            --paper:
+                #F8F8EC;
+
+            --brown:
+                #8B6B4F;
+
+            --dark-brown:
+                #5F4938;
+
+            --text:
+                #24231F;
+
+            --muted:
+                #77736B;
+
+            --line:
+                #D8D4C6;
+
+            --soft:
+                rgba(139,107,79,0.055);
+
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            background:
+                var(--ivory);
+
+            color:
+                var(--text);
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            -webkit-font-smoothing:
+                antialiased;
+
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =====================================================
+           NAV
+        ====================================================== */
+
+        .top-bar {
+
+            width: 100%;
+
+            padding:
+                27px 42px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            border-bottom:
+                1px solid
+                rgba(139,107,79,0.18);
+
+        }
+
+
+        .brand {
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                24px;
+
+            font-weight:
+                600;
+
+            letter-spacing:
+                0.01em;
+
+        }
+
+
+        .back-link {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                8px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                500;
+
+            letter-spacing:
+                0.17em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--brown);
+
+            transition:
+                opacity .25s ease;
+
+        }
+
+
+        .back-link:hover {
+            opacity: .55;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .page {
+
+            width:
+                min(100%, 1080px);
+
+            margin:
+                0 auto;
+
+            padding:
+                92px 32px 120px;
+
+        }
+
+
+        .article {
+
+            width:
+                min(100%, 760px);
+
+            margin:
+                0 auto;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .meta {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                13px;
+
+            margin-bottom:
+                25px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                500;
+
+            letter-spacing:
+                .17em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        .category {
+
+            color:
+                var(--brown);
+
+        }
+
+
+        .dot {
+
+            width:
+                3px;
+
+            height:
+                3px;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--brown);
+
+            opacity:
+                .7;
+
+        }
+
+
+        .subcategory {
+            color:
+                var(--muted);
+        }
+
+
+        .title {
+
+            margin:
+                0;
+
+            max-width:
+                850px;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                clamp(50px, 7vw, 82px);
+
+            line-height:
+                .94;
+
+            font-weight:
+                500;
+
+            letter-spacing:
+                -.035em;
+
+        }
+
+
+        .description {
+
+            max-width:
+                650px;
+
+            margin:
+                31px 0 0;
+
+            font-size:
+                15px;
+
+            line-height:
+                1.85;
+
+            font-weight:
+                300;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        .date {
+
+            margin-top:
+                27px;
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                .16em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                #969188;
+
+        }
+
+
+        /* =====================================================
+           COVER
+        ====================================================== */
+
+        .cover {
+
+            width:
+                100%;
+
+            margin:
+                65px 0 72px;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .cover.hidden {
+            display: none;
+        }
+
+
+        .cover img {
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            max-height:
+                550px;
+
+            object-fit:
+                cover;
+
+        }
+
+
+        /* =====================================================
+           DIVIDER
+        ====================================================== */
+
+        .divider {
+
+            width:
+                100%;
+
+            height:
+                1px;
+
+            background:
+                var(--line);
+
+            margin-bottom:
+                65px;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            font-size:
+                15px;
+
+            line-height:
+                2;
+
+            color:
+                #403E38;
+
+        }
+
+
+        .content p {
+
+            margin:
+                0 0 28px;
+
+        }
+
+
+        .content h2 {
+
+            margin:
+                66px 0 22px;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                38px;
+
+            line-height:
+                1.12;
+
+            font-weight:
+                600;
+
+            color:
+                var(--text);
+
+        }
+
+
+        .content h3 {
+
+            margin:
+                50px 0 17px;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                29px;
+
+            line-height:
+                1.2;
+
+            font-weight:
+                600;
+
+            color:
+                var(--dark-brown);
+
+        }
+
+
+        .content strong {
+
+            font-weight:
+                600;
+
+            color:
+                var(--text);
+
+        }
+
+
+        .content em {
+
+            color:
+                var(--brown);
+
+        }
+
+
+        .content ul,
+        .content ol {
+
+            margin:
+                0 0 30px;
+
+            padding-left:
+                25px;
+
+        }
+
+
+        .content li {
+
+            margin-bottom:
+                9px;
+
+            padding-left:
+                5px;
+
+        }
+
+
+        .content blockquote {
+
+            margin:
+                45px 0;
+
+            padding:
+                27px 30px;
+
+            border-left:
+                2px solid
+                var(--brown);
+
+            background:
+                var(--soft);
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                24px;
+
+            line-height:
+                1.55;
+
+            color:
+                var(--dark-brown);
+
+        }
+
+
+        .content a {
+
+            color:
+                var(--brown);
+
+            text-decoration:
+                underline;
+
+            text-decoration-thickness:
+                1px;
+
+            text-underline-offset:
+                3px;
+
+        }
+
+
+        .content img {
+
+            display:
+                block;
+
+            width:
+                100%;
+
+            height:
+                auto;
+
+            margin:
+                48px 0;
+
+        }
+
+
+        .content hr {
+
+            border:
+                0;
+
+            border-top:
+                1px solid
+                var(--line);
+
+            margin:
+                58px 0;
+
+        }
+
+
+        .content code {
+
+            padding:
+                3px 7px;
+
+            background:
+                #E8E6D9;
+
+            font-family:
+                monospace;
+
+            font-size:
+                .9em;
+
+        }
+
+
+        .content pre {
+
+            overflow-x:
+                auto;
+
+            padding:
+                22px;
+
+            margin:
+                35px 0;
+
+            background:
+                #E8E6D9;
+
+            line-height:
+                1.65;
+
+        }
+
+
+        .content pre code {
+
+            padding:
+                0;
+
+            background:
+                transparent;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .article-footer {
+
+            margin-top:
+                95px;
+
+            padding-top:
+                30px;
+
+            border-top:
+                1px solid
+                var(--line);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+        }
+
+
+        .footer-label {
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                .18em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                #99958C;
+
+        }
+
+
+        .footer-back {
+
+            font-size:
+                10px;
+
+            font-weight:
+                500;
+
+            letter-spacing:
+                .14em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--brown);
+
+            transition:
+                opacity .25s ease;
+
+        }
+
+
+        .footer-back:hover {
+            opacity: .55;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ====================================================== */
+
+        .loading {
+
+            min-height:
+                65vh;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                .17em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        /* =====================================================
+           ERROR
+        ====================================================== */
+
+        .error {
+
+            min-height:
+                65vh;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            text-align:
+                center;
+
+            padding:
+                40px;
+
+        }
+
+
+        .error h1 {
+
+            margin:
+                0 0 12px;
+
+            font-family:
+                "Cormorant Garamond",
+                serif;
+
+            font-size:
+                45px;
+
+            font-weight:
+                500;
+
+        }
+
+
+        .error p {
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                14px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .top-bar {
+
+                padding:
+                    21px 22px;
+
+            }
+
+
+            .brand {
+                font-size:
+                    21px;
+            }
+
+
+            .page {
+
+                padding:
+                    62px 22px 80px;
+
+            }
+
+
+            .title {
+
+                font-size:
+                    clamp(
+                        46px,
+                        14vw,
+                        65px
+                    );
+
+            }
+
+
+            .description {
+
+                font-size:
+                    14px;
+
+            }
+
+
+            .cover {
+
+                margin:
+                    45px 0 55px;
+
+            }
+
+
+            .content {
+
+                font-size:
+                    14px;
+
+                line-height:
+                    1.9;
+
+            }
+
+
+            .content h2 {
+
+                font-size:
+                    33px;
+
+                margin-top:
+                    52px;
+
+            }
+
+
+            .content h3 {
+
+                font-size:
+                    27px;
+
+            }
+
+
+            .content blockquote {
+
+                margin:
+                    35px 0;
+
+                padding:
+                    21px;
+
+                font-size:
+                    21px;
+
+            }
+
+
+            .article-footer {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         TOP NAV
+    ====================================================== -->
+
+    <header class="top-bar">
+
+        <a
+            href="news.html"
+            class="brand"
+        >
+            Yuri Choi
+        </a>
+
+
+        <a
+            href="news.html"
+            class="back-link"
+        >
+            ← Back to News
+        </a>
+
+    </header>
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <main
+        id="loading"
+        class="loading"
+    >
+        Loading note...
+    </main>
+
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <main
+        id="error"
+        class="error"
+        style="display:none;"
+    >
+
+        <h1>
+            Note not found
+        </h1>
+
+        <p>
+            The requested learning note could not be found.
+        </p>
+
+    </main>
+
+
+    <!-- =====================================================
+         PAGE
+    ====================================================== -->
+
+    <main
+        id="page"
+        class="page"
+        style="display:none;"
+    >
+
+        <article class="article">
+
+
+            <!-- META -->
+
+            <div class="meta">
+
+                <span
+                    id="category"
+                    class="category"
+                >
+                    Learning
+                </span>
+
+
+                <span class="dot"></span>
+
+
+                <span
+                    id="subcategory"
+                    class="subcategory"
+                >
+                    Note
+                </span>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1
+                id="title"
+                class="title"
+            >
+                Learning Note
+            </h1>
+
+
+            <!-- DESCRIPTION -->
+
+            <p
+                id="description"
+                class="description"
+            ></p>
+
+
+            <!-- DATE -->
+
+            <div
+                id="date"
+                class="date"
+            ></div>
+
+
+            <!-- COVER IMAGE -->
+
+            <div
+                id="cover"
+                class="cover hidden"
+            >
+
+                <img
+                    id="coverImage"
+                    src=""
+                    alt=""
+                >
+
+            </div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="divider"></div>
+
+
+            <!-- CONTENT -->
+
+            <div
+                id="content"
+                class="content"
+            ></div>
+
+
+            <!-- FOOTER -->
+
+            <footer
+                class="article-footer"
+            >
+
+                <span class="footer-label">
+                    Yuri Choi · Personal Archive
+                </span>
+
+
+                <a
+                    href="news.html"
+                    class="footer-back"
+                >
+                    ← All News
+                </a>
+
+            </footer>
+
+
+        </article>
+
+    </main>
+
+
+    <!-- =====================================================
+         FIREBASE
+    ====================================================== -->
+
+    <script type="module">
+
+        import {
+            initializeApp
+        }
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+
+        import {
+            getFirestore,
+            doc,
+            getDoc
+        }
+        from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+        /* =====================================================
+           SAME FIREBASE CONFIG AS NEWS ADMIN
+        ====================================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+
+            authDomain:
+                "yuri-research-portfolio.firebaseapp.com",
+
+            projectId:
+                "yuri-research-portfolio",
+
+            storageBucket:
+                "yuri-research-portfolio.firebasestorage.app",
+
+            messagingSenderId:
+                "231317507996",
+
+            appId:
+                "1:231317507996:web:9773282c138706d886c259",
+
+            measurementId:
+                "G-57VHW2454"
+
+        };
+
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getFirestore(
+                app
+            );
+
+
+        /* =====================================================
+           ELEMENTS
+        ====================================================== */
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+
+        const error =
+            document.getElementById(
+                "error"
+            );
+
+
+        const page =
+            document.getElementById(
+                "page"
+            );
+
+
+        const category =
+            document.getElementById(
+                "category"
+            );
+
+
+        const subcategory =
+            document.getElementById(
+                "subcategory"
+            );
+
+
+        const title =
+            document.getElementById(
+                "title"
+            );
+
+
+        const description =
+            document.getElementById(
+                "description"
+            );
+
+
+        const date =
+            document.getElementById(
+                "date"
+            );
+
+
+        const cover =
+            document.getElementById(
+                "cover"
+            );
+
+
+        const coverImage =
+            document.getElementById(
+                "coverImage"
+            );
+
+
+        const content =
+            document.getElementById(
+                "content"
+            );
+
+
+        /* =====================================================
+           GET ID
+        ====================================================== */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const entryId =
+            params.get(
+                "id"
+            );
+
+
+        /* =====================================================
+           DATE
+        ====================================================== */
+
+        function formatDate(
+            value
+        ) {
+
+            if (!value) {
+                return "";
+            }
+
+
+            let dateValue;
+
+
+            if (
+                value &&
+                typeof value.toDate ===
+                "function"
+            ) {
+
+                dateValue =
+                    value.toDate();
+
+            }
+
+            else {
+
+                dateValue =
+                    new Date(
+                        value
+                    );
+
+            }
+
+
+            if (
+                Number.isNaN(
+                    dateValue.getTime()
+                )
+            ) {
+
+                return String(
+                    value
+                );
+
+            }
+
+
+            return dateValue.toLocaleDateString(
+                "en-US",
+                {
+
+                    month:
+                        "long",
+
+                    day:
+                        "2-digit",
+
+                    year:
+                        "numeric"
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           ESCAPE TEXT
+        ====================================================== */
+
+        function escapeHTML(
+            value
+        ) {
+
+            return String(
+                value || ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================================
+           RENDER CONTENT
+        ====================================================== */
+
+        function renderContent(
+            value
+        ) {
+
+            if (!value) {
+
+                return `
+                    <p>
+                        No content has been added to this note yet.
+                    </p>
+                `;
+
+            }
+
+
+            /*
+             * The Admin Modal normally saves
+             * plain text.
+             *
+             * Paragraphs are separated by
+             * blank lines.
+             */
+
+            return escapeHTML(
+                value
+            )
+                .split(
+                    /\n\s*\n/
+                )
+                .map(
+                    paragraph => `
+
+                        <p>
+                            ${paragraph.replace(
+                                /\n/g,
+                                "<br>"
+                            )}
+                        </p>
+
+                    `
+                )
+                .join("");
+
+        }
+
+
+        /* =====================================================
+           LOAD NOTE
+        ====================================================== */
+
+        async function loadNote() {
+
+            if (!entryId) {
+
+                loading.style.display =
+                    "none";
+
+                error.style.display =
+                    "flex";
+
+                return;
+
+            }
+
+
+            try {
+
+                const entryRef =
+                    doc(
+                        db,
+                        "news",
+                        entryId
+                    );
+
+
+                const snapshot =
+                    await getDoc(
+                        entryRef
+                    );
+
+
+                if (
+                    !snapshot.exists()
+                ) {
+
+                    loading.style.display =
+                        "none";
+
+                    error.style.display =
+                        "flex";
+
+                    return;
+
+                }
+
+
+                const data =
+                    snapshot.data();
+
+
+                /*
+                 * Only Learning Note
+                 * pages should use this
+                 * template.
+                 */
+
+
+                /* =================================================
+                   BASIC DATA
+                ================================================== */
+
+                const entryTitle =
+                    data.title ||
+                    "Learning Note";
+
+
+                const entryCategory =
+                    data.category ||
+                    "Learning";
+
+
+                const entrySubcategory =
+                    data.subcategory ||
+                    "Note";
+
+
+                const entryDescription =
+                    data.description ||
+                    "";
+
+
+                const entryDate =
+                    data.date ||
+                    data.createdAt ||
+                    "";
+
+
+                const entryImage =
+                    data.image ||
+                    "";
+
+
+                const entryContent =
+                    typeof data.content ===
+                    "string"
+
+                        ? data.content
+
+                        : "";
+
+
+                /* =================================================
+                   DOCUMENT TITLE
+                ================================================== */
+
+                document.title =
+                    `${entryTitle} — Yuri Choi`;
+
+
+                /* =================================================
+                   META
+                ================================================== */
+
+                category.textContent =
+                    entryCategory;
+
+
+                subcategory.textContent =
+                    entrySubcategory;
+
+
+                /* =================================================
+                   TITLE
+                ================================================== */
+
+                title.textContent =
+                    entryTitle;
+
+
+                /* =================================================
+                   DESCRIPTION
+                ================================================== */
+
+                if (
+                    entryDescription
+                ) {
+
+                    description.textContent =
+                        entryDescription;
+
+                    description.style.display =
+                        "block";
+
+                }
+
+                else {
+
+                    description.style.display =
+                        "none";
+
+                }
+
+
+                /* =================================================
+                   DATE
+                ================================================== */
+
+                date.textContent =
+                    formatDate(
+                        entryDate
+                    );
+
+
+                /* =================================================
+                   COVER
+                ================================================== */
+
+                if (
+                    entryImage
+                ) {
+
+                    coverImage.src =
+                        entryImage;
+
+                    coverImage.alt =
+                        entryTitle;
+
+
+                    cover.classList.remove(
+                        "hidden"
+                    );
+
+
+                    coverImage.onerror =
+                        function() {
+
+                            cover.classList.add(
+                                "hidden"
+                            );
+
+                        };
+
+                }
+
+                else {
+
+                    cover.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+
+                /* =================================================
+                   CONTENT
+                ================================================== */
+
+                content.innerHTML =
+                    renderContent(
+                        entryContent
+                    );
+
+
+                /* =================================================
+                   SHOW
+                ================================================== */
+
+                loading.style.display =
+                    "none";
+
+
+                page.style.display =
+                    "block";
+
+
+                window.scrollTo(
+                    0,
+                    0
+                );
+
+
+            }
+
+            catch (
+                loadError
+            ) {
+
+                console.error(
+                    "Failed to load Learning Note:",
+                    loadError
+                );
+
+
+                loading.style.display =
+                    "none";
+
+
+                error.style.display =
+                    "flex";
+
+            }
+
+        }
+
+
+        loadNote();
+
+    </script>
+
+</body>
+
+</html>
