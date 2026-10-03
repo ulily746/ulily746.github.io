@@ -2,20 +2,27 @@
 NEWS ADMIN.JS
 Personal Archive — News Admin
 ========================================================= */
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { 
-  getFirestore, 
-  collection,
-  getDocs,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  getDoc,
-  query,
-  orderBy,
-  serverTimestamp
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    getDoc,
+    query,
+    orderBy,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+
+/* =========================================================
+FIREBASE
+========================================================= */
 
 const firebaseConfig = {
     apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
@@ -27,8 +34,8 @@ const firebaseConfig = {
     measurementId: "G-57VHW2454"
 };
 
-// 여기서 바로 db를 export 하거나 상수로 들고 있습니다.
 const app = initializeApp(firebaseConfig);
+
 export const db = getFirestore(app);
 
 
@@ -37,36 +44,99 @@ GLOBAL STATE
 ========================================================= */
 
 let allEntries = [];
+
 let currentFilter = "ALL";
+
 let selectedDesign = "FilmArchiveDesign";
+
 let isEditing = false;
+
+
+/* =========================================================
+DESIGN LIST
+========================================================= */
+
+const VALID_DESIGNS = [
+    "LearningNote",
+    "FilmArchiveDesign",
+    "VintageFlowerDesign",
+    "HomeBakingDesign",
+    "MInimalPortfolio",
+    "ModernMaturityDesign"
+];
+
+
+const DESIGN_NAMES = {
+
+    LearningNote:
+        "Learning Note",
+
+    FilmArchiveDesign:
+        "Film Archive",
+
+    VintageFlowerDesign:
+        "Vintage Flower",
+
+    HomeBakingDesign:
+        "Home Baking",
+
+    MInimalPortfolio:
+        "Minimal Portfolio",
+
+    ModernMaturityDesign:
+        "Modern Maturity"
+
+};
 
 
 /* =========================================================
 DOM READY
 ========================================================= */
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("News Admin initializing...");
 
-    initializeAdmin();
-});
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        console.log(
+            "News Admin initializing..."
+        );
+
+        initializeAdmin();
+
+    }
+);
+
+
 /* =========================================================
 INITIALIZE ADMIN
 ========================================================= */
 
 function initializeAdmin() {
 
-    console.log("================================");
-    console.log("NEW NEWS-ADMIN.JS IS RUNNING");
-    console.log("DB OBJECT:", db);
-    console.log("DB EXISTS:", !!db);
-    console.log("================================");
+    console.log(
+        "================================"
+    );
+
+    console.log(
+        "NEWS ADMIN — LEARNING NOTE ENABLED"
+    );
+
+    console.log(
+        "DB OBJECT:",
+        db
+    );
+
+    console.log(
+        "DB EXISTS:",
+        !!db
+    );
+
+    console.log(
+        "================================"
+    );
+
 
     if (!db) {
-
-        console.error(
-            "Firebase Database could not be initialized."
-        );
 
         showFirebaseError(
             new Error(
@@ -77,48 +147,422 @@ function initializeAdmin() {
         return;
     }
 
+
+    /*
+     * IMPORTANT
+     *
+     * These are automatically added to
+     * the existing modal.
+     *
+     * Therefore the HTML file does NOT
+     * need to be edited.
+     */
+
+    setupLearningNoteFields();
+
+
     setupFilters();
+
     setupDesignSelector();
+
     setupModalEvents();
+
     setupNewEntryButtons();
+
     setupSaveButton();
+
     setupCloseButtons();
 
     loadNewsEntries();
 
+
     console.log(
         "News Admin initialized successfully."
     );
+
 }
+
+
+/* =========================================================
+LEARNING NOTE MODAL FIELDS
+Automatically injects:
+- Subcategory
+- Content
+========================================================= */
+
+function setupLearningNoteFields() {
+
+    /*
+     * Add the Learning Note option
+     * to the existing Design select.
+     */
+
+    const designSelect =
+        document.getElementById(
+            "entryDesign"
+        );
+
+
+    if (designSelect) {
+
+        const exists =
+            Array.from(
+                designSelect.options
+            ).some(
+                option =>
+                    option.value ===
+                    "LearningNote"
+            );
+
+
+        if (!exists) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                "LearningNote";
+
+            option.textContent =
+                "Learning Note";
+
+            /*
+             * Put Learning Note first.
+             */
+
+            designSelect.insertBefore(
+                option,
+                designSelect.firstChild
+            );
+        }
+    }
+
+
+    /*
+     * Add the new common fields
+     * only if they don't already exist.
+     */
+
+    if (
+        !document.getElementById(
+            "entrySubcategory"
+        )
+    ) {
+
+        createSubcategoryField();
+
+    }
+
+
+    if (
+        !document.getElementById(
+            "entryContent"
+        )
+    ) {
+
+        createContentField();
+
+    }
+
+
+    /*
+     * Add a small amount of styling
+     * specifically for these injected fields.
+     */
+
+    injectLearningNoteStyles();
+
+}
+
+
+/* =========================================================
+CREATE SUBCATEGORY FIELD
+========================================================= */
+
+function createSubcategoryField() {
+
+    const descriptionField =
+        document.getElementById(
+            "entryDescription"
+        );
+
+
+    if (!descriptionField) {
+
+        console.warn(
+            "entryDescription not found. " +
+            "Subcategory field could not be inserted."
+        );
+
+        return;
+    }
+
+
+    const descriptionGroup =
+        descriptionField.closest(
+            ".form-group"
+        ) ||
+        descriptionField.parentElement;
+
+
+    if (!descriptionGroup) {
+        return;
+    }
+
+
+    const wrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    wrapper.className =
+        "form-group learning-common-field";
+
+
+    wrapper.id =
+        "entrySubcategoryWrapper";
+
+
+    wrapper.innerHTML = `
+
+        <label
+            class="form-label"
+            for="entrySubcategory"
+        >
+            SUBCATEGORY
+        </label>
+
+        <input
+            type="text"
+            id="entrySubcategory"
+            class="form-input"
+            placeholder="e.g. English / Research / Coding / Travel"
+            autocomplete="off"
+        >
+
+    `;
+
+
+    /*
+     * Insert immediately after Description.
+     */
+
+    descriptionGroup.insertAdjacentElement(
+        "afterend",
+        wrapper
+    );
+
+}
+
+
+/* =========================================================
+CREATE CONTENT FIELD
+========================================================= */
+
+function createContentField() {
+
+    const subcategoryWrapper =
+        document.getElementById(
+            "entrySubcategoryWrapper"
+        );
+
+
+    const descriptionField =
+        document.getElementById(
+            "entryDescription"
+        );
+
+
+    const insertAfter =
+        subcategoryWrapper ||
+        (
+            descriptionField
+                ? descriptionField.closest(
+                    ".form-group"
+                ) || descriptionField.parentElement
+                : null
+        );
+
+
+    if (!insertAfter) {
+
+        console.warn(
+            "Could not find a suitable location " +
+            "for entryContent."
+        );
+
+        return;
+    }
+
+
+    const wrapper =
+        document.createElement(
+            "div"
+        );
+
+
+    wrapper.className =
+        "form-group learning-common-field";
+
+
+    wrapper.id =
+        "entryContentWrapper";
+
+
+    wrapper.innerHTML = `
+
+        <label
+            class="form-label"
+            for="entryContent"
+        >
+            CONTENT
+        </label>
+
+        <textarea
+            id="entryContent"
+            class="form-textarea learning-content-input"
+            placeholder="Write your note or article content here..."
+        ></textarea>
+
+        <div class="learning-content-help">
+            Write freely. Paragraph breaks will be preserved.
+        </div>
+
+    `;
+
+
+    insertAfter.insertAdjacentElement(
+        "afterend",
+        wrapper
+    );
+
+}
+
+
+/* =========================================================
+LEARNING NOTE FIELD STYLES
+========================================================= */
+
+function injectLearningNoteStyles() {
+
+    if (
+        document.getElementById(
+            "learningNoteAdminStyles"
+        )
+    ) {
+        return;
+    }
+
+
+    const style =
+        document.createElement(
+            "style"
+        );
+
+
+    style.id =
+        "learningNoteAdminStyles";
+
+
+    style.textContent = `
+
+        #entrySubcategory,
+        #entryContent {
+
+            width: 100%;
+            box-sizing: border-box;
+
+        }
+
+
+        #entryContent {
+
+            min-height: 320px;
+            resize: vertical;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                sans-serif;
+
+            line-height: 1.75;
+
+        }
+
+
+        .learning-content-help {
+
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            color: #999;
+
+        }
+
+
+        #entryContentWrapper {
+
+            margin-top: 6px;
+
+        }
+
+    `;
+
+
+    document.head.appendChild(
+        style
+    );
+
+}
+
+
 /* =========================================================
 FIREBASE ERROR
 ========================================================= */
 
 function showFirebaseError(error) {
 
-const list =
-    document.getElementById("newsList");
+    const list =
+        document.getElementById(
+            "newsList"
+        );
 
-if (!list) {
-    return;
-}
 
-list.innerHTML = `
-    <div class="empty-state">
-        <div class="empty-state-title">
-            Firebase Connection Error
+    if (!list) {
+        return;
+    }
+
+
+    list.innerHTML = `
+
+        <div class="empty-state">
+
+            <div class="empty-state-title">
+                Firebase Connection Error
+            </div>
+
+            <div class="empty-state-text">
+
+                ${escapeHTML(
+                    error?.message ||
+                    "Unable to connect to Firebase."
+                )}
+
+            </div>
+
         </div>
 
-        <div class="empty-state-text">
-            ${escapeHTML(
-                error?.message ||
-                "Unable to connect to Firebase."
-            )}
-        </div>
-    </div>
-`;
+    `;
 
 }
+
 
 /* =========================================================
 LOAD NEWS ENTRIES
@@ -126,189 +570,254 @@ LOAD NEWS ENTRIES
 
 async function loadNewsEntries() {
 
-const list =
-    document.getElementById("newsList");
-
-if (list) {
-    list.innerHTML = `
-        <div class="loading-state">
-            LOADING ARCHIVE...
-        </div>
-    `;
-}
-
-if (!db) {
-    showFirebaseError(
-        new Error("Firebase is not ready.")
-    );
-    return;
-}
-
-try {
-
-    const newsRef =
-        collection(
-            db,
-            "news"
+    const list =
+        document.getElementById(
+            "newsList"
         );
 
-    let snapshot;
-
-    try {
-
-        const orderedQuery =
-            query(
-                newsRef,
-                orderBy(
-                    "date",
-                    "desc"
-                )
-            );
-
-        snapshot =
-            await getDocs(
-                orderedQuery
-            );
-
-    } catch (error) {
-
-        console.warn(
-            "orderBy failed. Loading without sorting.",
-            error
-        );
-
-        snapshot =
-            await getDocs(
-                newsRef
-            );
-    }
-
-    allEntries = [];
-
-    snapshot.forEach(
-        documentSnapshot => {
-
-            if (
-                documentSnapshot.id ===
-                "design"
-            ) {
-                return;
-            }
-
-            const data =
-                documentSnapshot.data();
-
-            allEntries.push({
-                id:
-                    documentSnapshot.id,
-                ...data
-            });
-        }
-    );
-
-    allEntries.sort(
-        sortEntriesByDate
-    );
-
-    updateStatistics();
-
-    renderNewsList();
-
-    console.log(
-        "News entries loaded:",
-        allEntries.length
-    );
-
-} catch (error) {
-
-    console.error(
-        "Failed to load news:",
-        error
-    );
 
     if (list) {
 
         list.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-state-title">
-                    Unable to Load Archive
-                </div>
 
-                <div class="empty-state-text">
-                    ${escapeHTML(
-                        error?.message ||
-                        "Please check Firebase configuration."
-                    )}
-                </div>
+            <div class="loading-state">
+                LOADING ARCHIVE...
             </div>
+
         `;
+
     }
-}
+
+
+    if (!db) {
+
+        showFirebaseError(
+            new Error(
+                "Firebase is not ready."
+            )
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const newsRef =
+            collection(
+                db,
+                "news"
+            );
+
+
+        let snapshot;
+
+
+        try {
+
+            const orderedQuery =
+                query(
+                    newsRef,
+                    orderBy(
+                        "date",
+                        "desc"
+                    )
+                );
+
+
+            snapshot =
+                await getDocs(
+                    orderedQuery
+                );
+
+
+        } catch (error) {
+
+            console.warn(
+                "orderBy failed. Loading without sorting.",
+                error
+            );
+
+
+            snapshot =
+                await getDocs(
+                    newsRef
+                );
+
+        }
+
+
+        allEntries = [];
+
+
+        snapshot.forEach(
+            documentSnapshot => {
+
+                if (
+                    documentSnapshot.id ===
+                    "design"
+                ) {
+                    return;
+                }
+
+
+                const data =
+                    documentSnapshot.data();
+
+
+                allEntries.push({
+
+                    id:
+                        documentSnapshot.id,
+
+                    ...data
+
+                });
+
+            }
+        );
+
+
+        allEntries.sort(
+            sortEntriesByDate
+        );
+
+
+        updateStatistics();
+
+        renderNewsList();
+
+
+        console.log(
+            "News entries loaded:",
+            allEntries.length
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load news:",
+            error
+        );
+
+
+        if (list) {
+
+            list.innerHTML = `
+
+                <div class="empty-state">
+
+                    <div class="empty-state-title">
+                        Unable to Load Archive
+                    </div>
+
+                    <div class="empty-state-text">
+
+                        ${escapeHTML(
+                            error?.message ||
+                            "Please check Firebase configuration."
+                        )}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    }
 
 }
+
 
 /* =========================================================
 SORT
 ========================================================= */
 
-function sortEntriesByDate(a, b) {
+function sortEntriesByDate(
+    a,
+    b
+) {
 
-return (
-    getEntryDateValue(b) -
-    getEntryDateValue(a)
-);
+    return (
+        getEntryDateValue(b) -
+        getEntryDateValue(a)
+    );
 
 }
 
-function getEntryDateValue(entry) {
 
-if (!entry) {
+function getEntryDateValue(
+    entry
+) {
+
+    if (!entry) {
+        return 0;
+    }
+
+
+    const value =
+        entry.date ||
+        entry.createdAt ||
+        entry.updatedAt;
+
+
+    if (
+        value &&
+        typeof value.toDate ===
+        "function"
+    ) {
+
+        return value
+            .toDate()
+            .getTime();
+
+    }
+
+
+    if (
+        value instanceof Date
+    ) {
+
+        return value.getTime();
+
+    }
+
+
+    if (
+        typeof value ===
+        "string"
+    ) {
+
+        const time =
+            new Date(
+                value
+            ).getTime();
+
+
+        return Number.isNaN(time)
+            ? 0
+            : time;
+
+    }
+
+
+    if (
+        typeof value ===
+        "number"
+    ) {
+
+        return value;
+
+    }
+
+
     return 0;
-}
-
-const value =
-    entry.date ||
-    entry.createdAt ||
-    entry.updatedAt;
-
-if (
-    value &&
-    typeof value.toDate ===
-    "function"
-) {
-    return value
-        .toDate()
-        .getTime();
-}
-
-if (
-    value instanceof Date
-) {
-    return value.getTime();
-}
-
-if (
-    typeof value === "string"
-) {
-    const time =
-        new Date(
-            value
-        ).getTime();
-
-    return Number.isNaN(time)
-        ? 0
-        : time;
-}
-
-if (
-    typeof value === "number"
-) {
-    return value;
-}
-
-return 0;
 
 }
+
 
 /* =========================================================
 RENDER LIST
@@ -316,279 +825,340 @@ RENDER LIST
 
 function renderNewsList() {
 
-const list =
-    document.getElementById(
-        "newsList"
-    );
+    const list =
+        document.getElementById(
+            "newsList"
+        );
 
-if (!list) {
-    return;
-}
 
-const filteredEntries =
-    filterEntries(
-        allEntries
-    );
+    if (!list) {
+        return;
+    }
 
-if (
-    filteredEntries.length === 0
-) {
 
-    list.innerHTML = `
-        <div class="empty-state">
-            <div class="empty-state-title">
-                No Archive Entries
+    const filteredEntries =
+        filterEntries(
+            allEntries
+        );
+
+
+    if (
+        filteredEntries.length === 0
+    ) {
+
+        list.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-state-title">
+                    No Archive Entries
+                </div>
+
+                <div class="empty-state-text">
+                    No entries match the current filter.
+                </div>
+
             </div>
 
-            <div class="empty-state-text">
-                No entries match the current filter.
-            </div>
-        </div>
-    `;
+        `;
 
-    return;
-}
+        return;
+    }
 
-list.innerHTML =
-    filteredEntries
-        .map(
-            createNewsRow
-        )
-        .join("");
 
-attachRowEvents();
+    list.innerHTML =
+        filteredEntries
+            .map(
+                createNewsRow
+            )
+            .join("");
+
+
+    attachRowEvents();
 
 }
+
 
 /* =========================================================
 FILTER
 ========================================================= */
 
-function filterEntries(entries) {
-
-if (
-    currentFilter ===
-    "ALL"
+function filterEntries(
+    entries
 ) {
-    return entries;
-}
 
-if (
-    currentFilter ===
-    "Published"
-) {
+    if (
+        currentFilter ===
+        "ALL"
+    ) {
+
+        return entries;
+
+    }
+
+
+    if (
+        currentFilter ===
+        "Published"
+    ) {
+
+        return entries.filter(
+            entry =>
+                normalizeStatus(
+                    entry.status
+                ) ===
+                "Published"
+        );
+
+    }
+
+
+    if (
+        currentFilter ===
+        "Draft"
+    ) {
+
+        return entries.filter(
+            entry =>
+                normalizeStatus(
+                    entry.status
+                ) ===
+                "Draft"
+        );
+
+    }
+
+
     return entries.filter(
         entry =>
-            normalizeStatus(
-                entry.status
+            normalizeCategory(
+                entry.category
             ) ===
-            "Published"
+            currentFilter
     );
+
 }
 
-if (
-    currentFilter ===
-    "Draft"
-) {
-    return entries.filter(
-        entry =>
-            normalizeStatus(
-                entry.status
-            ) ===
-            "Draft"
-    );
-}
-
-return entries.filter(
-    entry =>
-        normalizeCategory(
-            entry.category
-        ) ===
-        currentFilter
-);
-}
 
 /* =========================================================
 CREATE NEWS ROW
 ========================================================= */
 
-function createNewsRow(entry) {
+function createNewsRow(
+    entry
+) {
 
-const id =
-    entry.id ||
-    "";
+    const id =
+        entry.id ||
+        "";
 
-const title =
-    entry.title ||
-    entry.name ||
-    "Untitled Entry";
 
-const category =
-    normalizeCategory(
-        entry.category
-    );
+    const title =
+        entry.title ||
+        entry.name ||
+        "Untitled Entry";
 
-const design =
-    entry.design ||
-    entry.designId ||
-    "Unknown Design";
 
-const status =
-    normalizeStatus(
-        entry.status
-    );
+    const category =
+        normalizeCategory(
+            entry.category
+        );
 
-const image =
-    entry.image ||
-    entry.imageUrl ||
-    entry.heroImage ||
-    getContentValue(
-        entry,
-        "heroImage"
-    ) ||
-    getContentValue(
-        entry,
-        "minimalHeroImage"
-    ) ||
-    getContentValue(
-        entry,
-        "vintageHeroImage"
-    ) ||
-    getContentValue(
-        entry,
-        "bakingHeroImage"
-    ) ||
-    getContentValue(
-        entry,
-        "filmHeroImage"
-    ) ||
-    getContentValue(
-        entry,
-        "modernHeroImage"
-    ) ||
-    "";
 
-const description =
-    entry.description ||
-    entry.shortDescription ||
-    "";
+    const design =
+        entry.design ||
+        entry.designId ||
+        "Unknown Design";
 
-const date =
-    formatDate(
-        entry.date
-    );
 
-const statusClass =
-    status ===
-    "Published"
-        ? "status-published"
-        : "status-draft";
+    const status =
+        normalizeStatus(
+            entry.status
+        );
 
-const safeId =
-    escapeHTML(
-        id
-    );
 
-return `
-    <div
-        class="news-row"
-        data-entry-id="${safeId}"
-    >
+    const image =
+        entry.image ||
+        entry.imageUrl ||
+        entry.heroImage ||
+        getContentValue(
+            entry,
+            "heroImage"
+        ) ||
+        getContentValue(
+            entry,
+            "minimalHeroImage"
+        ) ||
+        getContentValue(
+            entry,
+            "vintageHeroImage"
+        ) ||
+        getContentValue(
+            entry,
+            "bakingHeroImage"
+        ) ||
+        getContentValue(
+            entry,
+            "filmHeroImage"
+        ) ||
+        getContentValue(
+            entry,
+            "modernHeroImage"
+        ) ||
+        "";
 
-        <div>
-            ${
-                image
-                    ? `
-                        <img
-                            class="thumb"
-                            src="${escapeHTML(image)}"
-                            alt="${escapeHTML(title)}"
-                            onerror="this.style.display='none';"
-                        >
-                    `
-                    : `
-                        <div class="thumb"></div>
-                    `
-            }
-        </div>
 
-        <div>
+    const description =
+        entry.description ||
+        entry.shortDescription ||
+        "";
 
-            <div class="news-title">
-                ${escapeHTML(title)}
-            </div>
 
-            <div class="news-meta">
+    const date =
+        formatDate(
+            entry.date
+        );
+
+
+    const statusClass =
+        status ===
+        "Published"
+            ? "status-published"
+            : "status-draft";
+
+
+    const safeId =
+        escapeHTML(
+            id
+        );
+
+
+    return `
+
+        <div
+            class="news-row"
+            data-entry-id="${safeId}"
+        >
+
+            <div>
 
                 ${
-                    date
-                        ? escapeHTML(date)
-                        : ""
+                    image
+                        ? `
+
+                            <img
+                                class="thumb"
+                                src="${escapeHTML(image)}"
+                                alt="${escapeHTML(title)}"
+                                onerror="this.style.display='none';"
+                            >
+
+                        `
+                        : `
+
+                            <div class="thumb"></div>
+
+                        `
                 }
 
-                ${
-                    description
-                        ? " · " +
-                          escapeHTML(
-                              truncateText(
-                                  description,
-                                  70
+            </div>
+
+
+            <div>
+
+                <div class="news-title">
+                    ${escapeHTML(title)}
+                </div>
+
+
+                <div class="news-meta">
+
+                    ${
+                        date
+                            ? escapeHTML(date)
+                            : ""
+                    }
+
+
+                    ${
+                        description
+                            ? " · " +
+                              escapeHTML(
+                                  truncateText(
+                                      description,
+                                      70
+                                  )
                               )
-                          )
-                        : ""
-                }
+                            : ""
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <span class="tag">
+                    ${escapeHTML(category)}
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <span class="design-tag">
+
+                    ${escapeHTML(
+                        getDesignDisplayName(
+                            design
+                        )
+                    )}
+
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <span class="${statusClass}">
+                    ● ${escapeHTML(status)}
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <div class="actions">
+
+                    <span
+                        class="action edit-action"
+                        data-id="${safeId}"
+                    >
+                        EDIT
+                    </span>
+
+
+                    <span
+                        class="action delete delete-action"
+                        data-id="${safeId}"
+                    >
+                        DELETE
+                    </span>
+
+                </div>
 
             </div>
 
         </div>
 
-        <div>
-            <span class="tag">
-                ${escapeHTML(category)}
-            </span>
-        </div>
-
-        <div>
-            <span class="design-tag">
-                ${escapeHTML(
-                    getDesignDisplayName(
-                        design
-                    )
-                )}
-            </span>
-        </div>
-
-        <div>
-            <span class="${statusClass}">
-                ● ${escapeHTML(status)}
-            </span>
-        </div>
-
-        <div>
-            <div class="actions">
-
-                <span
-                    class="action edit-action"
-                    data-id="${safeId}"
-                >
-                    EDIT
-                </span>
-
-                <span
-                    class="action delete delete-action"
-                    data-id="${safeId}"
-                >
-                    DELETE
-                </span>
-
-            </div>
-        </div>
-
-    </div>
-`;
-
+    `;
 
 }
+
 
 /* =========================================================
 ROW EVENTS
@@ -596,53 +1166,59 @@ ROW EVENTS
 
 function attachRowEvents() {
 
-document
-    .querySelectorAll(
-        ".edit-action"
-    )
-    .forEach(
-        button => {
+    document
+        .querySelectorAll(
+            ".edit-action"
+        )
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                event => {
+                button.addEventListener(
+                    "click",
+                    event => {
 
-                    event.preventDefault();
+                        event.preventDefault();
 
-                    event.stopPropagation();
+                        event.stopPropagation();
 
-                    editEntry(
-                        button.dataset.id
-                    );
-                }
-            );
-        }
-    );
+                        editEntry(
+                            button.dataset.id
+                        );
 
-document
-    .querySelectorAll(
-        ".delete-action"
-    )
-    .forEach(
-        button => {
+                    }
+                );
 
-            button.addEventListener(
-                "click",
-                event => {
+            }
+        );
 
-                    event.preventDefault();
 
-                    event.stopPropagation();
+    document
+        .querySelectorAll(
+            ".delete-action"
+        )
+        .forEach(
+            button => {
 
-                    deleteEntry(
-                        button.dataset.id
-                    );
-                }
-            );
-        }
-    );
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+                        deleteEntry(
+                            button.dataset.id
+                        );
+
+                    }
+                );
+
+            }
+        );
 
 }
+
 
 /* =========================================================
 FILTER SETUP
@@ -650,46 +1226,52 @@ FILTER SETUP
 
 function setupFilters() {
 
-document
-    .querySelectorAll(
-        ".filter"
-    )
-    .forEach(
-        button => {
+    document
+        .querySelectorAll(
+            ".filter"
+        )
+        .forEach(
+            button => {
 
-            button.addEventListener(
-                "click",
-                event => {
+                button.addEventListener(
+                    "click",
+                    event => {
 
-                    event.preventDefault();
+                        event.preventDefault();
 
-                    document
-                        .querySelectorAll(
-                            ".filter"
-                        )
-                        .forEach(
-                            item =>
-                                item.classList.remove(
-                                    "active"
-                                )
+
+                        document
+                            .querySelectorAll(
+                                ".filter"
+                            )
+                            .forEach(
+                                item =>
+                                    item.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        button.classList.add(
+                            "active"
                         );
 
-                    button.classList.add(
-                        "active"
-                    );
 
-                    currentFilter =
-                        button.dataset.filter ||
-                        "ALL";
+                        currentFilter =
+                            button.dataset.filter ||
+                            "ALL";
 
-                    renderNewsList();
-                }
-            );
-        }
-    );
 
+                        renderNewsList();
+
+                    }
+                );
+
+            }
+        );
 
 }
+
 
 /* =========================================================
 NEW ENTRY BUTTONS
@@ -697,108 +1279,28 @@ NEW ENTRY BUTTONS
 
 function setupNewEntryButtons() {
 
-const selectors = [
-    "#newEntryButton",
-    "#newEntryBtn",
-    ".new-entry-button",
-    ".new-entry-btn",
-    "[data-action='new-entry']"
-];
+    const selectors = [
 
-const buttons =
-    document.querySelectorAll(
-        selectors.join(",")
-    );
+        "#newEntryButton",
 
-buttons.forEach(
-    button => {
+        "#newEntryBtn",
 
-        button.addEventListener(
-            "click",
-            event => {
+        ".new-entry-button",
 
-                event.preventDefault();
+        ".new-entry-btn",
 
-                openNewModal();
-            }
+        "[data-action='new-entry']"
+
+    ];
+
+
+    const buttons =
+        document.querySelectorAll(
+            selectors.join(",")
         );
-    }
-);
 
-}
 
-/* =========================================================
-SAVE BUTTON
-Prevent duplicate event listeners
-========================================================= */
-
-function setupSaveButton() {
-
-    const button =
-        document.getElementById("saveButton");
-
-    if (!button) {
-        console.warn(
-            "saveButton not found."
-        );
-        return;
-    }
-
-    // 기존 이벤트 제거를 위한 clone
-    const newButton =
-        button.cloneNode(true);
-
-    button.parentNode.replaceChild(
-        newButton,
-        button
-    );
-
-    newButton.addEventListener(
-        "click",
-        async event => {
-
-            event.preventDefault();
-            event.stopPropagation();
-
-            // 이미 저장 중이면 무시
-            if (newButton.dataset.saving === "true") {
-                console.warn(
-                    "Save already in progress."
-                );
-                return;
-            }
-
-            newButton.dataset.saving = "true";
-
-            try {
-
-                await saveEntry();
-
-            } finally {
-
-                newButton.dataset.saving = "false";
-
-            }
-
-        },
-        {
-            once: false
-        }
-    );
-
-}
-
-/* =========================================================
-CLOSE BUTTONS
-========================================================= */
-
-function setupCloseButtons() {
-
-document
-    .querySelectorAll(
-        "[data-close-modal], .modal-close, .close-modal"
-    )
-    .forEach(
+    buttons.forEach(
         button => {
 
             button.addEventListener(
@@ -807,13 +1309,125 @@ document
 
                     event.preventDefault();
 
-                    closeModal();
+                    openNewModal();
+
                 }
             );
+
         }
     );
 
 }
+
+
+/* =========================================================
+SAVE BUTTON
+========================================================= */
+
+function setupSaveButton() {
+
+    const button =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    if (!button) {
+
+        console.warn(
+            "saveButton not found."
+        );
+
+        return;
+    }
+
+
+    const newButton =
+        button.cloneNode(
+            true
+        );
+
+
+    button.parentNode.replaceChild(
+        newButton,
+        button
+    );
+
+
+    newButton.addEventListener(
+        "click",
+        async event => {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            if (
+                newButton.dataset.saving ===
+                "true"
+            ) {
+
+                console.warn(
+                    "Save already in progress."
+                );
+
+                return;
+            }
+
+
+            newButton.dataset.saving =
+                "true";
+
+
+            try {
+
+                await saveEntry();
+
+            }
+
+            finally {
+
+                newButton.dataset.saving =
+                    "false";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+CLOSE BUTTONS
+========================================================= */
+
+function setupCloseButtons() {
+
+    document
+        .querySelectorAll(
+            "[data-close-modal], .modal-close, .close-modal"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    event => {
+
+                        event.preventDefault();
+
+                        closeModal();
+
+                    }
+                );
+
+            }
+        );
+
+}
+
 
 /* =========================================================
 DESIGN SELECTOR
@@ -822,59 +1436,68 @@ DESIGN SELECTOR
 function setupDesignSelector() {
 
     document
-        .querySelectorAll(".design-card")
-        .forEach(card => {
+        .querySelectorAll(
+            ".design-card"
+        )
+        .forEach(
+            card => {
 
-            const newCard =
-                card.cloneNode(true);
+                const newCard =
+                    card.cloneNode(
+                        true
+                    );
 
-            card.parentNode.replaceChild(
-                newCard,
-                card
-            );
 
-            newCard.addEventListener(
-                "click",
-                event => {
+                card.parentNode.replaceChild(
+                    newCard,
+                    card
+                );
 
-                    event.preventDefault();
-                    event.stopPropagation();
 
-                    const designId =
-                        newCard.dataset.design ||
-                        newCard.dataset.designId ||
-                        getDesignFromOnClick(
-                            newCard
+                newCard.addEventListener(
+                    "click",
+                    event => {
+
+                        event.preventDefault();
+
+                        event.stopPropagation();
+
+
+                        const designId =
+                            newCard.dataset.design ||
+                            newCard.dataset.designId ||
+                            getDesignFromOnClick(
+                                newCard
+                            );
+
+
+                        if (!designId) {
+
+                            console.warn(
+                                "Design ID not found:",
+                                newCard
+                            );
+
+                            return;
+                        }
+
+
+                        openNewModal(
+                            designId
                         );
 
-                    if (!designId) {
-
-                        console.warn(
-                            "Design ID not found:",
-                            newCard
-                        );
-
-                        return;
                     }
+                );
 
-                    console.log(
-                        "Opening design:",
-                        designId
-                    );
+            }
+        );
 
-                    openNewModal(
-                        designId
-                    );
-
-                }
-            );
-
-        });
 
     const select =
         document.getElementById(
             "entryDesign"
         );
+
 
     if (select) {
 
@@ -893,29 +1516,34 @@ function setupDesignSelector() {
 
 }
 
-          
-function getDesignFromOnClick(card) {
 
-const value =
-    card.getAttribute(
-        "onclick"
-    );
+function getDesignFromOnClick(
+    card
+) {
 
-if (!value) {
-    return "";
+    const value =
+        card.getAttribute(
+            "onclick"
+        );
+
+
+    if (!value) {
+        return "";
+    }
+
+
+    const match =
+        value.match(
+            /selectDesign\(['"]([^'"]+)['"]\)/
+        );
+
+
+    return match
+        ? match[1]
+        : "";
+
 }
 
-const match =
-    value.match(
-        /selectDesign\(['"]([^'"]+)['"]\)/
-    );
-
-return match
-    ? match[1]
-    : "";
-
-
-}
 
 /* =========================================================
 DESIGN CHANGE
@@ -923,20 +1551,23 @@ DESIGN CHANGE
 
 function handleDesignChange() {
 
-const select =
-    document.getElementById(
-        "entryDesign"
+    const select =
+        document.getElementById(
+            "entryDesign"
+        );
+
+
+    if (!select) {
+        return;
+    }
+
+
+    selectDesign(
+        select.value
     );
 
-if (!select) {
-    return;
 }
 
-selectDesign(
-    select.value
-);
-
-}
 
 /* =========================================================
 SELECT DESIGN
@@ -946,16 +1577,8 @@ function selectDesign(
     designId
 ) {
 
-    const validDesigns = [
-        "FilmArchiveDesign",
-        "VintageFlowerDesign",
-        "HomeBakingDesign",
-        "MInimalPortfolio",
-        "ModernMaturityDesign"
-    ];
-
     if (
-        !validDesigns.includes(
+        !VALID_DESIGNS.includes(
             designId
         )
     ) {
@@ -965,17 +1588,22 @@ function selectDesign(
             designId
         );
 
+
         designId =
             "FilmArchiveDesign";
+
     }
+
 
     selectedDesign =
         designId;
+
 
     const select =
         document.getElementById(
             "entryDesign"
         );
+
 
     if (select) {
 
@@ -984,12 +1612,66 @@ function selectDesign(
 
     }
 
+
     hideAllDesignFields();
+
 
     showDesignFields(
         selectedDesign
     );
 
+
+    /*
+     * Learning Note uses the generic
+     * Content field.
+     */
+
+    updateLearningNoteVisibility();
+
+}
+
+
+/* =========================================================
+LEARNING NOTE VISIBILITY
+========================================================= */
+
+function updateLearningNoteVisibility() {
+
+    const contentWrapper =
+        document.getElementById(
+            "entryContentWrapper"
+        );
+
+
+    if (!contentWrapper) {
+        return;
+    }
+
+
+    /*
+     * Content is useful for Learning Note.
+     *
+     * We keep the field available for
+     * every design as an optional common
+     * field, but Learning Note highlights it.
+     */
+
+    if (
+        selectedDesign ===
+        "LearningNote"
+    ) {
+
+        contentWrapper.style.display =
+            "block";
+
+    }
+
+    else {
+
+        contentWrapper.style.display =
+            "block";
+
+    }
 
 }
 
@@ -1000,76 +1682,101 @@ HIDE DESIGN FIELDS
 
 function hideAllDesignFields() {
 
+    document
+        .querySelectorAll(
+            ".design-fields"
+        )
+        .forEach(
+            field => {
 
-document
-    .querySelectorAll(
-        ".design-fields"
-    )
-    .forEach(
-        field => {
+                field.style.display =
+                    "none";
 
-            field.style.display =
-                "none";
-        }
-    );
+            }
+        );
 
 }
+
 
 /* =========================================================
 SHOW DESIGN FIELDS
 ========================================================= */
 
 function showDesignFields(
-designId
+    designId
 ) {
 
+    const fieldMap = {
 
-const fieldMap = {
+        FilmArchiveDesign:
+            "filmArchiveFields",
 
-    FilmArchiveDesign:
-        "filmArchiveFields",
+        VintageFlowerDesign:
+            "vintageFlowerFields",
 
-    VintageFlowerDesign:
-        "vintageFlowerFields",
+        HomeBakingDesign:
+            "homeBakingFields",
 
-    HomeBakingDesign:
-        "homeBakingFields",
+        MInimalPortfolio:
+            "minimalPortfolioFields",
 
-    MInimalPortfolio:
-        "minimalPortfolioFields",
+        ModernMaturityDesign:
+            "modernMaturityFields"
 
-    ModernMaturityDesign:
-        "modernMaturityFields"
-};
+        /*
+         * LearningNote intentionally
+         * has no design-specific field.
+         */
 
-const fieldId =
-    fieldMap[
-        designId
-    ];
+    };
 
-if (!fieldId) {
 
-    console.warn(
-        "Unknown design:",
-        designId
-    );
+    const fieldId =
+        fieldMap[
+            designId
+        ];
 
-    return;
+
+    if (!fieldId) {
+
+        /*
+         * This is expected for LearningNote.
+         */
+
+        if (
+            designId ===
+            "LearningNote"
+        ) {
+
+            return;
+
+        }
+
+
+        console.warn(
+            "Unknown design:",
+            designId
+        );
+
+        return;
+    }
+
+
+    const field =
+        document.getElementById(
+            fieldId
+        );
+
+
+    if (field) {
+
+        field.style.display =
+            "block";
+
+    }
+
 }
 
-const field =
-    document.getElementById(
-        fieldId
-    );
-
-if (field) {
-
-    field.style.display =
-        "block";
-}
-
-
-}
 
 /* =========================================================
 OPEN NEW MODAL
@@ -1082,57 +1789,64 @@ function openNewModal(
     isEditing =
         false;
 
-    // 먼저 전체 폼 초기화
+
     clearForm();
 
-    // 초기화 후 선택한 디자인 설정
+
     selectedDesign =
         designId ||
-        "FilmArchiveDesign";
+        "LearningNote";
 
-    // 수정 중인 Entry ID 초기화
+
     setFieldValue(
         "editingEntryId",
         ""
     );
 
-    // 선택한 디자인 반영
+
     setFieldValue(
         "entryDesign",
         selectedDesign
     );
+
 
     const modalTitle =
         document.getElementById(
             "modalTitle"
         );
 
+
     if (modalTitle) {
 
         modalTitle.textContent =
             "New Archive Entry";
+
     }
+
 
     const saveButton =
         document.getElementById(
             "saveButton"
         );
 
+
     if (saveButton) {
 
         saveButton.textContent =
             "Save Entry";
+
     }
 
-    // 선택한 디자인의 필드만 표시
+
     selectDesign(
         selectedDesign
     );
 
-    // 모달 열기
+
     openModal();
 
 }
+
 
 /* =========================================================
 OPEN MODAL
@@ -1140,23 +1854,50 @@ OPEN MODAL
 
 function openModal() {
 
-const modal = document.getElementById("entryModal");
+    const modal =
+        document.getElementById(
+            "entryModal"
+        );
 
-if (!modal) {
-    console.warn("entryModal not found.");
-    return;
+
+    if (!modal) {
+
+        console.warn(
+            "entryModal not found."
+        );
+
+        return;
+    }
+
+
+    modal.classList.add(
+        "active"
+    );
+
+
+    modal.style.display =
+        "flex";
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    const modalBox =
+        modal.querySelector(
+            ".modal-box"
+        );
+
+
+    if (modalBox) {
+
+        modalBox.scrollTop =
+            0;
+
+    }
+
 }
 
-modal.classList.add("active");
-modal.style.display = "flex";
-document.body.style.overflow = "hidden";
-
-const modalBox = modal.querySelector(".modal-box");
-if (modalBox) {
-    modalBox.scrollTop = 0;
-}
-
-}
 
 /* =========================================================
 CLOSE MODAL
@@ -1164,27 +1905,34 @@ CLOSE MODAL
 
 function closeModal() {
 
-const modal =
-    document.getElementById(
-        "entryModal"
-    );
+    const modal =
+        document.getElementById(
+            "entryModal"
+        );
 
-if (modal) {
 
-    modal.classList.remove(
-        "active"
-    );
+    if (modal) {
 
-    modal.style.display =
+        modal.classList.remove(
+            "active"
+        );
+
+
+        modal.style.display =
+            "";
+
+    }
+
+
+    document.body.style.overflow =
         "";
+
+
+    isEditing =
+        false;
+
 }
 
-document.body.style.overflow =
-    "";
-
-isEditing =
-    false;
-}
 
 /* =========================================================
 MODAL EVENTS
@@ -1192,799 +1940,891 @@ MODAL EVENTS
 
 function setupModalEvents() {
 
-const modal =
-    document.getElementById(
-        "entryModal"
+    const modal =
+        document.getElementById(
+            "entryModal"
+        );
+
+
+    if (!modal) {
+        return;
+    }
+
+
+    modal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                modal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
     );
 
-if (!modal) {
-    return;
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Escape" &&
+                modal.classList.contains(
+                    "active"
+                )
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
 }
 
-modal.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target ===
-            modal
-        ) {
-
-            closeModal();
-        }
-    }
-);
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key ===
-            "Escape" &&
-            modal.classList.contains(
-                "active"
-            )
-        ) {
-
-            closeModal();
-        }
-    }
-);
-
-}
 
 /* =========================================================
 EDIT ENTRY
 ========================================================= */
 
 async function editEntry(
-entryId
+    entryId
 ) {
 
-if (!entryId) {
-    return;
-}
+    if (!entryId) {
+        return;
+    }
 
-if (!db) {
 
-    alert(
-        "Firebase is not ready yet."
-    );
-
-    return;
-}
-
-try {
-
-    const entryRef =
-        doc(
-            db,
-            "news",
-            entryId
-        );
-
-    const snapshot =
-        await getDoc(
-            entryRef
-        );
-
-    if (
-        !snapshot.exists()
-    ) {
+    if (!db) {
 
         alert(
-            "This entry no longer exists."
+            "Firebase is not ready yet."
         );
-
-        await loadNewsEntries();
 
         return;
     }
 
-    const entry =
-        snapshot.data();
 
-    isEditing =
-        true;
+    try {
 
-    selectedDesign =
-        entry.design ||
-        entry.designId ||
-        "FilmArchiveDesign";
+        const entryRef =
+            doc(
+                db,
+                "news",
+                entryId
+            );
 
-    clearForm();
 
-    setFieldValue(
-        "editingEntryId",
-        entryId
-    );
+        const snapshot =
+            await getDoc(
+                entryRef
+            );
 
-    setFieldValue(
-        "entryTitle",
-        entry.title ||
-        ""
-    );
 
-    setFieldValue(
-        "entryCategory",
-        entry.category ||
-        "Research"
-    );
+        if (
+            !snapshot.exists()
+        ) {
 
-    setFieldValue(
-        "entryDescription",
-        entry.description ||
-        entry.shortDescription ||
-        ""
-    );
+            alert(
+                "This entry no longer exists."
+            );
 
-    setFieldValue(
-        "entryDate",
-        normalizeDateForInput(
-            entry.date
-        )
-    );
 
-    setFieldValue(
-        "entryStatus",
-        normalizeStatus(
-            entry.status
-        )
-    );
+            await loadNewsEntries();
 
-    setFieldValue(
-        "entryImage",
-        entry.image ||
-        entry.imageUrl ||
-        entry.heroImage ||
-        ""
-    );
+            return;
+        }
 
-    setFieldValue(
-        "entryDesign",
-        selectedDesign
-    );
 
-    const content =
-        getDesignContent(
+        const entry =
+            snapshot.data();
+
+
+        isEditing =
+            true;
+
+
+        selectedDesign =
+            entry.design ||
+            entry.designId ||
+            "LearningNote";
+
+
+        clearForm();
+
+
+        setFieldValue(
+            "editingEntryId",
+            entryId
+        );
+
+
+        setFieldValue(
+            "entryTitle",
+            entry.title ||
+            ""
+        );
+
+
+        setFieldValue(
+            "entryCategory",
+            entry.category ||
+            "Research"
+        );
+
+
+        setFieldValue(
+            "entrySubcategory",
+            entry.subcategory ||
+            ""
+        );
+
+
+        setFieldValue(
+            "entryDescription",
+            entry.description ||
+            entry.shortDescription ||
+            ""
+        );
+
+
+        setFieldValue(
+            "entryDate",
+            normalizeDateForInput(
+                entry.date
+            )
+        );
+
+
+        setFieldValue(
+            "entryStatus",
+            normalizeStatus(
+                entry.status
+            )
+        );
+
+
+        setFieldValue(
+            "entryImage",
+            entry.image ||
+            entry.imageUrl ||
+            entry.heroImage ||
+            ""
+        );
+
+
+        setFieldValue(
+            "entryDesign",
+            selectedDesign
+        );
+
+
+        /*
+         * Learning Note stores content
+         * directly as a string.
+         */
+
+        if (
+            selectedDesign ===
+            "LearningNote"
+        ) {
+
+            setFieldValue(
+                "entryContent",
+                typeof entry.content ===
+                "string"
+                    ? entry.content
+                    : ""
+            );
+
+        }
+
+
+        /*
+         * Existing designs still use
+         * the original content object.
+         */
+
+        const content =
+            getDesignContent(
+                entry
+            );
+
+
+        populateDesignFields(
+            selectedDesign,
+            content,
             entry
         );
 
-    populateDesignFields(
-        selectedDesign,
-        content,
-        entry
-    );
 
-    selectDesign(
-        selectedDesign
-    );
-
-    const modalTitle =
-        document.getElementById(
-            "modalTitle"
+        selectDesign(
+            selectedDesign
         );
 
-    if (modalTitle) {
 
-        modalTitle.textContent =
-            "Edit Archive Entry";
-    }
+        const modalTitle =
+            document.getElementById(
+                "modalTitle"
+            );
 
-    const saveButton =
-        document.getElementById(
-            "saveButton"
+
+        if (modalTitle) {
+
+            modalTitle.textContent =
+                "Edit Archive Entry";
+
+        }
+
+
+        const saveButton =
+            document.getElementById(
+                "saveButton"
+            );
+
+
+        if (saveButton) {
+
+            saveButton.textContent =
+                "Update Entry";
+
+        }
+
+
+        openModal();
+
+
+        console.log(
+            "Entry loaded for editing:",
+            entryId
         );
 
-    if (saveButton) {
 
-        saveButton.textContent =
-            "Update Entry";
+    } catch (error) {
+
+        console.error(
+            "Failed to edit entry:",
+            error
+        );
+
+
+        alert(
+            "Failed to load this entry.\n\n" +
+            error.message
+        );
+
     }
 
-    openModal();
-
-    console.log(
-        "Entry loaded for editing:",
-        entryId
-    );
-
-} catch (error) {
-
-    console.error(
-        "Failed to edit entry:",
-        error
-    );
-
-    alert(
-        "Failed to load this entry.\n\n" +
-        error.message
-    );
 }
 
-
-}
 
 /* =========================================================
 GET DESIGN CONTENT
 ========================================================= */
 
 function getDesignContent(
-entry
+    entry
 ) {
 
-if (
-    entry &&
-    entry.content &&
-    typeof entry.content ===
-    "object"
-) {
-    return entry.content;
+    if (
+        entry &&
+        entry.content &&
+        typeof entry.content ===
+        "object"
+    ) {
+
+        return entry.content;
+
+    }
+
+
+    if (
+        entry &&
+        entry.data &&
+        typeof entry.data ===
+        "object"
+    ) {
+
+        return entry.data;
+
+    }
+
+
+    return entry || {};
+
 }
 
-if (
-    entry &&
-    entry.data &&
-    typeof entry.data ===
-    "object"
-) {
-    return entry.data;
-}
-
-return entry || {};
-
-}
 
 /* =========================================================
 POPULATE DESIGN FIELDS
 ========================================================= */
 
 function populateDesignFields(
-designId,
-content,
-entry
+    designId,
+    content,
+    entry
 ) {
 
-const data = {
-    ...entry,
-    ...content
-};
+    const data = {
+        ...entry,
+        ...content
+    };
 
-if (
-    designId ===
-    "FilmArchiveDesign"
-) {
-    populateFilmArchive(
-        data
-    );
+
+    if (
+        designId ===
+        "FilmArchiveDesign"
+    ) {
+
+        populateFilmArchive(
+            data
+        );
+
+    }
+
+    else if (
+        designId ===
+        "VintageFlowerDesign"
+    ) {
+
+        populateVintageFlower(
+            data
+        );
+
+    }
+
+    else if (
+        designId ===
+        "HomeBakingDesign"
+    ) {
+
+        populateHomeBaking(
+            data
+        );
+
+    }
+
+    else if (
+        designId ===
+        "MInimalPortfolio"
+    ) {
+
+        populateMinimalPortfolio(
+            data
+        );
+
+    }
+
+    else if (
+        designId ===
+        "ModernMaturityDesign"
+    ) {
+
+        populateModernMaturity(
+            data
+        );
+
+    }
+
 }
 
-else if (
-    designId ===
-    "VintageFlowerDesign"
-) {
-    populateVintageFlower(
-        data
-    );
-}
-
-else if (
-    designId ===
-    "HomeBakingDesign"
-) {
-    populateHomeBaking(
-        data
-    );
-}
-
-else if (
-    designId ===
-    "MInimalPortfolio"
-) {
-    populateMinimalPortfolio(
-        data
-    );
-}
-
-else if (
-    designId ===
-    "ModernMaturityDesign"
-) {
-    populateModernMaturity(
-        data
-    );
-}
-
-}
 
 /* =========================================================
 FILM ARCHIVE
 ========================================================= */
 
 function populateFilmArchive(
-data
+    data
 ) {
 
+    populateFields({
 
-populateFields({
+        filmHeroTitleTop:
+            getValue(
+                data,
+                "filmHeroTitleTop"
+            ),
 
-    filmHeroTitleTop:
-        getValue(
-            data,
-            "filmHeroTitleTop"
-        ),
+        filmHeroTitleBottom1:
+            getValue(
+                data,
+                "filmHeroTitleBottom1"
+            ),
 
-    filmHeroTitleBottom1:
-        getValue(
-            data,
-            "filmHeroTitleBottom1"
-        ),
+        filmHeroTitleBottom2:
+            getValue(
+                data,
+                "filmHeroTitleBottom2"
+            ),
 
-    filmHeroTitleBottom2:
-        getValue(
-            data,
-            "filmHeroTitleBottom2"
-        ),
+        filmHeroImage:
+            getValue(
+                data,
+                "filmHeroImage",
+                "heroImage"
+            ),
 
-    filmHeroImage:
-        getValue(
-            data,
-            "filmHeroImage",
-            "heroImage"
-        ),
+        filmIntroText:
+            getValue(
+                data,
+                "filmIntroText",
+                "introText"
+            ),
 
-    filmIntroText:
-        getValue(
-            data,
-            "filmIntroText",
-            "introText"
-        ),
+        filmMemory1Image:
+            getValue(
+                data,
+                "filmMemory1Image"
+            ),
 
-    filmMemory1Image:
-        getValue(
-            data,
-            "filmMemory1Image"
-        ),
+        filmMemory1Text:
+            getValue(
+                data,
+                "filmMemory1Text"
+            ),
 
-    filmMemory1Text:
-        getValue(
-            data,
-            "filmMemory1Text"
-        ),
+        filmMemory2Image:
+            getValue(
+                data,
+                "filmMemory2Image"
+            ),
 
-    filmMemory2Image:
-        getValue(
-            data,
-            "filmMemory2Image"
-        ),
+        filmMemory2Text:
+            getValue(
+                data,
+                "filmMemory2Text"
+            ),
 
-    filmMemory2Text:
-        getValue(
-            data,
-            "filmMemory2Text"
-        ),
+        filmMemory3Image:
+            getValue(
+                data,
+                "filmMemory3Image"
+            ),
 
-    filmMemory3Image:
-        getValue(
-            data,
-            "filmMemory3Image"
-        ),
+        filmMemory3Text:
+            getValue(
+                data,
+                "filmMemory3Text"
+            ),
 
-    filmMemory3Text:
-        getValue(
-            data,
-            "filmMemory3Text"
-        ),
+        filmMemory4Image:
+            getValue(
+                data,
+                "filmMemory4Image"
+            ),
 
-    filmMemory4Image:
-        getValue(
-            data,
-            "filmMemory4Image"
-        ),
+        filmMemory4Text:
+            getValue(
+                data,
+                "filmMemory4Text"
+            ),
 
-    filmMemory4Text:
-        getValue(
-            data,
-            "filmMemory4Text"
-        ),
+        filmVideoUrl:
+            getValue(
+                data,
+                "filmVideoUrl",
+                "videoUrl"
+            ),
 
-    filmVideoUrl:
-        getValue(
-            data,
-            "filmVideoUrl",
-            "videoUrl"
-        ),
+        filmVideoCaption:
+            getValue(
+                data,
+                "filmVideoCaption",
+                "videoCaption"
+            ),
 
-    filmVideoCaption:
-        getValue(
-            data,
-            "filmVideoCaption",
-            "videoCaption"
-        ),
+        film1Image:
+            getValue(
+                data,
+                "film1Image"
+            ),
 
-    film1Image:
-        getValue(
-            data,
-            "film1Image"
-        ),
+        film1Title:
+            getValue(
+                data,
+                "film1Title"
+            ),
 
-    film1Title:
-        getValue(
-            data,
-            "film1Title"
-        ),
+        film1Text:
+            getValue(
+                data,
+                "film1Text"
+            ),
 
-    film1Text:
-        getValue(
-            data,
-            "film1Text"
-        ),
+        film2Image:
+            getValue(
+                data,
+                "film2Image"
+            ),
 
-    film2Image:
-        getValue(
-            data,
-            "film2Image"
-        ),
+        film2Title:
+            getValue(
+                data,
+                "film2Title"
+            ),
 
-    film2Title:
-        getValue(
-            data,
-            "film2Title"
-        ),
+        film2Text:
+            getValue(
+                data,
+                "film2Text"
+            ),
 
-    film2Text:
-        getValue(
-            data,
-            "film2Text"
-        ),
+        film3Image:
+            getValue(
+                data,
+                "film3Image"
+            ),
 
-    film3Image:
-        getValue(
-            data,
-            "film3Image"
-        ),
+        film3Title:
+            getValue(
+                data,
+                "film3Title"
+            ),
 
-    film3Title:
-        getValue(
-            data,
-            "film3Title"
-        ),
+        film3Text:
+            getValue(
+                data,
+                "film3Text"
+            ),
 
-    film3Text:
-        getValue(
-            data,
-            "film3Text"
-        ),
+        filmTravelMonth:
+            getValue(
+                data,
+                "filmTravelMonth"
+            ),
 
-    filmTravelMonth:
-        getValue(
-            data,
-            "filmTravelMonth"
-        ),
+        filmTravelYear:
+            getValue(
+                data,
+                "filmTravelYear"
+            ),
 
-    filmTravelYear:
-        getValue(
-            data,
-            "filmTravelYear"
-        ),
+        filmTravelLocation:
+            getValue(
+                data,
+                "filmTravelLocation"
+            ),
 
-    filmTravelLocation:
-        getValue(
-            data,
-            "filmTravelLocation"
-        ),
+        filmTravelText:
+            getValue(
+                data,
+                "filmTravelText"
+            )
 
-    filmTravelText:
-        getValue(
-            data,
-            "filmTravelText"
-        )
-});
-
+    });
 
 }
+
 
 /* =========================================================
 VINTAGE FLOWER
 ========================================================= */
 
 function populateVintageFlower(
-data
+    data
 ) {
 
-populateFields({
+    populateFields({
 
-    vintageHeroImage:
-        getValue(
-            data,
-            "vintageHeroImage",
-            "heroImage"
-        ),
+        vintageHeroImage:
+            getValue(
+                data,
+                "vintageHeroImage",
+                "heroImage"
+            ),
 
-    vintageHeroTitle:
-        getValue(
-            data,
-            "vintageHeroTitle",
-            "heroTitle"
-        ),
+        vintageHeroTitle:
+            getValue(
+                data,
+                "vintageHeroTitle",
+                "heroTitle"
+            ),
 
-    vintageHeroSubtitle:
-        getValue(
-            data,
-            "vintageHeroSubtitle",
-            "heroSubtitle"
-        ),
+        vintageHeroSubtitle:
+            getValue(
+                data,
+                "vintageHeroSubtitle",
+                "heroSubtitle"
+            ),
 
-    vintageIntroTitle:
-        getValue(
-            data,
-            "vintageIntroTitle",
-            "introTitle"
-        ),
+        vintageIntroTitle:
+            getValue(
+                data,
+                "vintageIntroTitle",
+                "introTitle"
+            ),
 
-    vintageIntroText:
-        getValue(
-            data,
-            "vintageIntroText",
-            "introText"
-        ),
+        vintageIntroText:
+            getValue(
+                data,
+                "vintageIntroText",
+                "introText"
+            ),
 
-    vintageFlower1Image:
-        getValue(
-            data,
-            "vintageFlower1Image"
-        ),
+        vintageFlower1Image:
+            getValue(
+                data,
+                "vintageFlower1Image"
+            ),
 
-    vintageFlower1Title:
-        getValue(
-            data,
-            "vintageFlower1Title"
-        ),
+        vintageFlower1Title:
+            getValue(
+                data,
+                "vintageFlower1Title"
+            ),
 
-    vintageFlower1Text:
-        getValue(
-            data,
-            "vintageFlower1Text"
-        ),
+        vintageFlower1Text:
+            getValue(
+                data,
+                "vintageFlower1Text"
+            ),
 
-    vintageFlower2Image:
-        getValue(
-            data,
-            "vintageFlower2Image"
-        ),
+        vintageFlower2Image:
+            getValue(
+                data,
+                "vintageFlower2Image"
+            ),
 
-    vintageFlower2Title:
-        getValue(
-            data,
-            "vintageFlower2Title"
-        ),
+        vintageFlower2Title:
+            getValue(
+                data,
+                "vintageFlower2Title"
+            ),
 
-    vintageFlower2Text:
-        getValue(
-            data,
-            "vintageFlower2Text"
-        ),
+        vintageFlower2Text:
+            getValue(
+                data,
+                "vintageFlower2Text"
+            ),
 
-    vintageFlower3Image:
-        getValue(
-            data,
-            "vintageFlower3Image"
-        ),
+        vintageFlower3Image:
+            getValue(
+                data,
+                "vintageFlower3Image"
+            ),
 
-    vintageFlower3Title:
-        getValue(
-            data,
-            "vintageFlower3Title"
-        ),
+        vintageFlower3Title:
+            getValue(
+                data,
+                "vintageFlower3Title"
+            ),
 
-    vintageFlower3Text:
-        getValue(
-            data,
-            "vintageFlower3Text"
-        ),
+        vintageFlower3Text:
+            getValue(
+                data,
+                "vintageFlower3Text"
+            ),
 
-    vintageJournalTitle:
-        getValue(
-            data,
-            "vintageJournalTitle"
-        ),
+        vintageJournalTitle:
+            getValue(
+                data,
+                "vintageJournalTitle"
+            ),
 
-    vintageJournalText:
-        getValue(
-            data,
-            "vintageJournalText"
-        ),
+        vintageJournalText:
+            getValue(
+                data,
+                "vintageJournalText"
+            ),
 
-    vintageGallery1Image:
-        getValue(
-            data,
-            "vintageGallery1Image"
-        ),
+        vintageGallery1Image:
+            getValue(
+                data,
+                "vintageGallery1Image"
+            ),
 
-    vintageGallery2Image:
-        getValue(
-            data,
-            "vintageGallery2Image"
-        ),
+        vintageGallery2Image:
+            getValue(
+                data,
+                "vintageGallery2Image"
+            ),
 
-    vintageGallery3Image:
-        getValue(
-            data,
-            "vintageGallery3Image"
-        ),
+        vintageGallery3Image:
+            getValue(
+                data,
+                "vintageGallery3Image"
+            ),
 
-    vintageGallery4Image:
-        getValue(
-            data,
-            "vintageGallery4Image"
-        )
-});
+        vintageGallery4Image:
+            getValue(
+                data,
+                "vintageGallery4Image"
+            )
 
+    });
 
 }
+
 
 /* =========================================================
 HOME BAKING
 ========================================================= */
 
 function populateHomeBaking(
-data
+    data
 ) {
 
+    populateFields({
 
-populateFields({
+        bakingHeroImage:
+            getValue(
+                data,
+                "bakingHeroImage",
+                "heroImage"
+            ),
 
-    bakingHeroImage:
-        getValue(
-            data,
-            "bakingHeroImage",
-            "heroImage"
-        ),
+        bakingHeroTitle:
+            getValue(
+                data,
+                "bakingHeroTitle",
+                "heroTitle"
+            ),
 
-    bakingHeroTitle:
-        getValue(
-            data,
-            "bakingHeroTitle",
-            "heroTitle"
-        ),
+        bakingHeroDescription:
+            getValue(
+                data,
+                "bakingHeroDescription",
+                "heroDescription"
+            ),
 
-    bakingHeroDescription:
-        getValue(
-            data,
-            "bakingHeroDescription",
-            "heroDescription"
-        ),
+        bakingSectionTitle:
+            getValue(
+                data,
+                "bakingSectionTitle"
+            ),
 
-    bakingSectionTitle:
-        getValue(
-            data,
-            "bakingSectionTitle"
-        ),
+        bakingSectionDescription:
+            getValue(
+                data,
+                "bakingSectionDescription"
+            ),
 
-    bakingSectionDescription:
-        getValue(
-            data,
-            "bakingSectionDescription"
-        ),
+        bakingPolaroid01Image:
+            getValue(
+                data,
+                "bakingPolaroid01Image"
+            ),
 
-    bakingPolaroid01Image:
-        getValue(
-            data,
-            "bakingPolaroid01Image"
-        ),
+        bakingPolaroid01Title:
+            getValue(
+                data,
+                "bakingPolaroid01Title"
+            ),
 
-    bakingPolaroid01Title:
-        getValue(
-            data,
-            "bakingPolaroid01Title"
-        ),
+        bakingPolaroid01Description:
+            getValue(
+                data,
+                "bakingPolaroid01Description"
+            ),
 
-    bakingPolaroid01Description:
-        getValue(
-            data,
-            "bakingPolaroid01Description"
-        ),
+        bakingPolaroid02Image:
+            getValue(
+                data,
+                "bakingPolaroid02Image"
+            ),
 
-    bakingPolaroid02Image:
-        getValue(
-            data,
-            "bakingPolaroid02Image"
-        ),
+        bakingPolaroid02Title:
+            getValue(
+                data,
+                "bakingPolaroid02Title"
+            ),
 
-    bakingPolaroid02Title:
-        getValue(
-            data,
-            "bakingPolaroid02Title"
-        ),
+        bakingPolaroid02Description:
+            getValue(
+                data,
+                "bakingPolaroid02Description"
+            ),
 
-    bakingPolaroid02Description:
-        getValue(
-            data,
-            "bakingPolaroid02Description"
-        ),
+        bakingPolaroid03Image:
+            getValue(
+                data,
+                "bakingPolaroid03Image"
+            ),
 
-    bakingPolaroid03Image:
-        getValue(
-            data,
-            "bakingPolaroid03Image"
-        ),
+        bakingPolaroid03Title:
+            getValue(
+                data,
+                "bakingPolaroid03Title"
+            ),
 
-    bakingPolaroid03Title:
-        getValue(
-            data,
-            "bakingPolaroid03Title"
-        ),
+        bakingPolaroid03Description:
+            getValue(
+                data,
+                "bakingPolaroid03Description"
+            ),
 
-    bakingPolaroid03Description:
-        getValue(
-            data,
-            "bakingPolaroid03Description"
-        ),
+        bakingGallery01Image:
+            getValue(
+                data,
+                "bakingGallery01Image"
+            ),
 
-    bakingGallery01Image:
-        getValue(
-            data,
-            "bakingGallery01Image"
-        ),
+        bakingGallery02Image:
+            getValue(
+                data,
+                "bakingGallery02Image"
+            ),
 
-    bakingGallery02Image:
-        getValue(
-            data,
-            "bakingGallery02Image"
-        ),
+        bakingGallery03Image:
+            getValue(
+                data,
+                "bakingGallery03Image"
+            ),
 
-    bakingGallery03Image:
-        getValue(
-            data,
-            "bakingGallery03Image"
-        ),
+        bakingAboutImage:
+            getValue(
+                data,
+                "bakingAboutImage"
+            ),
 
-    bakingAboutImage:
-        getValue(
-            data,
-            "bakingAboutImage"
-        ),
+        bakingAboutEyebrow:
+            getValue(
+                data,
+                "bakingAboutEyebrow"
+            ),
 
-    bakingAboutEyebrow:
-        getValue(
-            data,
-            "bakingAboutEyebrow"
-        ),
+        bakingAboutTitle:
+            getValue(
+                data,
+                "bakingAboutTitle"
+            ),
 
-    bakingAboutTitle:
-        getValue(
-            data,
-            "bakingAboutTitle"
-        ),
+        bakingAboutDescription:
+            getValue(
+                data,
+                "bakingAboutDescription"
+            ),
 
-    bakingAboutDescription:
-        getValue(
-            data,
-            "bakingAboutDescription"
-        ),
+        bakingFooterNote:
+            getValue(
+                data,
+                "bakingFooterNote"
+            ),
 
-    bakingFooterNote:
-        getValue(
-            data,
-            "bakingFooterNote"
-        ),
+        bakingFooterTitle:
+            getValue(
+                data,
+                "bakingFooterTitle"
+            ),
 
-    bakingFooterTitle:
-        getValue(
-            data,
-            "bakingFooterTitle"
-        ),
+        bakingFooterCopyright:
+            getValue(
+                data,
+                "bakingFooterCopyright"
+            )
 
-    bakingFooterCopyright:
-        getValue(
-            data,
-            "bakingFooterCopyright"
-        )
-});
-
+    });
 
 }
+
 
 /* =========================================================
 MINIMAL PORTFOLIO
@@ -1992,468 +2832,480 @@ Firebase ID = MInimalPortfolio
 ========================================================= */
 
 function populateMinimalPortfolio(
-data
+    data
 ) {
 
+    populateFields({
 
-populateFields({
+        minimalHeroImage:
+            getValue(
+                data,
+                "minimalHeroImage",
+                "heroImage"
+            ),
 
-    minimalHeroImage:
-        getValue(
-            data,
-            "minimalHeroImage",
-            "heroImage"
-        ),
+        minimalHeroEyebrow:
+            getValue(
+                data,
+                "minimalHeroEyebrow",
+                "heroEyebrow"
+            ),
 
-    minimalHeroEyebrow:
-        getValue(
-            data,
-            "minimalHeroEyebrow",
-            "heroEyebrow"
-        ),
+        minimalHeroTitle:
+            getValue(
+                data,
+                "minimalHeroTitle",
+                "heroTitle"
+            ),
 
-    minimalHeroTitle:
-        getValue(
-            data,
-            "minimalHeroTitle",
-            "heroTitle"
-        ),
+        minimalHeroDescription:
+            getValue(
+                data,
+                "minimalHeroDescription",
+                "heroDescription"
+            ),
 
-    minimalHeroDescription:
-        getValue(
-            data,
-            "minimalHeroDescription",
-            "heroDescription"
-        ),
+        minimalPlace01Image:
+            getValue(
+                data,
+                "minimalPlace01Image"
+            ),
 
-    minimalPlace01Image:
-        getValue(
-            data,
-            "minimalPlace01Image"
-        ),
+        minimalPlace01Label:
+            getValue(
+                data,
+                "minimalPlace01Label"
+            ),
 
-    minimalPlace01Label:
-        getValue(
-            data,
-            "minimalPlace01Label"
-        ),
+        minimalPlace01Title:
+            getValue(
+                data,
+                "minimalPlace01Title"
+            ),
 
-    minimalPlace01Title:
-        getValue(
-            data,
-            "minimalPlace01Title"
-        ),
+        minimalPlace01Description:
+            getValue(
+                data,
+                "minimalPlace01Description"
+            ),
 
-    minimalPlace01Description:
-        getValue(
-            data,
-            "minimalPlace01Description"
-        ),
+        minimalStatementEyebrow:
+            getValue(
+                data,
+                "minimalStatementEyebrow"
+            ),
 
-    minimalStatementEyebrow:
-        getValue(
-            data,
-            "minimalStatementEyebrow"
-        ),
+        minimalStatementTitle:
+            getValue(
+                data,
+                "minimalStatementTitle"
+            ),
 
-    minimalStatementTitle:
-        getValue(
-            data,
-            "minimalStatementTitle"
-        ),
+        minimalStatementDescription:
+            getValue(
+                data,
+                "minimalStatementDescription"
+            ),
 
-    minimalStatementDescription:
-        getValue(
-            data,
-            "minimalStatementDescription"
-        ),
+        minimalPlace02Image:
+            getValue(
+                data,
+                "minimalPlace02Image"
+            ),
 
-    minimalPlace02Image:
-        getValue(
-            data,
-            "minimalPlace02Image"
-        ),
+        minimalPlace02Label:
+            getValue(
+                data,
+                "minimalPlace02Label"
+            ),
 
-    minimalPlace02Label:
-        getValue(
-            data,
-            "minimalPlace02Label"
-        ),
+        minimalPlace02Title:
+            getValue(
+                data,
+                "minimalPlace02Title"
+            ),
 
-    minimalPlace02Title:
-        getValue(
-            data,
-            "minimalPlace02Title"
-        ),
+        minimalPlace02Description:
+            getValue(
+                data,
+                "minimalPlace02Description"
+            ),
 
-    minimalPlace02Description:
-        getValue(
-            data,
-            "minimalPlace02Description"
-        ),
+        minimalGalleryEyebrow:
+            getValue(
+                data,
+                "minimalGalleryEyebrow"
+            ),
 
-    minimalGalleryEyebrow:
-        getValue(
-            data,
-            "minimalGalleryEyebrow"
-        ),
+        minimalGalleryTitle:
+            getValue(
+                data,
+                "minimalGalleryTitle"
+            ),
 
-    minimalGalleryTitle:
-        getValue(
-            data,
-            "minimalGalleryTitle"
-        ),
+        minimalGalleryDescription:
+            getValue(
+                data,
+                "minimalGalleryDescription"
+            ),
 
-    minimalGalleryDescription:
-        getValue(
-            data,
-            "minimalGalleryDescription"
-        ),
+        minimalGallery01Image:
+            getValue(
+                data,
+                "minimalGallery01Image"
+            ),
 
-    minimalGallery01Image:
-        getValue(
-            data,
-            "minimalGallery01Image"
-        ),
+        minimalGallery02Image:
+            getValue(
+                data,
+                "minimalGallery02Image"
+            ),
 
-    minimalGallery02Image:
-        getValue(
-            data,
-            "minimalGallery02Image"
-        ),
+        minimalGallery03Image:
+            getValue(
+                data,
+                "minimalGallery03Image"
+            ),
 
-    minimalGallery03Image:
-        getValue(
-            data,
-            "minimalGallery03Image"
-        ),
+        minimalGallery04Image:
+            getValue(
+                data,
+                "minimalGallery04Image"
+            ),
 
-    minimalGallery04Image:
-        getValue(
-            data,
-            "minimalGallery04Image"
-        ),
+        minimalGallery05Image:
+            getValue(
+                data,
+                "minimalGallery05Image"
+            ),
 
-    minimalGallery05Image:
-        getValue(
-            data,
-            "minimalGallery05Image"
-        ),
+        minimalGallery06Image:
+            getValue(
+                data,
+                "minimalGallery06Image"
+            ),
 
-    minimalGallery06Image:
-        getValue(
-            data,
-            "minimalGallery06Image"
-        ),
+        minimalMovingEyebrow:
+            getValue(
+                data,
+                "minimalMovingEyebrow"
+            ),
 
-    minimalMovingEyebrow:
-        getValue(
-            data,
-            "minimalMovingEyebrow"
-        ),
+        minimalMovingTitle:
+            getValue(
+                data,
+                "minimalMovingTitle"
+            ),
 
-    minimalMovingTitle:
-        getValue(
-            data,
-            "minimalMovingTitle"
-        ),
+        minimalMovingDescription:
+            getValue(
+                data,
+                "minimalMovingDescription"
+            ),
 
-    minimalMovingDescription:
-        getValue(
-            data,
-            "minimalMovingDescription"
-        ),
+        minimalMovingVideo:
+            getValue(
+                data,
+                "minimalMovingVideo"
+            ),
 
-    minimalMovingVideo:
-        getValue(
-            data,
-            "minimalMovingVideo"
-        ),
+        minimalMovingCaption:
+            getValue(
+                data,
+                "minimalMovingCaption"
+            ),
 
-    minimalMovingCaption:
-        getValue(
-            data,
-            "minimalMovingCaption"
-        ),
+        minimalFinalEyebrow:
+            getValue(
+                data,
+                "minimalFinalEyebrow"
+            ),
 
-    minimalFinalEyebrow:
-        getValue(
-            data,
-            "minimalFinalEyebrow"
-        ),
+        minimalFinalTitle:
+            getValue(
+                data,
+                "minimalFinalTitle"
+            ),
 
-    minimalFinalTitle:
-        getValue(
-            data,
-            "minimalFinalTitle"
-        ),
+        minimalFinalDescription:
+            getValue(
+                data,
+                "minimalFinalDescription"
+            ),
 
-    minimalFinalDescription:
-        getValue(
-            data,
-            "minimalFinalDescription"
-        ),
+        minimalEndingImage:
+            getValue(
+                data,
+                "minimalEndingImage"
+            ),
 
-    minimalEndingImage:
-        getValue(
-            data,
-            "minimalEndingImage"
-        ),
+        minimalEndingEyebrow:
+            getValue(
+                data,
+                "minimalEndingEyebrow"
+            ),
 
-    minimalEndingEyebrow:
-        getValue(
-            data,
-            "minimalEndingEyebrow"
-        ),
+        minimalEndingDescription:
+            getValue(
+                data,
+                "minimalEndingDescription"
+            )
 
-    minimalEndingDescription:
-        getValue(
-            data,
-            "minimalEndingDescription"
-        )
-});
-
+    });
 
 }
+
 
 /* =========================================================
 MODERN MATURITY
 ========================================================= */
 
 function populateModernMaturity(
-data
+    data
 ) {
 
-populateFields({
+    populateFields({
 
-    modernHeroEyebrow:
-        getValue(
-            data,
-            "modernHeroEyebrow"
-        ),
+        modernHeroEyebrow:
+            getValue(
+                data,
+                "modernHeroEyebrow"
+            ),
 
-    modernHeroTitle:
-        getValue(
-            data,
-            "modernHeroTitle"
-        ),
+        modernHeroTitle:
+            getValue(
+                data,
+                "modernHeroTitle"
+            ),
 
-    modernHeroImage:
-        getValue(
-            data,
-            "modernHeroImage",
-            "heroImage"
-        ),
+        modernHeroImage:
+            getValue(
+                data,
+                "modernHeroImage",
+                "heroImage"
+            ),
 
-    modernHeroQuote:
-        getValue(
-            data,
-            "modernHeroQuote"
-        ),
+        modernHeroQuote:
+            getValue(
+                data,
+                "modernHeroQuote"
+            ),
 
-    modernHeroDescription:
-        getValue(
-            data,
-            "modernHeroDescription"
-        ),
+        modernHeroDescription:
+            getValue(
+                data,
+                "modernHeroDescription"
+            ),
 
-    modernSection01Image:
-        getValue(
-            data,
-            "modernSection01Image"
-        ),
+        modernSection01Image:
+            getValue(
+                data,
+                "modernSection01Image"
+            ),
 
-    modernSection01SubImage:
-        getValue(
-            data,
-            "modernSection01SubImage"
-        ),
+        modernSection01SubImage:
+            getValue(
+                data,
+                "modernSection01SubImage"
+            ),
 
-    modernSection01Title:
-        getValue(
-            data,
-            "modernSection01Title"
-        ),
+        modernSection01Title:
+            getValue(
+                data,
+                "modernSection01Title"
+            ),
 
-    modernSection01Description:
-        getValue(
-            data,
-            "modernSection01Description"
-        ),
+        modernSection01Description:
+            getValue(
+                data,
+                "modernSection01Description"
+            ),
 
-    modernSection02Image01:
-        getValue(
-            data,
-            "modernSection02Image01"
-        ),
+        modernSection02Image01:
+            getValue(
+                data,
+                "modernSection02Image01"
+            ),
 
-    modernSection02Image02:
-        getValue(
-            data,
-            "modernSection02Image02"
-        ),
+        modernSection02Image02:
+            getValue(
+                data,
+                "modernSection02Image02"
+            ),
 
-    modernSection02Title:
-        getValue(
-            data,
-            "modernSection02Title"
-        ),
+        modernSection02Title:
+            getValue(
+                data,
+                "modernSection02Title"
+            ),
 
-    modernSection02Description:
-        getValue(
-            data,
-            "modernSection02Description"
-        ),
+        modernSection02Description:
+            getValue(
+                data,
+                "modernSection02Description"
+            ),
 
-    modernSection03Image:
-        getValue(
-            data,
-            "modernSection03Image"
-        ),
+        modernSection03Image:
+            getValue(
+                data,
+                "modernSection03Image"
+            ),
 
-    modernSection03Title:
-        getValue(
-            data,
-            "modernSection03Title"
-        ),
+        modernSection03Title:
+            getValue(
+                data,
+                "modernSection03Title"
+            ),
 
-    modernSection03Description:
-        getValue(
-            data,
-            "modernSection03Description"
-        ),
+        modernSection03Description:
+            getValue(
+                data,
+                "modernSection03Description"
+            ),
 
-    modernSection04Image:
-        getValue(
-            data,
-            "modernSection04Image"
-        ),
+        modernSection04Image:
+            getValue(
+                data,
+                "modernSection04Image"
+            ),
 
-    modernSection04SubImage:
-        getValue(
-            data,
-            "modernSection04SubImage"
-        ),
+        modernSection04SubImage:
+            getValue(
+                data,
+                "modernSection04SubImage"
+            ),
 
-    modernSection04Title:
-        getValue(
-            data,
-            "modernSection04Title"
-        ),
+        modernSection04Title:
+            getValue(
+                data,
+                "modernSection04Title"
+            ),
 
-    modernSection04Description:
-        getValue(
-            data,
-            "modernSection04Description"
-        )
-});
+        modernSection04Description:
+            getValue(
+                data,
+                "modernSection04Description"
+            )
+
+    });
 
 }
+
 
 /* =========================================================
 GENERIC POPULATE
 ========================================================= */
 
 function populateFields(
-fields
+    fields
 ) {
 
-Object.entries(
-    fields
-).forEach(
-    (
-        [
-            fieldId,
-            value
-        ]
-    ) => {
+    Object.entries(
+        fields
+    ).forEach(
+        (
+            [
+                fieldId,
+                value
+            ]
+        ) => {
 
-        setFieldValue(
-            fieldId,
-            value
-        );
-    }
-);
+            setFieldValue(
+                fieldId,
+                value
+            );
+
+        }
+    );
+
 }
+
 
 /* =========================================================
 GET VALUE
 ========================================================= */
 
 function getValue(
-data,
-...keys
+    data,
+    ...keys
 ) {
 
-for (
-    const key of keys
-) {
-
-    if (
-        data &&
-        data[key] !== undefined &&
-        data[key] !== null
+    for (
+        const key of keys
     ) {
 
-        return data[key];
+        if (
+            data &&
+            data[key] !== undefined &&
+            data[key] !== null
+        ) {
+
+            return data[key];
+
+        }
+
     }
+
+
+    return "";
+
 }
 
-return "";
-
-
-}
 
 /* =========================================================
 SET FIELD VALUE
 ========================================================= */
 
 function setFieldValue(
-fieldId,
-value
+    fieldId,
+    value
 ) {
 
-const field =
-    document.getElementById(
-        fieldId
-    );
+    const field =
+        document.getElementById(
+            fieldId
+        );
 
-if (!field) {
-    return;
-}
 
-if (
-    value === null ||
-    value === undefined
-) {
+    if (!field) {
+        return;
+    }
+
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        field.value =
+            "";
+
+        return;
+    }
+
+
+    if (
+        value &&
+        typeof value.toDate ===
+        "function"
+    ) {
+
+        field.value =
+            normalizeDateForInput(
+                value
+            );
+
+        return;
+    }
+
 
     field.value =
-        "";
-
-    return;
-}
-
-if (
-    value &&
-    typeof value.toDate ===
-    "function"
-) {
-
-    field.value =
-        normalizeDateForInput(
+        String(
             value
         );
 
-    return;
 }
 
-field.value =
-    String(
-        value
-    );
-
-
-}
 
 /* =========================================================
 CLEAR FORM
@@ -2461,202 +3313,345 @@ CLEAR FORM
 
 function clearForm() {
 
-const formIds = [
+    const formIds = [
 
-    "editingEntryId",
-    "entryTitle",
-    "entryDescription",
-    "entryDate",
-    "entryImage",
+        "editingEntryId",
 
-    "filmHeroTitleTop",
-    "filmHeroTitleBottom1",
-    "filmHeroTitleBottom2",
-    "filmHeroImage",
-    "filmIntroText",
+        "entryTitle",
 
-    "filmMemory1Image",
-    "filmMemory1Text",
-    "filmMemory2Image",
-    "filmMemory2Text",
-    "filmMemory3Image",
-    "filmMemory3Text",
-    "filmMemory4Image",
-    "filmMemory4Text",
+        "entrySubcategory",
 
-    "filmVideoUrl",
-    "filmVideoCaption",
+        "entryDescription",
 
-    "film1Image",
-    "film1Title",
-    "film1Text",
-    "film2Image",
-    "film2Title",
-    "film2Text",
-    "film3Image",
-    "film3Title",
-    "film3Text",
+        "entryContent",
 
-    "filmTravelMonth",
-    "filmTravelYear",
-    "filmTravelLocation",
-    "filmTravelText",
+        "entryDate",
 
-    "vintageHeroImage",
-    "vintageHeroTitle",
-    "vintageHeroSubtitle",
-    "vintageIntroTitle",
-    "vintageIntroText",
+        "entryImage",
 
-    "vintageFlower1Image",
-    "vintageFlower1Title",
-    "vintageFlower1Text",
-    "vintageFlower2Image",
-    "vintageFlower2Title",
-    "vintageFlower2Text",
-    "vintageFlower3Image",
-    "vintageFlower3Title",
-    "vintageFlower3Text",
 
-    "vintageJournalTitle",
-    "vintageJournalText",
+        "filmHeroTitleTop",
 
-    "vintageGallery1Image",
-    "vintageGallery2Image",
-    "vintageGallery3Image",
-    "vintageGallery4Image",
+        "filmHeroTitleBottom1",
 
-    "bakingHeroImage",
-    "bakingHeroTitle",
-    "bakingHeroDescription",
-    "bakingSectionTitle",
-    "bakingSectionDescription",
+        "filmHeroTitleBottom2",
 
-    "bakingPolaroid01Image",
-    "bakingPolaroid01Title",
-    "bakingPolaroid01Description",
-    "bakingPolaroid02Image",
-    "bakingPolaroid02Title",
-    "bakingPolaroid02Description",
-    "bakingPolaroid03Image",
-    "bakingPolaroid03Title",
-    "bakingPolaroid03Description",
+        "filmHeroImage",
 
-    "bakingGallery01Image",
-    "bakingGallery02Image",
-    "bakingGallery03Image",
+        "filmIntroText",
 
-    "bakingAboutImage",
-    "bakingAboutEyebrow",
-    "bakingAboutTitle",
-    "bakingAboutDescription",
 
-    "bakingFooterNote",
-    "bakingFooterTitle",
-    "bakingFooterCopyright",
+        "filmMemory1Image",
 
-    "minimalHeroImage",
-    "minimalHeroEyebrow",
-    "minimalHeroTitle",
-    "minimalHeroDescription",
+        "filmMemory1Text",
 
-    "minimalPlace01Image",
-    "minimalPlace01Label",
-    "minimalPlace01Title",
-    "minimalPlace01Description",
+        "filmMemory2Image",
 
-    "minimalStatementEyebrow",
-    "minimalStatementTitle",
-    "minimalStatementDescription",
+        "filmMemory2Text",
 
-    "minimalPlace02Image",
-    "minimalPlace02Label",
-    "minimalPlace02Title",
-    "minimalPlace02Description",
+        "filmMemory3Image",
 
-    "minimalGalleryEyebrow",
-    "minimalGalleryTitle",
-    "minimalGalleryDescription",
+        "filmMemory3Text",
 
-    "minimalGallery01Image",
-    "minimalGallery02Image",
-    "minimalGallery03Image",
-    "minimalGallery04Image",
-    "minimalGallery05Image",
-    "minimalGallery06Image",
+        "filmMemory4Image",
 
-    "minimalMovingEyebrow",
-    "minimalMovingTitle",
-    "minimalMovingDescription",
-    "minimalMovingVideo",
-    "minimalMovingCaption",
+        "filmMemory4Text",
 
-    "minimalFinalEyebrow",
-    "minimalFinalTitle",
-    "minimalFinalDescription",
 
-    "minimalEndingImage",
-    "minimalEndingEyebrow",
-    "minimalEndingDescription",
+        "filmVideoUrl",
 
-    "modernHeroEyebrow",
-    "modernHeroTitle",
-    "modernHeroImage",
-    "modernHeroQuote",
-    "modernHeroDescription",
+        "filmVideoCaption",
 
-    "modernSection01Image",
-    "modernSection01SubImage",
-    "modernSection01Title",
-    "modernSection01Description",
 
-    "modernSection02Image01",
-    "modernSection02Image02",
-    "modernSection02Title",
-    "modernSection02Description",
+        "film1Image",
 
-    "modernSection03Image",
-    "modernSection03Title",
-    "modernSection03Description",
+        "film1Title",
 
-    "modernSection04Image",
-    "modernSection04SubImage",
-    "modernSection04Title",
-    "modernSection04Description"
-];
+        "film1Text",
 
-formIds.forEach(
-    id => {
+        "film2Image",
 
-        setFieldValue(
-            id,
-            ""
-        );
-    }
-);
+        "film2Title",
 
-setFieldValue(
-    "entryCategory",
-    "Research"
-);
+        "film2Text",
 
-setFieldValue(
-    "entryDesign",
-    "FilmArchiveDesign"
-);
+        "film3Image",
 
-setFieldValue(
-    "entryStatus",
-    "Published"
-);
+        "film3Title",
 
-selectedDesign =
-    "FilmArchiveDesign";
+        "film3Text",
 
-hideAllDesignFields();
 
+        "filmTravelMonth",
+
+        "filmTravelYear",
+
+        "filmTravelLocation",
+
+        "filmTravelText",
+
+
+        "vintageHeroImage",
+
+        "vintageHeroTitle",
+
+        "vintageHeroSubtitle",
+
+        "vintageIntroTitle",
+
+        "vintageIntroText",
+
+
+        "vintageFlower1Image",
+
+        "vintageFlower1Title",
+
+        "vintageFlower1Text",
+
+        "vintageFlower2Image",
+
+        "vintageFlower2Title",
+
+        "vintageFlower2Text",
+
+        "vintageFlower3Image",
+
+        "vintageFlower3Title",
+
+        "vintageFlower3Text",
+
+
+        "vintageJournalTitle",
+
+        "vintageJournalText",
+
+
+        "vintageGallery1Image",
+
+        "vintageGallery2Image",
+
+        "vintageGallery3Image",
+
+        "vintageGallery4Image",
+
+
+        "bakingHeroImage",
+
+        "bakingHeroTitle",
+
+        "bakingHeroDescription",
+
+        "bakingSectionTitle",
+
+        "bakingSectionDescription",
+
+
+        "bakingPolaroid01Image",
+
+        "bakingPolaroid01Title",
+
+        "bakingPolaroid01Description",
+
+        "bakingPolaroid02Image",
+
+        "bakingPolaroid02Title",
+
+        "bakingPolaroid02Description",
+
+        "bakingPolaroid03Image",
+
+        "bakingPolaroid03Title",
+
+        "bakingPolaroid03Description",
+
+
+        "bakingGallery01Image",
+
+        "bakingGallery02Image",
+
+        "bakingGallery03Image",
+
+
+        "bakingAboutImage",
+
+        "bakingAboutEyebrow",
+
+        "bakingAboutTitle",
+
+        "bakingAboutDescription",
+
+
+        "bakingFooterNote",
+
+        "bakingFooterTitle",
+
+        "bakingFooterCopyright",
+
+
+        "minimalHeroImage",
+
+        "minimalHeroEyebrow",
+
+        "minimalHeroTitle",
+
+        "minimalHeroDescription",
+
+
+        "minimalPlace01Image",
+
+        "minimalPlace01Label",
+
+        "minimalPlace01Title",
+
+        "minimalPlace01Description",
+
+
+        "minimalStatementEyebrow",
+
+        "minimalStatementTitle",
+
+        "minimalStatementDescription",
+
+
+        "minimalPlace02Image",
+
+        "minimalPlace02Label",
+
+        "minimalPlace02Title",
+
+        "minimalPlace02Description",
+
+
+        "minimalGalleryEyebrow",
+
+        "minimalGalleryTitle",
+
+        "minimalGalleryDescription",
+
+
+        "minimalGallery01Image",
+
+        "minimalGallery02Image",
+
+        "minimalGallery03Image",
+
+        "minimalGallery04Image",
+
+        "minimalGallery05Image",
+
+        "minimalGallery06Image",
+
+
+        "minimalMovingEyebrow",
+
+        "minimalMovingTitle",
+
+        "minimalMovingDescription",
+
+        "minimalMovingVideo",
+
+        "minimalMovingCaption",
+
+
+        "minimalFinalEyebrow",
+
+        "minimalFinalTitle",
+
+        "minimalFinalDescription",
+
+
+        "minimalEndingImage",
+
+        "minimalEndingEyebrow",
+
+        "minimalEndingDescription",
+
+
+        "modernHeroEyebrow",
+
+        "modernHeroTitle",
+
+        "modernHeroImage",
+
+        "modernHeroQuote",
+
+        "modernHeroDescription",
+
+
+        "modernSection01Image",
+
+        "modernSection01SubImage",
+
+        "modernSection01Title",
+
+        "modernSection01Description",
+
+
+        "modernSection02Image01",
+
+        "modernSection02Image02",
+
+        "modernSection02Title",
+
+        "modernSection02Description",
+
+
+        "modernSection03Image",
+
+        "modernSection03Title",
+
+        "modernSection03Description",
+
+
+        "modernSection04Image",
+
+        "modernSection04SubImage",
+
+        "modernSection04Title",
+
+        "modernSection04Description"
+
+    ];
+
+
+    formIds.forEach(
+        id => {
+
+            setFieldValue(
+                id,
+                ""
+            );
+
+        }
+    );
+
+
+    setFieldValue(
+        "entryCategory",
+        "Research"
+    );
+
+
+    setFieldValue(
+        "entryDesign",
+        "LearningNote"
+    );
+
+
+    setFieldValue(
+        "entryStatus",
+        "Published"
+    );
+
+
+    selectedDesign =
+        "LearningNote";
+
+
+    hideAllDesignFields();
 
 }
+
 
 /* =========================================================
 SAVE ENTRY
@@ -2665,27 +3660,33 @@ SAVE ENTRY
 async function saveEntry() {
 
     if (!db) {
+
         alert(
             "Firebase is not ready yet."
         );
+
         return;
     }
 
-   const saveButton =
-    document.getElementById(
-        "saveButton"
-    );
 
-const editingId =
-    getFieldValue(
-        "editingEntryId"
-    ).trim();
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
 
-const wasEditing =
-    Boolean(
-        editingId
-    );
-  
+
+    const editingId =
+        getFieldValue(
+            "editingEntryId"
+        ).trim();
+
+
+    const wasEditing =
+        Boolean(
+            editingId
+        );
+
+
     if (saveButton) {
 
         saveButton.disabled =
@@ -2693,7 +3694,9 @@ const wasEditing =
 
         saveButton.textContent =
             "Saving...";
+
     }
+
 
     try {
 
@@ -2702,6 +3705,7 @@ const wasEditing =
                 "entryTitle"
             ).trim();
 
+
         if (!title) {
 
             alert(
@@ -2709,452 +3713,687 @@ const wasEditing =
             );
 
             return;
+
         }
 
-       
-    const category =
-        getFieldValue(
-            "entryCategory"
-        );
 
-    const design =
-        getFieldValue(
-            "entryDesign"
-        ) ||
-        selectedDesign;
-
-    const description =
-        getFieldValue(
-            "entryDescription"
-        );
-
-    const date =
-        getFieldValue(
-            "entryDate"
-        );
-
-    const status =
-        getFieldValue(
-            "entryStatus"
-        );
-
-    const image =
-        getFieldValue(
-            "entryImage"
-        );
-
-    const content =
-        collectDesignFields(
-            design
-        );
-
-    const entryData = {
-
-        title,
-
-        category,
-
-        design,
-
-        description,
-
-        date,
-
-        status,
-
-        image,
-
-        content,
-
-        updatedAt:
-            serverTimestamp()
-    };
-
-    if (editingId) {
-
-        const entryRef =
-            doc(
-                db,
-                "news",
-                editingId
+        const category =
+            getFieldValue(
+                "entryCategory"
             );
 
-        await updateDoc(
-            entryRef,
-            entryData
-        );
 
-        alert(
-            "Entry updated successfully."
-        );
+        const subcategory =
+            getFieldValue(
+                "entrySubcategory"
+            ).trim();
 
-    } else {
 
-        entryData.createdAt =
-            serverTimestamp();
+        const design =
+            getFieldValue(
+                "entryDesign"
+            ) ||
+            selectedDesign;
 
-        const newsRef =
-            collection(
-                db,
-                "news"
+
+        const description =
+            getFieldValue(
+                "entryDescription"
             );
 
-        const newDocument =
-            await addDoc(
-                newsRef,
+
+        const date =
+            getFieldValue(
+                "entryDate"
+            );
+
+
+        const status =
+            getFieldValue(
+                "entryStatus"
+            );
+
+
+        const image =
+            getFieldValue(
+                "entryImage"
+            );
+
+
+        /*
+         * =====================================================
+         * LEARNING NOTE
+         *
+         * Content is stored directly as a STRING.
+         * =====================================================
+         */
+
+        let content;
+
+
+        if (
+            design ===
+            "LearningNote"
+        ) {
+
+            content =
+                getFieldValue(
+                    "entryContent"
+                );
+
+        }
+
+
+        /*
+         * =====================================================
+         * EXISTING DESIGNS
+         *
+         * Their original content-object
+         * structure remains unchanged.
+         * =====================================================
+         */
+
+        else {
+
+            content =
+                collectDesignFields(
+                    design
+                );
+
+        }
+
+
+        const entryData = {
+
+            title,
+
+            category,
+
+            subcategory,
+
+            design,
+
+            description,
+
+            date,
+
+            status,
+
+            image,
+
+            content,
+
+            updatedAt:
+                serverTimestamp()
+
+        };
+
+
+        /*
+         * UPDATE
+         */
+
+        if (editingId) {
+
+            const entryRef =
+                doc(
+                    db,
+                    "news",
+                    editingId
+                );
+
+
+            await updateDoc(
+                entryRef,
                 entryData
             );
 
-        console.log(
-            "New entry created:",
-            newDocument.id
+
+            alert(
+                "Entry updated successfully."
+            );
+
+        }
+
+
+        /*
+         * CREATE
+         */
+
+        else {
+
+            entryData.createdAt =
+                serverTimestamp();
+
+
+            const newsRef =
+                collection(
+                    db,
+                    "news"
+                );
+
+
+            const newDocument =
+                await addDoc(
+                    newsRef,
+                    entryData
+                );
+
+
+            console.log(
+                "New entry created:",
+                newDocument.id
+            );
+
+
+            alert(
+                "New entry created successfully."
+            );
+
+        }
+
+
+        closeModal();
+
+
+        await loadNewsEntries();
+
+
+    } catch (error) {
+
+        console.error(
+            "Save error:",
+            error
         );
+
 
         alert(
-            "New entry created successfully."
+            "Failed to save entry.\n\n" +
+            error.message
         );
+
     }
 
-    closeModal();
 
-    await loadNewsEntries();
+    finally {
 
-} catch (error) {
+        if (saveButton) {
 
-    console.error(
-        "Save error:",
-        error
-    );
+            saveButton.disabled =
+                false;
 
-    alert(
-        "Failed to save entry.\n\n" +
-        error.message
-    );
 
-} finally {
+            saveButton.textContent =
+                wasEditing
+                    ? "Update Entry"
+                    : "Save Entry";
 
-    if (saveButton) {
+        }
 
-        saveButton.disabled =
-            false;
-
-        saveButton.textContent =
-    wasEditing
-        ? "Update Entry"
-        : "Save Entry";
     }
-}
 
 }
+
 
 /* =========================================================
 COLLECT DESIGN FIELDS
 ========================================================= */
 
 function collectDesignFields(
-designId
+    designId
 ) {
 
-const fieldMap = {
+    const fieldMap = {
 
-    FilmArchiveDesign: [
+        FilmArchiveDesign: [
 
-        "filmHeroTitleTop",
-        "filmHeroTitleBottom1",
-        "filmHeroTitleBottom2",
-        "filmHeroImage",
-        "filmIntroText",
+            "filmHeroTitleTop",
 
-        "filmMemory1Image",
-        "filmMemory1Text",
-        "filmMemory2Image",
-        "filmMemory2Text",
-        "filmMemory3Image",
-        "filmMemory3Text",
-        "filmMemory4Image",
-        "filmMemory4Text",
+            "filmHeroTitleBottom1",
 
-        "filmVideoUrl",
-        "filmVideoCaption",
+            "filmHeroTitleBottom2",
 
-        "film1Image",
-        "film1Title",
-        "film1Text",
-        "film2Image",
-        "film2Title",
-        "film2Text",
-        "film3Image",
-        "film3Title",
-        "film3Text",
+            "filmHeroImage",
 
-        "filmTravelMonth",
-        "filmTravelYear",
-        "filmTravelLocation",
-        "filmTravelText"
-    ],
+            "filmIntroText",
 
-    VintageFlowerDesign: [
 
-        "vintageHeroImage",
-        "vintageHeroTitle",
-        "vintageHeroSubtitle",
+            "filmMemory1Image",
 
-        "vintageIntroTitle",
-        "vintageIntroText",
+            "filmMemory1Text",
 
-        "vintageFlower1Image",
-        "vintageFlower1Title",
-        "vintageFlower1Text",
+            "filmMemory2Image",
 
-        "vintageFlower2Image",
-        "vintageFlower2Title",
-        "vintageFlower2Text",
+            "filmMemory2Text",
 
-        "vintageFlower3Image",
-        "vintageFlower3Title",
-        "vintageFlower3Text",
+            "filmMemory3Image",
 
-        "vintageJournalTitle",
-        "vintageJournalText",
+            "filmMemory3Text",
 
-        "vintageGallery1Image",
-        "vintageGallery2Image",
-        "vintageGallery3Image",
-        "vintageGallery4Image"
-    ],
+            "filmMemory4Image",
 
-    HomeBakingDesign: [
+            "filmMemory4Text",
 
-        "bakingHeroImage",
-        "bakingHeroTitle",
-        "bakingHeroDescription",
 
-        "bakingSectionTitle",
-        "bakingSectionDescription",
+            "filmVideoUrl",
 
-        "bakingPolaroid01Image",
-        "bakingPolaroid01Title",
-        "bakingPolaroid01Description",
+            "filmVideoCaption",
 
-        "bakingPolaroid02Image",
-        "bakingPolaroid02Title",
-        "bakingPolaroid02Description",
 
-        "bakingPolaroid03Image",
-        "bakingPolaroid03Title",
-        "bakingPolaroid03Description",
+            "film1Image",
 
-        "bakingGallery01Image",
-        "bakingGallery02Image",
-        "bakingGallery03Image",
+            "film1Title",
 
-        "bakingAboutImage",
-        "bakingAboutEyebrow",
-        "bakingAboutTitle",
-        "bakingAboutDescription",
+            "film1Text",
 
-        "bakingFooterNote",
-        "bakingFooterTitle",
-        "bakingFooterCopyright"
-    ],
+            "film2Image",
 
-    MInimalPortfolio: [
+            "film2Title",
 
-        "minimalHeroImage",
-        "minimalHeroEyebrow",
-        "minimalHeroTitle",
-        "minimalHeroDescription",
+            "film2Text",
 
-        "minimalPlace01Image",
-        "minimalPlace01Label",
-        "minimalPlace01Title",
-        "minimalPlace01Description",
+            "film3Image",
 
-        "minimalStatementEyebrow",
-        "minimalStatementTitle",
-        "minimalStatementDescription",
+            "film3Title",
 
-        "minimalPlace02Image",
-        "minimalPlace02Label",
-        "minimalPlace02Title",
-        "minimalPlace02Description",
+            "film3Text",
 
-        "minimalGalleryEyebrow",
-        "minimalGalleryTitle",
-        "minimalGalleryDescription",
 
-        "minimalGallery01Image",
-        "minimalGallery02Image",
-        "minimalGallery03Image",
-        "minimalGallery04Image",
-        "minimalGallery05Image",
-        "minimalGallery06Image",
+            "filmTravelMonth",
 
-        "minimalMovingEyebrow",
-        "minimalMovingTitle",
-        "minimalMovingDescription",
-        "minimalMovingVideo",
-        "minimalMovingCaption",
+            "filmTravelYear",
 
-        "minimalFinalEyebrow",
-        "minimalFinalTitle",
-        "minimalFinalDescription",
+            "filmTravelLocation",
 
-        "minimalEndingImage",
-        "minimalEndingEyebrow",
-        "minimalEndingDescription"
-    ],
+            "filmTravelText"
 
-    ModernMaturityDesign: [
+        ],
 
-        "modernHeroEyebrow",
-        "modernHeroTitle",
-        "modernHeroImage",
-        "modernHeroQuote",
-        "modernHeroDescription",
 
-        "modernSection01Image",
-        "modernSection01SubImage",
-        "modernSection01Title",
-        "modernSection01Description",
+        VintageFlowerDesign: [
 
-        "modernSection02Image01",
-        "modernSection02Image02",
-        "modernSection02Title",
-        "modernSection02Description",
+            "vintageHeroImage",
 
-        "modernSection03Image",
-        "modernSection03Title",
-        "modernSection03Description",
+            "vintageHeroTitle",
 
-        "modernSection04Image",
-        "modernSection04SubImage",
-        "modernSection04Title",
-        "modernSection04Description"
-    ]
-};
+            "vintageHeroSubtitle",
 
-const fieldIds =
-    fieldMap[
-        designId
-    ] || [];
 
-const content = {};
+            "vintageIntroTitle",
 
-fieldIds.forEach(
-    fieldId => {
+            "vintageIntroText",
 
-        content[
-            fieldId
-        ] =
-            getFieldValue(
+
+            "vintageFlower1Image",
+
+            "vintageFlower1Title",
+
+            "vintageFlower1Text",
+
+
+            "vintageFlower2Image",
+
+            "vintageFlower2Title",
+
+            "vintageFlower2Text",
+
+
+            "vintageFlower3Image",
+
+            "vintageFlower3Title",
+
+            "vintageFlower3Text",
+
+
+            "vintageJournalTitle",
+
+            "vintageJournalText",
+
+
+            "vintageGallery1Image",
+
+            "vintageGallery2Image",
+
+            "vintageGallery3Image",
+
+            "vintageGallery4Image"
+
+        ],
+
+
+        HomeBakingDesign: [
+
+            "bakingHeroImage",
+
+            "bakingHeroTitle",
+
+            "bakingHeroDescription",
+
+
+            "bakingSectionTitle",
+
+            "bakingSectionDescription",
+
+
+            "bakingPolaroid01Image",
+
+            "bakingPolaroid01Title",
+
+            "bakingPolaroid01Description",
+
+
+            "bakingPolaroid02Image",
+
+            "bakingPolaroid02Title",
+
+            "bakingPolaroid02Description",
+
+
+            "bakingPolaroid03Image",
+
+            "bakingPolaroid03Title",
+
+            "bakingPolaroid03Description",
+
+
+            "bakingGallery01Image",
+
+            "bakingGallery02Image",
+
+            "bakingGallery03Image",
+
+
+            "bakingAboutImage",
+
+            "bakingAboutEyebrow",
+
+            "bakingAboutTitle",
+
+            "bakingAboutDescription",
+
+
+            "bakingFooterNote",
+
+            "bakingFooterTitle",
+
+            "bakingFooterCopyright"
+
+        ],
+
+
+        MInimalPortfolio: [
+
+            "minimalHeroImage",
+
+            "minimalHeroEyebrow",
+
+            "minimalHeroTitle",
+
+            "minimalHeroDescription",
+
+
+            "minimalPlace01Image",
+
+            "minimalPlace01Label",
+
+            "minimalPlace01Title",
+
+            "minimalPlace01Description",
+
+
+            "minimalStatementEyebrow",
+
+            "minimalStatementTitle",
+
+            "minimalStatementDescription",
+
+
+            "minimalPlace02Image",
+
+            "minimalPlace02Label",
+
+            "minimalPlace02Title",
+
+            "minimalPlace02Description",
+
+
+            "minimalGalleryEyebrow",
+
+            "minimalGalleryTitle",
+
+            "minimalGalleryDescription",
+
+
+            "minimalGallery01Image",
+
+            "minimalGallery02Image",
+
+            "minimalGallery03Image",
+
+            "minimalGallery04Image",
+
+            "minimalGallery05Image",
+
+            "minimalGallery06Image",
+
+
+            "minimalMovingEyebrow",
+
+            "minimalMovingTitle",
+
+            "minimalMovingDescription",
+
+            "minimalMovingVideo",
+
+            "minimalMovingCaption",
+
+
+            "minimalFinalEyebrow",
+
+            "minimalFinalTitle",
+
+            "minimalFinalDescription",
+
+
+            "minimalEndingImage",
+
+            "minimalEndingEyebrow",
+
+            "minimalEndingDescription"
+
+        ],
+
+
+        ModernMaturityDesign: [
+
+            "modernHeroEyebrow",
+
+            "modernHeroTitle",
+
+            "modernHeroImage",
+
+            "modernHeroQuote",
+
+            "modernHeroDescription",
+
+
+            "modernSection01Image",
+
+            "modernSection01SubImage",
+
+            "modernSection01Title",
+
+            "modernSection01Description",
+
+
+            "modernSection02Image01",
+
+            "modernSection02Image02",
+
+            "modernSection02Title",
+
+            "modernSection02Description",
+
+
+            "modernSection03Image",
+
+            "modernSection03Title",
+
+            "modernSection03Description",
+
+
+            "modernSection04Image",
+
+            "modernSection04SubImage",
+
+            "modernSection04Title",
+
+            "modernSection04Description"
+
+        ]
+
+    };
+
+
+    const fieldIds =
+        fieldMap[
+            designId
+        ] || [];
+
+
+    const content = {};
+
+
+    fieldIds.forEach(
+        fieldId => {
+
+            content[
                 fieldId
-            );
-    }
-);
+            ] =
+                getFieldValue(
+                    fieldId
+                );
 
-return content;
+        }
+    );
+
+
+    return content;
 
 }
+
 
 /* =========================================================
 GET FIELD VALUE
 ========================================================= */
 
 function getFieldValue(
-fieldId
+    fieldId
 ) {
 
-const field =
-    document.getElementById(
-        fieldId
-    );
+    const field =
+        document.getElementById(
+            fieldId
+        );
 
-if (!field) {
-    return "";
+
+    if (!field) {
+        return "";
+    }
+
+
+    return field.value || "";
+
 }
 
-return field.value ||
-    "";
-
-
-}
 
 /* =========================================================
 DELETE
 ========================================================= */
 
 async function deleteEntry(
-entryId
+    entryId
 ) {
 
-if (!entryId) {
-    return;
-}
+    if (!entryId) {
+        return;
+    }
 
-if (!db) {
 
-    alert(
-        "Firebase is not ready yet."
-    );
+    if (!db) {
 
-    return;
-}
-
-const entry =
-    allEntries.find(
-        item =>
-            item.id ===
-            entryId
-    );
-
-const title =
-    entry?.title ||
-    "this entry";
-
-const confirmed =
-    confirm(
-        `Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
-    );
-
-if (!confirmed) {
-    return;
-}
-
-try {
-
-    const entryRef =
-        doc(
-            db,
-            "news",
-            entryId
+        alert(
+            "Firebase is not ready yet."
         );
 
-    await deleteDoc(
-        entryRef
-    );
+        return;
+    }
 
-    alert(
-        "Entry deleted successfully."
-    );
 
-    await loadNewsEntries();
+    const entry =
+        allEntries.find(
+            item =>
+                item.id ===
+                entryId
+        );
 
-} catch (error) {
 
-    console.error(
-        "Delete error:",
-        error
-    );
+    const title =
+        entry?.title ||
+        "this entry";
 
-    alert(
-        "Failed to delete entry.\n\n" +
-        error.message
-    );
+
+    const confirmed =
+        confirm(
+            `Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const entryRef =
+            doc(
+                db,
+                "news",
+                entryId
+            );
+
+
+        await deleteDoc(
+            entryRef
+        );
+
+
+        alert(
+            "Entry deleted successfully."
+        );
+
+
+        await loadNewsEntries();
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete error:",
+            error
+        );
+
+
+        alert(
+            "Failed to delete entry.\n\n" +
+            error.message
+        );
+
+    }
+
 }
 
-
-}
 
 /* =========================================================
 STATISTICS
@@ -3162,554 +4401,605 @@ STATISTICS
 
 function updateStatistics() {
 
-const total =
-    allEntries.length;
+    const total =
+        allEntries.length;
 
-const published =
-    allEntries.filter(
-        entry =>
-            normalizeStatus(
-                entry.status
-            ) ===
-            "Published"
-    ).length;
 
-const drafts =
-    allEntries.filter(
-        entry =>
-            normalizeStatus(
-                entry.status
-            ) ===
-            "Draft"
-    ).length;
+    const published =
+        allEntries.filter(
+            entry =>
+                normalizeStatus(
+                    entry.status
+                ) ===
+                "Published"
+        ).length;
 
-const now =
-    new Date();
 
-const currentYear =
-    now.getFullYear();
+    const drafts =
+        allEntries.filter(
+            entry =>
+                normalizeStatus(
+                    entry.status
+                ) ===
+                "Draft"
+        ).length;
 
-const currentMonth =
-    now.getMonth();
 
-const thisMonth =
-    allEntries.filter(
-        entry => {
+    const now =
+        new Date();
 
-            const dateValue =
-                getEntryDateValue(
-                    entry
+
+    const currentYear =
+        now.getFullYear();
+
+
+    const currentMonth =
+        now.getMonth();
+
+
+    const thisMonth =
+        allEntries.filter(
+            entry => {
+
+                const dateValue =
+                    getEntryDateValue(
+                        entry
+                    );
+
+
+                if (!dateValue) {
+                    return false;
+                }
+
+
+                const date =
+                    new Date(
+                        dateValue
+                    );
+
+
+                return (
+                    date.getFullYear() ===
+                    currentYear &&
+                    date.getMonth() ===
+                    currentMonth
                 );
 
-            if (!dateValue) {
-                return false;
             }
+        ).length;
 
-            const date =
-                new Date(
-                    dateValue
-                );
 
-            return (
-                date.getFullYear() ===
-                currentYear &&
-                date.getMonth() ===
-                currentMonth
-            );
-        }
-    ).length;
+    setText(
+        "totalPosts",
+        total
+    );
 
-setText(
-    "totalPosts",
-    total
-);
 
-setText(
-    "publishedPosts",
-    published
-);
+    setText(
+        "publishedPosts",
+        published
+    );
 
-setText(
-    "draftPosts",
-    drafts
-);
 
-setText(
-    "thisMonthPosts",
-    String(
-        thisMonth
-    ).padStart(
-        2,
-        "0"
-    )
-);
+    setText(
+        "draftPosts",
+        drafts
+    );
 
+
+    setText(
+        "thisMonthPosts",
+        String(
+            thisMonth
+        ).padStart(
+            2,
+            "0"
+        )
+    );
 
 }
+
 
 /* =========================================================
 NORMALIZE STATUS
 ========================================================= */
 
 function normalizeStatus(
-status
+    status
 ) {
 
+    if (!status) {
+        return "Draft";
+    }
 
-if (!status) {
+
+    const value =
+        String(
+            status
+        )
+            .trim()
+            .toLowerCase();
+
+
+    if (
+        value ===
+        "published" ||
+        value ===
+        "publish" ||
+        value ===
+        "public"
+    ) {
+
+        return "Published";
+
+    }
+
+
     return "Draft";
-}
-
-const value =
-    String(
-        status
-    )
-        .trim()
-        .toLowerCase();
-
-if (
-    value ===
-    "published" ||
-    value ===
-    "publish" ||
-    value ===
-    "public"
-) {
-    return "Published";
-}
-
-return "Draft";
 
 }
+
 
 /* =========================================================
 NORMALIZE CATEGORY
 ========================================================= */
 
 function normalizeCategory(
-category
-) {
-if (!category) {
-    return "Research";
-}
-
-const value =
-    String(
-        category
-    )
-        .trim()
-        .toLowerCase();
-
-const categories = {
-
-    research:
-        "Research",
-
-    academic:
-        "Academic",
-
-    travel:
-        "Travel",
-
-    life:
-        "Life"
-};
-
-return (
-    categories[
-        value
-    ] ||
     category
-);
+) {
 
+    if (!category) {
+        return "Research";
+    }
+
+
+    const value =
+        String(
+            category
+        )
+            .trim()
+            .toLowerCase();
+
+
+    const categories = {
+
+        research:
+            "Research",
+
+        academic:
+            "Academic",
+
+        travel:
+            "Travel",
+
+        life:
+            "Life"
+
+    };
+
+
+    return (
+        categories[
+            value
+        ] ||
+        category
+    );
 
 }
+
 
 /* =========================================================
 FORMAT DATE
 ========================================================= */
 
 function formatDate(
-value
+    value
 ) {
 
-if (!value) {
-    return "";
-}
+    if (!value) {
+        return "";
+    }
 
-let date;
 
-if (
-    value &&
-    typeof value.toDate ===
-    "function"
-) {
+    let date;
 
-    date =
-        value.toDate();
 
-} else if (
-    value instanceof Date
-) {
+    if (
+        value &&
+        typeof value.toDate ===
+        "function"
+    ) {
 
-    date =
-        value;
+        date =
+            value.toDate();
 
-} else {
+    }
 
-    date =
-        new Date(
+    else if (
+        value instanceof Date
+    ) {
+
+        date =
+            value;
+
+    }
+
+    else {
+
+        date =
+            new Date(
+                value
+            );
+
+    }
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return String(
             value
         );
-}
 
-if (
-    Number.isNaN(
-        date.getTime()
-    )
-) {
-
-    return String(
-        value
-    );
-}
-
-return date.toLocaleDateString(
-    "en-US",
-    {
-        year:
-            "numeric",
-
-        month:
-            "short",
-
-        day:
-            "numeric"
     }
-);
 
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+
+            year:
+                "numeric",
+
+            month:
+                "short",
+
+            day:
+                "numeric"
+
+        }
+    );
 
 }
+
 
 /* =========================================================
 NORMALIZE DATE
 ========================================================= */
 
 function normalizeDateForInput(
-value
+    value
 ) {
 
-
-if (!value) {
-    return "";
-}
-
-let date;
-
-if (
-    value &&
-    typeof value.toDate ===
-    "function"
-) {
-
-    date =
-        value.toDate();
-
-} else if (
-    value instanceof Date
-) {
-
-    date =
-        value;
-
-} else {
-
-    const stringValue =
-        String(
-            value
-        );
-
-    if (
-        /^\d{4}-\d{2}-\d{2}$/
-            .test(
-                stringValue
-            )
-    ) {
-
-        return stringValue;
+    if (!value) {
+        return "";
     }
 
-    date =
-        new Date(
-            stringValue
+
+    let date;
+
+
+    if (
+        value &&
+        typeof value.toDate ===
+        "function"
+    ) {
+
+        date =
+            value.toDate();
+
+    }
+
+    else if (
+        value instanceof Date
+    ) {
+
+        date =
+            value;
+
+    }
+
+    else {
+
+        const stringValue =
+            String(
+                value
+            );
+
+
+        if (
+            /^\d{4}-\d{2}-\d{2}$/
+                .test(
+                    stringValue
+                )
+        ) {
+
+            return stringValue;
+
+        }
+
+
+        date =
+            new Date(
+                stringValue
+            );
+
+    }
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    const year =
+        String(
+            date.getFullYear()
+        ).padStart(
+            4,
+            "0"
         );
-}
 
-if (
-    Number.isNaN(
-        date.getTime()
-    )
-) {
 
-    return "";
-}
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
 
-const year =
-    String(
-        date.getFullYear()
-    ).padStart(
-        4,
-        "0"
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        `${year}-${month}-${day}`
     );
 
-const month =
-    String(
-        date.getMonth() + 1
-    ).padStart(
-        2,
-        "0"
-    );
-
-const day =
-    String(
-        date.getDate()
-    ).padStart(
-        2,
-        "0"
-    );
-
-return (
-    `${year}-${month}-${day}`
-);
-
-
 }
+
 
 /* =========================================================
 DESIGN DISPLAY NAME
 ========================================================= */
 
 function getDesignDisplayName(
-design
+    design
 ) {
 
-
-const names = {
-
-    FilmArchiveDesign:
-        "Film Archive",
-
-    VintageFlowerDesign:
-        "Vintage Flower",
-
-    HomeBakingDesign:
-        "Home Baking",
-
-    MInimalPortfolio:
-        "Minimal Portfolio",
-
-    ModernMaturityDesign:
-        "Modern Maturity"
-};
-
-return (
-    names[
-        design
-    ] ||
-    design ||
-    "Unknown"
-);
-
+    return (
+        DESIGN_NAMES[
+            design
+        ] ||
+        design ||
+        "Unknown"
+    );
 
 }
+
 
 /* =========================================================
 GET CONTENT VALUE
 ========================================================= */
 
 function getContentValue(
-entry,
-key
+    entry,
+    key
 ) {
 
+    if (!entry) {
+        return "";
+    }
 
-if (!entry) {
+
+    if (
+        entry.content &&
+        typeof entry.content ===
+        "object" &&
+        entry.content[key] !==
+        undefined
+    ) {
+
+        return entry.content[key];
+
+    }
+
+
+    if (
+        entry.data &&
+        entry.data[key] !==
+        undefined
+    ) {
+
+        return entry.data[key];
+
+    }
+
+
+    if (
+        entry[key] !==
+        undefined
+    ) {
+
+        return entry[key];
+
+    }
+
+
     return "";
-}
-
-if (
-    entry.content &&
-    entry.content[key] !==
-    undefined
-) {
-
-    return entry.content[key];
-}
-
-if (
-    entry.data &&
-    entry.data[key] !==
-    undefined
-) {
-
-    return entry.data[key];
-}
-
-if (
-    entry[key] !==
-    undefined
-) {
-
-    return entry[key];
-}
-
-return "";
-
 
 }
+
 
 /* =========================================================
 SET TEXT
 ========================================================= */
 
 function setText(
-elementId,
-value
+    elementId,
+    value
 ) {
 
-
-const element =
-    document.getElementById(
-        elementId
-    );
-
-if (element) {
-
-    element.textContent =
-        String(
-            value
+    const element =
+        document.getElementById(
+            elementId
         );
-}
 
 
+    if (element) {
+
+        element.textContent =
+            String(
+                value
+            );
+
+    }
+
 }
+
 
 /* =========================================================
 TRUNCATE
 ========================================================= */
 
 function truncateText(
-text,
-maxLength
-) {
-
-
-const value =
-    String(
-        text ||
-        ""
-    );
-
-if (
-    value.length <=
+    text,
     maxLength
 ) {
 
-    return value;
-}
+    const value =
+        String(
+            text ||
+            ""
+        );
 
-return (
-    value.substring(
-        0,
+
+    if (
+        value.length <=
         maxLength
-    ) +
-    "..."
-);
+    ) {
 
+        return value;
+
+    }
+
+
+    return (
+        value.substring(
+            0,
+            maxLength
+        ) +
+        "..."
+    );
 
 }
+
 
 /* =========================================================
 ESCAPE HTML
 ========================================================= */
 
 function escapeHTML(
-value
-) {
-
-
-if (
-    value === null ||
-    value === undefined
-) {
-
-    return "";
-}
-
-return String(
     value
-)
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+) {
 
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(
+        value
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
+
 
 /* =========================================================
 GLOBAL FUNCTIONS
 ========================================================= */
 
 window.refreshNewsAdmin =
-function() {
+    function() {
 
+        return loadNewsEntries();
 
-    return loadNewsEntries();
-
-};
+    };
 
 
 window.openNewModal =
-openNewModal;
+    openNewModal;
+
 
 window.openModal =
-openModal;
+    openModal;
+
 
 window.closeModal =
-closeModal;
+    closeModal;
+
 
 window.selectDesign =
-selectDesign;
+    selectDesign;
+
 
 window.handleDesignChange =
-handleDesignChange;
+    handleDesignChange;
+
 
 window.editEntry =
-editEntry;
+    editEntry;
+
 
 window.deleteEntry =
-deleteEntry;
+    deleteEntry;
+
 
 window.saveEntry =
-saveEntry;
+    saveEntry;
+
 
 console.log(
-"News Admin JS loaded successfully."
+    "News Admin JS loaded successfully."
 );
