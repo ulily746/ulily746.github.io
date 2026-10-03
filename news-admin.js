@@ -1,9 +1,5 @@
-/* =========================================================
-NEWS ADMIN.JS
-Personal Archive — News Admin
-========================================================= */
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 
 import {
     getFirestore,
@@ -17,11 +13,12 @@ import {
     query,
     orderBy,
     serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+} from
+"https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 
 /* =========================================================
-FIREBASE
+   FIREBASE
 ========================================================= */
 
 const firebaseConfig = {
@@ -35,25 +32,21 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-export const db = getFirestore(app);
+const db = getFirestore(app);
 
 
 /* =========================================================
-GLOBAL STATE
+   STATE
 ========================================================= */
 
 let allEntries = [];
-
 let currentFilter = "ALL";
-
-let selectedDesign = "FilmArchiveDesign";
-
+let selectedDesign = "LearningNote";
 let isEditing = false;
 
 
 /* =========================================================
-DESIGN LIST
+   DESIGN SETTINGS
 ========================================================= */
 
 const VALID_DESIGNS = [
@@ -65,269 +58,86 @@ const VALID_DESIGNS = [
     "ModernMaturityDesign"
 ];
 
-
 const DESIGN_NAMES = {
-
-    LearningNote:
-        "Learning Note",
-
-    FilmArchiveDesign:
-        "Film Archive",
-
-    VintageFlowerDesign:
-        "Vintage Flower",
-
-    HomeBakingDesign:
-        "Home Baking",
-
-    MInimalPortfolio:
-        "Minimal Portfolio",
-
-    ModernMaturityDesign:
-        "Modern Maturity"
-
+    LearningNote: "Learning Note",
+    FilmArchiveDesign: "Film Archive",
+    VintageFlowerDesign: "Vintage Flower",
+    HomeBakingDesign: "Home Baking",
+    MInimalPortfolio: "Minimal Portfolio",
+    ModernMaturityDesign: "Modern Maturity"
 };
 
 
 /* =========================================================
-DOM READY
+   START
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        console.log(
-            "News Admin initializing..."
-        );
-
-        initializeAdmin();
-
-    }
-);
-
-
-/* =========================================================
-INITIALIZE ADMIN
-========================================================= */
-
-function initializeAdmin() {
-
-    console.log(
-        "================================"
-    );
-
-    console.log(
-        "NEWS ADMIN — LEARNING NOTE ENABLED"
-    );
-
-    console.log(
-        "DB OBJECT:",
-        db
-    );
-
-    console.log(
-        "DB EXISTS:",
-        !!db
-    );
-
-    console.log(
-        "================================"
-    );
-
-
-    if (!db) {
-
-        showFirebaseError(
-            new Error(
-                "Firebase Database is not available."
-            )
-        );
-
-        return;
-    }
-
-
-    /*
-     * IMPORTANT
-     *
-     * These are automatically added to
-     * the existing modal.
-     *
-     * Therefore the HTML file does NOT
-     * need to be edited.
-     */
-
+document.addEventListener("DOMContentLoaded", () => {
     setupLearningNoteFields();
-
-
     setupFilters();
-
     setupDesignSelector();
-
     setupModalEvents();
-
-    setupNewEntryButtons();
-
+    setupNewEntryButton();
     setupSaveButton();
-
-    setupCloseButtons();
-
     loadNewsEntries();
-
-
-    console.log(
-        "News Admin initialized successfully."
-    );
-
-}
+});
 
 
 /* =========================================================
-LEARNING NOTE MODAL FIELDS
-Automatically injects:
-- Subcategory
-- Content
+   LEARNING NOTE FIELDS
 ========================================================= */
 
 function setupLearningNoteFields() {
-
-    /*
-     * Add the Learning Note option
-     * to the existing Design select.
-     */
-
-    const designSelect =
-        document.getElementById(
-            "entryDesign"
-        );
-
+    const designSelect = document.getElementById("entryDesign");
 
     if (designSelect) {
-
-        const exists =
-            Array.from(
-                designSelect.options
-            ).some(
-                option =>
-                    option.value ===
-                    "LearningNote"
-            );
-
+        const exists = Array.from(designSelect.options).some(
+            option => option.value === "LearningNote"
+        );
 
         if (!exists) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                "LearningNote";
-
-            option.textContent =
-                "Learning Note";
-
-            /*
-             * Put Learning Note first.
-             */
-
-            designSelect.insertBefore(
-                option,
-                designSelect.firstChild
-            );
+            const option = document.createElement("option");
+            option.value = "LearningNote";
+            option.textContent = "Learning Note";
+            designSelect.insertBefore(option, designSelect.firstChild);
         }
     }
 
-
-    /*
-     * Add the new common fields
-     * only if they don't already exist.
-     */
-
-    if (
-        !document.getElementById(
-            "entrySubcategory"
-        )
-    ) {
-
+    if (!document.getElementById("entrySubcategory")) {
         createSubcategoryField();
-
     }
 
-
-    if (
-        !document.getElementById(
-            "entryContent"
-        )
-    ) {
-
+    if (!document.getElementById("entryContent")) {
         createContentField();
-
     }
-
-
-    /*
-     * Add a small amount of styling
-     * specifically for these injected fields.
-     */
 
     injectLearningNoteStyles();
-
 }
 
-
-/* =========================================================
-CREATE SUBCATEGORY FIELD
-========================================================= */
-
 function createSubcategoryField() {
-
     const descriptionField =
-        document.getElementById(
-            "entryDescription"
-        );
-
+        document.getElementById("entryDescription");
 
     if (!descriptionField) {
-
-        console.warn(
-            "entryDescription not found. " +
-            "Subcategory field could not be inserted."
-        );
-
         return;
     }
 
-
     const descriptionGroup =
-        descriptionField.closest(
-            ".form-group"
-        ) ||
+        descriptionField.closest(".form-group") ||
         descriptionField.parentElement;
-
 
     if (!descriptionGroup) {
         return;
     }
 
-
-    const wrapper =
-        document.createElement(
-            "div"
-        );
-
+    const wrapper = document.createElement("div");
 
     wrapper.className =
         "form-group learning-common-field";
 
-
-    wrapper.id =
-        "entrySubcategoryWrapper";
-
+    wrapper.id = "entrySubcategoryWrapper";
 
     wrapper.innerHTML = `
-
         <label
             class="form-label"
             for="entrySubcategory"
@@ -338,82 +148,49 @@ function createSubcategoryField() {
         <input
             type="text"
             id="entrySubcategory"
-            class="form-input"
-            placeholder="e.g. English / Research / Coding / Travel"
+            placeholder="e.g. Graduation / Research / Travel"
             autocomplete="off"
         >
-
     `;
-
-
-    /*
-     * Insert immediately after Description.
-     */
 
     descriptionGroup.insertAdjacentElement(
         "afterend",
         wrapper
     );
-
 }
 
-
-/* =========================================================
-CREATE CONTENT FIELD
-========================================================= */
-
 function createContentField() {
-
     const subcategoryWrapper =
         document.getElementById(
             "entrySubcategoryWrapper"
         );
 
-
     const descriptionField =
-        document.getElementById(
-            "entryDescription"
-        );
-
+        document.getElementById("entryDescription");
 
     const insertAfter =
         subcategoryWrapper ||
         (
             descriptionField
-                ? descriptionField.closest(
-                    ".form-group"
-                ) || descriptionField.parentElement
+                ? (
+                    descriptionField.closest(".form-group") ||
+                    descriptionField.parentElement
+                )
                 : null
         );
 
-
     if (!insertAfter) {
-
-        console.warn(
-            "Could not find a suitable location " +
-            "for entryContent."
-        );
-
         return;
     }
 
-
-    const wrapper =
-        document.createElement(
-            "div"
-        );
-
+    const wrapper = document.createElement("div");
 
     wrapper.className =
         "form-group learning-common-field";
 
-
-    wrapper.id =
-        "entryContentWrapper";
-
+    wrapper.id = "entryContentWrapper";
 
     wrapper.innerHTML = `
-
         <label
             class="form-label"
             for="entryContent"
@@ -423,31 +200,21 @@ function createContentField() {
 
         <textarea
             id="entryContent"
-            class="form-textarea learning-content-input"
-            placeholder="Write your note or article content here..."
+            placeholder="Write your note or article here..."
         ></textarea>
 
         <div class="learning-content-help">
-            Write freely. Paragraph breaks will be preserved.
+            Paragraph breaks will be preserved.
         </div>
-
     `;
-
 
     insertAfter.insertAdjacentElement(
         "afterend",
         wrapper
     );
-
 }
 
-
-/* =========================================================
-LEARNING NOTE FIELD STYLES
-========================================================= */
-
 function injectLearningNoteStyles() {
-
     if (
         document.getElementById(
             "learningNoteAdminStyles"
@@ -456,400 +223,119 @@ function injectLearningNoteStyles() {
         return;
     }
 
+    const style = document.createElement("style");
 
-    const style =
-        document.createElement(
-            "style"
-        );
-
-
-    style.id =
-        "learningNoteAdminStyles";
-
+    style.id = "learningNoteAdminStyles";
 
     style.textContent = `
-
-        #entrySubcategory,
         #entryContent {
-
-            width: 100%;
-            box-sizing: border-box;
-
-        }
-
-
-        #entryContent {
-
             min-height: 320px;
             resize: vertical;
-
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                sans-serif;
-
             line-height: 1.75;
-
         }
-
 
         .learning-content-help {
-
             margin-top: 7px;
-
             font-size: 11px;
-
             line-height: 1.5;
-
             color: #999;
-
         }
-
-
-        #entryContentWrapper {
-
-            margin-top: 6px;
-
-        }
-
     `;
 
-
-    document.head.appendChild(
-        style
-    );
-
+    document.head.appendChild(style);
 }
 
 
 /* =========================================================
-FIREBASE ERROR
-========================================================= */
-
-function showFirebaseError(error) {
-
-    const list =
-        document.getElementById(
-            "newsList"
-        );
-
-
-    if (!list) {
-        return;
-    }
-
-
-    list.innerHTML = `
-
-        <div class="empty-state">
-
-            <div class="empty-state-title">
-                Firebase Connection Error
-            </div>
-
-            <div class="empty-state-text">
-
-                ${escapeHTML(
-                    error?.message ||
-                    "Unable to connect to Firebase."
-                )}
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-LOAD NEWS ENTRIES
+   LOAD ENTRIES
 ========================================================= */
 
 async function loadNewsEntries() {
-
-    const list =
-        document.getElementById(
-            "newsList"
-        );
-
+    const list = document.getElementById("newsList");
 
     if (list) {
-
         list.innerHTML = `
-
             <div class="loading-state">
                 LOADING ARCHIVE...
             </div>
-
         `;
-
     }
-
-
-    if (!db) {
-
-        showFirebaseError(
-            new Error(
-                "Firebase is not ready."
-            )
-        );
-
-        return;
-    }
-
 
     try {
-
-        const newsRef =
-            collection(
-                db,
-                "news"
-            );
-
+        const newsRef = collection(db, "news");
 
         let snapshot;
 
-
         try {
-
-            const orderedQuery =
+            snapshot = await getDocs(
                 query(
                     newsRef,
-                    orderBy(
-                        "date",
-                        "desc"
-                    )
-                );
-
-
-            snapshot =
-                await getDocs(
-                    orderedQuery
-                );
-
-
+                    orderBy("date", "desc")
+                )
+            );
         } catch (error) {
-
             console.warn(
-                "orderBy failed. Loading without sorting.",
+                "Could not order by date. Loading unsorted.",
                 error
             );
 
-
-            snapshot =
-                await getDocs(
-                    newsRef
-                );
-
+            snapshot = await getDocs(newsRef);
         }
-
 
         allEntries = [];
 
-
-        snapshot.forEach(
-            documentSnapshot => {
-
-                if (
-                    documentSnapshot.id ===
-                    "design"
-                ) {
-                    return;
-                }
-
-
-                const data =
-                    documentSnapshot.data();
-
-
-                allEntries.push({
-
-                    id:
-                        documentSnapshot.id,
-
-                    ...data
-
-                });
-
+        snapshot.forEach(documentSnapshot => {
+            if (documentSnapshot.id === "design") {
+                return;
             }
-        );
 
+            allEntries.push({
+                id: documentSnapshot.id,
+                ...documentSnapshot.data()
+            });
+        });
 
-        allEntries.sort(
-            sortEntriesByDate
-        );
-
+        allEntries.sort(sortEntriesByDate);
 
         updateStatistics();
-
         renderNewsList();
 
-
-        console.log(
-            "News entries loaded:",
-            allEntries.length
-        );
-
-
     } catch (error) {
-
-        console.error(
-            "Failed to load news:",
-            error
-        );
-
+        console.error("Failed to load news:", error);
 
         if (list) {
-
             list.innerHTML = `
-
                 <div class="empty-state">
-
                     <div class="empty-state-title">
                         Unable to Load Archive
                     </div>
 
                     <div class="empty-state-text">
-
-                        ${escapeHTML(
-                            error?.message ||
-                            "Please check Firebase configuration."
-                        )}
-
+                        ${escapeHTML(error.message)}
                     </div>
-
                 </div>
-
             `;
-
         }
-
     }
-
 }
 
 
 /* =========================================================
-SORT
-========================================================= */
-
-function sortEntriesByDate(
-    a,
-    b
-) {
-
-    return (
-        getEntryDateValue(b) -
-        getEntryDateValue(a)
-    );
-
-}
-
-
-function getEntryDateValue(
-    entry
-) {
-
-    if (!entry) {
-        return 0;
-    }
-
-
-    const value =
-        entry.date ||
-        entry.createdAt ||
-        entry.updatedAt;
-
-
-    if (
-        value &&
-        typeof value.toDate ===
-        "function"
-    ) {
-
-        return value
-            .toDate()
-            .getTime();
-
-    }
-
-
-    if (
-        value instanceof Date
-    ) {
-
-        return value.getTime();
-
-    }
-
-
-    if (
-        typeof value ===
-        "string"
-    ) {
-
-        const time =
-            new Date(
-                value
-            ).getTime();
-
-
-        return Number.isNaN(time)
-            ? 0
-            : time;
-
-    }
-
-
-    if (
-        typeof value ===
-        "number"
-    ) {
-
-        return value;
-
-    }
-
-
-    return 0;
-
-}
-
-
-/* =========================================================
-RENDER LIST
+   RENDER LIST
 ========================================================= */
 
 function renderNewsList() {
-
-    const list =
-        document.getElementById(
-            "newsList"
-        );
-
+    const list = document.getElementById("newsList");
 
     if (!list) {
         return;
     }
 
+    const filteredEntries = filterEntries(allEntries);
 
-    const filteredEntries =
-        filterEntries(
-            allEntries
-        );
-
-
-    if (
-        filteredEntries.length === 0
-    ) {
-
+    if (filteredEntries.length === 0) {
         list.innerHTML = `
-
             <div class="empty-state">
-
                 <div class="empty-state-title">
                     No Archive Entries
                 </div>
@@ -857,228 +343,93 @@ function renderNewsList() {
                 <div class="empty-state-text">
                     No entries match the current filter.
                 </div>
-
             </div>
-
         `;
 
         return;
     }
 
-
-    list.innerHTML =
-        filteredEntries
-            .map(
-                createNewsRow
-            )
-            .join("");
-
+    list.innerHTML = filteredEntries
+        .map(createNewsRow)
+        .join("");
 
     attachRowEvents();
-
 }
 
-
-/* =========================================================
-FILTER
-========================================================= */
-
-function filterEntries(
-    entries
-) {
-
-    if (
-        currentFilter ===
-        "ALL"
-    ) {
-
-        return entries;
-
-    }
-
-
-    if (
-        currentFilter ===
-        "Published"
-    ) {
-
-        return entries.filter(
-            entry =>
-                normalizeStatus(
-                    entry.status
-                ) ===
-                "Published"
-        );
-
-    }
-
-
-    if (
-        currentFilter ===
-        "Draft"
-    ) {
-
-        return entries.filter(
-            entry =>
-                normalizeStatus(
-                    entry.status
-                ) ===
-                "Draft"
-        );
-
-    }
-
-
-    return entries.filter(
-        entry =>
-            normalizeCategory(
-                entry.category
-            ) ===
-            currentFilter
-    );
-
-}
-
-
-/* =========================================================
-CREATE NEWS ROW
-========================================================= */
-
-function createNewsRow(
-    entry
-) {
-
-    const id =
-        entry.id ||
-        "";
-
+function createNewsRow(entry) {
+    const id = entry.id || "";
 
     const title =
         entry.title ||
         entry.name ||
         "Untitled Entry";
 
-
     const category =
-        normalizeCategory(
-            entry.category
-        );
-
+        normalizeCategory(entry.category);
 
     const design =
         entry.design ||
         entry.designId ||
-        "Unknown Design";
-
+        "Unknown";
 
     const status =
-        normalizeStatus(
-            entry.status
-        );
-
-
-    const image =
-        entry.image ||
-        entry.imageUrl ||
-        entry.heroImage ||
-        getContentValue(
-            entry,
-            "heroImage"
-        ) ||
-        getContentValue(
-            entry,
-            "minimalHeroImage"
-        ) ||
-        getContentValue(
-            entry,
-            "vintageHeroImage"
-        ) ||
-        getContentValue(
-            entry,
-            "bakingHeroImage"
-        ) ||
-        getContentValue(
-            entry,
-            "filmHeroImage"
-        ) ||
-        getContentValue(
-            entry,
-            "modernHeroImage"
-        ) ||
-        "";
-
+        normalizeStatus(entry.status);
 
     const description =
         entry.description ||
         entry.shortDescription ||
         "";
 
+    const image =
+        entry.image ||
+        entry.imageUrl ||
+        getContentValue(entry, "vintageHeroImage") ||
+        getContentValue(entry, "minimalHeroImage") ||
+        getContentValue(entry, "filmHeroImage") ||
+        getContentValue(entry, "bakingHeroImage") ||
+        getContentValue(entry, "modernHeroImage") ||
+        "";
 
-    const date =
-        formatDate(
-            entry.date
-        );
-
+    const date = formatDate(entry.date);
 
     const statusClass =
-        status ===
-        "Published"
+        status === "Published"
             ? "status-published"
             : "status-draft";
 
-
-    const safeId =
-        escapeHTML(
-            id
-        );
-
-
     return `
-
         <div
             class="news-row"
-            data-entry-id="${safeId}"
+            data-entry-id="${escapeHTML(id)}"
         >
-
             <div>
-
                 ${
                     image
                         ? `
-
                             <img
                                 class="thumb"
                                 src="${escapeHTML(image)}"
                                 alt="${escapeHTML(title)}"
                                 onerror="this.style.display='none';"
                             >
-
                         `
                         : `
-
                             <div class="thumb"></div>
-
                         `
                 }
-
             </div>
 
-
             <div>
-
                 <div class="news-title">
                     ${escapeHTML(title)}
                 </div>
 
-
                 <div class="news-meta">
-
                     ${
                         date
                             ? escapeHTML(date)
                             : ""
                     }
-
 
                     ${
                         description
@@ -1091,1023 +442,330 @@ function createNewsRow(
                               )
                             : ""
                     }
-
                 </div>
-
             </div>
 
-
             <div>
-
                 <span class="tag">
                     ${escapeHTML(category)}
                 </span>
-
             </div>
 
-
             <div>
-
                 <span class="design-tag">
-
                     ${escapeHTML(
-                        getDesignDisplayName(
-                            design
-                        )
+                        getDesignDisplayName(design)
                     )}
-
                 </span>
-
             </div>
 
-
             <div>
-
                 <span class="${statusClass}">
                     ● ${escapeHTML(status)}
                 </span>
-
             </div>
 
-
             <div>
-
                 <div class="actions">
-
                     <span
                         class="action edit-action"
-                        data-id="${safeId}"
+                        data-id="${escapeHTML(id)}"
                     >
                         EDIT
                     </span>
 
-
                     <span
                         class="action delete delete-action"
-                        data-id="${safeId}"
+                        data-id="${escapeHTML(id)}"
                     >
                         DELETE
                     </span>
-
                 </div>
-
             </div>
-
         </div>
-
     `;
-
 }
 
 
 /* =========================================================
-ROW EVENTS
-========================================================= */
-
-function attachRowEvents() {
-
-    document
-        .querySelectorAll(
-            ".edit-action"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-                        editEntry(
-                            button.dataset.id
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            ".delete-action"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-                        deleteEntry(
-                            button.dataset.id
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-FILTER SETUP
+   FILTERS
 ========================================================= */
 
 function setupFilters() {
-
-    document
-        .querySelectorAll(
-            ".filter"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-
-                        document
-                            .querySelectorAll(
-                                ".filter"
-                            )
-                            .forEach(
-                                item =>
-                                    item.classList.remove(
-                                        "active"
-                                    )
-                            );
-
-
-                        button.classList.add(
-                            "active"
-                        );
-
-
-                        currentFilter =
-                            button.dataset.filter ||
-                            "ALL";
-
-
-                        renderNewsList();
-
-                    }
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-NEW ENTRY BUTTONS
-========================================================= */
-
-function setupNewEntryButtons() {
-
-    const selectors = [
-
-        "#newEntryButton",
-
-        "#newEntryBtn",
-
-        ".new-entry-button",
-
-        ".new-entry-btn",
-
-        "[data-action='new-entry']"
-
-    ];
-
-
-    const buttons =
-        document.querySelectorAll(
-            selectors.join(",")
-        );
-
-
-    buttons.forEach(
-        button => {
-
-            button.addEventListener(
-                "click",
-                event => {
-
-                    event.preventDefault();
-
-                    openNewModal();
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-SAVE BUTTON
-========================================================= */
-
-function setupSaveButton() {
-
-    const button =
-        document.getElementById(
-            "saveButton"
-        );
-
-
-    if (!button) {
-
-        console.warn(
-            "saveButton not found."
-        );
-
-        return;
-    }
-
-
-    const newButton =
-        button.cloneNode(
-            true
-        );
-
-
-    button.parentNode.replaceChild(
-        newButton,
-        button
-    );
-
-
-    newButton.addEventListener(
-        "click",
-        async event => {
-
+    document.querySelectorAll(".filter").forEach(button => {
+        button.addEventListener("click", event => {
             event.preventDefault();
 
-            event.stopPropagation();
+            document
+                .querySelectorAll(".filter")
+                .forEach(item => {
+                    item.classList.remove("active");
+                });
 
+            button.classList.add("active");
 
-            if (
-                newButton.dataset.saving ===
-                "true"
-            ) {
+            currentFilter =
+                button.dataset.filter || "ALL";
 
-                console.warn(
-                    "Save already in progress."
-                );
+            renderNewsList();
+        });
+    });
+}
 
-                return;
-            }
+function filterEntries(entries) {
+    if (currentFilter === "ALL") {
+        return entries;
+    }
 
+    if (currentFilter === "Published") {
+        return entries.filter(entry =>
+            normalizeStatus(entry.status) ===
+            "Published"
+        );
+    }
 
-            newButton.dataset.saving =
-                "true";
+    if (currentFilter === "Draft") {
+        return entries.filter(entry =>
+            normalizeStatus(entry.status) ===
+            "Draft"
+        );
+    }
 
-
-            try {
-
-                await saveEntry();
-
-            }
-
-            finally {
-
-                newButton.dataset.saving =
-                    "false";
-
-            }
-
-        }
+    return entries.filter(entry =>
+        normalizeCategory(entry.category) ===
+        currentFilter
     );
-
 }
 
 
 /* =========================================================
-CLOSE BUTTONS
+   ROW EVENTS
 ========================================================= */
 
-function setupCloseButtons() {
+function attachRowEvents() {
+    document
+        .querySelectorAll(".edit-action")
+        .forEach(button => {
+            button.addEventListener("click", () => {
+                editEntry(button.dataset.id);
+            });
+        });
 
     document
-        .querySelectorAll(
-            "[data-close-modal], .modal-close, .close-modal"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-                        closeModal();
-
-                    }
-                );
-
-            }
-        );
-
+        .querySelectorAll(".delete-action")
+        .forEach(button => {
+            button.addEventListener("click", () => {
+                deleteEntry(button.dataset.id);
+            });
+        });
 }
 
 
 /* =========================================================
-DESIGN SELECTOR
+   DESIGN SELECTOR
 ========================================================= */
 
 function setupDesignSelector() {
-
     document
-        .querySelectorAll(
-            ".design-card"
-        )
-        .forEach(
-            card => {
+        .querySelectorAll(".design-card")
+        .forEach(card => {
+            card.addEventListener("click", event => {
+                event.preventDefault();
 
-                const newCard =
-                    card.cloneNode(
-                        true
-                    );
+                const designId =
+                    card.dataset.design;
 
+                if (!designId) {
+                    return;
+                }
 
-                card.parentNode.replaceChild(
-                    newCard,
-                    card
-                );
+                openNewModal(designId);
+            });
+        });
 
+    const designSelect =
+        document.getElementById("entryDesign");
 
-                newCard.addEventListener(
-                    "click",
-                    event => {
-
-                        event.preventDefault();
-
-                        event.stopPropagation();
-
-
-                        const designId =
-                            newCard.dataset.design ||
-                            newCard.dataset.designId ||
-                            getDesignFromOnClick(
-                                newCard
-                            );
-
-
-                        if (!designId) {
-
-                            console.warn(
-                                "Design ID not found:",
-                                newCard
-                            );
-
-                            return;
-                        }
-
-
-                        openNewModal(
-                            designId
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    const select =
-        document.getElementById(
-            "entryDesign"
-        );
-
-
-    if (select) {
-
-        select.addEventListener(
-            "change",
-            () => {
-
-                selectDesign(
-                    select.value
-                );
-
-            }
-        );
-
+    if (designSelect) {
+        designSelect.addEventListener("change", () => {
+            selectDesign(designSelect.value);
+        });
     }
-
 }
 
-
-function getDesignFromOnClick(
-    card
-) {
-
-    const value =
-        card.getAttribute(
-            "onclick"
-        );
-
-
-    if (!value) {
-        return "";
+function selectDesign(designId) {
+    if (!VALID_DESIGNS.includes(designId)) {
+        designId = "LearningNote";
     }
 
+    selectedDesign = designId;
 
-    const match =
-        value.match(
-            /selectDesign\(['"]([^'"]+)['"]\)/
-        );
-
-
-    return match
-        ? match[1]
-        : "";
-
-}
-
-
-/* =========================================================
-DESIGN CHANGE
-========================================================= */
-
-function handleDesignChange() {
-
-    const select =
-        document.getElementById(
-            "entryDesign"
-        );
-
-
-    if (!select) {
-        return;
-    }
-
-
-    selectDesign(
-        select.value
-    );
-
-}
-
-
-/* =========================================================
-SELECT DESIGN
-========================================================= */
-
-function selectDesign(
-    designId
-) {
-
-    if (
-        !VALID_DESIGNS.includes(
-            designId
-        )
-    ) {
-
-        console.warn(
-            "Invalid design ID:",
-            designId
-        );
-
-        designId =
-            "FilmArchiveDesign";
-    }
-
-
-    selectedDesign =
-        designId;
-
-
-    const select =
-        document.getElementById(
-            "entryDesign"
-        );
-
-
-    if (select) {
-
-        select.value =
-            selectedDesign;
-
-    }
-
-
-    /*
-     * 먼저 모든 디자인 전용 입력창을 숨김
-     */
+    setFieldValue("entryDesign", designId);
 
     hideAllDesignFields();
-
-
-    /*
-     * Learning Note인 경우
-     *
-     * 기존 디자인 입력창은 보여주지 않고
-     * Content만 보여줌
-     */
-
-    if (
-        selectedDesign ===
-        "LearningNote"
-    ) {
-
-        updateLearningNoteVisibility();
-
-        return;
-
-    }
-
-
-    /*
-     * Learning Note가 아닌 경우
-     *
-     * Learning Note Content는 숨김
-     */
-
     updateLearningNoteVisibility();
 
-
-    /*
-     * 선택한 기존 디자인의 입력창만 표시
-     */
-
-    showDesignFields(
-        selectedDesign
-    );
-
+    if (designId !== "LearningNote") {
+        showDesignFields(designId);
+    }
 }
 
-/* =========================================================
-LEARNING NOTE VISIBILITY
-========================================================= */
+function hideAllDesignFields() {
+    document
+        .querySelectorAll(".design-fields")
+        .forEach(field => {
+            field.style.display = "none";
+        });
+}
+
+function showDesignFields(designId) {
+    const fieldMap = {
+        FilmArchiveDesign: "filmArchiveFields",
+        VintageFlowerDesign: "vintageFlowerFields",
+        HomeBakingDesign: "homeBakingFields",
+        MInimalPortfolio: "minimalPortfolioFields",
+        ModernMaturityDesign: "modernMaturityFields"
+    };
+
+    const fieldId = fieldMap[designId];
+
+    if (!fieldId) {
+        return;
+    }
+
+    const field = document.getElementById(fieldId);
+
+    if (field) {
+        field.style.display = "block";
+    }
+}
 
 function updateLearningNoteVisibility() {
-
-    const contentWrapper =
+    const wrapper =
         document.getElementById(
             "entryContentWrapper"
         );
 
-
-    if (!contentWrapper) {
+    if (!wrapper) {
         return;
     }
 
-
-    /*
-     * Learning Note일 때만
-     * Content field를 표시
-     */
-
-    if (
-        selectedDesign ===
-        "LearningNote"
-    ) {
-
-        contentWrapper.style.display =
-            "block";
-
-    }
-
-    else {
-
-        contentWrapper.style.display =
-            "none";
-
-    }
-
-}
-
-/* =========================================================
-HIDE DESIGN FIELDS
-========================================================= */
-
-function hideAllDesignFields() {
-
-    document
-        .querySelectorAll(
-            ".design-fields"
-        )
-        .forEach(
-            field => {
-
-                field.style.display =
-                    "none";
-
-            }
-        );
-
+    wrapper.style.display =
+        selectedDesign === "LearningNote"
+            ? "block"
+            : "none";
 }
 
 
 /* =========================================================
-SHOW DESIGN FIELDS
+   NEW ENTRY
 ========================================================= */
 
-function showDesignFields(
-    designId
-) {
+function setupNewEntryButton() {
+    const button =
+        document.getElementById("newEntryButton");
 
-    const fieldMap = {
-
-        FilmArchiveDesign:
-            "filmArchiveFields",
-
-        VintageFlowerDesign:
-            "vintageFlowerFields",
-
-        HomeBakingDesign:
-            "homeBakingFields",
-
-        MInimalPortfolio:
-            "minimalPortfolioFields",
-
-        ModernMaturityDesign:
-            "modernMaturityFields"
-
-        /*
-         * LearningNote intentionally
-         * has no design-specific field.
-         */
-
-    };
-
-
-    const fieldId =
-        fieldMap[
-            designId
-        ];
-
-
-    if (!fieldId) {
-
-        /*
-         * This is expected for LearningNote.
-         */
-
-        if (
-            designId ===
-            "LearningNote"
-        ) {
-
-            return;
-
-        }
-
-
-        console.warn(
-            "Unknown design:",
-            designId
-        );
-
+    if (!button) {
         return;
     }
 
-
-    const field =
-        document.getElementById(
-            fieldId
-        );
-
-
-    if (field) {
-
-        field.style.display =
-            "block";
-
-    }
-
+    button.addEventListener("click", event => {
+        event.preventDefault();
+        openNewModal();
+    });
 }
-
-
-/* =========================================================
-OPEN NEW MODAL
-========================================================= */
 
 function openNewModal(
-    designId = null
+    designId = "LearningNote"
 ) {
+    isEditing = false;
 
-    isEditing =
-        false;
+    clearFormForNewEntry();
 
+    selectedDesign = VALID_DESIGNS.includes(designId)
+        ? designId
+        : "LearningNote";
 
-    clearForm();
+    setFieldValue("editingEntryId", "");
+    setFieldValue("entryDesign", selectedDesign);
 
+    const title =
+        document.getElementById("modalTitle");
 
-    selectedDesign =
-        designId ||
-        "LearningNote";
-
-
-    setFieldValue(
-        "editingEntryId",
-        ""
-    );
-
-
-    setFieldValue(
-        "entryDesign",
-        selectedDesign
-    );
-
-
-    const modalTitle =
-        document.getElementById(
-            "modalTitle"
-        );
-
-
-    if (modalTitle) {
-
-        modalTitle.textContent =
-            "New Archive Entry";
-
+    if (title) {
+        title.textContent = "New Archive Entry";
     }
-
 
     const saveButton =
-        document.getElementById(
-            "saveButton"
-        );
-
+        document.getElementById("saveButton");
 
     if (saveButton) {
-
-        saveButton.textContent =
-            "Save Entry";
-
+        saveButton.textContent = "Save Entry";
     }
 
-
-    selectDesign(
-        selectedDesign
-    );
-
-
+    selectDesign(selectedDesign);
     openModal();
-
 }
 
 
 /* =========================================================
-OPEN MODAL
+   EDIT ENTRY
 ========================================================= */
 
-function openModal() {
-
-    const modal =
-        document.getElementById(
-            "entryModal"
-        );
-
-
-    if (!modal) {
-
-        console.warn(
-            "entryModal not found."
-        );
-
-        return;
-    }
-
-
-    modal.classList.add(
-        "active"
-    );
-
-
-    modal.style.display =
-        "flex";
-
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    const modalBox =
-        modal.querySelector(
-            ".modal-box"
-        );
-
-
-    if (modalBox) {
-
-        modalBox.scrollTop =
-            0;
-
-    }
-
-}
-
-
-/* =========================================================
-CLOSE MODAL
-========================================================= */
-
-function closeModal() {
-
-    const modal =
-        document.getElementById(
-            "entryModal"
-        );
-
-
-    if (modal) {
-
-        modal.classList.remove(
-            "active"
-        );
-
-
-        modal.style.display =
-            "";
-
-    }
-
-
-    document.body.style.overflow =
-        "";
-
-
-    isEditing =
-        false;
-
-}
-
-
-/* =========================================================
-MODAL EVENTS
-========================================================= */
-
-function setupModalEvents() {
-
-    const modal =
-        document.getElementById(
-            "entryModal"
-        );
-
-
-    if (!modal) {
-        return;
-    }
-
-
-    modal.addEventListener(
-        "click",
-        event => {
-
-            if (
-                event.target ===
-                modal
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key ===
-                "Escape" &&
-                modal.classList.contains(
-                    "active"
-                )
-            ) {
-
-                closeModal();
-
-            }
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-EDIT ENTRY
-========================================================= */
-
-async function editEntry(
-    entryId
-) {
-
+async function editEntry(entryId) {
     if (!entryId) {
         return;
     }
 
-
-    if (!db) {
-
-        alert(
-            "Firebase is not ready yet."
-        );
-
-        return;
-    }
-
-
     try {
+        const entryRef = doc(db, "news", entryId);
 
-        const entryRef =
-            doc(
-                db,
-                "news",
-                entryId
-            );
+        const snapshot = await getDoc(entryRef);
 
-
-        const snapshot =
-            await getDoc(
-                entryRef
-            );
-
-
-        if (
-            !snapshot.exists()
-        ) {
-
-            alert(
-                "This entry no longer exists."
-            );
-
-
+        if (!snapshot.exists()) {
+            alert("This entry no longer exists.");
             await loadNewsEntries();
-
             return;
         }
 
+        const entry = snapshot.data();
 
-        const entry =
-            snapshot.data();
-
-
-        isEditing =
-            true;
-
-
-        selectedDesign =
+        const design =
             entry.design ||
             entry.designId ||
             "LearningNote";
 
+        const content =
+            getDesignContent(entry);
 
-        clearForm();
+        isEditing = true;
 
+        // 새 글용 clearForm()을 쓰지 않음
+        // 수정용 초기화 후 기존 값을 채움
+        resetFormForEdit();
 
-        setFieldValue(
-            "editingEntryId",
-            entryId
-        );
+        selectedDesign =
+            VALID_DESIGNS.includes(design)
+                ? design
+                : "LearningNote";
 
+        setFieldValue("editingEntryId", entryId);
 
+        // 공통 정보
         setFieldValue(
             "entryTitle",
-            entry.title ||
-            ""
+            entry.title || ""
         );
-
 
         setFieldValue(
             "entryCategory",
-            entry.category ||
-            "Research"
+            entry.category || "Research"
         );
-
 
         setFieldValue(
             "entrySubcategory",
-            entry.subcategory ||
-            ""
+            entry.subcategory || ""
         );
-
 
         setFieldValue(
             "entryDescription",
@@ -2116,2911 +774,983 @@ async function editEntry(
             ""
         );
 
-
         setFieldValue(
             "entryDate",
-            normalizeDateForInput(
-                entry.date
-            )
+            normalizeDateForInput(entry.date)
         );
-
 
         setFieldValue(
             "entryStatus",
-            normalizeStatus(
-                entry.status
-            )
+            normalizeStatus(entry.status)
         );
-
 
         setFieldValue(
             "entryImage",
             entry.image ||
             entry.imageUrl ||
-            entry.heroImage ||
             ""
         );
 
+        // 먼저 디자인을 선택해야
+        // 해당 디자인의 입력창이 표시됨
+        selectDesign(selectedDesign);
 
-        setFieldValue(
-            "entryDesign",
-            selectedDesign
-        );
-
-
-        /*
-         * Learning Note stores content
-         * directly as a string.
-         */
-
-        if (
-            selectedDesign ===
-            "LearningNote"
-        ) {
-
+        // Learning Note는 문자열 content 사용
+        if (selectedDesign === "LearningNote") {
             setFieldValue(
                 "entryContent",
-                typeof entry.content ===
-                "string"
+                typeof entry.content === "string"
                     ? entry.content
                     : ""
             );
-
         }
 
-
-        /*
-         * Existing designs still use
-         * the original content object.
-         */
-
-        const content =
-            getDesignContent(
+        // Vintage Flower 등은 객체 content 사용
+        else {
+            populateDesignFields(
+                selectedDesign,
+                content,
                 entry
             );
-
-
-        populateDesignFields(
-            selectedDesign,
-            content,
-            entry
-        );
-
-
-        selectDesign(
-            selectedDesign
-        );
-
+        }
 
         const modalTitle =
-            document.getElementById(
-                "modalTitle"
-            );
-
+            document.getElementById("modalTitle");
 
         if (modalTitle) {
-
             modalTitle.textContent =
                 "Edit Archive Entry";
-
         }
-
 
         const saveButton =
-            document.getElementById(
-                "saveButton"
-            );
-
+            document.getElementById("saveButton");
 
         if (saveButton) {
-
             saveButton.textContent =
                 "Update Entry";
-
         }
-
 
         openModal();
 
-
-        console.log(
-            "Entry loaded for editing:",
-            entryId
-        );
-
-
     } catch (error) {
-
-        console.error(
-            "Failed to edit entry:",
-            error
-        );
-
+        console.error("Failed to edit entry:", error);
 
         alert(
             "Failed to load this entry.\n\n" +
             error.message
         );
-
     }
-
 }
 
 
 /* =========================================================
-GET DESIGN CONTENT
+   FORM RESET
 ========================================================= */
 
-function getDesignContent(
-    entry
-) {
-
-    if (
-        entry &&
-        entry.content &&
-        typeof entry.content ===
-        "object"
-    ) {
-
-        return entry.content;
-
-    }
-
-
-    if (
-        entry &&
-        entry.data &&
-        typeof entry.data ===
-        "object"
-    ) {
-
-        return entry.data;
-
-    }
-
-
-    return entry || {};
-
-}
-
-
-/* =========================================================
-POPULATE DESIGN FIELDS
-========================================================= */
-
-function populateDesignFields(
-    designId,
-    content,
-    entry
-) {
-
-    const data = {
-        ...entry,
-        ...content
-    };
-
-
-    if (
-        designId ===
-        "FilmArchiveDesign"
-    ) {
-
-        populateFilmArchive(
-            data
-        );
-
-    }
-
-    else if (
-        designId ===
-        "VintageFlowerDesign"
-    ) {
-
-        populateVintageFlower(
-            data
-        );
-
-    }
-
-    else if (
-        designId ===
-        "HomeBakingDesign"
-    ) {
-
-        populateHomeBaking(
-            data
-        );
-
-    }
-
-    else if (
-        designId ===
-        "MInimalPortfolio"
-    ) {
-
-        populateMinimalPortfolio(
-            data
-        );
-
-    }
-
-    else if (
-        designId ===
-        "ModernMaturityDesign"
-    ) {
-
-        populateModernMaturity(
-            data
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-FILM ARCHIVE
-========================================================= */
-
-function populateFilmArchive(
-    data
-) {
-
-    populateFields({
-
-        filmHeroTitleTop:
-            getValue(
-                data,
-                "filmHeroTitleTop"
-            ),
-
-        filmHeroTitleBottom1:
-            getValue(
-                data,
-                "filmHeroTitleBottom1"
-            ),
-
-        filmHeroTitleBottom2:
-            getValue(
-                data,
-                "filmHeroTitleBottom2"
-            ),
-
-        filmHeroImage:
-            getValue(
-                data,
-                "filmHeroImage",
-                "heroImage"
-            ),
-
-        filmIntroText:
-            getValue(
-                data,
-                "filmIntroText",
-                "introText"
-            ),
-
-        filmMemory1Image:
-            getValue(
-                data,
-                "filmMemory1Image"
-            ),
-
-        filmMemory1Text:
-            getValue(
-                data,
-                "filmMemory1Text"
-            ),
-
-        filmMemory2Image:
-            getValue(
-                data,
-                "filmMemory2Image"
-            ),
-
-        filmMemory2Text:
-            getValue(
-                data,
-                "filmMemory2Text"
-            ),
-
-        filmMemory3Image:
-            getValue(
-                data,
-                "filmMemory3Image"
-            ),
-
-        filmMemory3Text:
-            getValue(
-                data,
-                "filmMemory3Text"
-            ),
-
-        filmMemory4Image:
-            getValue(
-                data,
-                "filmMemory4Image"
-            ),
-
-        filmMemory4Text:
-            getValue(
-                data,
-                "filmMemory4Text"
-            ),
-
-        filmVideoUrl:
-            getValue(
-                data,
-                "filmVideoUrl",
-                "videoUrl"
-            ),
-
-        filmVideoCaption:
-            getValue(
-                data,
-                "filmVideoCaption",
-                "videoCaption"
-            ),
-
-        film1Image:
-            getValue(
-                data,
-                "film1Image"
-            ),
-
-        film1Title:
-            getValue(
-                data,
-                "film1Title"
-            ),
-
-        film1Text:
-            getValue(
-                data,
-                "film1Text"
-            ),
-
-        film2Image:
-            getValue(
-                data,
-                "film2Image"
-            ),
-
-        film2Title:
-            getValue(
-                data,
-                "film2Title"
-            ),
-
-        film2Text:
-            getValue(
-                data,
-                "film2Text"
-            ),
-
-        film3Image:
-            getValue(
-                data,
-                "film3Image"
-            ),
-
-        film3Title:
-            getValue(
-                data,
-                "film3Title"
-            ),
-
-        film3Text:
-            getValue(
-                data,
-                "film3Text"
-            ),
-
-        filmTravelMonth:
-            getValue(
-                data,
-                "filmTravelMonth"
-            ),
-
-        filmTravelYear:
-            getValue(
-                data,
-                "filmTravelYear"
-            ),
-
-        filmTravelLocation:
-            getValue(
-                data,
-                "filmTravelLocation"
-            ),
-
-        filmTravelText:
-            getValue(
-                data,
-                "filmTravelText"
-            )
-
-    });
-
-}
-
-
-/* =========================================================
-VINTAGE FLOWER
-========================================================= */
-
-function populateVintageFlower(
-    data
-) {
-
-    populateFields({
-
-        vintageHeroImage:
-            getValue(
-                data,
-                "vintageHeroImage",
-                "heroImage"
-            ),
-
-        vintageHeroTitle:
-            getValue(
-                data,
-                "vintageHeroTitle",
-                "heroTitle"
-            ),
-
-        vintageHeroSubtitle:
-            getValue(
-                data,
-                "vintageHeroSubtitle",
-                "heroSubtitle"
-            ),
-
-        vintageIntroTitle:
-            getValue(
-                data,
-                "vintageIntroTitle",
-                "introTitle"
-            ),
-
-        vintageIntroText:
-            getValue(
-                data,
-                "vintageIntroText",
-                "introText"
-            ),
-
-        vintageFlower1Image:
-            getValue(
-                data,
-                "vintageFlower1Image"
-            ),
-
-        vintageFlower1Title:
-            getValue(
-                data,
-                "vintageFlower1Title"
-            ),
-
-        vintageFlower1Text:
-            getValue(
-                data,
-                "vintageFlower1Text"
-            ),
-
-        vintageFlower2Image:
-            getValue(
-                data,
-                "vintageFlower2Image"
-            ),
-
-        vintageFlower2Title:
-            getValue(
-                data,
-                "vintageFlower2Title"
-            ),
-
-        vintageFlower2Text:
-            getValue(
-                data,
-                "vintageFlower2Text"
-            ),
-
-        vintageFlower3Image:
-            getValue(
-                data,
-                "vintageFlower3Image"
-            ),
-
-        vintageFlower3Title:
-            getValue(
-                data,
-                "vintageFlower3Title"
-            ),
-
-        vintageFlower3Text:
-            getValue(
-                data,
-                "vintageFlower3Text"
-            ),
-
-        vintageJournalTitle:
-            getValue(
-                data,
-                "vintageJournalTitle"
-            ),
-
-        vintageJournalText:
-            getValue(
-                data,
-                "vintageJournalText"
-            ),
-
-        vintageGallery1Image:
-            getValue(
-                data,
-                "vintageGallery1Image"
-            ),
-
-        vintageGallery2Image:
-            getValue(
-                data,
-                "vintageGallery2Image"
-            ),
-
-        vintageGallery3Image:
-            getValue(
-                data,
-                "vintageGallery3Image"
-            ),
-
-        vintageGallery4Image:
-            getValue(
-                data,
-                "vintageGallery4Image"
-            )
-
-    });
-
-}
-
-
-/* =========================================================
-HOME BAKING
-========================================================= */
-
-function populateHomeBaking(
-    data
-) {
-
-    populateFields({
-
-        bakingHeroImage:
-            getValue(
-                data,
-                "bakingHeroImage",
-                "heroImage"
-            ),
-
-        bakingHeroTitle:
-            getValue(
-                data,
-                "bakingHeroTitle",
-                "heroTitle"
-            ),
-
-        bakingHeroDescription:
-            getValue(
-                data,
-                "bakingHeroDescription",
-                "heroDescription"
-            ),
-
-        bakingSectionTitle:
-            getValue(
-                data,
-                "bakingSectionTitle"
-            ),
-
-        bakingSectionDescription:
-            getValue(
-                data,
-                "bakingSectionDescription"
-            ),
-
-        bakingPolaroid01Image:
-            getValue(
-                data,
-                "bakingPolaroid01Image"
-            ),
-
-        bakingPolaroid01Title:
-            getValue(
-                data,
-                "bakingPolaroid01Title"
-            ),
-
-        bakingPolaroid01Description:
-            getValue(
-                data,
-                "bakingPolaroid01Description"
-            ),
-
-        bakingPolaroid02Image:
-            getValue(
-                data,
-                "bakingPolaroid02Image"
-            ),
-
-        bakingPolaroid02Title:
-            getValue(
-                data,
-                "bakingPolaroid02Title"
-            ),
-
-        bakingPolaroid02Description:
-            getValue(
-                data,
-                "bakingPolaroid02Description"
-            ),
-
-        bakingPolaroid03Image:
-            getValue(
-                data,
-                "bakingPolaroid03Image"
-            ),
-
-        bakingPolaroid03Title:
-            getValue(
-                data,
-                "bakingPolaroid03Title"
-            ),
-
-        bakingPolaroid03Description:
-            getValue(
-                data,
-                "bakingPolaroid03Description"
-            ),
-
-        bakingGallery01Image:
-            getValue(
-                data,
-                "bakingGallery01Image"
-            ),
-
-        bakingGallery02Image:
-            getValue(
-                data,
-                "bakingGallery02Image"
-            ),
-
-        bakingGallery03Image:
-            getValue(
-                data,
-                "bakingGallery03Image"
-            ),
-
-        bakingAboutImage:
-            getValue(
-                data,
-                "bakingAboutImage"
-            ),
-
-        bakingAboutEyebrow:
-            getValue(
-                data,
-                "bakingAboutEyebrow"
-            ),
-
-        bakingAboutTitle:
-            getValue(
-                data,
-                "bakingAboutTitle"
-            ),
-
-        bakingAboutDescription:
-            getValue(
-                data,
-                "bakingAboutDescription"
-            ),
-
-        bakingFooterNote:
-            getValue(
-                data,
-                "bakingFooterNote"
-            ),
-
-        bakingFooterTitle:
-            getValue(
-                data,
-                "bakingFooterTitle"
-            ),
-
-        bakingFooterCopyright:
-            getValue(
-                data,
-                "bakingFooterCopyright"
-            )
-
-    });
-
-}
-
-
-/* =========================================================
-MINIMAL PORTFOLIO
-Firebase ID = MInimalPortfolio
-========================================================= */
-
-function populateMinimalPortfolio(
-    data
-) {
-
-    populateFields({
-
-        minimalHeroImage:
-            getValue(
-                data,
-                "minimalHeroImage",
-                "heroImage"
-            ),
-
-        minimalHeroEyebrow:
-            getValue(
-                data,
-                "minimalHeroEyebrow",
-                "heroEyebrow"
-            ),
-
-        minimalHeroTitle:
-            getValue(
-                data,
-                "minimalHeroTitle",
-                "heroTitle"
-            ),
-
-        minimalHeroDescription:
-            getValue(
-                data,
-                "minimalHeroDescription",
-                "heroDescription"
-            ),
-
-        minimalPlace01Image:
-            getValue(
-                data,
-                "minimalPlace01Image"
-            ),
-
-        minimalPlace01Label:
-            getValue(
-                data,
-                "minimalPlace01Label"
-            ),
-
-        minimalPlace01Title:
-            getValue(
-                data,
-                "minimalPlace01Title"
-            ),
-
-        minimalPlace01Description:
-            getValue(
-                data,
-                "minimalPlace01Description"
-            ),
-
-        minimalStatementEyebrow:
-            getValue(
-                data,
-                "minimalStatementEyebrow"
-            ),
-
-        minimalStatementTitle:
-            getValue(
-                data,
-                "minimalStatementTitle"
-            ),
-
-        minimalStatementDescription:
-            getValue(
-                data,
-                "minimalStatementDescription"
-            ),
-
-        minimalPlace02Image:
-            getValue(
-                data,
-                "minimalPlace02Image"
-            ),
-
-        minimalPlace02Label:
-            getValue(
-                data,
-                "minimalPlace02Label"
-            ),
-
-        minimalPlace02Title:
-            getValue(
-                data,
-                "minimalPlace02Title"
-            ),
-
-        minimalPlace02Description:
-            getValue(
-                data,
-                "minimalPlace02Description"
-            ),
-
-        minimalGalleryEyebrow:
-            getValue(
-                data,
-                "minimalGalleryEyebrow"
-            ),
-
-        minimalGalleryTitle:
-            getValue(
-                data,
-                "minimalGalleryTitle"
-            ),
-
-        minimalGalleryDescription:
-            getValue(
-                data,
-                "minimalGalleryDescription"
-            ),
-
-        minimalGallery01Image:
-            getValue(
-                data,
-                "minimalGallery01Image"
-            ),
-
-        minimalGallery02Image:
-            getValue(
-                data,
-                "minimalGallery02Image"
-            ),
-
-        minimalGallery03Image:
-            getValue(
-                data,
-                "minimalGallery03Image"
-            ),
-
-        minimalGallery04Image:
-            getValue(
-                data,
-                "minimalGallery04Image"
-            ),
-
-        minimalGallery05Image:
-            getValue(
-                data,
-                "minimalGallery05Image"
-            ),
-
-        minimalGallery06Image:
-            getValue(
-                data,
-                "minimalGallery06Image"
-            ),
-
-        minimalMovingEyebrow:
-            getValue(
-                data,
-                "minimalMovingEyebrow"
-            ),
-
-        minimalMovingTitle:
-            getValue(
-                data,
-                "minimalMovingTitle"
-            ),
-
-        minimalMovingDescription:
-            getValue(
-                data,
-                "minimalMovingDescription"
-            ),
-
-        minimalMovingVideo:
-            getValue(
-                data,
-                "minimalMovingVideo"
-            ),
-
-        minimalMovingCaption:
-            getValue(
-                data,
-                "minimalMovingCaption"
-            ),
-
-        minimalFinalEyebrow:
-            getValue(
-                data,
-                "minimalFinalEyebrow"
-            ),
-
-        minimalFinalTitle:
-            getValue(
-                data,
-                "minimalFinalTitle"
-            ),
-
-        minimalFinalDescription:
-            getValue(
-                data,
-                "minimalFinalDescription"
-            ),
-
-        minimalEndingImage:
-            getValue(
-                data,
-                "minimalEndingImage"
-            ),
-
-        minimalEndingEyebrow:
-            getValue(
-                data,
-                "minimalEndingEyebrow"
-            ),
-
-        minimalEndingDescription:
-            getValue(
-                data,
-                "minimalEndingDescription"
-            )
-
-    });
-
-}
-
-
-/* =========================================================
-MODERN MATURITY
-========================================================= */
-
-function populateModernMaturity(
-    data
-) {
-
-    populateFields({
-
-        modernHeroEyebrow:
-            getValue(
-                data,
-                "modernHeroEyebrow"
-            ),
-
-        modernHeroTitle:
-            getValue(
-                data,
-                "modernHeroTitle"
-            ),
-
-        modernHeroImage:
-            getValue(
-                data,
-                "modernHeroImage",
-                "heroImage"
-            ),
-
-        modernHeroQuote:
-            getValue(
-                data,
-                "modernHeroQuote"
-            ),
-
-        modernHeroDescription:
-            getValue(
-                data,
-                "modernHeroDescription"
-            ),
-
-        modernSection01Image:
-            getValue(
-                data,
-                "modernSection01Image"
-            ),
-
-        modernSection01SubImage:
-            getValue(
-                data,
-                "modernSection01SubImage"
-            ),
-
-        modernSection01Title:
-            getValue(
-                data,
-                "modernSection01Title"
-            ),
-
-        modernSection01Description:
-            getValue(
-                data,
-                "modernSection01Description"
-            ),
-
-        modernSection02Image01:
-            getValue(
-                data,
-                "modernSection02Image01"
-            ),
-
-        modernSection02Image02:
-            getValue(
-                data,
-                "modernSection02Image02"
-            ),
-
-        modernSection02Title:
-            getValue(
-                data,
-                "modernSection02Title"
-            ),
-
-        modernSection02Description:
-            getValue(
-                data,
-                "modernSection02Description"
-            ),
-
-        modernSection03Image:
-            getValue(
-                data,
-                "modernSection03Image"
-            ),
-
-        modernSection03Title:
-            getValue(
-                data,
-                "modernSection03Title"
-            ),
-
-        modernSection03Description:
-            getValue(
-                data,
-                "modernSection03Description"
-            ),
-
-        modernSection04Image:
-            getValue(
-                data,
-                "modernSection04Image"
-            ),
-
-        modernSection04SubImage:
-            getValue(
-                data,
-                "modernSection04SubImage"
-            ),
-
-        modernSection04Title:
-            getValue(
-                data,
-                "modernSection04Title"
-            ),
-
-        modernSection04Description:
-            getValue(
-                data,
-                "modernSection04Description"
-            )
-
-    });
-
-}
-
-
-/* =========================================================
-GENERIC POPULATE
-========================================================= */
-
-function populateFields(
-    fields
-) {
-
-    Object.entries(
-        fields
-    ).forEach(
-        (
-            [
-                fieldId,
-                value
-            ]
-        ) => {
-
-            setFieldValue(
-                fieldId,
-                value
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-GET VALUE
-========================================================= */
-
-function getValue(
-    data,
-    ...keys
-) {
-
-    for (
-        const key of keys
-    ) {
-
-        if (
-            data &&
-            data[key] !== undefined &&
-            data[key] !== null
-        ) {
-
-            return data[key];
-
-        }
-
-    }
-
-
-    return "";
-
-}
-
-
-/* =========================================================
-SET FIELD VALUE
-========================================================= */
-
-function setFieldValue(
-    fieldId,
-    value
-) {
-
-    const field =
-        document.getElementById(
-            fieldId
-        );
-
-
-    if (!field) {
-        return;
-    }
-
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        field.value =
-            "";
-
-        return;
-    }
-
-
-    if (
-        value &&
-        typeof value.toDate ===
-        "function"
-    ) {
-
-        field.value =
-            normalizeDateForInput(
-                value
-            );
-
-        return;
-    }
-
-
-    field.value =
-        String(
-            value
-        );
-
-}
-
-
-/* =========================================================
-CLEAR FORM
-========================================================= */
-
-function clearForm() {
-
-    const formIds = [
-
-        "editingEntryId",
-
-        "entryTitle",
-
-        "entrySubcategory",
-
-        "entryDescription",
-
-        "entryContent",
-
-        "entryDate",
-
-        "entryImage",
-
-
-        "filmHeroTitleTop",
-
-        "filmHeroTitleBottom1",
-
-        "filmHeroTitleBottom2",
-
-        "filmHeroImage",
-
-        "filmIntroText",
-
-
-        "filmMemory1Image",
-
-        "filmMemory1Text",
-
-        "filmMemory2Image",
-
-        "filmMemory2Text",
-
-        "filmMemory3Image",
-
-        "filmMemory3Text",
-
-        "filmMemory4Image",
-
-        "filmMemory4Text",
-
-
-        "filmVideoUrl",
-
-        "filmVideoCaption",
-
-
-        "film1Image",
-
-        "film1Title",
-
-        "film1Text",
-
-        "film2Image",
-
-        "film2Title",
-
-        "film2Text",
-
-        "film3Image",
-
-        "film3Title",
-
-        "film3Text",
-
-
-        "filmTravelMonth",
-
-        "filmTravelYear",
-
-        "filmTravelLocation",
-
-        "filmTravelText",
-
-
-        "vintageHeroImage",
-
-        "vintageHeroTitle",
-
-        "vintageHeroSubtitle",
-
-        "vintageIntroTitle",
-
-        "vintageIntroText",
-
-
-        "vintageFlower1Image",
-
-        "vintageFlower1Title",
-
-        "vintageFlower1Text",
-
-        "vintageFlower2Image",
-
-        "vintageFlower2Title",
-
-        "vintageFlower2Text",
-
-        "vintageFlower3Image",
-
-        "vintageFlower3Title",
-
-        "vintageFlower3Text",
-
-
-        "vintageJournalTitle",
-
-        "vintageJournalText",
-
-
-        "vintageGallery1Image",
-
-        "vintageGallery2Image",
-
-        "vintageGallery3Image",
-
-        "vintageGallery4Image",
-
-
-        "bakingHeroImage",
-
-        "bakingHeroTitle",
-
-        "bakingHeroDescription",
-
-        "bakingSectionTitle",
-
-        "bakingSectionDescription",
-
-
-        "bakingPolaroid01Image",
-
-        "bakingPolaroid01Title",
-
-        "bakingPolaroid01Description",
-
-        "bakingPolaroid02Image",
-
-        "bakingPolaroid02Title",
-
-        "bakingPolaroid02Description",
-
-        "bakingPolaroid03Image",
-
-        "bakingPolaroid03Title",
-
-        "bakingPolaroid03Description",
-
-
-        "bakingGallery01Image",
-
-        "bakingGallery02Image",
-
-        "bakingGallery03Image",
-
-
-        "bakingAboutImage",
-
-        "bakingAboutEyebrow",
-
-        "bakingAboutTitle",
-
-        "bakingAboutDescription",
-
-
-        "bakingFooterNote",
-
-        "bakingFooterTitle",
-
-        "bakingFooterCopyright",
-
-
-        "minimalHeroImage",
-
-        "minimalHeroEyebrow",
-
-        "minimalHeroTitle",
-
-        "minimalHeroDescription",
-
-
-        "minimalPlace01Image",
-
-        "minimalPlace01Label",
-
-        "minimalPlace01Title",
-
-        "minimalPlace01Description",
-
-
-        "minimalStatementEyebrow",
-
-        "minimalStatementTitle",
-
-        "minimalStatementDescription",
-
-
-        "minimalPlace02Image",
-
-        "minimalPlace02Label",
-
-        "minimalPlace02Title",
-
-        "minimalPlace02Description",
-
-
-        "minimalGalleryEyebrow",
-
-        "minimalGalleryTitle",
-
-        "minimalGalleryDescription",
-
-
-        "minimalGallery01Image",
-
-        "minimalGallery02Image",
-
-        "minimalGallery03Image",
-
-        "minimalGallery04Image",
-
-        "minimalGallery05Image",
-
-        "minimalGallery06Image",
-
-
-        "minimalMovingEyebrow",
-
-        "minimalMovingTitle",
-
-        "minimalMovingDescription",
-
-        "minimalMovingVideo",
-
-        "minimalMovingCaption",
-
-
-        "minimalFinalEyebrow",
-
-        "minimalFinalTitle",
-
-        "minimalFinalDescription",
-
-
-        "minimalEndingImage",
-
-        "minimalEndingEyebrow",
-
-        "minimalEndingDescription",
-
-
-        "modernHeroEyebrow",
-
-        "modernHeroTitle",
-
-        "modernHeroImage",
-
-        "modernHeroQuote",
-
-        "modernHeroDescription",
-
-
-        "modernSection01Image",
-
-        "modernSection01SubImage",
-
-        "modernSection01Title",
-
-        "modernSection01Description",
-
-
-        "modernSection02Image01",
-
-        "modernSection02Image02",
-
-        "modernSection02Title",
-
-        "modernSection02Description",
-
-
-        "modernSection03Image",
-
-        "modernSection03Title",
-
-        "modernSection03Description",
-
-
-        "modernSection04Image",
-
-        "modernSection04SubImage",
-
-        "modernSection04Title",
-
-        "modernSection04Description"
-
-    ];
-
-
-    formIds.forEach(
-        id => {
-
-            setFieldValue(
-                id,
-                ""
-            );
-
-        }
-    );
-
+function clearFormForNewEntry() {
+    clearAllInputValues();
 
     setFieldValue(
         "entryCategory",
         "Research"
     );
 
+    setFieldValue(
+        "entryStatus",
+        "Published"
+    );
 
     setFieldValue(
         "entryDesign",
         "LearningNote"
     );
 
+    selectedDesign = "LearningNote";
 
-    setFieldValue(
-        "entryStatus",
-        "Published"
-    );
+    hideAllDesignFields();
+    updateLearningNoteVisibility();
+}
 
-
-    selectedDesign =
-        "LearningNote";
-
+function resetFormForEdit() {
+    clearAllInputValues();
 
     hideAllDesignFields();
 
+    const contentWrapper =
+        document.getElementById(
+            "entryContentWrapper"
+        );
+
+    if (contentWrapper) {
+        contentWrapper.style.display = "none";
+    }
+}
+
+function clearAllInputValues() {
+    const modal =
+        document.getElementById("entryModal");
+
+    if (!modal) {
+        return;
+    }
+
+    modal
+        .querySelectorAll(
+            "input, textarea, select"
+        )
+        .forEach(field => {
+            if (field.type === "hidden") {
+                field.value = "";
+                return;
+            }
+
+            if (field.tagName === "SELECT") {
+                return;
+            }
+
+            field.value = "";
+        });
 }
 
 
 /* =========================================================
-SAVE ENTRY
+   DESIGN CONTENT
 ========================================================= */
 
-async function saveEntry() {
+function getDesignContent(entry) {
+    if (
+        entry &&
+        entry.content &&
+        typeof entry.content === "object" &&
+        !Array.isArray(entry.content)
+    ) {
+        return entry.content;
+    }
 
-    if (!db) {
+    if (
+        entry &&
+        entry.data &&
+        typeof entry.data === "object" &&
+        !Array.isArray(entry.data)
+    ) {
+        return entry.data;
+    }
 
-        alert(
-            "Firebase is not ready yet."
+    return {};
+}
+
+function populateDesignFields(
+    designId,
+    content,
+    entry
+) {
+    const data = {
+        ...entry,
+        ...content
+    };
+
+    const fieldMap = {
+        FilmArchiveDesign: [
+            "filmHeroTitleTop",
+            "filmHeroTitleBottom1",
+            "filmHeroTitleBottom2",
+            "filmHeroImage",
+            "filmIntroText",
+            "filmMemory1Image",
+            "filmMemory1Text",
+            "filmMemory2Image",
+            "filmMemory2Text",
+            "filmMemory3Image",
+            "filmMemory3Text",
+            "filmMemory4Image",
+            "filmMemory4Text",
+            "filmVideoUrl",
+            "filmVideoCaption",
+            "film1Image",
+            "film1Title",
+            "film1Text",
+            "film2Image",
+            "film2Title",
+            "film2Text",
+            "film3Image",
+            "film3Title",
+            "film3Text",
+            "filmTravelMonth",
+            "filmTravelYear",
+            "filmTravelLocation",
+            "filmTravelText"
+        ],
+
+        VintageFlowerDesign: [
+            "vintageHeroImage",
+            "vintageHeroTitle",
+            "vintageHeroSubtitle",
+            "vintageIntroTitle",
+            "vintageIntroText",
+            "vintageFlower1Image",
+            "vintageFlower1Title",
+            "vintageFlower1Text",
+            "vintageFlower2Image",
+            "vintageFlower2Title",
+            "vintageFlower2Text",
+            "vintageFlower3Image",
+            "vintageFlower3Title",
+            "vintageFlower3Text",
+            "vintageJournalTitle",
+            "vintageJournalText",
+            "vintageGallery1Image",
+            "vintageGallery2Image",
+            "vintageGallery3Image",
+            "vintageGallery4Image"
+        ],
+
+        HomeBakingDesign: [
+            "bakingHeroImage",
+            "bakingHeroTitle",
+            "bakingHeroDescription",
+            "bakingSectionTitle",
+            "bakingSectionDescription",
+            "bakingPolaroid01Image",
+            "bakingPolaroid01Title",
+            "bakingPolaroid01Description",
+            "bakingPolaroid02Image",
+            "bakingPolaroid02Title",
+            "bakingPolaroid02Description",
+            "bakingPolaroid03Image",
+            "bakingPolaroid03Title",
+            "bakingPolaroid03Description",
+            "bakingGallery01Image",
+            "bakingGallery02Image",
+            "bakingGallery03Image",
+            "bakingAboutImage",
+            "bakingAboutEyebrow",
+            "bakingAboutTitle",
+            "bakingAboutDescription",
+            "bakingFooterNote",
+            "bakingFooterTitle",
+            "bakingFooterCopyright"
+        ],
+
+        MInimalPortfolio: [
+            "minimalHeroImage",
+            "minimalHeroEyebrow",
+            "minimalHeroTitle",
+            "minimalHeroDescription",
+            "minimalPlace01Image",
+            "minimalPlace01Label",
+            "minimalPlace01Title",
+            "minimalPlace01Description",
+            "minimalStatementEyebrow",
+            "minimalStatementTitle",
+            "minimalStatementDescription",
+            "minimalPlace02Image",
+            "minimalPlace02Label",
+            "minimalPlace02Title",
+            "minimalPlace02Description",
+            "minimalGalleryEyebrow",
+            "minimalGalleryTitle",
+            "minimalGalleryDescription",
+            "minimalGallery01Image",
+            "minimalGallery02Image",
+            "minimalGallery03Image",
+            "minimalGallery04Image",
+            "minimalGallery05Image",
+            "minimalGallery06Image",
+            "minimalMovingEyebrow",
+            "minimalMovingTitle",
+            "minimalMovingDescription",
+            "minimalMovingVideo",
+            "minimalMovingCaption",
+            "minimalFinalEyebrow",
+            "minimalFinalTitle",
+            "minimalFinalDescription",
+            "minimalEndingImage",
+            "minimalEndingEyebrow",
+            "minimalEndingDescription"
+        ],
+
+        ModernMaturityDesign: [
+            "modernHeroEyebrow",
+            "modernHeroTitle",
+            "modernHeroImage",
+            "modernHeroQuote",
+            "modernHeroDescription",
+            "modernSection01Image",
+            "modernSection01SubImage",
+            "modernSection01Title",
+            "modernSection01Description",
+            "modernSection02Image01",
+            "modernSection02Image02",
+            "modernSection02Title",
+            "modernSection02Description",
+            "modernSection03Image",
+            "modernSection03Title",
+            "modernSection03Description",
+            "modernSection04Image",
+            "modernSection04SubImage",
+            "modernSection04Title",
+            "modernSection04Description"
+        ]
+    };
+
+    const fields = fieldMap[designId] || [];
+
+    fields.forEach(fieldId => {
+        setFieldValue(
+            fieldId,
+            data[fieldId] ?? ""
         );
+    });
+}
 
+function collectDesignFields(designId) {
+    const fieldMap = {
+        FilmArchiveDesign: [
+            "filmHeroTitleTop",
+            "filmHeroTitleBottom1",
+            "filmHeroTitleBottom2",
+            "filmHeroImage",
+            "filmIntroText",
+            "filmMemory1Image",
+            "filmMemory1Text",
+            "filmMemory2Image",
+            "filmMemory2Text",
+            "filmMemory3Image",
+            "filmMemory3Text",
+            "filmMemory4Image",
+            "filmMemory4Text",
+            "filmVideoUrl",
+            "filmVideoCaption",
+            "film1Image",
+            "film1Title",
+            "film1Text",
+            "film2Image",
+            "film2Title",
+            "film2Text",
+            "film3Image",
+            "film3Title",
+            "film3Text",
+            "filmTravelMonth",
+            "filmTravelYear",
+            "filmTravelLocation",
+            "filmTravelText"
+        ],
+
+        VintageFlowerDesign: [
+            "vintageHeroImage",
+            "vintageHeroTitle",
+            "vintageHeroSubtitle",
+            "vintageIntroTitle",
+            "vintageIntroText",
+            "vintageFlower1Image",
+            "vintageFlower1Title",
+            "vintageFlower1Text",
+            "vintageFlower2Image",
+            "vintageFlower2Title",
+            "vintageFlower2Text",
+            "vintageFlower3Image",
+            "vintageFlower3Title",
+            "vintageFlower3Text",
+            "vintageJournalTitle",
+            "vintageJournalText",
+            "vintageGallery1Image",
+            "vintageGallery2Image",
+            "vintageGallery3Image",
+            "vintageGallery4Image"
+        ],
+
+        HomeBakingDesign: [
+            "bakingHeroImage",
+            "bakingHeroTitle",
+            "bakingHeroDescription",
+            "bakingSectionTitle",
+            "bakingSectionDescription",
+            "bakingPolaroid01Image",
+            "bakingPolaroid01Title",
+            "bakingPolaroid01Description",
+            "bakingPolaroid02Image",
+            "bakingPolaroid02Title",
+            "bakingPolaroid02Description",
+            "bakingPolaroid03Image",
+            "bakingPolaroid03Title",
+            "bakingPolaroid03Description",
+            "bakingGallery01Image",
+            "bakingGallery02Image",
+            "bakingGallery03Image",
+            "bakingAboutImage",
+            "bakingAboutEyebrow",
+            "bakingAboutTitle",
+            "bakingAboutDescription",
+            "bakingFooterNote",
+            "bakingFooterTitle",
+            "bakingFooterCopyright"
+        ],
+
+        MInimalPortfolio: [
+            "minimalHeroImage",
+            "minimalHeroEyebrow",
+            "minimalHeroTitle",
+            "minimalHeroDescription",
+            "minimalPlace01Image",
+            "minimalPlace01Label",
+            "minimalPlace01Title",
+            "minimalPlace01Description",
+            "minimalStatementEyebrow",
+            "minimalStatementTitle",
+            "minimalStatementDescription",
+            "minimalPlace02Image",
+            "minimalPlace02Label",
+            "minimalPlace02Title",
+            "minimalPlace02Description",
+            "minimalGalleryEyebrow",
+            "minimalGalleryTitle",
+            "minimalGalleryDescription",
+            "minimalGallery01Image",
+            "minimalGallery02Image",
+            "minimalGallery03Image",
+            "minimalGallery04Image",
+            "minimalGallery05Image",
+            "minimalGallery06Image",
+            "minimalMovingEyebrow",
+            "minimalMovingTitle",
+            "minimalMovingDescription",
+            "minimalMovingVideo",
+            "minimalMovingCaption",
+            "minimalFinalEyebrow",
+            "minimalFinalTitle",
+            "minimalFinalDescription",
+            "minimalEndingImage",
+            "minimalEndingEyebrow",
+            "minimalEndingDescription"
+        ],
+
+        ModernMaturityDesign: [
+            "modernHeroEyebrow",
+            "modernHeroTitle",
+            "modernHeroImage",
+            "modernHeroQuote",
+            "modernHeroDescription",
+            "modernSection01Image",
+            "modernSection01SubImage",
+            "modernSection01Title",
+            "modernSection01Description",
+            "modernSection02Image01",
+            "modernSection02Image02",
+            "modernSection02Title",
+            "modernSection02Description",
+            "modernSection03Image",
+            "modernSection03Title",
+            "modernSection03Description",
+            "modernSection04Image",
+            "modernSection04SubImage",
+            "modernSection04Title",
+            "modernSection04Description"
+        ]
+    };
+
+    const fieldIds = fieldMap[designId] || {};
+    const content = {};
+
+    fieldIds.forEach(fieldId => {
+        content[fieldId] =
+            getFieldValue(fieldId);
+    });
+
+    return content;
+}
+
+
+/* =========================================================
+   SAVE / UPDATE
+========================================================= */
+
+function setupSaveButton() {
+    const saveButton =
+        document.getElementById("saveButton");
+
+    if (!saveButton) {
         return;
     }
 
+    saveButton.addEventListener("click", async event => {
+        event.preventDefault();
 
+        if (saveButton.dataset.saving === "true") {
+            return;
+        }
+
+        saveButton.dataset.saving = "true";
+
+        try {
+            await saveEntry();
+        } finally {
+            saveButton.dataset.saving = "false";
+        }
+    });
+}
+
+async function saveEntry() {
     const saveButton =
-        document.getElementById(
-            "saveButton"
-        );
-
+        document.getElementById("saveButton");
 
     const editingId =
-        getFieldValue(
-            "editingEntryId"
-        ).trim();
+        getFieldValue("editingEntryId").trim();
 
-
-    const wasEditing =
-        Boolean(
-            editingId
-        );
-
+    const wasEditing = Boolean(editingId);
 
     if (saveButton) {
-
-        saveButton.disabled =
-            true;
-
-        saveButton.textContent =
-            "Saving...";
-
+        saveButton.disabled = true;
+        saveButton.textContent = "Saving...";
     }
 
-
     try {
-
         const title =
-            getFieldValue(
-                "entryTitle"
-            ).trim();
-
+            getFieldValue("entryTitle").trim();
 
         if (!title) {
-
-            alert(
-                "Please enter a title."
-            );
-
+            alert("Please enter a title.");
             return;
-
         }
-
-
-        const category =
-            getFieldValue(
-                "entryCategory"
-            );
-
-
-        const subcategory =
-            getFieldValue(
-                "entrySubcategory"
-            ).trim();
-
 
         const design =
-            getFieldValue(
-                "entryDesign"
-            ) ||
+            getFieldValue("entryDesign") ||
             selectedDesign;
 
-
-        const description =
-            getFieldValue(
-                "entryDescription"
-            );
-
-
-        const date =
-            getFieldValue(
-                "entryDate"
-            );
-
-
-        const status =
-            getFieldValue(
-                "entryStatus"
-            );
-
-
-        const image =
-            getFieldValue(
-                "entryImage"
-            );
-
-
-        /*
-         * =====================================================
-         * LEARNING NOTE
-         *
-         * Content is stored directly as a STRING.
-         * =====================================================
-         */
-
-        let content;
-
-
-        if (
-            design ===
-            "LearningNote"
-        ) {
-
-            content =
-                getFieldValue(
-                    "entryContent"
-                );
-
-        }
-
-
-        /*
-         * =====================================================
-         * EXISTING DESIGNS
-         *
-         * Their original content-object
-         * structure remains unchanged.
-         * =====================================================
-         */
-
-        else {
-
-            content =
-                collectDesignFields(
-                    design
-                );
-
-        }
-
+        const content =
+            design === "LearningNote"
+                ? getFieldValue("entryContent")
+                : collectDesignFields(design);
 
         const entryData = {
-
             title,
-
-            category,
-
-            subcategory,
-
+            category:
+                getFieldValue("entryCategory"),
+            subcategory:
+                getFieldValue(
+                    "entrySubcategory"
+                ).trim(),
             design,
-
-            description,
-
-            date,
-
-            status,
-
-            image,
-
+            description:
+                getFieldValue(
+                    "entryDescription"
+                ),
+            date:
+                getFieldValue("entryDate"),
+            status:
+                getFieldValue("entryStatus"),
+            image:
+                getFieldValue("entryImage"),
             content,
-
-            updatedAt:
-                serverTimestamp()
-
+            updatedAt: serverTimestamp()
         };
 
-
-        /*
-         * UPDATE
-         */
-
-        if (editingId) {
-
-            const entryRef =
-                doc(
-                    db,
-                    "news",
-                    editingId
-                );
-
-
+        if (wasEditing) {
             await updateDoc(
-                entryRef,
+                doc(db, "news", editingId),
                 entryData
             );
 
+            alert("Entry updated successfully.");
+        } else {
+            entryData.createdAt = serverTimestamp();
 
-            alert(
-                "Entry updated successfully."
+            await addDoc(
+                collection(db, "news"),
+                entryData
             );
-
-        }
-
-
-        /*
-         * CREATE
-         */
-
-        else {
-
-            entryData.createdAt =
-                serverTimestamp();
-
-
-            const newsRef =
-                collection(
-                    db,
-                    "news"
-                );
-
-
-            const newDocument =
-                await addDoc(
-                    newsRef,
-                    entryData
-                );
-
-
-            console.log(
-                "New entry created:",
-                newDocument.id
-            );
-
 
             alert(
                 "New entry created successfully."
             );
-
         }
 
-
         closeModal();
-
-
         await loadNewsEntries();
 
-
     } catch (error) {
-
-        console.error(
-            "Save error:",
-            error
-        );
-
+        console.error("Save error:", error);
 
         alert(
             "Failed to save entry.\n\n" +
             error.message
         );
 
-    }
-
-
-    finally {
-
+    } finally {
         if (saveButton) {
-
-            saveButton.disabled =
-                false;
-
+            saveButton.disabled = false;
 
             saveButton.textContent =
                 wasEditing
                     ? "Update Entry"
                     : "Save Entry";
-
         }
+    }
+}
 
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function setupModalEvents() {
+    const modal =
+        document.getElementById("entryModal");
+
+    if (!modal) {
+        return;
     }
 
-}
-
-
-/* =========================================================
-COLLECT DESIGN FIELDS
-========================================================= */
-
-function collectDesignFields(
-    designId
-) {
-
-    const fieldMap = {
-
-        FilmArchiveDesign: [
-
-            "filmHeroTitleTop",
-
-            "filmHeroTitleBottom1",
-
-            "filmHeroTitleBottom2",
-
-            "filmHeroImage",
-
-            "filmIntroText",
-
-
-            "filmMemory1Image",
-
-            "filmMemory1Text",
-
-            "filmMemory2Image",
-
-            "filmMemory2Text",
-
-            "filmMemory3Image",
-
-            "filmMemory3Text",
-
-            "filmMemory4Image",
-
-            "filmMemory4Text",
-
-
-            "filmVideoUrl",
-
-            "filmVideoCaption",
-
-
-            "film1Image",
-
-            "film1Title",
-
-            "film1Text",
-
-            "film2Image",
-
-            "film2Title",
-
-            "film2Text",
-
-            "film3Image",
-
-            "film3Title",
-
-            "film3Text",
-
-
-            "filmTravelMonth",
-
-            "filmTravelYear",
-
-            "filmTravelLocation",
-
-            "filmTravelText"
-
-        ],
-
-
-        VintageFlowerDesign: [
-
-            "vintageHeroImage",
-
-            "vintageHeroTitle",
-
-            "vintageHeroSubtitle",
-
-
-            "vintageIntroTitle",
-
-            "vintageIntroText",
-
-
-            "vintageFlower1Image",
-
-            "vintageFlower1Title",
-
-            "vintageFlower1Text",
-
-
-            "vintageFlower2Image",
-
-            "vintageFlower2Title",
-
-            "vintageFlower2Text",
-
-
-            "vintageFlower3Image",
-
-            "vintageFlower3Title",
-
-            "vintageFlower3Text",
-
-
-            "vintageJournalTitle",
-
-            "vintageJournalText",
-
-
-            "vintageGallery1Image",
-
-            "vintageGallery2Image",
-
-            "vintageGallery3Image",
-
-            "vintageGallery4Image"
-
-        ],
-
-
-        HomeBakingDesign: [
-
-            "bakingHeroImage",
-
-            "bakingHeroTitle",
-
-            "bakingHeroDescription",
-
-
-            "bakingSectionTitle",
-
-            "bakingSectionDescription",
-
-
-            "bakingPolaroid01Image",
-
-            "bakingPolaroid01Title",
-
-            "bakingPolaroid01Description",
-
-
-            "bakingPolaroid02Image",
-
-            "bakingPolaroid02Title",
-
-            "bakingPolaroid02Description",
-
-
-            "bakingPolaroid03Image",
-
-            "bakingPolaroid03Title",
-
-            "bakingPolaroid03Description",
-
-
-            "bakingGallery01Image",
-
-            "bakingGallery02Image",
-
-            "bakingGallery03Image",
-
-
-            "bakingAboutImage",
-
-            "bakingAboutEyebrow",
-
-            "bakingAboutTitle",
-
-            "bakingAboutDescription",
-
-
-            "bakingFooterNote",
-
-            "bakingFooterTitle",
-
-            "bakingFooterCopyright"
-
-        ],
-
-
-        MInimalPortfolio: [
-
-            "minimalHeroImage",
-
-            "minimalHeroEyebrow",
-
-            "minimalHeroTitle",
-
-            "minimalHeroDescription",
-
-
-            "minimalPlace01Image",
-
-            "minimalPlace01Label",
-
-            "minimalPlace01Title",
-
-            "minimalPlace01Description",
-
-
-            "minimalStatementEyebrow",
-
-            "minimalStatementTitle",
-
-            "minimalStatementDescription",
-
-
-            "minimalPlace02Image",
-
-            "minimalPlace02Label",
-
-            "minimalPlace02Title",
-
-            "minimalPlace02Description",
-
-
-            "minimalGalleryEyebrow",
-
-            "minimalGalleryTitle",
-
-            "minimalGalleryDescription",
-
-
-            "minimalGallery01Image",
-
-            "minimalGallery02Image",
-
-            "minimalGallery03Image",
-
-            "minimalGallery04Image",
-
-            "minimalGallery05Image",
-
-            "minimalGallery06Image",
-
-
-            "minimalMovingEyebrow",
-
-            "minimalMovingTitle",
-
-            "minimalMovingDescription",
-
-            "minimalMovingVideo",
-
-            "minimalMovingCaption",
-
-
-            "minimalFinalEyebrow",
-
-            "minimalFinalTitle",
-
-            "minimalFinalDescription",
-
-
-            "minimalEndingImage",
-
-            "minimalEndingEyebrow",
-
-            "minimalEndingDescription"
-
-        ],
-
-
-        ModernMaturityDesign: [
-
-            "modernHeroEyebrow",
-
-            "modernHeroTitle",
-
-            "modernHeroImage",
-
-            "modernHeroQuote",
-
-            "modernHeroDescription",
-
-
-            "modernSection01Image",
-
-            "modernSection01SubImage",
-
-            "modernSection01Title",
-
-            "modernSection01Description",
-
-
-            "modernSection02Image01",
-
-            "modernSection02Image02",
-
-            "modernSection02Title",
-
-            "modernSection02Description",
-
-
-            "modernSection03Image",
-
-            "modernSection03Title",
-
-            "modernSection03Description",
-
-
-            "modernSection04Image",
-
-            "modernSection04SubImage",
-
-            "modernSection04Title",
-
-            "modernSection04Description"
-
-        ]
-
-    };
-
-
-    const fieldIds =
-        fieldMap[
-            designId
-        ] || [];
-
-
-    const content = {};
-
-
-    fieldIds.forEach(
-        fieldId => {
-
-            content[
-                fieldId
-            ] =
-                getFieldValue(
-                    fieldId
-                );
-
+    modal.addEventListener("click", event => {
+        if (event.target === modal) {
+            closeModal();
         }
-    );
+    });
 
-
-    return content;
-
+    document.addEventListener("keydown", event => {
+        if (
+            event.key === "Escape" &&
+            modal.classList.contains("active")
+        ) {
+            closeModal();
+        }
+    });
 }
 
+function openModal() {
+    const modal =
+        document.getElementById("entryModal");
 
-/* =========================================================
-GET FIELD VALUE
-========================================================= */
-
-function getFieldValue(
-    fieldId
-) {
-
-    const field =
-        document.getElementById(
-            fieldId
-        );
-
-
-    if (!field) {
-        return "";
+    if (!modal) {
+        return;
     }
 
+    modal.classList.add("active");
+    modal.style.display = "flex";
 
-    return field.value || "";
+    document.body.style.overflow = "hidden";
 
+    const modalBox =
+        modal.querySelector(".modal-box");
+
+    if (modalBox) {
+        modalBox.scrollTop = 0;
+    }
+}
+
+function closeModal() {
+    const modal =
+        document.getElementById("entryModal");
+
+    if (modal) {
+        modal.classList.remove("active");
+        modal.style.display = "";
+    }
+
+    document.body.style.overflow = "";
+    isEditing = false;
 }
 
 
 /* =========================================================
-DELETE
+   DELETE
 ========================================================= */
 
-async function deleteEntry(
-    entryId
-) {
-
+async function deleteEntry(entryId) {
     if (!entryId) {
         return;
     }
 
-
-    if (!db) {
-
-        alert(
-            "Firebase is not ready yet."
-        );
-
-        return;
-    }
-
-
-    const entry =
-        allEntries.find(
-            item =>
-                item.id ===
-                entryId
-        );
-
+    const entry = allEntries.find(
+        item => item.id === entryId
+    );
 
     const title =
-        entry?.title ||
-        "this entry";
+        entry?.title || "this entry";
 
-
-    const confirmed =
-        confirm(
-            `Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
-        );
-
+    const confirmed = confirm(
+        `Are you sure you want to delete "${title}"?\n\nThis action cannot be undone.`
+    );
 
     if (!confirmed) {
         return;
     }
 
-
     try {
-
-        const entryRef =
-            doc(
-                db,
-                "news",
-                entryId
-            );
-
-
         await deleteDoc(
-            entryRef
+            doc(db, "news", entryId)
         );
 
-
-        alert(
-            "Entry deleted successfully."
-        );
-
+        alert("Entry deleted successfully.");
 
         await loadNewsEntries();
 
-
     } catch (error) {
-
-        console.error(
-            "Delete error:",
-            error
-        );
-
+        console.error("Delete error:", error);
 
         alert(
             "Failed to delete entry.\n\n" +
             error.message
         );
-
     }
-
 }
 
 
 /* =========================================================
-STATISTICS
+   STATISTICS
 ========================================================= */
 
 function updateStatistics() {
+    const total = allEntries.length;
 
-    const total =
-        allEntries.length;
+    const published = allEntries.filter(entry =>
+        normalizeStatus(entry.status) ===
+        "Published"
+    ).length;
 
+    const drafts = allEntries.filter(entry =>
+        normalizeStatus(entry.status) ===
+        "Draft"
+    ).length;
 
-    const published =
-        allEntries.filter(
-            entry =>
-                normalizeStatus(
-                    entry.status
-                ) ===
-                "Published"
-        ).length;
+    const now = new Date();
 
+    const thisMonth = allEntries.filter(entry => {
+        const value = getEntryDateValue(entry);
 
-    const drafts =
-        allEntries.filter(
-            entry =>
-                normalizeStatus(
-                    entry.status
-                ) ===
-                "Draft"
-        ).length;
+        if (!value) {
+            return false;
+        }
 
+        const date = new Date(value);
 
-    const now =
-        new Date();
+        return (
+            date.getFullYear() === now.getFullYear() &&
+            date.getMonth() === now.getMonth()
+        );
+    }).length;
 
-
-    const currentYear =
-        now.getFullYear();
-
-
-    const currentMonth =
-        now.getMonth();
-
-
-    const thisMonth =
-        allEntries.filter(
-            entry => {
-
-                const dateValue =
-                    getEntryDateValue(
-                        entry
-                    );
-
-
-                if (!dateValue) {
-                    return false;
-                }
-
-
-                const date =
-                    new Date(
-                        dateValue
-                    );
-
-
-                return (
-                    date.getFullYear() ===
-                    currentYear &&
-                    date.getMonth() ===
-                    currentMonth
-                );
-
-            }
-        ).length;
-
-
-    setText(
-        "totalPosts",
-        total
-    );
-
-
-    setText(
-        "publishedPosts",
-        published
-    );
-
-
-    setText(
-        "draftPosts",
-        drafts
-    );
-
+    setText("totalPosts", total);
+    setText("publishedPosts", published);
+    setText("draftPosts", drafts);
 
     setText(
         "thisMonthPosts",
-        String(
-            thisMonth
-        ).padStart(
-            2,
-            "0"
-        )
+        String(thisMonth).padStart(2, "0")
     );
-
 }
 
 
 /* =========================================================
-NORMALIZE STATUS
+   UTILITIES
 ========================================================= */
 
-function normalizeStatus(
-    status
-) {
+function getFieldValue(fieldId) {
+    const field =
+        document.getElementById(fieldId);
 
-    if (!status) {
-        return "Draft";
-    }
-
-
-    const value =
-        String(
-            status
-        )
-            .trim()
-            .toLowerCase();
-
-
-    if (
-        value ===
-        "published" ||
-        value ===
-        "publish" ||
-        value ===
-        "public"
-    ) {
-
-        return "Published";
-
-    }
-
-
-    return "Draft";
-
+    return field ? field.value || "" : "";
 }
 
+function setFieldValue(fieldId, value) {
+    const field =
+        document.getElementById(fieldId);
 
-/* =========================================================
-NORMALIZE CATEGORY
-========================================================= */
-
-function normalizeCategory(
-    category
-) {
-
-    if (!category) {
-        return "Research";
+    if (!field) {
+        return;
     }
 
-
-    const value =
-        String(
-            category
-        )
-            .trim()
-            .toLowerCase();
-
-
-    const categories = {
-
-        research:
-            "Research",
-
-        academic:
-            "Academic",
-
-        travel:
-            "Travel",
-
-        life:
-            "Life"
-
-    };
-
-
-    return (
-        categories[
-            value
-        ] ||
-        category
-    );
-
+    field.value =
+        value === null ||
+        value === undefined
+            ? ""
+            : String(value);
 }
 
-
-/* =========================================================
-FORMAT DATE
-========================================================= */
-
-function formatDate(
-    value
-) {
-
-    if (!value) {
-        return "";
-    }
-
-
-    let date;
-
-
-    if (
-        value &&
-        typeof value.toDate ===
-        "function"
-    ) {
-
-        date =
-            value.toDate();
-
-    }
-
-    else if (
-        value instanceof Date
-    ) {
-
-        date =
-            value;
-
-    }
-
-    else {
-
-        date =
-            new Date(
-                value
-            );
-
-    }
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return String(
-            value
-        );
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-
-            year:
-                "numeric",
-
-            month:
-                "short",
-
-            day:
-                "numeric"
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-NORMALIZE DATE
-========================================================= */
-
-function normalizeDateForInput(
-    value
-) {
-
-    if (!value) {
-        return "";
-    }
-
-
-    let date;
-
-
-    if (
-        value &&
-        typeof value.toDate ===
-        "function"
-    ) {
-
-        date =
-            value.toDate();
-
-    }
-
-    else if (
-        value instanceof Date
-    ) {
-
-        date =
-            value;
-
-    }
-
-    else {
-
-        const stringValue =
-            String(
-                value
-            );
-
-
-        if (
-            /^\d{4}-\d{2}-\d{2}$/
-                .test(
-                    stringValue
-                )
-        ) {
-
-            return stringValue;
-
-        }
-
-
-        date =
-            new Date(
-                stringValue
-            );
-
-    }
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "";
-
-    }
-
-
-    const year =
-        String(
-            date.getFullYear()
-        ).padStart(
-            4,
-            "0"
-        );
-
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-        `${year}-${month}-${day}`
-    );
-
-}
-
-
-/* =========================================================
-DESIGN DISPLAY NAME
-========================================================= */
-
-function getDesignDisplayName(
-    design
-) {
-
-    return (
-        DESIGN_NAMES[
-            design
-        ] ||
-        design ||
-        "Unknown"
-    );
-
-}
-
-
-/* =========================================================
-GET CONTENT VALUE
-========================================================= */
-
-function getContentValue(
-    entry,
-    key
-) {
-
+function getContentValue(entry, key) {
     if (!entry) {
         return "";
     }
 
-
     if (
         entry.content &&
-        typeof entry.content ===
-        "object" &&
-        entry.content[key] !==
-        undefined
+        typeof entry.content === "object" &&
+        entry.content[key] !== undefined
     ) {
-
         return entry.content[key];
-
     }
-
 
     if (
         entry.data &&
-        entry.data[key] !==
-        undefined
+        typeof entry.data === "object" &&
+        entry.data[key] !== undefined
     ) {
-
         return entry.data[key];
-
     }
 
-
-    if (
-        entry[key] !==
-        undefined
-    ) {
-
-        return entry[key];
-
-    }
-
-
-    return "";
-
+    return entry[key] || "";
 }
 
-
-/* =========================================================
-SET TEXT
-========================================================= */
-
-function setText(
-    elementId,
-    value
-) {
-
-    const element =
-        document.getElementById(
-            elementId
-        );
-
-
-    if (element) {
-
-        element.textContent =
-            String(
-                value
-            );
-
-    }
-
-}
-
-
-/* =========================================================
-TRUNCATE
-========================================================= */
-
-function truncateText(
-    text,
-    maxLength
-) {
-
-    const value =
-        String(
-            text ||
-            ""
-        );
-
-
-    if (
-        value.length <=
-        maxLength
-    ) {
-
-        return value;
-
-    }
-
+function normalizeStatus(status) {
+    const value = String(
+        status || "Draft"
+    ).trim().toLowerCase();
 
     return (
-        value.substring(
-            0,
-            maxLength
-        ) +
-        "..."
-    );
-
-}
-
-
-/* =========================================================
-ESCAPE HTML
-========================================================= */
-
-function escapeHTML(
-    value
-) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "";
-
-    }
-
-
-    return String(
-        value
+        value === "published" ||
+        value === "publish" ||
+        value === "public"
     )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
+        ? "Published"
+        : "Draft";
 }
 
+function normalizeCategory(category) {
+    const value = String(
+        category || "Research"
+    ).trim().toLowerCase();
 
-/* =========================================================
-GLOBAL FUNCTIONS
-========================================================= */
-
-window.refreshNewsAdmin =
-    function() {
-
-        return loadNewsEntries();
-
+    const map = {
+        research: "Research",
+        academic: "Academic",
+        travel: "Travel",
+        life: "Life"
     };
 
+    return map[value] || category || "Research";
+}
 
-window.openNewModal =
-    openNewModal;
+function getDesignDisplayName(design) {
+    return DESIGN_NAMES[design] || design || "Unknown";
+}
+
+function getEntryDateValue(entry) {
+    const value =
+        entry.date ||
+        entry.createdAt ||
+        entry.updatedAt;
+
+    if (!value) {
+        return 0;
+    }
+
+    if (typeof value.toDate === "function") {
+        return value.toDate().getTime();
+    }
+
+    if (value instanceof Date) {
+        return value.getTime();
+    }
+
+    const time = new Date(value).getTime();
+
+    return Number.isNaN(time) ? 0 : time;
+}
+
+function sortEntriesByDate(a, b) {
+    return (
+        getEntryDateValue(b) -
+        getEntryDateValue(a)
+    );
+}
+
+function normalizeDateForInput(value) {
+    if (!value) {
+        return "";
+    }
+
+    if (
+        typeof value === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(value)
+    ) {
+        return value;
+    }
+
+    let date;
+
+    if (typeof value.toDate === "function") {
+        date = value.toDate();
+    } else {
+        date = new Date(value);
+    }
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    const year = date.getFullYear();
+    const month = String(
+        date.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+        date.getDate()
+    ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+}
+
+function formatDate(value) {
+    if (!value) {
+        return "";
+    }
+
+    let date;
+
+    if (typeof value.toDate === "function") {
+        date = value.toDate();
+    } else {
+        date = new Date(value);
+    }
+
+    if (Number.isNaN(date.getTime())) {
+        return String(value);
+    }
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        }
+    );
+}
+
+function truncateText(text, maxLength) {
+    const value = String(text || "");
+
+    return value.length > maxLength
+        ? value.slice(0, maxLength) + "..."
+        : value;
+}
+
+function setText(elementId, value) {
+    const element =
+        document.getElementById(elementId);
+
+    if (element) {
+        element.textContent = String(value);
+    }
+}
+
+function escapeHTML(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
 
 
-window.openModal =
-    openModal;
+/* =========================================================
+   GLOBAL FUNCTIONS
+========================================================= */
 
-
-window.closeModal =
-    closeModal;
-
-
-window.selectDesign =
-    selectDesign;
-
-
-window.handleDesignChange =
-    handleDesignChange;
-
-
-window.editEntry =
-    editEntry;
-
-
-window.deleteEntry =
-    deleteEntry;
-
-
-window.saveEntry =
-    saveEntry;
-
-
-console.log(
-    "News Admin JS loaded successfully."
-);
+window.openNewModal = openNewModal;
+window.closeModal = closeModal;
+window.selectDesign = selectDesign;
+window.editEntry = editEntry;
+window.deleteEntry = deleteEntry;
+window.saveEntry = saveEntry;
+window.refreshNewsAdmin = loadNewsEntries;
