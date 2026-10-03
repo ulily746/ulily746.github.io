@@ -662,7 +662,7 @@ const firebaseConfig = {
     storageBucket: "yuri-research-portfolio.firebasestorage.app",
     messagingSenderId: "231317507996",
     appId: "1:231317507996:web:9773282c138706d886c259",
-    measurementId: "G-57VHW2454E"
+    measurementId: "G-57VHW2454"
 
 };
 
@@ -693,73 +693,114 @@ const CARD_LIMITS = {
    DESIGN PAGE
 ====================================== */
 
-const DESIGN_ROUTES={
-    FilmArchiveDesign:"FilmArchiveDesign.html",
-    VintageFlowerDesign:"VintageFlowerDesign.html",
-    HomeBakingDesign:"HomeBakingDesign.html",
-    MInimalPortfolio:"MInimalPortfolioDesign.html",
-    ModernMaturityDesign:"ModernMaturityDesign.html"
+const DESIGN_ROUTES = {
+    LearningNote: "learning-note.html",
+    FilmArchiveDesign: "FilmArchiveDesign.html",
+    VintageFlowerDesign: "VintageFlowerDesign.html",
+    HomeBakingDesign: "HomeBakingDesign.html",
+    MInimalPortfolio: "MInimalPortfolioDesign.html",
+    ModernMaturityDesign: "ModernMaturityDesign.html"
 };
 
-function getDesignPage(design){
-    return DESIGN_ROUTES[design] || "FilmArchiveDesign.html";
+function getDesignPage(design) {
+    return (
+        DESIGN_ROUTES[design] ||
+        "learning-note.html"
+    );
 }
-
 
 /* ======================================
    COMMON HELPER
 ====================================== */
 
-function getNewsImage(item){
+function getNewsImage(item) {
+    const content =
+        item.content &&
+        typeof item.content === "object" &&
+        !Array.isArray(item.content)
+            ? item.content
+            : {};
 
     return (
-
+        // 공통 IMAGE URL
         item.image ||
-
+        item.imageUrl ||
         item.heroImage ||
-
-        item.chapter01Image ||
-
         item.thumbnail ||
 
+        // Vintage Flower
+        content.vintageHeroImage ||
+
+        // Film Archive
+        content.filmHeroImage ||
+
+        // Home Baking
+        content.bakingHeroImage ||
+
+        // Minimal Portfolio
+        content.minimalHeroImage ||
+
+        // Modern Maturity
+        content.modernHeroImage ||
+
+        // 혹시 과거에 content 없이 저장한 글이라면
+        item.vintageHeroImage ||
+        item.filmHeroImage ||
+        item.bakingHeroImage ||
+        item.minimalHeroImage ||
+        item.modernHeroImage ||
+
+        // 마지막 대체 이미지
         "hero.jpg"
-
     );
-
 }
 
 
-function getNewsTitle(item){
+function getNewsTitle(item) {
+    const content =
+        item.content &&
+        typeof item.content === "object" &&
+        !Array.isArray(item.content)
+            ? item.content
+            : {};
 
     return (
-
         item.title ||
 
-        item.heroTitle ||
+        content.vintageHeroTitle ||
+        content.minimalHeroTitle ||
+        content.bakingHeroTitle ||
+        content.modernHeroTitle ||
 
+        item.heroTitle ||
         item.chapter01Title ||
 
         "Untitled"
-
     );
-
 }
 
 
-function getNewsDescription(item){
+function getNewsDescription(item) {
+    const content =
+        item.content &&
+        typeof item.content === "object" &&
+        !Array.isArray(item.content)
+            ? item.content
+            : {};
 
     return (
-
         item.description ||
 
-        item.heroDescription ||
+        content.vintageHeroSubtitle ||
+        content.minimalHeroDescription ||
+        content.bakingHeroDescription ||
+        content.modernHeroDescription ||
 
+        item.heroDescription ||
         item.chapter01Description ||
 
         ""
-
     );
-
 }
 
 
