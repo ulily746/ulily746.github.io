@@ -1481,8 +1481,28 @@
                 }
 
 
-                const data =
-                    snapshot.data();
+              const data =
+    snapshot.data();
+
+const design =
+    data.design ||
+    data.designId ||
+    "LearningNote";
+
+if (design !== "LearningNote") {
+    loading.style.display = "none";
+    error.style.display = "flex";
+
+    console.error(
+        "This document is not a Learning Note.",
+        {
+            expected: "LearningNote",
+            received: design
+        }
+    );
+
+    return;
+}
 
 
                 /*
