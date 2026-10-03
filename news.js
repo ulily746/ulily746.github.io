@@ -7,7 +7,7 @@
    1. Firebase news 컬렉션 불러오기
    2. 최신 News 카드 표시
    3. 최대 표시 개수 유지
-   4. 선택한 디자인 템플릿으로 상세페이지 연결
+   4. 저장된 design 값에 따라 상세페이지 연결
    5. Firebase 문서 ID를 상세페이지에 전달
 ========================================================= */
 
@@ -72,13 +72,6 @@ const db =
    4. SETTINGS
 ========================================================= */
 
-/*
-   News 페이지에 표시할 최대 카드 개수
-
-   예:
-   6개만 유지하고 싶으면 6
-*/
-
 const MAX_NEWS_COUNT = 6;
 
 
@@ -95,31 +88,96 @@ const newsContainer =
 /* =========================================================
    6. DESIGN TEMPLATE ROUTER
    ---------------------------------------------------------
-   Firebase에 저장된 디자인 값을 기준으로
-   해당 상세페이지 HTML 파일을 선택
+   Firebase에 저장된 design/template 값을 확인해서
+   해당 상세페이지 HTML을 반환
 ========================================================= */
 
 function getTemplatePath(data) {
 
+    /*
+       Admin에서 새로 저장하는 값:
+       
+       design:
+       "LearningNote"
 
+       "FilmArchiveDesign"
+
+       "VintageFlowerDesign"
+
+       "HomeBakingDesign"
+
+       "MInimalPortfolio"
+
+       "ModernMaturityDesign"
+    */
+
+    const rawTemplate =
+        data.design ||
+        data.template ||
+        data.templateName ||
+        "";
+
+    
     const template =
         String(
-            data.template ||
-            data.design ||
-            data.templateName ||
-            ""
-        ).toLowerCase();
+            rawTemplate
+        )
+        .trim()
+        .toLowerCase();
 
 
-    /* ---------------------------------------------
-       Childhood 디자인
-    --------------------------------------------- */
+    console.log(
+        "디자인 확인:",
+        {
+            original:
+                rawTemplate,
+            normalized:
+                template
+        }
+    );
+
+
+    /* =====================================================
+       LEARNING NOTE
+    ===================================================== */
 
     if (
+
+        template === "learningnote" ||
+
+        template === "learning note" ||
+
+        template === "learningnote.html"
+
+    ) {
+
+        return "LearningNote.html";
+
+    }
+
+
+    /* =====================================================
+       FILM ARCHIVE
+    ===================================================== */
+
+    if (
+
+        template === "filmarchivedesign" ||
+
+        template === "filmarchivedesign.html" ||
+
+        template === "film archive" ||
+
+        template === "film archive design" ||
+
         template === "childhood" ||
+
         template === "childhood.html" ||
+
         template === "design1" ||
+
         template === "design01"
+
     ) {
 
         return "FilmArchiveDesign.html";
@@ -127,70 +185,123 @@ function getTemplatePath(data) {
     }
 
 
-   /* =============================================
-       DESIGN 02
-       Vintage Flower
-    ============================================= */
+    /* =====================================================
+       VINTAGE FLOWER
+    ===================================================== */
 
     if (
-        template === "design2" ||
-        template === "design02" ||
+
         template === "vintageflowerdesign" ||
+
         template === "vintageflowerdesign.html" ||
+
         template === "vintage flower" ||
-        template === "vintage flower design"
+
+        template === "vintage flower design" ||
+
+        template === "design2" ||
+
+        template === "design02"
+
     ) {
 
         return "VintageFlowerDesign.html";
 
     }
 
-    /* ---------------------------------------------
-       디자인 3
-    --------------------------------------------- */
+
+    /* =====================================================
+       HOME BAKING
+    ===================================================== */
 
     if (
+
+        template === "homebakingdesign" ||
+
+        template === "homebakingdesign.html" ||
+
+        template === "home baking" ||
+
+        template === "home baking design" ||
+
         template === "design3" ||
+
         template === "design03"
+
     ) {
 
-        return "design03.html";
+        return "HomeBakingDesign.html";
 
     }
 
 
-    /* ---------------------------------------------
-       디자인 4
-    --------------------------------------------- */
+    /* =====================================================
+       MINIMAL PORTFOLIO
+       -----------------------------------------------------
+       주의:
+       기존 파일명이 MInimalPortfolio.html
+       대문자 I를 그대로 유지
+    ===================================================== */
 
     if (
+
+        template === "minimalportfolio" ||
+
+        template === "minimalportfolio.html" ||
+
+        template === "minimal portfolio" ||
+
+        template === "minimal portfolio design" ||
+
+        template === "mininalportfolio" ||
+
         template === "design4" ||
+
         template === "design04"
+
     ) {
 
-        return "design04.html";
+        return "MInimalPortfolio.html";
 
     }
 
 
-    /* ---------------------------------------------
-       디자인 5
-    --------------------------------------------- */
+    /* =====================================================
+       MODERN MATURITY
+    ===================================================== */
 
     if (
+
+        template === "modernmaturitydesign" ||
+
+        template === "modernmaturitydesign.html" ||
+
+        template === "modern maturity" ||
+
+        template === "modern maturity design" ||
+
         template === "design5" ||
+
         template === "design05"
+
     ) {
 
-        return "design05.html";
+        return "ModernMaturityDesign.html";
 
     }
 
 
-    /*
+    /* =====================================================
+       DEFAULT
+       -----------------------------------------------------
        디자인 정보가 없을 경우
-       기본 상세페이지
-    */
+    ===================================================== */
+
+    console.warn(
+        "⚠️ 알 수 없는 디자인입니다:",
+        rawTemplate
+    );
+
 
     return "news-detail.html";
 
@@ -284,11 +395,6 @@ async function loadNews() {
 
         /* ---------------------------------------------
            최신순 정렬
-
-           createdAt이 있으면
-           createdAt 기준
-
-           없으면 date 기준
         --------------------------------------------- */
 
         newsList.sort(
@@ -386,8 +492,19 @@ async function loadNews() {
                     "";
 
 
+                /*
+                   이미지 우선순위
+
+                   1. image
+                   2. heroImage
+                   3. imageUrl
+                   4. 기본 이미지
+                */
+
                 const image =
+                    data.image ||
                     data.heroImage ||
+                    data.imageUrl ||
                     "images/default-news.jpg";
 
 
@@ -421,14 +538,45 @@ async function loadNews() {
 
 
                 console.log(
-                    "News 카드 연결:",
-                    {
-                        newsId,
-                        template:
-                            data.template,
-                        templatePath,
-                        detailURL
-                    }
+                    "===================================="
+                );
+
+                console.log(
+                    "News 카드 연결"
+                );
+
+                console.log(
+                    "문서 ID:",
+                    newsId
+                );
+
+                console.log(
+                    "Design:",
+                    data.design
+                );
+
+                console.log(
+                    "Template:",
+                    data.template
+                );
+
+                console.log(
+                    "Template Name:",
+                    data.templateName
+                );
+
+                console.log(
+                    "연결 페이지:",
+                    templatePath
+                );
+
+                console.log(
+                    "상세 URL:",
+                    detailURL
+                );
+
+                console.log(
+                    "===================================="
                 );
 
 
@@ -498,7 +646,9 @@ async function loadNews() {
                                 ?
                                 `
                                 <span class="news-card-date">
-                                    ${escapeHTML(date)}
+                                    ${escapeHTML(
+                                        formatDisplayDate(date)
+                                    )}
                                 </span>
                                 `
                                 :
@@ -567,8 +717,12 @@ function getDateValue(data) {
     */
 
     if (
+
         data.createdAt &&
-        typeof data.createdAt.toMillis === "function"
+
+        typeof data.createdAt.toMillis ===
+        "function"
+
     ) {
 
         return data.createdAt.toMillis();
@@ -637,7 +791,82 @@ function getDateValue(data) {
 
 
 /* =========================================================
-   9. HTML ESCAPE
+   9. DISPLAY DATE
+========================================================= */
+
+function formatDisplayDate(value) {
+
+    if (
+        !value
+    ) {
+
+        return "";
+
+    }
+
+
+    /*
+       Firebase Timestamp
+    */
+
+    if (
+
+        typeof value.toDate ===
+        "function"
+
+    ) {
+
+        const date =
+            value.toDate();
+
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            }
+        );
+
+    }
+
+
+    /*
+       문자열
+    */
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        !isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return date.toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            }
+        );
+
+    }
+
+
+    return String(value);
+
+}
+
+
+/* =========================================================
+   10. HTML ESCAPE
 ========================================================= */
 
 function escapeHTML(value) {
@@ -683,7 +912,7 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   10. 실행
+   11. EXECUTE
 ========================================================= */
 
 loadNews();
