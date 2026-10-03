@@ -1588,10 +1588,8 @@ function selectDesign(
             designId
         );
 
-
         designId =
             "FilmArchiveDesign";
-
     }
 
 
@@ -1613,23 +1611,50 @@ function selectDesign(
     }
 
 
+    /*
+     * 먼저 모든 디자인 전용 입력창을 숨김
+     */
+
     hideAllDesignFields();
 
+
+    /*
+     * Learning Note인 경우
+     *
+     * 기존 디자인 입력창은 보여주지 않고
+     * Content만 보여줌
+     */
+
+    if (
+        selectedDesign ===
+        "LearningNote"
+    ) {
+
+        updateLearningNoteVisibility();
+
+        return;
+
+    }
+
+
+    /*
+     * Learning Note가 아닌 경우
+     *
+     * Learning Note Content는 숨김
+     */
+
+    updateLearningNoteVisibility();
+
+
+    /*
+     * 선택한 기존 디자인의 입력창만 표시
+     */
 
     showDesignFields(
         selectedDesign
     );
 
-
-    /*
-     * Learning Note uses the generic
-     * Content field.
-     */
-
-    updateLearningNoteVisibility();
-
 }
-
 
 /* =========================================================
 LEARNING NOTE VISIBILITY
@@ -1649,11 +1674,8 @@ function updateLearningNoteVisibility() {
 
 
     /*
-     * Content is useful for Learning Note.
-     *
-     * We keep the field available for
-     * every design as an optional common
-     * field, but Learning Note highlights it.
+     * Learning Note일 때만
+     * Content field를 표시
      */
 
     if (
@@ -1669,12 +1691,11 @@ function updateLearningNoteVisibility() {
     else {
 
         contentWrapper.style.display =
-            "block";
+            "none";
 
     }
 
 }
-
 
 /* =========================================================
 HIDE DESIGN FIELDS
