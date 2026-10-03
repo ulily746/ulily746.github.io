@@ -106,7 +106,13 @@ function setText(id, value){
     if(!el || value === undefined || value === null || value === "") return;
     el.textContent = String(value);
 }
+function clearText(id) {
+    const el = getElement(id);
 
+    if (el) {
+        el.textContent = "";
+    }
+}
 function setImage(id, value){
     const el = getElement(id);
     if(!el || !value) return;
@@ -145,81 +151,282 @@ async function loadLifeTravel(){
         }
 
         const newsData = docSnap.data();
-        const content = newsData.content || {};
 
-        console.log("VintageFlowerDesign content:", content);
+const content =
+    newsData.content &&
+    typeof newsData.content === "object"
+        ? newsData.content
+        : {};
 
-        // HERO
-        setImage("heroImage", content.vintageHeroImage);
-        setText("heroTitle", content.vintageHeroTitle);
-        setText("heroDescription", content.vintageHeroSubtitle);
-        hideElement("heroEyebrow");
 
-        // CHAPTER 01 = INTRO
-        setText("chapter01Label", "INTRODUCTION");
-        setText("chapter01Title", content.vintageIntroTitle);
-        setText("chapter01Description", content.vintageIntroText);
-        setImage("chapter01Image", content.vintageFlower1Image);
+/* =========================================================
+   HERO
+========================================================= */
 
-        // RIBBON = FLOWER 1
-        setImage("ribbonImage", content.vintageFlower1Image);
-        setText("ribbonCaption", content.vintageFlower1Title);
+setImage(
+    "heroImage",
+    content.vintageHeroImage ||
+    newsData.image
+);
 
-        // CHAPTER 02 = FLOWER 2
-        setImage("chapter02Image", content.vintageFlower2Image);
-        setText("chapter02Label", "FLOWER STORY");
-        setText("chapter02Title", content.vintageFlower2Title);
-        setText("chapter02Description", content.vintageFlower2Text);
-        hideElement("chapter02SideLabel");
-        hideElement("chapter02Date");
+setText(
+    "heroTitle",
+    content.vintageHeroTitle ||
+    newsData.title
+);
 
-        // VIDEO — Vintage Flower 디자인엔 영상 입력란이 없어서 섹션 숨김
-        hideElement("videoSection");
+setText(
+    "heroDescription",
+    content.vintageHeroSubtitle ||
+    newsData.description
+);
 
-        // PAGE 01 = FLOWER 3
-        setImage("page01Image", content.vintageFlower3Image);
-        setText("page01Label", "FLOWER STORY");
-        setText("page01Title", content.vintageFlower3Title);
-        setText("page01Description", content.vintageFlower3Text);
+hideElement("heroEyebrow");
 
-        // PAGE 02 / 03 = GALLERY 1 / 2
-        setImage("page02Image", content.vintageGallery1Image);
-        setText("page02Label", "GALLERY");
-        hideElement("page02Title");
-        hideElement("page02Description");
 
-        setImage("page03Image", content.vintageGallery2Image);
-        setText("page03Label", "GALLERY");
-        hideElement("page03Title");
-        hideElement("page03Description");
+/* =========================================================
+   CIRCLE PHOTO 01
+========================================================= */
 
-        // MEMORY A = JOURNAL
-        setImage("memoryAImage", content.vintageGallery3Image);
-        setText("memoryALabel", "JOURNAL");
-        setText("memoryATitle", content.vintageJournalTitle);
-        setText("memoryADescription", content.vintageJournalText);
-        hideElement("memoryANote");
+hideElement("chapter01Label");
 
-        // MEMORY B = GALLERY 4
-        setImage("memoryBImage", content.vintageGallery4Image);
-        hideElement("memoryBLabel");
-        hideElement("memoryBTitle");
-        hideElement("memoryBDescription");
-        hideElement("memoryBNote");
+setImage(
+    "chapter01Image",
+    content.vintageFlower1Image
+);
 
-        // MEMORY C — 남는 데이터 없음
-        const memoryC = document.querySelector('[id="memoryCImage"]')?.closest("section") 
-            || document.querySelector('[id="memoryCImage"]')?.closest("div.grid");
-        hideElement("memoryCImage");
-        hideElement("memoryCLabel");
-        hideElement("memoryCTitle");
-        hideElement("memoryCDescription");
-        hideElement("memoryCNote");
+setText(
+    "chapter01Title",
+    content.vintageFlower1Title
+);
 
-        const pageTitle = content.vintageHeroTitle;
-        if(pageTitle){
-            document.title = String(pageTitle) + " — Vintage Flower Archive";
-        }
+setText(
+    "chapter01Description",
+    content.vintageFlower1Text
+);
+
+
+/* =========================================================
+   WIDE PHOTO + TITLE
+========================================================= */
+
+setImage(
+    "ribbonImage",
+    content.vintageRibbonImage ||
+    content.vintageFlower1Image
+);
+
+setText(
+    "ribbonCaption",
+    content.vintageRibbonTitle ||
+    content.vintageFlower1Title
+);
+
+
+/* =========================================================
+   CIRCLE PHOTO 02
+========================================================= */
+
+hideElement("chapter02Label");
+hideElement("chapter02SideLabel");
+hideElement("chapter02Date");
+
+setImage(
+    "chapter02Image",
+    content.vintageFlower2Image
+);
+
+setText(
+    "chapter02Title",
+    content.vintageFlower2Title
+);
+
+setText(
+    "chapter02Description",
+    content.vintageFlower2Text
+);
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+hideElement("videoSection");
+
+
+/* =========================================================
+   MEMORIES HEADING
+========================================================= */
+
+const quietMomentsHeading =
+    document.querySelector(
+        ".section-sage .section-heading .archive-label"
+    );
+
+if (quietMomentsHeading) {
+    quietMomentsHeading.textContent =
+        "MEMORABLE MOMENTS";
+}
+
+
+/* =========================================================
+   ARCH PHOTO 01
+========================================================= */
+
+setImage(
+    "page01Image",
+    content.vintageFlower3Image
+);
+
+clearText("page01Label");
+
+setText(
+    "page01Title",
+    content.vintageFlower3Title
+);
+
+setText(
+    "page01Description",
+    content.vintageFlower3Text
+);
+
+
+/* =========================================================
+   ARCH PHOTO 02
+========================================================= */
+
+setImage(
+    "page02Image",
+    content.vintageGallery1Image
+);
+
+clearText("page02Label");
+
+setText(
+    "page02Title",
+    content.vintageGallery1Title
+);
+
+setText(
+    "page02Description",
+    content.vintageGallery1Text
+);
+
+
+/* =========================================================
+   ARCH PHOTO 03
+========================================================= */
+
+setImage(
+    "page03Image",
+    content.vintageGallery2Image
+);
+
+clearText("page03Label");
+
+setText(
+    "page03Title",
+    content.vintageGallery2Title
+);
+
+setText(
+    "page03Description",
+    content.vintageGallery2Text
+);
+
+
+/* =========================================================
+   FINAL JOURNAL
+========================================================= */
+
+setImage(
+    "memoryAImage",
+    content.vintageGallery3Image
+);
+
+hideElement("memoryALabel");
+
+setText(
+    "memoryATitle",
+    content.vintageJournalTitle
+);
+
+setText(
+    "memoryADescription",
+    content.vintageJournalText
+);
+
+hideElement("memoryANote");
+
+
+/* =========================================================
+   FINAL PHOTO
+========================================================= */
+
+setImage(
+    "memoryBImage",
+    content.vintageGallery4Image
+);
+
+hideElement("memoryBLabel");
+hideElement("memoryBTitle");
+hideElement("memoryBDescription");
+hideElement("memoryBNote");
+
+
+/* =========================================================
+   UNUSED MEMORY C
+========================================================= */
+
+hideElement("memoryCSection");
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+const footerDate =
+    getElement("footerDate");
+
+if (footerDate) {
+    const category =
+        newsData.category ||
+        "Life";
+
+    const designName =
+        "Vintage Flower";
+
+    const date =
+        formatArchiveDate(
+            newsData.date ||
+            newsData.createdAt ||
+            newsData.updatedAt
+        );
+
+    footerDate.textContent =
+        [
+            date,
+            category,
+            designName
+        ]
+            .filter(Boolean)
+            .join(" · ");
+}
+
+
+/* =========================================================
+   DOCUMENT TITLE
+========================================================= */
+
+const pageTitle =
+    content.vintageHeroTitle ||
+    newsData.title;
+
+if (pageTitle) {
+    document.title =
+        String(pageTitle) +
+        " — Yuri Choi";
+}
 
         hideElement("loadingScreen");
 
@@ -231,7 +438,47 @@ async function loadLifeTravel(){
     }
 
 }
+function formatArchiveDate(value) {
+    if (!value) {
+        return "";
+    }
 
+    let date;
+
+    if (
+        value &&
+        typeof value.toDate === "function"
+    ) {
+        date = value.toDate();
+    }
+
+    else if (
+        value instanceof Date
+    ) {
+        date = value;
+    }
+
+    else {
+        date = new Date(value);
+    }
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return String(value);
+    }
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
+}
 loadLifeTravel();
 
 
@@ -2187,6 +2434,7 @@ object-cover
 <!-- MEMORY C -->
 
 <div
+id="memoryCSection"
 class="
 grid
 grid-cols-1
