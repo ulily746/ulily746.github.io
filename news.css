@@ -901,17 +901,13 @@ TALL ARCH WINDOW
 
 .life-arch-img{
     width:100%;
+    height:460px;
+
     border-radius:120px 120px 0 0;
     overflow:hidden;
     position:relative;
     background:#DDD;
 }
-
-/* 카드마다 다른 높이 — 갤러리 벽 리듬 */
-.life-card:nth-child(4n+1) .life-arch-img{ height:520px; }
-.life-card:nth-child(4n+2) .life-arch-img{ height:380px; }
-.life-card:nth-child(4n+3) .life-arch-img{ height:460px; }
-.life-card:nth-child(4n+4) .life-arch-img{ height:340px; }
 
 .life-arch-img img {
     width: 100%;
