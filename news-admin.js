@@ -1014,7 +1014,7 @@ function populateDesignFields(
     "vintageJournalText",
 
     "vintageGallery4Image"
-]
+],
 
         HomeBakingDesign: [
             "bakingHeroImage",
@@ -1148,26 +1148,38 @@ function collectDesignFields(designId) {
             "filmTravelText"
         ],
 
-        VintageFlowerDesign: [
+            VintageFlowerDesign: [
             "vintageHeroImage",
             "vintageHeroTitle",
             "vintageHeroSubtitle",
-            "vintageIntroTitle",
-            "vintageIntroText",
+
             "vintageFlower1Image",
             "vintageFlower1Title",
             "vintageFlower1Text",
+
+            "vintageRibbonImage",
+            "vintageRibbonTitle",
+
             "vintageFlower2Image",
             "vintageFlower2Title",
             "vintageFlower2Text",
+
             "vintageFlower3Image",
             "vintageFlower3Title",
             "vintageFlower3Text",
+
+            "vintageGallery1Image",
+            "vintageGallery1Title",
+            "vintageGallery1Text",
+
+            "vintageGallery2Image",
+            "vintageGallery2Title",
+            "vintageGallery2Text",
+
+            "vintageGallery3Image",
             "vintageJournalTitle",
             "vintageJournalText",
-            "vintageGallery1Image",
-            "vintageGallery2Image",
-            "vintageGallery3Image",
+
             "vintageGallery4Image"
         ],
 
