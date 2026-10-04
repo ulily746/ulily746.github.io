@@ -146,7 +146,50 @@ select{
 
 }
 
+.archive-topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:60px;
+    padding:0 6vw;
+    background:#1A1A1A;
+}
 
+.archive-topbar-link{
+    color:#F2F2DF;
+    font-size:11px;
+    letter-spacing:.1em;
+}
+
+.archive-topbar-tabs{
+    display:flex;
+    gap:30px;
+}
+
+.archive-topbar-tabs a{
+    color:#D9D3C8;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    transition:.3s;
+}
+
+.archive-topbar-tabs a:hover{
+    color:#fff;
+}
+
+.archive-topbar-admin{
+    color:#B9AA95;
+    font-size:10px;
+    letter-spacing:.1em;
+    border:1px solid #B9AA95;
+    padding:7px 13px;
+}
+
+.archive-topbar-admin:hover{
+    background:#B9AA95;
+    color:#000;
+}
 
 /* =========================================================
    HERO
@@ -1526,7 +1569,24 @@ select{
 
 </div>
 
+<div class="archive-topbar">
 
+    <a href="news.html" class="archive-topbar-link">
+        ← Back to News
+    </a>
+
+    <div class="archive-topbar-tabs">
+        <a href="#research">Research</a>
+        <a href="#academic">Academic</a>
+        <a href="#travel">Travel</a>
+        <a href="#life">Life</a>
+    </div>
+
+    <a href="news-admin.html" class="archive-topbar-admin">
+        + ADD NEWS
+    </a>
+
+</div>
 
 <!-- =========================================================
      PAGE
@@ -1950,13 +2010,71 @@ function getSection() {
 }
 
 function getNewsImage(item) {
-    return item.image || "hero.jpg";
+    const content =
+        item.content &&
+        typeof item.content === "object" &&
+        !Array.isArray(item.content)
+            ? item.content
+            : {};
+
+    return (
+        item.image ||
+        item.imageUrl ||
+        item.heroImage ||
+        item.thumbnail ||
+
+        content.vintageHeroImage ||
+        content.filmHeroImage ||
+        content.bakingHeroImage ||
+        content.minimalHeroImage ||
+        content.modernHeroImage ||
+
+        item.vintageHeroImage ||
+        item.filmHeroImage ||
+        item.bakingHeroImage ||
+        item.minimalHeroImage ||
+        item.modernHeroImage ||
+
+        "hero.jpg"
+    );
 }
+
 function getNewsTitle(item) {
-    return item.title || "Untitled";
+    const content =
+        item.content &&
+        typeof item.content === "object" &&
+        !Array.isArray(item.content)
+            ? item.content
+            : {};
+
+    return (
+        item.title ||
+        content.vintageHeroTitle ||
+        content.minimalHeroTitle ||
+        content.bakingHeroTitle ||
+        content.modernHeroTitle ||
+        item.heroTitle ||
+        "Untitled"
+    );
 }
+
 function getNewsDescription(item) {
-    return item.description || "";
+    const content =
+        item.content &&
+        typeof item.content === "object" &&
+        !Array.isArray(item.content)
+            ? item.content
+            : {};
+
+    return (
+        item.description ||
+        content.vintageHeroSubtitle ||
+        content.minimalHeroDescription ||
+        content.bakingHeroDescription ||
+        content.modernHeroDescription ||
+        item.heroDescription ||
+        ""
+    );
 }
 function getNewsYear(item) {
     if (item.date) return String(item.date).substring(0, 4);
