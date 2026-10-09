@@ -1,728 +1,1560 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vintage Flower Archive — Yuri Choi</title>
+<title>Life & Travel Archive</title>
 
-<!-- GOOGLE FONTS (Cormorant Garamond + Gowun Batang 고운바탕 + Caveat + Manrope) -->
+<!-- =========================================================
+     TAILWIND
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<!-- =========================================================
+     LUCIDE
+========================================================= -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- =========================================================
+     GOOGLE FONTS
+========================================================= -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gowun+Batang:wght@400;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- FIREBASE -->
+<link
+href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&family=Gowun+Batang:wght@400;700&display=swap"
+rel="stylesheet"
+>
+
+<!-- =========================================================
+     FIREBASE
+========================================================= -->
+
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
-        authDomain: "yuri-research-portfolio.firebaseapp.com",
-        projectId: "yuri-research-portfolio",
-        storageBucket: "yuri-research-portfolio.firebasestorage.app",
-        messagingSenderId: "231317507996",
-        appId: "1:231317507996:web:9773282c138706d886c259",
-        measurementId: "G-57VHW2454"
-    };
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    window.firebaseDB = db;
-    window.firebaseDoc = doc;
-    window.firebaseGetDoc = getDoc;
-</script>
-
-<style>
-/* RESET */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
-body {
-    min-width: 320px;
-    background: linear-gradient(rgba(35,58,40,.18), rgba(35,58,40,.18)), #647765;
-    color: #4f574b;
-    font-family: 'Gowun Batang', 'Manrope', sans-serif;
-    overflow-x: hidden;
-    line-height: 1.7;
-    font-size: 16px;
+import {
+    getFirestore,
+    doc,
+    getDoc
 }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
-/* MAIN PAPER */
-.paper {
-    display: block;
-    width: min(1440px, 94%);
-    margin: 35px auto 60px;
-    padding: 50px 70px;
-    background: #f5f0df;
-    border-radius: 28px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(30,45,32,.22);
-}
 
-.paper::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(rgba(75,88,65,.045) 1px, transparent 1px);
-    opacity: .45;
-    background-size: 9px 9px;
-    pointer-events: none;
-}
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
 
-.paper > * { position: relative; z-index: 2; }
+const firebaseConfig = {
 
-/* HERO */
-.hero { margin-bottom: 110px; }
+    apiKey:
+    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
 
-.hero-card {
-    position: relative;
-    background: #f7f2e3;
-    border: 1px solid #c9cbb5;
-    border-radius: 24px;
-    padding: 28px;
-}
+    authDomain:
+    "yuri-research-portfolio.firebaseapp.com",
 
-.hero-top { position: relative; margin-bottom: 24px; }
-.hero-top h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(48px, 6vw, 72px);
-    line-height: .85;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: #4d5549;
-}
+    projectId:
+    "yuri-research-portfolio",
 
-.hero-image { width: 88%; margin: 0 auto; position: relative; }
-.hero-image img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 8.5;
-    object-fit: cover;
-    background-color: #e8e4d5;
-    transition: .5s ease;
-}
-.hero-image:hover img { transform: scale(1.015); }
+    storageBucket:
+    "yuri-research-portfolio.firebasestorage.app",
 
-.hero-bottom {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    margin-top: 28px;
-    padding-right: 2%;
-}
+    messagingSenderId:
+    "231317507996",
 
-.hero-title { text-align: right; }
-.hero-title h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 5vw, 62px);
-    line-height: .86;
-    font-weight: 500;
-    color: #4d5549;
-}
+    appId:
+    "1:231317507996:web:9773282c138706d886c259",
 
-.hero-card::before {
-    content: ""; position: absolute; left: 25px; top: 25px;
-    width: 60px; height: 60px; border-top: 1px solid #aeb5a1;
-    border-left: 1px solid #aeb5a1; border-radius: 18px 0 0 0;
-}
-.hero-card::after {
-    content: ""; position: absolute; right: 25px; bottom: 25px;
-    width: 60px; height: 60px; border-bottom: 1px solid #aeb5a1;
-    border-right: 1px solid #aeb5a1; border-radius: 0 0 18px 0;
-}
+    measurementId:
+    "G-57VHW2454"
 
-/* INTRO */
-.intro {
-    margin-left: -70px; margin-right: -70px;
-    padding: 85px 70px; background: #e3e9d8;
-}
+};
 
-.intro-wrapper {
-    display: flex; justify-content: center; align-items: center;
-    gap: 35px; max-width: 900px; margin: 0 auto;
-}
 
-.left-brace, .right-brace {
-    width: 50px; height: 160px; flex-shrink: 0;
-    stroke: #89987f; stroke-width: 1.8; fill: none;
-}
+/* =========================================================
+   FIREBASE INITIALIZE
+========================================================= */
 
-.intro-text { max-width: 680px; text-align: center; }
-.intro-text p {
-    font-family: 'Gowun Batang', 'Caveat', serif;
-    font-size: 22px; line-height: 1.8; color: #525F4D;
-}
+const app =
+    initializeApp(firebaseConfig);
 
-/* MEMORY BOARD */
-.memory {
-    margin-left: -70px; margin-right: -70px;
-    padding: 110px 70px 140px; background: #f5f0df;
-}
+const db =
+    getFirestore(app);
 
-.memory-heading { text-align: center; margin-bottom: 95px; }
-.memory-heading h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 56px; font-weight: 500; color: #58634f;
-}
 
-.memory-board {
-    position: relative; width: min(1000px,100%);
-    min-height: 1300px; margin: 0 auto;
-}
-
-.memory-row { position: absolute; display: flex; align-items: center; z-index: 3; }
-.memory-photo {
-    position: relative; flex-shrink: 0; background: #fffdf5;
-    padding: 12px 12px 34px; box-shadow: 0 14px 28px rgba(58,68,52,.15);
-    transition: .4s ease;
-}
-.memory-photo:hover { transform: scale(1.035) rotate(0deg) !important; z-index: 10; }
-.memory-photo img { display: block; width: 100%; height: 100%; object-fit: cover; background: #e8e4d5; }
-
-.row-1 .memory-photo { width: 390px; height: 340px; transform: rotate(-4deg); }
-.row-2 .memory-photo { width: 320px; height: 300px; transform: rotate(5deg); }
-.row-3 .memory-photo { width: 270px; height: 255px; transform: rotate(-5deg); }
-.row-4 .memory-photo { width: 215px; height: 205px; transform: rotate(5deg); }
-
-.memory-note {
-    position: relative; width: 250px;
-    font-family: 'Gowun Batang', 'Caveat', serif;
-    font-size: 20px; line-height: 1.6; color: #525F4D; text-align: center;
-}
-.memory-note small {
-    display: block; margin-bottom: 6px; font-family: 'Manrope', sans-serif;
-    font-size: 9px; letter-spacing: 3px; color: #9aa48f;
-}
-
-.row-1 { top: 0; left: 0; gap: 85px; }
-.row-2 { top: 330px; right: 0; gap: 80px; }
-.row-2 .memory-note { order: 1; }
-.row-2 .memory-photo { order: 2; }
-.row-3 { top: 650px; left: 100px; gap: 90px; }
-.row-4 { top: 1010px; right: 70px; gap: 75px; }
-
-.memory-connector { position: absolute; pointer-events: none; z-index: 1; overflow: visible; }
-.memory-connector path { fill: none; stroke: #8d9a80; stroke-width: 2; stroke-dasharray: 5 8; }
-
-.connector-1 { left: 295px; top: 135px; width: 310px; height: 190px; }
-.connector-1 path { d: path("M10 25 C80 10 135 105 210 135 C245 150 275 155 305 155"); }
-.connector-2 { right: 255px; top: 400px; width: 350px; height: 230px; }
-.connector-2 path { d: path("M15 35 C75 75 105 145 175 155 C245 165 290 185 340 215"); }
-.connector-3 { left: 275px; top: 680px; width: 430px; height: 245px; }
-.connector-3 path { d: path("M10 175 C65 110 125 55 205 55 C285 55 345 90 425 120"); }
-.connector-4 { right: 185px; top: 885px; width: 390px; height: 280px; }
-.connector-4 path { d: path("M15 30 C80 60 95 145 170 190 C235 230 305 235 380 250"); }
-
-/* MOVING MEMORIES */
-.moving-memories {
-    margin-left: -70px; margin-right: -70px;
-    padding: 110px 70px 130px; background: #e0e8d7;
-}
-
-.moving-heading { text-align: center; margin-bottom: 55px; }
-.moving-label {
-    display: block; font-family: 'Manrope', sans-serif;
-    font-size: 9px; letter-spacing: 4px; color: #8a987f; margin-bottom: 14px;
-}
-.moving-heading h2 {
-    font-family: 'Cormorant Garamond', serif; font-size: 54px;
-    font-weight: 500; color: #58634f; line-height: 1;
-}
-
-.video-wrapper { width: 100%; max-width: 1150px; margin: 0 auto; }
-.memory-video {
-    display: block; width: 100%; aspect-ratio: 16 / 8.5;
-    object-fit: cover; background: #273027; border: 12px solid #414b3d;
-    box-shadow: 0 20px 40px rgba(45,58,43,.2);
-}
-.video-caption { display: flex; justify-content: space-between; align-items: center; padding: 20px 12px 0; }
-.video-caption span { font-family: 'Gowun Batang', 'Caveat', serif; font-size: 20px; color: #525F4D; }
-.video-caption small { font-family: 'Manrope', sans-serif; font-size: 9px; letter-spacing: 3px; color: #8a987f; }
-
-/* FILM SECTION */
-.film {
-    margin-left: -70px; margin-right: -70px;
-    padding: 110px 70px 120px; background: #f5f0df;
-}
-.film-title {
-    font-family: 'Cormorant Garamond', serif; font-size: 56px;
-    font-weight: 500; text-align: center; color: #58634f; margin-bottom: 60px;
-}
-
-.film-item {
-    position: relative; display: flex; align-items: center;
-    width: min(1100px,100%); margin: 0 auto 110px;
-}
-.film-item.left-photo { justify-content: flex-start; gap: 70px; }
-.film-item.right-photo { justify-content: flex-end; gap: 70px; }
-
-.film-frame {
-    position: relative; flex-shrink: 0; background: #343b32;
-    padding: 24px 14px; box-shadow: 0 15px 30px rgba(45,55,42,.2);
-}
-.film-frame::before, .film-frame::after {
-    content: ""; position: absolute; left: 7px; right: 7px; height: 10px;
-    background-image: radial-gradient(circle, #f5f0df 4px, transparent 4.5px);
-    background-size: 19px 10px; background-repeat: repeat-x;
-}
-.film-frame::before { top: 6px; }
-.film-frame::after { bottom: 6px; }
-.film-frame img { display: block; width: 100%; height: 100%; object-fit: cover; background: #4f574b; }
-.film-frame.vertical { width: 340px; }
-.film-frame.vertical img { height: 430px; }
-
-.film-text { max-width: 340px; }
-.film-text .film-label {
-    font-family: 'Manrope', sans-serif; font-size: 9px;
-    letter-spacing: 3px; color: #94a08b; margin-bottom: 10px;
-}
-.film-text h3 {
-    font-family: 'Cormorant Garamond', serif; font-size: 38px;
-    font-weight: 500; line-height: 1.15; color: #4D5549; margin-bottom: 10px;
-}
-.film-text p {
-    font-family: 'Gowun Batang', sans-serif; font-size: 16px;
-    line-height: 1.7; color: #69755f;
-}
-
-.film-item-1 .film-frame { transform: rotate(-3deg); }
-.film-item-3 .film-frame { transform: rotate(3deg); }
-.film-item-3 .film-text { text-align: right; }
-
-.film-item.horizontal-film { display: block; width: 100%; max-width: 1200px; margin: 20px auto 110px; }
-.film-item.horizontal-film .film-frame { width: 100%; padding: 24px 14px; transform: rotate(1deg); }
-.film-frame.horizontal img { width: 100%; height: 460px; object-fit: cover; }
-
-/* TRAVEL NOTES */
-.travel-notes {
-    margin-left: -70px; margin-right: -70px;
-    padding: 110px 70px 130px; background: #dce6d3; position: relative;
-}
-.travel-heading { text-align: center; margin-bottom: 65px; }
-.travel-heading span {
-    display: block; font-family: 'Manrope', sans-serif; font-size: 9px;
-    letter-spacing: 4px; color: #87947d; margin-bottom: 12px;
-}
-.travel-heading h2 {
-    font-family: 'Cormorant Garamond', serif; font-size: 56px;
-    font-weight: 500; color: #58634f; line-height: 1;
-}
-
-.travel-diary {
-    width: min(1050px,100%); margin: 0 auto; display: grid;
-    grid-template-columns: 0.9fr 1.1fr; gap: 35px; align-items: stretch;
-}
-
-.travel-calendar {
-    background: #f7f2e3; border: 1px solid #cbd2bf; padding: 30px;
-    box-shadow: 0 14px 30px rgba(55,70,50,.1); transform: rotate(-1deg); position: relative;
-}
-.travel-calendar::before {
-    content: ""; position: absolute; top: 14px; left: 50%; width: 45px;
-    height: 1px; background: #9ca892; transform: translateX(-50%);
-}
-.calendar-label {
-    display: block; font-family: 'Manrope', sans-serif; font-size: 9px;
-    letter-spacing: 3px; color: #97a18e; margin-bottom: 10px;
-}
-.calendar-month {
-    font-family: 'Cormorant Garamond', serif; font-size: 36px;
-    font-weight: 500; color: #5d6957; margin-bottom: 22px;
-}
-.calendar-weekdays, .calendar-days {
-    display: grid; grid-template-columns: repeat(7,1fr); text-align: center; gap: 8px;
-}
-.calendar-weekdays { margin-bottom: 10px; }
-.calendar-weekdays span { font-family: 'Manrope', sans-serif; font-size: 8px; color: #9aa48f; }
-.calendar-days span {
-    position: relative; display: flex; align-items: center; justify-content: center;
-    width: 28px; height: 28px; margin: auto; font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; color: #69755f;
-}
-.calendar-days span.memory-date { border: 1px solid #8d9a80; border-radius: 50%; }
-
-.travel-location {
-    background: #f5f0df; border: 1px solid #cbd2bf; padding: 24px;
-    box-shadow: 0 14px 30px rgba(55,70,50,.1); transform: rotate(1deg); position: relative;
-}
-.location-map {
-    position: relative; width: 100%; height: 250px; overflow: hidden;
-    background: #e4eadc; border: 1px solid #c9d0c0;
-}
-.location-map::before {
-    content: ""; position: absolute; inset: -30px;
-    background: linear-gradient(35deg, transparent 42%, rgba(135,148,125,.35) 43%, rgba(135,148,125,.35) 44%, transparent 45%),
-                linear-gradient(125deg, transparent 48%, rgba(135,148,125,.3) 49%, rgba(135,148,125,.3) 50%, transparent 51%);
-    transform: rotate(-8deg);
-}
-.location-pin {
-    position: absolute; left: 56%; top: 43%; width: 18px; height: 18px;
-    background: #69755f; border: 3px solid #f5f0df; border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg); z-index: 3;
-}
-.location-name {
-    position: absolute; left: calc(56% + 16px); top: 34%; z-index: 4;
-    padding: 4px 8px; background: #f7f2e3; font-family: 'Gowun Batang', 'Caveat', cursive;
-    font-size: 16px; color: #69755f; white-space: nowrap;
-}
-
-.location-info { display: flex; justify-content: space-between; align-items: flex-start; padding: 20px 5px 5px; }
-.location-label { font-family: 'Manrope', sans-serif; font-size: 8px; letter-spacing: 3px; color: #97a18e; }
-.location-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; color: #5d6957; }
-.location-date { text-align: right; font-family: 'Caveat', cursive; font-size: 19px; color: #7d8b74; }
-
-.travel-memory-note {
-    width: min(1050px,100%); margin: 60px auto 0; padding: 32px 40px; text-align: center;
-    border-top: 1px solid rgba(125,139,116,.45); border-bottom: 1px solid rgba(125,139,116,.45);
-}
-.travel-memory-note p {
-    max-width: 720px; margin: 0 auto; font-family: 'Gowun Batang', 'Caveat', serif;
-    font-size: 22px; line-height: 1.7; color: #525F4D;
-}
-
-/* FOOTER */
-.footer {
-    margin-left: -70px; margin-right: -70px; padding: 65px 70px 35px;
-    text-align: center; background: #f5f0df; border-top: 1px solid #c9cbd5;
-}
-.footer-stamp {
-    display: inline-block; padding: 4px 18px; border: 1px dashed #89987f;
-    border-radius: 20px; font-family: 'Manrope', sans-serif; font-size: 11px;
-    letter-spacing: 2px; color: #5A6652; margin-bottom: 15px;
-}
-.footer p { font-family: 'Caveat', cursive; font-size: 24px; color: #69755f; }
-.footer small { display: block; margin-top: 10px; font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 2px; color: #87947d; }
-
-@media(max-width:850px) {
-    .paper { width: 95%; padding: 30px 25px; }
-    .intro, .memory, .moving-memories, .film, .travel-notes, .footer {
-        margin-left: -25px; margin-right: -25px; padding-left: 25px; padding-right: 25px;
-    }
-    .travel-diary { grid-template-columns: 1fr; }
-    .film-item.left-photo, .film-item.right-photo { flex-direction: column; text-align: center; }
-    .film-item-3 .film-text { text-align: center; }
-}
-</style>
-</head>
-
-<body>
-
-<div class="paper">
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-card">
-            <div class="hero-top">
-                <h1 id="heroTitleTop">Master’s Graduation</h1>
-            </div>
-
-            <div class="hero-image">
-                <img id="heroImage" src="images/hero.jpg" alt="Graduation Image">
-            </div>
-
-            <div class="hero-bottom">
-                <div class="hero-title">
-                    <h2 id="heroTitleBottom1">and a New</h2>
-                    <h2 id="heroTitleBottom2">Beginning</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- INTRO -->
-    <section class="intro">
-        <div class="intro-wrapper">
-            <svg class="left-brace" viewBox="0 0 100 300">
-                <path d="M80 0 C20 0 20 60 55 90 C75 110 75 190 55 210 C20 240 20 300 80 300" />
-            </svg>
-
-            <div class="intro-text">
-                <p id="introText">
-                    소중했던 대학원 생활을 마치며, 함께했던 순간들과 감사한 기억들을 담아둡니다.
-                </p>
-            </div>
-
-            <svg class="right-brace" viewBox="0 0 100 300">
-                <path d="M20 0 C80 0 80 60 45 90 C25 110 25 190 45 210 C80 240 80 300 20 300" />
-            </svg>
-        </div>
-    </section>
-
-    <!-- MEMORY BOARD -->
-    <section class="memory">
-        <div class="memory-heading">
-            <h2>Little Memories</h2>
-        </div>
-
-        <div class="memory-board">
-            <!-- MEMORY 1 -->
-            <div class="memory-row row-1">
-                <div class="memory-photo">
-                    <img id="memory1Image" src="images/photo1.jpg" alt="Memory 1">
-                </div>
-                <div class="memory-note">
-                    <small>MEMORY 01</small>
-                    <span id="memory1Text">거위들을 보는 마지막 날, 학위증과 선물 받은 넙죽이와 함께</span>
-                </div>
-            </div>
-
-            <svg class="memory-connector connector-1" viewBox="0 0 310 190">
-                <path d="M10 25 C80 10 135 105 210 135 C245 150 275 155 305 155" />
-            </svg>
-
-            <!-- MEMORY 2 -->
-            <div class="memory-row row-2">
-                <div class="memory-note">
-                    <small>MEMORY 02</small>
-                    <span id="memory2Text">학위식 이후 함께 모여 사진찍기 전 학사모 던져보기</span>
-                </div>
-                <div class="memory-photo">
-                    <img id="memory2Image" src="images/photo2.jpg" alt="Memory 2">
-                </div>
-            </div>
-
-            <svg class="memory-connector connector-2" viewBox="0 0 350 230">
-                <path d="M15 35 C75 75 105 145 175 155 C245 165 290 185 340 215" />
-            </svg>
-
-            <!-- MEMORY 3 -->
-            <div class="memory-row row-3">
-                <div class="memory-photo">
-                    <img id="memory3Image" src="images/photo3.jpg" alt="Memory 3">
-                </div>
-                <div class="memory-note">
-                    <small>MEMORY 03</small>
-                    <span id="memory3Text">소중한 동기들과 함께 남긴 기억</span>
-                </div>
-            </div>
-
-            <svg class="memory-connector connector-3" viewBox="0 0 430 245">
-                <path d="M10 175 C65 110 125 55 205 55 C285 55 345 90 425 120" />
-            </svg>
-
-            <!-- MEMORY 4 -->
-            <div class="memory-row row-4">
-                <div class="memory-note">
-                    <small>MEMORY 04</small>
-                    <span id="memory4Text">항상 응원해 주신 교수님과 연구실 식구들</span>
-                </div>
-                <div class="memory-photo">
-                    <img id="memory4Image" src="images/photo4.jpg" alt="Memory 4">
-                </div>
-            </div>
-
-            <svg class="memory-connector connector-4" viewBox="0 0 390 280">
-                <path d="M15 30 C80 60 95 145 170 190 C235 230 305 235 380 250" />
-            </svg>
-        </div>
-    </section>
-
-    <!-- MOVING MEMORIES -->
-    <section class="moving-memories">
-        <div class="moving-heading">
-            <span class="moving-label">MOVING MEMORIES</span>
-            <h2>Little moments in motion.</h2>
-        </div>
-
-        <div class="video-wrapper">
-            <video id="memoryVideo" class="memory-video" controls poster="images/video-poster.jpg" preload="metadata">
-                <source id="memoryVideoSource" src="videos/memory-video.mp4" type="video/mp4">
-            </video>
-
-            <div class="video-caption">
-                <span id="videoCaption">축하의 순간들</span>
-                <small>MOVING MEMORY · 001</small>
-            </div>
-        </div>
-    </section>
-
-    <!-- FILM MEMORIES -->
-    <section class="film">
-        <h2 class="film-title">Film Memories</h2>
-
-        <!-- FILM 1 -->
-        <div class="film-item left-photo film-item-1">
-            <div class="film-frame vertical">
-                <img id="film1Image" src="images/film1.jpg" alt="Film memory 1">
-            </div>
-            <div class="film-text">
-                <div class="film-label">FRAME 001</div>
-                <h3 id="film1Title">Congratulations!</h3>
-                <p id="film1Text">따뜻했던 꽃다발과 축하의 마음들.</p>
-            </div>
-        </div>
-
-        <!-- FILM 2 -->
-        <div class="film-item horizontal-film">
-            <div class="film-frame horizontal">
-                <img id="film2Image" src="images/film2.jpg" alt="Film memory 2">
-            </div>
-        </div>
-
-        <!-- FILM 3 -->
-        <div class="film-item right-photo film-item-3">
-            <div class="film-text">
-                <div class="film-label">FRAME 003</div>
-                <h3 id="film3Title">New Chapter</h3>
-                <p id="film3Text">새로운 시작을 향한 발걸음.</p>
-            </div>
-            <div class="film-frame vertical">
-                <img id="film3Image" src="images/film3.jpg" alt="Film memory 3">
-            </div>
-        </div>
-    </section>
-
-    <!-- TRAVEL NOTES -->
-    <section class="travel-notes">
-        <div class="travel-heading">
-            <span>MEMORABLE NOTES</span>
-            <h2>Thank You, Graduation Day</h2>
-        </div>
-
-        <div class="travel-diary">
-            <!-- CALENDAR -->
-            <div class="travel-calendar">
-                <span class="calendar-label">MEMORY CALENDAR</span>
-                <h3 class="calendar-month" id="travelMonth">FEBRUARY 2026</h3>
-
-                <div class="calendar-weekdays">
-                    <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
-                </div>
-
-                <div class="calendar-days">
-                    <span></span><span></span><span></span><span></span><span>1</span><span>2</span><span>3</span>
-                    <span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                    <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
-                    <span>18</span><span>19</span><span class="memory-date">20</span><span>21</span><span>22</span><span>23</span><span>24</span>
-                    <span>25</span><span>26</span><span>27</span><span>28</span><span></span><span></span><span></span>
-                </div>
-            </div>
-
-            <!-- LOCATION MAP -->
-            <div class="travel-location">
-                <div class="location-map">
-                    <div class="location-pin"></div>
-                    <div class="location-name" id="travelLocationMap">Campus</div>
-                </div>
-
-                <div class="location-info">
-                    <div>
-                        <div class="location-label">LOCATION</div>
-                        <h3 id="travelLocation">Graduation Hall</h3>
-                    </div>
-                    <div class="location-date" id="travelYear">2026</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="travel-memory-note">
-            <p id="travelText">
-                함께한 모든 순간들이 앞으로 걸어갈 길에 따뜻한 양분이 되기를 기대하며.
-            </p>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-stamp">VINTAGE FLOWER ARCHIVE</div>
-        <p>© YURI CHOI · ALL RIGHTS RESERVED</p>
-        <small id="footerDate">February 20, 2026</small>
-    </footer>
-
-</div>
-
-<!-- DATA LOADER -->
-<script type="module">
+/* =========================================================
+   URL에서 NEWS ID 가져오기
+   예: news.html?id=abc123
+========================================================= */
 const params = new URLSearchParams(window.location.search);
 const newsId = params.get("id");
 
-function setText(id, value) {
-    if (!value) return;
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
+function getElement(id){ return document.getElementById(id); }
+
+function setText(id, value){
+    const el = getElement(id);
+    if(!el || value === undefined || value === null || value === "") return;
+    el.textContent = String(value);
 }
 
-function setSrc(id, value) {
-    if (!value) return;
-    const el = document.getElementById(id);
-    if (el) el.src = value;
-}
-
-function formatDate(value) {
-    if (!value) return "";
-    let dateObj = value.toDate ? value.toDate() : new Date(value);
-    if (isNaN(dateObj.getTime())) return String(value);
-    return dateObj.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-}
-
-async function loadNewsData() {
-    if (!newsId) return;
-
-    try {
-        if (!window.firebaseDB || !window.firebaseDoc || !window.firebaseGetDoc) {
-            return;
-        }
-
-        const newsRef = window.firebaseDoc(window.firebaseDB, "news", newsId);
-        const snapshot = await window.firebaseGetDoc(newsRef);
-
-        if (snapshot.exists()) {
-            const data = snapshot.data();
-            const content = data.content || {};
-
-            // HERO
-            setText("heroTitleTop", content.vintageHeroTitle || data.title);
-            setText("heroTitleBottom1", content.vintageFlower1Title);
-            setText("heroTitleBottom2", content.vintageFlower2Title);
-            setSrc("heroImage", content.vintageHeroImage || data.image);
-
-            // INTRO
-            setText("introText", content.vintageHeroSubtitle || data.description);
-
-            // CIRCLE & MEMORIES
-            setSrc("memory1Image", content.vintageFlower1Image);
-            setText("memory1Text", content.vintageFlower1Text);
-
-            setSrc("memory2Image", content.vintageFlower2Image);
-            setText("memory2Text", content.vintageFlower2Text);
-
-            setSrc("memory3Image", content.vintageFlower3Image);
-            setText("memory3Text", content.vintageFlower3Text);
-
-            setSrc("memory4Image", content.vintageGallery1Image);
-            setText("memory4Text", content.vintageGallery1Text);
-
-            // FILMS
-            setSrc("film1Image", content.vintageRibbonImage);
-            setText("film1Title", content.vintageRibbonTitle);
-
-            setSrc("film2Image", content.vintageGallery2Image);
-
-            setSrc("film3Image", content.vintageGallery3Image);
-            setText("film3Title", content.vintageJournalTitle);
-            setText("film3Text", content.vintageJournalText);
-
-            // FOOTER DATE BINDING
-            const entryDate = data.date || data.createdAt;
-            if (entryDate) {
-                setText("footerDate", formatDate(entryDate));
-            }
-
-            if (data.title) {
-                document.title = `${data.title} — Yuri Choi`;
-            }
-        }
-    } catch(error) {
-        console.error("Failed to load Firebase data:", error);
+function clearText(id) {
+    const el = getElement(id);
+    if (el) {
+        el.textContent = "";
     }
 }
 
-window.addEventListener("DOMContentLoaded", loadNewsData);
+function setImage(id, value){
+    const el = getElement(id);
+    if(!el || !value) return;
+    el.src = String(value).trim();
+}
+
+function hideElement(id){
+    const el = getElement(id);
+    if(el) el.style.display = "none";
+}
+
+function showError(message){
+    const loadingScreen = getElement("loadingScreen");
+    const errorScreen = getElement("errorScreen");
+    const errorMessage = getElement("errorMessage");
+    if(loadingScreen) loadingScreen.style.display = "none";
+    if(errorScreen) errorScreen.style.display = "flex";
+    if(errorMessage) errorMessage.textContent = message;
+}
+
+async function loadLifeTravel(){
+
+    if(!newsId){
+        showError("This archive page requires a news ID.");
+        return;
+    }
+
+    try{
+
+        const docRef = doc(db, "news", newsId);
+        const docSnap = await getDoc(docRef);
+
+        if(!docSnap.exists()){
+            showError("Archive entry not found.");
+            return;
+        }
+
+        const newsData = docSnap.data();
+
+        const content =
+            newsData.content &&
+            typeof newsData.content === "object"
+                ? newsData.content
+                : {};
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+setImage(
+    "heroImage",
+    content.vintageHeroImage ||
+    newsData.image
+);
+
+setText(
+    "heroTitle",
+    content.vintageHeroTitle ||
+    newsData.title
+);
+
+setText(
+    "heroDescription",
+    content.vintageHeroSubtitle ||
+    newsData.description
+);
+
+hideElement("heroEyebrow");
+
+
+/* =========================================================
+   CHAPTER 01
+========================================================= */
+
+hideElement("chapter01Label");
+
+setImage(
+    "chapter01Image",
+    content.vintageFlower1Image
+);
+
+setText(
+    "chapter01Title",
+    content.vintageFlower1Title
+);
+
+setText(
+    "chapter01Description",
+    content.vintageFlower1Text
+);
+
+
+/* =========================================================
+   WIDE PHOTO + TITLE
+========================================================= */
+
+setImage(
+    "ribbonImage",
+    content.vintageRibbonImage ||
+    content.vintageFlower1Image
+);
+
+setText(
+    "ribbonCaption",
+    content.vintageRibbonTitle ||
+    content.vintageFlower1Title
+);
+
+
+/* =========================================================
+   CHAPTER 02
+========================================================= */
+
+hideElement("chapter02Label");
+hideElement("chapter02SideLabel");
+hideElement("chapter02Date");
+
+setImage(
+    "chapter02Image",
+    content.vintageFlower2Image
+);
+
+setText(
+    "chapter02Title",
+    content.vintageFlower2Title
+);
+
+setText(
+    "chapter02Description",
+    content.vintageFlower2Text
+);
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+hideElement("videoSection");
+
+
+/* =========================================================
+   MEMORIES HEADING
+========================================================= */
+
+const quietMomentsHeading =
+    document.querySelector(
+        ".section-sage .section-heading .archive-label"
+    );
+
+if (quietMomentsHeading) {
+    quietMomentsHeading.textContent =
+        "MEMORABLE MOMENTS";
+}
+
+
+/* =========================================================
+   ARCH PHOTO 01
+========================================================= */
+
+setImage(
+    "page01Image",
+    content.vintageFlower3Image
+);
+
+clearText("page01Label");
+
+setText(
+    "page01Title",
+    content.vintageFlower3Title
+);
+
+setText(
+    "page01Description",
+    content.vintageFlower3Text
+);
+
+
+/* =========================================================
+   ARCH PHOTO 02
+========================================================= */
+
+setImage(
+    "page02Image",
+    content.vintageGallery1Image
+);
+
+clearText("page02Label");
+
+setText(
+    "page02Title",
+    content.vintageGallery1Title
+);
+
+setText(
+    "page02Description",
+    content.vintageGallery1Text
+);
+
+
+/* =========================================================
+   ARCH PHOTO 03
+========================================================= */
+
+setImage(
+    "page03Image",
+    content.vintageGallery2Image
+);
+
+clearText("page03Label");
+
+setText(
+    "page03Title",
+    content.vintageGallery2Title
+);
+
+setText(
+    "page03Description",
+    content.vintageGallery2Text
+);
+
+
+/* =========================================================
+   FINAL JOURNAL
+========================================================= */
+
+setImage(
+    "memoryAImage",
+    content.vintageGallery3Image
+);
+
+hideElement("memoryALabel");
+
+setText(
+    "memoryATitle",
+    content.vintageJournalTitle
+);
+
+setText(
+    "memoryADescription",
+    content.vintageJournalText
+);
+
+hideElement("memoryANote");
+
+
+/* =========================================================
+   FINAL PHOTO
+========================================================= */
+
+setImage(
+    "memoryBImage",
+    content.vintageGallery4Image
+);
+
+hideElement("memoryBLabel");
+hideElement("memoryBTitle");
+hideElement("memoryBDescription");
+hideElement("memoryBNote");
+
+
+/* =========================================================
+   UNUSED MEMORY C
+========================================================= */
+
+hideElement("memoryCSection");
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+const footerDate =
+    getElement("footerDate");
+
+if (footerDate) {
+    const category =
+        newsData.category ||
+        "Life";
+
+    const designName =
+        "Vintage Flower";
+
+    const date =
+        formatArchiveDate(
+            newsData.date ||
+            newsData.createdAt ||
+            newsData.updatedAt
+        );
+
+    footerDate.textContent =
+        [
+            date,
+            category,
+            designName
+        ]
+            .filter(Boolean)
+            .join(" · ");
+}
+
+
+/* =========================================================
+   DOCUMENT TITLE
+========================================================= */
+
+const pageTitle =
+    content.vintageHeroTitle ||
+    newsData.title;
+
+if (pageTitle) {
+    document.title =
+        String(pageTitle) +
+        " — Yuri Choi";
+}
+
+        hideElement("loadingScreen");
+
+        console.log("VintageFlowerDesign loaded successfully!", { id: newsId, content });
+
+    }catch(error){
+        console.error("Failed to load VintageFlowerDesign:", error);
+        showError("Unable to load this archive. Please try again.");
+    }
+
+}
+
+function formatArchiveDate(value) {
+    if (!value) {
+        return "";
+    }
+
+    let date;
+
+    if (
+        value &&
+        typeof value.toDate === "function"
+    ) {
+        date = value.toDate();
+    }
+    else if (
+        value instanceof Date
+    ) {
+        date = value;
+    }
+    else {
+        date = new Date(value);
+    }
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return String(value);
+    }
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    );
+}
+
+loadLifeTravel();
+
+</script>
+
+<!-- =========================================================
+     CSS (가독성 및 글자 크기 보완)
+========================================================= -->
+
+<style>
+
+/* =========================================================
+   BASE
+========================================================= */
+
+:root{
+    --paper:#F3F1E8;
+    --paper-light:#F8F7F1;
+    --sage-bg:#E7EDE3;
+    --sage-light:#EEF2EA;
+    --moss:#5E6958;
+    --deep-moss:#3F4B40;
+    --sage:#899681;
+    --line:#B8B9A8;
+    --soft-line:#D4D5C7;
+    --text:#3F473D;
+    --subtext:#6F766A;
+    --warm:#EDE7DB;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family: 'Gowun Batang', 'Plus Jakarta Sans', sans-serif;
+    background: var(--paper);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+img{
+    max-width:100%;
+}
+
+.font-serif-title{
+    font-family: 'Cinzel', serif;
+}
+
+.font-hand{
+    font-family: 'Caveat', cursive;
+}
+
+::selection{
+    background:#AEB9A6;
+    color:white;
+}
+
+/* =========================================================
+   TEXT SIZE OVERRIDES (가독성 보완)
+========================================================= */
+p {
+    font-size: 1rem !important; /* 16px 기본 적용 */
+    line-height: 1.75 !important;
+}
+
+h3 {
+    font-size: 1.65rem !important;
+    line-height: 1.3 !important;
+}
+
+h4 {
+    font-size: 1.25rem !important;
+}
+
+.font-hand {
+    font-size: 1.5rem !important; /* 캘리그라피 폰트 시원하게 확대 */
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+#loadingScreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:15px;
+    background:#F3F1E8;
+    color:#5E6958;
+}
+
+.loading-symbol{
+    font-family: 'Cinzel', serif;
+    font-size:22px;
+    letter-spacing:.2em;
+}
+
+.loading-text{
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    opacity:.6;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+#errorScreen{
+    position:fixed;
+    inset:0;
+    z-index:9998;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    background:#F3F1E8;
+    color:#5E6958;
+}
+
+#errorScreen h1{
+    font-family: 'Cinzel', serif;
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+#errorMessage{
+    font-size:13px;
+    opacity:.7;
+}
+
+/* =========================================================
+   SECTION BACKGROUNDS
+========================================================= */
+
+.section-paper{
+    background:
+    radial-gradient(
+        circle at 15% 20%,
+        rgba(255,255,255,.55),
+        transparent 30%
+    ),
+    var(--paper);
+}
+
+.section-sage{
+    background:
+    linear-gradient(
+        180deg,
+        #E7EDE3 0%,
+        #EAF0E6 100%
+    );
+}
+
+.section-light{
+    background: #F8F7F1;
+}
+
+.section-warm{
+    background:
+    linear-gradient(
+        180deg,
+        #EEF2EA 0%,
+        #E7EDE3 100%
+    );
+}
+
+.section-life-memory{
+    background:
+    linear-gradient(
+        180deg,
+        #F3F1E8 0%,
+        #EEF0E7 100%
+    );
+}
+
+/* =========================================================
+   ARCHIVE LABEL
+========================================================= */
+
+.archive-label{
+    display:inline-block;
+    font-size:11px;
+    letter-spacing:.35em;
+    color:#71806D;
+}
+
+/* =========================================================
+   BOTANICAL DIVIDER
+========================================================= */
+
+.botanical-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    color:#788574;
+    font-size:13px;
+    letter-spacing:.3em;
+    opacity:.75;
+}
+
+.botanical-divider::before,
+.botanical-divider::after{
+    content:"";
+    width:65px;
+    height:1px;
+    background:#BEC6B7;
+}
+
+/* =========================================================
+   SPARKLE LINE
+========================================================= */
+
+.sparkle-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#7C8976;
+}
+
+.sparkle-line::before{
+    content:"";
+    width:30px;
+    height:1px;
+    background:#B8C0B1;
+    flex-shrink:0;
+}
+
+/* =========================================================
+   PHOTO FRAME
+========================================================= */
+
+.photo-frame{
+    position:relative;
+    display:inline-block;
+}
+
+.hand-photo{
+    position:relative;
+    border: 1px solid rgba(108,120,102,.55);
+    background:#F9F8F2;
+    box-shadow:
+        3px 3px 0 rgba(105,116,99,.07),
+        -2px -2px 0 rgba(150,157,139,.05);
+}
+
+.hand-photo::before{
+    content:"";
+    position:absolute;
+    inset:-5px;
+    border: 1px solid rgba(104,116,99,.38);
+    pointer-events:none;
+    z-index:5;
+}
+
+.hand-photo::after{
+    content:"";
+    position:absolute;
+    inset:-8px -6px -5px -7px;
+    border: 1px solid rgba(142,151,133,.18);
+    border-radius:4px;
+    transform: rotate(-.35deg);
+    pointer-events:none;
+    z-index:5;
+}
+
+/* =========================================================
+   VERTICAL OVAL FRAME
+========================================================= */
+
+.vertical-oval-frame{
+    position:relative;
+    width:320px;
+    height:520px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.vertical-oval-frame::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border: 1px solid #B8A85F;
+    border-radius:50%;
+    transform: rotate(-3deg) translate(-8px,5px);
+    pointer-events:none;
+}
+
+.vertical-oval-frame::after{
+    content:"";
+    position:absolute;
+    inset:3px -5px -4px 5px;
+    border: 1px dashed #C8BB79;
+    border-radius:50%;
+    transform: rotate(2deg);
+    pointer-events:none;
+}
+
+.vertical-oval-photo{
+    position:relative;
+    width:290px;
+    height:490px;
+    border-radius:50%;
+    overflow:hidden;
+    border: 1px solid rgba(105,116,75,.45);
+    background:#F5F2E6;
+    box-shadow:
+        3px 4px 0 rgba(105,116,75,.08),
+        -2px -2px 0 rgba(190,175,95,.06);
+    z-index:2;
+}
+
+.vertical-oval-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-border{
+    border-bottom: 1px solid rgba(201,205,192,.8);
+}
+
+.hero-image{
+    transition: opacity .5s ease;
+}
+
+/* =========================================================
+   RIBBON
+========================================================= */
+
+.ribbon-section{
+    position:relative;
+}
+
+.ribbon-section::before{
+    content:"";
+    position:absolute;
+    left:8%;
+    right:8%;
+    top:50%;
+    height:1px;
+    background: rgba(203,209,196,.8);
+    z-index:0;
+}
+
+.ribbon-caption{
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform: translateX(-50%);
+    z-index:3;
+    white-space:nowrap;
+    background: rgba(243,241,232,.88);
+    padding: 6px 20px;
+    font-family: 'Caveat', cursive;
+    font-size: 20px !important;
+    color:#65715F;
+}
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-frame{
+    position:relative;
+    background:#F7F6EF;
+    border: 1px solid #C3C8BB;
+    padding:10px;
+}
+
+.video-frame::before{
+    content:"";
+    position:absolute;
+    inset:-5px;
+    border: 1px solid rgba(104,116,99,.25);
+    transform: rotate(.25deg);
+    pointer-events:none;
+}
+
+.video-inner{
+    position:relative;
+    width:100%;
+    aspect-ratio: 16/7;
+    overflow:hidden;
+    background:#D9DDD2;
+}
+
+.video-inner video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.video-play{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+}
+
+.video-play span{
+    width:58px;
+    height:58px;
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    background: rgba(55,65,55,.2);
+    backdrop-filter: blur(3px);
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:50px;
+}
+
+.section-heading::before,
+.section-heading::after{
+    content:"";
+    width:42px;
+    height:1px;
+    background:#AEB8A9;
+}
+
+/* =========================================================
+   MEMORY DIVIDER
+========================================================= */
+
+.memory-divider{
+    border-bottom: 1px solid rgba(160,169,151,.35);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.archive-footer{
+    background: #526052;
+    color: #EEF0E7;
+}
+
+.footer-link{
+    position:relative;
+    transition: opacity .3s ease;
+}
+
+.footer-link::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:1px;
+    background: #DCE2D5;
+    transition: width .3s ease;
+}
+
+.footer-link:hover{
+    opacity:.75;
+}
+
+.footer-link:hover::after{
+    width:100%;
+}
+
+.footer-botanical{
+    width:100%;
+    height:1px;
+    background: rgba(230,235,223,.3);
+    position:relative;
+}
+
+.footer-botanical::after{
+    content:"✦";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    background: #526052;
+    padding: 0 15px;
+    color: #DDE4D7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:768px){
+    .vertical-oval-frame{
+        width:280px;
+        height:460px;
+    }
+
+    .vertical-oval-photo{
+        width:252px;
+        height:432px;
+    }
+
+    .ribbon-caption{
+        font-size:16px !important;
+        max-width: 85%;
+        overflow:hidden;
+        text-overflow: ellipsis;
+    }
+
+    .section-heading{
+        margin-bottom:35px;
+    }
+
+    .section-heading::before,
+    .section-heading::after{
+        width:25px;
+    }
+}
+
+</style>
+
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+<!-- =========================================================
+     LOADING SCREEN
+========================================================= -->
+
+<div id="loadingScreen">
+    <div class="loading-symbol">✦</div>
+    <div class="loading-text">Opening the archive</div>
+</div>
+
+<!-- =========================================================
+     ERROR SCREEN
+========================================================= -->
+
+<div id="errorScreen">
+    <h1>Archive Not Found</h1>
+    <p id="errorMessage">Unable to load this archive.</p>
+</div>
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="w-full">
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header class="w-full section-paper hero-border">
+
+<div class="relative w-full aspect-[16/7] overflow-hidden">
+
+<img
+id="heroImage"
+src=""
+alt="Life and Travel Archive"
+class="hero-image w-full h-full object-cover brightness-[0.70]"
+>
+
+<div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center p-6">
+
+<span id="heroEyebrow" class="text-[10px] md:text-xs tracking-[0.4em] text-[#E8ECE2] uppercase mb-3"> </span>
+
+<h1 id="heroTitle" class="text-4xl md:text-6xl font-serif-title tracking-widest text-white"></h1>
+
+<div class="w-16 h-[1px] bg-white/50 my-5"></div>
+
+<p id="heroDescription" class="text-sm md:text-base text-white/90 leading-relaxed font-light max-w-xl"></p>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- =========================================================
+     CHAPTER 01
+========================================================= -->
+
+<section class="section-paper w-full py-28 md:py-36">
+
+<div class="w-full max-w-5xl mx-auto px-6">
+
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+
+<div class="md:col-span-6 space-y-4">
+
+<span id="chapter01Label" class="archive-label"> </span>
+
+<h3 id="chapter01Title" class="text-xl md:text-2xl font-serif-title tracking-wide"></h3>
+
+<p id="chapter01Description" class="text-sm md:text-base text-[#6F766A] leading-relaxed font-light"></p>
+
+<div class="botanical-divider pt-4">✦</div>
+
+</div>
+
+<div class="md:col-span-6 flex justify-center md:justify-end">
+
+<div class="photo-frame">
+
+<div class="vertical-oval-frame">
+
+<div class="vertical-oval-photo">
+
+<img id="chapter01Image" src="" alt="Chapter 01">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     RIBBON
+========================================================= -->
+
+<section class="w-full section-light">
+
+<div class="ribbon-section w-full h-24 md:h-36 overflow-hidden">
+
+<img id="ribbonImage" src="" alt="Travel Journal Detail" class="w-full h-full object-cover brightness-[0.85]">
+
+<div id="ribbonCaption" class="ribbon-caption"></div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     CHAPTER 02
+========================================================= -->
+
+<section class="section-paper w-full py-28 md:py-36">
+
+<div class="w-full max-w-5xl mx-auto px-6">
+
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+
+<div class="md:col-span-6 flex justify-center md:justify-start">
+
+<div class="photo-frame">
+
+<div class="vertical-oval-frame">
+
+<div class="vertical-oval-photo">
+
+<img id="chapter02Image" src="" alt="Chapter 02">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="md:col-span-6 space-y-4">
+
+<span id="chapter02Label" class="archive-label"> </span>
+
+<h3 id="chapter02Title" class="text-xl md:text-2xl font-serif-title tracking-wide"></h3>
+
+<p id="chapter02Description" class="text-sm md:text-base text-[#6F766A] leading-relaxed font-light"></p>
+
+<div class="border-l border-[#8D9A86] pl-4 mt-4">
+
+<p id="chapter02SideLabel" class="text-[10px] tracking-widest text-[#71806D]"></p>
+
+<p id="chapter02Date" class="text-xs text-[#6F766A] mt-1"></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     VIDEO MEMORY
+========================================================= -->
+
+<section id="videoSection" class="section-light w-full py-28 md:py-36">
+
+<div class="w-full max-w-6xl mx-auto px-6">
+
+<div class="section-heading">
+
+<span class="archive-label">MOVING MEMORIES</span>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+
+<div class="md:col-span-8">
+
+<div class="video-frame">
+
+<div class="video-inner">
+
+<video id="mainVideo" autoplay muted loop playsinline>
+
+<source id="videoUrl" src="" type="video/mp4">
+
+</video>
+
+<div class="video-play">
+
+<span>
+<i data-lucide="play" width="20" height="20"> </i>
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="md:col-span-4 space-y-4">
+
+<span id="videoLabel" class="archive-label"> </span>
+
+<h3 id="videoTitle" class="text-xl font-serif-title tracking-wide"></h3>
+
+<p id="videoDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
+
+<div id="videoSubLabel" class="sparkle-line pt-2"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     THREE ARCH WINDOWS
+========================================================= -->
+
+<section class="section-sage w-full py-28 md:py-36">
+
+<div class="w-full max-w-6xl mx-auto px-6">
+
+<div class="section-heading">
+
+<span class="archive-label">A FEW QUIET MOMENTS</span>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+<!-- PAGE 01 -->
+
+<div class="space-y-5 flex flex-col items-center text-center">
+
+<div class="photo-frame w-full">
+
+<div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
+
+<img id="page01Image" src="" alt="Page 01" class="w-full h-full object-cover">
+
+</div>
+
+</div>
+
+<div class="w-full pt-5">
+
+<div class="botanical-divider mb-5">✦</div>
+
+<h4 id="page01Label" class="text-sm font-semibold tracking-wide"></h4>
+
+<p id="page01Title" class="font-hand text-xl text-[#66745F] mt-1"></p>
+
+<p id="page01Description" class="text-xs text-[#6F766A] leading-relaxed px-2 mt-2"></p>
+
+</div>
+
+</div>
+
+<!-- PAGE 02 -->
+
+<div class="space-y-5 flex flex-col items-center text-center">
+
+<div class="photo-frame w-full">
+
+<div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
+
+<img id="page02Image" src="" alt="Page 02" class="w-full h-full object-cover">
+
+</div>
+
+</div>
+
+<div class="w-full pt-5">
+
+<div class="botanical-divider mb-5">✦</div>
+
+<h4 id="page02Label" class="text-sm font-semibold tracking-wide"></h4>
+
+<p id="page02Title" class="font-hand text-xl text-[#66745F] mt-1"></p>
+
+<p id="page02Description" class="text-xs text-[#6F766A] leading-relaxed px-2 mt-2"></p>
+
+</div>
+
+</div>
+
+<!-- PAGE 03 -->
+
+<div class="space-y-5 flex flex-col items-center text-center">
+
+<div class="photo-frame w-full">
+
+<div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
+
+<img id="page03Image" src="" alt="Page 03" class="w-full h-full object-cover">
+
+</div>
+
+</div>
+
+<div class="w-full pt-5">
+
+<div class="botanical-divider mb-5">✦</div>
+
+<h4 id="page03Label" class="text-sm font-semibold tracking-wide"></h4>
+
+<p id="page03Title" class="font-hand text-xl text-[#66745F] mt-1"></p>
+
+<p id="page03Description" class="text-xs text-[#6F766A] leading-relaxed px-2 mt-2"></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     MEMORY A / B / C
+========================================================= -->
+
+<section class="section-life-memory w-full">
+
+<!-- MEMORY A -->
+
+<div class="memory-divider grid grid-cols-1 md:grid-cols-2 w-full items-center">
+
+<div class="photo-frame w-full">
+
+<div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-r-full">
+
+<img id="memoryAImage" src="" alt="Memory A" class="w-full h-full object-cover">
+
+</div>
+
+</div>
+
+<div class="p-8 md:p-16 space-y-3 text-left">
+
+<span id="memoryALabel" class="archive-label"> </span>
+
+<h4 id="memoryATitle" class="text-base font-semibold"></h4>
+
+<p id="memoryADescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
+
+<div id="memoryANote" class="sparkle-line pt-2"></div>
+
+</div>
+
+</div>
+
+<!-- MEMORY B -->
+
+<div class="memory-divider grid grid-cols-1 md:grid-cols-2 w-full items-center">
+
+<div class="p-8 md:p-16 space-y-3 text-left md:text-right order-2 md:order-1">
+
+<span id="memoryBLabel" class="archive-label"> </span>
+
+<h4 id="memoryBTitle" class="text-base font-semibold"></h4>
+
+<p id="memoryBDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
+
+<div id="memoryBNote" class="sparkle-line pt-2 md:justify-end"></div>
+
+</div>
+
+<div class="order-1 md:order-2">
+
+<div class="photo-frame w-full">
+
+<div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-l-full">
+
+<img id="memoryBImage" src="" alt="Memory B" class="w-full h-full object-cover">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MEMORY C -->
+
+<div id="memoryCSection" class="grid grid-cols-1 md:grid-cols-2 w-full items-center">
+
+<div class="photo-frame w-full">
+
+<div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-r-full">
+
+<img id="memoryCImage" src="" alt="Memory C" class="w-full h-full object-cover">
+
+</div>
+
+</div>
+
+<div class="p-8 md:p-16 space-y-3 text-left">
+
+<span id="memoryCLabel" class="archive-label"> </span>
+
+<h4 id="memoryCTitle" class="text-base font-semibold"></h4>
+
+<p id="memoryCDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
+
+<div id="memoryCNote" class="sparkle-line pt-2"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="archive-footer">
+
+<div class="max-w-7xl mx-auto px-6 py-14">
+
+<div class="footer-botanical mb-12"></div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+
+<!-- TITLE -->
+
+<div>
+
+<p class="font-serif-title tracking-widest text-sm">LIFE & TRAVEL</p>
+
+<p class="text-xs mt-3 opacity-70 leading-relaxed">
+A quiet archive of places, flowers and memories.
+</p>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<div>
+
+<p class="text-[10px] tracking-[0.3em] mb-5 opacity-60">EXPLORE THE ARCHIVE</p>
+
+<div class="flex flex-wrap gap-x-7 gap-y-4 text-xs">
+
+<a href="#" class="footer-link">LIFE</a>
+
+<a href="#" class="footer-link">TRAVEL</a>
+
+<a href="#" class="footer-link">PLACES</a>
+
+<a href="#" class="footer-link">JOURNAL</a>
+
+<a href="#" class="footer-link">MEMORIES</a>
+
+</div>
+
+</div>
+
+<!-- INFO -->
+
+<div class="md:text-right">
+
+<p class="text-xs">Vintage Flower Archive</p>
+
+<p id="footerDate" class="text-[10px] opacity-60 mt-2">
+First page written · 2026
+</p>
+
+<p class="text-[10px] opacity-60 mt-1">
+© 2026 MY VINTAGE ATELIER
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+</main>
+
+<!-- =========================================================
+     LUCIDE INITIALIZE
+========================================================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        if(
+            window.lucide &&
+            typeof lucide.createIcons === "function"
+        ){
+
+            lucide.createIcons();
+
+        }
+
+    }
+);
+
 </script>
 
 </body>
+
 </html>
