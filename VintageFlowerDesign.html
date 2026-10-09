@@ -9,92 +9,33 @@
 
 <title>Life & Travel Archive</title>
 
-<!-- =========================================================
-     TAILWIND
-========================================================= -->
-
+<!-- TAILWIND & LUCIDE -->
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<!-- =========================================================
-     LUCIDE
-========================================================= -->
-
 <script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- =========================================================
-     GOOGLE FONTS
-========================================================= -->
-
+<!-- GOOGLE FONTS (고운바탕 + Cinzel + Plus Jakarta Sans + Caveat) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
 
-<link
-href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&family=Caveat:wght@400;500;600&family=Gowun+Batang:wght@400;700&display=swap"
-rel="stylesheet"
->
-
-<!-- =========================================================
-     FIREBASE
-========================================================= -->
-
+<!-- FIREBASE -->
 <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-    getFirestore,
-    doc,
-    getDoc
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
-
-    authDomain:
-    "yuri-research-portfolio.firebaseapp.com",
-
-    projectId:
-    "yuri-research-portfolio",
-
-    storageBucket:
-    "yuri-research-portfolio.firebasestorage.app",
-
-    messagingSenderId:
-    "231317507996",
-
-    appId:
-    "1:231317507996:web:9773282c138706d886c259",
-
-    measurementId:
-    "G-57VHW2454"
-
+    apiKey: "AIzaSyD_d4etBdBcvBRhTJlD3cLssN309LAdlfg",
+    authDomain: "yuri-research-portfolio.firebaseapp.com",
+    projectId: "yuri-research-portfolio",
+    storageBucket: "yuri-research-portfolio.firebasestorage.app",
+    messagingSenderId: "231317507996",
+    appId: "1:231317507996:web:9773282c138706d886c259",
+    measurementId: "G-57VHW2454"
 };
 
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-/* =========================================================
-   FIREBASE INITIALIZE
-========================================================= */
-
-const app =
-    initializeApp(firebaseConfig);
-
-const db =
-    getFirestore(app);
-
-
-/* =========================================================
-   URL에서 NEWS ID 가져오기
-   예: news.html?id=abc123
-========================================================= */
 const params = new URLSearchParams(window.location.search);
 const newsId = params.get("id");
 
@@ -108,15 +49,15 @@ function setText(id, value){
 
 function clearText(id) {
     const el = getElement(id);
-    if (el) {
-        el.textContent = "";
-    }
+    if (el) el.textContent = "";
 }
 
 function setImage(id, value){
     const el = getElement(id);
-    if(!el || !value) return;
-    el.src = String(value).trim();
+    if(!el) return;
+    if(value && String(value).trim() !== ""){
+        el.src = String(value).trim();
+    }
 }
 
 function hideElement(id){
@@ -134,14 +75,12 @@ function showError(message){
 }
 
 async function loadLifeTravel(){
-
     if(!newsId){
         showError("This archive page requires a news ID.");
         return;
     }
 
     try{
-
         const docRef = doc(db, "news", newsId);
         const docSnap = await getDoc(docRef);
 
@@ -151,348 +90,109 @@ async function loadLifeTravel(){
         }
 
         const newsData = docSnap.data();
-
-        const content =
-            newsData.content &&
-            typeof newsData.content === "object"
-                ? newsData.content
-                : {};
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-setImage(
-    "heroImage",
-    content.vintageHeroImage ||
-    newsData.image
-);
-
-setText(
-    "heroTitle",
-    content.vintageHeroTitle ||
-    newsData.title
-);
-
-setText(
-    "heroDescription",
-    content.vintageHeroSubtitle ||
-    newsData.description
-);
-
-hideElement("heroEyebrow");
-
-
-/* =========================================================
-   CHAPTER 01
-========================================================= */
-
-hideElement("chapter01Label");
-
-setImage(
-    "chapter01Image",
-    content.vintageFlower1Image
-);
-
-setText(
-    "chapter01Title",
-    content.vintageFlower1Title
-);
-
-setText(
-    "chapter01Description",
-    content.vintageFlower1Text
-);
-
-
-/* =========================================================
-   WIDE PHOTO + TITLE
-========================================================= */
-
-setImage(
-    "ribbonImage",
-    content.vintageRibbonImage ||
-    content.vintageFlower1Image
-);
-
-setText(
-    "ribbonCaption",
-    content.vintageRibbonTitle ||
-    content.vintageFlower1Title
-);
-
-
-/* =========================================================
-   CHAPTER 02
-========================================================= */
-
-hideElement("chapter02Label");
-hideElement("chapter02SideLabel");
-hideElement("chapter02Date");
-
-setImage(
-    "chapter02Image",
-    content.vintageFlower2Image
-);
-
-setText(
-    "chapter02Title",
-    content.vintageFlower2Title
-);
-
-setText(
-    "chapter02Description",
-    content.vintageFlower2Text
-);
-
-
-/* =========================================================
-   VIDEO
-========================================================= */
-
-hideElement("videoSection");
-
-
-/* =========================================================
-   MEMORIES HEADING
-========================================================= */
-
-const quietMomentsHeading =
-    document.querySelector(
-        ".section-sage .section-heading .archive-label"
-    );
-
-if (quietMomentsHeading) {
-    quietMomentsHeading.textContent =
-        "MEMORABLE MOMENTS";
-}
-
-
-/* =========================================================
-   ARCH PHOTO 01
-========================================================= */
-
-setImage(
-    "page01Image",
-    content.vintageFlower3Image
-);
-
-clearText("page01Label");
-
-setText(
-    "page01Title",
-    content.vintageFlower3Title
-);
-
-setText(
-    "page01Description",
-    content.vintageFlower3Text
-);
-
-
-/* =========================================================
-   ARCH PHOTO 02
-========================================================= */
-
-setImage(
-    "page02Image",
-    content.vintageGallery1Image
-);
-
-clearText("page02Label");
-
-setText(
-    "page02Title",
-    content.vintageGallery1Title
-);
-
-setText(
-    "page02Description",
-    content.vintageGallery1Text
-);
-
-
-/* =========================================================
-   ARCH PHOTO 03
-========================================================= */
-
-setImage(
-    "page03Image",
-    content.vintageGallery2Image
-);
-
-clearText("page03Label");
-
-setText(
-    "page03Title",
-    content.vintageGallery2Title
-);
-
-setText(
-    "page03Description",
-    content.vintageGallery2Text
-);
-
-
-/* =========================================================
-   FINAL JOURNAL
-========================================================= */
-
-setImage(
-    "memoryAImage",
-    content.vintageGallery3Image
-);
-
-hideElement("memoryALabel");
-
-setText(
-    "memoryATitle",
-    content.vintageJournalTitle
-);
-
-setText(
-    "memoryADescription",
-    content.vintageJournalText
-);
-
-hideElement("memoryANote");
-
-
-/* =========================================================
-   FINAL PHOTO
-========================================================= */
-
-setImage(
-    "memoryBImage",
-    content.vintageGallery4Image
-);
-
-hideElement("memoryBLabel");
-hideElement("memoryBTitle");
-hideElement("memoryBDescription");
-hideElement("memoryBNote");
-
-
-/* =========================================================
-   UNUSED MEMORY C
-========================================================= */
-
-hideElement("memoryCSection");
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-const footerDate =
-    getElement("footerDate");
-
-if (footerDate) {
-    const category =
-        newsData.category ||
-        "Life";
-
-    const designName =
-        "Vintage Flower";
-
-    const date =
-        formatArchiveDate(
-            newsData.date ||
-            newsData.createdAt ||
-            newsData.updatedAt
-        );
-
-    footerDate.textContent =
-        [
-            date,
-            category,
-            designName
-        ]
-            .filter(Boolean)
-            .join(" · ");
-}
-
-
-/* =========================================================
-   DOCUMENT TITLE
-========================================================= */
-
-const pageTitle =
-    content.vintageHeroTitle ||
-    newsData.title;
-
-if (pageTitle) {
-    document.title =
-        String(pageTitle) +
-        " — Yuri Choi";
-}
+        const content = newsData.content && typeof newsData.content === "object" ? newsData.content : {};
+
+        /* HERO */
+        setImage("heroImage", content.vintageHeroImage || newsData.image);
+        setText("heroTitle", content.vintageHeroTitle || newsData.title);
+        setText("heroDescription", content.vintageHeroSubtitle || newsData.description);
+        hideElement("heroEyebrow");
+
+        /* CHAPTER 01 */
+        hideElement("chapter01Label");
+        setImage("chapter01Image", content.vintageFlower1Image);
+        setText("chapter01Title", content.vintageFlower1Title);
+        setText("chapter01Description", content.vintageFlower1Text);
+
+        /* WIDE PHOTO (RIBBON) - 모달 입력 이미지 연동 보완 */
+        const ribbonImgUrl = content.vintageRibbonImage || content.vintageGallery2Image || content.vintageFlower1Image || newsData.image;
+        setImage("ribbonImage", ribbonImgUrl);
+        setText("ribbonCaption", content.vintageRibbonTitle || "Congratulations!");
+
+        /* CHAPTER 02 */
+        hideElement("chapter02Label");
+        hideElement("chapter02SideLabel");
+        hideElement("chapter02Date");
+        setImage("chapter02Image", content.vintageFlower2Image);
+        setText("chapter02Title", content.vintageFlower2Text || content.vintageFlower2Title);
+        setText("chapter02Description", content.vintageFlower2Text);
+
+        /* VIDEO */
+        hideElement("videoSection");
+
+        /* MEMORABLE MOMENTS HEADING */
+        const quietMomentsHeading = document.querySelector(".section-sage .section-heading .archive-label");
+        if (quietMomentsHeading) {
+            quietMomentsHeading.textContent = "MEMORABLE MOMENTS";
+        }
+
+        /* ARCH PHOTO 01, 02, 03 */
+        setImage("page01Image", content.vintageFlower3Image);
+        clearText("page01Label");
+        setText("page01Title", content.vintageFlower3Title);
+        setText("page01Description", content.vintageFlower3Text);
+
+        setImage("page02Image", content.vintageGallery1Image);
+        clearText("page02Label");
+        setText("page02Title", content.vintageGallery1Title);
+        setText("page02Description", content.vintageGallery1Text);
+
+        setImage("page03Image", content.vintageGallery2Image);
+        clearText("page03Label");
+        setText("page03Title", content.vintageGallery2Title);
+        setText("page03Description", content.vintageGallery2Text);
+
+        /* FINAL JOURNAL */
+        setImage("memoryAImage", content.vintageGallery3Image);
+        hideElement("memoryALabel");
+        setText("memoryATitle", content.vintageJournalTitle);
+        setText("memoryADescription", content.vintageJournalText);
+        hideElement("memoryANote");
+
+        /* FINAL PHOTO */
+        setImage("memoryBImage", content.vintageGallery4Image);
+        hideElement("memoryBLabel");
+        hideElement("memoryBTitle");
+        hideElement("memoryBDescription");
+        hideElement("memoryBNote");
+
+        /* UNUSED MEMORY C */
+        hideElement("memoryCSection");
+
+        /* FOOTER DATE */
+        const footerDate = getElement("footerDate");
+        if (footerDate) {
+            const category = newsData.category || "Life";
+            const designName = "Vintage Flower";
+            const date = formatArchiveDate(newsData.date || newsData.createdAt || newsData.updatedAt);
+            footerDate.textContent = [date, category, designName].filter(Boolean).join(" · ");
+        }
+
+        /* DOCUMENT TITLE */
+        const pageTitle = content.vintageHeroTitle || newsData.title;
+        if (pageTitle) {
+            document.title = String(pageTitle) + " — Yuri Choi";
+        }
 
         hideElement("loadingScreen");
 
-        console.log("VintageFlowerDesign loaded successfully!", { id: newsId, content });
-
-    }catch(error){
+    } catch(error){
         console.error("Failed to load VintageFlowerDesign:", error);
         showError("Unable to load this archive. Please try again.");
     }
-
 }
 
 function formatArchiveDate(value) {
-    if (!value) {
-        return "";
-    }
-
-    let date;
-
-    if (
-        value &&
-        typeof value.toDate === "function"
-    ) {
-        date = value.toDate();
-    }
-    else if (
-        value instanceof Date
-    ) {
-        date = value;
-    }
-    else {
-        date = new Date(value);
-    }
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-        return String(value);
-    }
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-    );
+    if (!value) return "";
+    let date = (value && typeof value.toDate === "function") ? value.toDate() : new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
 loadLifeTravel();
-
 </script>
 
-<!-- =========================================================
-     CSS (가독성 및 글자 크기 보완)
-========================================================= -->
-
 <style>
-
-/* =========================================================
-   BASE
-========================================================= */
-
 :root{
     --paper:#F3F1E8;
     --paper-light:#F8F7F1;
@@ -508,1053 +208,369 @@ loadLifeTravel();
     --warm:#EDE7DB;
 }
 
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
 
 body{
     margin:0;
-    font-family: 'Gowun Batang', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Gowun Batang', 'Plus Jakarta Sans', serif, sans-serif;
     background: var(--paper);
     color: var(--text);
-    font-size: 16px;
-    line-height: 1.7;
 }
 
-img{
-    max-width:100%;
-}
+img{ max-width:100%; }
 
-.font-serif-title{
-    font-family: 'Cinzel', serif;
-}
+.font-serif-title{ font-family: 'Cinzel', serif; }
 
+/* 폰트 지정 (한글은 고운바탕, 영문/기호는 Caveat 감성 적용) */
 .font-hand{
-    font-family: 'Caveat', cursive;
+    font-family: 'Gowun Batang', 'Caveat', cursive, serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
 }
 
-::selection{
-    background:#AEB9A6;
-    color:white;
+p, span, h4 {
+    font-family: 'Gowun Batang', 'Plus Jakarta Sans', sans-serif;
 }
 
-/* =========================================================
-   TEXT SIZE OVERRIDES (가독성 보완)
-========================================================= */
-p {
-    font-size: 1rem !important; /* 16px 기본 적용 */
-    line-height: 1.75 !important;
-}
-
-h3 {
-    font-size: 1.65rem !important;
-    line-height: 1.3 !important;
-}
-
-h4 {
-    font-size: 1.25rem !important;
-}
-
-.font-hand {
-    font-size: 1.5rem !important; /* 캘리그라피 폰트 시원하게 확대 */
-}
-
-/* =========================================================
-   LOADING
-========================================================= */
+::selection{ background:#AEB9A6; color:white; }
 
 #loadingScreen{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:15px;
-    background:#F3F1E8;
-    color:#5E6958;
+    position:fixed; inset:0; z-index:9999; display:flex; align-items:center;
+    justify-content:center; flex-direction:column; gap:15px; background:#F3F1E8; color:#5E6958;
 }
-
-.loading-symbol{
-    font-family: 'Cinzel', serif;
-    font-size:22px;
-    letter-spacing:.2em;
-}
-
-.loading-text{
-    font-size:11px;
-    letter-spacing:.3em;
-    text-transform:uppercase;
-    opacity:.6;
-}
-
-/* =========================================================
-   ERROR
-========================================================= */
+.loading-symbol{ font-family: 'Cinzel', serif; font-size:22px; letter-spacing:.2em; }
+.loading-text{ font-size:10px; letter-spacing:.3em; text-transform:uppercase; opacity:.6; }
 
 #errorScreen{
-    position:fixed;
-    inset:0;
-    z-index:9998;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-    padding:30px;
-    background:#F3F1E8;
-    color:#5E6958;
+    position:fixed; inset:0; z-index:9998; display:none; align-items:center;
+    justify-content:center; flex-direction:column; text-align:center; padding:30px; background:#F3F1E8; color:#5E6958;
 }
+#errorScreen h1{ font-family: 'Cinzel', serif; font-size:24px; margin-bottom:15px; }
+#errorMessage{ font-size:12px; opacity:.7; }
 
-#errorScreen h1{
-    font-family: 'Cinzel', serif;
-    font-size:24px;
-    margin-bottom:15px;
-}
+.section-paper{ background: radial-gradient(circle at 15% 20%, rgba(255,255,255,.55), transparent 30%), var(--paper); }
+.section-sage{ background: linear-gradient(180deg, #E7EDE3 0%, #EAF0E6 100%); }
+.section-light{ background: #F8F7F1; }
+.section-warm{ background: linear-gradient(180deg, #EEF2EA 0%, #E7EDE3 100%); }
+.section-life-memory{ background: linear-gradient(180deg, #F3F1E8 0%, #EEF0E7 100%); }
 
-#errorMessage{
-    font-size:13px;
-    opacity:.7;
-}
+.archive-label{ display:inline-block; font-size:10px; letter-spacing:.35em; color:#71806D; }
 
-/* =========================================================
-   SECTION BACKGROUNDS
-========================================================= */
+.botanical-divider{ display:flex; align-items:center; justify-content:center; gap:14px; color:#788574; font-size:13px; letter-spacing:.3em; opacity:.75; }
+.botanical-divider::before, .botanical-divider::after{ content:""; width:65px; height:1px; background:#BEC6B7; }
 
-.section-paper{
-    background:
-    radial-gradient(
-        circle at 15% 20%,
-        rgba(255,255,255,.55),
-        transparent 30%
-    ),
-    var(--paper);
-}
+.sparkle-line{ display:flex; align-items:center; gap:10px; color:#7C8976; }
+.sparkle-line::before{ content:""; width:30px; height:1px; background:#B8C0B1; flex-shrink:0; }
 
-.section-sage{
-    background:
-    linear-gradient(
-        180deg,
-        #E7EDE3 0%,
-        #EAF0E6 100%
-    );
-}
+.photo-frame{ position:relative; display:inline-block; }
+.hand-photo{ position:relative; border: 1px solid rgba(108,120,102,.55); background:#F9F8F2; box-shadow: 3px 3px 0 rgba(105,116,99,.07), -2px -2px 0 rgba(150,157,139,.05); }
+.hand-photo::before{ content:""; position:absolute; inset:-5px; border: 1px solid rgba(104,116,99,.38); pointer-events:none; z-index:5; }
+.hand-photo::after{ content:""; position:absolute; inset:-8px -6px -5px -7px; border: 1px solid rgba(142,151,133,.18); border-radius:4px; transform: rotate(-.35deg); pointer-events:none; z-index:5; }
 
-.section-light{
-    background: #F8F7F1;
-}
+.vertical-oval-frame{ position:relative; width:320px; height:520px; display:flex; align-items:center; justify-content:center; }
+.vertical-oval-frame::before{ content:""; position:absolute; inset:0; border: 1px solid #B8A85F; border-radius:50%; transform: rotate(-3deg) translate(-8px,5px); pointer-events:none; }
+.vertical-oval-frame::after{ content:""; position:absolute; inset:3px -5px -4px 5px; border: 1px dashed #C8BB79; border-radius:50%; transform: rotate(2deg); pointer-events:none; }
 
-.section-warm{
-    background:
-    linear-gradient(
-        180deg,
-        #EEF2EA 0%,
-        #E7EDE3 100%
-    );
-}
+.vertical-oval-photo{ position:relative; width:290px; height:490px; border-radius:50%; overflow:hidden; border: 1px solid rgba(105,116,75,.45); background:#F5F2E6; box-shadow: 3px 4px 0 rgba(105,116,75,.08), -2px -2px 0 rgba(190,175,95,.06); z-index:2; }
+.vertical-oval-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-.section-life-memory{
-    background:
-    linear-gradient(
-        180deg,
-        #F3F1E8 0%,
-        #EEF0E7 100%
-    );
-}
+.hero-border{ border-bottom: 1px solid rgba(201,205,192,.8); }
+.hero-image{ transition: opacity .5s ease; }
 
-/* =========================================================
-   ARCHIVE LABEL
-========================================================= */
+/* RIBBON SECTION (긴 사진 영역) */
+.ribbon-section{ position:relative; background-color: #E7EDE3; }
+.ribbon-section::before{ content:""; position:absolute; left:8%; right:8%; top:50%; height:1px; background: rgba(203,209,196,.8); z-index:0; }
+.ribbon-caption{ position:absolute; bottom:12px; left:50%; transform: translateX(-50%); z-index:3; white-space:nowrap; background: rgba(243,241,232,.92); padding: 5px 20px; font-family: 'Gowun Batang', 'Caveat', cursive; font-size:18px; color:#65715F; border-radius: 4px; border: 1px solid #d4d5c7; }
 
-.archive-label{
-    display:inline-block;
-    font-size:11px;
-    letter-spacing:.35em;
-    color:#71806D;
-}
+.video-frame{ position:relative; background:#F7F6EF; border: 1px solid #C3C8BB; padding:10px; }
+.video-frame::before{ content:""; position:absolute; inset:-5px; border: 1px solid rgba(104,116,99,.25); transform: rotate(.25deg); pointer-events:none; }
+.video-inner{ position:relative; width:100%; aspect-ratio: 16/7; overflow:hidden; background:#D9DDD2; }
+.video-inner video{ width:100%; height:100%; object-fit:cover; }
+.video-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.video-play span{ width:58px; height:58px; border: 1px solid rgba(255,255,255,.85); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; background: rgba(55,65,55,.2); backdrop-filter: blur(3px); }
 
-/* =========================================================
-   BOTANICAL DIVIDER
-========================================================= */
+.section-heading{ display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:50px; }
+.section-heading::before, .section-heading::after{ content:""; width:42px; height:1px; background:#AEB8A9; }
 
-.botanical-divider{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:14px;
-    color:#788574;
-    font-size:13px;
-    letter-spacing:.3em;
-    opacity:.75;
-}
+.memory-divider{ border-bottom: 1px solid rgba(160,169,151,.35); }
 
-.botanical-divider::before,
-.botanical-divider::after{
-    content:"";
-    width:65px;
-    height:1px;
-    background:#BEC6B7;
-}
+.archive-footer{ background: #526052; color: #EEF0E7; }
+.footer-link{ position:relative; transition: opacity .3s ease; }
+.footer-link::after{ content:""; position:absolute; left:0; bottom:-5px; width:0; height:1px; background: #DCE2D5; transition: width .3s ease; }
+.footer-link:hover{ opacity:.75; }
+.footer-link:hover::after{ width:100%; }
 
-/* =========================================================
-   SPARKLE LINE
-========================================================= */
-
-.sparkle-line{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    color:#7C8976;
-}
-
-.sparkle-line::before{
-    content:"";
-    width:30px;
-    height:1px;
-    background:#B8C0B1;
-    flex-shrink:0;
-}
-
-/* =========================================================
-   PHOTO FRAME
-========================================================= */
-
-.photo-frame{
-    position:relative;
-    display:inline-block;
-}
-
-.hand-photo{
-    position:relative;
-    border: 1px solid rgba(108,120,102,.55);
-    background:#F9F8F2;
-    box-shadow:
-        3px 3px 0 rgba(105,116,99,.07),
-        -2px -2px 0 rgba(150,157,139,.05);
-}
-
-.hand-photo::before{
-    content:"";
-    position:absolute;
-    inset:-5px;
-    border: 1px solid rgba(104,116,99,.38);
-    pointer-events:none;
-    z-index:5;
-}
-
-.hand-photo::after{
-    content:"";
-    position:absolute;
-    inset:-8px -6px -5px -7px;
-    border: 1px solid rgba(142,151,133,.18);
-    border-radius:4px;
-    transform: rotate(-.35deg);
-    pointer-events:none;
-    z-index:5;
-}
-
-/* =========================================================
-   VERTICAL OVAL FRAME
-========================================================= */
-
-.vertical-oval-frame{
-    position:relative;
-    width:320px;
-    height:520px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.vertical-oval-frame::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    border: 1px solid #B8A85F;
-    border-radius:50%;
-    transform: rotate(-3deg) translate(-8px,5px);
-    pointer-events:none;
-}
-
-.vertical-oval-frame::after{
-    content:"";
-    position:absolute;
-    inset:3px -5px -4px 5px;
-    border: 1px dashed #C8BB79;
-    border-radius:50%;
-    transform: rotate(2deg);
-    pointer-events:none;
-}
-
-.vertical-oval-photo{
-    position:relative;
-    width:290px;
-    height:490px;
-    border-radius:50%;
-    overflow:hidden;
-    border: 1px solid rgba(105,116,75,.45);
-    background:#F5F2E6;
-    box-shadow:
-        3px 4px 0 rgba(105,116,75,.08),
-        -2px -2px 0 rgba(190,175,95,.06);
-    z-index:2;
-}
-
-.vertical-oval-photo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero-border{
-    border-bottom: 1px solid rgba(201,205,192,.8);
-}
-
-.hero-image{
-    transition: opacity .5s ease;
-}
-
-/* =========================================================
-   RIBBON
-========================================================= */
-
-.ribbon-section{
-    position:relative;
-}
-
-.ribbon-section::before{
-    content:"";
-    position:absolute;
-    left:8%;
-    right:8%;
-    top:50%;
-    height:1px;
-    background: rgba(203,209,196,.8);
-    z-index:0;
-}
-
-.ribbon-caption{
-    position:absolute;
-    bottom:12px;
-    left:50%;
-    transform: translateX(-50%);
-    z-index:3;
-    white-space:nowrap;
-    background: rgba(243,241,232,.88);
-    padding: 6px 20px;
-    font-family: 'Caveat', cursive;
-    font-size: 20px !important;
-    color:#65715F;
-}
-
-/* =========================================================
-   VIDEO
-========================================================= */
-
-.video-frame{
-    position:relative;
-    background:#F7F6EF;
-    border: 1px solid #C3C8BB;
-    padding:10px;
-}
-
-.video-frame::before{
-    content:"";
-    position:absolute;
-    inset:-5px;
-    border: 1px solid rgba(104,116,99,.25);
-    transform: rotate(.25deg);
-    pointer-events:none;
-}
-
-.video-inner{
-    position:relative;
-    width:100%;
-    aspect-ratio: 16/7;
-    overflow:hidden;
-    background:#D9DDD2;
-}
-
-.video-inner video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.video-play{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    pointer-events:none;
-}
-
-.video-play span{
-    width:58px;
-    height:58px;
-    border: 1px solid rgba(255,255,255,.85);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    background: rgba(55,65,55,.2);
-    backdrop-filter: blur(3px);
-}
-
-/* =========================================================
-   SECTION HEADING
-========================================================= */
-
-.section-heading{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:16px;
-    margin-bottom:50px;
-}
-
-.section-heading::before,
-.section-heading::after{
-    content:"";
-    width:42px;
-    height:1px;
-    background:#AEB8A9;
-}
-
-/* =========================================================
-   MEMORY DIVIDER
-========================================================= */
-
-.memory-divider{
-    border-bottom: 1px solid rgba(160,169,151,.35);
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.archive-footer{
-    background: #526052;
-    color: #EEF0E7;
-}
-
-.footer-link{
-    position:relative;
-    transition: opacity .3s ease;
-}
-
-.footer-link::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-5px;
-    width:0;
-    height:1px;
-    background: #DCE2D5;
-    transition: width .3s ease;
-}
-
-.footer-link:hover{
-    opacity:.75;
-}
-
-.footer-link:hover::after{
-    width:100%;
-}
-
-.footer-botanical{
-    width:100%;
-    height:1px;
-    background: rgba(230,235,223,.3);
-    position:relative;
-}
-
-.footer-botanical::after{
-    content:"✦";
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
-    background: #526052;
-    padding: 0 15px;
-    color: #DDE4D7;
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+.footer-botanical{ width:100%; height:1px; background: rgba(230,235,223,.3); position:relative; }
+.footer-botanical::after{ content:"✦"; position:absolute; left:50%; top:50%; transform: translate(-50%,-50%); background: #526052; padding: 0 15px; color: #DDE4D7; }
 
 @media(max-width:768px){
-    .vertical-oval-frame{
-        width:280px;
-        height:460px;
-    }
-
-    .vertical-oval-photo{
-        width:252px;
-        height:432px;
-    }
-
-    .ribbon-caption{
-        font-size:16px !important;
-        max-width: 85%;
-        overflow:hidden;
-        text-overflow: ellipsis;
-    }
-
-    .section-heading{
-        margin-bottom:35px;
-    }
-
-    .section-heading::before,
-    .section-heading::after{
-        width:25px;
-    }
+    .vertical-oval-frame{ width:280px; height:460px; }
+    .vertical-oval-photo{ width:252px; height:432px; }
+    .ribbon-caption{ font-size:15px; max-width: 85%; overflow:hidden; text-overflow: ellipsis; }
+    .section-heading{ margin-bottom:35px; }
+    .section-heading::before, .section-heading::after{ width:25px; }
 }
-
 </style>
-
 </head>
 
 <body class="antialiased overflow-x-hidden">
-
-<!-- =========================================================
-     LOADING SCREEN
-========================================================= -->
 
 <div id="loadingScreen">
     <div class="loading-symbol">✦</div>
     <div class="loading-text">Opening the archive</div>
 </div>
 
-<!-- =========================================================
-     ERROR SCREEN
-========================================================= -->
-
 <div id="errorScreen">
     <h1>Archive Not Found</h1>
     <p id="errorMessage">Unable to load this archive.</p>
 </div>
 
-<!-- =========================================================
-     MAIN
-========================================================= -->
-
 <main class="w-full">
 
-<!-- =========================================================
-     HERO
-========================================================= -->
-
+<!-- HERO -->
 <header class="w-full section-paper hero-border">
-
-<div class="relative w-full aspect-[16/7] overflow-hidden">
-
-<img
-id="heroImage"
-src=""
-alt="Life and Travel Archive"
-class="hero-image w-full h-full object-cover brightness-[0.70]"
->
-
-<div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center p-6">
-
-<span id="heroEyebrow" class="text-[10px] md:text-xs tracking-[0.4em] text-[#E8ECE2] uppercase mb-3"> </span>
-
-<h1 id="heroTitle" class="text-4xl md:text-6xl font-serif-title tracking-widest text-white"></h1>
-
-<div class="w-16 h-[1px] bg-white/50 my-5"></div>
-
-<p id="heroDescription" class="text-sm md:text-base text-white/90 leading-relaxed font-light max-w-xl"></p>
-
-</div>
-
-</div>
-
+    <div class="relative w-full aspect-[16/7] overflow-hidden">
+        <img id="heroImage" src="" alt="Life and Travel Archive" class="hero-image w-full h-full object-cover brightness-[0.70]">
+        <div class="absolute inset-0 bg-black/20 flex flex-col justify-center items-center text-center p-6">
+            <span id="heroEyebrow" class="text-[10px] md:text-xs tracking-[0.4em] text-[#E8ECE2] uppercase mb-3"> </span>
+            <h1 id="heroTitle" class="text-4xl md:text-6xl font-serif-title tracking-widest text-white"></h1>
+            <div class="w-16 h-[1px] bg-white/50 my-5"></div>
+            <p id="heroDescription" class="text-xs md:text-sm text-white/90 leading-relaxed font-light max-w-xl"></p>
+        </div>
+    </div>
 </header>
 
-<!-- =========================================================
-     CHAPTER 01
-========================================================= -->
-
+<!-- CHAPTER 01 -->
 <section class="section-paper w-full py-28 md:py-36">
-
-<div class="w-full max-w-5xl mx-auto px-6">
-
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-
-<div class="md:col-span-6 space-y-4">
-
-<span id="chapter01Label" class="archive-label"> </span>
-
-<h3 id="chapter01Title" class="text-xl md:text-2xl font-serif-title tracking-wide"></h3>
-
-<p id="chapter01Description" class="text-sm md:text-base text-[#6F766A] leading-relaxed font-light"></p>
-
-<div class="botanical-divider pt-4">✦</div>
-
-</div>
-
-<div class="md:col-span-6 flex justify-center md:justify-end">
-
-<div class="photo-frame">
-
-<div class="vertical-oval-frame">
-
-<div class="vertical-oval-photo">
-
-<img id="chapter01Image" src="" alt="Chapter 01">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+    <div class="w-full max-w-5xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 space-y-4">
+                <span id="chapter01Label" class="archive-label"> </span>
+                <h3 id="chapter01Title" class="text-xl md:text-2xl font-serif-title tracking-wide"></h3>
+                <p id="chapter01Description" class="text-xs md:text-sm text-[#6F766A] leading-relaxed font-light"></p>
+                <div class="botanical-divider pt-4">✦</div>
+            </div>
+            <div class="md:col-span-6 flex justify-center md:justify-end">
+                <div class="photo-frame">
+                    <div class="vertical-oval-frame">
+                        <div class="vertical-oval-photo">
+                            <img id="chapter01Image" src="" alt="Chapter 01">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- =========================================================
-     RIBBON
-========================================================= -->
-
+<!-- RIBBON (긴 사진 영역) -->
 <section class="w-full section-light">
-
-<div class="ribbon-section w-full h-24 md:h-36 overflow-hidden">
-
-<img id="ribbonImage" src="" alt="Travel Journal Detail" class="w-full h-full object-cover brightness-[0.85]">
-
-<div id="ribbonCaption" class="ribbon-caption"></div>
-
-</div>
-
+    <div class="ribbon-section w-full h-32 md:h-48 overflow-hidden">
+        <img id="ribbonImage" src="" alt="Travel Journal Detail" class="w-full h-full object-cover brightness-[0.90]">
+        <div id="ribbonCaption" class="ribbon-caption"></div>
+    </div>
 </section>
 
-<!-- =========================================================
-     CHAPTER 02
-========================================================= -->
-
+<!-- CHAPTER 02 -->
 <section class="section-paper w-full py-28 md:py-36">
-
-<div class="w-full max-w-5xl mx-auto px-6">
-
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-
-<div class="md:col-span-6 flex justify-center md:justify-start">
-
-<div class="photo-frame">
-
-<div class="vertical-oval-frame">
-
-<div class="vertical-oval-photo">
-
-<img id="chapter02Image" src="" alt="Chapter 02">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="md:col-span-6 space-y-4">
-
-<span id="chapter02Label" class="archive-label"> </span>
-
-<h3 id="chapter02Title" class="text-xl md:text-2xl font-serif-title tracking-wide"></h3>
-
-<p id="chapter02Description" class="text-sm md:text-base text-[#6F766A] leading-relaxed font-light"></p>
-
-<div class="border-l border-[#8D9A86] pl-4 mt-4">
-
-<p id="chapter02SideLabel" class="text-[10px] tracking-widest text-[#71806D]"></p>
-
-<p id="chapter02Date" class="text-xs text-[#6F766A] mt-1"></p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+    <div class="w-full max-w-5xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 flex justify-center md:justify-start">
+                <div class="photo-frame">
+                    <div class="vertical-oval-frame">
+                        <div class="vertical-oval-photo">
+                            <img id="chapter02Image" src="" alt="Chapter 02">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-6 space-y-4">
+                <span id="chapter02Label" class="archive-label"> </span>
+                <h3 id="chapter02Title" class="text-xl md:text-2xl font-serif-title tracking-wide"></h3>
+                <p id="chapter02Description" class="text-xs md:text-sm text-[#6F766A] leading-relaxed font-light"></p>
+                <div class="border-l border-[#8D9A86] pl-4 mt-4">
+                    <p id="chapter02SideLabel" class="text-[10px] tracking-widest text-[#71806D]"></p>
+                    <p id="chapter02Date" class="text-xs text-[#6F766A] mt-1"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- =========================================================
-     VIDEO MEMORY
-========================================================= -->
-
+<!-- VIDEO MEMORY -->
 <section id="videoSection" class="section-light w-full py-28 md:py-36">
-
-<div class="w-full max-w-6xl mx-auto px-6">
-
-<div class="section-heading">
-
-<span class="archive-label">MOVING MEMORIES</span>
-
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-
-<div class="md:col-span-8">
-
-<div class="video-frame">
-
-<div class="video-inner">
-
-<video id="mainVideo" autoplay muted loop playsinline>
-
-<source id="videoUrl" src="" type="video/mp4">
-
-</video>
-
-<div class="video-play">
-
-<span>
-<i data-lucide="play" width="20" height="20"> </i>
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="md:col-span-4 space-y-4">
-
-<span id="videoLabel" class="archive-label"> </span>
-
-<h3 id="videoTitle" class="text-xl font-serif-title tracking-wide"></h3>
-
-<p id="videoDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
-
-<div id="videoSubLabel" class="sparkle-line pt-2"></div>
-
-</div>
-
-</div>
-
-</div>
-
+    <div class="w-full max-w-6xl mx-auto px-6">
+        <div class="section-heading">
+            <span class="archive-label">MOVING MEMORIES</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+            <div class="md:col-span-8">
+                <div class="video-frame">
+                    <div class="video-inner">
+                        <video id="mainVideo" autoplay muted loop playsinline>
+                            <source id="videoUrl" src="" type="video/mp4">
+                        </video>
+                        <div class="video-play">
+                            <span><i data-lucide="play" width="20" height="20"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-4 space-y-4">
+                <span id="videoLabel" class="archive-label"> </span>
+                <h3 id="videoTitle" class="text-xl font-serif-title tracking-wide"></h3>
+                <p id="videoDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
+                <div id="videoSubLabel" class="sparkle-line pt-2"></div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- =========================================================
-     THREE ARCH WINDOWS
-========================================================= -->
-
+<!-- THREE ARCH WINDOWS (아치 사진 3개 영역) -->
 <section class="section-sage w-full py-28 md:py-36">
+    <div class="w-full max-w-6xl mx-auto px-6">
+        <div class="section-heading">
+            <span class="archive-label">MEMORABLE MOMENTS</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-<div class="w-full max-w-6xl mx-auto px-6">
+            <!-- PAGE 01 -->
+            <div class="space-y-5 flex flex-col items-center text-center">
+                <div class="photo-frame w-full">
+                    <div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
+                        <img id="page01Image" src="" alt="Page 01" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full pt-5">
+                    <div class="botanical-divider mb-5">✦</div>
+                    <h4 id="page01Label" class="text-sm font-semibold tracking-wide"></h4>
+                    <p id="page01Title" class="font-hand text-2xl text-[#58634f] mt-1"></p>
+                    <p id="page01Description" class="text-sm text-[#6F766A] leading-relaxed px-2 mt-2"></p>
+                </div>
+            </div>
 
-<div class="section-heading">
+            <!-- PAGE 02 -->
+            <div class="space-y-5 flex flex-col items-center text-center">
+                <div class="photo-frame w-full">
+                    <div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
+                        <img id="page02Image" src="" alt="Page 02" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full pt-5">
+                    <div class="botanical-divider mb-5">✦</div>
+                    <h4 id="page02Label" class="text-sm font-semibold tracking-wide"></h4>
+                    <p id="page02Title" class="font-hand text-2xl text-[#58634f] mt-1"></p>
+                    <p id="page02Description" class="text-sm text-[#6F766A] leading-relaxed px-2 mt-2"></p>
+                </div>
+            </div>
 
-<span class="archive-label">A FEW QUIET MOMENTS</span>
+            <!-- PAGE 03 (꿈돌이 영역) -->
+            <div class="space-y-5 flex flex-col items-center text-center">
+                <div class="photo-frame w-full">
+                    <div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
+                        <img id="page03Image" src="" alt="Page 03" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full pt-5">
+                    <div class="botanical-divider mb-5">✦</div>
+                    <h4 id="page03Label" class="text-sm font-semibold tracking-wide"></h4>
+                    <p id="page03Title" class="font-hand text-2xl text-[#58634f] mt-1"></p>
+                    <p id="page03Description" class="text-sm text-[#6F766A] leading-relaxed px-2 mt-2"></p>
+                </div>
+            </div>
 
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-
-<!-- PAGE 01 -->
-
-<div class="space-y-5 flex flex-col items-center text-center">
-
-<div class="photo-frame w-full">
-
-<div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
-
-<img id="page01Image" src="" alt="Page 01" class="w-full h-full object-cover">
-
-</div>
-
-</div>
-
-<div class="w-full pt-5">
-
-<div class="botanical-divider mb-5">✦</div>
-
-<h4 id="page01Label" class="text-sm font-semibold tracking-wide"></h4>
-
-<p id="page01Title" class="font-hand text-xl text-[#66745F] mt-1"></p>
-
-<p id="page01Description" class="text-xs text-[#6F766A] leading-relaxed px-2 mt-2"></p>
-
-</div>
-
-</div>
-
-<!-- PAGE 02 -->
-
-<div class="space-y-5 flex flex-col items-center text-center">
-
-<div class="photo-frame w-full">
-
-<div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
-
-<img id="page02Image" src="" alt="Page 02" class="w-full h-full object-cover">
-
-</div>
-
-</div>
-
-<div class="w-full pt-5">
-
-<div class="botanical-divider mb-5">✦</div>
-
-<h4 id="page02Label" class="text-sm font-semibold tracking-wide"></h4>
-
-<p id="page02Title" class="font-hand text-xl text-[#66745F] mt-1"></p>
-
-<p id="page02Description" class="text-xs text-[#6F766A] leading-relaxed px-2 mt-2"></p>
-
-</div>
-
-</div>
-
-<!-- PAGE 03 -->
-
-<div class="space-y-5 flex flex-col items-center text-center">
-
-<div class="photo-frame w-full">
-
-<div class="hand-photo w-full aspect-[2/3] rounded-t-full overflow-hidden">
-
-<img id="page03Image" src="" alt="Page 03" class="w-full h-full object-cover">
-
-</div>
-
-</div>
-
-<div class="w-full pt-5">
-
-<div class="botanical-divider mb-5">✦</div>
-
-<h4 id="page03Label" class="text-sm font-semibold tracking-wide"></h4>
-
-<p id="page03Title" class="font-hand text-xl text-[#66745F] mt-1"></p>
-
-<p id="page03Description" class="text-xs text-[#6F766A] leading-relaxed px-2 mt-2"></p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
+        </div>
+    </div>
 </section>
 
-<!-- =========================================================
-     MEMORY A / B / C
-========================================================= -->
-
+<!-- MEMORY A / B / C -->
 <section class="section-life-memory w-full">
+    <!-- MEMORY A -->
+    <div class="memory-divider grid grid-cols-1 md:grid-cols-2 w-full items-center">
+        <div class="photo-frame w-full">
+            <div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-r-full">
+                <img id="memoryAImage" src="" alt="Memory A" class="w-full h-full object-cover">
+            </div>
+        </div>
+        <div class="p-8 md:p-16 space-y-3 text-left">
+            <span id="memoryALabel" class="archive-label"> </span>
+            <h4 id="memoryATitle" class="text-base font-semibold"></h4>
+            <p id="memoryADescription" class="text-xs md:text-sm text-[#6F766A] leading-relaxed font-light"></p>
+            <div id="memoryANote" class="sparkle-line pt-2"></div>
+        </div>
+    </div>
 
-<!-- MEMORY A -->
+    <!-- MEMORY B -->
+    <div class="memory-divider grid grid-cols-1 md:grid-cols-2 w-full items-center">
+        <div class="p-8 md:p-16 space-y-3 text-left md:text-right order-2 md:order-1">
+            <span id="memoryBLabel" class="archive-label"> </span>
+            <h4 id="memoryBTitle" class="text-base font-semibold"></h4>
+            <p id="memoryBDescription" class="text-xs md:text-sm text-[#6F766A] leading-relaxed font-light"></p>
+            <div id="memoryBNote" class="sparkle-line pt-2 md:justify-end"></div>
+        </div>
+        <div class="order-1 md:order-2">
+            <div class="photo-frame w-full">
+                <div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-l-full">
+                    <img id="memoryBImage" src="" alt="Memory B" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="memory-divider grid grid-cols-1 md:grid-cols-2 w-full items-center">
-
-<div class="photo-frame w-full">
-
-<div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-r-full">
-
-<img id="memoryAImage" src="" alt="Memory A" class="w-full h-full object-cover">
-
-</div>
-
-</div>
-
-<div class="p-8 md:p-16 space-y-3 text-left">
-
-<span id="memoryALabel" class="archive-label"> </span>
-
-<h4 id="memoryATitle" class="text-base font-semibold"></h4>
-
-<p id="memoryADescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
-
-<div id="memoryANote" class="sparkle-line pt-2"></div>
-
-</div>
-
-</div>
-
-<!-- MEMORY B -->
-
-<div class="memory-divider grid grid-cols-1 md:grid-cols-2 w-full items-center">
-
-<div class="p-8 md:p-16 space-y-3 text-left md:text-right order-2 md:order-1">
-
-<span id="memoryBLabel" class="archive-label"> </span>
-
-<h4 id="memoryBTitle" class="text-base font-semibold"></h4>
-
-<p id="memoryBDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
-
-<div id="memoryBNote" class="sparkle-line pt-2 md:justify-end"></div>
-
-</div>
-
-<div class="order-1 md:order-2">
-
-<div class="photo-frame w-full">
-
-<div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-l-full">
-
-<img id="memoryBImage" src="" alt="Memory B" class="w-full h-full object-cover">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- MEMORY C -->
-
-<div id="memoryCSection" class="grid grid-cols-1 md:grid-cols-2 w-full items-center">
-
-<div class="photo-frame w-full">
-
-<div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-r-full">
-
-<img id="memoryCImage" src="" alt="Memory C" class="w-full h-full object-cover">
-
-</div>
-
-</div>
-
-<div class="p-8 md:p-16 space-y-3 text-left">
-
-<span id="memoryCLabel" class="archive-label"> </span>
-
-<h4 id="memoryCTitle" class="text-base font-semibold"></h4>
-
-<p id="memoryCDescription" class="text-xs text-[#6F766A] leading-relaxed font-light"></p>
-
-<div id="memoryCNote" class="sparkle-line pt-2"></div>
-
-</div>
-
-</div>
-
+    <!-- MEMORY C -->
+    <div id="memoryCSection" class="grid grid-cols-1 md:grid-cols-2 w-full items-center">
+        <div class="photo-frame w-full">
+            <div class="hand-photo w-full aspect-[16/8] md:aspect-[2/1] overflow-hidden rounded-r-full">
+                <img id="memoryCImage" src="" alt="Memory C" class="w-full h-full object-cover">
+            </div>
+        </div>
+        <div class="p-8 md:p-16 space-y-3 text-left">
+            <span id="memoryCLabel" class="archive-label"> </span>
+            <h4 id="memoryCTitle" class="text-base font-semibold"></h4>
+            <p id="memoryCDescription" class="text-xs md:text-sm text-[#6F766A] leading-relaxed font-light"></p>
+            <div id="memoryCNote" class="sparkle-line pt-2"></div>
+        </div>
+    </div>
 </section>
 
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
+<!-- FOOTER -->
 <footer class="archive-footer">
-
-<div class="max-w-7xl mx-auto px-6 py-14">
-
-<div class="footer-botanical mb-12"></div>
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
-
-<!-- TITLE -->
-
-<div>
-
-<p class="font-serif-title tracking-widest text-sm">LIFE & TRAVEL</p>
-
-<p class="text-xs mt-3 opacity-70 leading-relaxed">
-A quiet archive of places, flowers and memories.
-</p>
-
-</div>
-
-<!-- NAVIGATION -->
-
-<div>
-
-<p class="text-[10px] tracking-[0.3em] mb-5 opacity-60">EXPLORE THE ARCHIVE</p>
-
-<div class="flex flex-wrap gap-x-7 gap-y-4 text-xs">
-
-<a href="#" class="footer-link">LIFE</a>
-
-<a href="#" class="footer-link">TRAVEL</a>
-
-<a href="#" class="footer-link">PLACES</a>
-
-<a href="#" class="footer-link">JOURNAL</a>
-
-<a href="#" class="footer-link">MEMORIES</a>
-
-</div>
-
-</div>
-
-<!-- INFO -->
-
-<div class="md:text-right">
-
-<p class="text-xs">Vintage Flower Archive</p>
-
-<p id="footerDate" class="text-[10px] opacity-60 mt-2">
-First page written · 2026
-</p>
-
-<p class="text-[10px] opacity-60 mt-1">
-© 2026 MY VINTAGE ATELIER
-</p>
-
-</div>
-
-</div>
-
-</div>
-
+    <div class="max-w-7xl mx-auto px-6 py-14">
+        <div class="footer-botanical mb-12"></div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+            <div>
+                <p class="font-serif-title tracking-widest text-sm">LIFE & TRAVEL</p>
+                <p class="text-xs mt-3 opacity-70 leading-relaxed">A quiet archive of places, flowers and memories.</p>
+            </div>
+            <div>
+                <p class="text-[10px] tracking-[0.3em] mb-5 opacity-60">EXPLORE THE ARCHIVE</p>
+                <div class="flex flex-wrap gap-x-7 gap-y-4 text-xs">
+                    <a href="#" class="footer-link">LIFE</a>
+                    <a href="#" class="footer-link">TRAVEL</a>
+                    <a href="#" class="footer-link">PLACES</a>
+                    <a href="#" class="footer-link">JOURNAL</a>
+                    <a href="#" class="footer-link">MEMORIES</a>
+                </div>
+            </div>
+            <div class="md:text-right">
+                <p class="text-xs">Vintage Flower Archive</p>
+                <p id="footerDate" class="text-[10px] opacity-60 mt-2">First page written · 2026</p>
+                <p class="text-[10px] opacity-60 mt-1">© 2026 MY VINTAGE ATELIER</p>
+            </div>
+        </div>
+    </div>
 </footer>
 
 </main>
 
-<!-- =========================================================
-     LUCIDE INITIALIZE
-========================================================= -->
-
 <script>
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        if(
-            window.lucide &&
-            typeof lucide.createIcons === "function"
-        ){
-
-            lucide.createIcons();
-
-        }
-
+document.addEventListener("DOMContentLoaded", function(){
+    if(window.lucide && typeof lucide.createIcons === "function"){
+        lucide.createIcons();
     }
-);
-
+});
 </script>
 
 </body>
-
 </html>
