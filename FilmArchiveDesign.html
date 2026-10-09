@@ -2,7 +2,6 @@
 <html lang="ko">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -51,8 +50,9 @@ body {
     font-size: 16px;
 }
 
-/* MAIN PAPER */
+/* MAIN PAPER WRAPPER (기본 표시 설정) */
 .paper {
+    display: block;
     width: min(1440px, 94%);
     margin: 35px auto 60px;
     padding: 50px 70px;
@@ -75,7 +75,7 @@ body {
 
 .paper > * { position: relative; z-index: 2; }
 
-/* HERO (대문 사진 사각형 채움 + 라운딩 + 텍스트 오버레이) */
+/* HERO */
 .hero { margin-bottom: 100px; }
 
 .hero-card {
@@ -103,12 +103,13 @@ body {
     height: 100%;
     min-height: 480px;
     object-fit: cover;
+    background-color: #556251;
     transition: transform .6s ease;
 }
 
 .hero-image-wrap:hover img { transform: scale(1.02); }
 
-/* 사진 위 텍스트 오버레이 */
+/* HERO OVERLAY */
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -188,7 +189,7 @@ body {
     color: #525F4D;
 }
 
-/* MEMORY SECTION */
+/* MEMORY BOARD */
 .memory {
     margin-left: -70px;
     margin-right: -70px;
@@ -227,7 +228,7 @@ body {
     transition: .4s ease;
 }
 .memory-photo:hover { transform: scale(1.03) rotate(0deg) !important; z-index: 10; }
-.memory-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.memory-photo img { display: block; width: 100%; height: 100%; object-fit: cover; background: #e8e4d5; }
 
 .row-1 .memory-photo { width: 380px; height: 320px; transform: rotate(-4deg); }
 .row-2 .memory-photo { width: 320px; height: 290px; transform: rotate(4deg); }
@@ -276,4 +277,551 @@ body {
 .moving-memories {
     margin-left: -70px; margin-right: -70px;
     padding: 100px 70px 130px;
-    background: #e0e8
+    background: #e0e8d7;
+}
+
+.moving-heading { text-align: center; margin-bottom: 50px; }
+.moving-label {
+    display: block; font-family: 'Manrope', sans-serif;
+    font-size: 9px; letter-spacing: 4px; color: #8a987f; margin-bottom: 12px;
+}
+.moving-heading h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px; font-weight: 500; color: #58634f; line-height: 1;
+}
+.moving-heading p {
+    margin-top: 10px; font-family: 'Caveat', cursive; font-size: 22px; color: #7f8d75;
+}
+
+.video-wrapper { width: 100%; max-width: 1100px; margin: 0 auto; }
+.memory-video {
+    display: block; width: 100%; aspect-ratio: 16 / 8.5;
+    object-fit: cover; background: #273027; border: 10px solid #414b3d;
+    box-shadow: 0 18px 35px rgba(45,58,43,.18);
+}
+.video-caption {
+    display: flex; justify-content: space-between; align-items: center; padding: 18px 10px 0;
+}
+.video-caption span { font-family: 'Gowun Batang', 'Caveat', serif; font-size: 20px; color: #5A6652; }
+.video-caption small { font-family: 'Manrope', sans-serif; font-size: 9px; letter-spacing: 3px; color: #8a987f; }
+
+/* FILM SECTION */
+.film {
+    margin-left: -70px; margin-right: -70px;
+    padding: 110px 70px 120px; background: #f5f0df;
+}
+.film-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 54px;
+    font-weight: 500; text-align: center; color: #58634f; margin-bottom: 15px;
+}
+.film-subtitle {
+    text-align: center; margin-bottom: 70px;
+    font-family: 'Caveat', cursive; font-size: 22px; color: #87947d;
+}
+
+.film-item {
+    position: relative; display: flex; align-items: center;
+    width: min(1100px,100%); margin: 0 auto 100px;
+}
+.film-item.left-photo { justify-content: flex-start; gap: 60px; }
+.film-item.right-photo { justify-content: flex-end; gap: 60px; }
+
+.film-frame {
+    position: relative; flex-shrink: 0; background: #343b32;
+    padding: 22px 12px; box-shadow: 0 15px 30px rgba(45,55,42,.18);
+}
+.film-frame::before, .film-frame::after {
+    content: ""; position: absolute; left: 6px; right: 6px; height: 10px;
+    background-image: radial-gradient(circle, #f5f0df 4px, transparent 4.5px);
+    background-size: 18px 10px; background-repeat: repeat-x;
+}
+.film-frame::before { top: 5px; }
+.film-frame::after { bottom: 5px; }
+.film-frame img { display: block; width: 100%; height: 100%; object-fit: cover; background: #556251; }
+.film-frame.vertical { width: 330px; }
+.film-frame.vertical img { height: 420px; }
+
+.film-text { max-width: 320px; }
+.film-text .film-label {
+    font-family: 'Manrope', sans-serif; font-size: 9px;
+    letter-spacing: 3px; color: #94a08b; margin-bottom: 10px;
+}
+.film-text h3 {
+    font-family: 'Gowun Batang', 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600; line-height: 1.3; color: #4B5545; margin-bottom: 10px;
+}
+.film-text p {
+    font-family: 'Gowun Batang', sans-serif; font-size: 15px;
+    line-height: 1.7; color: #69755f;
+}
+
+.film-item-1 .film-frame { transform: rotate(-3deg); }
+.film-item-3 .film-frame { transform: rotate(3deg); }
+.film-item-3 .film-text { text-align: right; }
+
+.film-item.horizontal-film { display: block; width: 100%; max-width: 1150px; margin: 20px auto 100px; }
+.film-item.horizontal-film .film-frame { width: 100%; padding: 22px 12px; transform: rotate(1deg); }
+.film-frame.horizontal img { width: 100%; height: 440px; object-fit: cover; }
+
+/* TRAVEL NOTES */
+.travel-notes {
+    margin-left: -70px; margin-right: -70px;
+    padding: 110px 70px 130px; background: #dce6d3; position: relative;
+}
+.travel-heading { text-align: center; margin-bottom: 60px; }
+.travel-heading span {
+    display: block; font-family: 'Manrope', sans-serif; font-size: 9px;
+    letter-spacing: 4px; color: #87947d; margin-bottom: 12px;
+}
+.travel-heading h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: 54px;
+    font-weight: 500; color: #58634f; line-height: 1;
+}
+.travel-heading p {
+    margin-top: 10px; font-family: 'Caveat', cursive; font-size: 22px; color: #7d8b74;
+}
+
+.travel-diary {
+    width: min(1040px,100%); margin: 0 auto; display: grid;
+    grid-template-columns: 0.9fr 1.1fr; gap: 35px; align-items: stretch;
+}
+
+.travel-calendar {
+    background: #f7f2e3; border: 1px solid #cbd2bf; padding: 28px;
+    box-shadow: 0 12px 25px rgba(55,70,50,.08); transform: rotate(-1deg); position: relative;
+}
+.travel-calendar::before {
+    content: ""; position: absolute; top: 12px; left: 50%; width: 40px;
+    height: 1px; background: #9ca892; transform: translateX(-50%);
+}
+.calendar-label {
+    display: block; font-family: 'Manrope', sans-serif; font-size: 9px;
+    letter-spacing: 3px; color: #97a18e; margin-bottom: 10px;
+}
+.calendar-month {
+    font-family: 'Cormorant Garamond', serif; font-size: 34px;
+    font-weight: 500; color: #5d6957; margin-bottom: 20px;
+}
+.calendar-weekdays, .calendar-days {
+    display: grid; grid-template-columns: repeat(7,1fr); text-align: center; gap: 8px;
+}
+.calendar-weekdays { margin-bottom: 10px; }
+.calendar-weekdays span { font-family: 'Manrope', sans-serif; font-size: 8px; color: #9aa48f; }
+.calendar-days span {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; margin: auto; font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; color: #69755f;
+}
+.calendar-days span.memory-date { border: 1px solid #8d9a80; border-radius: 50%; }
+
+.travel-location {
+    background: #f5f0df; border: 1px solid #cbd2bf; padding: 22px;
+    box-shadow: 0 12px 25px rgba(55,70,50,.08); transform: rotate(1deg); position: relative;
+}
+.location-map {
+    position: relative; width: 100%; height: 240px; overflow: hidden;
+    background: #e4eadc; border: 1px solid #c9d0c0;
+}
+.location-map::before {
+    content: ""; position: absolute; inset: -30px;
+    background: linear-gradient(35deg, transparent 42%, rgba(135,148,125,.35) 43%, rgba(135,148,125,.35) 44%, transparent 45%),
+                linear-gradient(125deg, transparent 48%, rgba(135,148,125,.3) 49%, rgba(135,148,125,.3) 50%, transparent 51%);
+    transform: rotate(-8deg);
+}
+.location-pin {
+    position: absolute; left: 56%; top: 43%; width: 18px; height: 18px;
+    background: #69755f; border: 3px solid #f5f0df; border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg); z-index: 3;
+}
+.location-name {
+    position: absolute; left: calc(56% + 16px); top: 34%; z-index: 4;
+    padding: 4px 8px; background: #f7f2e3; font-family: 'Gowun Batang', 'Caveat', cursive;
+    font-size: 16px; color: #69755f; white-space: nowrap;
+}
+
+.location-info { display: flex; justify-content: space-between; align-items: flex-start; padding: 18px 5px 5px; }
+.location-label { font-family: 'Manrope', sans-serif; font-size: 8px; letter-spacing: 3px; color: #97a18e; }
+.location-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; color: #5d6957; }
+.location-date { text-align: right; font-family: 'Caveat', cursive; font-size: 19px; color: #7d8b74; }
+
+.travel-memory-note {
+    width: min(1040px,100%); margin: 55px auto 0; padding: 30px 40px; text-align: center;
+    border-top: 1px solid rgba(125,139,116,.45); border-bottom: 1px solid rgba(125,139,116,.45);
+}
+.travel-memory-note p {
+    max-width: 720px; margin: 0 auto; font-family: 'Gowun Batang', 'Caveat', serif;
+    font-size: 21px; line-height: 1.7; color: #525F4D;
+}
+.travel-memory-note small {
+    display: block; margin-top: 10px; font-family: 'Manrope', sans-serif;
+    font-size: 8px; letter-spacing: 3px; color: #97a18e;
+}
+
+/* FOOTER */
+.footer {
+    margin-left: -70px; margin-right: -70px; padding: 60px 70px 35px;
+    text-align: center; background: #e3e9d8; border-top: 1px solid #c9cbd5;
+}
+.footer-stamp {
+    display: inline-block; padding: 4px 16px; border: 1px dashed #89987f;
+    border-radius: 20px; font-family: 'Manrope', sans-serif; font-size: 11px;
+    letter-spacing: 2px; color: #5A6652; margin-bottom: 15px;
+}
+.footer p { font-family: 'Caveat', cursive; font-size: 24px; color: #69755f; }
+.footer small { display: block; margin-top: 8px; font-family: 'Manrope', sans-serif; font-size: 10px; letter-spacing: 2px; color: #87947d; }
+
+@media(max-width:850px) {
+    .paper { width: 95%; padding: 30px 25px; }
+    .intro, .memory, .moving-memories, .film, .travel-notes, .footer {
+        margin-left: -25px; margin-right: -25px; padding-left: 25px; padding-right: 25px;
+    }
+    .hero-overlay { padding: 25px; }
+    .hero-image-wrap { min-height: 380px; }
+    .travel-diary { grid-template-columns: 1fr; }
+    .film-item.left-photo, .film-item.right-photo { flex-direction: column; text-align: center; }
+    .film-item-3 .film-text { text-align: center; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="paper">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-card">
+            <div class="hero-image-wrap">
+                <img id="heroImage" src="images/hero.jpg" alt="Childhood countryside">
+                
+                <div class="hero-overlay">
+                    <div class="hero-top">
+                        <h1 id="heroTitleTop">CHILDHOOD</h1>
+                        <div class="hero-top-sub">little memories from the countryside</div>
+                    </div>
+
+                    <div class="hero-bottom">
+                        <div class="hero-title">
+                            <h2 id="heroTitleBottom1">IN THE</h2>
+                            <h2 id="heroTitleBottom2">COUNTRYSIDE</h2>
+                        </div>
+                        <div class="hero-bottom-sub">a cherished memory</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro">
+        <div class="intro-wrapper">
+            <svg class="left-brace" viewBox="0 0 100 300">
+                <path d="M80 0 C20 0 20 60 55 90 C75 110 75 190 55 210 C20 240 20 300 80 300" />
+            </svg>
+
+            <div class="intro-text">
+                <p id="introText">
+                    The countryside always smelled like warm grass, fresh bread, and quiet afternoons in the sun.
+                </p>
+            </div>
+
+            <svg class="right-brace" viewBox="0 0 100 300">
+                <path d="M20 0 C80 0 80 60 45 90 C25 110 25 190 45 210 C80 240 80 300 20 300" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- MEMORY BOARD -->
+    <section class="memory">
+        <div class="memory-heading">
+            <h2>Little Memories</h2>
+            <p>things I still remember...</p>
+        </div>
+
+        <div class="memory-board">
+            <!-- MEMORY 1 -->
+            <div class="memory-row row-1">
+                <div class="memory-photo">
+                    <img id="memory1Image" src="images/photo1.jpg" alt="Memory 1">
+                </div>
+                <div class="memory-note">
+                    <small>MEMORY 01</small>
+                    <span id="memory1Text">Every morning smelled like fresh grass.</span>
+                </div>
+            </div>
+
+            <svg class="memory-connector connector-1" viewBox="0 0 310 190">
+                <path d="M10 25 C80 10 135 105 210 135 C245 150 275 155 305 155" />
+            </svg>
+
+            <!-- MEMORY 2 -->
+            <div class="memory-row row-2">
+                <div class="memory-note">
+                    <small>MEMORY 02</small>
+                    <span id="memory2Text">Linen dancing softly in the wind.</span>
+                </div>
+                <div class="memory-photo">
+                    <img id="memory2Image" src="images/photo2.jpg" alt="Memory 2">
+                </div>
+            </div>
+
+            <svg class="memory-connector connector-2" viewBox="0 0 350 230">
+                <path d="M15 35 C75 75 105 145 175 155 C245 165 290 185 340 215" />
+            </svg>
+
+            <!-- MEMORY 3 -->
+            <div class="memory-row row-3">
+                <div class="memory-photo">
+                    <img id="memory3Image" src="images/photo3.jpg" alt="Memory 3">
+                </div>
+                <div class="memory-note">
+                    <small>MEMORY 03</small>
+                    <span id="memory3Text">Warm afternoon sunshine on the table.</span>
+                </div>
+            </div>
+
+            <svg class="memory-connector connector-3" viewBox="0 0 430 245">
+                <path d="M10 175 C65 110 125 55 205 55 C285 55 345 90 425 120" />
+            </svg>
+
+            <!-- MEMORY 4 -->
+            <div class="memory-row row-4">
+                <div class="memory-note">
+                    <small>MEMORY 04</small>
+                    <span id="memory4Text">And somehow, the afternoon always stayed.</span>
+                </div>
+                <div class="memory-photo">
+                    <img id="memory4Image" src="images/photo4.jpg" alt="Memory 4">
+                </div>
+            </div>
+
+            <svg class="memory-connector connector-4" viewBox="0 0 390 280">
+                <path d="M15 30 C80 60 95 145 170 190 C235 230 305 235 380 250" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- MOVING MEMORIES -->
+    <section class="moving-memories">
+        <div class="moving-heading">
+            <span class="moving-label">MOVING MEMORIES</span>
+            <h2>Little moments in motion.</h2>
+            <p>some memories are better when they move.</p>
+        </div>
+
+        <div class="video-wrapper">
+            <video id="memoryVideo" class="memory-video" controls poster="images/video-poster.jpg" preload="metadata">
+                <source id="memoryVideoSource" src="videos/memory-video.mp4" type="video/mp4">
+            </video>
+
+            <div class="video-caption">
+                <span id="videoCaption">A quiet afternoon in motion.</span>
+                <small>MOVING MEMORY · 001</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- FILM MEMORIES -->
+    <section class="film">
+        <h2 class="film-title">Film Memories</h2>
+        <div class="film-subtitle">little moments, captured on film</div>
+
+        <!-- FILM 1 -->
+        <div class="film-item left-photo film-item-1">
+            <div class="film-frame vertical">
+                <img id="film1Image" src="images/film1.jpg" alt="Film memory 1">
+            </div>
+            <div class="film-text">
+                <div class="film-label">FRAME 001</div>
+                <h3 id="film1Title">Walking through lavender fields.</h3>
+                <p id="film1Text">A quiet moment recorded on film.</p>
+            </div>
+        </div>
+
+        <!-- FILM 2 -->
+        <div class="film-item horizontal-film">
+            <div class="film-frame horizontal">
+                <img id="film2Image" src="images/film2.jpg" alt="Film memory 2">
+            </div>
+        </div>
+
+        <!-- FILM 3 -->
+        <div class="film-item right-photo film-item-3">
+            <div class="film-text">
+                <div class="film-label">FRAME 003</div>
+                <h3 id="film3Title">Cherished moments.</h3>
+                <p id="film3Text">Some memories stay warm, even after years.</p>
+            </div>
+            <div class="film-frame vertical">
+                <img id="film3Image" src="images/film3.jpg" alt="Film memory 3">
+            </div>
+        </div>
+    </section>
+
+    <!-- TRAVEL NOTES -->
+    <section class="travel-notes">
+        <div class="travel-heading">
+            <span>TRAVEL NOTES</span>
+            <h2>Places I Still Remember</h2>
+            <p>little places, quiet days, and the feeling they left behind.</p>
+        </div>
+
+        <div class="travel-diary">
+            <!-- CALENDAR -->
+            <div class="travel-calendar">
+                <span class="calendar-label">MEMORY CALENDAR</span>
+                <h3 class="calendar-month" id="travelMonth">JUNE 2026</h3>
+
+                <div class="calendar-weekdays">
+                    <span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+                </div>
+
+                <div class="calendar-days">
+                    <span></span><span></span><span></span><span></span><span>1</span><span>2</span><span>3</span>
+                    <span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                    <span>11</span><span>12</span><span class="memory-date">13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+                    <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span>
+                    <span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span></span>
+                </div>
+            </div>
+
+            <!-- LOCATION MAP -->
+            <div class="travel-location">
+                <div class="location-map">
+                    <div class="location-pin"></div>
+                    <div class="location-name" id="travelLocationMap">countryside</div>
+                </div>
+
+                <div class="location-info">
+                    <div>
+                        <div class="location-label">LOCATION</div>
+                        <h3 id="travelLocation">Somewhere<br>Between the Fields</h3>
+                    </div>
+                    <div class="location-date" id="travelYear">2026</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="travel-memory-note">
+            <p id="travelText">
+                There was always another path to follow, another field beyond the trees, and a quiet place to rest.
+            </p>
+            <small>A PLACE I STILL REMEMBER · 001</small>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-stamp">FILM ARCHIVE MONOGRAPH</div>
+        <p>collecting little pieces of life ♡</p>
+        <small id="footerDate">CHILDHOOD ARCHIVE · 2026</small>
+    </footer>
+
+</div>
+
+<!-- DATA LOADER -->
+<script type="module">
+const params = new URLSearchParams(window.location.search);
+const newsId = params.get("id");
+
+function setText(id, value) {
+    if (!value) return;
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+}
+
+function setSrc(id, value) {
+    if (!value) return;
+    const el = document.getElementById(id);
+    if (el) el.src = value;
+}
+
+function formatDate(value) {
+    if (!value) return "2026";
+    let dateObj = value.toDate ? value.toDate() : new Date(value);
+    if (isNaN(dateObj.getTime())) return String(value);
+    return dateObj.toLocaleDateString("en-US", { month: "long", year: "numeric" }).toUpperCase();
+}
+
+async function loadNewsData() {
+    if (!newsId) return;
+
+    try {
+        if (!window.firebaseDB || !window.firebaseDoc || !window.firebaseGetDoc) {
+            console.warn("Firebase not initialized yet.");
+            return;
+        }
+
+        const newsRef = window.firebaseDoc(window.firebaseDB, "news", newsId);
+        const snapshot = await window.firebaseGetDoc(newsRef);
+
+        if (snapshot.exists()) {
+            const data = snapshot.data();
+            const content = data.content || {};
+
+            // HERO
+            setText("heroTitleTop", content.filmHeroTitleTop || data.title);
+            setText("heroTitleBottom1", content.filmHeroTitleBottom1);
+            setText("heroTitleBottom2", content.filmHeroTitleBottom2);
+            setSrc("heroImage", content.filmHeroImage || data.image);
+
+            // INTRO
+            setText("introText", content.filmIntroText || data.description);
+
+            // MEMORIES 1~4
+            for (let i = 1; i <= 4; i++) {
+                setSrc(`memory${i}Image`, content[`filmMemory${i}Image`]);
+                setText(`memory${i}Text`, content[`filmMemory${i}Text`]);
+            }
+
+            // VIDEO
+            if (content.filmVideoUrl) {
+                const video = document.getElementById("memoryVideo");
+                const source = document.getElementById("memoryVideoSource");
+                if (video && source) {
+                    source.src = content.filmVideoUrl;
+                    video.load();
+                }
+            }
+            setText("videoCaption", content.filmVideoCaption);
+
+            // FILMS 1~3
+            for (let i = 1; i <= 3; i++) {
+                setSrc(`film${i}Image`, content[`film${i}Image`]);
+                setText(`film${i}Title`, content[`film${i}Title`]);
+                setText(`film${i}Text`, content[`film${i}Text`]);
+            }
+
+            // TRAVEL
+            if (content.filmTravelMonth || content.filmTravelYear) {
+                setText("travelMonth", `${content.filmTravelMonth || ""} ${content.filmTravelYear || ""}`.trim());
+            }
+            if (content.filmTravelLocation) {
+                setText("travelLocation", content.filmTravelLocation);
+                setText("travelLocationMap", content.filmTravelLocation);
+            }
+            if (content.filmTravelYear) {
+                setText("travelYear", content.filmTravelYear);
+            }
+            setText("travelText", content.filmTravelText);
+
+            // FOOTER DATE BINDING
+            const entryDate = data.date || data.createdAt;
+            if (entryDate) {
+                setText("footerDate", `CHILDHOOD ARCHIVE · ${formatDate(entryDate)}`);
+            }
+
+            if (data.title) {
+                document.title = `${data.title} — Yuri Choi`;
+            }
+        }
+    } catch(error) {
+        console.error("Failed to load Firebase data:", error);
+    }
+}
+
+window.addEventListener("DOMContentLoaded", loadNewsData);
+</script>
+
+</body>
+</html>
