@@ -102,10 +102,11 @@ body {
 .hero-image-wrap img {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: 75vh; /* 화면 크기에 맞추어 원본 비율 유지하며 안 잘리게 조정 */
-    object-fit: contain;
-    background-color: #3a4437;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+    /* 사진의 중심을 가운데(Center)로 맞춰 인물이 잘리지 않게 조정 */
+    object-position: center 35%;
     transition: transform .6s ease;
 }
 
