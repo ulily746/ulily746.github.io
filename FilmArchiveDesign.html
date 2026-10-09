@@ -2,6 +2,7 @@
 <html lang="ko">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -50,7 +51,7 @@ body {
     font-size: 16px;
 }
 
-/* MAIN PAPER WRAPPER (기본 표시 설정) */
+/* MAIN PAPER */
 .paper {
     display: block;
     width: min(1440px, 94%);
@@ -75,7 +76,7 @@ body {
 
 .paper > * { position: relative; z-index: 2; }
 
-/* HERO */
+/* HERO (사진 안 잘리도록 프레임 및 비율 보완) */
 .hero { margin-bottom: 100px; }
 
 .hero-card {
@@ -91,44 +92,46 @@ body {
 .hero-image-wrap {
     position: relative;
     width: 100%;
-    min-height: 480px;
-    max-height: 600px;
     border-radius: 18px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .hero-image-wrap img {
     display: block;
     width: 100%;
-    height: 100%;
-    min-height: 480px;
-    object-fit: cover;
-    background-color: #556251;
+    height: auto;
+    max-height: 75vh; /* 화면 크기에 맞추어 원본 비율 유지하며 안 잘리게 조정 */
+    object-fit: contain;
+    background-color: #3a4437;
     transition: transform .6s ease;
 }
 
-.hero-image-wrap:hover img { transform: scale(1.02); }
+.hero-image-wrap:hover img { transform: scale(1.015); }
 
 /* HERO OVERLAY */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(30,35,28,0.25) 0%, rgba(30,35,28,0.55) 100%);
+    background: linear-gradient(180deg, rgba(30,35,28,0.2) 0%, rgba(30,35,28,0.45) 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 40px 48px;
     color: #FFFFFF;
+    pointer-events: none;
 }
 
 .hero-top h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(40px, 5.5vw, 68px);
-    line-height: .9;
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: .95;
     font-weight: 500;
     letter-spacing: 2px;
     color: #FFFFFF;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 .hero-top-sub {
@@ -136,16 +139,17 @@ body {
     font-size: 24px;
     color: #E2E8DC;
     margin-top: 8px;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.4);
 }
 
 .hero-bottom { text-align: right; }
 .hero-title h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4.8vw, 58px);
-    line-height: .9;
+    font-size: clamp(34px, 4.5vw, 54px);
+    line-height: .95;
     font-weight: 500;
     color: #FFFFFF;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 .hero-bottom-sub {
@@ -153,6 +157,7 @@ body {
     font-family: 'Caveat', cursive;
     font-size: 22px;
     color: #E2E8DC;
+    text-shadow: 0 1px 5px rgba(0,0,0,0.4);
 }
 
 /* INTRO */
@@ -476,7 +481,6 @@ body {
         margin-left: -25px; margin-right: -25px; padding-left: 25px; padding-right: 25px;
     }
     .hero-overlay { padding: 25px; }
-    .hero-image-wrap { min-height: 380px; }
     .travel-diary { grid-template-columns: 1fr; }
     .film-item.left-photo, .film-item.right-photo { flex-direction: column; text-align: center; }
     .film-item-3 .film-text { text-align: center; }
@@ -496,14 +500,14 @@ body {
                 
                 <div class="hero-overlay">
                     <div class="hero-top">
-                        <h1 id="heroTitleTop">CHILDHOOD</h1>
+                        <h1 id="heroTitleTop">SPRING</h1>
                         <div class="hero-top-sub">little memories from the countryside</div>
                     </div>
 
                     <div class="hero-bottom">
                         <div class="hero-title">
-                            <h2 id="heroTitleBottom1">IN THE</h2>
-                            <h2 id="heroTitleBottom2">COUNTRYSIDE</h2>
+                            <h2 id="heroTitleBottom1">FLOWER</h2>
+                            <h2 id="heroTitleBottom2">MEMORIES</h2>
                         </div>
                         <div class="hero-bottom-sub">a cherished memory</div>
                     </div>
@@ -748,7 +752,6 @@ async function loadNewsData() {
 
     try {
         if (!window.firebaseDB || !window.firebaseDoc || !window.firebaseGetDoc) {
-            console.warn("Firebase not initialized yet.");
             return;
         }
 
@@ -785,7 +788,7 @@ async function loadNewsData() {
             }
             setText("videoCaption", content.filmVideoCaption);
 
-            // FILMS 1~3
+            // FILMS 1~3 (Firestore에서 동적으로 연동되는 부분)
             for (let i = 1; i <= 3; i++) {
                 setSrc(`film${i}Image`, content[`film${i}Image`]);
                 setText(`film${i}Title`, content[`film${i}Title`]);
