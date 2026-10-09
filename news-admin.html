@@ -1227,7 +1227,24 @@ textarea{
 
 }
 
+/* ======================================
+   LEARNING NOTE EDITOR STYLES
+====================================== */
 
+.editor-area[placeholder]:empty:before {
+    content: attr(placeholder);
+    color: #9A978E;
+    cursor: text;
+}
+
+.editor-area img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 18px 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 /* ======================================
    RESPONSIVE
 ====================================== */
@@ -3691,6 +3708,37 @@ id="modernSection04Title"
 </div>
 
 </div>
+
+<!-- ======================================
+     LEARNING NOTE DESIGN (NEW)
+====================================== -->
+<div
+    id="learningNoteFields"
+    class="design-fields"
+>
+    <h3 class="design-form-title">
+        Learning Note Content
+    </h3>
+
+    <div class="form-section-label">
+        NOTE CONTENT
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            BODY CONTENT (PASTE IMAGES / EDIT)
+        </label>
+        
+        <!-- 네이버 블로그 형태의 contenteditable 에디터 영역 -->
+        <div
+            id="learningEditor"
+            class="editor-area"
+            contenteditable="true"
+            placeholder="내용을 입력하세요. 이미지를 직접 복사(Ctrl+C)하여 여기에 붙여넣기(Ctrl+V)할 수 있습니다."
+            style="min-height: 320px; max-height: 500px; overflow-y: auto; border: 1px solid #D8D3CA; background: #FFFDF8; padding: 16px; font-size: 13px; line-height: 1.7; outline: none; border-radius: 2px;"
+        ></div>
+    </div>
+</div>     
 
 <!-- ======================================
      FORM ACTIONS
