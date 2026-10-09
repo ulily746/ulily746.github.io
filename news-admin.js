@@ -84,167 +84,92 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* =========================================================
-   LEARNING NOTE FIELDS
+   LEARNING NOTE FIELDS (에디터 생성 부분)
 ========================================================= */
 
-function setupLearningNoteFields() {
-    const designSelect = document.getElementById("entryDesign");
-
-    if (designSelect) {
-        const exists = Array.from(designSelect.options).some(
-            option => option.value === "LearningNote"
-        );
-
-        if (!exists) {
-            const option = document.createElement("option");
-            option.value = "LearningNote";
-            option.textContent = "Learning Note";
-            designSelect.insertBefore(option, designSelect.firstChild);
-        }
-    }
-
-    if (!document.getElementById("entrySubcategory")) {
-        createSubcategoryField();
-    }
-
-    if (!document.getElementById("entryContent")) {
-        createContentField();
-    }
-
-    injectLearningNoteStyles();
-}
-
-function createSubcategoryField() {
-    const descriptionField =
-        document.getElementById("entryDescription");
-
-    if (!descriptionField) {
-        return;
-    }
-
-    const descriptionGroup =
-        descriptionField.closest(".form-group") ||
-        descriptionField.parentElement;
-
-    if (!descriptionGroup) {
-        return;
-    }
-
-    const wrapper = document.createElement("div");
-
-    wrapper.className =
-        "form-group learning-common-field";
-
-    wrapper.id = "entrySubcategoryWrapper";
-
-    wrapper.innerHTML = `
-        <label
-            class="form-label"
-            for="entrySubcategory"
-        >
-            SUBCATEGORY
-        </label>
-
-        <input
-            type="text"
-            id="entrySubcategory"
-            placeholder="e.g. Graduation / Research / Travel"
-            autocomplete="off"
-        >
-    `;
-
-    descriptionGroup.insertAdjacentElement(
-        "afterend",
-        wrapper
-    );
-}
-
 function createContentField() {
-    const subcategoryWrapper =
-        document.getElementById(
-            "entrySubcategoryWrapper"
-        );
+    const subcategoryWrapper = document.getElementById("entrySubcategoryWrapper");
+    const descriptionField = document.getElementById("entryDescription");
 
-    const descriptionField =
-        document.getElementById("entryDescription");
+    const insertAfter = subcategoryWrapper || (
+        descriptionField ? (descriptionField.closest(".form-group") || descriptionField.parentElement) : null
+    );
 
-    const insertAfter =
-        subcategoryWrapper ||
-        (
-            descriptionField
-                ? (
-                    descriptionField.closest(".form-group") ||
-                    descriptionField.parentElement
-                )
-                : null
-        );
-
-    if (!insertAfter) {
-        return;
-    }
+    if (!insertAfter) return;
 
     const wrapper = document.createElement("div");
-
-    wrapper.className =
-        "form-group learning-common-field";
-
+    wrapper.className = "form-group learning-common-field";
     wrapper.id = "entryContentWrapper";
 
     wrapper.innerHTML = `
-        <label
-            class="form-label"
-            for="entryContent"
-        >
+        <label class="form-label">
             CONTENT
         </label>
 
-        <textarea
+        <!-- contenteditable 에디터 영역 -->
+        <div
             id="entryContent"
-            placeholder="Write your note or article here..."
-        ></textarea>
+            class="editor-area"
+            contenteditable="true"
+            placeholder="내용을 입력하세요. 이미지를 복사(Ctrl+C) 후 여기에 붙여넣기(Ctrl+V)할 수 있습니다."
+            style="min-height: 320px; max-height: 500px; overflow-y: auto; border: 1px solid #D8D3CA; background: #FFFDF8; padding: 16px; font-size: 13px; line-height: 1.75; outline: none; border-radius: 2px;"
+        ></div>
 
         <div class="learning-content-help">
-            Paragraph breaks will be preserved.
+            이미지를 직접 복사-붙여넣기(Ctrl+V)할 수 있습니다.
         </div>
     `;
 
-    insertAfter.insertAdjacentElement(
-        "afterend",
-        wrapper
-    );
+    insertAfter.insertAdjacentElement("afterend", wrapper);
+
+    // 이미지 Paste(붙여넣기) 이벤트 바인딩
+    attachImagePasteEvent();
 }
 
-function injectLearningNoteStyles() {
-    if (
-        document.getElementById(
-            "learningNoteAdminStyles"
-        )
-    ) {
-        return;
-    }
+/* 이미지 클립보드 Paste 처리 함수 추가 */
+function attachImagePasteEvent() {
+    setTimeout(() => {
+        const editor = document.getElementById("entryContent");
+        if (!editor || editor.dataset.pasteBound) return;
 
-    const style = document.createElement("style");
+        editor.dataset.pasteBound = "true";
 
-    style.id = "learningNoteAdminStyles";
+        editor.addEventListener("paste", (e) => {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
 
-    style.textContent = `
-        #entryContent {
-            min-height: 320px;
-            resize: vertical;
-            line-height: 1.75;
-        }
+            for (const item of items) {
+                if (item.type.indexOf("image") !== -1) {
+                    e.preventDefault(); // 기본 붙여넣기 방지
 
-        .learning-content-help {
-            margin-top: 7px;
-            font-size: 11px;
-            line-height: 1.5;
-            color: #999;
-        }
-    `;
+                    const file = item.getAsFile();
+                    const reader = new FileReader();
 
-    document.head.appendChild(style);
+                    reader.onload = (event) => {
+                        const img = document.createElement("img");
+                        img.src = event.target.result;
+
+                        // 커서 위치에 이미지 삽입
+                        const selection = window.getSelection();
+                        if (selection.rangeCount > 0) {
+                            const range = selection.getRangeAt(0);
+                            range.deleteContents();
+                            range.insertNode(img);
+
+                            range.setStartAfter(img);
+                            range.setEndAfter(img);
+                            selection.removeAllRanges();
+                            selection.addRange(range);
+                        } else {
+                            editor.appendChild(img);
+                        }
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+    }, 100);
 }
-
 
 /* =========================================================
    LOAD ENTRIES
@@ -1565,207 +1490,34 @@ function updateStatistics() {
 
 
 /* =========================================================
-   UTILITIES
+   UTILITIES (에디터 HTML 읽기/쓰기 지원 수정)
 ========================================================= */
 
 function getFieldValue(fieldId) {
-    const field =
-        document.getElementById(fieldId);
+    const field = document.getElementById(fieldId);
+    if (!field) return "";
 
-    return field ? field.value || "" : "";
+    // contenteditable div 에디터인 경우 innerHTML 반환
+    if (field.isContentEditable || field.getAttribute("contenteditable") === "true") {
+        return field.innerHTML || "";
+    }
+
+    return field.value || "";
 }
 
 function setFieldValue(fieldId, value) {
-    const field =
-        document.getElementById(fieldId);
+    const field = document.getElementById(fieldId);
+    if (!field) return;
 
-    if (!field) {
-        return;
-    }
+    const val = (value === null || value === undefined) ? "" : String(value);
 
-    field.value =
-        value === null ||
-        value === undefined
-            ? ""
-            : String(value);
-}
-
-function getContentValue(entry, key) {
-    if (!entry) {
-        return "";
-    }
-
-    if (
-        entry.content &&
-        typeof entry.content === "object" &&
-        entry.content[key] !== undefined
-    ) {
-        return entry.content[key];
-    }
-
-    if (
-        entry.data &&
-        typeof entry.data === "object" &&
-        entry.data[key] !== undefined
-    ) {
-        return entry.data[key];
-    }
-
-    return entry[key] || "";
-}
-
-function normalizeStatus(status) {
-    const value = String(
-        status || "Draft"
-    ).trim().toLowerCase();
-
-    return (
-        value === "published" ||
-        value === "publish" ||
-        value === "public"
-    )
-        ? "Published"
-        : "Draft";
-}
-
-function normalizeCategory(category) {
-    const value = String(
-        category || "Research"
-    ).trim().toLowerCase();
-
-    const map = {
-        research: "Research",
-        academic: "Academic",
-        travel: "Travel",
-        life: "Life"
-    };
-
-    return map[value] || category || "Research";
-}
-
-function getDesignDisplayName(design) {
-    return DESIGN_NAMES[design] || design || "Unknown";
-}
-
-function getEntryDateValue(entry) {
-    const value =
-        entry.date ||
-        entry.createdAt ||
-        entry.updatedAt;
-
-    if (!value) {
-        return 0;
-    }
-
-    if (typeof value.toDate === "function") {
-        return value.toDate().getTime();
-    }
-
-    if (value instanceof Date) {
-        return value.getTime();
-    }
-
-    const time = new Date(value).getTime();
-
-    return Number.isNaN(time) ? 0 : time;
-}
-
-function sortEntriesByDate(a, b) {
-    return (
-        getEntryDateValue(b) -
-        getEntryDateValue(a)
-    );
-}
-
-function normalizeDateForInput(value) {
-    if (!value) {
-        return "";
-    }
-
-    if (
-        typeof value === "string" &&
-        /^\d{4}-\d{2}-\d{2}$/.test(value)
-    ) {
-        return value;
-    }
-
-    let date;
-
-    if (typeof value.toDate === "function") {
-        date = value.toDate();
+    // contenteditable div 에디터인 경우 innerHTML 설정
+    if (field.isContentEditable || field.getAttribute("contenteditable") === "true") {
+        field.innerHTML = val;
     } else {
-        date = new Date(value);
-    }
-
-    if (Number.isNaN(date.getTime())) {
-        return "";
-    }
-
-    const year = date.getFullYear();
-    const month = String(
-        date.getMonth() + 1
-    ).padStart(2, "0");
-
-    const day = String(
-        date.getDate()
-    ).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-}
-
-function formatDate(value) {
-    if (!value) {
-        return "";
-    }
-
-    let date;
-
-    if (typeof value.toDate === "function") {
-        date = value.toDate();
-    } else {
-        date = new Date(value);
-    }
-
-    if (Number.isNaN(date.getTime())) {
-        return String(value);
-    }
-
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-        }
-    );
-}
-
-function truncateText(text, maxLength) {
-    const value = String(text || "");
-
-    return value.length > maxLength
-        ? value.slice(0, maxLength) + "..."
-        : value;
-}
-
-function setText(elementId, value) {
-    const element =
-        document.getElementById(elementId);
-
-    if (element) {
-        element.textContent = String(value);
+        field.value = val;
     }
 }
-
-function escapeHTML(value) {
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
 
 /* =========================================================
    GLOBAL FUNCTIONS
