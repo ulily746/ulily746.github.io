@@ -301,8 +301,15 @@ body {
 
 .video-wrapper { width: 100%; max-width: 1100px; margin: 0 auto; }
 .memory-video {
-    display: block; width: 100%; aspect-ratio: 16 / 8.5;
-    object-fit: cover; background: #273027; border: 10px solid #414b3d;
+    display: block; 
+    width: 100%; 
+    aspect-ratio: 16 / 8.5;
+    /* object-fit: contain; 을 cover로 변경 */
+    object-fit: cover; 
+    /* 영상 중심 위치를 가운데로 설정 */
+    object-position: center; 
+    background: #273027; 
+    border: 10px solid #414b3d;
     box-shadow: 0 18px 35px rgba(45,58,43,.18);
 }
 .video-caption {
